@@ -7,8 +7,107 @@ Covers: .app (Authorware 1.x/Star packaged), .apr (Authorware 1.x/Star library),
         .a3m (Authorware 3.x Mac), .a3w (Authorware 3.x Windows),
         .a4p, .a5p, .a6p, .a7p (packaged),
         .a4r, .a5r, .a6r, .a7r (library),
-        and EXE-appended PCRS files
+        compiled Windows PE executables (.exe), and stripped EXE-appended PCRS files
 Reverse-engineered from Macromedia Authorware 1.x/2.x/3.x/4.x/5.x/6.x/7.x sample files.
+Detection uses the file signature, not the filename extension. The same
+containers also occur as .ap, .as, .imm, .dat and names ending in ;1.
+
+Extraction and validation
+-------------------------
+Usage: python3 authorware.py <inputFile> <outputDir> [--report] [--deep]
+The extractor works with the Python standard library. Pillow optionally
+accelerates conversion of bitmap pixels to PNG for SVG. For legacy text
+without stored line positions, installed fonts measured with Pillow and
+fontconfig improve wrapping; an approximate fallback is available.
+
+PIG resources now also produce self-contained SVG pictures, through
+authorware_pig.py. Text, audio and other raw exports are retained. Standalone
+DIB files (.bmp and .bin) are omitted when a PIG SVG successfully embeds that
+DIB. --deep retains those original DIB bytes as .bin; it does not add a
+duplicate BMP. DIBs that were not successfully embedded retain their raw
+.bin export and a standalone BMP when decoding succeeds.
+The separate imported-media .bin outputs are unchanged. Bitmaps needed
+inside a PIG composition are embedded in the SVG as PNG or their original
+browser-readable image format; original coordinates and draw order are used.
+PIG entries with drawing limitations can produce partial SVGs. Inspect
+pig_manifest.json or the SVG's metadata for status and diagnostics.
+DIB export decisions and the PIGs that successfully include each bitmap
+are recorded in dib_manifest.json. A reference that fails to render does
+not suppress a recoverable standalone BMP. Multiple PIGs using one DIB
+with different colors or cropping remain separate SVGs.
+--deep and --report can be combined. dib_manifest.json includes every DIB
+and its PIG references even when no standalone file is written; raw_file
+is present only when the original DIB was actually exported.
+
+Bitmaps stored inside a PIG (including reference previews) also omit their
+standalone BMP when that specific image drawing record succeeds in the SVG.
+The original PIG is retained as .bin. pig_manifest.json records successful
+image record offsets and the suppressed BMP's source offset and raw file.
+An SVG with other successful drawings does not suppress a failed bitmap's
+BMP fallback, nor a recoverable bitmap outside the parsed drawing records.
+
+--report writes pig-report.html beside the extracted files. It is a dark,
+self-contained offline page showing every PIG picture in a compact grid
+that wraps across the full browser width. Each image's checkerboard matches
+its dimensions. Images have no fixed height or internal scrollbars.
+Each picture is labeled with its entry ID and table index; click its label
+for a direct link. Report problems using the source filename and those
+labels. A checkerboard shows transparent areas; decoding warnings appear
+below affected pictures. Source hashes and entry table indices distinguish
+files and repeated/zero entry IDs.
+The same page also previews extracted bitmap files, plays audio with native
+HTML audio controls, and displays text in small sandboxed, scrollable frames.
+Other files have byte sizes, short hex previews and download links. Every
+extracted file is available offline from the report; separate imported-media
+.bin files remain opaque downloads. Existing files from earlier extractions
+in the same output directory are excluded from the new report.
+
+To refresh only the current source page, without regenerating other reports:
+  python3 -c "from authorware_pig_report import review_file; print(review_file(('sample/a3m/Bienvenue.A3M', 'report/pig-review'))['page'])"
+Each source is extracted into a temporary directory and all of its outputs
+are embedded in the resulting page. The batch CLI still accepts explicitly
+requested source files or directories. During the current visual review,
+only regenerate Bienvenue.A3M until a different source is requested.
+
+Every output is created exclusively. Repeated entry IDs (including the
+all-zero IDs in legacy tables), repeated names, and an existing output
+directory cannot cause overwrites. Collisions receive _2, _3, etc. before
+the extension. Running extraction again preserves the earlier outputs.
+
+Exit codes:
+  0 = extraction completed for the available, indexed entries.
+  1 = invalid/unsupported input or unusable container/table.
+  2 = partial extraction: missing/damaged data or unresolved audio grouping.
+
+An exit code of 0 does not mean every resource has a media decoder.
+Unrecognized or undecodable entries are preserved as .bin. If a PIG
+only yields readable text, its original binary is also preserved.
+Failed zlib entries retain their available compressed bytes. Missing
+segment data cannot be reconstructed without the other segments.
+
+Some legacy inputs end before their entry table. For WPCR/WPLI/WCRS
+files whose declared size exceeds the available bytes, the extractor
+preserves unindexed_data.bin and salvages complete images from available
+PIG data. Their IDs and original entry boundaries remain unknown; this
+is recovery from incomplete input, not a complete extraction.
+
+Regression commands:
+  python3 -B -m unittest -v test_authorware test_authorware_pig
+  python3 -B validate_authorware.py --output report/regression-after.json sample sample1 sample2 sample3
+
+To also produce the dark comparison report, add:
+  --baseline report/regression-before.json --html report/regression.html
+
+The corpus validator requires Pillow. It checks SVG XML and embedded image
+decodability, records PIG conversion diagnostics and support-module hashes,
+checks all raster image frames and
+WAV container/PCM lengths, and uses FFmpeg when available for compressed
+WAV decoding. Voxware-tagged WAVs are retained and counted separately as
+codec-unverified; FFmpeg maps their reused 0x0062 tag to a different codec.
+Container readability alone cannot establish correct source sample format.
+The w4_2s.apr regression also independently compares all 38 WAV payloads,
+sample rates, bit depths and channel counts with the original descriptors
+and source byte ranges (report/w4_2s-audio-check.json).
 
 Overview
 --------
@@ -100,8 +199,12 @@ actual file size on disk.
   (A5R-style)     5                 0xFFFFFFF8              10 bytes (PCRS)
   (A6R-style)     6                 0xFFFFFFF6/0xFFFFFFF7   10 bytes (PCRS)
 
-EXE-appended files are Authorware PCRS data that was originally appended
-to a Windows EXE runtime stub. When the EXE stub is stripped, the
+Compiled Windows EXE files contain a PE runtime followed by Authorware
+PCRS data in the executable's overlay (see Compiled Windows Executables
+below). The runtime does not need to be run to extract the project.
+
+Stripped EXE-appended files are Authorware PCRS data that was originally
+appended to a Windows EXE runtime stub. When the EXE stub is stripped, the
 remaining PCRS data retains header offsets (table_offset, file_size) and
 entry data_offset values that reference positions within the original
 combined EXE file. To extract these files, a base offset must be
@@ -111,7 +214,8 @@ adjusted table_offset is always 0x6A (standard PCRS position). Both
 10-byte PCRS and 30-byte ACRS entry formats are used, determined by the
 same entry_count * 30 vs table_total_size heuristic. EXE-appended files
 are distinguished from segment files (which also have file_size >
-actual_size) by their table_offset being != 0x6A before adjustment.
+actual_size) by their table_offset being != 0x6A before adjustment, and
+table_offset - base_offset being exactly 0x6A.
 
 Both formats share the same 64-byte header structure, icon type system,
 compression scheme, and data extraction logic. They store a collection
@@ -121,6 +225,77 @@ in a single file with optional zlib compression.
 All multi-byte integers are little-endian unless otherwise noted.
 Exception: A3M (Authorware 3.x Mac) files store all header and entry
 table fields in big-endian byte order (see A3M section above).
+
+Compiled Windows Executables
+----------------------------
+The extractor accepts complete Windows PE executables directly:
+
+  python3 authorware.py sample2/Notenlernen.exe output/Notenlernen
+
+These begin with an MZ/DOS header, whose uint32 field at 0x3C points to
+the PE signature ("PE\0\0"). The PE file header gives the section count
+and optional-header size. The 40-byte section records follow the optional
+header. Each section record contains SizeOfRawData at +0x10 and
+PointerToRawData at +0x14. The overlay starts after the largest section
+file end (PointerToRawData + SizeOfRawData), including SizeOfHeaders from
+the optional header (+0x3C). Virtual addresses and virtual section sizes
+must not be used as file offsets. The loader handles PE32 and PE32+
+header layouts; the observed Authorware runtimes are PE32.
+
+The compiled samples have this layout:
+
+  [MZ / PE headers] [runtime sections] [PCRS header + tables + entry data]
+                                      ^ payload_offset
+
+Search the overlay for the full signature "PCRS" + AF BC AD AC. The
+runtime code itself contains ACRS/PCRS strings, so searching for the
+first four-byte magic anywhere in the executable is insufficient.
+
+The appended PCRS header uses absolute positions in the original EXE:
+
+  header.table_offset = payload_offset + 0x6A
+  header.file_size    = absolute end of the Authorware payload
+  entry.data_offset  = absolute position of that entry in the EXE
+
+Take bytes [payload_offset:header.file_size] as the Authorware stream,
+then subtract payload_offset from the table and entry offsets. This
+uses the same normalization as a previously stripped EXE payload.
+Bounding the stream by header.file_size also excludes any trailing
+executable data; using the physical EOF to infer the base would shift
+all offsets if a trailer were present. The header's data_end field is
+not an absolute EXE endpoint in these samples and is not used to crop.
+
+Validate the PE header and section bounds before searching. A candidate
+PCRS header must have format version 5 or 6, a nonempty entry table that
+fits in the declared payload, and the expected absolute table offset.
+Select 10-byte or 30-byte entries with the existing table-size heuristic.
+Nonempty entries must use raw/zlib storage and lie within the payload
+after the table region. Invalid candidates are skipped; a missing valid
+payload or malformed PE produces an error before creating output files.
+
+Observed complete executables in sample2/:
+
+  File                                     PCRS offset  Version  Entries
+  ---------------------------------------  -----------  -------  -------
+  BIT.exe                                  0x161400     5        36
+  F8982_BusinessObjectsQuickTour51EN.exe     0x15DC00     5        2187
+  Notenlernen.exe                          0x16F400     6        44
+  batnball2.exe                            0x16F400     6        19
+  cdgamer29.exe                            0x15DC00     5        337
+  egb.exe                                  0x16F400     6        4104
+  ram.exe                                  0x161400     5        70
+
+All seven use 10-byte PCRS entries, with flags 0xFFFFFFF8 for version 5
+and 0xFFFFFFF7 for version 6. The pre-existing stripped EXE corpus also
+contains 30-byte PCRS tables (ZT.exe and TextZahlWandler.exe).
+
+This wrapper support covers table-first PCRS overlays with absolute EXE
+offsets. It does not unpack compressed executable stubs or support older
+NE/DOS runtime wrappers. Existing standalone and stripped files continue
+through their original format-specific parsing paths.
+
+Regression tests: python3 -B -m unittest -v test_authorware
+
 
 Version Differences
 -------------------
@@ -463,8 +638,8 @@ Type    Name                    Description
 0x33    AnimationPath           Animation/motion path definition (~2400-2600 bytes)
 0x34    PIG                     Packaged Icon Group (platform-specific image)
 0x35    DIB                     Device Independent Bitmap (raw BITMAPINFOHEADER)
-0x36    SoundHeader             Audio metadata header (48 bytes, see below)
-0x37    SoundData               Raw 8-bit PCM audio samples (see below)
+0x36    SoundHeader             Packed PCM descriptor (48 or 50 bytes, see below)
+0x37    SoundData               Raw 8-bit or 16-bit PCM chunks (see below)
 0x38    AnimationFrames         Animation frame data (paired with 0x33)
 0x39    MediaLink               External media reference (file paths + format info, A6P only)
 0x3A    DisplayText             Display text / UI label strings
@@ -505,50 +680,180 @@ Offset  Size  Type      Description
 0x02    4     char[4]   Signature: "PIG\0"
 0x06    4     char[4]   Platform: "WIN\0" or "MAC\0"
 0x0A    4     char[4]   Version: "001\0"
-0x0E    4     uint32    Sub-image count
-0x12    4     uint32    Remaining data size (total_size - 2)
+0x0E    4     uint32    Record count (includes initial bounds; see notes below)
+0x12    4     uint32    Declared size (observed total_size or total_size - 2)
 0x16    4     uint32    Reserved (0)
-0x1A    4     uint32    Reserved (0)
+0x1A    2     int16     Left bound
+0x1C    2     int16     Top bound
+0x1E    2     int16     Right bound
+0x20    2     int16     Bottom bound
 
-For WIN platform entries:
-  0x1E    2   uint16    Image width
-  0x20    2   uint16    Image height
-  Followed by bounds rectangles and then image data.
+Width = right - left; height = bottom - top. Bounds can have negative
+origins. WIN and MAC records can contain little- or big-endian fields.
+The field order above is for little-endian PIGs. Big-endian PIGs serialize
+Macintosh QuickDraw rectangles as top, left, bottom, right and points as
+vertical, horizontal. This also applies to big-endian PIGs tagged WIN:
+their bitmap payload is Windows format, but their geometry is Macintosh
+format. Normalize rectangles, line/polygon/arc points, pen sizes and corner
+diameters before rendering; text line-table fields retain their named order.
 
-  Shared palette (WIN only):
-    At offset 0x34 (52) from the start of the PIG entry, there is a
-    256-color RGBQUAD palette (1024 bytes). This shared palette is used
-    by 8bpp BITMAPINFOHEADER sub-images within the PIG. These 8bpp DIBs
-    omit their own palette and rely on the PIG's shared palette at offset
-    0x34. The palette can be validated by checking that every 4th byte
-    (the RGBQUAD reserved field) is 0.
+Shared palettes occur in both WIN and MAC containers. They are tagged
+records, not a palette at a fixed offset:
 
-    Some PIGs lack a shared palette at 0x34 (e.g., PIGs with many
-    sub-images where bounds data extends past 0x34, or very small PIGs).
-    In those cases, the 8bpp DIB includes its own embedded palette.
+  uint16 tag = 0x0056
+  uint32 total_record_size = 10 + color_count * 4
+  uint32 color_count (1 through 256)
+  RGBQUAD[color_count] (blue, green, red, reserved=0)
 
-    Lower bit-depth sub-images (1bpp, 4bpp) always include their own
-    embedded palettes within the BITMAPINFOHEADER structure.
+The first palette often starts at 0x34, but extra tags or other records
+can move it. A PIG may have multiple palettes of different sizes.
+Four-bit and eight-bit DIBs can omit their palette and use a preceding
+compatible PIG palette. An eight-bit DIB may use fewer colors than the
+shared table contains. One-bit DIBs commonly have an embedded palette.
 
-  One or more BITMAPINFOHEADER sub-images follow at various bit depths.
-  The highest bit-depth sub-image is typically the best quality version.
+Bitmap record tag 0x0065 has a 58-byte prefix before its DIB header.
+Its length bounds the bitmap data; some legacy lengths exclude the
+embedded palette bytes. Validate header, palette, masks and pixels
+before selecting a candidate. The extractor chooses the highest valid
+bit depth, with the first candidate winning ties.
 
 For MAC platform entries:
   Contains QuickDraw/PICT-format data with big-endian coordinates.
   Some MAC PIGs still contain BITMAPINFOHEADER sub-images (possibly for
   cross-platform compatibility).
 
-Some PIG entries embed GIF images (observed in A5P files) instead of
-BITMAPINFOHEADER sub-images. The GIF data appears at a variable offset
-after the PIG header and bounds structures (observed at offsets 204,
-342, 418, and 786). The GIF can be identified by scanning for the
-"GIF87a" or "GIF89a" signature within the PIG data. The PIG header's
-width/height fields describe the display region, which may be larger
-than the actual GIF image dimensions.
+PIGs can also embed GIF, JPEG and PNG at variable offsets. A signature
+alone is insufficient: metadata may contain a false JPEG prefix or
+the four bytes 89 50 4E 47 before the actual PNG. The extractor checks
+GIF blocks/LZW data/trailer, JPEG marker structure through EOI, and PNG
+chunks/CRCs through IEND. Trailing PIG data is excluded from the image.
+The PIG bounds describe the display region, which can differ from the
+embedded image's dimensions. Undecodable PIGs remain available as .bin.
 
 Some PIG entries contain only position/bounds data (small entries) or
 mixed content including styled text and Authorware script code alongside
 image data.
+
+PIG drawing records and SVG reconstruction
+-----------------------------------------------------------------
+Inspection of sample/a5r/debromination.a5r shows that PIG is also a
+vector drawing container, not just a wrapper around raster images.
+After the bounds at 0x1A, another rectangle occupies 0x22..0x29.
+Drawing records begin at 0x2A. In the parsed WIN/001 examples the count
+at 0x0E is one more than the number of records following this header.
+Thus it must not be interpreted as the number of bitmap sub-images.
+
+Observed records (tags/coordinates use the PIG byte order) include:
+  0x0001/0x0002: 2 bytes, enable/disable shape fill.
+  0x0006/0x000E: 8 bytes, fill colors; RGB bytes at +2..+4.
+  0x000A: 10 bytes, eight rows of an 8x8 fill pattern.
+  0x0021/0x0022: 2 bytes, enable/disable shape frame.
+  0x0023: 6 bytes, two pen-size values after the tag.
+  0x0026: 8 bytes, pen RGB bytes at +2..+4; remaining fields unresolved.
+  0x002A: 10 bytes, eight rows of an 8x8 pen pattern.
+  0x002E: 8 bytes, pen background RGB at +2..+4.
+  0x0040/0x0041: 2 bytes, begin/end a drawing-state group.
+  0x0042/0x0043: 2 bytes, begin/end framed drawing.
+  0x0048: 4 bytes, arrow flags in byte +2 (1=start, 2=end, 3=both).
+  0x0049: 2 bytes, end arrowheads.
+  0x0050: 4 bytes, transfer mode in byte +2 even in big-endian PIGs.
+          The high byte can contain unused memory, not part of the mode.
+  0x0051: 4 bytes, rare drawing-state value; semantics still unresolved
+          and explicitly flagged by the renderer (one indexed corpus PIG).
+  0x0060: length-prefixed bitmap reference. Entry ID at record +10 in
+          this sample; entry 25 refers to the DIB in entry 24.
+  0x0071: 10 bytes, tag followed by four signed rectangle coordinates.
+  0x0075: 10 bytes, tag followed by x1,y1,x2,y2 signed line coordinates.
+  0x007D: 10 bytes, ellipse bounds.
+  0x0081: 14 bytes, rounded-rectangle bounds and corner diameters.
+  0x0089: 18 bytes, ellipse bounds followed by two radial points for
+          an arc. A following 0x0001 is a separate fill-enable operation,
+          not an arc direction field.
+  0x008D: length-prefixed polygon; bounds at +6, uint16 point count at
+          +14, then that many pairs of signed 16-bit coordinates.
+  0x0098: length-prefixed styled text; bounds at +6, uint32 character
+          count at +52. In these examples, the text is at the end of
+          the record, with its storage rounded up to an even byte count.
+          Font/style and line-layout data precede it.
+  0x009A: length-prefixed imported-media record, sometimes containing
+          format identifiers such as kMoaCfFormat_JPEG.
+Length-prefixed records store their total byte length as uint32 at +2.
+The declared count bounds the command stream; bytes after the final
+record are often unused allocation/heap contents rather than commands.
+Unknown operations or invalid record lengths stop decoding and produce
+diagnostics. Original content exports are retained even when SVG succeeds.
+
+Text record versions 9/10 contain cached line positions and sparse styles:
+  +40: uint32 style-transition table bytes (2 + 8*n).
+  +52: uint32 character count.
+  +74: uint32 line-position table bytes (8*(line_count+1)).
+  +78: uint32 character-run table bytes (10*n).
+  +90: uint16 transition size, observed 8, then transitions:
+       uint16 character index, int16 baseline adjustment, uint16 style ID,
+       uint16 flags. The flags are not the high half of the style ID.
+  Next: line rows (uint16 start index, int16 top, x, baseline). The last
+        row is a sentinel providing final character index and bottom edge;
+        its remaining coordinates are unused cached values.
+  Next: runs (uint16 start/end, uint32 ID, uint8 kind, uint8 unused).
+        Kind 1 applies a text style; 2 is a link; 4 is an inline/dynamic
+        object. Link/object IDs must not be looked up as font style IDs.
+  Next: character bytes, padded to an even byte count.
+Font/style resources (type 0x19, or signature 13 00 / 00 13 in older
+untyped tables) supply sparse attribute overrides, sizes, colors and font
+families. Style masks apply independently rather than replacing a whole
+style. Fonts are referenced by name, not embedded; viewers substitute
+unavailable fonts. Mac Roman and Windows CP1252 text are decoded. Symbol
+font bytes use the Unicode Consortium's Adobe Symbol mapping in
+authorware_symbol.py (source/license notice included); private-use and
+unmapped glyphs are flagged.
+Older text versions 0/5 instead store 58-byte inline font runs and lack
+cached line positions. Wrapping uses substituted font metrics and is
+explicitly flagged as approximate.
+
+Bitmap record 0x60 stores source bounds at +14 and destination at +22;
+0x65 stores source at +10 and destination at +18. A 0x65 record can hold
+a monochrome preview followed by full-color pixels: choose the highest
+valid bit depth within that record. Each bitmap is placed independently;
+selecting one image from the entire PIG would lose mixed compositions.
+
+Observed imported-image record 0x9A has destination bounds at +6 and
+storage flags at +82. Flag 2 stores a uint16 resource ID in the final
+four bytes; flag 6 stores inline payload length at +368 and bytes at
++372. Flag 1 has a link/handle without embedded pixels and is reported
+as unavailable. Resource resolution rejects missing or ambiguous IDs.
+Native GIF/JPEG/PNG bytes are embedded directly; decoded DIB/BMP pixels
+are encoded as PNG. Pillow, when installed, also converts supported TIFF,
+Photoshop and TGA image payloads needed inside SVG. This does not change
+the separate raw imported-media exports. Unsupported imported formats
+remain explicitly flagged.
+
+Before SVG support, of this sample's 136 PIG entries the extractor left 103 as
+raw PIG binaries: 57 text/rectangle records, 9 mixed text/vector drawings,
+20 vector drawings, 7 bitmap references, 7 imported-media containers,
+and 3 with unparsed records. 39 also have heuristic text exports.
+The .bin copy preserves graphics/layout data that a text export loses.
+
+report/pig-review/index.html contains current per-source visual reports.
+The earlier report/pig-investigation prototype is historical and has
+less accurate typography/layout than the integrated renderer. For
+debromination.a5r all 136 indexed PIGs now produce SVGs; two retain stored
+dynamic-text placeholders and carry a diagnostic.
+
+Remaining fidelity limits: installed-font substitution, legacy wrapping,
+dynamic inline text placeholders, unresolved source styles or image
+references, and rare transfer/drawing states. Logical raster operations
+which depend on the original stage cannot always be represented exactly
+by standalone SVG and are flagged when approximated. Ellipse/arc edges,
+pattern colors, grouping and raster-mode behavior merit visual comparison
+against original Authorware playback. "Converted" means no known decoder
+limitation, not proof of pixel-identical rendering.
+
+Related finding: table type 0x3E is not restricted to BMP. Entries 80
+and 89 in this sample are complete JPEGs; 149 and 166 are complete GIFs.
+The current 0x3E branch leaves these as .bin. Copies with correct image
+extensions are included in the investigation report, without changing
+the encoded bytes. Image references and actual image resources must be
+distinguished when assessing how many PIG graphics remain unconverted.
 
 
 DIB (type 0x35)
@@ -557,7 +862,35 @@ Raw Windows DIB data starting with a BITMAPINFOHEADER (40 bytes),
 followed by the color palette (if bpp <= 8) and pixel data. No BMP file
 header is present; one must be prepended for standard BMP viewers.
 
-Pixel data may use RLE8 compression (biCompression = 1) for 8bpp images.
+Some standalone DIB entries omit their palette. Resolve explicit PIG
+bitmap references and the palette active at each draw operation; never
+borrow colors based on table order, physical proximity or color count
+alone. The renderer uses the DIB's own palette when it is present.
+
+PIG SVGs are written before standalone DIB export, including PIGs found
+in uncovered zlib blocks. Track successful bitmap embedding by entry table
+index, so duplicate/zero entry IDs cannot suppress unrelated resources.
+A partially rendered PIG can still successfully embed individual DIBs;
+failed references are excluded from its rendered_dibs metadata.
+
+For DIBs not successfully embedded in any PIG, export a BMP only if the DIB
+is self-contained or its explicit PIG references supply one unambiguous
+palette. A failed PIG drawing operation may still establish a palette for
+standalone recovery. Conflicting/missing palettes leave the DIB as .bin
+with a reason in dib_manifest.json. Successfully embedded DIBs have no
+standalone output by default. --deep preserves their original bytes too,
+including ones embedded in cropped pictures.
+
+Observed compression codes include 0 (uncompressed), 1 (RLE8), 2 (RLE4),
+and 4 (Authorware's one-bit byte-run encoding). In this legacy context,
+code 4 is NOT modern BMP JPEG compression. It uses RLE8-style packets
+over packed one-bit bytes. The extractor decodes these RLE variants to
+uncompressed, DWORD-aligned rows. Truncated or overflowing packets are
+rejected and the original entry is retained as .bin.
+
+For bitfields compression with a 40-byte header, the masks follow the
+header and must be included in the BMP pixel offset (12 bytes for RGB,
+16 bytes for RGBA). Palette size comes from biClrUsed, or 2^bpp if zero.
 
 In A3M files, the BITMAPINFOHEADER fields may be in big-endian byte
 order (biSize = 0x00000028 in BE). To create a valid BMP, the header
@@ -574,28 +907,66 @@ Can be extracted and saved directly as a .bmp file.
 
 Sound Header (type 0x36) and Sound Data (type 0x37)
 ----------------------------------------------------
-Audio is stored as a pair of entries: a 48-byte SoundHeader (0x36)
-immediately followed by a SoundData (0x37) entry containing raw PCM.
+PCM audio has a 48-byte or 50-byte descriptor and one or more data
+entries. Legacy WPCR/WPLI/WCRS tables have no explicit SoundHeader or
+SoundData type; recognize the descriptor, then use its declared byte
+count to group the data. Byte averages cannot establish that an unknown
+block is audio, or determine its bit depth, rate, channels or boundaries.
 
-SoundHeader layout (48 bytes):
+Packed descriptor layout (little-endian, including observed Mac files):
 Offset  Size  Type      Description
 ------  ----  --------  -------------------------------------------
-0x00    4     uint32    Audio format type (observed: 3)
-0x04    2     uint16    Channel count (1 = mono)
-0x06    2     uint16    Data size in bytes (matches paired 0x37 entry)
-0x08    16    bytes     Reserved (zeros)
-0x18    2     uint16    Channel count (repeated)
-0x1A    1     uint8     Block size hint
-0x1B    1     uint8     Bits per sample (8)
-0x1C    4     bytes     Encoding flags
-0x20    8     bytes     Float/reserved data
-0x28    2     uint16    Sample rate (e.g. 22050)
-0x2A    6     bytes     Reserved (zeros)
+0x00    4     uint32    Marker: 3 or 0x10000003
+0x04    2     uint16    Legacy value 1; newer value 0 (NOT channel count)
+0x06    4     uint32    Total PCM byte count across all chunks
+0x0A    10    bytes     Reserved/legacy data (sometimes filename fragments)
+0x14    2     uint16    Observed value 1
+0x16    2     uint16    Observed value 0x003C
+0x18    1     uint8     Channel count (observed: 1 or 2)
+0x19    1     uint8     Bits per sample (8 or 16)
+0x1A    1     uint8     Bits per sample repeated
+0x1B    1     uint8     Rate/format hint (NOT bits per sample)
 
-The SoundData entry contains unsigned 8-bit PCM samples centered at
-0x80 (128 = silence). To create a playable WAV file, prepend a standard
-RIFF/WAV header specifying PCM format with the sample rate, bit depth,
-and channel count from the SoundHeader.
+48-byte variant:
+0x1C    8     double    Sample rate (IEEE 754 little-endian binary64)
+0x24    2     uint16    Block alignment = channels * bits_per_sample / 8
+0x26    4     uint32    Byte rate = sample_rate * block_alignment
+0x2A    6     bytes     Trailing/reserved fields
+
+50-byte variant:
+0x1C    10    extended  Sample rate: LE uint64 significand + uint16 exponent
+0x26    2     uint16    Block alignment
+0x28    4     uint32    Byte rate (NOT sample rate)
+0x2C    6     bytes     Trailing/reserved fields
+
+The extended rate uses an explicit leading significand bit and exponent
+bias 16383 (x87 80-bit format). Round fractional rates to the nearest Hz
+for the WAV integer rate. Some older descriptors have a zero float;
+then use byte_rate / block_alignment. Validate the duplicate bit-depth
+fields and block alignment before treating an entry as a PCM descriptor.
+
+Samples are unsigned 8-bit PCM centered at 128, or signed little-endian
+16-bit PCM centered at zero. Preserve their bytes; supply a RIFF/WAVE
+PCM header using the descriptor's rate, bit depth and channel count.
+
+The descriptor may precede or follow its data. Chunks are typically
+65536 bytes (legacy) or 4096 bytes (newer), with a shorter final chunk.
+Group by table position and exact total byte count, not entry IDs:
+some legacy tables have all-zero IDs. The last short chunk still belongs
+to the sound, even if it has fewer than 4096 bytes or looks like silence.
+
+Edited legacy projects can interleave metadata or move the descriptor
+away from the sound. After resolving adjacent groups, the extractor can
+associate an otherwise unmatched descriptor with a unique, unclaimed
+run of 65536-byte blocks and a final block whose length completes the
+exact declared count. Overlapping or ambiguous candidates remain raw.
+Unknown data and PCM without matched metadata are preserved as .bin;
+no default-rate WAV is invented from their byte distribution.
+
+w4_2s.apr contains 38 sounds: 26 mono 16-bit and 12 mono 8-bit, all at
+22050 Hz. The 16-bit descriptors have byte_rate=44100 and alignment=2;
+interpreting this field as a sample rate, or the data as 8-bit samples,
+produces incorrect playback. Their combined PCM size is 12521460 bytes.
 
 
 Embedded Media (type 0x3B)
@@ -636,10 +1007,22 @@ plugin-provided display objects).
 
 Streaming Audio (type 0x3C)
 ---------------------------
-Streaming audio data. Large audio files are split across multiple
-consecutive 0x3C entries, each up to 65536 bytes. All consecutive 0x3C
-entries must be concatenated in order to reconstruct the complete audio
-file.
+Streaming audio data. Large audio files are split across multiple 0x3C
+entries, usually consecutive but sometimes separated by metadata. For
+RIFF/FORM streams, the container's length determines completion; include
+later 0x3C continuation chunks across those metadata entries. A fresh
+RIFF/FORM/ID3 header starts a separate stream, even when adjacent.
+Unknown/MP3 streams retain the consecutive-entry grouping convention.
+
+Incomplete containers are saved as .bin with a partial-extraction warning.
+An omitted final padding byte is restored only when all chunk payload
+bytes are present. Generated PCM WAVs also pad odd data lengths, without
+including that pad byte in the data chunk's sample count.
+
+If complete WAVE fmt/data chunks are followed by malformed metadata,
+the complete audio is recovered with corrected RIFF length. The original
+container is also saved as *_original.bin and extraction returns 2.
+A truncated data chunk is never relabeled as complete audio.
 
 The actual audio format varies and can be determined from the first
 chunk's opening bytes:
@@ -653,8 +1036,11 @@ chunk's opening bytes:
 AIFF: The first entry begins with "FORM" + size + "AIFF", containing
 COMM (format) and SSND (sample data) chunks. Observed in A4P and A5P.
 
-WAV: Standard RIFF/WAVE container with fmt and data chunks. Observed
-in A6P files.
+WAV: RIFF/WAVE container with fmt and data chunks. PCM and ADPCM occur
+in the corpus. Some A5R samples contain legacy Voxware (format 0x0062
+with a VOX. extension in fmt); these are extracted without transcoding.
+Their codec assignment is documented in RFC 2361, Appendix A.52:
+https://www.rfc-editor.org/rfc/rfc2361.html
 
 MP3: MPEG audio with ID3 tag or raw MPEG sync frames (0xFFFB, 0xFFF3,
 0xFFFA, 0xFFF2, 0xFFE2). Observed in A6P files. Some MP3 entries have
@@ -689,8 +1075,14 @@ Compression
 Entry data with storage_type = 2 is compressed using zlib (RFC 1950
 deflate wrapper). The compressed data at the entry's data_offset can be
 decompressed using standard zlib inflate. The decompressed result should
-match the entry's decomp_size field.
+match the entry's decomp_size field. Successful inflation requires the
+zlib end marker/checksum and the exact advertised decompressed size.
+Inflation is bounded to the entry's compressed bytes, never bytes from
+the following entry. Partial output is not a complete resource.
 
 Unreferenced zlib blocks elsewhere in the file use the same compression
 format and can be identified by the zlib header byte 0x78 followed by
 one of: 0x01 (no compression), 0x5E (fast), 0x9C (default), 0xDA (best).
+Only complete streams in uncovered file regions are recovered. Content
+hashes suppress duplicate indexed/unindexed copies without retaining a
+Python set of every covered byte offset.

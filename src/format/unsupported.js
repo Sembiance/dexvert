@@ -2985,6 +2985,7 @@ export default
 		magixAudioEditProxyCache                 : {name : "MAGIX audio edit proxy/cache", ext : [".hdp"], magic : ["MAGIX audio edit proxy/cache"]},
 		magicWorkstationDeck                     : {name : "Magic Workstation Deck", ext : [".mwdeck"], magic : ["Magic Workstation Deck"]},
 		magixHardDiskProjectAudio                : {name : "MAGIX Hard Disk Project Audio", ext : [".hdp"], magic : ["MAGIX Hard Disk Project Audio"]},
+		mAGIXMovieEditProProject                 : {name : "MAGIX Movie Edit Pro project", ext : [".avd"], magic : ["MAGIX Movie Edit Pro project"]},
 		magixMovieEditVideo                      : {name : "Magix Movie Edit video", ext : [".vip"], magic : ["Magix Movie Edit video"]},
 		magixLibrary                             : {name : "MAGIX library", ext : [".mxm"], magic : ["MAGIX library"]},
 		magixMusicStudioStyle                    : {name : "MAGIX music studio Style", ext : [".sty"], magic : ["MAGIX music studio Style"], weakMagic : true},

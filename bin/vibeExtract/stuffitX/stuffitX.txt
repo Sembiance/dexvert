@@ -1,9 +1,18 @@
 StuffIt X (.sitx) File Format Specification
 ============================================
 Vibe coded by Claude
+Corrections and verified extraction tests by Codex, 2026-10-11.
 
 Reverse-engineered from sample files and the XADMaster open-source
 implementation (MacPaw Inc., LGPL 2.1).
+
+Coverage warning: this is NOT a complete specification of every StuffIt X
+variant. The previous sample table overstated support: successful writes did
+not imply correct decoding. Current verification covers the Avid sample and
+22 of the 25 sample0 archives. Two still need the M68k preprocessing filter,
+and one has a truncated inner archive stream (section 14). They fail instead of producing
+silently corrupted output. Unrecognized metadata/layouts are not claimed to
+be understood byte-for-byte.
 
 StuffIt X was introduced in September 2002 with StuffIt Deluxe 7.0 by
 Aladdin Systems (later Smith Micro Software). It is a proprietary,
@@ -138,6 +147,8 @@ for any element-specific data.
   2    [1]    checksum       Checksum algorithm ID
   3    [2]    preprocessing  Preprocessing filter ID
   4    [3]    crypto         Encryption algorithm ID (+ extra P2 value)
+  5    [4]    redundancy     Root wrapper; ID 0 is interleaved Reed-Solomon
+  6    [5]    (unknown)      Not used by the verified samples
 
 
 4. DATA BLOCKS
@@ -188,18 +199,24 @@ Raw data, no transformation.
 5.1 Brimstone / PPMd (alglist[0] = 0)
 --------------------------------------
 PPMd Variant G with Brimstone sub-allocator.
-Parameters: 2 bytes at start of decompressed block stream:
+Parameters: 2 bytes at start of concatenated element payload:
   byte 0: exponent (alloc_size = 1 << exponent)
   byte 1: max_order (PPMd model order)
 
 Used primarily for catalogs and some data streams. Based on Dmitry
 Shkarin's PPMd algorithm, adapted with a custom sub-allocator.
 
+For English-filtered elements, the PPMd output size is NOT the fork size.
+Decode the intermediate stream through its end marker, then apply English
+decoding. The implementation uses a bounded output capacity of 2*N+5 for a
+final size N: at most two encoded bytes per output byte, four header bytes,
+and one extra sentinel byte. This also handles inputs made larger by escaping.
+
 5.2 Cyanide / BWT (alglist[0] = 1)
 -----------------------------------
 Burrows-Wheeler Transform with range-coded ternary symbols.
 
-Block format (within the decompressed block stream):
+Block format (within the concatenated element payload):
   byte 0: skip byte (initialization)
 
   Then repeating blocks:
@@ -215,16 +232,52 @@ Block format (within the decompressed block stream):
     - tresym 0,1: stored directly
     - tresym 2+: highbit model + lowbits model
 
-  After decoding: M1FFN (Move-1-From-Front-N) transform with order=2,
-  then inverse BWT unsort.
+After decoding: M1FFN (Move-1-From-Front-N) transform with order=2,
+then inverse BWT unsort.
 
 This is the most common compression method for data streams.
+
+M1FFN is NOT ordinary move-to-front. Initialize table=0..255 and lasthead=1.
+For each encoded symbol s:
+  emit table[s]
+  if s==0: lasthead=0
+  if s==1 and lasthead>=2: swap table[0],table[1]
+  if s>=2: move table[s] to position 1 (not position 0)
+  lasthead++
+
+The old native decoder incorrectly moved symbols to position 0. It produced
+plausible-length but corrupt output. libsitx_cyanide.so replaces that decoder;
+the old cyanide_decompress symbol in libsitx_decomp.so is no longer called.
+
+Ternary frequency sorting also has specific tie-breaking rules. Given the
+three current frequencies a,b,c, the symbol order is:
+  if a<b:
+    if a<c: [0,1,2] when b<c, otherwise [0,2,1]
+    otherwise: [2,0,1]
+  otherwise:
+    if b<c: [1,2,0] when c<a, otherwise [1,0,2]
+    otherwise: [2,1,0]
+Add one to each ordered frequency before range decoding. A stable numeric
+sort is not equivalent (all-zero frequencies must order symbols as 2,1,0).
 
 5.3 Darkhorse / LZSS (alglist[0] = 2)
 --------------------------------------
 LZSS with carryless range coder (adaptive binary weights).
-Parameters: 1 byte at start of decompressed block stream:
+Header at the start of the concatenated element payload:
   byte 0: window_exponent (window_size = max(1 << exp, 0x100000))
+  byte 1: initialization byte, observed as 00; consumed but not interpreted
+  bytes 2-5: initial range-coder code, unsigned 32-bit big-endian
+  bytes 6 onward: range-coder normalization bytes
+
+The TWO leading parameter bytes are distinct. The old implementation skipped
+only the window exponent, treating the initialization byte as the high byte
+of the initial code. This desynchronized decoding immediately. Its unchecked
+native match-copying code could then access invalid memory or crash.
+
+The current implementation uses libsitx_darkhorse.so, with source included
+as sitx_darkhorse.c, or a checked Python fallback. The legacy function in
+libsitx_decomp.so is never called. Exponents above 30 and reserved distance
+symbols 60-63 are rejected rather than interpreted speculatively.
 
 Uses adaptive weighted bit decisions (weight/shift=12) for:
   - Literal/match flags (4 contexts based on position & 3)
@@ -235,14 +288,134 @@ Uses adaptive weighted bit decisions (weight/shift=12) for:
 
 End-of-stream: length value 0x10F (= 0x111 - 2 = 271 decimal raw)
 
+Range coder:
+  All code/range arithmetic is unsigned 32-bit; range starts at FFFFFFFF.
+  The low-register mode used by Cyanide is NOT used here (low remains zero).
+  Normalize whenever range < 01000000:
+    code = (code << 8) | next_byte(); range <<= 8
+  Each adaptive weight starts at 0800. Its threshold is (range >> 12)*weight.
+  If code < threshold: bit=0; range=threshold;
+    weight += (1000_hex-weight) >> 5
+  Otherwise: bit=1; code-=threshold; range-=threshold;
+    weight -= weight >> 5
+  Normalize after either branch. Truncated normalization input is an error.
+  An unbiased distance bit instead divides range by 2, chooses code/range,
+  subtracts bit*range from code, and normalizes. The quotient must be 0 or 1.
+
+Binary symbol trees start at node=1. For each requested bit, use weights[node]
+and update node=2*node+bit. Subtract 2**bits from the final node.
+
+Token decoding at output position p (context c = p & 3):
+  flag[c] == 0: decode a literal. Its ordinary context is previous_byte>>4,
+    with previous_byte=0 at position zero. Traverse an 8-bit symbol tree.
+    If the previous token was a match, first use a separate weight tree
+    indexed by context, node, and the corresponding predicted-byte bit.
+    After the first unequal bit, switch to the ordinary tree. A literal
+    clears this match prediction; it lasts for at most one literal.
+  flag[c] == 1, secondary_flag == 0: decode a length and a new distance.
+    A decoded length of 273 terminates the stream before any distance read.
+    Insert the new distance at the front of the four-entry distance cache.
+  flag[c] == 1, secondary_flag == 1: use a cached distance. The first recency
+    bit 0 selects either a one-byte match (per-context bit 0) or cache index
+    0 with an explicit length (per-context bit 1). First recency bit 1 uses
+    two further decisions: 0 -> index 1, 10 -> index 2, 11 -> index 3.
+    Explicit-length matches move the selected cached distance to the front.
+
+Length decoding uses one adaptive selector:
+  0 -> per-context 4-bit tree + 2, giving lengths 2..17
+  1 -> shared 8-bit tree + 18, giving lengths 18..273
+Length 273 is ONLY an end marker in a NEW-distance token; it is a valid copy
+length in a cached-distance token. The cache initially holds four distances
+of one byte (equivalent to four encoded offsets of zero).
+
+New-distance decoding uses a 6-bit tree selected by min(length-2,3).
+Let its result be s and the encoded offset be actual_distance-1:
+  s < 4: offset=s
+  4 <= s < 60: n=floor(s/2)-1; base=(2+(s&1)) << n
+    s < 14: read n low bits from the adaptive tree specific to s
+    s >= 14: read n-4 high bits as unbiased bits, then four low bits from
+      a shared adaptive tree
+    offset=base+low_bits
+  actual_distance=offset+1; it must not exceed the declared window.
+
+History before output byte zero is initialized to zero. Copy matches FORWARD
+so overlapping matches repeat their source. The next literal's prediction,
+computed before the copy, is history[p-distance + length % distance]. The
+decoder can use its retained output as history instead of allocating a huge
+window, provided it enforces the distance limit and initial-zero semantics.
+
+Decode through the explicit end marker even if the declared size has already
+been reached. Reject output beyond the supplied capacity, missing end markers,
+out-of-window references, invalid range intervals, and bytes trailing the
+completed range-coded stream. After unfiltering, the element dispatcher still
+requires the exact final length and stored CRC-32.
+
 5.4 Deflate (alglist[0] = 3)
 -----------------------------
 Modified DEFLATE (RFC 1951) with one change:
   In dynamic Huffman block headers, HDIST is encoded as 6 bits
   (instead of standard 5 bits), allowing up to 64 distance codes.
 
-Parameters: 1 byte at start of decompressed block stream:
+Parameters: 1 byte at start of concatenated element payload:
   byte 0: window_bits (must be 15 in known files)
+
+The remaining bytes are a continuous LSB-first bitstream. Each block starts
+with BFINAL (1 bit) and BTYPE (2 bits). Huffman codes are transmitted most
+significant code bit first, unlike numeric fields. The history is shared
+across all blocks, including stored blocks, and is limited to 32,768 bytes.
+
+BTYPE 0 (stored): discard bits to the next byte boundary, read little-endian
+uint16 LEN and NLEN, require LEN XOR NLEN = 0xFFFF, then copy LEN bytes.
+
+BTYPE 1 (fixed): literal/length code lengths by symbol are:
+  0..143: 8 bits; 144..255: 9 bits; 256..279: 7 bits; 280..287: 8 bits.
+  All 32 distance code lengths are 5 bits.
+
+BTYPE 2 (dynamic):
+  HLIT  = read_bits(5) + 257, maximum 286
+  HDIST = read_bits(6) + 1, maximum 64
+  HCLEN = read_bits(4) + 4
+  Read HCLEN three-bit code lengths for the meta alphabet, in this order:
+    16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15
+  Unspecified meta lengths are zero. Decode exactly HLIT + HDIST lengths:
+    0..15: use the value as a length (zero means absent)
+    16: repeat the previous length 3 + read_bits(2) times
+    17: emit 3 + read_bits(3) zero lengths
+    18: emit 11 + read_bits(7) zero lengths
+  A repeat cannot precede its required previous length or exceed the total.
+  The first HLIT lengths define literal/length symbols; the rest define
+  distances. Literal symbol 256 must have a code. An empty distance tree is
+  permitted for literal-only blocks, but cannot be used for a match.
+
+Codes are canonical: count codes of each length; starting with code = 0,
+compute next_code[n] = (next_code[n-1] + count[n-1]) << 1. Assign consecutive
+codes to symbols of length n in symbol order. Reject oversubscribed trees,
+missing codes encountered in the input, and lengths above 15.
+
+Decoded symbols 0..255 are literals, and 256 ends the block. Symbols 257..285
+specify match length. Their base lengths in order are:
+  3,4,5,6,7,8,9,10,11,13,15,17,19,23,27,31,35,43,51,59,
+  67,83,99,115,131,163,195,227,258
+Symbols 257..264 and 285 have no extra bits; 265..284 have
+floor((symbol - 261) / 4) extra bits, added to the base.
+
+Read one distance symbol d. For d < 4, distance = d + 1. Otherwise:
+  extra = floor(d / 2) - 1
+  distance = ((2 + (d AND 1)) << extra) + 1 + read_bits(extra)
+Only distance symbols 0..29 are supported with the observed window_bits=15.
+The wider HDIST field does not make reserved distance codes valid. Copy
+length bytes from distance bytes before the current output, allowing overlap.
+Reject references before the beginning of history and symbols 286/287.
+
+BTYPE 3 is reserved. Decode to the end of the BFINAL block, not just until
+the declared output length is reached. At most seven unused padding bits may
+remain; no additional bytes are allowed. Enforce output capacity for literals,
+stored blocks and matches, then unfilter and verify the final size and CRC.
+
+stuffitXDeflate.py implements all of these blocks. The previous zlib-first
+heuristic and one-header bit patch were incorrect for multi-block streams:
+every dynamic block needs six HDIST bits, and stored-block alignment must be
+computed in the original bitstream, not a stream with header bits removed.
 
 5.5 Blend (alglist[0] = 4)
 ---------------------------
@@ -257,7 +430,7 @@ Each sub-block is decompressed independently using the specified algorithm.
 5.6 RC4 obfuscation (alglist[0] = 5)
 -------------------------------------
 Not true compression. Data is XOR'd with RC4 stream cipher.
-Parameters: 3 bytes at start of decompressed block stream:
+Parameters: 3 bytes at start of concatenated element payload:
   byte 0-1: skip
   byte 2:   RC4 key (single byte)
 
@@ -288,8 +461,8 @@ Applied after decompression to reverse transformations:
   0    English    English text filter using 100,366-word PPMd-compressed
                   dictionary. Uses escape codes for non-dictionary content.
   1    Biff       (undocumented)
-  2    x86        x86 executable filter. Converts relative E8/E9
-                  (CALL/JMP) addresses back to absolute.
+  2    x86        x86 executable filter. Converts encoded E8/E9
+                  (CALL/JMP) addresses back to relative displacements.
   3    PEFF       PowerPC PEF executable filter
   4    M68k       Motorola 68000 executable filter
   5    Sparc      SPARC executable filter
@@ -297,7 +470,66 @@ Applied after decompression to reverse transformations:
   7    WAV        WAV audio filter
   8    WRT        Text filter
 
-Only filters 0, 2, and 4 are encountered in the sample files.
+Only filters 0, 2, and 4 are encountered in the sample files. Filters 0 and 2
+are implemented. Filter 4 and all other unknown filters are rejected, not
+silently ignored. Encryption and unknown checksum algorithms are rejected.
+
+
+7.1 English Filter, Byte-Level Decoding
+---------------------------------------
+The decompressed intermediate stream begins with four control bytes:
+  escape, plain_word, initial_uppercase_word, all_uppercase_word
+The sample1 stream uses 7F 80 81 82. These are stream parameters, not constants.
+
+Use the fixed, ordered 100,366-word dictionary, not an arbitrary English word
+list. Its newline-separated representation (including the final LF) is:
+  Length: 881,863 bytes
+  CRC-32: FB1DCFD5
+  SHA-256: 6095ebdbadd794ac50fe5b53b12a744b5833e046658777ee37dcb6da82512a31
+  First entries: the, and, that, was, for, you, with, have
+  Word lengths: 3 through 25 bytes, lowercase ASCII
+The original dictionary is distributed as 325,602 PPMd Variant I bytes,
+decoded using order=16, allocator=16 MiB, restoration=0. This is NOT the
+Variant G/Brimstone decoder used for archive contents. The extractor bundles
+the same decoded dictionary as stuffitXEnglishDictionary.gz and authenticates
+its contents before use. The archive itself does not carry the dictionary.
+
+Initialize sentence_start=true; process bytes following the four-byte header:
+
+  escape:
+    Emit the following byte literally; set sentence_start=false. A missing
+    following byte is an error. Do not apply case or punctuation handling.
+
+  Any word control:
+    Read zero or more ASCII letters, then consume the first nonletter byte
+    as this token's delimiter (EOF may replace the delimiter).
+    Decode letters as bijective base-52 digits, most significant first:
+      index starts at 0
+      'a'..'z' -> 1..26; 'A'..'Z' -> 27..52
+      index = index*52 + digit
+    An empty digit sequence selects dictionary[0], "the". Reject an index
+    >=100366 immediately, including in the middle of an oversized sequence.
+    Select dictionary[index]. Uppercase its first letter or all letters as
+    specified by the control byte; leave it lowercase for plain_word.
+    If sentence_start was true, toggle the case of the word's first letter.
+    If the consumed delimiter equals escape, replace it with the next byte;
+    a missing escaped delimiter is an error. Other control-valued delimiters
+    are literal bytes, not new word tokens.
+    Emit the word and delimiter (unless EOF).
+    Set sentence_start = (delimiter is '.', '?' or '!').
+
+  Other literal byte:
+    If sentence_start is true and the byte is an ASCII letter, toggle case.
+    '.', '?' or '!' sets sentence_start=true. Space, LF, CR and TAB leave it
+    unchanged; all other bytes, including emitted letters, clear it.
+    Emit the byte. Non-ASCII data is preserved, not Unicode-decoded.
+
+Both contraction (dictionary tokens) and expansion (literal escaping) can
+occur in the intermediate encoding. Decode the WHOLE solid stream before
+using fork lengths as offsets. Validate the final size and CRC on the
+unfiltered bytes; neither check applies to the intermediate dictionary-coded
+bytes. Ignoring this filter shifts all later fork offsets and can create
+zero-filled or empty files without raising a decoder exception.
 
 
 8. CATALOG STRUCTURE
@@ -330,7 +562,8 @@ per-entry records. Each entry's fields are key-value pairs:
         7: (unknown)      P2 integer
         8: ctime          8-byte uint64 (same format as mtime)
         9: comment        P2-length-prefixed UTF-8 string (byte-aligned)
-       10: string_array   P2 count, then count P2-length strings
+       10: string_array   P2 count, then count P2-length strings;
+                          flush bits BEFORE each string's P2 length
        11: string         P2-length-prefixed string
        12: string         P2-length-prefixed string
 
@@ -389,27 +622,93 @@ After the fork attributes, one additional P2 value is read:
 Multiple forks can reference the same data stream (solid compression).
 The forks are concatenated within the stream in index order.
 
-When extracting, the data stream is decompressed as a whole, then
-split according to fork lengths and assigned to the correct entries.
+When extracting, the data stream is decompressed and unfiltered as a whole,
+validated, then split according to fork lengths and assigned to entries.
+Multiple entries may reference the same stream index. Such shared content is
+stored only once, not once per entry; repeated lengths/types must agree.
+
+An entry whose Finder info starts with "slnkrhap" is a symbolic link. Its
+data fork consists of the target path bytes, without a terminating NUL. The
+Avid archive has four such entries. The extractor creates relative symlinks
+after all regular files, rejects targets outside the output directory, and
+does not follow pre-existing output symlinks while writing regular files.
 
 
 11. ARCHIVE VARIANTS
 =====================
 
-Two variants have been observed:
+The earlier "variant B" hypothesis was incorrect. Both layouts begin with
+the normal root element. Common bytes A1 0A encode a root with no algorithms.
+Bytes A1 59 05 encode a root with algorithm-list key 5 = 0, followed by the
+root's extra P2 value 0. The rest of that archive is wrapped in redundancy
+records, not a catalog element. The first record starts at file offset 11.
 
-Variant A (byte 8-9 = 0xA1, 0x0A pattern):
-  Standard element stream starting at byte 8.
-  All sample files except DVDInfo_X.sitx and Archive_1.sitx.
+11.1 Redundancy Wrapper (Root Algorithm Key 5 = 0)
+-------------------------------------------------
+Observed in DVDInfo_X.sitx and Archive_1.sitx. Groups consist of numbered
+records; numbering restarts at zero for each group. Integers in the wrapper
+are raw big-endian bytes, NOT P2 values. Each record is:
 
-Variant B (byte 8-9 = 0xA1, 0x59):
-  Both DVDInfo_X.sitx and Archive_1.sitx share identical bytes 8-26:
-    A1 59 05 B2 00 00 00 00 04 00 00 04 00 DF 00 16 0A DB 78
-  The bit-level parsing at byte 8 still produces valid elements (root,
-  catalog) but with unusual attribute/algorithm patterns. The element
-  stream terminates early, leaving most of the file as unreferenced data.
-  This variant may represent a newer StuffIt X version with an extended
-  header or different catalog architecture.
+  Offset  Size   Description
+  0       1      0xB2 every eighth record; otherwise 0xB1
+  1       3      Record index, starting at 0
+  4       8      Group parameters, present ONLY for marker 0xB2:
+    4     3        Matrix width W (number of codewords), observed 1024
+    7     3        Used columns U, including any partial last column
+    10    1        Data symbols K per codeword, observed 223
+    11    1        Valid bytes T in last column; 0 means all K are valid
+  4/12    4      IEEE CRC-32 of bytes from offset 1 up to the CRC
+  8/16    1020   Matrix payload bytes
+  1028/1036 1    Record terminator 0xB3
+
+A group has W / 4 records, so W must be positive and divisible by four.
+For W=1024 there are 256 records and 263,680 physical bytes per group.
+All repeated parameter headers must agree. Header CRCs cover record indices
+and parameters, but not payload bytes. Markers and terminators are framing
+bytes outside those CRCs. The decoder checks all of them and every index.
+
+Concatenate the 1020-byte payloads to obtain a 255-row by W-column matrix,
+stored row-major. Each COLUMN is an independent systematic RS(255,K)
+codeword: the first K symbols are data, followed by 255-K parity symbols.
+The field is GF(256), with primitive element 2 and polynomial 0x187
+(x^8 + x^7 + x^2 + x + 1). The generator polynomial is:
+
+  g(x) = product for j=K..254 of (x + alpha^j)
+
+Treat the top symbol as the highest-degree coefficient. Every column must
+evaluate to zero at all roots alpha^K through alpha^254. This validates ALL
+payload bytes, including unused data cells and parity, not only extracted
+file bytes. All 5,120 codewords in the five supplied wrapper groups pass.
+The implementation checks parity and rejects damage; it does not repair
+damaged or missing records or correct symbols using the redundant bytes.
+
+Recover the element stream by reading the first K rows COLUMN-MAJOR, then
+keep only U*K bytes if T=0, or (U-1)*K + T bytes otherwise. Require
+1 <= U <= W, 1 <= K <= 254 and 0 <= T < K. Unused cells are padding; they
+are not necessarily zero (the DVD Info final partial column has 74 nonzero
+unused bytes). Padding is still validated by the RS checks. A partial group
+must be the final group. A full final group is allowed, provided the inner
+element stream has a valid end element and is completely consumed.
+
+The decoder reconstructs the element bytes after the root before normal
+parsing. parse_archive returns logical bytes as its last tuple item; all
+element block offsets refer to those bytes, not the wrapped source file.
+Only W=1024, K=223 occur in the samples; other parameter combinations are
+covered by synthetic tests, not independently observed archive fixtures.
+
+DVDInfo_X.sitx has two groups:
+  W=1024, U=1024, K=223, T=0:   228,352 element bytes
+  W=1024, U=389,  K=223, T=149:  86,673 element bytes
+Total: 315,025 inner element bytes, after the 11-byte magic/root prefix.
+The complete 527,371-byte source is accounted for, including parity/padding.
+
+Archive_1.sitx has three full groups (685,056 inner element bytes). All
+framing, header CRCs and RS parity are valid, but the inner stream is
+truncated: a declared 45,441-byte payload at logical offset 642,744 has only
+42,323 bytes available. At least 3,118 payload bytes plus subsequent framing
+are missing. Parity from the existing groups cannot recover a missing group.
+This file is rejected without creating output, rather than silently accepting
+an incomplete resource fork.
 
 
 12. BIT/BYTE INTERACTION SEMANTICS
@@ -437,8 +736,12 @@ This means:
 13. CRC-32 VERIFICATION
 ========================
 
-When alglist[1] = 0 (checksum enabled), the decompressed data should
-match the CRC-32 stored after the data blocks.
+When alglist[1] = 0 (checksum enabled), the fully decompressed AND unfiltered
+solid stream must match the CRC-32 stored after the data blocks. This is a
+stream-level checksum, not a separate checksum per file. A checksum of zero
+is valid and must not be interpreted as "absent". A missing CRC trailer is an
+error when the algorithm list requests CRC-32. An absent checksum algorithm
+does not imply CRC-32; for example, the Avid catalog has no checksum.
 
 CRC-32 parameters:
   Polynomial: 0xEDB88320 (reflected/reversed)
@@ -446,41 +749,191 @@ CRC-32 parameters:
   Final XOR:  0xFFFFFFFF
   Conditioned: Yes (as per XADCRCHandle IEEECRC32)
 
+Equivalent Python operation: zlib.crc32(final_bytes).
+Every decoded stream must also have exactly the expected total fork size.
+Catalogs use their declared uncompressed size. Catalog failures and stream
+errors stop extraction with exit status 1; the extractor validates all data
+streams before creating output files/directories. This is not a claim of
+transactional rollback after a later filesystem/write error.
+
 
 14. SAMPLE FILE ANALYSIS
 =========================
 
+Current verification: "CRC OK" means complete parsing and matching decoded
+lengths/CRCs for every data stream. It does not certify all filesystem metadata
+or resource-fork wrapping semantics. The legacy "OK" labels were based on
+unverified extraction and have been replaced here.
+
 File                              Size        Entries  Comp     Status
 ----                              ----        -------  ----     ------
-picodrive.sis.sitx                41,765      1        Cyanide  OK
-Soundflower1.1.sit                37,798      1        Cyanide  OK
-JewelCase_1.6.sit                 211,804     1        Cyanide  OK
-Confidential Conduit.sitx         92,639      1        Cyanide  OK
-Galaxymap1.0.zip.hqx              95,295      1        RC4      OK
-Hypersonic_1.1_AU.dmg.sitx        9,049,839   1        Cyanide  OK
-Hypersonic_1.1_VST.dmg.sitx       8,939,172   1        Cyanide  OK
-AudioFinder.sit                   3,256,031   1        Cyanide  OK
-copypastex.sit                    2,646,921   1        Brimstone OK
-opmor.sit                         22,079,758  1        Cyanide  OK
-duke3d-macosx-12162004.dmg.sitx   20,334,745  1        Cyanide  OK
-Morph Age Release 2.2.dmg.sitx    6,327,322   1        Cyanide  OK
-ViperGlows.sitx                   208,809     1        Cyanide  OK
-Planet Rico.sitx                  1,138,009   1        Cyanide  OK
-Archive.sitx                      580,657     1        Brimstone OK
-Starwars_plug.sitx                1,685,724   2        Brimstone OK
-ec.sit                            1,794,999   32       Mixed    OK
-net_clipper_IIX.sit               943,507     6        Mixed    OK
-bidmaker.sitx                     6,116,942   13       Mixed    OK
-SIG03.app.sitx                    954,268     22       RC4      OK
-The DarthKev Plug v2.sitx         3,493,004   3        Deflate  Partial*
-The_DarthKev_Plug_.sitx           3,445,802   3        Deflate  Partial*
-The_DarthKev_Plug_v1_1.sitx       3,450,118   3        Deflate  Partial*
-DVDInfo_X.sitx                    527,371     1        Variant  N/A**
-Archive_1.sitx                    791,051     0        Variant  N/A**
+picodrive.sis.sitx                41,765      1        Cyanide  CRC OK
+Soundflower1.1.sit                37,798      1        Cyanide  CRC OK
+JewelCase_1.6.sit                 211,804     1        Cyanide  CRC OK
+Confidential Conduit.sitx         92,639      1        Cyanide  CRC OK
+Galaxymap1.0.zip.hqx              95,295      1        RC4      CRC OK
+Hypersonic_1.1_AU.dmg.sitx        9,049,839   1        Cyanide  CRC OK
+Hypersonic_1.1_VST.dmg.sitx       8,939,172   1        Cyanide  CRC OK
+AudioFinder.sit                   3,256,031   1        Cyanide  CRC OK
+copypastex.sit                    2,646,921   1        Brimstone CRC OK
+opmor.sit                         22,079,758  1        Cyanide  CRC OK
+duke3d-macosx-12162004.dmg.sitx   20,334,745  1        Cyanide  CRC OK
+Morph Age Release 2.2.dmg.sitx    6,327,322   1        Cyanide  CRC OK
+ViperGlows.sitx                   208,809     1        Cyanide  CRC OK
+Planet Rico.sitx                  1,138,009   1        Cyanide  CRC OK
+Archive.sitx                      580,657     1        Brimstone CRC OK
+Starwars_plug.sitx                1,685,724   2        Brimstone CRC OK
+ec.sit                            1,794,999   32       Mixed    REJECT: M68k
+net_clipper_IIX.sit               943,507     6        Mixed    REJECT: M68k
+bidmaker.sitx                     6,116,942   13       Mixed    CRC OK
+SIG03.app.sitx                    954,268     22       RC4      CRC OK
+The DarthKev Plug v2.sitx         3,493,004   3        Deflate  CRC OK
+The_DarthKev_Plug_.sitx           3,445,802   3        Deflate  CRC OK
+The_DarthKev_Plug_v1_1.sitx       3,450,118   3        Deflate  CRC OK
+DVDInfo_X.sitx                    527,371     11       Brimstone CRC OK + RS OK
+Archive_1.sitx                    791,051     -        Wrapped  REJECT: truncated
 
-*  Small Deflate streams extract OK; large multi-block resource fork
-   streams fail due to the StuffIt X 6-bit HDIST Deflate variant
-   requiring a custom decoder for multi-block streams.
+Each DarthKev archive now extracts two files and one directory. All three
+streams in each archive pass their final lengths and CRCs after English
+unfiltering where required. The largest streams, containing resource forks:
+  The DarthKev Plug v2.sitx:    8,452,460 bytes, CRC-32 C71AB882
+  The_DarthKev_Plug_.sitx:      8,202,114 bytes, CRC-32 A33CBF83
+  The_DarthKev_Plug_v1_1.sitx:   8,264,078 bytes, CRC-32 6E26687C
+Resource forks are preserved in the existing MacBinary output representation.
 
-** Format variant B with different element structure. Parser handles
-   every byte but the variant's catalog/data architecture differs.
+DVDInfo_X.sitx extracts six files in five directories. All five data streams
+pass lengths and CRCs, in addition to the wrapper checks described above:
+  ID  Decoded bytes  CRC-32
+  13            850  63B15011
+  14          1,622  928C6461
+  15         98,412  E1083505
+  16            376  C6DAF4AD
+  17      1,527,808  9EF0B3AB
+
+New synthetic regressions cover multi-block DEFLATE, shared history, stored
+alignment, code-length repeats, all length/distance ranges, invalid trees,
+truncation, reserved symbols and output bounds. Independent RS encoders test
+wrapper framing, header/data/parity damage, full and partial groups, unused
+padding and trailing bytes. CLI tests verify every recovered fork, including
+MacBinary header CRCs and fork boundaries, and failure before writing when
+wrapper bytes are corrupted or the inner archive is truncated.
+Unlike the Avid comparison below, these new CLI checks are not an independent
+unar content comparison: installed unar 1.10.7 rejects catalog field 10 in
+the normalized DVD Info stream. The evidence is the archives' stored CRCs,
+exact stream lengths, RS syndromes and verified fork-output boundaries.
+
+bidmaker.sitx: all nine data streams now pass their lengths and CRCs, and
+11 files in two directories extract successfully. Its Darkhorse stream 20
+contains "BidMaker v7.27 demo/BidMaker Manual 7.27 PDF.pdf":
+  Concatenated payload: 1,274,549 bytes
+  Header: 15 00 (2 MiB window, initialization byte)
+  Initial range-coder code: 12 94 00 84
+  Decoded length: 1,365,221 bytes
+  Stored/verified CRC-32: DBC64A98
+  Decoded SHA-256:
+    a3ada69fcc4b326977de6d035021ccb8faa11ea2f307839eefcbd5359e92ed61
+The native and Python decoders match byte-for-byte. pdfinfo recognizes the
+output as a 45-page PDF 1.3. The old native path produced nondeterministically
+short output (including 243,418 and 83,855 bytes) and sometimes crashed.
+
+Two other Darkhorse streams are in ec.sit (892,950 bytes) and net_clipper_IIX.sit
+(866,142 bytes). Native and Python decompression agrees for both; their M68k
+postprocessing filter remains unsupported, so those archives still fail
+explicitly. Matching the intermediate bytes does not validate their final
+file contents or final CRCs.
+
+Darkhorse regression tests cover literal prediction, all distance-cache
+indices, initial-zero history, overlapping copies, window wrapping, repeated
+native calls, truncation/end markers, reserved distances, output canaries,
+and corrupted-stream failure before file creation. tests/darkhorse_safety.c
+can additionally be linked with sitx_darkhorse.c under AddressSanitizer and
+UndefinedBehaviorSanitizer to test a valid raw payload plus 5,000 mutations.
+
+
+14.1 Avid Free DV Regression Sample
+------------------------------------
+Path: sample1/avidfreedv_mac_1_0_3.sitx
+Archive length: 26,437,232 bytes
+Archive SHA-256:
+  92be26cee6e3712fa13e5109506060cc08f71adeae07dccce37f1cfcbc48c8a5
+54 entries: 20 directories, 30 regular files, 4 symbolic links.
+
+Catalog: Brimstone, 605 compressed payload bytes -> 4,369 bytes, no CRC.
+Data streams (lengths below count each shared fork only once):
+  ID  Compression/filter   Intermediate  Final bytes  CRC-32
+  56  Brimstone/English       702,902       729,920    DFDADE4A
+  57  Cyanide                     57            57    3BD4CF96
+  58  RC4                 26,260,814    26,260,814    CACB0BC7
+
+The ReadMe.html fork starts at decoded offset 139,623 in stream 56, and is
+8,349 bytes long. Its SHA-256 is:
+  c0123e548de55915106836f5b16fc0dcea864f8bbb2de94abaf850598a5d9265
+The old extractor sliced that offset in the 702,902-byte INTERMEDIATE stream,
+not the 729,920-byte original stream, explaining the observed corruption.
+
+The Cyanide stream is exactly these four concatenated targets, with no NUL
+or newline separators (individual fork lengths delimit them):
+  ../Archive.bom       14 bytes
+  ../Archive.pax.gz    17 bytes
+  ./postinstall       13 bytes
+  ./postupgrade       13 bytes
+
+Independent reference: unar/lsar 1.10.7. All 30 regular file contents were
+compared byte-for-byte, all link targets compared, and the set of 54 paths
+matched. tests/avidfreedv_manifest.json records the reference hashes/sizes.
+Tests also check malformed tokens, output-length mismatches, missing/zero/
+wrong CRCs, native/Python Cyanide parity, truncation, path safety, and nonzero
+CLI exit with no created output when a stream CRC is altered.
+
+
+15. IMPLEMENTATION ASSETS AND REPRODUCIBILITY
+=============================================
+
+Run: python3 stuffitX.py input.sitx output-directory
+Tests: python3 -m unittest discover -s tests -v
+
+Keep stuffitX.py, stuffitXEnglish.py, stuffitXDeflate.py,
+stuffitXRedundancy.py, stuffitXEnglishDictionary.gz and the native libraries
+together. publish.sh's *.py selection includes the entry point and helper
+modules unchanged.
+The script does not call unar, download dictionaries, or need internet access
+at runtime. The English filter, DEFLATE decoder and redundancy validator use
+only the Python standard library.
+
+Rebuild the optional corrected Cyanide accelerator:
+  cc -O2 -std=c99 -Wall -Wextra -Werror -fPIC -shared \
+    sitx_cyanide.c -o libsitx_cyanide.so
+Rebuild the optional corrected Darkhorse accelerator:
+  cc -O2 -std=c99 -Wall -Wextra -Werror -fPIC -shared \
+    sitx_darkhorse.c -o libsitx_darkhorse.so
+If either accelerator cannot load, its checked Python decoder is used.
+Only Brimstone still uses the pre-existing libsitx_decomp.so/libppmd_sitx.so
+binaries. Their sources were not supplied in this workspace, and this change
+does not make that older code fully portable or hardened for arbitrary
+hostile input. The legacy Cyanide and Darkhorse entry points are bypassed.
+
+The dictionary and filter/Cyanide/Darkhorse/Deflate algorithms derive from XADMaster:
+  https://github.com/MacPaw/XADMaster
+  revision 7cb9ee0abbb163f261e4cb74501e15067032319c
+  StuffItXEnglishDictionary.c
+  XADStuffItXEnglishHandle.m
+  XADStuffItXCyanideHandle.m
+  XADStuffItXDarkhorseHandle.m and XADLZSSHandle.m
+  XADDeflateHandle.m (six-bit HDIST variant of RFC 1951)
+  BWT.c and CarrylessRangeCoder.m
+Copyright (c) 2017-present, MacPaw Way Ltd. All rights reserved.
+The derived English, Deflate, Cyanide and Darkhorse sources are LGPL-2.1-or-later; the
+license is included as LICENSE-XADMaster.txt. The fixed dictionary was
+decoded and repackaged without changing or reordering its words.
+The redundancy framing, interleaving and RS field/generator parameters were
+recovered directly from the supplied archives and validated independently.
+
+To regenerate the bundled dictionary with an XADMaster checkout at $XAD:
+  cc -O2 -I "$XAD" tools/decode_english_dictionary.c \
+    "$XAD/StuffItXEnglishDictionary.c" "$XAD/PPMd/VariantI.c" \
+    "$XAD/PPMd/SubAllocatorVariantI.c" "$XAD/PPMd/Context.c" \
+    "$XAD/PPMd/RangeCoder.c" -o /tmp/decode_sitx_dictionary
+  set -o pipefail
+  /tmp/decode_sitx_dictionary | gzip -n -9 > stuffitXEnglishDictionary.gz
+Validate the decoded SHA-256 in section 7.1. The shipped gzip SHA-256 is:
+  62baeccb5dfac2ba571e9a074a3f01f08c93d6a2cf9cf848750baaef500c205a

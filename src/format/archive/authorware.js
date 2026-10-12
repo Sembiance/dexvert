@@ -14,6 +14,6 @@ export class authorware extends Format
 		".a7p", ".a7r"
 	];
 	forbidExtMatch = [".app", ".apr", ".aas"];
-	magic          = ["Authorware Application", "Unpackaged Authorware 3 for Windows file", "Authorware Packaged file", "Authorware APR Archive", "Authorware Archive"];
+	magic          = ["Authorware Application", "Unpackaged Authorware", "Authorware Packaged file", "Authorware APR Archive", "Authorware Archive", "Adobe Authorware compiled Executable"];
 	converters     = ["vibeExtract"];
 }

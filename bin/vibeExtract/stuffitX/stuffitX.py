@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+# Vibe coded by Codex
 # Vibe coded by Claude
 """
-unStuffitX.py - StuffIt X (.sitx/.sit) archive extractor
+stuffitX.py - StuffIt X (.sitx/.sit) archive extractor
 
-Usage: python3 unStuffitX.py <inputFile> [outputDir]
+Usage: python3 stuffitX.py <inputFile> [outputDir]
 
 Extracts files from StuffIt X archives. Supports compression methods:
   - Brimstone (PPMd variant G)
@@ -14,7 +15,9 @@ Extracts files from StuffIt X archives. Supports compression methods:
   - RC4 (obfuscation)
   - Iron (advanced BWT) [listed, not encountered in samples]
 
-Preprocessing filters: English, x86, M68k
+Preprocessing filters: English, x86. Unsupported filters are rejected.
+Reed-Solomon archive wrappers are unpacked and their parity is verified.
+Decoded lengths and available CRC-32 checksums are verified before writing.
 """
 
 import sys
@@ -24,6 +27,10 @@ import ctypes
 import zlib
 import datetime
 import shutil
+
+from stuffitXEnglish import unfilter_english
+from stuffitXDeflate import decompress_deflate
+from stuffitXRedundancy import unwrap_redundancy
 
 # ─────────────────────────────────────────────────────────────────────
 # BitReader - matches CSHandle bit/byte semantics exactly
@@ -68,6 +75,8 @@ class BitReader:
         return self.byte_pos
 
     def skip_bytes(self, n):
+        if n < 0 or self.byte_pos + n > len(self.data):
+            raise EOFError(f"Truncated data at byte {self.byte_pos} (need {n} bytes)")
         self.byte_pos += n
 
     def seek(self, pos):
@@ -85,6 +94,8 @@ class BitReader:
         return val
 
     def read_bytes_raw(self, n):
+        if n < 0 or self.byte_pos + n > len(self.data):
+            raise EOFError(f"Truncated data at byte {self.byte_pos} (need {n} bytes)")
         val = self.data[self.byte_pos:self.byte_pos + n]
         self.byte_pos += n
         return bytes(val)
@@ -186,7 +197,7 @@ def read_element(br):
         'alglist3_extra': alglist3_extra,
         'dataoffset': br.offset_in_file(),
         'actualsize': 0,
-        'datacrc': 0,
+        'datacrc': None,
     }
 
 
@@ -272,14 +283,6 @@ def get_decomp_lib():
                 ctypes.c_char_p, ctypes.c_size_t
             ]
 
-        if hasattr(_decomp_lib, 'darkhorse_decompress'):
-            _decomp_lib.darkhorse_decompress.restype = ctypes.c_int
-            _decomp_lib.darkhorse_decompress.argtypes = [
-                ctypes.c_char_p, ctypes.c_size_t,
-                ctypes.c_char_p, ctypes.c_size_t,
-                ctypes.c_int
-            ]
-
     return _decomp_lib
 
 
@@ -322,7 +325,7 @@ def rc4_decrypt(data, key):
 def decompress_rc4(block_data):
     """Decompress RC4-obfuscated data (algo 5). First 3 bytes: skip 2, key = byte 3."""
     if len(block_data) < 3:
-        return block_data
+        raise ValueError("Truncated RC4 header")
     key = bytes([block_data[2]])
     return rc4_decrypt(block_data[3:], key)
 
@@ -339,7 +342,7 @@ class ByteStream:
 
     def next_byte(self):
         if self.pos >= len(self.data):
-            return 0
+            raise EOFError("Truncated compressed stream")
         b = self.data[self.pos]
         self.pos += 1
         return b
@@ -368,8 +371,15 @@ class CarrylessRangeCoder:
         self.range &= 0xFFFFFFFF
 
     def current_count(self, scale):
+        if scale <= 0:
+            raise ValueError("Invalid range-coder scale")
         self.range = (self.range // scale) & 0xFFFFFFFF
-        return ((self.code - self.low) & 0xFFFFFFFF) // self.range
+        if not self.range:
+            raise ValueError("Invalid range-coder interval")
+        count = ((self.code - self.low) & 0xFFFFFFFF) // self.range
+        if count >= scale:
+            raise ValueError("Range-coder count out of bounds")
+        return count
 
     def remove_subrange(self, lowcount, highcount):
         if self.uselow:
@@ -411,7 +421,11 @@ class CarrylessRangeCoder:
         return bit
 
     def next_weighted_bit2(self, weight, shift):
+        if not 0 < weight < (1 << shift) or self.code >= self.range:
+            raise ValueError("Invalid weighted range-coder interval")
         threshold = ((self.range >> shift) * weight) & 0xFFFFFFFF
+        if not threshold:
+            raise ValueError("Empty weighted range-coder interval")
         if self.code < threshold:
             self.range = threshold
             self.normalize()
@@ -457,29 +471,22 @@ def decode_m1ffn(block, blocklen, order):
     """M1FFN (Move-1-From-Front-N) decode."""
     data = bytearray(block[:blocklen])
     table = list(range(256))
+    lasthead = order - 1
 
     for i in range(blocklen):
         sym = data[i]
+        data[i] = table[sym]
         if sym == 0:
-            data[i] = table[0]
+            lasthead = 0
         elif sym == 1:
-            val = table[1]
-            table[1] = table[0]
-            table[0] = val
-            data[i] = val
+            if lasthead >= order:
+                table[0], table[1] = table[1], table[0]
         else:
             val = table[sym]
-            for j in range(sym, order, -1):
+            for j in range(sym, 1, -1):
                 table[j] = table[j - 1]
-            if sym >= order:
-                for j in range(order, 1, -1):
-                    table[j] = table[j - 1]
-            else:
-                for j in range(sym, 1, -1):
-                    table[j] = table[j - 1]
-            table[1] = table[0]
-            table[0] = val
-            data[i] = val
+            table[1] = val
+        lasthead += 1
 
     return bytes(data)
 
@@ -511,34 +518,66 @@ class RangeCoderModel:
 
 def calc_ternary_freqs(infreqs):
     a, b, c = infreqs[0], infreqs[1], infreqs[2]
-    vals = [(a, 0), (b, 1), (c, 2)]
-    vals.sort(key=lambda x: x[0])
-    meanings = [vals[0][1], vals[1][1], vals[2][1]]
+    # Equal frequencies have format-specific priorities, not stable-sort order.
+    if a < b:
+        if a < c:
+            meanings = [0, 1, 2] if b < c else [0, 2, 1]
+        else:
+            meanings = [2, 0, 1]
+    elif b < c:
+        meanings = [1, 2, 0] if c < a else [1, 0, 2]
+    else:
+        meanings = [2, 1, 0]
     outfreqs = [infreqs[meanings[0]] + 1, infreqs[meanings[1]] + 1, infreqs[meanings[2]] + 1]
     return outfreqs, meanings
 
 
+_cyanide_lib = None
+
+
+def get_cyanide_lib():
+    """The legacy combined library has an incorrect M1FFN decoder; never use it."""
+    global _cyanide_lib
+    if _cyanide_lib is None:
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'libsitx_cyanide.so')
+        try:
+            lib = ctypes.CDLL(path)
+        except OSError:
+            return None
+        lib.sitx_cyanide_decompress.restype = ctypes.c_ssize_t
+        lib.sitx_cyanide_decompress.argtypes = [
+            ctypes.c_char_p, ctypes.c_size_t, ctypes.c_char_p, ctypes.c_size_t
+        ]
+        _cyanide_lib = lib
+    return _cyanide_lib
+
+
 def decompress_cyanide(block_data, output_size):
-    """Decompress Cyanide (BWT + range coder) compressed data."""
-    lib = get_decomp_lib()
-    if hasattr(lib, 'cyanide_decompress'):
+    """Decompress Cyanide with the checked native decoder or Python fallback."""
+    lib = get_cyanide_lib()
+    if lib is not None:
         output = ctypes.create_string_buffer(output_size)
-        result = lib.cyanide_decompress(
+        result = lib.sitx_cyanide_decompress(
             block_data, len(block_data),
             output, output_size
         )
         if result < 0:
             raise ValueError("Cyanide decompression failed")
         return output.raw[:result]
+    return decompress_cyanide_python(block_data, output_size)
 
-    # Python fallback
+
+def decompress_cyanide_python(block_data, output_size):
+    """Portable reference implementation, with the same bounds as native code."""
     stream = ByteStream(block_data)
     _something = stream.next_byte()  # skip first byte
 
     result = bytearray()
-    while len(result) < output_size:
+    while True:
         marker = stream.next_byte()
         if marker == 0xFF:
+            if stream.pos != len(block_data):
+                raise ValueError("Trailing Cyanide data")
             break
         if marker != 0x77:
             raise ValueError(f"Invalid Cyanide block marker: 0x{marker:02x}")
@@ -546,6 +585,8 @@ def decompress_cyanide(block_data, output_size):
         blocksize = stream.next_uint32_be()
         firstindex = stream.next_uint32_be()
         numsymbols = stream.next_byte()
+        if not blocksize or firstindex >= blocksize or blocksize > output_size - len(result):
+            raise ValueError("Invalid Cyanide block size or BWT index")
 
         # Ternary coded block decoding with range coder
         markovgroups = [0, 1, 2, 3, 4, 5, 6, 7, 8, 3, 9, 10, 3, 4, 5, 11, 11, 8, 6, 2, 5, 6, 7, 8, 12, 12, 13]
@@ -611,7 +652,10 @@ def decompress_cyanide(block_data, output_size):
                         lowbits = lbm.mapping[lbi]
                         maxv = min(lbm.num * 128, 0x4000)
                         lbm.bump_frequency(lbi, maxv)
-                        sorted_data[i] = ((1 << highbit) + lowbits + 1) & 0xFF
+                        value = (1 << highbit) + lowbits + 1
+                        if value > 255:
+                            raise ValueError("Invalid Cyanide byte value")
+                        sorted_data[i] = value
 
             prev3 = prev2
             prev2 = prev
@@ -647,28 +691,62 @@ DARKHORSE_BITLEN_TABLE = [
 ]
 
 
+_darkhorse_lib = None
+
+
+def get_darkhorse_lib():
+    """Never call the unsafe Darkhorse entry point in the legacy library."""
+    global _darkhorse_lib
+    if _darkhorse_lib is None:
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'libsitx_darkhorse.so')
+        try:
+            lib = ctypes.CDLL(path)
+        except OSError:
+            return None
+        lib.sitx_darkhorse_decompress.restype = ctypes.c_ssize_t
+        lib.sitx_darkhorse_decompress.argtypes = [
+            ctypes.c_char_p, ctypes.c_size_t, ctypes.c_char_p, ctypes.c_size_t,
+            ctypes.c_uint32,
+        ]
+        _darkhorse_lib = lib
+    return _darkhorse_lib
+
+
+def validate_darkhorse_parameters(block_data, output_size, window_size):
+    if len(block_data) < 6:
+        raise ValueError("Truncated Darkhorse header")
+    if block_data[0] > 30:
+        raise ValueError("Unsupported Darkhorse window exponent")
+    if window_size != max(1 << block_data[0], 0x100000):
+        raise ValueError("Darkhorse window does not match header")
+    if not 0 <= output_size <= sys.maxsize:
+        raise ValueError("Invalid Darkhorse output capacity")
+
+
 def decompress_darkhorse(block_data, output_size, window_size):
-    """Decompress Darkhorse (LZSS + range coder) compressed data."""
-    lib = get_decomp_lib()
-    if hasattr(lib, 'darkhorse_decompress'):
+    """Decode a complete Darkhorse stream, with output_size as a hard limit."""
+    validate_darkhorse_parameters(block_data, output_size, window_size)
+    lib = get_darkhorse_lib()
+    if lib is not None:
         output = ctypes.create_string_buffer(output_size)
-        result = lib.darkhorse_decompress(
+        result = lib.sitx_darkhorse_decompress(
             block_data, len(block_data),
             output, output_size,
             window_size
         )
         if result < 0:
-            raise ValueError("Darkhorse decompression failed")
+            raise ValueError("Invalid, truncated, or oversized Darkhorse stream")
         return output.raw[:result]
+    return decompress_darkhorse_python(block_data, output_size, window_size)
 
-    # Python fallback
+
+def decompress_darkhorse_python(block_data, output_size, window_size):
+    """Checked Python implementation, adapted from XADMaster (LGPL-2.1+)."""
+    validate_darkhorse_parameters(block_data, output_size, window_size)
     stream = ByteStream(block_data)
-    _skip = stream.next_byte()  # skip window size byte (already provided)
+    stream.next_byte()  # window exponent
+    stream.next_byte()  # separate initialization byte, observed as zero
     coder = CarrylessRangeCoder(stream, uselow=False, bottom=0)
-
-    if window_size < 0x100000:
-        window_size = 0x100000
-    window = bytearray(window_size)
     pos = 0
 
     flagweights = [0x800] * 4
@@ -698,7 +776,7 @@ def decompress_darkhorse(block_data, output_size, window_size):
             weight_list[idx] -= weight_list[idx] >> 5
         return bit
 
-    def next_bit_w_single(wref):
+    def next_bit_w_single():
         nonlocal flagweight2
         bit = coder.next_weighted_bit2(flagweight2, 12)
         if bit == 0:
@@ -763,6 +841,8 @@ def decompress_darkhorse(block_data, output_size, window_size):
     def read_distance(length):
         ln = min(length - 2, 3)
         sym = read_symbol_w(distlenweights[ln], 6)
+        if sym >= 60:
+            raise ValueError("Reserved Darkhorse distance symbol")
         if sym < 4:
             return sym
         elif sym < 14:
@@ -807,23 +887,31 @@ def decompress_darkhorse(block_data, output_size, window_size):
             distancetable[i] = distancetable[i - 1]
         distancetable[0] = dist
 
-    while len(result) < output_size:
+    # Keep history in the output buffer rather than allocating the entire
+    # declared window. References before the beginning address initialized zeroes.
+    def history(distance):
+        return result[pos - distance] if distance <= pos else 0
+
+    while True:
         pidx = pos & 3
         is_match = next_bit_w(flagweights, pidx)
 
         if is_match == 0:
-            prev = window[(pos - 1) % window_size] if pos > 0 else 0
+            if pos == output_size:
+                raise ValueError("Darkhorse output exceeds capacity")
+            prev = history(1)
             byte = read_literal(prev, next_guess)
             next_guess = -1
-            window[pos % window_size] = byte
             result.append(byte)
             pos += 1
         else:
-            bit2 = next_bit_w_single(None)
+            bit2 = next_bit_w_single()
             if bit2 == 0:
                 length = read_length(pidx) + 2
                 if length == 0x111:
-                    break
+                    if stream.pos != len(block_data):
+                        raise ValueError("Trailing Darkhorse data")
+                    return bytes(result)
                 offs = read_distance(length)
                 update_dist_mem(3, offs)
             else:
@@ -836,110 +924,15 @@ def decompress_darkhorse(block_data, output_size, window_size):
                     update_dist_mem(recency, offs)
                     length = read_length(pidx) + 2
 
-            for k in range(length):
-                byte = window[(pos - offs - 1) % window_size]
-                window[pos % window_size] = byte
-                result.append(byte)
+            distance = offs + 1
+            if distance > window_size:
+                raise ValueError("Darkhorse match distance exceeds window")
+            if length > output_size - pos:
+                raise ValueError("Darkhorse match exceeds output capacity")
+            next_guess = history(distance - length % distance)
+            for _ in range(length):
+                result.append(history(distance))
                 pos += 1
-
-            next_guess = window[(pos - offs - 1) % window_size]
-
-    return bytes(result[:output_size])
-
-
-# ─────────────────────────────────────────────────────────────────────
-# Deflate Decompressor (StuffIt X variant uses zlib raw deflate)
-# ─────────────────────────────────────────────────────────────────────
-
-def _patch_sitx_deflate(raw):
-    """Patch StuffIt X deflate stream (6-bit HDIST) to standard deflate (5-bit HDIST).
-    StuffIt X reads HDIST as 6 bits instead of standard 5 bits."""
-    bits = []
-    for byte in raw:
-        for i in range(8):
-            bits.append((byte >> i) & 1)
-
-    result_bits = []
-    pos = 0
-
-    while pos < len(bits):
-        if pos + 3 > len(bits):
-            result_bits.extend(bits[pos:])
-            break
-
-        # BFINAL (1 bit)
-        bfinal = bits[pos]; result_bits.append(bfinal); pos += 1
-        # BTYPE (2 bits)
-        btype = bits[pos] | (bits[pos + 1] << 1)
-        result_bits.extend(bits[pos:pos + 2]); pos += 2
-
-        if btype == 0:  # stored
-            # Skip to byte boundary
-            while pos % 8 != 0:
-                result_bits.append(0)
-                pos += 1
-            # LEN (16 bits) + NLEN (16 bits) + data
-            if pos + 32 > len(bits):
-                result_bits.extend(bits[pos:]); break
-            count = 0
-            for i in range(16):
-                count |= bits[pos + i] << i
-            result_bits.extend(bits[pos:pos + 32]); pos += 32
-            result_bits.extend(bits[pos:pos + count * 8]); pos += count * 8
-        elif btype == 1:  # fixed huffman - no header to patch, just copy all
-            result_bits.extend(bits[pos:])
-            break
-        elif btype == 2:  # dynamic huffman
-            # HLIT (5 bits) - same in both
-            result_bits.extend(bits[pos:pos + 5]); pos += 5
-            # HDIST: read 6 bits (StuffIt X), write 5 bits (standard)
-            hdist_val = 0
-            for i in range(6):
-                hdist_val |= bits[pos + i] << i
-            pos += 6
-            # Write as 5 bits
-            for i in range(5):
-                result_bits.append((hdist_val >> i) & 1)
-            # HCLEN (4 bits) + rest of block
-            result_bits.extend(bits[pos:])
-            break
-        else:  # reserved
-            result_bits.extend(bits[pos:])
-            break
-
-        if bfinal:
-            result_bits.extend(bits[pos:])
-            break
-
-    # Convert bits back to bytes
-    out = bytearray()
-    for i in range(0, len(result_bits), 8):
-        byte = 0
-        for j in range(min(8, len(result_bits) - i)):
-            byte |= result_bits[i + j] << j
-        out.append(byte)
-    return bytes(out)
-
-
-def decompress_deflate(block_data, output_size):
-    """Decompress StuffIt X Deflate variant. Window size byte prefix.
-    StuffIt X deflate uses 6-bit HDIST field instead of standard 5-bit."""
-    if len(block_data) < 1:
-        return b''
-    raw = block_data[1:]  # Skip window size byte
-
-    # First try standard raw deflate
-    try:
-        return zlib.decompress(raw, -15)
-    except zlib.error:
-        pass
-
-    # Patch the 6-bit HDIST to 5-bit and try again
-    patched = _patch_sitx_deflate(raw)
-    try:
-        return zlib.decompress(patched, -15)
-    except zlib.error as e:
-        raise ValueError(f"Deflate decompression failed: {e}")
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -1056,10 +1049,7 @@ def parse_catalog(catalog_data, entries):
 
     for entry in entries:
         while True:
-            try:
-                key = read_p2(br)
-            except (EOFError, ValueError):
-                break
+            key = read_p2(br)
             if key == 0:
                 break
 
@@ -1095,9 +1085,12 @@ def parse_catalog(catalog_data, entries):
             elif key == 11 or key == 12:
                 read_sitx_string(br)
             else:
-                break
+                raise ValueError(f"Unsupported catalog field {key}")
 
         br.flush()
+
+    if br.offset_in_file() != len(catalog_data):
+        raise ValueError("Unconsumed catalog bytes")
 
 
 def filetime_to_datetime(ft):
@@ -1116,46 +1109,68 @@ def filetime_to_datetime(ft):
 # ─────────────────────────────────────────────────────────────────────
 
 def decompress_element(data, elem, blocks):
-    """Decompress an element's data blocks."""
+    """Decode the entire stream, reverse filters, then validate fork bytes."""
     block_data = extract_block_data(data, blocks)
     comp = elem['alglist'][0]
     preproc = elem['alglist'][2]
+    checksum = elem['alglist'][1]
+    expected_size = elem['actualsize']
+    if expected_size < 0:
+        raise ValueError("Missing decompressed size")
+    if elem['alglist'][3] >= 0:
+        raise ValueError("Encrypted elements are not supported")
+    if preproc not in (-1, 0, 2):
+        raise ValueError(f"Unsupported preprocessing filter {preproc}")
+    if checksum not in (-1, 0):
+        raise ValueError(f"Unsupported checksum algorithm {checksum}")
+
+    # English changes the size in either direction. Escaped literals need two
+    # bytes; dictionary tokens need <=4 for words of >=3 bytes. Add one sentinel
+    # byte beyond the maximum encoded size so a truncated decode cannot pass.
+    decode_size = 2 * expected_size + 5 if preproc == 0 else expected_size
 
     if comp == -1:  # No compression
         result = block_data
     elif comp == 0:  # Brimstone/PPMd
-        exp_byte = block_data[0] if block_data else 16
-        order_byte = block_data[1] if len(block_data) > 1 else 6
-        alloc_size = 1 << min(exp_byte, 31)
-        result = decompress_brimstone(block_data[2:], elem['actualsize'], order_byte, alloc_size)
+        if len(block_data) < 2:
+            raise ValueError("Truncated Brimstone header")
+        exp_byte, order_byte = block_data[:2]
+        if exp_byte > 30 or not 1 <= order_byte <= 64:
+            raise ValueError("Unsupported Brimstone parameters")
+        alloc_size = 1 << exp_byte
+        result = decompress_brimstone(block_data[2:], decode_size, order_byte, alloc_size)
     elif comp == 1:  # Cyanide
-        result = decompress_cyanide(block_data, elem['actualsize'])
+        result = decompress_cyanide(block_data, decode_size)
     elif comp == 2:  # Darkhorse
-        ws_byte = block_data[0] if block_data else 20
+        if not block_data or block_data[0] > 30:
+            raise ValueError("Invalid Darkhorse header")
+        ws_byte = block_data[0]
         ws = max(1 << ws_byte, 0x100000)
-        result = decompress_darkhorse(block_data, elem['actualsize'], ws)
+        result = decompress_darkhorse(block_data, decode_size, ws)
     elif comp == 3:  # Deflate
-        result = decompress_deflate(block_data, elem['actualsize'])
+        result = decompress_deflate(block_data, decode_size)
     elif comp == 4:  # Blend
-        result = decompress_blend(block_data, elem['actualsize'])
+        result = decompress_blend(block_data, decode_size)
     elif comp == 5:  # RC4
         result = decompress_rc4(block_data)
-    elif comp == 6:  # Iron (not implemented)
-        print(f"  WARNING: Iron compression not implemented, skipping")
-        return None
     else:
-        print(f"  WARNING: Unknown compression {comp}, skipping")
-        return None
+        raise ValueError(f"Unsupported compression {COMP_NAMES.get(comp, comp)}")
 
     # Apply preprocessing filter
     if preproc == 0:  # English
-        pass  # English filter requires dictionary, skip for now
+        result = unfilter_english(result, expected_size)
     elif preproc == 2:  # x86
         result = unfilter_x86(result)
-    elif preproc == 4:  # M68k
-        pass  # M68k filter not implemented
-    elif preproc >= 0:
-        pass  # Unknown filter
+
+    if len(result) != expected_size:
+        raise ValueError(f"Decoded size mismatch: expected {expected_size}, got {len(result)}")
+    if checksum == 0:
+        expected_crc = elem.get('datacrc')
+        if expected_crc is None:
+            raise ValueError("Missing CRC-32 trailer")
+        actual_crc = zlib.crc32(result)
+        if actual_crc != expected_crc:
+            raise ValueError(f"CRC-32 mismatch: expected {expected_crc:08x}, got {actual_crc:08x}")
 
     return result
 
@@ -1165,7 +1180,7 @@ def decompress_element(data, elem, blocks):
 # ─────────────────────────────────────────────────────────────────────
 
 def parse_archive(data):
-    """Parse a StuffIt X archive and return its structure."""
+    """Return the structure and logical bytes to which its block offsets refer."""
     if data[:8] != b'StuffIt!':
         raise ValueError("Not a StuffIt X file (missing magic)")
 
@@ -1186,6 +1201,8 @@ def parse_archive(data):
         elements.append(elem)
 
         if et == 0:  # end
+            if br.offset_in_file() != len(data):
+                raise ValueError("Unparsed bytes after end element (unsupported archive layout)")
             break
 
         elif et == 1:  # data
@@ -1229,6 +1246,8 @@ def parse_archive(data):
             if forks[index] is None:
                 forks[index] = finfo
             else:
+                if forks[index]['length'] != length or forks[index]['type'] != fork_type:
+                    raise ValueError("Conflicting shared fork references")
                 forks[index]['entries'].append(entry_id)
 
         elif et == 4:  # directory
@@ -1244,14 +1263,9 @@ def parse_archive(data):
         elif et == 5:  # catalog
             total, blocks = scan_element_data(br, elem)
             elem['blocks'] = blocks
-            elem['actualsize'] = a[4] if a[4] >= 0 else total * 4
-
-            try:
-                decompressed = decompress_element(data, elem, blocks)
-                if decompressed:
-                    parse_catalog(decompressed, entries)
-            except Exception as e:
-                print(f"  WARNING: Catalog decompression failed: {e}")
+            elem['actualsize'] = a[4]
+            decompressed = decompress_element(data, elem, blocks)
+            parse_catalog(decompressed, entries)
 
         elif et == 6:  # clue
             size = a[4]
@@ -1260,6 +1274,16 @@ def parse_archive(data):
 
         elif et == 7:  # root
             _ = read_p2(br)
+            if elem['alglist'][3] >= 0:
+                raise ValueError("Encrypted archives are not supported")
+            redundancy = elem['alglist'][4]
+            if redundancy >= 0:
+                if redundancy != 0 or start != 8:
+                    raise ValueError(f"Unsupported archive redundancy algorithm {redundancy}")
+                offset = br.offset_in_file()
+                data = data[:offset] + unwrap_redundancy(data[offset:])
+                br = BitReader(data)
+                br.seek(offset)
 
         elif et == 8:  # boundary
             pass
@@ -1283,6 +1307,8 @@ def sanitize_filename(name):
     name = name.replace('/', '_').replace('\\', '_')
     # Replace other problematic characters
     name = name.replace(':', '_')
+    if name in ('.', '..'):
+        raise ValueError("Unsafe archive filename")
     return name if name else 'unnamed'
 
 
@@ -1294,7 +1320,7 @@ def build_path(entry, entry_dict):
     while current:
         oid = current.get('objid', id(current))
         if oid in visited:
-            break
+            raise ValueError("Cycle in archive directory hierarchy")
         visited.add(oid)
         fname = current.get('filename', b'')
         if isinstance(fname, bytes):
@@ -1308,6 +1334,30 @@ def build_path(entry, entry_dict):
         current = entry_dict[parent_id]
     parts.reverse()
     return os.path.join(*parts) if parts else ''
+
+
+def safe_output_path(output_dir, path, allow_leaf_link=False):
+    """Do not write through existing symlinks, including on repeated extraction."""
+    root = os.path.realpath(output_dir)
+    full_path = os.path.abspath(os.path.join(root, path))
+    if os.path.commonpath((root, full_path)) != root or full_path == root:
+        raise ValueError(f"Unsafe output path: {path}")
+    current = full_path
+    while current != root:
+        if os.path.islink(current) and not (allow_leaf_link and current == full_path):
+            raise ValueError(f"Refusing to write through symlink: {current}")
+        current = os.path.dirname(current)
+    return full_path
+
+
+def link_target(path, data, output_dir):
+    """StuffIt X stores a link's target as its exact, non-NUL-terminated fork."""
+    target = os.fsdecode(data)
+    if not target or '\x00' in target or os.path.isabs(target):
+        raise ValueError(f"Invalid or absolute symbolic link target: {path}")
+    relative = os.path.normpath(os.path.join(os.path.dirname(path), target))
+    safe_output_path(output_dir, relative, allow_leaf_link=True)
+    return target
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -1434,6 +1484,14 @@ def build_macbinary(filename, data_fork, resource_fork, entry):
 
 def extract_archive(input_path, output_dir):
     """Extract a StuffIt X archive."""
+    try:
+        return _extract_archive(input_path, output_dir)
+    except (OSError, ValueError, EOFError) as exc:
+        print(f"  ERROR: {exc}")
+        return False
+
+
+def _extract_archive(input_path, output_dir):
     with open(input_path, 'rb') as f:
         data = f.read()
 
@@ -1447,17 +1505,7 @@ def extract_archive(input_path, output_dir):
 
     print(f"  Found {len(entries)} entries")
 
-    # Create output directory
-    os.makedirs(output_dir, exist_ok=True)
-
-    # Create directories first
-    for entry in entries:
-        if entry.get('is_dir'):
-            path = build_path(entry, entry_dict)
-            if path:
-                full_path = os.path.join(output_dir, path)
-                os.makedirs(full_path, exist_ok=True)
-
+    # Validate every stream before creating any output files or directories.
     # First pass: collect all fork data per entry
     # entry_id -> {'data': bytes, 'rsrc': bytes}
     entry_forks = {}
@@ -1469,27 +1517,25 @@ def extract_archive(input_path, output_dir):
         objid = elem['attribs'][0]
         forks = stream_forks.get(objid, [])
 
-        if not forks:
-            continue
-
         try:
             decompressed = decompress_element(data, elem, elem.get('blocks', []))
         except Exception as e:
             print(f"  ERROR decompressing stream {objid}: {e}")
-            continue
-
-        if decompressed is None:
-            continue
+            return False
 
         # Split decompressed data into fork segments and assign to entries
         offset = 0
         for fork in forks:
             if fork is None:
-                continue
+                print(f"  ERROR: Missing fork index in stream {objid}")
+                return False
 
             fork_type = fork['type']
             fork_len = fork['length']
             fork_data = decompressed[offset:offset + fork_len]
+            if fork_type not in (0, 1) or len(fork_data) != fork_len:
+                print(f"  ERROR: Unsupported or truncated fork in stream {objid}")
+                return False
 
             for entry_id in fork['entries']:
                 if entry_id not in entry_forks:
@@ -1501,9 +1547,29 @@ def extract_archive(input_path, output_dir):
 
             offset += fork_len
 
-    # Second pass: write files
-    extracted = 0
+    if forked_set.difference(entry_forks):
+        print("  ERROR: Missing data streams for one or more files")
+        return False
+
     for entry in entries:
+        path = build_path(entry, entry_dict) or f"file_{entry['objid']}"
+        safe_output_path(output_dir, path, allow_leaf_link=entry.get('is_link', False))
+        if entry.get('is_link'):
+            forks = entry_forks.get(entry['objid'], {})
+            if 'data' not in forks or forks.get('rsrc'):
+                raise ValueError(f"Invalid symbolic link forks: {path}")
+            entry['link_target'] = link_target(path, forks['data'], output_dir)
+
+    os.makedirs(output_dir, exist_ok=True)
+    for entry in entries:
+        if entry.get('is_dir'):
+            path = build_path(entry, entry_dict)
+            if path:
+                os.makedirs(safe_output_path(output_dir, path), exist_ok=True)
+
+    # Write links last so other archive entries can never traverse a new link.
+    extracted = 0
+    for entry in sorted(entries, key=lambda item: item.get('is_link', False)):
         if entry.get('is_dir'):
             continue
 
@@ -1518,29 +1584,36 @@ def extract_archive(input_path, output_dir):
                 # Truly empty file
                 path = build_path(entry, entry_dict)
                 if path:
-                    full_path = os.path.join(output_dir, path)
+                    full_path = safe_output_path(output_dir, path)
                     pdir = os.path.dirname(full_path)
                     if pdir:
                         os.makedirs(pdir, exist_ok=True)
                     if not os.path.isdir(full_path):
                         with open(full_path, 'wb') as f:
                             pass
+                        extracted += 1
             continue
 
         path = build_path(entry, entry_dict)
         if not path:
             path = f"file_{entry_id}"
 
-        full_path = os.path.join(output_dir, path)
+        full_path = safe_output_path(output_dir, path, allow_leaf_link=entry.get('is_link', False))
         pdir = os.path.dirname(full_path)
         if pdir:
             os.makedirs(pdir, exist_ok=True)
 
         # Handle case where path exists as a directory
-        if os.path.isdir(full_path):
-            full_path = full_path + ".data"
+        if not entry.get('is_link') and os.path.isdir(full_path):
+            full_path = safe_output_path(output_dir, path + ".data")
 
-        if rsrc_fork:
+        if entry.get('is_link'):
+            if os.path.lexists(full_path):
+                os.unlink(full_path)
+            os.symlink(entry['link_target'], full_path)
+            extracted += 1
+            print(f"  Extracted: {path} -> {entry['link_target']}")
+        elif rsrc_fork:
             # Has a resource fork -> output as MacBinary (no .bin extension)
             fname_part = os.path.basename(path)
             macbin = build_macbinary(
@@ -1569,7 +1642,7 @@ def extract_archive(input_path, output_dir):
             if dt:
                 try:
                     ts = dt.timestamp()
-                    os.utime(full_path, (ts, ts))
+                    os.utime(full_path, (ts, ts), follow_symlinks=False)
                 except (OSError, OverflowError):
                     pass
 

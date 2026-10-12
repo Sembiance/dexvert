@@ -29,10 +29,16 @@
 | Vibe Viable |
 \-------------/
 >>> wip
-* MacDraw Pro: https://discmaster.textfiles.com/search?detection=64446F634432FFFF*
-	It's also fmt/1428  dDoc/dPro
-  Maybe makes sense to start with fmt/1425 macdraw samples and work up in the versions 1426, 1427, etc
+* Instruct vibe stuffitX to reverse engineer and fully support M68k filter 4 archives
 <<<
+
+* ZIP files might have hidden 'metadata' in PKAV/AVEXTRA data. So vibe code support for this.
+	First dexvert needs a new meta program to retrieve this info and append to end of comment (or create if needed)
+	Can use these projects to help vibe come up with the correct code for v1.x and v2.x and AVEXTRA data extraction:
+		https://github.com/johnsonjh/infozip-av
+		https://github.com/johnsonjh/pkstuff/blob/master/pkav_verify.py
+	Also have the vibe code create a 2nd tool that has the bare minimum fastest fewest byte reads to just "determine" if the zip has this data
+	Then create a selectiveReprocess.js for zip that only includes zips that actually have this data
 
 * Check to see if any of these can be converted with gameextractor vibe: https://discmaster.textfiles.com/search?extension=txd_tex&family=unknown
 

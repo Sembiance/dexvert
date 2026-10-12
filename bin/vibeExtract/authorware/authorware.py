@@ -1,19 +1,27 @@
 #!/usr/bin/env python3
-# vibe coded by claude code
+# Vibe coded by Codex
 """
 Authorware Packaged/Library File Extractor (.app/.apr/.apw/.asw/.aas/.a3m/.a3w/.a4p/.a5p/.a6p/.a7p/.a4r/.a5r/.a6r/.a7r/.exe)
 
 Extracts images, text, scripts, and raw data from Macromedia Authorware
 packaged files (ACRS), library files (PCRS), v3 files (WCRS/A3M),
-and EXE-appended PCRS files (Authorware data stripped from EXE wrappers).
+and compiled Windows PE executables with appended PCRS data (including
+payloads whose EXE wrappers have already been stripped).
 
-Usage: python3 unauthorware.py <inputFile> <outputDir>
+Usage: python3 authorware.py <inputFile> <outputDir> [--report] [--deep]
 """
 
 import sys
 import os
 import struct
 import zlib
+import re
+import hashlib
+import math
+import json
+import argparse
+
+import authorware_pig
 
 ICON_TYPE_NAMES = {
     0x01: "FileProperties",
@@ -72,13 +80,29 @@ ICON_TYPE_NAMES = {
 TEXT_TYPES = {0x02, 0x05, 0x07, 0x09, 0x0A, 0x0B, 0x0E, 0x23, 0x24, 0x28, 0x3A}
 
 
+def write_output(output_dir, name, content):
+    """Write a new file, never replacing another entry or an existing output."""
+    name = os.path.basename(name.replace('\\', '/'))
+    stem, extension = os.path.splitext(name)
+    payload = content.encode('utf-8') if isinstance(content, str) else content
+    suffix = 1
+    while True:
+        candidate = name if suffix == 1 else f'{stem}_{suffix}{extension}'
+        try:
+            with open(os.path.join(output_dir, candidate), 'xb') as output:
+                output.write(payload)
+            return candidate
+        except FileExistsError:
+            suffix += 1
+
+
 def read_header(data):
     """Parse the 64-byte file header."""
     if len(data) < 64:
         raise ValueError("File too small for header")
     if data[:4] not in (b'ACRS', b'PCRS', b'WCRS', b'WPCR', b'WPLI'):
         raise ValueError(f"Invalid magic: {data[:4]!r} (expected b'ACRS', b'PCRS', b'WCRS', b'WPCR', or b'WPLI')")
-    if data[4:8] not in (b'\xbe\xbc\xad\xac', b'\xaf\xbc\xad\xac', b'\xa8\xbc\xad\xac', b'\xa8\xaf\xbc\xad', b'\xa8\xaf\xb3\xb6'):
+    if data[4:8] != bytes(byte ^ 0xFF for byte in data[:4]):
         raise ValueError("Invalid secondary magic")
 
     hdr = {}
@@ -176,6 +200,97 @@ def read_entries_pcrs(data, hdr):
     return entries
 
 
+def pe_overlay_offset(data):
+    """Find the end of a PE's on-disk headers and sections, without executing it."""
+    if len(data) < 64 or data[:2] != b'MZ':
+        raise ValueError("Truncated or invalid DOS executable header")
+    pe = struct.unpack_from('<I', data, 0x3C)[0]
+    if pe < 64 or pe + 24 > len(data):
+        raise ValueError("Truncated or invalid PE header offset")
+    if data[pe:pe + 4] != b'PE\x00\x00':
+        raise ValueError("Unsupported executable header (expected Windows PE)")
+
+    section_count = struct.unpack_from('<H', data, pe + 6)[0]
+    optional_size = struct.unpack_from('<H', data, pe + 20)[0]
+    optional = pe + 24
+    section_table = optional + optional_size
+    section_table_end = section_table + section_count * 40
+    if not section_count or optional_size < 64 or section_table_end > len(data):
+        raise ValueError("Truncated or invalid PE section table")
+    if struct.unpack_from('<H', data, optional)[0] not in (0x10B, 0x20B):
+        raise ValueError("Unsupported PE optional header")
+
+    # SizeOfHeaders has the same offset in PE32 and PE32+.
+    overlay = struct.unpack_from('<I', data, optional + 60)[0]
+    if not section_table_end <= overlay <= len(data):
+        raise ValueError("Invalid PE header size")
+    for i in range(section_count):
+        section = section_table + i * 40
+        size, offset = struct.unpack_from('<II', data, section + 16)
+        if size:
+            if offset < section_table_end or offset + size > len(data):
+                raise ValueError("PE section data is outside the file")
+            overlay = max(overlay, offset + size)
+    return overlay
+
+
+def load_authorware(data):
+    """Return an Authorware byte stream and its normalized header.
+
+    Compiled PE runtimes append table-first PCRS data with absolute EXE
+    offsets. Search only the overlay: runtime code contains magic strings
+    too. Bound the payload by its declared file end before rebasing, so
+    trailing executable data does not change the inferred base offset.
+    """
+    if data[:2] != b'MZ':
+        return data, read_header(data)
+
+    search_from = pe_overlay_offset(data)
+    signature = b'PCRS\xaf\xbc\xad\xac'
+    while True:
+        offset = data.find(signature, search_from)
+        if offset < 0:
+            break
+        search_from = offset + len(signature)
+        if offset + 64 > len(data):
+            continue
+
+        version, file_end = struct.unpack_from('<II', data, offset + 0x20)
+        table_total, count, table_offset = struct.unpack_from('<III', data, offset + 0x2C)
+        if (version not in (5, 6) or not count
+                or table_offset != offset + 0x6A
+                or not table_offset <= file_end <= len(data)
+                or table_total < count * 10
+                or table_offset + table_total > file_end):
+            continue
+
+        payload = data[offset:file_end]
+        hdr = read_header(payload)
+        if count * 30 > table_total:
+            entries = read_entries_pcrs(payload, hdr)
+        else:
+            entries = read_entries(payload, hdr)
+
+        # Reject signature lookalikes with invalid entry tables, rather than
+        # treating arbitrary overlay bytes as an Authorware project.
+        data_start = hdr['table_offset'] + table_total
+        valid = True
+        for entry in entries:
+            if entry['comp_size'] == 0 and entry['decomp_size'] == 0:
+                continue
+            if (entry['storage_type'] not in (1, 2)
+                    or entry['comp_size'] < 0
+                    or entry['data_offset'] < data_start
+                    or entry['data_offset'] + entry['comp_size'] > len(payload)):
+                valid = False
+                break
+        if valid:
+            hdr['exe_offset'] = offset
+            return payload, hdr
+
+    raise ValueError("No valid appended Authorware PCRS payload found in PE executable")
+
+
 def detect_icon_type(entry_data, entry_size=0):
     """Auto-detect icon type from data signatures (for WCRS files with no type field)."""
     if not entry_data or len(entry_data) < 4:
@@ -188,6 +303,8 @@ def detect_icon_type(entry_data, entry_size=0):
         return 0x3C  # StreamingAudio (AIFF)
     if entry_data[:4] == b'RIFF':
         return 0x3C  # StreamingAudio (WAV)
+    if (not entry_size or entry_size == len(entry_data)) and parse_sound_header(entry_data):
+        return 0x36  # PCM metadata, not inferred from sample byte averages
     # Check for BITMAPINFOHEADER in both LE and BE
     for endian in ('<', '>'):
         hdr_size = struct.unpack_from(f'{endian}I', entry_data, 0)[0]
@@ -198,13 +315,6 @@ def detect_icon_type(entry_data, entry_size=0):
             bpp = struct.unpack_from(f'{endian}H', entry_data, 14)[0]
             if 0 < w < 10000 and 0 < h < 10000 and planes == 1 and bpp in (1, 4, 8, 16, 24, 32):
                 return 0x35  # DIB
-    # Detect unsigned 8-bit PCM audio: large blocks with byte average ~128
-    sz = entry_size if entry_size else len(entry_data)
-    if sz >= 4096:
-        sample = entry_data[:min(len(entry_data), 512)]
-        avg = sum(sample) / len(sample)
-        if 112 < avg < 144:
-            return 0x37  # SoundData
     return 0x06  # RawData
 
 
@@ -350,7 +460,7 @@ def decompress_entry(data, entry):
     if comp_size == 0 and entry['decomp_size'] == 0:
         return None  # empty placeholder entry
 
-    if off + comp_size > len(data):
+    if off < 0 or comp_size < 0 or entry['decomp_size'] < 0 or off + comp_size > len(data):
         return None
 
     if entry['storage_type'] == 1:
@@ -358,8 +468,10 @@ def decompress_entry(data, entry):
     elif entry['storage_type'] == 2:
         try:
             obj = zlib.decompressobj()
-            result = obj.decompress(data[off:off + comp_size + 256])
-            return result[:entry['decomp_size']]
+            result = obj.decompress(data[off:off + comp_size], entry['decomp_size'] + 1)
+            if not obj.eof or len(result) != entry['decomp_size']:
+                return None
+            return result
         except zlib.error:
             return None
     return None
@@ -394,166 +506,234 @@ def swap_dib_to_le(dib_data):
     return le_header + dib_data[40:]
 
 
-def make_bmp_from_dib(dib_data):
-    """Create a full BMP file from raw DIB data (BITMAPINFOHEADER + palette + pixels)."""
-    if len(dib_data) < 40:
+def dib_fields(data):
+    """Validate a bitmap header before using its sizes or interpreting pixels."""
+    if len(data) < 40:
         return None
-
-    # Convert BE DIB to LE if needed
-    if dib_endian(dib_data) == '>':
-        dib_data = swap_dib_to_le(dib_data)
-
-    hdr_size = struct.unpack_from('<I', dib_data, 0)[0]
-    if hdr_size < 40:
+    fields = struct.unpack_from(dib_endian(data) + 'IiiHHIIiiII', data)
+    size, width, height, planes, bpp, compression, image_size, _, _, colors, _ = fields
+    if (size not in (40, 52, 56, 108, 124) or size > len(data)
+            or not 0 < width < 10000 or not 0 < abs(height) < 10000
+            or planes != 1 or bpp not in (1, 4, 8, 16, 24, 32)
+            or (bpp <= 8 and colors > 1 << bpp)
+            or compression not in (0, 1, 2, 3, 4, 6)
+            or (compression == 1 and bpp != 8)
+            or (compression == 2 and bpp != 4)
+            or (compression == 4 and bpp != 1)
+            or (compression in (3, 6) and bpp not in (16, 32))):
         return None
-
-    bpp = struct.unpack_from('<H', dib_data, 14)[0]
-
-    if bpp <= 8:
-        colors_used = struct.unpack_from('<I', dib_data, 32)[0]
-        if colors_used == 0:
-            colors_used = 1 << bpp
-        palette_size = colors_used * 4
-    else:
-        palette_size = 0
-
-    pixel_offset = 14 + hdr_size + palette_size
-    file_size = 14 + len(dib_data)
-
-    bmp_header = struct.pack('<2sIHHI', b'BM', file_size, 0, 0, pixel_offset)
-    return bmp_header + dib_data
+    return fields
 
 
-def dib_has_embedded_palette(pig_data, dib_offset):
-    """Check if a DIB inside a PIG has its own palette or uses the PIG's shared one.
+def decode_bitmap_rle(data, width, height, bpp):
+    """Decode RLE8, RLE4, or Authorware's byte-run encoded 1-bit bitmap.
 
-    PIG entries store a shared 256-color palette at offset 0x34 for WIN.
-    8bpp DIBs use the shared palette when it exists; otherwise they have
-    their own embedded palette. 1bpp/4bpp DIBs always have their own.
+    The 1-bit variant uses RLE8 packets over packed bytes, with compression
+    code 4. It is not the JPEG data denoted by code 4 in modern BMP files.
     """
-    if dib_offset + 44 > len(pig_data):
-        return True  # assume it has one if we can't check
-    endian = dib_endian(pig_data[dib_offset:dib_offset + 40])
-    bpp = struct.unpack_from(f'{endian}H', pig_data, dib_offset + 14)[0]
-    if bpp > 8:
-        return False  # no palette needed
+    stride = ((width * bpp + 31) // 32) * 4
+    if stride * height > 256 * 1024 * 1024:
+        return None
+    pixels = bytearray(stride * height)
+    capacity = stride if bpp in (1, 8) else stride * 2
+    x = y = offset = 0
 
-    if bpp == 8:
-        # 8bpp: uses shared palette if available, otherwise has its own
-        return extract_pig_palette(pig_data) is None
-    else:
-        # 1bpp and 4bpp: include their own palette
+    def put(values):
+        nonlocal x
+        if y >= height or x + len(values) > capacity:
+            return False
+        if bpp in (1, 8):
+            start = y * stride + x
+            pixels[start:start + len(values)] = bytes(values)
+        else:
+            for index, value in enumerate(values, x):
+                byte = y * stride + index // 2
+                if index & 1:
+                    pixels[byte] = (pixels[byte] & 0xF0) | value
+                else:
+                    pixels[byte] = (pixels[byte] & 0x0F) | value << 4
+        x += len(values)
         return True
 
-
-def calc_dib_size(pig_data, offset, in_pig=False):
-    """Calculate the total size of a DIB starting at offset."""
-    if offset + 40 > len(pig_data):
-        return 0
-    endian = dib_endian(pig_data[offset:offset + 40])
-    hdr_size = struct.unpack_from(f'{endian}I', pig_data, offset)[0]
-    w = struct.unpack_from(f'{endian}i', pig_data, offset + 4)[0]
-    h = abs(struct.unpack_from(f'{endian}i', pig_data, offset + 8)[0])
-    bpp = struct.unpack_from(f'{endian}H', pig_data, offset + 14)[0]
-    img_size = struct.unpack_from(f'{endian}I', pig_data, offset + 20)[0]
-    colors_used = struct.unpack_from(f'{endian}I', pig_data, offset + 32)[0]
-
-    if in_pig and not dib_has_embedded_palette(pig_data, offset):
-        palette_size = 0
-    elif bpp <= 8:
-        if colors_used == 0:
-            colors_used = 1 << bpp
-        palette_size = colors_used * 4
-    else:
-        palette_size = 0
-
-    if img_size > 0:
-        pixel_size = img_size
-    else:
-        row_stride = ((w * bpp + 31) // 32) * 4
-        pixel_size = row_stride * h
-
-    return hdr_size + palette_size + pixel_size
-
-
-def extract_pig_palette(pig_data):
-    """Extract the shared 256-color palette from a WIN PIG entry.
-
-    The palette is 256 RGBQUAD entries (1024 bytes) at offset 0x34 in the PIG.
-    Each RGBQUAD has a reserved byte (4th byte) that must be 0. If the data
-    at 0x34 doesn't contain a valid palette, returns None.
-    """
-    if pig_data[6:9] != b'WIN':
-        return None
-    pal_off = 0x34
-    if len(pig_data) < pal_off + 1024:
-        return None
-    # Validate: all reserved bytes in the 256-entry palette must be 0
-    pal = pig_data[pal_off:pal_off + 1024]
-    if not all(pal[i + 3] == 0 for i in range(0, 1024, 4)):
-        return None
-    return pal
-
-
-def find_best_dib_in_pig(pig_data):
-    """Find the highest quality embedded BITMAPINFOHEADER in a PIG entry."""
-    dibs = []
-
-    i = 0
-    while i < len(pig_data) - 40:
-        for endian in ('<', '>'):
-            hdr_size = struct.unpack_from(f'{endian}I', pig_data, i)[0]
-            if hdr_size == 40:
-                w = struct.unpack_from(f'{endian}i', pig_data, i + 4)[0]
-                h = struct.unpack_from(f'{endian}i', pig_data, i + 8)[0]
-                planes = struct.unpack_from(f'{endian}H', pig_data, i + 12)[0]
-                bpp = struct.unpack_from(f'{endian}H', pig_data, i + 14)[0]
-                if 0 < w < 10000 and 0 < abs(h) < 10000 and planes == 1 and bpp in (1, 4, 8, 16, 24, 32):
-                    dib_size = calc_dib_size(pig_data, i, in_pig=True)
-                    if dib_size > 0 and i + dib_size <= len(pig_data):
-                        has_palette = dib_has_embedded_palette(pig_data, i)
-                        dibs.append((i, bpp, dib_size, has_palette))
-                break  # don't check other endian if hdr_size == 40
-        i += 1
-
-    if not dibs:
-        return None
-
-    # Pick the highest bpp DIB that fits
-    best = max(dibs, key=lambda x: x[1])
-    offset, bpp, size, has_palette = best
-
-    dib_header = pig_data[offset:offset + 40]
-    dib_rest = pig_data[offset + 40:offset + size]
-
-    if has_palette:
-        # DIB has its own palette embedded - return as-is
-        return dib_header + dib_rest
-    else:
-        # Need to insert the PIG's shared palette
-        pig_palette = extract_pig_palette(pig_data)
-        if pig_palette:
-            return dib_header + pig_palette + dib_rest
+    while offset + 2 <= len(data):
+        count, value = data[offset:offset + 2]
+        offset += 2
+        if count:
+            values = ([value >> 4, value & 15] * ((count + 1) // 2))[:count] if bpp == 4 else [value] * count
+            if not put(values):
+                return None
+        elif value == 0:
+            x = 0
+            y += 1
+            if y == height:
+                return bytes(pixels)
+        elif value == 1:
+            return bytes(pixels)
+        elif value == 2:
+            if offset + 2 > len(data):
+                return None
+            dx, dy = data[offset:offset + 2]
+            offset += 2
+            x += dx
+            y += dy
+            if x > capacity or y >= height:
+                return None
         else:
-            # No palette available - return raw (won't display correctly)
-            return dib_header + dib_rest
+            length = (value + 1) // 2 if bpp == 4 else value
+            padded = (length + 1) & ~1
+            if offset + padded > len(data):
+                return None
+            literal = data[offset:offset + length]
+            values = [((literal[i // 2] >> 4) if i % 2 == 0 else (literal[i // 2] & 15))
+                      for i in range(value)] if bpp == 4 else literal
+            if not put(values):
+                return None
+            offset += padded
+    required = (width + 7) // 8 if bpp == 1 else width
+    if y == height - 1 and x >= required:
+        return bytes(pixels)
+    return None
+
+
+def normalize_dib(dib_data, shared_palette=None, embedded_palette=None):
+    """Build a complete, validated DIB, supplying an external palette if needed."""
+    fields = dib_fields(dib_data)
+    if fields is None:
+        return None
+    size, width, height, planes, bpp, compression, image_size, xpm, ypm, colors, important = fields
+    if dib_endian(dib_data) == '>':
+        dib_data = swap_dib_to_le(dib_data)
+    stride = ((width * bpp + 31) // 32) * 4
+    pixel_size = stride * abs(height)
+    if pixel_size > 256 * 1024 * 1024:
+        return None
+    color_count = (colors or (1 << bpp)) if bpp <= 8 else 0
+    palette_size = color_count * 4
+    mask_size = (16 if compression == 6 else 12) if compression in (3, 6) and size == 40 else 0
+    header_end = size + mask_size
+    if len(dib_data) < header_end:
+        return None
+    needed_pixels = image_size if compression in (1, 2, 4) else pixel_size
+    external = shared_palette is not None and len(shared_palette) >= palette_size and palette_size > 0
+    if embedded_palette is None:
+        embedded_palette = not (external and len(dib_data) < header_end + palette_size + needed_pixels)
+    if palette_size and not embedded_palette:
+        if not external:
+            return None
+        palette = shared_palette[:palette_size]
+        start = header_end
+    else:
+        palette = dib_data[header_end:header_end + palette_size]
+        if len(palette) != palette_size:
+            return None
+        start = header_end + palette_size
+    # A palette-less RLE stream can accidentally decode when its first bytes
+    # are mistaken for a palette. Require room for the declared pixel stream.
+    if start + needed_pixels > len(dib_data):
+        return None
+    if compression in (1, 2, 4):
+        stream = dib_data[start:start + image_size] if image_size else dib_data[start:]
+        pixels = decode_bitmap_rle(stream, width, abs(height), bpp)
+        if pixels is None:
+            return None
+        header = bytearray(dib_data[:header_end])
+        struct.pack_into('<II', header, 16, 0, len(pixels))
+        return bytes(header) + palette + pixels
+    if start + pixel_size > len(dib_data):
+        return None
+    # Preserve existing valid data and metadata, including any trailing content.
+    return dib_data[:header_end] + palette + dib_data[start:]
+
+
+def make_bmp_from_dib(dib_data, shared_palette=None):
+    """Create a BMP only when the palette and pixel data can be recovered."""
+    dib_data = normalize_dib(dib_data, shared_palette)
+    if dib_data is None:
+        return None
+    fields = dib_fields(dib_data)
+    size, _, _, _, bpp, compression, _, _, _, colors, _ = fields
+    palette_size = ((colors or (1 << bpp)) * 4) if bpp <= 8 else 0
+    masks = (16 if compression == 6 else 12) if compression in (3, 6) and size == 40 else 0
+    return struct.pack('<2sIHHI', b'BM', 14 + len(dib_data), 0, 0,
+                       14 + size + palette_size + masks) + dib_data
+
+
+def extract_pig_palette(pig_data, before=None, colors=None, minimum=False):
+    """Read a PIG palette record (tag 0x56), at its actual variable offset.
+
+    A record contains tag:uint16, total_size:uint32, count:uint32, followed
+    by count RGBQUADs. WIN and MAC containers can both hold these records.
+    """
+    if pig_data[2:6] != b'PIG\x00':
+        return None
+    end = len(pig_data) if before is None else min(before, len(pig_data))
+    found = None
+    for endian, marker in (('<', b'\x56\x00'), ('>', b'\x00\x56')):
+        offset = 14
+        while True:
+            offset = pig_data.find(marker, offset, end)
+            if offset < 0:
+                break
+            if offset + 10 <= end:
+                length, count = struct.unpack_from(endian + 'II', pig_data, offset + 2)
+                if (0 < count <= 256 and length == 10 + count * 4
+                        and offset + length <= end
+                        and (colors is None or colors == count or (minimum and count >= colors))):
+                    palette = pig_data[offset + 10:offset + length]
+                    if all(palette[i] == 0 for i in range(3, len(palette), 4)):
+                        if found is None or offset > found[0]:
+                            found = (offset, palette)
+            offset += 2
+    return found[1] if found else None
+
+
+def find_best_dib_in_pig(pig_data, *, with_offset=False):
+    """Find a valid DIB, optionally returning its original PIG byte offset."""
+    candidates = []
+    offsets = sorted({match.start() for pattern in (b'\x28\x00\x00\x00', b'\x00\x00\x00\x28')
+                      for match in re.finditer(re.escape(pattern), pig_data)})
+    for offset in offsets:
+        fields = dib_fields(pig_data[offset:])
+        if fields is None:
+            continue
+        size, w, h, planes, bpp, compression, image_size, _, _, colors, _ = fields
+        end = len(pig_data)
+        # Bitmap record 0x65 has a 58-byte prefix before the DIB header.
+        record = offset - 58
+        if record >= 14:
+            for endian, marker in (('<', b'\x65\x00'), ('>', b'\x00\x65')):
+                if pig_data[record:record + 2] == marker:
+                    length = struct.unpack_from(endian + 'I', pig_data, record + 2)[0]
+                    if offset + size <= record + length <= len(pig_data):
+                        end = record + length
+        count = (colors or (1 << bpp)) if bpp <= 8 else 0
+        palette = extract_pig_palette(pig_data, before=offset, colors=count, minimum=bpp == 8) if count else None
+        embedded = False if palette is not None and bpp in (4, 8) else None
+        dib = normalize_dib(pig_data[offset:end], palette, embedded)
+        # Some legacy 0x65 lengths exclude the embedded RGBQUAD table.
+        if dib is None and palette is None and count and end + count * 4 <= len(pig_data):
+            dib = normalize_dib(pig_data[offset:end + count * 4])
+        if dib is not None:
+            candidates.append((bpp, offset, dib))
+    if not candidates:
+        return None
+    _, offset, dib = max(candidates, key=lambda item: item[0])
+    return (offset, dib) if with_offset else dib
 
 
 def extract_pig_dimensions(pig_data):
-    """Extract width/height from a WIN PIG header."""
+    """Compute width/height from the signed bounding rectangle in a PIG."""
     if len(pig_data) < 0x22:
         return None, None
     if pig_data[2:5] != b'PIG':
         return None, None
     platform = pig_data[6:9]
     if platform in (b'WIN', b'MAC'):
-        # Try LE first, fall back to BE if dimensions look unreasonable
-        w = struct.unpack_from('<H', pig_data, 0x1E)[0]
-        h = struct.unpack_from('<H', pig_data, 0x20)[0]
-        if w > 10000 or h > 10000:
-            w = struct.unpack_from('>H', pig_data, 0x1E)[0]
-            h = struct.unpack_from('>H', pig_data, 0x20)[0]
-        return w, h
+        endian = '>' if struct.unpack_from('<I', pig_data, 14)[0] > 65535 else '<'
+        left, top, right, bottom = authorware_pig.rectangle(pig_data, 0x1A, endian)
+        w, h = right - left, bottom - top
+        if 0 < w < 10000 and 0 < h < 10000:
+            return w, h
     return None, None
 
 
@@ -611,7 +791,7 @@ def extract_text_from_entry(entry_data, icon_type):
                 pass
         return "\n".join(strings) if strings else None
 
-    elif icon_type in (0x05, 0x24):
+    elif icon_type in (0x05, 0x09, 0x0E, 0x24, 0x3A):
         # Script/expression
         strings = extract_printable_strings(entry_data, min_len=3)
         return "\n".join(strings) if strings else None
@@ -635,19 +815,159 @@ def extract_printable_strings(data, min_len=3):
     return strings
 
 
-def find_embedded_image_in_pig(pig_data):
-    """Find a GIF, JPEG, or PNG image embedded inside a PIG entry.
+def valid_gif_codes(data, code_size, expected):
+    """Validate GIF LZW codes without allocating the decoded image."""
+    if not 2 <= code_size <= 8:
+        return False
+    clear = 1 << code_size
+    lengths = [1] * clear + [0, 0]
+    bits = code_size + 1
+    bit = count = previous = 0
+    while bit + bits <= len(data) * 8:
+        start = bit // 8
+        code = int.from_bytes(data[start:start + 3], 'little') >> (bit & 7) & ((1 << bits) - 1)
+        bit += bits
+        if code == clear:
+            lengths = [1] * clear + [0, 0]
+            bits = code_size + 1
+            previous = 0
+            continue
+        if code == clear + 1:
+            return count == expected
+        if code < len(lengths):
+            length = lengths[code]
+        elif code == len(lengths) and previous:
+            length = previous + 1
+        else:
+            return False
+        count += length
+        if count > expected:
+            return False
+        if previous and len(lengths) < 4096:
+            lengths.append(previous + 1)
+            if len(lengths) == 1 << bits and bits < 12:
+                bits += 1
+        previous = length
+    return False
 
-    Returns (format, data) tuple or None. Some A5P PIGs embed GIF images
-    instead of using BITMAPINFOHEADER sub-images.
-    """
-    for j in range(0, len(pig_data) - 6):
-        if pig_data[j:j+6] in (b'GIF87a', b'GIF89a'):
-            return ('gif', pig_data[j:])
-        if pig_data[j:j+3] == b'\xff\xd8\xff':
-            return ('jpeg', pig_data[j:])
-        if pig_data[j:j+4] == b'\x89PNG':
-            return ('png', pig_data[j:])
+
+def embedded_image_end(data, offset, kind):
+    """Find a complete image, rejecting signature fragments in PIG metadata."""
+    if kind == 'png':
+        pos = offset + 8
+        first = True
+        saw_data = False
+        while pos + 12 <= len(data):
+            length = struct.unpack_from('>I', data, pos)[0]
+            tag = data[pos + 4:pos + 8]
+            end = pos + 12 + length
+            if end > len(data) or (first and (tag != b'IHDR' or length != 13)):
+                return None
+            checksum = struct.unpack_from('>I', data, pos + 8 + length)[0]
+            if zlib.crc32(data[pos + 4:pos + 8 + length]) & 0xFFFFFFFF != checksum:
+                return None
+            saw_data |= tag == b'IDAT'
+            if tag == b'IEND':
+                return end if length == 0 and saw_data else None
+            first = False
+            pos = end
+        return None
+    if kind == 'gif':
+        if offset + 13 > len(data):
+            return None
+        packed = data[offset + 10]
+        pos = offset + 13 + (3 * (1 << ((packed & 7) + 1)) if packed & 0x80 else 0)
+        frames = 0
+        while pos < len(data):
+            tag = data[pos]
+            pos += 1
+            if tag == 0x3B:
+                return pos if frames else None
+            if tag == 0x21:
+                if pos >= len(data):
+                    return None
+                pos += 1  # extension label
+                image_size = None
+            elif tag == 0x2C:
+                if pos + 10 > len(data):
+                    return None
+                width, height = struct.unpack_from('<HH', data, pos + 4)
+                packed = data[pos + 8]
+                pos += 9 + (3 * (1 << ((packed & 7) + 1)) if packed & 0x80 else 0)
+                if pos >= len(data) or width == 0 or height == 0:
+                    return None
+                code_size = data[pos]
+                pos += 1
+                image_size = width * height
+            else:
+                return None
+            blocks = []
+            while pos < len(data):
+                size = data[pos]
+                pos += 1
+                if not size:
+                    break
+                if pos + size > len(data):
+                    return None
+                blocks.append(data[pos:pos + size])
+                pos += size
+            else:
+                return None
+            if image_size is not None:
+                if not valid_gif_codes(b''.join(blocks), code_size, image_size):
+                    return None
+                frames += 1
+        return None
+    if kind == 'jpeg':
+        pos = offset + 2
+        saw_frame = saw_scan = False
+        while pos < len(data):
+            if data[pos] != 0xFF:
+                return None
+            while pos < len(data) and data[pos] == 0xFF:
+                pos += 1
+            if pos >= len(data):
+                return None
+            marker = data[pos]
+            pos += 1
+            if marker == 0xD9:
+                return pos if saw_frame and saw_scan else None
+            if marker in (0, 0xD8) or pos + 2 > len(data):
+                return None
+            length = struct.unpack_from('>H', data, pos)[0]
+            if length < 2 or pos + length > len(data):
+                return None
+            if marker in (0xC0, 0xC1, 0xC2):
+                if length < 8:
+                    return None
+                height, width = struct.unpack_from('>HH', data, pos + 3)
+                saw_frame = width > 0 and height > 0
+            pos += length
+            if marker == 0xDA:
+                saw_scan = True
+                while pos < len(data):
+                    pos = data.find(b'\xFF', pos)
+                    if pos < 0 or pos + 1 >= len(data):
+                        return None
+                    next_byte = data[pos + 1]
+                    if next_byte == 0 or 0xD0 <= next_byte <= 0xD7:
+                        pos += 2
+                    else:
+                        break
+        return None
+    return None
+
+
+def find_embedded_image_in_pig(pig_data):
+    """Extract the first complete GIF, JPEG or PNG, excluding PIG trailers."""
+    signatures = ((b'GIF87a', 'gif'), (b'GIF89a', 'gif'),
+                  (b'\x89PNG\r\n\x1a\n', 'png'), (b'\xff\xd8\xff', 'jpeg'))
+    candidates = sorted((match.start(), kind) for signature, kind in signatures
+                        for match in re.finditer(re.escape(signature), pig_data))
+    for offset, kind in candidates:
+        end = embedded_image_end(pig_data, offset, kind)
+        if end is not None:
+            return kind, pig_data[offset:end]
     return None
 
 
@@ -673,114 +993,384 @@ def extract_pig_text(pig_data):
     return "\n".join(meaningful) if meaningful else None
 
 
+def parse_sound_header(data):
+    """Read the packed 48/50-byte PCM descriptor, including its true byte count.
+
+    The rate is a little-endian double (48 bytes) or x87 extended value
+    (50 bytes). The later integer field is BYTE rate, not sample rate.
+    These descriptors are little-endian even in the observed Mac containers.
+    """
+    if (len(data) not in (48, 50) or data[:4] not in (b'\x03\x00\x00\x00', b'\x03\x00\x00\x10')
+            or data[20:24] != b'\x01\x00\x3c\x00'):
+        return None
+    channels, bits = data[24], data[26]
+    align = struct.unpack_from('<H', data, len(data) - 12)[0]
+    byte_rate = struct.unpack_from('<I', data, len(data) - 10)[0]
+    if (not 1 <= channels <= 32 or bits not in (8, 16)
+            or data[25] != bits or align != channels * (bits // 8) or not byte_rate):
+        return None
+    if len(data) == 48:
+        rate = struct.unpack_from('<d', data, 28)[0]
+    else:
+        exponent = struct.unpack_from('<H', data, 36)[0]
+        if exponent & 0x8000 or exponent & 0x7FFF == 0x7FFF:
+            return None
+        try:
+            rate = math.ldexp(int.from_bytes(data[28:36], 'little') / 2**63,
+                              (exponent & 0x7FFF) - 16383)
+        except OverflowError:
+            return None
+    if rate == 0:
+        rate = byte_rate / align  # some older descriptors leave the float unset
+    if not math.isfinite(rate) or not 1000 <= rate <= 384000:
+        return None
+    return {'byte_count': struct.unpack_from('<I', data, 6)[0],
+            'sample_rate': round(rate), 'bits_per_sample': bits,
+            'channels': channels, 'block_align': align}
+
+
+def sound_data_groups(data, entries, legacy=False):
+    """Associate PCM chunks with descriptors, in entry order rather than by ID.
+
+    Legacy tables can have all-zero IDs and can put the descriptor after
+    its chunks. Only an exact match to the declared length authorizes a WAV.
+    Unknown blocks remain binary instead of being guessed to be 8-bit PCM.
+    """
+    headers = {}
+    for index, entry in enumerate(entries):
+        if entry['decomp_size'] not in (48, 50):
+            continue
+        block = decompress_entry(data, entry)
+        header = parse_sound_header(block) if block is not None else None
+        if header and header['byte_count']:
+            headers[index] = header
+    groups, consumed, unresolved = {}, set(), []
+    for index, header in headers.items():
+        expected = header['byte_count']
+        if expected % header['block_align']:
+            unresolved.append(index)
+            continue
+        for backward in (False, True):
+            order = range(index - 1, -1, -1) if backward else range(index + 1, len(entries))
+            remaining, members = expected, []
+            for candidate in order:
+                entry = entries[candidate]
+                length = entry['decomp_size']
+                if (candidate in headers or entry['icon_type'] not in (0x06, 0x37)
+                        or not 0 < length <= remaining):
+                    break
+                # Full continuation blocks have the observed storage chunk
+                # sizes. Small neighboring metadata must not become samples.
+                if length < remaining and (not backward or members) and length not in (4096, 65536):
+                    break
+                members.append(candidate)
+                remaining -= length
+                if not remaining:
+                    break
+            if not remaining:
+                if backward:
+                    members.reverse()
+                groups[index] = {**header, 'members': members}
+                consumed.update(members)
+                break
+        else:
+            unresolved.append(index)
+    if legacy and unresolved:
+        # Edited legacy projects can move whole audio runs away from their
+        # descriptor and insert unrelated entries between 64 KiB chunks.
+        # Match only a unique, unclaimed run with the exact final-block size;
+        # ambiguous or overlapping associations remain binary.
+        proposals = {}
+        for index in unresolved:
+            header = headers[index]
+            expected = header['byte_count']
+            if expected % header['block_align']:
+                continue
+            full_count, tail_size = divmod(expected, 65536)
+            if not tail_size:
+                continue  # no distinct final block to establish a boundary
+            eligible = [k for k, e in enumerate(entries) if k not in consumed and k not in headers
+                        and e['icon_type'] in (0x06, 0x37) and e['storage_type'] == 1]
+            options = []
+            for tail in eligible:
+                if entries[tail]['decomp_size'] != tail_size:
+                    continue
+                full = [k for k in eligible if k < tail and entries[k]['decomp_size'] == 65536]
+                if len(full) >= full_count:
+                    options.append((full[-full_count:] if full_count else []) + [tail])
+            if len(options) == 1:
+                proposals[index] = options[0]
+        for index, members in proposals.items():
+            if any(set(members).intersection(other) for key, other in proposals.items() if key != index):
+                continue
+            groups[index] = {**headers[index], 'members': members}
+            consumed.update(members)
+        unresolved = [index for index in unresolved if index not in groups]
+    return groups, consumed, unresolved
+
+
 def make_wav(pcm_data, sample_rate=22050, bits_per_sample=8, channels=1):
     """Create a WAV file from raw PCM data."""
     byte_rate = sample_rate * channels * (bits_per_sample // 8)
     block_align = channels * (bits_per_sample // 8)
     data_size = len(pcm_data)
-    file_size = 36 + data_size
+    padding = b'\x00' if data_size & 1 else b''
+    file_size = 36 + data_size + len(padding)
 
     header = struct.pack('<4sI4s', b'RIFF', file_size, b'WAVE')
     fmt = struct.pack('<4sIHHIIHH', b'fmt ', 16, 1, channels,
                       sample_rate, byte_rate, block_align, bits_per_sample)
     data_hdr = struct.pack('<4sI', b'data', data_size)
-    return header + fmt + data_hdr + pcm_data
+    return header + fmt + data_hdr + pcm_data + padding
 
 
 def find_uncovered_zlib_blocks(data, hdr, entries):
-    """Find zlib-compressed blocks not referenced by the entry table.
-
-    Returns list of (file_offset, compressed_size, decompressed_data) tuples
-    for blocks that contain unique data (not duplicates of entry data).
-    """
-    entry_table_bytes = hdr['entry_count'] * 30
-    secondary_size = hdr['table_total_size'] - entry_table_bytes
-
-    # Build set of covered byte offsets
-    covered = set()
-    # Header (0x00-0x3F) + preamble (0x40-0x57)
-    for i in range(0x58):
-        covered.add(i)
-    # Small gap between preamble and first data/table (0x58 to whichever is first)
-    first_data = min((e['data_offset'] for e in entries), default=hdr['table_offset'])
-    gap_end = min(hdr['table_offset'], first_data)
-    for i in range(0x58, min(gap_end, len(data))):
-        covered.add(i)
-    # Entry table
-    for i in range(hdr['table_offset'], hdr['table_offset'] + entry_table_bytes):
-        covered.add(i)
-    # Secondary table
-    sec_start = hdr['table_offset'] + entry_table_bytes
-    for i in range(sec_start, sec_start + secondary_size):
-        covered.add(i)
-    # Entry data regions
-    for e in entries:
-        for i in range(e['data_offset'], e['data_offset'] + e['comp_size']):
-            covered.add(i)
-
-    # Decompress all entry data for duplicate detection
-    entry_contents = set()
-    for e in entries:
-        edata = decompress_entry(data, e)
-        if edata:
-            entry_contents.add(edata)
-
-    # Scan for uncovered zlib blocks
+    """Find complete, unique zlib streams in gaps, without a per-byte set."""
+    first_data = min((e['data_offset'] for e in entries if e['comp_size'] > 0 and e['data_offset'] > 0),
+                     default=hdr['table_offset'])
+    regions = [(0, max(0x58, min(first_data, hdr['table_offset']))),
+               (hdr['table_offset'], hdr['table_offset'] + hdr['table_total_size'])]
+    regions.extend((e['data_offset'], e['data_offset'] + e['comp_size'])
+                   for e in entries if e['data_offset'] >= 0 and e['comp_size'] > 0)
+    merged = []
+    for start, end in sorted(regions):
+        start, end = max(0, start), min(len(data), end)
+        if end <= start:
+            continue
+        if merged and start <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(end, merged[-1][1]))
+        else:
+            merged.append((start, end))
+    gaps = []
+    start = 0
+    for low, high in merged:
+        if start < low:
+            gaps.append((start, low))
+        start = high
+    if start < len(data):
+        gaps.append((start, len(data)))
+    seen = set()
+    for entry in entries:
+        content = decompress_entry(data, entry)
+        if content:
+            seen.add(hashlib.sha256(content).digest())
     blocks = []
-    i = 0
-    while i < len(data) - 2:
-        if i not in covered:
-            if data[i] == 0x78 and data[i + 1] in (0x01, 0x5E, 0x9C, 0xDA):
-                try:
-                    obj = zlib.decompressobj()
-                    result = obj.decompress(data[i:])
-                    consumed = len(data[i:]) - len(obj.unused_data)
-                    # Skip duplicates and trivial all-zero blocks
-                    if result not in entry_contents and result != b'\x00' * len(result):
-                        blocks.append((i, consumed, result))
-                    i += consumed
-                    continue
-                except zlib.error:
-                    pass
-        i += 1
-
+    for start, end in gaps:
+        cursor = start
+        while cursor + 2 <= end:
+            offset = data.find(b'\x78', cursor, end - 1)
+            if offset < 0:
+                break
+            cursor = offset + 1
+            if data[offset + 1] not in (0x01, 0x5E, 0x9C, 0xDA):
+                continue
+            try:
+                obj = zlib.decompressobj()
+                result = obj.decompress(data[offset:end], 256 * 1024 * 1024)
+            except zlib.error:
+                continue
+            if not obj.eof:
+                continue
+            consumed = end - offset - len(obj.unused_data)
+            cursor = offset + consumed
+            digest = hashlib.sha256(result).digest()
+            if digest not in seen and any(result):
+                blocks.append((offset, consumed, result))
+                seen.add(digest)
     return blocks
 
 
-def main():
-    if len(sys.argv) != 3:
-        print(f"Usage: {sys.argv[0]} <inputFile> <outputDir>", file=sys.stderr)
-        sys.exit(1)
+def read_entry_table(data, hdr):
+    """Select an entry layout and reject absent/truncated tables explicitly."""
+    table = hdr['table_offset']
+    if hdr['magic'] in ('WPCR', 'WPLI') and hdr['flags'] & 0xFFFFFFFF == 0xFFFFFFFC:
+        reader, size = read_entries_wpcr, 4
+    elif hdr['magic'] in ('WCRS', 'WPCR', 'WPLI') and hdr['format_version'] == 2:
+        reader, size = read_entries_wcrs_v2, 10
+        table = hdr['file_size'] - hdr['table_total_size']
+    elif hdr['magic'] in ('WCRS', 'WPCR', 'WPLI') or hdr.get('big_endian'):
+        reader, size = read_entries_wcrs, 16
+    elif hdr['magic'] == 'PCRS' and hdr['entry_count'] * 30 > hdr['table_total_size']:
+        reader, size = read_entries_pcrs, 10
+    else:
+        reader, size = read_entries, 30
+    end = table + hdr['entry_count'] * size
+    if hdr['entry_count'] and (table < 64 or end > len(data)):
+        raise ValueError(f'Entry table is incomplete: requires bytes 0x{table:x}..0x{end:x}, file ends at 0x{len(data):x}')
+    return reader(data, hdr)
 
-    input_file = sys.argv[1]
-    output_dir = sys.argv[2]
+
+def audio_container_size(data):
+    if len(data) >= 12 and data[:4] in (b'RIFF', b'FORM'):
+        size = struct.unpack_from('<I' if data[:4] == b'RIFF' else '>I', data, 4)[0] + 8
+        return size if size >= 12 else None
+    return None
+
+
+def pad_audio_container(data):
+    """Restore an omitted final RIFF/FORM pad byte only when all data exists."""
+    expected = audio_container_size(data)
+    if expected != len(data) + 1:
+        return data
+    endian = '<' if data[:4] == b'RIFF' else '>'
+    offset = 12
+    while offset + 8 <= len(data):
+        size = struct.unpack_from(endian + 'I', data, offset + 4)[0]
+        end = offset + 8 + size
+        if end == len(data) and size & 1:
+            return data + b'\x00'
+        if end > len(data):
+            break
+        offset = end + (size & 1)
+    return data
+
+
+def recover_wave(data):
+    """Validate WAVE chunks, salvaging complete audio before damaged metadata.
+
+    The caller must preserve the original bytes whenever a repair is made.
+    Never shorten an incomplete data chunk and present it as complete audio.
+    """
+    end = audio_container_size(data)
+    if end is None or end > len(data) or data[8:12] != b'WAVE':
+        return None
+    offset = 12
+    has_format = has_data = False
+    while offset < end:
+        if offset + 8 > end:
+            break
+        tag = data[offset:offset + 4]
+        size = struct.unpack_from('<I', data, offset + 4)[0]
+        chunk_end = offset + 8 + size
+        if chunk_end > end:
+            if tag in (b'fmt ', b'data'):
+                return None
+            break
+        if tag == b'fmt ':
+            has_format = size >= 16
+        elif tag == b'data':
+            has_data = True
+        offset = chunk_end + (size & 1)
+    if not has_format or not has_data:
+        return None
+    if offset >= end:
+        return data
+    # The complete fmt/data chunks are usable; exclude the malformed tail.
+    return b'RIFF' + struct.pack('<I', offset - 8) + data[8:offset]
+
+
+def streaming_audio_groups(data, entries):
+    """Join RIFF/FORM chunks even when metadata records separate them.
+
+    A known container length delimits a stream. MP3/unknown streams retain
+    the consecutive-entry convention, with new ID3 headers starting a file.
+    """
+    groups = {}
+    start = previous = None
+    chunks = []
+    expected = None
+    total = 0
+
+    def flush():
+        nonlocal start, chunks, expected, total
+        if start is not None:
+            groups[start] = (pad_audio_container(b''.join(chunks)), len(chunks), expected)
+        start, chunks, expected, total = None, [], None, 0
+
+    for index, entry in enumerate(entries):
+        if entry['icon_type'] != 0x3C:
+            continue
+        chunk = decompress_entry(data, entry)
+        if chunk is None:
+            flush()
+            previous = index
+            continue
+        new_size = audio_container_size(chunk)
+        new_header = new_size is not None or chunk[:3] == b'ID3'
+        if start is not None and (new_header or (expected is None and index != previous + 1)):
+            flush()
+        if start is None:
+            start, expected = index, new_size
+        chunks.append(chunk)
+        total += len(chunk)
+        previous = index
+        if expected is not None and (total >= expected or
+                (total + 1 == expected and len(pad_audio_container(b''.join(chunks))) == expected)):
+            flush()
+    flush()
+    return groups
+
+
+def recover_unindexed_content(data, output_dir):
+    """Salvage complete images from a legacy file whose table is missing.
+
+    Preserve all bytes as well: without the table the original entry IDs,
+    types and boundaries cannot be reconstructed reliably.
+    """
+    fname = write_output(output_dir, 'unindexed_data.bin', data)
+    print(f'  Original incomplete input preserved -> {fname}')
+    count = 1
+    offsets = [match.start() - 2 for match in re.finditer(re.escape(b'PIG\x00'), data)
+               if match.start() >= 2 and data[match.start() + 4:match.start() + 8] in (b'WIN\x00', b'MAC\x00')]
+    for index, offset in enumerate(offsets):
+        end = offsets[index + 1] if index + 1 < len(offsets) else len(data)
+        block = data[offset:end]
+        dib = find_best_dib_in_pig(block)
+        bmp = make_bmp_from_dib(dib) if dib is not None else None
+        if bmp:
+            fname = write_output(output_dir, f'recovered_0x{offset:06x}_PIG.bmp', bmp)
+        else:
+            embedded = find_embedded_image_in_pig(block)
+            if embedded is None:
+                continue
+            extension, content = embedded
+            fname = write_output(output_dir, f'recovered_0x{offset:06x}_PIG.{extension}', content)
+        print(f'  Recovered complete image at 0x{offset:x} -> {fname}')
+        count += 1
+    return count
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Extract Authorware resources and reconstruct PIG pictures.')
+    parser.add_argument('inputFile')
+    parser.add_argument('outputDir')
+    parser.add_argument('--report', action='store_true', help='Write a self-contained HTML review report')
+    parser.add_argument('--deep', action='store_true',
+                        help='Keep original DIB .bin files even when a PIG SVG embeds their bitmap')
+    args = parser.parse_args()
+    input_file, output_dir = args.inputFile, args.outputDir
+    make_report = args.report
 
     with open(input_file, 'rb') as f:
         data = f.read()
+    source_hash = hashlib.sha256(data).hexdigest()
 
-    hdr = read_header(data)
-    if hdr['magic'] in ('WPCR', 'WPLI') and hdr['flags'] & 0xFFFFFFFF == 0xFFFFFFFC:
-        # WPCR/WPLI offset-only format: 4-byte offset list
-        entries = read_entries_wpcr(data, hdr)
-    elif hdr['magic'] in ('WCRS', 'WPCR', 'WPLI') and hdr['format_version'] == 2:
-        # Authorware 2.x: 10-byte records at end of file
-        entries = read_entries_wcrs_v2(data, hdr)
-    elif hdr['magic'] in ('WCRS', 'WPCR', 'WPLI'):
-        # WCRS/WPCR/WPLI: 16-byte records
-        entries = read_entries_wcrs(data, hdr)
-    elif hdr.get('big_endian'):
-        # A3M: big-endian ACRS with 16-byte records (same structure as WCRS)
-        entries = read_entries_wcrs(data, hdr)
-    elif hdr['magic'] == 'PCRS' and hdr['entry_count'] * 30 > hdr['table_total_size']:
-        entries = read_entries_pcrs(data, hdr)
-    else:
-        entries = read_entries(data, hdr)
+    try:
+        data, hdr = load_authorware(data)
+    except ValueError as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        sys.exit(1)
+    try:
+        entries = read_entry_table(data, hdr)
+    except ValueError as exc:
+        if hdr['file_size'] > len(data) and hdr['magic'] in ('WPCR', 'WPLI', 'WCRS'):
+            os.makedirs(output_dir, exist_ok=True)
+            print(f"Warning: {exc}; recovering available content", file=sys.stderr)
+            count = recover_unindexed_content(data, output_dir)
+            print(f"Extracted {count} items to {output_dir} (incomplete input)")
+            sys.exit(2)
+        print(f"Error: {exc}", file=sys.stderr)
+        sys.exit(1)
 
     os.makedirs(output_dir, exist_ok=True)
 
-    basename = os.path.splitext(os.path.basename(input_file))[0]
+    # Exclusive output names let the report include only files from this run,
+    # even when the destination already contains earlier extractions.
+    report_existing = set(os.listdir(output_dir)) if make_report else set()
 
     print(f"File: {input_file}")
+    if 'exe_offset' in hdr:
+        print(f"  Executable payload offset: 0x{hdr['exe_offset']:x}")
     print(f"  Format version: {hdr['format_version']}")
     print(f"  Entry count: {hdr['entry_count']}")
     print(f"  Entry table offset: 0x{hdr['table_offset']:x}")
@@ -788,13 +1378,83 @@ def main():
     print()
 
     extracted_count = 0
-    audio_accum = None  # (start_eid, chunks) for combining consecutive 0x3C entries
-    pcm_accum = None    # (start_eid, chunks) for combining consecutive 0x37 entries (auto-detected)
+    audio_groups = streaming_audio_groups(data, entries)
+    legacy_audio = hdr['magic'] in ('WPCR', 'WPLI', 'WCRS') or hdr.get('big_endian', False)
+    pcm_groups, pcm_members, unresolved_pcm = sound_data_groups(data, entries, legacy=legacy_audio)
+    incomplete_audio = len(unresolved_pcm)
+    for index in unresolved_pcm:
+        print(f"Warning: PCM descriptor at entry index {index} (ID {entries[index]['id']}) "
+              'could not be matched to complete audio; entries preserved as binary', file=sys.stderr)
     # Detect segment files (header file_size > actual data length)
     is_segment = hdr['file_size'] > len(data)
     skipped_segment = 0
+    decompression_failures = 0
+    pig_context = authorware_pig.Context(sys.modules[__name__], data, entries)
+    pig_results = []
+    pigs_by_index = {}
+    dib_results = []
+    rendered_dibs = {}
 
-    for entry in entries:
+    def save_pig_svg(content, prefix, entry_id, index):
+        result = authorware_pig.render_pig(content, pig_context)
+        svg = result.pop('svg')
+        result.update(id=entry_id, index=index, key=str(index),
+                      pig_sha256=hashlib.sha256(content).hexdigest())
+        count = 0
+        if svg:
+            platform = result.get('platform', 'unknown')
+            fname = write_output(output_dir, f'{prefix}_{platform}.svg', svg)
+            result['file'] = fname
+            for dib_index in result.get('rendered_dibs', []):
+                rendered_dibs.setdefault(dib_index, []).append({'id': entry_id, 'index': index, 'file': fname})
+            print(f'  PIG entry {entry_id}: SVG {result["status"]} -> {fname}')
+            count = 1
+            if make_report:
+                import base64
+                result['svg'] = 'data:image/svg+xml;base64,' + base64.b64encode(svg).decode('ascii')
+        pig_results.append(result)
+        pigs_by_index[index] = result
+        return count
+
+    def preserve_rendered_pig_bitmap(content, prefix, index, dib_offset):
+        """Skip only the bitmap whose owning drawing record reached the SVG.
+
+        A successful reference may replace an embedded monochrome preview.
+        Keep the complete PIG so those original bytes remain available too.
+        """
+        picture = pigs_by_index.get(index, {})
+        if not picture.get('file'):
+            return None
+        for record in picture.get('rendered_image_records', []):
+            if record['offset'] <= dib_offset < record['offset'] + record['length']:
+                fname = write_output(output_dir, f'{prefix}.bin', content)
+                picture.update(raw_file=fname, bitmap_export='rendered_in_svg',
+                               bitmap_offset=dib_offset)
+                print(f'  PIG entry {picture["id"]}: bitmap rendered in {picture["file"]}; '
+                      f'original PIG preserved -> {fname}')
+                return fname
+        return None
+
+    # Resolve and write all pictures before deciding which standalone DIBs
+    # need a BMP. Entry order and physical order do not establish references.
+    for index, entry in enumerate(entries):
+        if entry['icon_type'] not in (0x34, 0xFFFD):
+            continue
+        if is_segment and (entry['data_offset'] >= len(data) or entry['data_offset'] + entry['comp_size'] > len(data)):
+            continue
+        content = pig_context.entry(index)
+        if content and content[2:6] == b'PIG\0':
+            name = ICON_TYPE_NAMES.get(entry['icon_type'], 'PIG')
+            extracted_count += save_pig_svg(content, f'{entry["id"]:03d}_{name}', entry['id'], index)
+    uncovered = find_uncovered_zlib_blocks(data, hdr, entries) if hdr['magic'] == 'ACRS' and not hdr.get('big_endian') else []
+    for index, (offset, _, content) in enumerate(uncovered):
+        if content[2:6] == b'PIG\0':
+            prefix = f'extra_{index:03d}_0x{offset:06x}'
+            extracted_count += save_pig_svg(content, f'{prefix}_PIG', prefix, f'offset:{offset}')
+
+    for entry_index, entry in enumerate(entries):
+        if entry_index in pcm_members:
+            continue  # written with its descriptor, even when IDs are repeated
         eid = entry['id']
         icon_type = entry['icon_type']
         type_name = ICON_TYPE_NAMES.get(icon_type, f"Unknown_0x{icon_type:02x}")
@@ -809,44 +1469,111 @@ def main():
             if entry['comp_size'] == 0 and entry['decomp_size'] == 0:
                 continue  # silent skip for empty placeholder entries
             print(f"  Entry {eid:3d} ({type_name}): DECOMPRESS FAILED")
+            decompression_failures += 1
+            off = entry['data_offset']
+            if 0 <= off < len(data) and entry['comp_size'] > 0:
+                raw = data[off:off + entry['comp_size']]
+                fname = write_output(output_dir, f'{eid:03d}_{type_name}_compressed.bin', raw)
+                print(f"  Entry {eid:3d} ({type_name}): compressed bytes preserved -> {fname}")
+                extracted_count += 1
             continue
+
+        if entry_index in pcm_groups:
+            group = pcm_groups[entry_index]
+            chunks = [decompress_entry(data, entries[index]) for index in group['members']]
+            start_eid = entries[group['members'][0]]['id']
+            rate, bits, channels = group['sample_rate'], group['bits_per_sample'], group['channels']
+            if all(chunk is not None for chunk in chunks):
+                pcm = b''.join(chunks)
+                wav = make_wav(pcm, rate, bits, channels)
+                fname = write_output(output_dir, f'{start_eid:05d}_SoundData_{rate}hz_{bits}bit.wav', wav)
+                print(f'  Entry {start_eid} (SoundData): WAV {rate}Hz {bits}bit {channels}ch '
+                      f'({len(pcm)} PCM bytes, {len(chunks)} chunks) -> {fname}')
+                extracted_count += 1
+            else:
+                incomplete_audio += 1
+                print(f'Warning: PCM audio for entry {eid} is missing or damaged; available chunks preserved', file=sys.stderr)
+                for index, chunk in zip(group['members'], chunks):
+                    member = entries[index]
+                    if chunk is None:
+                        offset = member['data_offset']
+                        chunk = data[max(0, offset):max(0, offset) + member['comp_size']] if offset >= 0 else b''
+                    if chunk:
+                        fname = write_output(output_dir, f"{member['id']:05d}_SoundData_chunk_{index}.bin", chunk)
+                        print(f'  PCM chunk preserved -> {fname}')
+                        extracted_count += 1
+
+        # Keep content exports and raw fallback independently of the SVGs
+        # already written. Separate DIB resources follow the policy below.
+        count_before = extracted_count
 
         # Extract based on type
         if icon_type == 0x3E:
             # Full BMP - extract directly
-            if entry_data[:2] == b'BM':
+            if len(entry_data) >= 54 and entry_data[:2] == b'BM':
                 w = struct.unpack_from('<i', entry_data, 18)[0]
                 h = struct.unpack_from('<i', entry_data, 22)[0]
                 bpp = struct.unpack_from('<H', entry_data, 28)[0]
                 fname = f"{eid:03d}_{type_name}_{w}x{h}_{bpp}bpp.bmp"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(entry_data)
+                fname = write_output(output_dir, fname, entry_data)
                 print(f"  Entry {eid:3d} ({type_name}): BMP {w}x{h} {bpp}bpp -> {fname}")
                 extracted_count += 1
 
         elif icon_type == 0x35:
-            # DIB data - convert to BMP
+            info = {'id': eid, 'index': entry_index,
+                    'rendered_by': rendered_dibs.get(entry_index, [])}
+            dib_results.append(info)
+            # Successfully embedded DIBs need no separate export by default.
+            # --deep retains the original bytes, including uncropped pixels.
+            if not info['rendered_by'] or args.deep:
+                raw_name = write_output(output_dir, f'{eid:03d}_{type_name}.bin', entry_data)
+                info['raw_file'] = raw_name
+                extracted_count += 1
+            if info['rendered_by']:
+                info['status'] = 'rendered_in_pig'
+                info['reason'] = 'Standalone DIB omitted; bitmap embedded in a PIG SVG'
+                if args.deep:
+                    info['reason'] = 'Standalone BMP omitted; original DIB retained by --deep'
+                print(f'  Entry {eid:3d} ({type_name}): {info["reason"]}'
+                      + (f' -> {raw_name}' if args.deep else ''))
+                continue
             bmp_data = make_bmp_from_dib(entry_data)
+            info['palette_source'] = 'self_contained'
+            reason = 'Bitmap header, palette or pixels could not be decoded'
+            fields = dib_fields(entry_data)
+            if bmp_data is None and fields and fields[4] <= 8:
+                palette, palette_issue = pig_context.standalone_palette(entry_index)
+                if palette is not None:
+                    bmp_data = make_bmp_from_dib(entry_data, palette)
+                    info['palette_source'] = 'explicit_pig_reference'
+                else:
+                    reason += '; ' + palette_issue
             if bmp_data:
                 de = dib_endian(entry_data)
                 w = struct.unpack_from(f'{de}i', entry_data, 4)[0]
                 h = struct.unpack_from(f'{de}i', entry_data, 8)[0]
                 bpp = struct.unpack_from(f'{de}H', entry_data, 14)[0]
                 fname = f"{eid:03d}_{type_name}_{w}x{h}_{bpp}bpp.bmp"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(bmp_data)
+                fname = write_output(output_dir, fname, bmp_data)
+                info.update(status='standalone_bmp', file=fname)
                 print(f"  Entry {eid:3d} ({type_name}): DIB {w}x{h} {bpp}bpp -> {fname}")
                 extracted_count += 1
+            else:
+                info.pop('palette_source', None)
+                info.update(status='raw_only', reason=reason)
+                print(f'  Entry {eid:3d} ({type_name}): {reason}; original preserved -> {raw_name}')
 
         elif icon_type == 0x34:
             # PIG - try to extract embedded bitmap
             if len(entry_data) >= 14 and entry_data[2:5] == b'PIG':
                 platform = entry_data[6:9].decode('ascii', errors='replace')
-                dib_data = find_best_dib_in_pig(entry_data)
+                candidate = find_best_dib_in_pig(entry_data, with_offset=True)
 
-                if dib_data:
+                if candidate:
+                    dib_offset, dib_data = candidate
+                    if preserve_rendered_pig_bitmap(entry_data, f'{eid:03d}_{type_name}', entry_index, dib_offset):
+                        extracted_count += 1
+                        continue
                     bmp_data = make_bmp_from_dib(dib_data)
                     if bmp_data:
                         de = dib_endian(dib_data)
@@ -854,9 +1581,7 @@ def main():
                         h = struct.unpack_from(f'{de}i', dib_data, 8)[0]
                         bpp = struct.unpack_from(f'{de}H', dib_data, 14)[0]
                         fname = f"{eid:03d}_{type_name}_{platform}_{w}x{h}_{bpp}bpp.bmp"
-                        fpath = os.path.join(output_dir, fname)
-                        with open(fpath, 'wb') as f:
-                            f.write(bmp_data)
+                        fname = write_output(output_dir, fname, bmp_data)
                         print(f"  Entry {eid:3d} ({type_name}): PIG/{platform} {w}x{h} {bpp}bpp -> {fname}")
                         extracted_count += 1
                         continue
@@ -868,9 +1593,7 @@ def main():
                     pw, ph = extract_pig_dimensions(entry_data)
                     dim_str = f" {pw}x{ph}" if pw and ph else ""
                     fname = f"{eid:03d}_{type_name}_{platform}{dim_str}.{img_fmt}"
-                    fpath = os.path.join(output_dir, fname)
-                    with open(fpath, 'wb') as f:
-                        f.write(img_data)
+                    fname = write_output(output_dir, fname, img_data)
                     print(f"  Entry {eid:3d} ({type_name}): PIG/{platform}{dim_str} {img_fmt.upper()} ({len(img_data)} bytes) -> {fname}")
                     extracted_count += 1
                     continue
@@ -879,10 +1602,11 @@ def main():
                 pig_text = extract_pig_text(entry_data)
                 if pig_text and len(pig_text) > 20:
                     fname = f"{eid:03d}_{type_name}_{platform}_text.txt"
-                    fpath = os.path.join(output_dir, fname)
-                    with open(fpath, 'w') as f:
-                        f.write(pig_text)
+                    fname = write_output(output_dir, fname, pig_text)
                     print(f"  Entry {eid:3d} ({type_name}): PIG/{platform} text ({len(pig_text)} chars) -> {fname}")
+                    extracted_count += 1
+                    fname = write_output(output_dir, f'{eid:03d}_{type_name}.bin', entry_data)
+                    print(f"  Entry {eid:3d} ({type_name}): original PIG preserved -> {fname}")
                     extracted_count += 1
                     continue
 
@@ -898,9 +1622,7 @@ def main():
             text = extract_text_from_entry(entry_data, icon_type)
             if text and len(text.strip()) > 0:
                 fname = f"{eid:03d}_{type_name}.txt"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'w') as f:
-                    f.write(text)
+                fname = write_output(output_dir, fname, text)
                 print(f"  Entry {eid:3d} ({type_name}): text ({len(text)} chars) -> {fname}")
                 extracted_count += 1
             else:
@@ -912,9 +1634,7 @@ def main():
             if strings:
                 text = "\n".join(strings)
                 fname = f"{eid:03d}_{type_name}.txt"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'w') as f:
-                    f.write(text)
+                fname = write_output(output_dir, fname, text)
                 print(f"  Entry {eid:3d} ({type_name}): display text ({len(strings)} strings) -> {fname}")
                 extracted_count += 1
             else:
@@ -924,8 +1644,12 @@ def main():
             # Plugin PIG - same handling as regular PIG (0x34)
             if len(entry_data) >= 14 and entry_data[2:5] == b'PIG':
                 platform = entry_data[6:9].decode('ascii', errors='replace')
-                dib_data = find_best_dib_in_pig(entry_data)
-                if dib_data:
+                candidate = find_best_dib_in_pig(entry_data, with_offset=True)
+                if candidate:
+                    dib_offset, dib_data = candidate
+                    if preserve_rendered_pig_bitmap(entry_data, f'{eid:03d}_{type_name}', entry_index, dib_offset):
+                        extracted_count += 1
+                        continue
                     bmp_data = make_bmp_from_dib(dib_data)
                     if bmp_data:
                         de = dib_endian(dib_data)
@@ -933,163 +1657,98 @@ def main():
                         h = struct.unpack_from(f'{de}i', dib_data, 8)[0]
                         bpp = struct.unpack_from(f'{de}H', dib_data, 14)[0]
                         fname = f"{eid:03d}_{type_name}_{platform}_{w}x{h}_{bpp}bpp.bmp"
-                        fpath = os.path.join(output_dir, fname)
-                        with open(fpath, 'wb') as f:
-                            f.write(bmp_data)
+                        fname = write_output(output_dir, fname, bmp_data)
                         print(f"  Entry {eid:3d} ({type_name}): PIG/{platform} {w}x{h} {bpp}bpp -> {fname}")
                         extracted_count += 1
                         continue
                 print(f"  Entry {eid:3d} ({type_name}): PIG/{platform} ({len(entry_data)} bytes, no extractable bitmap)")
             else:
                 fname = f"{eid:03d}_{type_name}.bin"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(entry_data)
+                fname = write_output(output_dir, fname, entry_data)
                 print(f"  Entry {eid:3d} ({type_name}): {len(entry_data)} bytes -> {fname}")
                 extracted_count += 1
 
         elif icon_type == 0x3B:
             # Embedded media - can contain BMP, 3DMF models, or other data
-            if entry_data[:2] == b'BM':
+            if len(entry_data) >= 54 and entry_data[:2] == b'BM':
                 w = struct.unpack_from('<i', entry_data, 18)[0]
                 h = struct.unpack_from('<i', entry_data, 22)[0]
                 bpp = struct.unpack_from('<H', entry_data, 28)[0]
                 fname = f"{eid:03d}_{type_name}_{w}x{h}_{bpp}bpp.bmp"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(entry_data)
+                fname = write_output(output_dir, fname, entry_data)
                 print(f"  Entry {eid:3d} ({type_name}): BMP {w}x{h} {bpp}bpp -> {fname}")
             elif entry_data[:4] == b'3DMF':
                 fname = f"{eid:03d}_{type_name}.3dmf"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(entry_data)
+                fname = write_output(output_dir, fname, entry_data)
                 print(f"  Entry {eid:3d} ({type_name}): 3DMF model ({len(entry_data)} bytes) -> {fname}")
             elif len(entry_data) > 15 and entry_data[12:15] in (b'FWS', b'CWS'):
                 # SWF with 12-byte big-endian wrapper
                 swf_data = entry_data[12:]
                 fname = f"{eid:03d}_{type_name}.swf"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(swf_data)
+                fname = write_output(output_dir, fname, swf_data)
                 print(f"  Entry {eid:3d} ({type_name}): SWF ({len(swf_data)} bytes) -> {fname}")
             else:
                 fname = f"{eid:03d}_{type_name}.bin"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(entry_data)
+                fname = write_output(output_dir, fname, entry_data)
                 print(f"  Entry {eid:3d} ({type_name}): {len(entry_data)} bytes -> {fname}")
             extracted_count += 1
 
         elif icon_type == 0x37:
-            # Raw audio data - extract as WAV
-            # Check if there's a preceding 0x36 SoundHeader (ACRS-style single entry)
-            has_header = False
-            sample_rate = 22050  # default
-            bits = 8
-            channels = 1
-            for prev in entries:
-                if prev['id'] == eid - 1 and prev['icon_type'] == 0x36:
-                    has_header = True
-                    hdr_data = decompress_entry(data, prev)
-                    if hdr_data and len(hdr_data) >= 42:
-                        sample_rate = struct.unpack_from('<H', hdr_data, 40)[0]
-                        if sample_rate == 0:
-                            sample_rate = 22050
-                        bits = hdr_data[27] if hdr_data[27] in (8, 16) else 8
-                        channels = struct.unpack_from('<H', hdr_data, 4)[0]
-                        if channels == 0:
-                            channels = 1
-                    break
-            if has_header:
-                # Single ACRS-style SoundData with preceding header
-                wav_data = make_wav(entry_data, sample_rate, bits, channels)
-                fname = f"{eid:03d}_{type_name}_{sample_rate}hz_{bits}bit.wav"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(wav_data)
-                print(f"  Entry {eid:3d} ({type_name}): WAV {sample_rate}Hz {bits}bit {channels}ch ({len(entry_data)} samples) -> {fname}")
-                extracted_count += 1
-            else:
-                # Auto-detected PCM (WPCR) - accumulate consecutive entries
-                if pcm_accum is None:
-                    # Check preceding entry for SoundHeader-like metadata
-                    pcm_sr = 22050
-                    pcm_bits = 8
-                    pcm_ch = 1
-                    cur_idx = entries.index(entry)
-                    if cur_idx > 0:
-                        prev = entries[cur_idx - 1]
-                        prev_data = decompress_entry(data, prev)
-                        if prev_data and 44 <= len(prev_data) <= 64:
-                            sr_val = struct.unpack_from('<H', prev_data, 0x28)[0] if len(prev_data) > 0x29 else 0
-                            if sr_val in (8000, 11025, 22050, 44100):
-                                pcm_sr = sr_val
-                                bps_val = prev_data[0x1B] if len(prev_data) > 0x1B else 8
-                                pcm_bits = bps_val if bps_val in (8, 16) else 8
-                                ch_val = struct.unpack_from('<H', prev_data, 4)[0] if len(prev_data) > 5 else 1
-                                pcm_ch = ch_val if 0 < ch_val <= 2 else 1
-                    pcm_accum = (eid, [entry_data], pcm_sr, pcm_bits, pcm_ch)
-                else:
-                    pcm_accum = (pcm_accum[0], pcm_accum[1] + [entry_data], pcm_accum[2], pcm_accum[3], pcm_accum[4])
-                next_idx = entries.index(entry) + 1
-                if next_idx >= len(entries) or entries[next_idx]['icon_type'] != 0x37:
-                    combined = b''.join(pcm_accum[1])
-                    start_eid, _, pcm_sr, pcm_bits, pcm_ch = pcm_accum
-                    wav_data = make_wav(combined, pcm_sr, pcm_bits, pcm_ch)
-                    fname = f"{start_eid:05d}_{type_name}_{pcm_sr}hz_{pcm_bits}bit.wav"
-                    fpath = os.path.join(output_dir, fname)
-                    with open(fpath, 'wb') as f:
-                        f.write(wav_data)
-                    duration = len(combined) / pcm_sr
-                    print(f"  Entry {start_eid}-{eid} ({type_name}): WAV {pcm_sr}Hz {pcm_bits}bit {pcm_ch}ch ({len(pcm_accum[1])} chunks, {duration:.1f}s) -> {fname}")
-                    extracted_count += 1
-                    pcm_accum = None
+            # A type code alone does not specify rate, depth, channels or
+            # stream boundaries. Keep unassociated samples losslessly.
+            fname = write_output(output_dir, f'{eid:05d}_{type_name}.bin', entry_data)
+            print(f'  Entry {eid:3d} ({type_name}): PCM without matched metadata preserved -> {fname}')
+            extracted_count += 1
 
         elif icon_type == 0x3C:
-            # Streaming audio - consecutive 0x3C entries form one file
-            # Format varies: AIFF (FORM), WAV (RIFF), MP3 (0xFFFB/0xFFF3/0xFFFA/ID3)
-            if audio_accum is None:
-                audio_accum = (eid, [entry_data])
-            else:
-                audio_accum = (audio_accum[0], audio_accum[1] + [entry_data])
-            # Check if next entry is also 0x3C; if not, flush now
-            next_idx = entries.index(entry) + 1
-            if next_idx >= len(entries) or entries[next_idx]['icon_type'] != 0x3C:
-                start_eid = audio_accum[0]
-                combined = b''.join(audio_accum[1])
-                # Detect actual audio format from first chunk
-                if combined[:4] == b'FORM':
-                    ext, fmt_name = 'aiff', 'AIFF'
-                elif combined[:4] == b'RIFF':
-                    ext, fmt_name = 'wav', 'WAV'
-                elif combined[:3] == b'ID3' or (len(combined) > 1 and combined[0] == 0xFF and combined[1] in (0xFB, 0xF3, 0xFA, 0xF2, 0xE2)):
-                    ext, fmt_name = 'mp3', 'MP3'
-                elif len(combined) > 0x26 and combined[:4] == b'\x00\x00\x00\x20' and combined[0x24] == 0xFF and (combined[0x25] & 0xE0) == 0xE0:
-                    # 36-byte big-endian wrapper with audio metadata, MP3 data at offset 0x24
-                    combined = combined[0x24:]
-                    ext, fmt_name = 'mp3', 'MP3'
+            if entry_index not in audio_groups:
+                continue  # this chunk was written with its stream's first entry
+            combined, chunks, expected = audio_groups[entry_index]
+            if expected is not None and len(combined) < expected:
+                incomplete_audio += 1
+                print(f"Warning: audio entry {eid} is incomplete ({len(combined)}/{expected} bytes)", file=sys.stderr)
+                ext, fmt_name = 'bin', 'incomplete audio'
+            elif combined[:4] == b'FORM':
+                ext, fmt_name = 'aiff', 'AIFF'
+            elif combined[:4] == b'RIFF':
+                recovered = recover_wave(combined)
+                if recovered is None:
+                    incomplete_audio += 1
+                    print(f'Warning: audio entry {eid} has invalid WAVE chunks; original preserved', file=sys.stderr)
+                    ext, fmt_name = 'bin', 'undecoded audio'
                 else:
-                    ext, fmt_name = 'bin', 'audio'
-                fname = f"{start_eid:03d}_{type_name}.{ext}"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(combined)
-                print(f"  Entry {start_eid:3d} ({type_name}): {fmt_name} ({len(combined)} bytes, {len(audio_accum[1])} chunks) -> {fname}")
-                extracted_count += 1
-                audio_accum = None
+                    if recovered != combined:
+                        original = write_output(output_dir, f'{eid:03d}_{type_name}_original.bin', combined)
+                        print(f'  Entry {eid:3d} ({type_name}): damaged WAVE metadata preserved -> {original}')
+                        print(f'Warning: audio entry {eid} has damaged trailing WAVE metadata; complete audio recovered', file=sys.stderr)
+                        extracted_count += 1
+                        incomplete_audio += 1
+                        combined = recovered
+                    ext, fmt_name = 'wav', 'WAV'
+            elif combined[:3] == b'ID3' or (len(combined) > 1 and combined[0] == 0xFF and combined[1] in (0xFB, 0xF3, 0xFA, 0xF2, 0xE2)):
+                ext, fmt_name = 'mp3', 'MP3'
+            elif len(combined) > 0x26 and combined[:4] == b'\x00\x00\x00\x20' and combined[0x24] == 0xFF and (combined[0x25] & 0xE0) == 0xE0:
+                combined = combined[0x24:]
+                ext, fmt_name = 'mp3', 'MP3'
+            else:
+                ext, fmt_name = 'bin', 'audio'
+            fname = write_output(output_dir, f"{eid:03d}_{type_name}.{ext}", combined)
+            print(f"  Entry {eid:3d} ({type_name}): {fmt_name} ({len(combined)} bytes, {chunks} chunks) -> {fname}")
+            extracted_count += 1
 
         else:
             # Other types - save raw decompressed data
             fname = f"{eid:03d}_{type_name}.bin"
-            fpath = os.path.join(output_dir, fname)
-            with open(fpath, 'wb') as f:
-                f.write(entry_data)
+            fname = write_output(output_dir, fname, entry_data)
             print(f"  Entry {eid:3d} ({type_name}): {len(entry_data)} bytes -> {fname}")
             extracted_count += 1
 
+        if extracted_count == count_before and icon_type not in (0x37, 0x3C):
+            fname = write_output(output_dir, f'{eid:03d}_{type_name}.bin', entry_data)
+            print(f"  Entry {eid:3d} ({type_name}): undecoded content preserved -> {fname}")
+            extracted_count += 1
+
     # Extract unique uncovered zlib blocks (only for ACRS files with zlib compression)
-    uncovered = find_uncovered_zlib_blocks(data, hdr, entries) if hdr['magic'] == 'ACRS' and not hdr.get('big_endian') else []
     if uncovered:
         print(f"\n  Unreferenced data blocks ({len(uncovered)}):")
         for idx, (off, comp_sz, block_data) in enumerate(uncovered):
@@ -1097,25 +1756,25 @@ def main():
 
             if block_data[:6] in (b'GIF87a', b'GIF89a'):
                 fname = f"{prefix}.gif"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(block_data)
+                fname = write_output(output_dir, fname, block_data)
                 print(f"    0x{off:06x}: GIF image ({len(block_data)} bytes) -> {fname}")
 
-            elif block_data[:2] == b'BM' and len(block_data) > 14:
+            elif block_data[:2] == b'BM' and len(block_data) >= 54:
                 w = struct.unpack_from('<i', block_data, 18)[0]
                 h = struct.unpack_from('<i', block_data, 22)[0]
                 bpp = struct.unpack_from('<H', block_data, 28)[0]
                 fname = f"{prefix}_BMP_{w}x{h}_{bpp}bpp.bmp"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(block_data)
+                fname = write_output(output_dir, fname, block_data)
                 print(f"    0x{off:06x}: BMP {w}x{h} {bpp}bpp -> {fname}")
 
             elif len(block_data) > 6 and block_data[2:5] == b'PIG':
                 platform = block_data[6:9].decode('ascii', errors='replace')
-                dib_data = find_best_dib_in_pig(block_data)
-                if dib_data:
+                candidate = find_best_dib_in_pig(block_data, with_offset=True)
+                if candidate:
+                    dib_offset, dib_data = candidate
+                    if preserve_rendered_pig_bitmap(block_data, f'{prefix}_PIG', f'offset:{off}', dib_offset):
+                        extracted_count += 1
+                        continue
                     bmp_data = make_bmp_from_dib(dib_data)
                     if bmp_data:
                         de = dib_endian(dib_data)
@@ -1123,20 +1782,19 @@ def main():
                         h = struct.unpack_from(f'{de}i', dib_data, 8)[0]
                         bpp = struct.unpack_from(f'{de}H', dib_data, 14)[0]
                         fname = f"{prefix}_PIG_{platform}_{w}x{h}_{bpp}bpp.bmp"
-                        fpath = os.path.join(output_dir, fname)
-                        with open(fpath, 'wb') as f:
-                            f.write(bmp_data)
+                        fname = write_output(output_dir, fname, bmp_data)
                         print(f"    0x{off:06x}: PIG/{platform} {w}x{h} {bpp}bpp -> {fname}")
                         extracted_count += 1
                         continue
                 # PIG with no extractable bitmap - save raw
                 fname = f"{prefix}_PIG.bin"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(block_data)
+                fname = write_output(output_dir, fname, block_data)
                 print(f"    0x{off:06x}: PIG/{platform} ({len(block_data)} bytes, no extractable bitmap) -> {fname}")
 
             elif len(block_data) >= 40 and (struct.unpack_from('<I', block_data, 0)[0] == 40 or struct.unpack_from('>I', block_data, 0)[0] == 40):
+                raw_name = write_output(output_dir, f'{prefix}.bin', block_data)
+                print(f'    0x{off:06x}: original DIB bytes preserved -> {raw_name}')
+                extracted_count += 1
                 de = dib_endian(block_data)
                 w = struct.unpack_from(f'{de}i', block_data, 4)[0]
                 h = abs(struct.unpack_from(f'{de}i', block_data, 8)[0])
@@ -1146,38 +1804,52 @@ def main():
                     bmp_data = make_bmp_from_dib(block_data)
                     if bmp_data:
                         fname = f"{prefix}_DIB_{w}x{h}_{bpp}bpp.bmp"
-                        fpath = os.path.join(output_dir, fname)
-                        with open(fpath, 'wb') as f:
-                            f.write(bmp_data)
+                        fname = write_output(output_dir, fname, bmp_data)
                         print(f"    0x{off:06x}: DIB {w}x{h} {bpp}bpp -> {fname}")
                         extracted_count += 1
                         continue
-                # Not a valid DIB - save raw
-                fname = f"{prefix}.bin"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(block_data)
-                print(f"    0x{off:06x}: {len(block_data)} bytes -> {fname}")
+                # Without unambiguous colors and complete pixels, keep raw only.
+                continue
 
             elif block_data[:4] == b'FORM':
                 fname = f"{prefix}.aiff"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(block_data)
+                fname = write_output(output_dir, fname, block_data)
                 print(f"    0x{off:06x}: AIFF audio ({len(block_data)} bytes) -> {fname}")
 
             else:
                 fname = f"{prefix}.bin"
-                fpath = os.path.join(output_dir, fname)
-                with open(fpath, 'wb') as f:
-                    f.write(block_data)
+                fname = write_output(output_dir, fname, block_data)
                 print(f"    0x{off:06x}: {len(block_data)} bytes -> {fname}")
 
             extracted_count += 1
 
+    if pig_results:
+        manifest = {'source': input_file, 'source_sha256': source_hash,
+                    'pictures': [{key: value for key, value in result.items() if key != 'svg'}
+                                 for result in pig_results]}
+        fname = write_output(output_dir, 'pig_manifest.json', json.dumps(manifest, indent=2) + '\n')
+        print(f'  PIG reconstruction details -> {fname}')
+        extracted_count += 1
+    if dib_results:
+        manifest = {'source': input_file, 'source_sha256': source_hash, 'dibs': dib_results}
+        fname = write_output(output_dir, 'dib_manifest.json', json.dumps(manifest, indent=2) + '\n')
+        print(f'  DIB references and export decisions -> {fname}')
+        extracted_count += 1
+    if make_report:
+        from authorware_pig_report import collect_assets, report_html
+        names = [name for name in os.listdir(output_dir) if name not in report_existing
+                 and os.path.isfile(os.path.join(output_dir, name))]
+        assets = collect_assets(output_dir, names, pig_results)
+        fname = write_output(output_dir, 'pig-report.html', report_html(input_file, source_hash, pig_results, assets))
+        print(f'  Extraction review -> {fname}')
+        extracted_count += 1
+
     if is_segment and skipped_segment > 0:
         print(f"\n  Segment file: {skipped_segment} entries skipped (data in other segments)")
     print(f"\nExtracted {extracted_count} items to {output_dir}")
+    if skipped_segment or incomplete_audio or decompression_failures:
+        print('Warning: extraction is partial; some content is missing, damaged, or could not be decoded', file=sys.stderr)
+        sys.exit(2)
 
 
 if __name__ == '__main__':

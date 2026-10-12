@@ -43,6 +43,8 @@ export class rarInfo extends Program
 		if(Object.values(meta.files).some(file => (file.flags || "").toLowerCase().includes("encrypted")))
 			meta.passwordProtected = true;
 
+		delete meta.archive;	// just the input filename, not useful
+
 		Object.assign(r.meta, meta);
 	};
 	renameOut = false;

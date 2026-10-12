@@ -13,6 +13,7 @@ export class degasLow extends Format
 	converters = ["recoil2png[format:PC1]", "wuimg[format:degas][hasExtMatch]", `abydosconvert[format:${this.mimeType}]`, "nconvert[format:degas]"];
 	verify     = async ({inputFile, meta}) =>
 	{
+		// too many things begin with 0x8000 so we further validate here
 		if(meta.colorCount<=1)
 			return false;
 

@@ -6,3 +6,4 @@
 /aux/
 /blender/addons/__pycache__/
 /pp/oldSamples/
+/bin/**/__pycache/

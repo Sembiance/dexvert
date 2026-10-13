@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,010)
+# Unsupported File Formats (4,017)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1098,7 +1098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,828)
+## Other (2,835)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1225,6 +1225,7 @@ Family/Format | Name | Extensions | Notes
 [other/agfaCompugraphicFontCache](https://discmaster.textfiles.com/search?format=agfaCompugraphicFontCache) | AGFA/Compugraphic Font Cache |  | 
 [other/aibbLoadModule](https://discmaster.textfiles.com/search?format=aibbLoadModule) | AIBB load Module | .module .aibb | 
 [other/aimpSkin](https://discmaster.textfiles.com/search?format=aimpSkin) | AIMP Skin | .acs3 | 
+[other/airWarriorDataTable](https://discmaster.textfiles.com/search?format=airWarriorDataTable) | Air Warrior Data Table | .kdt | 
 [other/airlineTycoonGameDataArchive](https://discmaster.textfiles.com/search?format=airlineTycoonGameDataArchive) | Airline Tycoon game data archive | .gli | 
 [other/airtyPrologEnvironmentSettings](https://discmaster.textfiles.com/search?format=airtyPrologEnvironmentSettings) | Airty Prolog Environment settings | .env .reg .big | 
 [other/akAbakScript](https://discmaster.textfiles.com/search?format=akAbakScript) | AkAbak Script | .aks | 
@@ -1559,6 +1560,7 @@ Family/Format | Name | Extensions | Notes
 [other/callOfDutyGameData](https://discmaster.textfiles.com/search?format=callOfDutyGameData) | Call of Duty game data | .ff | 
 [other/callusSavestate](https://discmaster.textfiles.com/search?format=callusSavestate) | Callus savestate | .cs0 | 
 [other/calmiraAlias](https://discmaster.textfiles.com/search?format=calmiraAlias) | Calmira Alias | .als | 
+[other/cantoCumulusCatalog](https://discmaster.textfiles.com/search?format=cantoCumulusCatalog) | Canto Cumulus Catalog | .ccf | 
 [other/canvasPenBrushSettings](https://discmaster.textfiles.com/search?format=canvasPenBrushSettings) | Canvas Pen/brush settings | .apn .dpn .npn .ppn .spn | 
 [other/capellaGalleryDataFile](https://discmaster.textfiles.com/search?format=capellaGalleryDataFile) | Capella gallery data file | .cag | 
 [other/capellaMusicNotation](https://discmaster.textfiles.com/search?format=capellaMusicNotation) | Capella music notation | .cap | 
@@ -1741,6 +1743,7 @@ Family/Format | Name | Extensions | Notes
 [other/cygnusEdDefaultSettings](https://discmaster.textfiles.com/search?format=cygnusEdDefaultSettings) | Cygnus Editor Default Settings |  | 
 [other/cygnusEdMacros](https://discmaster.textfiles.com/search?format=cygnusEdMacros) | Cygnus Editor Macros |  | 
 [other/cypressPSoCTopLevelCreatorSchematic](https://discmaster.textfiles.com/search?format=cypressPSoCTopLevelCreatorSchematic) | Cypress PSoC top-level Creator Schematic | .cysch | 
+[other/d2HackerPatch](https://discmaster.textfiles.com/search?format=d2HackerPatch) | D2 Hacker Patch | .pat | 
 [other/daikatanaGameData](https://discmaster.textfiles.com/search?format=daikatanaGameData) | Daikatana game data | .vsc | 
 [other/dalvikDexFile](https://discmaster.textfiles.com/search?format=dalvikDexFile) | Dalvik Dex File | .dex | 
 [other/danebaCanvasPalette](https://discmaster.textfiles.com/search?format=danebaCanvasPalette) | Daneba Canvas Palette (v3.x) | .pal .pa | 
@@ -1848,6 +1851,7 @@ Family/Format | Name | Extensions | Notes
 [other/directXCompiledShaderObject](https://discmaster.textfiles.com/search?format=directXCompiledShaderObject) | DirectX Compiled Shader Object | .cso | 
 [other/directXPreCompiledPixelVertexShader](https://discmaster.textfiles.com/search?format=directXPreCompiledPixelVertexShader) | DirectX pre-compiled pixel/vertex shader | .fxo | 
 [other/dirtyLittleHelperDatabaseResource](https://discmaster.textfiles.com/search?format=dirtyLittleHelperDatabaseResource) | Dirty Little Helper database resource | .dlm | 
+[other/disciplesSacredLands](https://discmaster.textfiles.com/search?format=disciplesSacredLands) | Disciples: Sacred Lands Archive | .dbi .ff .wdb | 
 [other/disGCLScript](https://discmaster.textfiles.com/search?format=disGCLScript) | DISGCL script | .gcl | 
 [other/findingNemoGameData](https://discmaster.textfiles.com/search?format=findingNemoGameData) | Disney Pixar Finding Nemo game data | .co2a | 
 [other/diveFileFormat](https://discmaster.textfiles.com/search?format=diveFileFormat) | Dive File Format | .dff | 
@@ -2538,6 +2542,7 @@ Family/Format | Name | Extensions | Notes
 [other/magixAudioEditProxyCache](https://discmaster.textfiles.com/search?format=magixAudioEditProxyCache) | MAGIX audio edit proxy/cache | .hdp | 
 [other/magixHardDiskProjectAudio](https://discmaster.textfiles.com/search?format=magixHardDiskProjectAudio) | MAGIX Hard Disk Project Audio | .hdp | 
 [other/magixLibrary](https://discmaster.textfiles.com/search?format=magixLibrary) | MAGIX library | .mxm | 
+[other/mAGIXMovieEditProProject](https://discmaster.textfiles.com/search?format=mAGIXMovieEditProProject) | MAGIX Movie Edit Pro project | .avd | 
 [other/magixMovieEditVideo](https://discmaster.textfiles.com/search?format=magixMovieEditVideo) | Magix Movie Edit video | .vip | 
 [other/magixStudioDefinitions](https://discmaster.textfiles.com/search?format=magixStudioDefinitions) | MAGIX music studio Definitions | .def | 
 [other/magixMusicStudioStyle](https://discmaster.textfiles.com/search?format=magixMusicStudioStyle) | MAGIX music studio Style | .sty | 
@@ -3645,6 +3650,8 @@ Family/Format | Name | Extensions | Notes
 [other/photoImpactPresets](https://discmaster.textfiles.com/search?format=photoImpactPresets) | Ulead Photo Impact Presets | .smp | 
 [other/ultiboardLibrary](https://discmaster.textfiles.com/search?format=ultiboardLibrary) | ULTIboard Library | .hlp | 
 [other/ulticapLibrary](https://discmaster.textfiles.com/search?format=ulticapLibrary) | ULTIcap Library | .lib | 
+[other/ultimaVIIInitialGameData](https://discmaster.textfiles.com/search?format=ultimaVIIInitialGameData) | Ultima VII initial game data | .dat | 
+[other/ultimaVIIPalette](https://discmaster.textfiles.com/search?format=ultimaVIIPalette) | Ultima VII palette | .flx | 
 [other/ultimateFootball95Playbook](https://discmaster.textfiles.com/search?format=ultimateFootball95Playbook) | Ultimate Football '95 Playbook | .pbk | 
 [other/ultimateRaceProDCR](https://discmaster.textfiles.com/search?format=ultimateRaceProDCR) | Ultimate Race Pro DCR | .dcr | 
 [other/ultimateStuntsReplay](https://discmaster.textfiles.com/search?format=ultimateStuntsReplay) | Ultimate Stunts Replay | .repl | 

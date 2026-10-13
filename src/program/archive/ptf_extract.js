@@ -10,7 +10,7 @@ export class ptf_extract extends Program
 	mirrorInToCWD = true;
 	post          = async r =>
 	{
-		r.f.files.new.filter(file => file.ext===".gim").map(async file => await r.f.remove("new", file, {unlink : true}));
+		r.f.files.new.filter(file => file.ext.toLowerCase()===".gim").map(async file => await r.f.remove("new", file, {unlink : true}));
 		const dirNames = r.f.files.new.map(file => path.dirname(file.rel)).unique();
 		if(dirNames.length===1 && dirNames[0].replace(/^(\.\.\/)+/, "").split("/").length===2)
 			await r.f.files.new.parallelMap(async file => await file.moveUp(1));

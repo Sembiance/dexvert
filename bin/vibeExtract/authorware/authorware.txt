@@ -15,6 +15,9 @@ containers also occur as .ap, .as, .imm, .dat and names ending in ;1.
 Extraction and validation
 -------------------------
 Usage: python3 authorware.py <inputFile> <outputDir> [--report] [--deep]
+Manifest JSON files (pig_manifest.json and dib_manifest.json) are written
+only with --deep. Normal extraction and --report do not export or offer
+downloads of these files. Reports use extraction metadata held in memory.
 The extractor works with the Python standard library. Pillow optionally
 accelerates conversion of bitmap pixels to PNG for SVG. For legacy text
 without stored line positions, installed fonts measured with Pillow and
@@ -30,9 +33,19 @@ The separate imported-media .bin outputs are unchanged. Bitmaps needed
 inside a PIG composition are embedded in the SVG as PNG or their original
 browser-readable image format; original coordinates and draw order are used.
 PIG entries with drawing limitations can produce partial SVGs. Inspect
-pig_manifest.json or the SVG's metadata for status and diagnostics.
+the SVG's metadata, or pig_manifest.json with --deep, for diagnostics. Original
+PIG .bin files are omitted once the extractor handles the drawing, for
+bitmap, vector and text pictures alike. --deep retains every original.
+Handling means processing at least one recognized drawing record, or a
+valid empty PIG. Partial parsing, approximated operations, image-decoding
+failures, unresolved styles/references and dynamic text placeholders do
+not force a raw export, even when no SVG can be drawn. Warnings, fallback
+rendering and partial/unrendered status remain unchanged; omission of the
+original does not imply complete rendering. PIGs the extractor cannot handle
+at all (such as unusable headers/bounds or no parsable records in an
+unsupported drawing) retain their original .bin even without --deep.
 DIB export decisions and the PIGs that successfully include each bitmap
-are recorded in dib_manifest.json. A reference that fails to render does
+are recorded in dib_manifest.json with --deep. A reference that fails to render does
 not suppress a recoverable standalone BMP. Multiple PIGs using one DIB
 with different colors or cropping remain separate SVGs.
 --deep and --report can be combined. dib_manifest.json includes every DIB
@@ -41,33 +54,271 @@ is present only when the original DIB was actually exported.
 
 Bitmaps stored inside a PIG (including reference previews) also omit their
 standalone BMP when that specific image drawing record succeeds in the SVG.
-The original PIG is retained as .bin. pig_manifest.json records successful
-image record offsets and the suppressed BMP's source offset and raw file.
+pig_manifest.json records successful image record offsets, the suppressed
+BMP's source offset and each PIG's raw-export decision. raw_file is present
+only when the original PIG was exported (--deep or an entirely unhandled
+drawing). The handled field tracks this separately from rendering status.
 An SVG with other successful drawings does not suppress a failed bitmap's
 BMP fallback, nor a recoverable bitmap outside the parsed drawing records.
+
+SoundHeader .bin files are omitted once their audio is successfully written
+as WAV. --deep retains the original descriptors. Unmatched headers and
+headers whose audio could not be decoded are retained without --deep.
+WCRS and explicit-ID WPCR/WPLI sound properties can also name an ordered
+list of PCM resource IDs.
+Successfully consumed chunks are omitted unless --deep is passed; their
+owner property blocks remain available because they also contain settings
+and expressions unrelated to the recovered audio.
+Font/style tables actually used in a written PIG SVG are also omitted
+unless --deep is passed. Usage is tracked by entry table index, not by a
+hard-coded resource number. Unused or unrecognized tables remain raw.
+Recognized entry 1 project roots are internal bookkeeping and are also
+exported only with --deep. Their references are still used during normal
+extraction. Unrecognized resources with ID 1 remain available normally.
+
+Root-referenced legacy cursor tables produce one transparent PNG per record,
+at the stored 16x16 or 32x32 dimensions. Names include the resource ID,
+cursor key and dimensions, e.g. 010_Cursor_001_32x32.png. Hotspots are not
+exported. Original cursor .bin files are omitted after the entire table
+converts successfully; --deep retains them. Malformed/unsupported tables
+retain their original bytes normally. PNG cannot invert the background,
+so inverting cursor pixels become opaque black; the report notes this.
+This includes A4P resource directories. Their root and successfully decoded
+cursor tables are retained only with --deep; failed cursor references keep
+their available original data normally.
 
 --report writes pig-report.html beside the extracted files. It is a dark,
 self-contained offline page showing every PIG picture in a compact grid
 that wraps across the full browser width. Each image's checkerboard matches
 its dimensions. Images have no fixed height or internal scrollbars.
 Each picture is labeled with its entry ID and table index; click its label
-for a direct link. Report problems using the source filename and those
+for a direct link, or click the image to open its SVG in a new tab. SVGs
+use local Blob URLs so this works in self-contained, offline reports.
+Display-object ownership is retained as diagnostic metadata but is not
+shown on the report cards. Report problems using the source filename and those
 labels. A checkerboard shows transparent areas; decoding warnings appear
 below affected pictures. Source hashes and entry table indices distinguish
 files and repeated/zero entry IDs.
 The same page also previews extracted bitmap files, plays audio with native
 HTML audio controls, and displays text in small sandboxed, scrollable frames.
+When FFmpeg is installed, MS/IMA ADPCM WAVs get embedded PCM WAV previews
+for browser playback. Extracted files and download links retain the original
+compressed WAV bytes. Without FFmpeg, or if decoding fails, the report keeps
+the original and shows a preview warning. Other codecs are not reinterpreted.
 Other files have byte sizes, short hex previews and download links. Every
 extracted file is available offline from the report; separate imported-media
 .bin files remain opaque downloads. Existing files from earlier extractions
 in the same output directory are excluded from the new report.
 
-To refresh only the current source page, without regenerating other reports:
-  python3 -c "from authorware_pig_report import review_file; print(review_file(('sample/a3m/Bienvenue.A3M', 'report/pig-review'))['page'])"
+The active visual review set is now all files in sample1/ and sample2/.
+Refresh both sets with:
+  python3 authorware_pig_report.py --output report/sample1-review sample1
+  python3 authorware_pig_report.py --output report/sample2-review sample2
 Each source is extracted into a temporary directory and all of its outputs
 are embedded in the resulting page. The batch CLI still accepts explicitly
 requested source files or directories. During the current visual review,
-only regenerate Bienvenue.A3M until a different source is requested.
+refresh all sample1 and sample2 files together; do not regenerate other source
+reports unless requested. report/sample1-review/index.html and
+report/sample2-review/index.html link the two sets, and
+report/pig-review/index.html provides the directory-grouped main index.
+All 15 current inputs extract successfully. The eight sample1 APPs produce
+213 PIG SVGs (38 partial), two cursor PNGs, 21 text files, four WAV sounds
+and 1,858 other files. The seven sample2 compiled executables produce
+4,337 PIG SVGs (336 partial), 31 APNG animations, two cursor PNGs, 1,756
+other images, 1,564 text files, 230 sounds (69 WAV and 161 MP3), and
+575 other files. Every EXE payload and indexed resource range is available.
+All emitted SVGs, embedded bitmaps, rasters/animation frames and sounds pass
+structural/decoding checks. Report contents match all 10,593 extracted
+outputs byte-for-byte. cdgamer29.exe's 31 animations contain 2,186 frames
+and use the stored 10 fps cached fallback; no authored rate was recovered.
+Four PIGs in BIT.exe and ram.exe reference linked media without embedded
+pixels and remain unrendered. Other drawing warnings concern substituted
+fonts, dynamic text, approximate blend modes and linked media.
+
+The sound-property decoder now also handles WPCR/WPLI flags -1 tables,
+which store explicit resource IDs and the same property layout as WCRS.
+This recovers one mono 8-bit 22,050 Hz sound each from carole.app, lisa.app
+and paulina.app, replacing their 37 raw PCM chunks. The metadata owners
+remain exported; --deep retains consumed chunks. A before/after comparison
+across all 74 WPCR/WPLI flags -1 samples recovers 467 sounds from 16 files,
+replacing 869 raw chunks. All 22,892 retained outputs are unchanged, and
+58 inputs have entirely unchanged output. Independent source checks confirm
+the formats and all 41,035,806 PCM bytes in those 467 new WAVs. All 156
+regression tests pass, including explicit-ID APP/APR audio and exclusion
+of ordinal-ID Star tables. Older reports were not regenerated; their saved
+counts therefore do not include the 464 sounds recovered outside sample1.
+See report/sample1-review/validation.json and
+report/sample2-review/validation.json for current corpus checks.
+
+The previous 66-file mixed-extension review extracted 2,223 PIG SVGs (892 partial),
+one APNG animation, 24 cursor PNGs, 770 other images, 1,280 text files,
+42 WAV sounds and 9,221 other files. All containers are recognized by
+signature; their .bin, .dll, .dat, .exe and other names do not select the
+parser. All indexed byte ranges are available. Sixty-four inputs extract
+completely; two retain damaged compressed resources and report partial
+extraction. Mortal Combat 5 [c][!].exe has an incomplete 14-byte zlib
+stream in entry 3 (LookupTable). class2.dat entries 24 and 29 (BMP) fail
+independent zlib checks. Available original compressed bytes are retained.
+Every emitted SVG, embedded bitmap, raster/animation frame and WAV passes
+structural/decoding checks. Report contents match all 13,561 extracted
+outputs byte-for-byte. Forty generated PCM WAVs match their source chunks
+and descriptor formats; the two streaming WAVs match their assembled source
+containers. INFOCHEK.243's 24-frame animation uses its authored 24 fps.
+There are 257 unrendered PIGs: three contain no drawable records, one in
+history references an unsupported image encoding, and 253 in main.a5v
+refer to linked/absent media. MwM Demo File retains warnings for conflicting
+bitmap references: the same IDs occur with differing full-image source
+rectangles, and some point at PIGs or non-image resources. A reliable
+remapping has not been established; no guessed replacement IDs are used.
+Other limitations include substituted fonts, dynamic text and approximate
+blend modes. No extractor changes were required. Previous source reports
+were not regenerated. See report/mixed-review/validation.json for checks.
+
+The previous 10-file ASW review extracted 647 PIG SVGs (150 partial), 107 text files,
+44 WAV sounds and 838 other files. All inputs extract successfully; every
+entry range is available. All SVGs, embedded bitmaps and WAVs pass
+structural/decoding checks, and report contents match all 1,636 extracted
+outputs byte-for-byte. The APW sound-property decoder also handles these
+ASW inputs without changes. Independent checks confirm all 44 WAVs match
+their ordered source PCM chunks and stored formats: all are mono 8-bit,
+with 19 at 22,000 Hz, three at 11,025 Hz and 22 at 22,050 Hz.
+The 150 partial SVGs have substituted-font wrapping warnings. Six PIGs
+contain only empty text records and have no drawable output. No extractor
+changes were required, and previous source reports were not regenerated.
+See report/asw-review/validation.json for corpus checks.
+
+The previous 28-file APW review extracted 766 PIG SVGs (350 partial), 222 text files,
+64 WAV sounds and 3,836 other files. Twenty-two PIGs have no drawable
+output. All inputs extract successfully, and all SVGs, embedded bitmaps
+and WAVs pass structural/decoding checks. Report contents match all 4,888
+extracted outputs byte-for-byte. The new WCRS sound-property decoder
+recovers 64 sounds from nine sources, replacing 97 raw PCM chunks with
+WAVs. Independent checks confirm the exact source PCM bytes and stored
+rates, bit depths and channel counts for every recovered sound.
+Existing SVGs, text and retained raw outputs are unchanged; 19 inputs
+have entirely unchanged output. All 156 regression tests pass. Other
+source reports were not regenerated. See report/apw-review/validation.json
+for corpus checks.
+
+The previous 30-file APR review extracted 1,759 PIG SVGs (87 partial), 669 text files,
+118 WAV sounds and 1,281 other files. Four PIGs contain no drawable output.
+Twenty-nine inputs extract completely for their indexed resources;
+GRAPHICS.APR returns partial status because 72 entry ranges lie beyond
+its available bytes. Its recoverable content produces 11 outputs.
+All emitted SVGs, embedded bitmaps and WAVs pass structural/decoding checks;
+report contents match all 3,827 extracted outputs byte-for-byte. The 38
+w4_2s.apr WAVs were additionally checked against the original descriptors
+and PCM byte ranges: all rates, bit depths, channel counts and 12,521,460
+PCM bytes match (26 mono 16-bit and 12 mono 8-bit sounds at 22,050 Hz).
+The Star ordinal-ID fix already applies to the four flags -5 libraries;
+no further extractor changes were required. Other source reports were not
+regenerated. See report/apr-review/validation.json for corpus checks.
+
+The previous 10-file stripped EXE-appended review extracted 6,063 PIG SVGs
+(1,337 partial), 104 APNG animations, 2 cursor PNGs, 1,961 other images,
+2,852 text files, 493 sounds and 828 other files. Their original EXE-based
+offsets normalize correctly; every entry lies within the available payload.
+All emitted SVGs, embedded bitmaps, rasters/animation frames, 330 WAVs and
+161 MP3s pass structural/decoding checks. Both AIFFs were also decoded by
+FFmpeg. Report contents match all 12,303 extracted outputs byte-for-byte.
+Four PIGs reference linked media without embedded pixels and remain
+unrendered. Fourteen ImparoGiocando animations lack stored transparency
+masks and are exported opaque, with warnings. Its cursor slots contain
+unsupported eight-byte records and a PIG drawing; originals are retained.
+Fifty animations use authored rates; 54 use the labeled cached fallback.
+No extractor changes were required, and older source reports were not
+regenerated. See report/appended-review/validation.json for corpus checks.
+
+The previous 85-file APP review extracted 10,627 PIG SVGs (2,132 partial),
+31 APNG animations, 37 cursor PNGs, 3,581 text files, 726 sounds and 14,444
+other files. Three PIGs have no drawable output: two have invalid bounds.
+Every emitted SVG, embedded bitmap, raster/animation frame and sound passes
+structural/decoding validation. Report contents match all 29,446 outputs
+byte-for-byte. The Star flags -5 reference fix recovers 488 additional SVGs
+and six cursors; successfully embedded DIBs omit duplicate standalone files.
+All 632 previously unresolved image references in the 27 affected APPs
+match the one-based entry layout, as do all 27 root font-table references.
+Outputs from the other 58 APPs are unchanged. Existing audio, animation,
+text and cursor bytes are unchanged across the full set; 152 regression
+tests pass. Other families' reports were not regenerated.
+See report/app-review/validation.json for the current corpus checks.
+
+The previous 26-file AAS review produced 207 PIG SVGs (30 partial), 13 APNG animations,
+2 cursor PNGs, 27 other images, 158 text files, 34 sounds and 186 other files.
+Twelve inputs extract completely for their indexed resources; 14 return
+the partial-extraction status because 6,845 referenced entry ranges are
+outside the available segment bytes. pcb0000.aas has no available resource
+payloads and produces no exports. mfou0000, mone0000, mthr0000 and mtwo0000
+retain incomplete streaming audio as .bin; these are not exported as broken
+WAVs. All emitted SVGs, embedded bitmaps, raster/animation frames and the
+34 complete WAVs pass structural/decoding validation. The 13 animations
+use cached playback rates, identified in their reports. No extractor
+changes were required. Report contents match all 627 output files
+byte-for-byte; other source reports were not regenerated.
+See report/aas-review/validation.json for per-file diagnostics and results.
+
+The previous 48-file A7R review extracted 2,414 PIG SVGs (1,177 partial),
+2 APNG animations, 34 other images, 1,156 text files and 490 other files.
+No sounds or cursors were exported. Another 82 PIGs have no renderable
+picture. Every emitted SVG, embedded bitmap and raster/animation frame
+passes structural/decoding validation. Both LMS Wizard animations contain
+101 frames and use the cached 15 FPS fallback; the report labels this rate
+source. Partial PIGs mainly retain dynamic placeholders or linked media,
+with some font/style limitations. No extractor changes were required.
+Report contents match all 4,096 extracted outputs byte-for-byte, and older
+source reports were not regenerated. See report/a7r-review/validation.json.
+
+The previous 96-file A7P review produced 4,391 PIG SVGs (1,005 partial), 9 APNG animations,
+50 cursor PNGs, 442 other images, 3,815 text files, 22 sounds and 1,830
+other files. Another 66 PIGs have no renderable picture. All emitted SVGs,
+embedded bitmaps, raster/animation frames and audio pass decoding checks;
+the AIFF in Anibutt.a7p was additionally decoded by FFmpeg. Report contents
+match all 10,559 extracted outputs byte-for-byte. No extractor changes were
+required. Accessibility Kit Tutorial.a7p returns the partial-extraction
+status: entry 605 (LookupTable) stores only 25 bytes of an incomplete zlib
+stream, yielding no decoded bytes. Its original compressed bytes remain
+available as 605_LookupTable_compressed.bin. The other 95 files return
+success. Admin.a7p and Scrllist.a7p retain PIGs in cursor-designated slots;
+they are not interpreted as cursor pixels. Other drawing limitations are
+recorded in the reports. See report/a7p-review/validation.json for results.
+
+The previous 41-file A6R review extracted 4,524 PIG SVGs (2,615 partial),
+631 other images, 2,744 text files, 304 sounds and 1,029 other files.
+Another 26 PIGs have no renderable picture. No cursor or bitmap-animation
+resource entries or references were found. Every emitted SVG, embedded
+bitmap and raster image passes structural/decoding validation; all 302
+WAVs pass PCM checks, and both AIFFs were independently decoded by FFmpeg.
+The report downloads match all 9,232 validated output files byte-for-byte.
+Partial PIGs mainly involve font substitution, unresolved text styles and
+dynamic placeholders; linked media and invalid references remain visible
+as report diagnostics. No extractor changes were required for this set.
+See report/a6r-review/validation.json for the corpus validation results.
+
+The previous 103-file A6P review extracted 4,381 PIG SVGs (943 partial),
+9 APNG animations, 50 cursor PNGs, 459 other images, 3,804 text files,
+22 sounds and 2,367 other files. Another 66 PIGs have no renderable picture.
+Every emitted SVG, embedded bitmap, raster/animation frame and sound passes
+structural/decoding validation (report/a6p-review/validation.json). Partial
+PIGs mainly retain dynamic text placeholders or unresolved styles; linked
+media, invalid references and unsupported drawings remain visible as
+diagnostics. Admin.a6p and Scrllist.a6p have PIGs in their cursor slots;
+these remain raw rather than being misinterpreted as cursor pixels.
+Cursor tables with longer unused allocation tails now decode, recovering
+24 additional cursors across 10 A6P files. Consumed cursor originals remain
+deep-only. Earlier reports were not regenerated.
+
+The previous 45-file A4R review extracted 7,000 converted PIGs, 712 partial
+PIGs, 18 unrendered PIGs, 4,246 raster images (including 114 cursor PNGs),
+842 WAVs, and 3,547 text files. All emitted SVGs, rasters and WAVs pass
+structural/decoding checks. Of the WAVs, 356 use MS ADPCM and need the PCM
+report preview for browser playback. Partial PIGs chiefly involve blend
+approximations, dynamic text or substituted fonts; unrendered entries have
+linked/unsupported imported media or invalid bounds. Imported bins remain
+opaque, and previous review sets are not regenerated.
+The 84-file A4P review includes two inputs with damaged compressed entries:
+External.a4p entry 3 (LookupTable) has no complete zlib stream within its
+14 stored bytes; Quizfinal.a4p entry 146 (PIG) has an invalid zlib header.
+Both retain the compressed bytes and return the partial-extraction status.
 
 Every output is created exclusively. Repeated entry IDs (including the
 all-zero IDs in legacy tables), repeated names, and an existing output
@@ -80,16 +331,17 @@ Exit codes:
   2 = partial extraction: missing/damaged data or unresolved audio grouping.
 
 An exit code of 0 does not mean every resource has a media decoder.
-Unrecognized or undecodable entries are preserved as .bin. If a PIG
-only yields readable text, its original binary is also preserved.
+Unrecognized or undecodable entries are preserved as .bin. Handled PIGs
+keep originals only with --deep, even when their rendering is incomplete.
 Failed zlib entries retain their available compressed bytes. Missing
 segment data cannot be reconstructed without the other segments.
 
 Some legacy inputs end before their entry table. For WPCR/WPLI/WCRS
 files whose declared size exceeds the available bytes, the extractor
-preserves unindexed_data.bin and salvages complete images from available
-PIG data. Their IDs and original entry boundaries remain unknown; this
-is recovery from incomplete input, not a complete extraction.
+salvages complete images from available PIG data. It does not duplicate
+the entire input as unindexed_data.bin, including with --deep. Their IDs
+and original entry boundaries remain unknown; this is recovery from
+incomplete input, not a complete extraction.
 
 Regression commands:
   python3 -B -m unittest -v test_authorware test_authorware_pig
@@ -123,7 +375,7 @@ based on flags:
     An end-of-data marker (= file_size) follows at position entry_count.
 
   - Flags 0xFFFFFFFB: 16-byte entry records at table_offset (same layout
-    as WCRS, but all entry IDs are 0).
+    as WCRS, but ID fields are unused; references use one-based table positions).
 
   - Flags 0xFFFFFFFF: 16-byte entry records at table_offset (same as
     WCRS with proper entry IDs). Table is typically at end of file.
@@ -303,7 +555,7 @@ APP/APR files (Authorware Star/1.x) use the WPCR (packaged) or WPLI
 (library) magic with format version 4 and encoder version 22. Three
 sub-formats exist:
   - Flags 0xFFFFFFFC: 4-byte offset-only entry table (no entry IDs/sizes).
-  - Flags 0xFFFFFFFB: 16-byte records at table_offset (IDs all zero).
+  - Flags 0xFFFFFFFB: 16-byte records at table_offset (implicit one-based IDs).
   - Flags 0xFFFFFFFF: 16-byte records at table_offset (with IDs).
 Some .app files use the PCRS magic (same as library files).
 
@@ -525,7 +777,14 @@ Format 1 (flags = 0xFFFFFFFC): Offset-only table
 
 Format 2 (flags = 0xFFFFFFFB): 16-byte records, no IDs
   Same 16-byte record layout as WCRS/A3M (see above), but all entry
-  ID fields are 0. Content types are auto-detected.
+  ID fields are unused. Assign entry IDs from the one-based table position,
+  as in the offset-only format. Root, font, cursor and bitmap references
+  use these IDs. Across 27 APP samples the first eight record bytes are
+  zero; treating them as explicit IDs makes unrelated entries ambiguous
+  and prevents hundreds of bitmap drawings from resolving their pixels.
+  This rule is restricted to WPCR/WPLI flags -5. WCRS can share the flag
+  value but has explicit IDs; do not infer ordinal IDs merely from zeros.
+  Content types are auto-detected.
 
 Format 3 (flags = 0xFFFFFFFF): 16-byte records, with IDs
   Same 16-byte record layout as WCRS/A3M (see above). Table is
@@ -635,12 +894,12 @@ Type    Name                    Description
 0x27    Wait                    Wait/pause icon
 0x28    RichText                Rich text block with font table (see below)
 0x29    Reference               Small 4-byte configuration/reference value
-0x33    AnimationPath           Animation/motion path definition (~2400-2600 bytes)
+0x33    AnimationPath           Bitmap-animation directory (legacy output name)
 0x34    PIG                     Packaged Icon Group (platform-specific image)
 0x35    DIB                     Device Independent Bitmap (raw BITMAPINFOHEADER)
 0x36    SoundHeader             Packed PCM descriptor (48 or 50 bytes, see below)
 0x37    SoundData               Raw 8-bit or 16-bit PCM chunks (see below)
-0x38    AnimationFrames         Animation frame data (paired with 0x33)
+0x38    AnimationFrames         Pixel/mask storage blocks referenced by 0x33
 0x39    MediaLink               External media reference (file paths + format info, A6P only)
 0x3A    DisplayText             Display text / UI label strings
 0x3B    EmbeddedMedia           Embedded media (BMP image, 3DMF model, SWF, or other)
@@ -784,32 +1043,210 @@ Unknown operations or invalid record lengths stop decoding and produce
 diagnostics. Original content exports are retained even when SVG succeeds.
 
 Text record versions 9/10 contain cached line positions and sparse styles:
+  +6: visible text-object rectangle.
+  +18: full content rectangle, which can be taller than the viewport.
+  +26: cached text layout rectangle, including margins and scrolling.
   +40: uint32 style-transition table bytes (2 + 8*n).
-  +52: uint32 character count.
+  +52: uint32 text byte count (not Unicode character count).
+  +62: uint16 text-box kind; observed 2 for scrolling text boxes.
+  +68: int16 saved vertical scroll offset in the current Mac examples.
   +74: uint32 line-position table bytes (8*(line_count+1)).
   +78: uint32 character-run table bytes (10*n).
   +90: uint16 transition size, observed 8, then transitions:
-       uint16 character index, int16 baseline adjustment, uint16 style ID,
+       uint16 text byte index, int16 baseline adjustment, uint16 style ID,
        uint16 flags. The flags are not the high half of the style ID.
   Next: line rows (uint16 start index, int16 top, x, baseline). The last
-        row is a sentinel providing final character index and bottom edge;
+        row is a sentinel providing final text byte index and bottom edge;
         its remaining coordinates are unused cached values.
   Next: runs (uint16 start/end, uint32 ID, uint8 kind, uint8 unused).
         Kind 1 applies a text style; 2 is a link; 4 is an inline/dynamic
         object. Link/object IDs must not be looked up as font style IDs.
   Next: character bytes, padded to an even byte count.
+
+Scrolling text boxes clip their text to the visible rectangle at +6.
+Their cached line coordinates already include the saved scroll offset;
+subtracting it again would move the text twice. Bienvenue entries 128
+and 146 have offsets 328 and 56 respectively. Drawing their hidden lines
+without clipping incorrectly overlays neighboring headings/art. The
+SVG preserves the saved scroll position; complete text remains in its
+metadata and the separate text exports. Other drawing records do not
+inherit the text clip. text_viewports records these bounds/offsets.
+
 Font/style resources (type 0x19, or signature 13 00 / 00 13 in older
 untyped tables) supply sparse attribute overrides, sizes, colors and font
 families. Style masks apply independently rather than replacing a whole
 style. Fonts are referenced by name, not embedded; viewers substitute
-unavailable fonts. Mac Roman and Windows CP1252 text are decoded. Symbol
+unavailable fonts. SVG font-family lists retain the requested face first
+and provide compatible fallbacks (MS Sans Serif/Geneva/Helvetica remain
+sans-serif; Times/Palatino remain serif). This avoids the browser's generic
+serif fallback for unavailable historical sans-serif fonts. When Pillow
+and fontconfig are available, a substituted line that exceeds the stored
+layout width is fitted with SVG textLength; shorter lines are not stretched.
+Stored wrapping and baselines are preserved. Such adjustments are noted
+in metadata (text_fits); original font fidelity still depends on the viewer.
+Mac Roman, Windows CP1252 and Japanese CP932 text are decoded. The cached
+Windows font metrics store tmCharSet at +51; 128 identifies Shift-JIS.
+An unambiguous Japanese charset in the font table supplies the document
+encoding, including ANSI/default faces and drawings tagged MAC inside a
+Windows project. Matching Mac/Windows family slots also share their
+Japanese encoding. No filename or guessed text-language detection is used.
+Japanese font names decode with that encoding, and the observed Japanese
+style-prefix variants 0x49/0x51 are accepted with the other validation fields.
+The reserved name slot zero (FFFF marker) is bookkeeping, not a font name.
+Text line/style offsets always index the original bytes; decoding before
+slicing would split or drop double-byte Japanese characters. Multibyte PIG
+text exports use the parsed Unicode text instead of ASCII string scanning.
+This corrects Admin.a4p, Avsync.a4p and 30 other Japanese A4P samples.
+For CP932 text, fullwidth characters measure at least one em: a local font
+without CJK glyphs may otherwise measure its narrow missing-glyph boxes and
+fail to fit overflowing Japanese lines into their stored layout width.
+Symbol
 font bytes use the Unicode Consortium's Adobe Symbol mapping in
 authorware_symbol.py (source/license notice included); private-use and
 unmapped glyphs are flagged.
+In the legacy font metrics, bit 0x10 of the flags at record +6 selects
+Macintosh fields: both 0x10 and 0x13 use the size at +8 and the Mac family
+name. Windows metrics use the Windows name and signed requested height
+at +28. Legacy 62-byte records also cache int16 Windows cell height,
+ascent, descent and internal leading at +38/+40/+42/+44. When these are
+consistent, the realized character size is cell height minus internal
+leading. This accounts for bitmap fonts mapped to a larger available
+size: Bienvenue font 8 requests height -8 but caches height 13 / leading
+2, giving an 11-pixel character size. Mac records keep their Mac size;
+missing or inconsistent Windows caches fall back to the requested size.
+Microsoft's definitions of character height and physical font metrics:
+https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-logfonta
+https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-textmetrica
+The low flag bits do not switch the platform. Legacy family-name tables
+start with uint16 count/stride (stride 64), followed by paired 32-byte
+Mac/Windows names. Family slots are one-based. Unnamed Mac slot zero uses
+the cached QuickDraw font ID at +26: Roman defaults 0=Chicago, 1=Geneva.
+This default mapping is noted in affected SVG metadata; other unresolved
+names/sizes produce warnings when used, rather than silent omissions.
+Apple's documented default font IDs:
+https://dev.os9.ca/techpubs/mac/Text/Text-190.html
+
+The corrected decoding recovers all 16 font records in Bienvenue (89
+styles), 7 in COMPLETE (34 styles), and 12 in NOVATO (200 styles). This
+does not imply every field of these records has been decoded: cached
+metrics, style extensions and several attribute bits remain unresolved.
 Older text versions 0/5 instead store 58-byte inline font runs and lack
 cached line positions. Wrapping uses substituted font metrics and is
 explicitly flagged as approximate.
 
+Project resource directory (entry 1)
+-----------------------------------------------------------------
+The A3M, A3W and A4P samples share a 1212-byte root resource:
+188 bytes of header followed by 128 eight-byte slots. The first uint16 is
+the object capacity (256 per active group); the next uint16 is zero.
+Both capacity and references use container byte order: a one-group root
+starts 01 00 00 00 in A3M but 00 01 00 00 in A3W/A4P. Reading just the
+first byte as a group count incorrectly rejected the Windows directories.
+Each active slot contains four uint16 resource IDs. In A3M, the first two point to object
+records and properties. The third (probable text index) can be zero, as in
+START. The fourth is zero in the original three samples, but WELCOME and
+wildlifemac reference empty 256-slot offset tables; their role is unknown.
+
+Source          Resource-ID triplets at +0xBC, +0xC4, +0xCC
+Bienvenue       (2, 9, 12), (228, 229, 231)
+COMPLETE        (2, 9, 10)
+NOVATO          (2, 9, 10), (381, 382, 384), (597, 598, 599)
+
+START has one group, WELCOME two, and wildlifemac seven. The font/root
+recognizer also accepts their optional third/fourth group references.
+
+Confirmed root references (big-endian uint16 at each offset):
+Offset   Contents                    Bienvenue  COMPLETE  NOVATO
++0x14    Variable names               13         0         11
++0x16    Variable descriptions        23         0         22
++0x32    Font/style table             7          7         7
+
+The variable tables contain repeated uint16 ID / uint16 byte-length
+pairs, then null-terminated Mac Roman strings padded to even length.
+Names and descriptions match by ID. Bienvenue has 21 names / 11
+descriptions; NOVATO has 50 names / 4 descriptions. COMPLETE's zero
+references indicate neither table is present. These are structural
+findings, not new automatic export classifications.
+
+The renderer validates the root layout and referenced font resource,
+then follows +0x32; entry 7 is not hard-coded. Without a recognized root,
+a single validated font table can still be selected by its signature.
+Multiple candidates without an unambiguous reference produce a warning
+when text needs styles instead of silently selecting the first table.
+
+Other recurring root slots point to names, configuration and version
+information. Not every small integer is a resource pointer. For example,
++0x2C points to resources 326/104/553, not an entry count. Resources at
++0x06 occupy 2048 bytes per active group; those at +0x08 occupy 1024
+bytes per group. Their internal schemas still need decoding. Recognized
+entry 1 roots are exported only with --deep; the other unresolved
+resources remain exported normally.
+
+All 84 current A4P directories have one active group. Their known header
+references consistently resolve to the typed entries in the file:
+  +0x04 IconNames; +0x06 ColorPalette; +0x14 Variables;
+  +0x16 PropertyDescriptions; +0x30/+0x34 cursor tables; +0x32 FontTable.
+The group at +0xBC references Expression, Display, MapGroup and optionally
+Wait resources. Other header slots reference scripts, libraries, navigation
+and interaction tables; the small scalar at +0x44 is not a resource ID.
+The font reference is used to select the table and recognize the root as
+consumed bookkeeping. Normal extraction omits 001_FileProperties.bin;
+--deep preserves its exact original bytes.
+
+Legacy cursor tables
+-----------------------------------------------------------------
+Entry 1 +0x30 names the 32x32 cursor table; +0x34 names the 16x16 table.
+Zero means absent. Resolve these IDs through the entry table; do not
+hard-code the resource numbers or identify cursors from a magic string.
+Bienvenue and WELCOME use entries 10/11 (11 records per size), while
+wildlifemac uses entries 11/12 (one record per size). The other three A3M
+files have neither table. The Bienvenue/WELCOME cursor resources are
+identical. Unreferenced cursor-like data is not automatically consumed.
+
+The A4P corpus has 12 decodable cursor records across Content.a4p (2),
+GLOSSARY.A4P (4), NOTEPAD.A4P (2), Notepad.a4p (2), and Quizfinal.a4p (2),
+including both stored sizes. ADMIN.A4P also fills the two cursor slots,
+but both resources contain PIG drawings rather than cursor tables. They
+fail cursor validation and retain their original bytes; neither resource
+is interpreted as cursor pixels merely because of its type or root slot.
+All six stored 16x16 A4P cursors reproduce the upper-left 16x16 pixels of
+their 32x32 counterparts, including clipped hands and a clipped crosshair.
+This clipping is present in the source planes. Export both stored sizes
+faithfully rather than replacing the smaller cursor with a scaled image.
+
+The resource is a sequence of uint16 cursor key / uint16 byte length /
+record bytes, padded to even length and terminated by a zero key. Fields
+use container byte order. An unused allocation tail can follow the
+terminator (28 bytes in Bienvenue/WELCOME; up to 82 in the A5P/A6P samples).
+These tails can contain nonzero old memory and are ignored after a fully
+validated, nonempty table. Identical records occur with both short and long
+tails; the former 31-byte tail limit incorrectly rejected valid cursors.
+Record headers contain:
+
+Offset  Size  Contents
++0x00   2     Uninterpreted field; observed 1, 2, and 250
++0x02   4     Two hotspot-like coordinates (ignored for PNG export)
++0x06   2     Width
++0x08   2     Height
++0x0A   2     One-bit plane/depth indicator (1)
++0x0C   ...   Two packed one-bit planes, MSB first, top-to-bottom rows
+
+For 16x16 cursors, each plane is 32 bytes: bitmap followed by mask.
+Bitmap/mask combinations: 00 transparent, 01 white, 10 invert, 11 black.
+For 32x32 cursors, each plane is 128 bytes: AND followed by XOR.
+AND/XOR combinations: 00 black, 01 white, 10 transparent, 11 invert.
+PNG inversion is approximated with opaque black; other pixels retain
+their actual transparency and black/white colors. No palette is guessed.
+
+Observed record lengths: 80 bytes for 16x16, 268 or 290 bytes for 32x32.
+The plane data needs 76 or 268 bytes including the header; remaining
+short fields/allocation bytes are not rendered. The parser validates all
+record lengths, dimensions, depth, padding and termination before writing
+any cursor from a table or suppressing its original .bin file. Ambiguous
+resource IDs and unsupported layouts keep the raw fallback.
+
+PIG bitmap references and embedded previews
+-----------------------------------------------------------------
 Bitmap record 0x60 stores source bounds at +14 and destination at +22;
 0x65 stores source at +10 and destination at +18. A 0x65 record can hold
 a monochrome preview followed by full-color pixels: choose the highest
@@ -826,6 +1263,16 @@ are encoded as PNG. Pillow, when installed, also converts supported TIFF,
 Photoshop and TGA image payloads needed inside SVG. This does not change
 the separate raw imported-media exports. Unsupported imported formats
 remain explicitly flagged.
+
+References to unrecognized image data report the resource ID and byte
+count. This can indicate a stale reference rather than a missing codec:
+NOVATO PIG 552 requests a 266x127 bitmap from entry 553, but entry 553 is
+a 26-byte bookkeeping block also referenced by the project root at +0x2C.
+That drawing command has no embedded preview. The PIG's other reference,
+554, supplies a decodable bitmap and is already represented in its SVG.
+The unresolved first reference keeps the SVG partial; the raw PIG is now
+available only with --deep, regardless of other rendering limitations. No replacement
+image is inferred from dimensions or proximity.
 
 Before SVG support, of this sample's 136 PIG entries the extractor left 103 as
 raw PIG binaries: 57 text/rectangle records, 9 mixed text/vector drawings,
@@ -847,6 +1294,35 @@ by standalone SVG and are flagged when approximated. Ellipse/arc edges,
 pattern colors, grouping and raster-mode behavior merit visual comparison
 against original Authorware playback. "Converted" means no known decoder
 limitation, not proof of pixel-identical rendering.
+
+Wildlife palette/reference investigation
+----------------------------------------
+wildlifemac PIGs 29, 119, 524, 536, 539, 541, 544, 545, 550, 554,
+627, 709 and 712 pair stored palettes with apparently stale bitmap
+references. None has a direct reference from the decoded display-object
+records. Other PIGs using the same DIBs have different stored palettes and
+are referenced by current display objects; those render coherent images.
+For example, 119 and 560 both use DIB 118, but only 560 is referenced by
+display object 1319. PIG 29 requests a 640x480 image from DIB 30, which
+actually contains 415x274 pixels. Its palette is identical to the palette
+of the currently referenced background PIG 538, which uses 640x480 DIB 523.
+This is evidence of stale drawings, not a reason to substitute another
+PIG's palette or bitmap automatically. Palette interpretation itself is
+consistent with the correctly rendered, directly referenced counterparts.
+
+Report metadata identifies direct display-object references from validated
+Mac root/object tables; these labels are hidden in the visual grid. The
+two decoded 18-byte display-record forms use a
+packed little-endian uint16 picture ID at +14 (form 0x01) or +15 (0x11).
+The first big-endian uint32 shifted right 12 addresses the object-name
+pool identified by root +0x04. All nonzero picture IDs in these forms
+resolve to PIG entries across the six A3M samples. This is not a complete
+runtime reachability analysis: scripts, buttons and other object forms
+may use drawings too. Missing direct references never suppress output.
+Source rectangles extending outside decoded bitmap dimensions now carry
+a warning instead of being reported as fully converted. Colors, crop
+coordinates and recoverable content are preserved as stored.
+See report/wildlife-palette-review.html for the visual comparisons.
 
 Related finding: table type 0x3E is not restricted to BMP. Entries 80
 and 89 in this sample are complete JPEGs; 149 and 166 are complete GIFs.
@@ -948,6 +1424,10 @@ fields and block alignment before treating an entry as a PCM descriptor.
 Samples are unsigned 8-bit PCM centered at 128, or signed little-endian
 16-bit PCM centered at zero. Preserve their bytes; supply a RIFF/WAVE
 PCM header using the descriptor's rate, bit depth and channel count.
+After successfully writing the WAV, omit the standalone SoundHeader .bin
+unless --deep is passed. If grouping or decoding fails, retain the original
+header and recoverable audio bytes. Match by table index, not entry ID, so
+one successful sound cannot suppress another sound's unresolved header.
 
 The descriptor may precede or follow its data. Chunks are typically
 65536 bytes (legacy) or 4096 bytes (newer), with a shorter final chunk.
@@ -962,6 +1442,43 @@ run of 65536-byte blocks and a final block whose length completes the
 exact declared count. Overlapping or ambiguous candidates remain raw.
 Unknown data and PCM without matched metadata are preserved as .bin;
 no default-rate WAV is invented from their byte distribution.
+
+Legacy property-based PCM (WPCR/WPLI/WCRS)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This layout occurs in WCRS APW/ASW files and WPCR/WPLI APP/APR files with
+flags -1 and explicit resource IDs. Do not apply it to the ordinal-ID
+Star variants; those use the separate packed descriptors described above.
+Some untyped object resources with IDs below 0x4000 store a word-aligned
+little-endian property stream: uint16 tag, uint16 payload length, payload,
+and one padding byte after odd payload lengths. Padding need not be zero.
+A zero tag terminates the stream; an exact end after the last property is
+also accepted. Parse the whole bounded stream before recognizing audio.
+
+Property 0x17 contains a 26-byte sound descriptor:
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------
+0x00    2     uint16    Kind: 1
+0x02    4     bytes     Cached flags/fields, not necessarily zero
+0x06    4     uint32    Total PCM byte count
+0x0A    2     uint16    WAVE format: 1 (PCM)
+0x0C    2     uint16    Channel count
+0x0E    4     uint32    Sample rate in Hz
+0x12    4     uint32    Byte rate = sample_rate * block_alignment
+0x16    2     uint16    Block alignment = channels * bits_per_sample / 8
+0x18    2     uint16    Bits per sample (8 or 16)
+
+Property 0x18 starts with a uint16 count followed by that many uint16
+resource IDs in playback order. The payload can end there or include
+unused zero-filled slots (128-byte and 144-byte payloads occur). IDs often descend;
+neither table order nor physical adjacency establishes playback order.
+Observed chunks include both 65536-byte and 65532-byte blocks. Each ID
+must resolve uniquely, and the complete chunks must total the descriptor's
+exact byte count. Validate the PCM format, alignment and byte rate before
+writing a WAV; missing or ambiguous references retain the available raw
+data and report partial extraction. Chunks shared with unresolved sounds
+also remain available. Successful chunks are raw exports only with --deep.
+The owner property block remains exported because it also contains names,
+playback expressions and other settings beyond the PCM descriptor.
 
 w4_2s.apr contains 38 sounds: 26 mono 16-bit and 12 mono 8-bit, all at
 22050 Hz. The 16-bit descriptors have byte_rate=44100 and alignment=2;
@@ -992,9 +1509,173 @@ The SWF data from offset 12 onward can be extracted directly as a .swf file.
 
 Animation Data (types 0x33 and 0x38)
 -------------------------------------
-Animation is stored as a pair: an AnimationPath (0x33) defining the
-motion path (~2400-2600 bytes) followed by AnimationFrames (0x38)
-containing the frame-by-frame data (can be very large, up to ~57KB).
+The existing AnimationPath filename is misleading: in the A4R corpus,
+type 0x33 is a bitmap-animation directory, not a geometric motion path.
+Type 0x38 holds its pixel and optional mask data. One animation may use
+many storage blocks, and one block can contain several frames or planes.
+The extractor reconstructs these linked resources as ###_Animation.apng.
+Each APNG contains the complete sequence at its original dimensions, using
+its own palettes, cumulative delta pixels and stored transparency masks.
+When present, the loop-back record is checked against frame zero but omitted
+from playback. Sequences without that flagged record retain every frame.
+Ten A5R sequences (eight in Letter_Fun29, two in Music_Magic18) restore their
+initial RGB colors but leave a different transparency mask. These export the
+complete first-pass display frames, repeated as an APNG, with a warning in
+the report and PNG metadata. The original mask is not guessed or repaired.
+Loop-back color mismatches still fail conversion and preserve original BINs.
+The standard-library encoder requires no Pillow or other image dependency.
+
+Directory and frame/mask BINs used by a successfully written APNG are omitted
+from normal output. --deep retains them and writes animation_manifest.json.
+Unused blocks, unsupported layouts, failed sequences and ambiguous resource
+references retain their BINs. Blocks shared with a failed conversion are
+also retained. Conversion validates the whole animation before writing it.
+APNGs appear as animated images in the self-contained HTML review reports.
+
+All 45 A4R files were inspected: 38 contain 306 animation directories and
+1,186 data blocks, describing 4,637 records / 4,331 display frames. The
+extra record in each directory restores the first frame for looping.
+303 sequences have complete pixel/mask data; in every one,
+the final loop-back exactly matches the initial RGBA pixels. Three cases
+set the mask flag but have zero mask references throughout: t15a.a4r
+entry 160, and }A91007A.A4R / }A91007B.A4R entry 47. Their color planes
+are exported as opaque APNGs, with an explicit warning in the report and
+PNG Comment metadata. No transparent color is guessed. Their original BINs
+are omitted after conversion as usual; --deep can retain them. Missing masks
+in only part of a sequence, or invalid mask ranges, fail conversion instead.
+
+A4R directory layout (little-endian):
+  +0x00 uint32  Record count, including final loop-back
+  +0x04 uint16  Number of palettes (1 or 2 in these samples)
+  +0x06 uint16  Bytes per RGBQUAD palette (1024)
+  +0x08 uint32  Frame-record table offset (48)
+  +0x0C uint32  BITMAPINFOHEADER offset (48 + 32 * record_count)
+  +0x10 uint32  Duplicate BITMAPINFOHEADER offset
+  +0x14 uint32  Palette offset (bitmap-header offset + 40)
+  +0x18 ...     Uninterpreted fields / cached state
+Following the 40-byte header are all RGBQUAD palettes (1024 bytes each),
+then 256 uint16 palette mapping/cache values per palette (512 bytes each).
+All observed images are 8-bit indexed color. The explicit RGBQUAD palette
+is sufficient for the reconstructed pixels; no guessed palette is used.
+288 directories have one palette; 18 have two. The cached bitmap header's
+compression and image-size fields do not reliably describe each frame;
+use its frame record's flags, length and storage references instead.
+
+Each 32-byte frame record:
+  +0x00 uint16  Flags
+  +0x02 int16*4 Changed bounds: left, top, right, bottom
+  +0x0A uint16  Palette index (used when the palette-change bit is set)
+  +0x0C uint16  Pixel data block number
+  +0x0E uint32  Pixel byte offset within that block
+  +0x12 uint32  Pixel byte length
+  +0x16 uint16  Mask data block number (0 if absent)
+  +0x18 uint32  Mask byte offset
+  +0x1C uint32  Mask byte length
+
+Observed flag meanings:
+  0x01 RLE8 pixels; otherwise a full raw DIB plane with DWORD row padding
+  0x02 Mask-capable sequence; check the actual mask references too
+  0x10 Final loop-back record
+  0x20 Select palette
+  0x40 Independent/key frame (also set on the initial frame)
+Pixels are bottom-up. RLE packets use standard byte runs, literal runs,
+end-of-line, end-of-bitmap, and relative skip commands. Skipped pixels keep
+the previous frame's values: decoding each record into a new zeroed image
+would lose unchanged content. Coordinates address the complete canvas;
+the changed bounds are not a cropped bitmap's dimensions. Masks are also
+RLE8 delta planes over the complete canvas, with 0 transparent / 255 opaque.
+They are not packed one-bit cursor masks. Empty updates can be just 00 01.
+Key frames reset the pixel and mask canvases before decoding; delta frames
+retain preceding pixels. A5P Move entry 109 (also A4P Move entry 30) stores
+32 independent frames and has no loop-back record. Its owner declares all
+32 as display frames. A5P Move entry 114 stores 25 delta-animation display
+frames plus one loop-back record. Both are exported as APNGs.
+
+Resource association is explicit, not dependent on adjacency:
+  * Entry 1's active group slots identify the Display property tables.
+  * These tables have 257 uint32 offsets, delimiting 256 object records.
+  * Property 0x0023 stores a uint32 count followed by that many uint32s.
+    Its first value identifies the owning object (high word 25, low word
+    object ID); subsequent values are the directory ID and data-block IDs.
+  * Frame block number 1 names the directory; block 2 names the first
+    payload resource, and so on. Resolve the listed IDs through the entry
+    table rather than treating them as consecutive IDs in future files.
+Display properties are aligned to two-byte boundaries. Odd-length payloads
+have one padding byte, which may be nonzero. Advance by the declared length
+plus padding; otherwise following resource lists/settings can be missed.
+All 306 A4R directories have one matching owner/list, and every pixel/mask
+reference lands within its explicitly listed AnimationFrames resource.
+
+Property 0x001C in the owning record contains animation settings. In the
+observed layout, relative to its four-byte property header: +0x06 is the
+uint32 display-frame count; +0x10/+0x12 are uint16 dimensions; +0x26 is
+a cached uint16 rate. Counts/dimensions agree with all 306 directories.
+The cached rate values include 4, 5, 7, 15, 24 and 30. Prefer the owning
+record's 0x03F8 playback-rate expression when it is a supported positive
+integer constant. Credit_Screen.a5r entries 22 and 24 both cache 24, but
+their authored constants are 8 and 10 respectively; the exports now use
+8 and 10 fps. This interpretation is inferred from the stored properties
+and has not yet been checked against the original Authorware runtime.
+
+Supported 0x03F8 payloads contain a 16-byte constant program:
+  +0x00 uint16 total payload length
+  +0x02 uint16 2 (observed integer-expression form)
+  +0x04 uint16 source offset: 0 for compiled, 16 when source follows
+  +0x06 uint16 0
+  +0x08 uint16 3 (integer literal)
+  +0x0A int32  frame rate, accepted from 1 through 65535
+  +0x0E uint16 0
+Editable projects can append source text after this program. Expressions
+using variables, formulas or other encodings (including floating-point
+constants), invalid rates and duplicate rate properties use the cached
+rate as a fallback. In the 945 A5R animation owners, 571 have the compiled
+integer form, 350 omit the rate property, and 24 use other expressions.
+
+Main_Screen7.a5r timing investigation: entry 97 (owner object 56 in Display
+table 9) has seven frames, no 0x03F8 property, and cached rate 24. This is
+not an arbitrary preview default: disassembly of the supplied Authorware
+5.0 runtime in sample2/cdgamer29.exe shows the absent-property path reading
+the uint16 at settings payload +0x22 directly as its playback rate
+(0x44E263 requests 0x03F8; 0x44E2BC checks presence; 0x44E33E-0x44E362
+loads the cached value). The Authorware 6 runtime in sample2/batnball2.exe
+has the equivalent path at 0x450E73 / 0x450ECC / 0x450F4E-0x450F72.
+No lower rate was found for entry 97. Of Main_Screen7's 102 animations,
+39 have explicit constant rates; the other 63 omit the rate property.
+
+There is a separate playback difference: entry 97's flow record in entry
+2 specifies play mode 1, with property 0x03F9 equal to 1. Runtime code at
+0x450D06-0x450D26 in batnball2.exe reads that property as the repeat count
+for mode 1. The authored setting therefore plays this seven-frame sequence
+once, whereas the review APNG loops it indefinitely every 7/24 second.
+This can affect its perceived pacing, but does not establish the speed
+actually achieved by the original application or reconstruct its scripts.
+These findings document the limitation; no guessed slower rate is applied.
+
+Each APNG frame has delay 1/playback_rate seconds; all APNGs repeat the full
+sequence for review. Metadata preserves stored_rate (the cache) separately
+from playback_rate and rate_source (authored or cached). Report captions
+and PNG Comment metadata identify the chosen source. Scripted speed,
+start/end ranges, concurrency and runtime behavior have not been
+reconstructed. Original source filenames
+also survive in neighboring properties: FLC movies and BMP sequences.
+Macromedia's manual documents both as digital-movie inputs:
+https://manualzz.com/doc/34976097/macromedia-authorware-family-user-manual
+(Working with Content, pp. 229-231).
+
+Concrete examples (display-frame counts exclude the loop-back record):
+  }elk010a.a4r: directory 80, blocks 81-105, 129 frames, 160x120;
+    video clip, original 3amavi3.flc, cached rate 5.
+  T13a.a4r: directory 65, block 66, 3 frames, 80x60;
+    transparent pencil, original Penc0001.bmp, cached rate 30.
+  T13a.a4r: directory 94, blocks 95-110, 15 frames, 485x204;
+    paint scraper, original drys0001.BMP, cached rate 15.
+  T13a.a4r: directory 125, blocks 126-152, 43 frames, 100x440;
+    transparent tape measure, original Tape0001.bmp, cached rate 30.
+
+report/animation-investigation/index.html embeds lossless APNG previews
+of these four examples. Every exported frame was decoded again and matched
+against reconstructed RGBA pixels. Playback uses the provisional cached
+rate interpretation; this does not reproduce scripted application behavior.
 
 
 Plugin PIG (type 0xFFFD)
@@ -1011,7 +1692,8 @@ Streaming audio data. Large audio files are split across multiple 0x3C
 entries, usually consecutive but sometimes separated by metadata. For
 RIFF/FORM streams, the container's length determines completion; include
 later 0x3C continuation chunks across those metadata entries. A fresh
-RIFF/FORM/ID3 header starts a separate stream, even when adjacent.
+RIFF/FORM/ID3 header, or a 36-byte Authorware MP3 wrapper followed by a valid
+MPEG Layer III header, starts a separate stream, even when adjacent.
 Unknown/MP3 streams retain the consecutive-entry grouping convention.
 
 Incomplete containers are saved as .bin with a partial-extraction warning.
@@ -1039,6 +1721,7 @@ COMM (format) and SSND (sample data) chunks. Observed in A4P and A5P.
 WAV: RIFF/WAVE container with fmt and data chunks. PCM and ADPCM occur
 in the corpus. Some A5R samples contain legacy Voxware (format 0x0062
 with a VOX. extension in fmt); these are extracted without transcoding.
+Review pages explicitly flag their unavailable browser-playable conversion.
 Their codec assignment is documented in RFC 2361, Appendix A.52:
 https://www.rfc-editor.org/rfc/rfc2361.html
 
@@ -1060,7 +1743,11 @@ a 36-byte big-endian wrapper header:
   0x24    ...   bytes     MP3 data (MPEG sync frame)
 
 The MP3 data from offset 0x24 onward should be extracted, discarding
-the wrapper.
+the wrapper. In A5R BamTur1/Bambam5, independently wrapped MP3 recordings
+can occupy consecutive entries with no intervening metadata. Start a new
+stream at each entry's wrapper; otherwise one export contains another
+recording's wrapper bytes and fails decoding. Do not scan inside audio
+chunks for wrappers. Continuation chunks remain byte-exact and joined.
 
 
 Empty Entries

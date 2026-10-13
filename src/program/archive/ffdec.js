@@ -45,5 +45,5 @@ export class ffdec extends Program
 
 	// send the output gif to ffmpeg to be turned into an MP4
 	chain      = "?ffmpeg";
-	chainCheck = (r, chainFile) => chainFile.dir===r.outDir({absolute : true}) && chainFile.ext===".gif";
+	chainCheck = (r, chainFile) => chainFile.dir===r.outDir({absolute : true}) && chainFile.ext.toLowerCase()===".gif";
 }

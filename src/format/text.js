@@ -199,6 +199,7 @@ export default
 		clispByteCompiled                        : {name : "CLISP byte-compiled Lisp program", ext : [".fas"], magic : ["CLISP byte-compiled Lisp program"]},
 		cloantoPersonalPaintRexxScript           : {name : "Cloanto Personal Paint Rexx script", ext : [".pprx"], magic : ["Cloanto Personal Paint Rexx script"], weakMagic : true},
 		cloantoPersonalPaintSettings             : {name : "Cloanto Personal Paint Settings", ext : [".set"], magic : ["Cloanto Personal Paint Settings"]},
+		cobol                                    : {name : "COBOL source", ext : [".cbl"], magic : ["COBOL source"], weakMagic : true},
 		codeBlocksDependencies                   : {name : "Code::Blocks Dependencies", ext : [".depend"], magic : ["Code::Blocks Dependencies"]},
 		codesysSymbols                           : {name : "CODESYS Symbols", ext : [".sym"], magic : ["CODESYS Symbols"], weakMagic : true},
 		coldFusionComponent                      : {name : "ColdFusion Component", ext : [".cfc"], magic : ["ColdFusion Component"], weakMagic : true},

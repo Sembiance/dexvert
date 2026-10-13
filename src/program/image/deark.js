@@ -225,7 +225,7 @@ export class deark extends Program
 			return false;
 
 		// DMG files incorrectly identified as ZLIB when sent to deark produces invalid 512byte output files, so check that here and deny them
-		if(r.stdout.includes("zlib") && dexFile.ext===".unc" && dexFile.size===512)
+		if(r.stdout.includes("zlib") && dexFile.ext.toLowerCase()===".unc" && dexFile.size===512)
 			return false;
 
 		// If a file extracts to > 3x it's original size, it's unlikely to be correct (http://dev.discmaster.textfiles.com/view/224/Deathmatch%20Arsenal%20V1.0%20(Arsenal%20Computer).ISO/wads_003/hunt.zip/HUNT.WAD/THINGS)

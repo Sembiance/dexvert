@@ -29,7 +29,6 @@
 | Vibe Viable |
 \-------------/
 >>> wip
-* Instruct vibe stuffitX to reverse engineer and fully support M68k filter 4 archives
 <<<
 
 * ZIP files might have hidden 'metadata' in PKAV/AVEXTRA data. So vibe code support for this.

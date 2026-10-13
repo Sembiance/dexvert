@@ -14,9 +14,9 @@ export class degasExtended extends Format
 		const originalExt = dexState.original.input.ext.toLowerCase();
 		if(originalExt===".pi9")
 			r.push("deark[module:fpaint_pi9]");
-		if(originalExt===".pi7")
+		else if(originalExt===".pi7")
 			r.push("deark[module:atari_pi7]");
-		if(originalExt===".pi4")
+		else if(originalExt===".pi4")
 			r.push("deark[module:fpaint_pi4]");
 		return r;
 	};

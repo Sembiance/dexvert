@@ -15,6 +15,7 @@ import json
 import math
 import re
 import struct
+import unicodedata
 import zlib
 from xml.etree import ElementTree as ET
 
@@ -22,6 +23,13 @@ from authorware_symbol import SYMBOL_CHARACTERS
 
 
 NS = 'http://www.w3.org/2000/svg'
+DYNAMIC_TEXT_WARNING = 'Dynamic/inline text objects retain their stored placeholder text'
+
+
+class InvalidImageReference(ValueError):
+    """A parsed image operation has no usable referenced image to draw."""
+
+
 ET.register_namespace('', NS)
 FIXED = {0x01: 2, 0x02: 2, 0x06: 8, 0x0A: 10, 0x0E: 8,
          0x21: 2, 0x22: 2, 0x23: 6, 0x26: 8, 0x2A: 10, 0x2E: 8,
@@ -105,7 +113,13 @@ def parse_pig(data):
     return result
 
 
-def text_layout(record, endian='<', platform='WIN'):
+def decode_text_bytes(raw, encoding):
+    """Decode a byte range before removing characters forbidden in XML."""
+    text = raw.decode(encoding, errors='replace')
+    return ''.join(c if ord(c) >= 32 or c in '\t\n\r' else '\ufffd' for c in text)
+
+
+def text_layout(record, endian='<', platform='WIN', encoding=None):
     """Read the style transitions, stored line baselines and character runs."""
     if len(record) < 100:
         raise ValueError('Short styled-text record')
@@ -123,10 +137,8 @@ def text_layout(record, endian='<', platform='WIN'):
     if word(record, 90, endian) != 8:
         raise ValueError('Unrecognized text style-transition size')
     raw = record[runs_end:runs_end + count]
-    encoding = 'mac_roman' if platform == 'MAC' else 'cp1252'
-    text = raw.decode(encoding, errors='replace')
-    # XML cannot contain the control bytes present in some old text runs.
-    text = ''.join(c if ord(c) >= 32 or c in '\t\n\r' else '\ufffd' for c in text)
+    encoding = encoding or ('mac_roman' if platform == 'MAC' else 'cp1252')
+    text = decode_text_bytes(raw, encoding)
     changes = [struct.unpack_from(endian + 'HhH', record, i)
                for i in range(92, changes_end, 8)]
     # Eight bytes per line; the final row is a sentinel giving the last
@@ -142,8 +154,12 @@ def text_layout(record, endian='<', platform='WIN'):
     if (any(start > end or end > count for start, _, _, _, end, *_ in lines)
             or any(start > count for start, _, _ in changes)):
         raise ValueError('Text ranges lie outside character data')
-    return {'text': text, 'raw': raw, 'changes': changes, 'lines': lines, 'runs': runs,
+    return {'text': text, 'raw': raw, 'encoding': encoding,
+            'changes': changes, 'lines': lines, 'runs': runs,
             'inline_objects': inline, 'invalid_runs': bad_runs,
+            'scrollable': word(record, 62, endian) == 2,
+            'scroll_offset': struct.unpack_from(endian + 'h', record, 68)[0],
+            'layout_bounds': rectangle(record, 26, endian),
             'bounds': rectangle(record, 6, endian), 'background': '#' + record[56:59].hex()}
 
 
@@ -157,12 +173,16 @@ Font substitution remains a viewer responsibility; fonts are not embedded.
 
     def __init__(self, data):
         self.styles, self.fonts = {}, {}
+        self.font_issues, self.font_notes = {}, {}
+        self.text_encoding = None
+        self.endian = None
         self.valid = False
         if len(data) < 24:
             return
         endian = '<' if data[:2] == b'\x13\0' else '>' if data[:2] == b'\0\x13' else None
         if not endian:
             return
+        self.endian = endian
         end, names_size, metrics_size = struct.unpack_from(endian + 'III', data, 6)
         if not 24 <= end <= len(data) or end + metrics_size + names_size > len(data) or metrics_size < 4:
             return
@@ -171,20 +191,63 @@ Font substitution remains a viewer responsibility; fonts are not embedded.
             return
         names = data[end + metrics_size:end + metrics_size + names_size]
         legacy_names = len(names) >= 4 and word(names, 2, endian) == 64
+        if legacy_names and 4 + word(names, 0, endian) * 64 > len(names):
+            return
         if not legacy_names and names_size % 128:
             return
-        for index in range(count):
-            record = data[end + 4 + index * stride:end + 4 + (index + 1) * stride]
+        records = [data[end + 4 + index * stride:end + 4 + (index + 1) * stride]
+                   for index in range(count)]
+        # The cached Windows TEXTMETRIC stores tmCharSet at byte 51 in
+        # both metric layouts. 128 is SHIFTJIS_CHARSET. Paired Mac/Windows
+        # faces share a family slot, even in PIGs with a different platform tag.
+        charsets = {record[51] for record in records if not word(record, 6, endian) & 0x10}
+        japanese_families = {word(record, 0, endian) for record in records
+                             if not word(record, 6, endian) & 0x10 and record[51] == 128}
+        if charsets - {0, 1, 2, 77, 255} == {128}:
+            # ANSI/default faces (and unnamed Mac system faces) don't specify
+            # the document's code page. Use its unambiguous Japanese charset,
+            # including for text that mixes ASCII and Japanese in those faces.
+            self.text_encoding = 'cp932'
+        for index, record in enumerate(records):
             family = word(record, 0, endian)
-            native_mac = word(record, 6, endian) == 16
+            # 0x10 selects the Macintosh metrics. Low flag bits can be set
+            # (0x13); they do not turn it into a Windows LOGFONT record.
+            native_mac = bool(word(record, 6, endian) & 0x10)
             name_offset = (4 + (family-1)*64 if legacy_names else family*128) + (0 if native_mac else 32)
-            name_data = names[max(0, name_offset):max(0, name_offset) + 32]
-            name = name_data.split(b'\0')[0].decode('mac_roman' if native_mac else 'cp1252', errors='replace')
+            family_in_range = (1 <= family <= word(names, 0, endian) if legacy_names
+                               else (family+1)*128 <= len(names))
+            if not legacy_names and family == 0 and names[:2] == b'\xff\xff':
+                family_in_range = False  # slot zero is bookkeeping, not a font name
+            name_data = names[name_offset:name_offset + 32] if family_in_range else b''
+            encoding = ('cp932' if (native_mac and family in japanese_families)
+                        or (not native_mac and record[51] == 128) else None)
+            name = name_data.split(b'\0')[0].decode(
+                encoding or ('mac_roman' if native_mac else 'cp1252'), errors='replace')
+            if legacy_names and native_mac and family == 0:
+                # Family slot zero has no name pair. The cached QuickDraw
+                # font ID supplies the Roman system/application default.
+                # Apple Inside Macintosh: Text, "Font Family IDs".
+                font_id = word(record, 26, endian)
+                name = {0: 'Chicago', 1: 'Geneva'}.get(font_id, '')
+                if name:
+                    self.font_notes[index + 1] = f'Font record {index + 1} uses the Roman Mac default {name}'
             if not name or any(ord(c) < 32 for c in name):
                 name = 'serif'
+                self.font_issues[index + 1] = f'Font record {index + 1} has no usable family name; substituted serif'
             size = abs(struct.unpack_from(endian + 'h', record, 8 if native_mac else 28)[0])
+            if not native_mac and stride == 62:
+                # Legacy Windows fonts cache the physical metrics after font
+                # mapping. Bitmap faces can be larger than the requested size.
+                # TEXTMETRIC character height = cell height - internal leading.
+                height, ascent, descent, leading = struct.unpack_from(endian + '4h', record, 38)
+                if 0 < height <= 1024 and ascent > 0 and descent >= 0 and height == ascent + descent and 0 <= leading < height:
+                    size = height - leading
             if 0 < size <= 512:
                 self.fonts[index + 1] = {'family': name, 'size': size}
+                if encoding:
+                    self.fonts[index + 1]['encoding'] = encoding
+            else:
+                self.font_issues[index + 1] = f'Font record {index + 1} has an invalid size'
         candidates = defaultdict(list)
         ordered = []
         for offset in range(24, end - 83, 2):
@@ -193,7 +256,7 @@ Font substitution remains a viewer responsibility; fonts are not embedded.
             metric = word(record, 40, endian)
             # These validation fields distinguish serialized style records
             # from optional tab stops, coordinates and strings between them.
-            if (not style_id or word(record, 14, endian) not in (0x01, 0x09, 0x11, 0x81, 0x89, 0x91)
+            if (not style_id or word(record, 14, endian) not in (0x01, 0x09, 0x11, 0x49, 0x51, 0x81, 0x89, 0x91)
                     or metric > count or word(record, 16, endian) > 4
                     or word(record, 38, endian) > 1024 or flags & 0xF0000000):
                 continue
@@ -215,12 +278,12 @@ Font substitution remains a viewer responsibility; fonts are not embedded.
             self.styles = partition
         self.valid = bool(self.fonts)
 
-    def apply(self, style, style_id, missing):
+    def apply(self, style, style_id, missing, issues=None, notes=None):
         item = self.styles.get(style_id)
         if item is None:
             if style_id:
                 missing.add(style_id)
-            return
+            return False
         mask = item['mask']
         if mask & 0x4000:
             style['color'] = item['color']
@@ -228,8 +291,41 @@ Font substitution remains a viewer responsibility; fonts are not embedded.
             font = self.fonts.get(item['font'])
             if font:
                 style.update(font)
+            if issues is not None:
+                if item['font'] in self.font_issues:
+                    issues.add(self.font_issues[item['font']])
+                elif font is None:
+                    issues.add(f'Font record {item["font"]} referenced by style {style_id} is unavailable')
+            if notes is not None and item['font'] in self.font_notes:
+                notes.add(self.font_notes[item['font']])
         attributes = mask & 0x7f
         style['attributes'] = (style['attributes'] & ~attributes) | (item['attributes'] & attributes)
+        return True
+
+
+def legacy_project_root(data, endian):
+    """Read the resource directory shared by A3M, A3W and A4P files.
+
+    A 188-byte header precedes 128 eight-byte resource-group slots. The
+    first uint16 is the object capacity, in groups of 256. It and the
+    resource IDs use container byte order: one group starts 01 00 on
+    Macintosh, but 00 01 on Windows. The next uint16 is reserved/zero.
+    The third table can be absent (START); the fourth can reference another
+    offset table (WELCOME and Wildlife). Its role is not yet interpreted.
+    """
+    if len(data) != 1212 or endian not in ('<', '>') or data[2:4] != b'\0\0':
+        return None
+    capacity = word(data, 0, endian)
+    group_count, remainder = divmod(capacity, 256)
+    if remainder or not 1 <= group_count <= 128:
+        return None
+    groups = []
+    for offset in range(0xBC, 0xBC + group_count*8, 8):
+        first, second, third, fourth = struct.unpack_from(endian+'4H', data, offset)
+        if not first or not second:
+            return None
+        groups.append([first, second, third])
+    return {'font_id': word(data, 0x32, endian), 'group_count': group_count, 'resource_groups': groups}
 
 
 def png_rgba(width, height, rows):
@@ -327,6 +423,7 @@ class Context:
         self.by_id = defaultdict(list)
         self.dib_palettes = defaultdict(set)
         self.font_tables = []
+        candidates = {}
         for index, entry in enumerate(entries):
             self.by_id[entry['id']].append(index)
             if entry['icon_type'] == 0x19 or (entry['icon_type'] == 0x06 and 24 <= entry['decomp_size'] <= 2_000_000):
@@ -335,7 +432,75 @@ class Context:
                     fonts = FontTable(font_data)
                     if fonts.valid:
                         self.font_tables.append(fonts)
-        self.fonts = self.font_tables[0] if self.font_tables else FontTable(b'')
+                        candidates[index] = fonts
+        self.font_table_index = None
+        self.font_selection_issue = None
+        self.project_root = None
+        self.project_root_index = None
+        roots = self.by_id.get(1, [])
+        if len(roots) == 1:
+            root = api.decompress_entry(data, entries[roots[0]]) or b''
+            matches = []
+            for index, fonts in candidates.items():
+                parsed = legacy_project_root(root, fonts.endian)
+                if parsed and self.by_id.get(parsed['font_id']) == [index]:
+                    matches.append((index, parsed))
+            if len(matches) == 1:
+                self.font_table_index, self.project_root = matches[0]
+                self.project_root_index = roots[0]
+        if self.font_table_index is None and len(candidates) == 1:
+            self.font_table_index = next(iter(candidates))
+        elif self.font_table_index is None and len(candidates) > 1:
+            self.font_selection_issue = 'Multiple font tables without an unambiguous project-root reference'
+        self.fonts = candidates.get(self.font_table_index, FontTable(b''))
+        self.display_pictures = self.legacy_display_pictures()
+
+    def legacy_display_pictures(self):
+        """Find direct display references in validated Macintosh object tables.
+
+        This is not a reachability analysis: buttons, libraries, scripts and
+        other object forms can also use pictures. Missing references here do
+        not justify dropping a drawing or choosing a different bitmap/palette.
+        """
+        if self.project_root is None or self.fonts.endian != '>':
+            return None
+        names = b''
+        root = self.entry(self.project_root_index)
+        name_indices = self.by_id.get(word(root, 4, '>'), [])
+        if len(name_indices) == 1:
+            names = self.entry(name_indices[0]) or b''
+        pictures = defaultdict(list)
+        for group_number, group in enumerate(self.project_root['resource_groups']):
+            indices = self.by_id.get(group[0], [])
+            if len(indices) != 1:
+                return None
+            table = self.entry(indices[0])
+            if table is None or len(table) < 514:
+                return None
+            offsets = struct.unpack_from('>257H', table)
+            if (offsets[0] != 514 or offsets[-1] != len(table)
+                    or any(a > b for a, b in zip(offsets, offsets[1:]))):
+                return None
+            for slot, (start, end) in enumerate(zip(offsets, offsets[1:])):
+                record = table[start:end]
+                if len(record) != 18 or record[3] & 0x3f not in (0x01, 0x11):
+                    continue
+                # These two display forms have different packed payloads;
+                # their picture ID stays little-endian inside the Mac table.
+                offset = 15 if record[3] & 0x10 else 14
+                entry_id = word(record, offset)
+                if not entry_id:
+                    continue
+                targets = self.by_id.get(entry_id, [])
+                if len(targets) != 1 or self.entries[targets[0]]['icon_type'] not in (0x34, 0xFFFD):
+                    return None  # do not label pictures using an unvalidated layout
+                owner = {'object_id': group_number * 256 + slot}
+                name_offset = longword(record, 0, '>') >> 12
+                name_end = names.find(b'\0', name_offset)
+                if 0 < name_offset < name_end:
+                    owner['name'] = names[name_offset:name_end].decode('mac_roman')
+                pictures[targets[0]].append(owner)
+        return dict(pictures)
 
     @lru_cache(maxsize=128)
     def entry(self, index):
@@ -345,7 +510,7 @@ class Context:
         candidates = [index for index in self.by_id.get(entry_id, [])
                       if self.entries[index]['icon_type'] in (0x35, 0x3E, 0x3B, 0x06)]
         if len(candidates) != 1:
-            raise ValueError(f'Image reference {entry_id} is missing or ambiguous')
+            raise InvalidImageReference(f'Image reference {entry_id} is missing or ambiguous')
         index = candidates[0]
         content = self.entry(index)
         if content is None:
@@ -377,11 +542,43 @@ def svg_element(parent, name, **attributes):
 
 
 @lru_cache(maxsize=256)
+def font_families(family):
+    """Keep the original face first, then compatible browser font families."""
+    aliases = {
+        'ms sans serif': ['Tahoma', 'Arial', 'sans-serif'],
+        'geneva': ['Arial', 'Helvetica', 'sans-serif'],
+        'system': ['Chicago', 'Geneva', 'Arial', 'sans-serif'],
+        'chicago': ['Geneva', 'Arial', 'sans-serif'],
+        'helv': ['Helvetica', 'Arial', 'sans-serif'],
+        'helvetica': ['Arial', 'sans-serif'],
+        'arial': ['Helvetica', 'sans-serif'],
+        'times': ['Times New Roman', 'serif'],
+        'times new roman': ['Times', 'serif'],
+        'tms rmn': ['Times New Roman', 'Times', 'serif'],
+        'palatino': ['Palatino Linotype', 'Book Antiqua', 'serif'],
+        'courier': ['Courier New', 'monospace'],
+        'courier new': ['Courier', 'monospace'],
+        'monaco': ['Courier New', 'monospace'],
+        'ｍｓ ゴシック': ['MS Gothic', 'Noto Sans CJK JP', 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'sans-serif'],
+        'ms gothic': ['Noto Sans CJK JP', 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'sans-serif'],
+        'osaka': ['Noto Sans CJK JP', 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'sans-serif'],
+    }
+    return [family, *aliases.get(family.lower(), [])]
+
+
+def svg_font_family(family):
+    generic = {'serif', 'sans-serif', 'monospace', 'cursive', 'fantasy'}
+    names = font_families(family)
+    return ', '.join(name if name in generic else '"' + name.replace('\\', '\\\\').replace('"', '\\"') + '"'
+                     for name in names)
+
+
+@lru_cache(maxsize=256)
 def installed_font(family, size, attributes):
     try:
         import subprocess
         from PIL import ImageFont
-        spec = family + (':style=Bold' if attributes & 1 else ':style=Regular')
+        spec = ','.join(font_families(family)) + (':style=Bold' if attributes & 1 else ':style=Regular')
         if attributes & 2:
             spec += ' Italic'
         result = subprocess.run(['fc-match', '-f', '%{file}', spec], capture_output=True,
@@ -405,6 +602,9 @@ class Renderer:
         self.warnings = list(parsed['warnings'])
         self.notes = []
         self.texts, self.missing_styles = [], set()
+        self.text_viewports = []
+        self.text_fits = []
+        self.font_issues, self.font_notes, self.rendered_font_tables = set(), set(), set()
         self.drawn = 0
         self.rendered_dibs = set()
         self.bounds = parsed['bounds']
@@ -480,23 +680,40 @@ class Renderer:
 
     def font_style(self, base, overlays, fallback_size):
         style = {'family': 'Arial', 'size': fallback_size, 'color': '#000000', 'attributes': 0}
-        self.context.fonts.apply(style, base, self.missing_styles)
-        for value in overlays:
-            self.context.fonts.apply(style, value, self.missing_styles)
+        if self.context.font_selection_issue:
+            self.font_issues.add(self.context.font_selection_issue)
+        for value in [base, *overlays]:
+            used = self.context.fonts.apply(style, value, self.missing_styles, self.font_issues, self.font_notes)
+            if used and self.context.font_table_index is not None:
+                self.rendered_font_tables.add(self.context.font_table_index)
         return style
 
     def text(self, record):
         if longword(record, 14, self.endian) in (0, 5):
             self.legacy_text(record)
             return
-        layout = text_layout(record, self.endian, self.parsed['platform'])
+        layout = text_layout(record, self.endian, self.parsed['platform'], self.context.fonts.text_encoding)
         self.texts.append(layout['text'])
         if layout['inline_objects']:
-            self.warning('Dynamic/inline text objects retain their stored placeholder text')
+            self.warning(DYNAMIC_TEXT_WARNING)
         if layout['invalid_runs']:
             self.warning('Invalid stored text-style ranges were ignored')
         if not layout['lines'] and layout['text']:
             raise ValueError('Text has no stored line positions')
+        clip_id = None
+        if layout['scrollable']:
+            left, top, right, bottom = layout['bounds']
+            if right <= left or bottom <= top:
+                raise ValueError('Invalid scrolling text viewport')
+            clip_id = f'text-clip-{len(self.text_viewports)}'
+            clip = svg_element(self.defs, 'clipPath', id=clip_id, clipPathUnits='userSpaceOnUse')
+            svg_element(clip, 'rect', x=left, y=top, width=right-left, height=bottom-top)
+            self.text_viewports.append({'bounds': list(layout['bounds']), 'scroll_offset': layout['scroll_offset']})
+            # Cached baselines already include the scroll offset. Preserve
+            # them and clip the text object, leaving neighboring art alone.
+            note = 'Scrollable text is clipped at its saved scroll position; full text is preserved in metadata'
+            if note not in self.notes:
+                self.notes.append(note)
         changes = layout['changes']
         for start, top, x, baseline, end, bottom, _, _ in layout['lines']:
             boundaries = {start, end}
@@ -507,14 +724,24 @@ class Renderer:
                 if start < last < end:
                     boundaries.add(last)
             node = self.shape('text', x=x, y=baseline)
+            if clip_id:
+                node.set('clip-path', f'url(#{clip_id})')
             node.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
             positions = sorted(boundaries)
+            advance, measured = 0, True
             for first, last in zip(positions, positions[1:]):
                 applicable = [item for item in changes if item[0] <= first]
                 _, delta, base = applicable[-1] if applicable else (0, 0, 0)
                 overlays = [style for begin, finish, style in layout['runs'] if begin <= first < finish]
+                raw_part = layout['raw'][first:last]
+                if not raw_part.replace(b'\r', b'').replace(b'\n', b''):
+                    continue
                 style = self.font_style(base, overlays, max(8, baseline-top))
-                part = layout['text'][first:last].replace('\r', '').replace('\n', '')
+                # Stored line/style positions count bytes, not Unicode code
+                # points. Slice first so a two-byte character cannot shift all
+                # subsequent lines and style changes after decoding.
+                part = decode_text_bytes(raw_part,
+                                         style.get('encoding', layout['encoding'])).replace('\r', '').replace('\n', '')
                 if not part:
                     continue
                 if style['family'].lower() == 'symbol':
@@ -523,7 +750,7 @@ class Renderer:
                     if any(0xe000 <= ord(c) <= 0xf8ff or c == '\ufffd' for c in part):
                         self.warning('Symbol font contains private-use or unmapped glyphs')
                     style['family'] = 'serif'
-                attrs = {'font_family': style['family'], 'font_size': style['size'],
+                attrs = {'font_family': svg_font_family(style['family']), 'font_size': style['size'],
                          'fill': style['color'], 'y': baseline-delta}
                 bits = style['attributes']
                 if bits & 1:
@@ -534,6 +761,33 @@ class Renderer:
                     attrs['text_decoration'] = 'underline'
                 span = svg_element(node, 'tspan', **attrs)
                 span.text = part
+                font = installed_font(style['family'], style['size'], bits)
+                if font is None:
+                    measured = False
+                else:
+                    advance += font.getlength(part)
+                    if style.get('encoding', layout['encoding']) == 'cp932':
+                        # A local measurement font may lack Japanese glyphs
+                        # even when the viewing browser has a CJK fallback.
+                        # Its narrow missing-glyph boxes must not undercount
+                        # the one-em advances of fullwidth Japanese characters.
+                        advance += sum(max(0, style['size'] - font.getlength(c))
+                                       for c in part if unicodedata.east_asian_width(c) in ('W', 'F'))
+            # Preserve the stored wrapping when a substitute face is wider.
+            # Only overflowing lines are fitted; short and centered lines
+            # keep their natural width. The original text remains unchanged.
+            layout_left, _, layout_right, _ = layout['layout_bounds']
+            left, _, right, _ = layout['bounds']
+            if left <= layout_left < layout_right <= right and x >= layout_left:
+                available = layout_right - x
+                if measured and available > 0 and advance > available + 0.5:
+                    node.set('textLength', str(available))
+                    node.set('lengthAdjust', 'spacingAndGlyphs')
+                    self.text_fits.append({'start': start, 'end': end, 'bounds': list(layout['bounds']),
+                                          'measured_width': round(advance, 3), 'width': available})
+                    note = 'Wider substituted fonts are fitted to the stored text line width'
+                    if note not in self.notes:
+                        self.notes.append(note)
 
     def legacy_text(self, record):
         """Older text objects store inline font runs but no cached line layout."""
@@ -581,7 +835,7 @@ class Renderer:
                 line.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
                 if part in ('\r', '\n', '\r\n'):
                     continue
-            attrs = {'font_family': style['family'], 'font_size': size, 'fill': style['color']}
+            attrs = {'font_family': svg_font_family(style['family']), 'font_size': size, 'fill': style['color']}
             if style['attributes'] & 1:
                 attrs['font_weight'] = 'bold'
             if style['attributes'] & 2:
@@ -621,7 +875,7 @@ class Renderer:
             dest = rectangle(record, 6, en)
             flags = word(record, 82, en)
             if flags == 1:
-                raise ValueError('Imported media is a link/handle without embedded pixels')
+                raise InvalidImageReference('Imported media is a link/handle without embedded pixels')
             if flags == 2 and len(record) >= 368:
                 index, content = self.context.reference(word(record, len(record)-4, en))
             else:
@@ -654,7 +908,10 @@ class Renderer:
                 # Only image formats relevant to this record are passed to
                 # Pillow. Never invoke external media applications or Xtras.
                 if content[:4] not in (b'II*\0', b'MM\0*', b'8BPS') and b'kMoaCfFormat_TGA\0' not in record:
-                    raise ValueError('Referenced image encoding is not supported for SVG')
+                    resource = (f'Referenced resource {self.context.entries[index]["id"]}'
+                                if index is not None else 'Inline image data')
+                    error = InvalidImageReference if index is not None else ValueError
+                    raise error(f'{resource} is not a recognized image ({len(content)} bytes)')
                 try:
                     import io
                     from PIL import Image
@@ -677,6 +934,9 @@ class Renderer:
             sx, sy, sr, sb = source
             if sr <= sx or sb <= sy:
                 raise ValueError('Invalid bitmap source rectangle')
+            if sx < 0 or sy < 0 or sr > iw or sb > ih:
+                self.warning(f'Bitmap source rectangle {sx},{sy},{sr},{sb} exceeds '
+                             f'the referenced bitmap dimensions {iw}x{ih}; reference may be stale')
             container = svg_element(self.root, 'svg', x=left, y=top, width=width, height=height,
                                     viewBox=f'{sx} {sy} {sr-sx} {sb-sy}', preserveAspectRatio='none', overflow='hidden')
             left, top, width, height = 0, 0, iw, ih
@@ -777,6 +1037,7 @@ class Renderer:
 
     def render(self):
         rendered_image_records = []
+        invalid_reference_warnings = []
         for tag, offset, record in self.parsed['records']:
             try:
                 self.operation(tag, record)
@@ -784,15 +1045,26 @@ class Renderer:
                     rendered_image_records.append({'operation': f'0x{tag:04X}',
                                                    'offset': offset, 'length': len(record)})
             except (ValueError, struct.error, IndexError, OverflowError) as exc:
-                self.warning(f'{OP_NAMES[tag]} at byte {offset}: {exc}')
+                message = f'{OP_NAMES[tag]} at byte {offset}: {exc}'
+                self.warning(message)
+                if isinstance(exc, InvalidImageReference):
+                    invalid_reference_warnings.append(message)
+        missing_style_warning = None
         if self.missing_styles:
-            self.warning('Unresolved text styles: ' + ', '.join(map(str, sorted(self.missing_styles))))
+            missing_style_warning = 'Unresolved text styles: ' + ', '.join(map(str, sorted(self.missing_styles)))
+            self.warning(missing_style_warning)
+        for issue in sorted(self.font_issues):
+            self.warning(issue)
+        self.notes.extend(sorted(self.font_notes))
         if self.texts:
             self.notes.append('Uses installed fonts; unavailable original fonts are substituted by the viewer')
         result = {'bounds': list(self.bounds), 'platform': self.parsed['platform'],
                   'operations': dict(Counter(f'0x{tag:04X}' for tag, _, _ in self.parsed['records'])),
                   'record_count': len(self.parsed['records']), 'drawn_objects': self.drawn,
                   'rendered_dibs': sorted(self.rendered_dibs),
+                  'rendered_font_tables': sorted(self.rendered_font_tables),
+                  'text_viewports': self.text_viewports,
+                  'text_fits': self.text_fits,
                   'rendered_image_records': rendered_image_records,
                   'warnings': self.warnings, 'notes': self.notes, 'text': '\n'.join(self.texts),
                   'status': 'partial' if self.warnings else 'converted',
@@ -804,6 +1076,14 @@ class Renderer:
             svg_element(self.root, 'title').text = 'Authorware PIG picture'
             svg_element(self.root, 'metadata').text = json.dumps(result, ensure_ascii=False)
             result['svg'] = ET.tostring(self.root, encoding='utf-8', xml_declaration=True)
+        # Processing recognized records counts as handling the PIG even when
+        # operations fail. A valid empty drawing is handled too. Keep export
+        # classification outside the SVG so drawing bytes remain unchanged.
+        result['handled'] = bool(self.parsed['records']) or self.parsed.get('declared_records') == 0
+        if invalid_reference_warnings:
+            result['unresolved_image_references'] = invalid_reference_warnings
+        if missing_style_warning:
+            result['unresolved_text_styles'] = [missing_style_warning]
         return result
 
 
@@ -811,6 +1091,7 @@ def render_pig(data, context):
     parsed = parse_pig(data)
     bounds = parsed['bounds']
     if not bounds or not (0 < bounds[2]-bounds[0] <= 32768 and 0 < bounds[3]-bounds[1] <= 32768):
-        return {'status': 'unrendered', 'svg': None, 'warnings': parsed['warnings'] + ['Invalid picture bounds'],
+        return {'status': 'unrendered', 'handled': False, 'svg': None,
+                'warnings': parsed['warnings'] + ['Invalid picture bounds'],
                 'text': '', 'operations': {}, 'drawn_objects': 0, 'record_count': len(parsed['records'])}
     return Renderer(context, data, parsed).render()

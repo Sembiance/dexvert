@@ -22,6 +22,8 @@ import json
 import argparse
 
 import authorware_pig
+import authorware_cursor
+import authorware_animation
 
 ICON_TYPE_NAMES = {
     0x01: "FileProperties",
@@ -328,12 +330,17 @@ def read_entries_wcrs(data, hdr):
     endian = '>' if hdr.get('big_endian') else '<'
     entries = []
     table_off = hdr['table_offset']
+    # Star's -5 variant leaves the ID fields unused. Like its offset-only
+    # -4 variant, references address one-based table positions. WCRS can
+    # share the flag value but stores real IDs and must not use this rule.
+    ordinal_ids = (hdr['magic'] in ('WPCR', 'WPLI')
+                   and hdr['flags'] & 0xFFFFFFFF == 0xFFFFFFFB)
     for i in range(hdr['entry_count']):
         off = table_off + i * 16
         if off + 16 > len(data):
             break
         entry = {}
-        entry['id'] = struct.unpack_from(f'{endian}H', data, off)[0]
+        entry['id'] = i + 1 if ordinal_ids else struct.unpack_from(f'{endian}H', data, off)[0]
         entry['storage_type'] = struct.unpack_from(f'{endian}H', data, off + 2)[0]
         entry['data_offset'] = struct.unpack_from(f'{endian}I', data, off + 8)[0]
         entry['decomp_size'] = struct.unpack_from(f'{endian}I', data, off + 12)[0]
@@ -1109,6 +1116,81 @@ def sound_data_groups(data, entries, legacy=False):
     return groups, consumed, unresolved
 
 
+def referenced_pcm_groups(data, entries):
+    """Read legacy sound-object properties and their ordered resource references.
+
+    Property 0x17 contains a byte count and WAVEFORMAT; 0x18 lists chunk IDs.
+    These owners also contain names, expressions and playback settings, so
+    retain their original data even after converting the referenced PCM.
+    """
+    by_id = {}
+    for index, entry in enumerate(entries):
+        by_id.setdefault(entry['id'], []).append(index)
+    owners = {}
+    for index, entry in enumerate(entries):
+        if entry['icon_type'] != 0x06 or not 0 < entry['id'] < 0x4000:
+            continue
+        content = decompress_entry(data, entry)
+        if content is None:
+            continue
+        pos, formats, lists = 0, [], []
+        while pos + 4 <= len(content):
+            tag, length = struct.unpack_from('<HH', content, pos)
+            end = pos + 4 + length
+            if not tag or end + (length & 1) > len(content):
+                break
+            if tag == 0x17:
+                formats.append(content[pos + 4:end])
+            elif tag == 0x18:
+                lists.append(content[pos + 4:end])
+            pos = end + (length & 1)
+        if content[pos:] not in (b'', b'\0\0') or len(formats) != 1 or len(lists) != 1:
+            continue
+        fmt, refs = formats[0], lists[0]
+        if len(fmt) != 26 or fmt[:2] != b'\x01\0' or len(refs) < 4:
+            continue
+        byte_count = struct.unpack_from('<I', fmt, 6)[0]
+        codec, channels, rate, byte_rate, align, bits = struct.unpack_from('<HHIIHH', fmt, 10)
+        count = struct.unpack_from('<H', refs)[0]
+        end = 2 + 2 * count
+        # Some saved lists reserve 128 bytes, with zero-filled unused slots.
+        if (codec != 1 or not 1 <= channels <= 32 or bits not in (8, 16)
+                or not 1000 <= rate <= 384000 or align != channels * (bits // 8)
+                or byte_rate != rate * align or not byte_count or byte_count % align
+                or not count or end > len(refs) or len(refs) % 2 or any(refs[end:])):
+            continue
+        owners[index] = {'byte_count': byte_count, 'sample_rate': rate,
+                         'bits_per_sample': bits, 'channels': channels,
+                         'block_align': align, 'keep_owner': True,
+                         'resource_ids': struct.unpack_from('<' + 'H' * count, refs, 2)}
+    groups, consumed, unresolved = {}, set(), []
+    for index, owner in owners.items():
+        members = []
+        valid = len(by_id[entries[index]['id']]) == 1
+        for resource_id in owner['resource_ids']:
+            candidates = by_id.get(resource_id, [])
+            if len(candidates) != 1 or candidates[0] in owners:
+                valid = False
+                break
+            target = candidates[0]
+            entry = entries[target]
+            content = decompress_entry(data, entry) if entry['icon_type'] in (0x06, 0x37) else None
+            if content is None or not content or len(content) != entry['decomp_size']:
+                valid = False
+                break
+            members.append(target)
+        if not valid or sum(entries[i]['decomp_size'] for i in members) != owner['byte_count']:
+            unresolved.append(index)
+            continue
+        groups[index] = {**owner, 'members': members}
+        consumed.update(members)
+    # A successful owner must not hide chunks needed by an unresolved owner.
+    for index in unresolved:
+        for resource_id in owners[index]['resource_ids']:
+            consumed.difference_update(by_id.get(resource_id, []))
+    return groups, consumed, unresolved
+
+
 def make_wav(pcm_data, sample_rate=22050, bits_per_sample=8, channels=1):
     """Create a WAV file from raw PCM data."""
     byte_rate = sample_rate * channels * (bits_per_sample // 8)
@@ -1259,11 +1341,22 @@ def recover_wave(data):
     return b'RIFF' + struct.pack('<I', offset - 8) + data[8:offset]
 
 
+def has_wrapped_mp3_header(data):
+    """Recognize Authorware's 36-byte wrapper followed by a Layer III header."""
+    if len(data) < 40 or data[:4] != b'\0\0\0\x20':
+        return False
+    first, second, third = data[36:39]
+    return (first == 0xff and second & 0xe0 == 0xe0
+            and (second >> 3) & 3 != 1 and (second >> 1) & 3 == 1
+            and third >> 4 not in (0, 15) and (third >> 2) & 3 != 3)
+
+
 def streaming_audio_groups(data, entries):
     """Join RIFF/FORM chunks even when metadata records separate them.
 
     A known container length delimits a stream. MP3/unknown streams retain
-    the consecutive-entry convention, with new ID3 headers starting a file.
+    the consecutive-entry convention, with new ID3 or Authorware MP3 wrapper
+    headers starting a file. Wrappers are examined only at entry boundaries.
     """
     groups = {}
     start = previous = None
@@ -1286,7 +1379,7 @@ def streaming_audio_groups(data, entries):
             previous = index
             continue
         new_size = audio_container_size(chunk)
-        new_header = new_size is not None or chunk[:3] == b'ID3'
+        new_header = new_size is not None or chunk[:3] == b'ID3' or has_wrapped_mp3_header(chunk)
         if start is not None and (new_header or (expected is None and index != previous + 1)):
             flush()
         if start is None:
@@ -1304,12 +1397,11 @@ def streaming_audio_groups(data, entries):
 def recover_unindexed_content(data, output_dir):
     """Salvage complete images from a legacy file whose table is missing.
 
-    Preserve all bytes as well: without the table the original entry IDs,
-    types and boundaries cannot be reconstructed reliably.
+    Without the table the original entry IDs, types and boundaries cannot
+    be reconstructed reliably. Emit recovered media only; a copy of the
+    entire input is not an extracted resource, even in deep mode.
     """
-    fname = write_output(output_dir, 'unindexed_data.bin', data)
-    print(f'  Original incomplete input preserved -> {fname}')
-    count = 1
+    count = 0
     offsets = [match.start() - 2 for match in re.finditer(re.escape(b'PIG\x00'), data)
                if match.start() >= 2 and data[match.start() + 4:match.start() + 8] in (b'WIN\x00', b'MAC\x00')]
     for index, offset in enumerate(offsets):
@@ -1331,12 +1423,12 @@ def recover_unindexed_content(data, output_dir):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Extract Authorware resources and reconstruct PIG pictures.')
+    parser = argparse.ArgumentParser(description='Extract Authorware resources, PIG pictures and APNG animations.')
     parser.add_argument('inputFile')
     parser.add_argument('outputDir')
     parser.add_argument('--report', action='store_true', help='Write a self-contained HTML review report')
     parser.add_argument('--deep', action='store_true',
-                        help='Keep original DIB .bin files even when a PIG SVG embeds their bitmap')
+                        help='Write manifest JSON files and retain original PIG, DIB, animation resources, cursor tables, project roots, font tables and sound headers')
     args = parser.parse_args()
     input_file, output_dir = args.inputFile, args.outputDir
     make_report = args.report
@@ -1381,6 +1473,21 @@ def main():
     audio_groups = streaming_audio_groups(data, entries)
     legacy_audio = hdr['magic'] in ('WPCR', 'WPLI', 'WCRS') or hdr.get('big_endian', False)
     pcm_groups, pcm_members, unresolved_pcm = sound_data_groups(data, entries, legacy=legacy_audio)
+    property_pcm_members = set()
+    # Explicit-ID Star APP/APR tables share the WCRS property layout. The
+    # ordinal-ID Star variants use separate packed sound descriptors.
+    if (hdr['magic'] == 'WCRS' or (hdr['magic'] in ('WPCR', 'WPLI')
+                                  and hdr['flags'] == -1)):
+        property_groups, property_pcm_members, property_unresolved = referenced_pcm_groups(data, entries)
+        legacy_pcm_indices = set(pcm_groups) | pcm_members
+        for index, group in property_groups.items():
+            if index in legacy_pcm_indices or legacy_pcm_indices.intersection(group['members']):
+                property_unresolved.append(index)
+                property_pcm_members.difference_update(group['members'])
+                pcm_members.difference_update(group['members'])
+                continue
+            pcm_groups[index] = group
+        unresolved_pcm.extend(property_unresolved)
     incomplete_audio = len(unresolved_pcm)
     for index in unresolved_pcm:
         print(f"Warning: PCM descriptor at entry index {index} (ID {entries[index]['id']}) "
@@ -1390,21 +1497,31 @@ def main():
     skipped_segment = 0
     decompression_failures = 0
     pig_context = authorware_pig.Context(sys.modules[__name__], data, entries)
+    cursor_endian = '>' if hdr.get('big_endian') else '<'
+    cursor_tables = authorware_cursor.referenced_tables(pig_context, cursor_endian)
+    cursor_results = []
+    animation_results = []
+    animation_consumed = set()
     pig_results = []
     pigs_by_index = {}
     dib_results = []
     rendered_dibs = {}
+    rendered_font_tables = set()
 
-    def save_pig_svg(content, prefix, entry_id, index):
+    def save_pig(content, prefix, entry_id, index):
+        """Write the SVG and make the sole raw-export decision for this PIG."""
         result = authorware_pig.render_pig(content, pig_context)
         svg = result.pop('svg')
         result.update(id=entry_id, index=index, key=str(index),
                       pig_sha256=hashlib.sha256(content).hexdigest())
+        if pig_context.display_pictures is not None and isinstance(index, int):
+            result['display_objects'] = pig_context.display_pictures.get(index, [])
         count = 0
         if svg:
             platform = result.get('platform', 'unknown')
             fname = write_output(output_dir, f'{prefix}_{platform}.svg', svg)
             result['file'] = fname
+            rendered_font_tables.update(result.get('rendered_font_tables', []))
             for dib_index in result.get('rendered_dibs', []):
                 rendered_dibs.setdefault(dib_index, []).append({'id': entry_id, 'index': index, 'file': fname})
             print(f'  PIG entry {entry_id}: SVG {result["status"]} -> {fname}')
@@ -1412,28 +1529,33 @@ def main():
             if make_report:
                 import base64
                 result['svg'] = 'data:image/svg+xml;base64,' + base64.b64encode(svg).decode('ascii')
+        # Handling and rendering fidelity are separate: any processed drawing
+        # keeps its diagnostics, but its original is needed only in deep mode.
+        if args.deep or not result['handled']:
+            fname = write_output(output_dir, f'{prefix}.bin', content)
+            reason = 'Original PIG retained by --deep' if args.deep else 'Original PIG retained; drawing could not be handled'
+            result.update(raw_file=fname, raw_export='deep' if args.deep else 'unhandled', raw_reason=reason)
+            print(f'  PIG entry {entry_id}: {reason} -> {fname}')
+            count += 1
+        else:
+            reason = ('Original PIG omitted; SVG conversion complete' if result['status'] == 'converted'
+                      else 'Original PIG omitted; drawing handled with limitations (see diagnostics)')
+            result.update(raw_export='omitted', raw_reason=reason)
         pig_results.append(result)
         pigs_by_index[index] = result
         return count
 
-    def preserve_rendered_pig_bitmap(content, prefix, index, dib_offset):
-        """Skip only the bitmap whose owning drawing record reached the SVG.
-
-        A successful reference may replace an embedded monochrome preview.
-        Keep the complete PIG so those original bytes remain available too.
-        """
+    def pig_bitmap_is_rendered(index, dib_offset):
+        """Skip only the bitmap whose owning drawing record reached the SVG."""
         picture = pigs_by_index.get(index, {})
         if not picture.get('file'):
-            return None
+            return False
         for record in picture.get('rendered_image_records', []):
             if record['offset'] <= dib_offset < record['offset'] + record['length']:
-                fname = write_output(output_dir, f'{prefix}.bin', content)
-                picture.update(raw_file=fname, bitmap_export='rendered_in_svg',
-                               bitmap_offset=dib_offset)
-                print(f'  PIG entry {picture["id"]}: bitmap rendered in {picture["file"]}; '
-                      f'original PIG preserved -> {fname}')
-                return fname
-        return None
+                picture.update(bitmap_export='rendered_in_svg', bitmap_offset=dib_offset)
+                print(f'  PIG entry {picture["id"]}: standalone bitmap omitted; rendered in {picture["file"]}')
+                return True
+        return False
 
     # Resolve and write all pictures before deciding which standalone DIBs
     # need a BMP. Entry order and physical order do not establish references.
@@ -1445,19 +1567,59 @@ def main():
         content = pig_context.entry(index)
         if content and content[2:6] == b'PIG\0':
             name = ICON_TYPE_NAMES.get(entry['icon_type'], 'PIG')
-            extracted_count += save_pig_svg(content, f'{entry["id"]:03d}_{name}', entry['id'], index)
+            extracted_count += save_pig(content, f'{entry["id"]:03d}_{name}', entry['id'], index)
     uncovered = find_uncovered_zlib_blocks(data, hdr, entries) if hdr['magic'] == 'ACRS' and not hdr.get('big_endian') else []
     for index, (offset, _, content) in enumerate(uncovered):
         if content[2:6] == b'PIG\0':
             prefix = f'extra_{index:03d}_0x{offset:06x}'
-            extracted_count += save_pig_svg(content, f'{prefix}_PIG', prefix, f'offset:{offset}')
+            extracted_count += save_pig(content, f'{prefix}_PIG', prefix, f'offset:{offset}')
+
+    # Animation storage is linked by explicit resource IDs, not table order.
+    # Suppress originals only after a complete APNG has been written. Shared
+    # blocks needed by a failed conversion remain available as raw resources.
+    animation_owners = authorware_animation.referenced_animations(pig_context, cursor_endian)
+    animation_preserved = set()
+    for index, entry in enumerate(entries):
+        if entry['icon_type'] != 0x33:
+            continue
+        candidates = animation_owners.get(index, [])
+        try:
+            animation = authorware_animation.render_animation(pig_context, index, candidates)
+        except ValueError as exc:
+            animation_preserved.update(authorware_animation.referenced_indices(pig_context, candidates))
+            animation_results.append({'id': entry['id'], 'index': index, 'status': 'unrendered',
+                                      'warnings': [str(exc)]})
+            print(f'  Animation entry {entry["id"]}: {exc}; original resources retained')
+            continue
+        fname = write_output(output_dir, f'{entry["id"]:03d}_Animation.apng', animation.pop('apng'))
+        animation.update(id=entry['id'], index=index, file=fname)
+        animation_results.append(animation)
+        animation_consumed.update(animation['consumed_indices'])
+        print(f'  Animation entry {entry["id"]}: {animation["frames"]} frames, '
+              f'{animation["width"]}x{animation["height"]} -> {fname}')
+        for warning in animation['warnings']:
+            print(f'    Warning: {warning}')
+        extracted_count += 1
+    animation_consumed.difference_update(animation_preserved)
 
     for entry_index, entry in enumerate(entries):
         if entry_index in pcm_members:
             continue  # written with its descriptor, even when IDs are repeated
+        if entry_index in property_pcm_members and not args.deep:
+            continue  # explicitly referenced PCM; --deep retains chunk originals
+        if entry_index in animation_consumed and not args.deep:
+            continue  # descriptor/pixel/mask data successfully exported as APNG
         eid = entry['id']
         icon_type = entry['icon_type']
         type_name = ICON_TYPE_NAMES.get(icon_type, f"Unknown_0x{icon_type:02x}")
+
+        if entry_index == pig_context.project_root_index and not args.deep:
+            print(f'  Entry {eid:3d} ({type_name}): internal project root omitted; use --deep to retain')
+            continue
+
+        if entry_index in rendered_font_tables and not args.deep:
+            print(f'  Entry {eid:3d} ({type_name}): original font/style table omitted; used in PIG SVGs')
+            continue
 
         # Skip entries whose data is beyond or straddles this segment's bounds
         if is_segment and (entry['data_offset'] >= len(data) or entry['data_offset'] + entry['comp_size'] > len(data)):
@@ -1478,6 +1640,32 @@ def main():
                 extracted_count += 1
             continue
 
+        if entry_index in cursor_tables:
+            try:
+                cursors = authorware_cursor.decode_table(entry_data, cursor_tables[entry_index], cursor_endian)
+            except ValueError as exc:
+                print(f'Warning: cursor table entry {eid} could not be converted: {exc}; original retained', file=sys.stderr)
+            else:
+                for cursor in cursors:
+                    png = cursor.pop('png')
+                    name = f'{eid:03d}_Cursor_{cursor["cursor_id"]:03d}_{cursor["width"]}x{cursor["height"]}.png'
+                    fname = write_output(output_dir, name, png)
+                    cursor.update(file=fname, id=eid, index=entry_index)
+                    print(f'  Entry {eid:3d}: cursor PNG -> {fname}')
+                    if cursor['inverting_pixels']:
+                        print(f'    {cursor["inverting_pixels"]} background-inverting pixels rendered black in PNG')
+                    extracted_count += 1
+                if args.deep:
+                    fname = write_output(output_dir, f'{eid:03d}_{type_name}.bin', entry_data)
+                    for cursor in cursors:
+                        cursor['raw_file'] = fname
+                    print(f'  Entry {eid:3d}: original cursor table retained by --deep -> {fname}')
+                    extracted_count += 1
+                else:
+                    print(f'  Entry {eid:3d}: original cursor table omitted; cursors saved as PNG')
+                cursor_results.extend(cursors)
+                continue
+
         if entry_index in pcm_groups:
             group = pcm_groups[entry_index]
             chunks = [decompress_entry(data, entries[index]) for index in group['members']]
@@ -1490,6 +1678,11 @@ def main():
                 print(f'  Entry {start_eid} (SoundData): WAV {rate}Hz {bits}bit {channels}ch '
                       f'({len(pcm)} PCM bytes, {len(chunks)} chunks) -> {fname}')
                 extracted_count += 1
+                # Omit the descriptor only after its audio has been written.
+                # Failed/unmatched sounds still retain their original header.
+                if not args.deep and not group.get('keep_owner'):
+                    print(f'  Entry {eid:3d} ({type_name}): original sound header omitted; audio saved as WAV')
+                    continue
             else:
                 incomplete_audio += 1
                 print(f'Warning: PCM audio for entry {eid} is missing or damaged; available chunks preserved', file=sys.stderr)
@@ -1571,8 +1764,7 @@ def main():
 
                 if candidate:
                     dib_offset, dib_data = candidate
-                    if preserve_rendered_pig_bitmap(entry_data, f'{eid:03d}_{type_name}', entry_index, dib_offset):
-                        extracted_count += 1
+                    if pig_bitmap_is_rendered(entry_index, dib_offset):
                         continue
                     bmp_data = make_bmp_from_dib(dib_data)
                     if bmp_data:
@@ -1599,15 +1791,19 @@ def main():
                     continue
 
                 # Check for text/script content in PIG
-                pig_text = extract_pig_text(entry_data)
+                # Preserve decoded multibyte display text in the text export;
+                # scanning binary bytes as ASCII loses those characters.
+                picture = pigs_by_index.get(entry_index, {})
+                pig_text = (picture.get('text') if pig_context.fonts.text_encoding else None) or extract_pig_text(entry_data)
                 if pig_text and len(pig_text) > 20:
                     fname = f"{eid:03d}_{type_name}_{platform}_text.txt"
                     fname = write_output(output_dir, fname, pig_text)
                     print(f"  Entry {eid:3d} ({type_name}): PIG/{platform} text ({len(pig_text)} chars) -> {fname}")
                     extracted_count += 1
-                    fname = write_output(output_dir, f'{eid:03d}_{type_name}.bin', entry_data)
-                    print(f"  Entry {eid:3d} ({type_name}): original PIG preserved -> {fname}")
-                    extracted_count += 1
+                    if entry_index not in pigs_by_index:
+                        fname = write_output(output_dir, f'{eid:03d}_{type_name}.bin', entry_data)
+                        print(f"  Entry {eid:3d} ({type_name}): original PIG preserved -> {fname}")
+                        extracted_count += 1
                     continue
 
                 # Save PIG dimensions info
@@ -1647,8 +1843,7 @@ def main():
                 candidate = find_best_dib_in_pig(entry_data, with_offset=True)
                 if candidate:
                     dib_offset, dib_data = candidate
-                    if preserve_rendered_pig_bitmap(entry_data, f'{eid:03d}_{type_name}', entry_index, dib_offset):
-                        extracted_count += 1
+                    if pig_bitmap_is_rendered(entry_index, dib_offset):
                         continue
                     bmp_data = make_bmp_from_dib(dib_data)
                     if bmp_data:
@@ -1727,7 +1922,7 @@ def main():
                     ext, fmt_name = 'wav', 'WAV'
             elif combined[:3] == b'ID3' or (len(combined) > 1 and combined[0] == 0xFF and combined[1] in (0xFB, 0xF3, 0xFA, 0xF2, 0xE2)):
                 ext, fmt_name = 'mp3', 'MP3'
-            elif len(combined) > 0x26 and combined[:4] == b'\x00\x00\x00\x20' and combined[0x24] == 0xFF and (combined[0x25] & 0xE0) == 0xE0:
+            elif has_wrapped_mp3_header(combined):
                 combined = combined[0x24:]
                 ext, fmt_name = 'mp3', 'MP3'
             else:
@@ -1743,7 +1938,8 @@ def main():
             print(f"  Entry {eid:3d} ({type_name}): {len(entry_data)} bytes -> {fname}")
             extracted_count += 1
 
-        if extracted_count == count_before and icon_type not in (0x37, 0x3C):
+        if (extracted_count == count_before and icon_type not in (0x37, 0x3C)
+                and entry_index not in pigs_by_index):
             fname = write_output(output_dir, f'{eid:03d}_{type_name}.bin', entry_data)
             print(f"  Entry {eid:3d} ({type_name}): undecoded content preserved -> {fname}")
             extracted_count += 1
@@ -1772,8 +1968,7 @@ def main():
                 candidate = find_best_dib_in_pig(block_data, with_offset=True)
                 if candidate:
                     dib_offset, dib_data = candidate
-                    if preserve_rendered_pig_bitmap(block_data, f'{prefix}_PIG', f'offset:{off}', dib_offset):
-                        extracted_count += 1
+                    if pig_bitmap_is_rendered(f'offset:{off}', dib_offset):
                         continue
                     bmp_data = make_bmp_from_dib(dib_data)
                     if bmp_data:
@@ -1786,7 +1981,10 @@ def main():
                         print(f"    0x{off:06x}: PIG/{platform} {w}x{h} {bpp}bpp -> {fname}")
                         extracted_count += 1
                         continue
-                # PIG with no extractable bitmap - save raw
+                # Recognized PIGs already had their raw-export decision above.
+                if f'offset:{off}' in pigs_by_index:
+                    continue
+                # Unrecognized PIG with no extractable bitmap - save raw.
                 fname = f"{prefix}_PIG.bin"
                 fname = write_output(output_dir, fname, block_data)
                 print(f"    0x{off:06x}: PIG/{platform} ({len(block_data)} bytes, no extractable bitmap) -> {fname}")
@@ -1823,32 +2021,40 @@ def main():
 
             extracted_count += 1
 
-    if pig_results:
+    if args.deep and pig_results:
         manifest = {'source': input_file, 'source_sha256': source_hash,
                     'pictures': [{key: value for key, value in result.items() if key != 'svg'}
                                  for result in pig_results]}
         fname = write_output(output_dir, 'pig_manifest.json', json.dumps(manifest, indent=2) + '\n')
         print(f'  PIG reconstruction details -> {fname}')
         extracted_count += 1
-    if dib_results:
+    if args.deep and dib_results:
         manifest = {'source': input_file, 'source_sha256': source_hash, 'dibs': dib_results}
         fname = write_output(output_dir, 'dib_manifest.json', json.dumps(manifest, indent=2) + '\n')
         print(f'  DIB references and export decisions -> {fname}')
         extracted_count += 1
+    if args.deep and animation_results:
+        manifest = {'source': input_file, 'source_sha256': source_hash, 'animations': animation_results}
+        fname = write_output(output_dir, 'animation_manifest.json', json.dumps(manifest, indent=2) + '\n')
+        print(f'  Animation reconstruction details -> {fname}')
+        extracted_count += 1
+    partial_notice = ('Extraction is partial; some content is missing, damaged, or could not be decoded'
+                      if skipped_segment or incomplete_audio or decompression_failures else '')
     if make_report:
         from authorware_pig_report import collect_assets, report_html
         names = [name for name in os.listdir(output_dir) if name not in report_existing
                  and os.path.isfile(os.path.join(output_dir, name))]
-        assets = collect_assets(output_dir, names, pig_results)
-        fname = write_output(output_dir, 'pig-report.html', report_html(input_file, source_hash, pig_results, assets))
+        assets = collect_assets(output_dir, names, pig_results, dib_results, cursor_results, animation_results)
+        fname = write_output(output_dir, 'pig-report.html',
+                             report_html(input_file, source_hash, pig_results, assets, partial_notice))
         print(f'  Extraction review -> {fname}')
         extracted_count += 1
 
     if is_segment and skipped_segment > 0:
         print(f"\n  Segment file: {skipped_segment} entries skipped (data in other segments)")
     print(f"\nExtracted {extracted_count} items to {output_dir}")
-    if skipped_segment or incomplete_audio or decompression_failures:
-        print('Warning: extraction is partial; some content is missing, damaged, or could not be decoded', file=sys.stderr)
+    if partial_notice:
+        print('Warning: ' + partial_notice, file=sys.stderr)
         sys.exit(2)
 
 

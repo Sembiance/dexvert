@@ -18,22 +18,32 @@ Usage: python3 authorware.py <inputFile> <outputDir> [--report] [--deep]
 Manifest JSON files (pig_manifest.json and dib_manifest.json) are written
 only with --deep. Normal extraction and --report do not export or offer
 downloads of these files. Reports use extraction metadata held in memory.
-The extractor works with the Python standard library. Pillow optionally
-accelerates conversion of bitmap pixels to PNG for SVG. For legacy text
+The extractor works with the Python standard library. Pillow enables PNG
+export when a raster picture needs decoding, scaling or cropping; without it,
+those pictures retain their SVG wrapper and a diagnostic. Native PNG pictures
+that already match the PIG canvas need no Pillow. For legacy text
 without stored line positions, installed fonts measured with Pillow and
 fontconfig improve wrapping; an approximate fallback is available.
 
-PIG resources now also produce self-contained SVG pictures, through
-authorware_pig.py. Text, audio and other raw exports are retained. Standalone
-DIB files (.bmp and .bin) are omitted when a PIG SVG successfully embeds that
+PIG resources produce self-contained SVG or PNG pictures through
+authorware_pig.py. A picture containing only one rendered raster image is
+exported as PNG, preserving its palette, alpha, source crop, destination
+scaling, canvas dimensions and transparent margins. Text, vector shapes
+and multiple-image compositions remain SVG. Animated imported images retain
+their frames, delays and play count as APNG data in the .png file. Resource
+limits or decoding failures keep the SVG and report the conversion limitation.
+Generated SVGs have no generic title element; metadata is included only with
+--deep. Reports retain diagnostics in either mode and display both formats.
+Text, audio and other raw exports are retained. Standalone
+DIB files (.bmp and .bin) are omitted when a PIG picture successfully uses that
 DIB. --deep retains those original DIB bytes as .bin; it does not add a
 duplicate BMP. DIBs that were not successfully embedded retain their raw
 .bin export and a standalone BMP when decoding succeeds.
 The separate imported-media .bin outputs are unchanged. Bitmaps needed
 inside a PIG composition are embedded in the SVG as PNG or their original
 browser-readable image format; original coordinates and draw order are used.
-PIG entries with drawing limitations can produce partial SVGs. Inspect
-the SVG's metadata, or pig_manifest.json with --deep, for diagnostics. Original
+PIG entries with drawing limitations can produce partial pictures. Inspect
+the report, or pig_manifest.json / SVG metadata with --deep, for diagnostics. Original
 PIG .bin files are omitted once the extractor handles the drawing, for
 bitmap, vector and text pictures alike. --deep retains every original.
 Handling means processing at least one recognized drawing record, or a
@@ -47,13 +57,13 @@ unsupported drawing) retain their original .bin even without --deep.
 DIB export decisions and the PIGs that successfully include each bitmap
 are recorded in dib_manifest.json with --deep. A reference that fails to render does
 not suppress a recoverable standalone BMP. Multiple PIGs using one DIB
-with different colors or cropping remain separate SVGs.
+with different colors or cropping remain separate pictures.
 --deep and --report can be combined. dib_manifest.json includes every DIB
 and its PIG references even when no standalone file is written; raw_file
 is present only when the original DIB was actually exported.
 
 Bitmaps stored inside a PIG (including reference previews) also omit their
-standalone BMP when that specific image drawing record succeeds in the SVG.
+standalone BMP when that specific image drawing record succeeds in the picture.
 pig_manifest.json records successful image record offsets, the suppressed
 BMP's source offset and each PIG's raw-export decision. raw_file is present
 only when the original PIG was exported (--deep or an entirely unhandled
@@ -92,7 +102,7 @@ self-contained offline page showing every PIG picture in a compact grid
 that wraps across the full browser width. Each image's checkerboard matches
 its dimensions. Images have no fixed height or internal scrollbars.
 Each picture is labeled with its entry ID and table index; click its label
-for a direct link, or click the image to open its SVG in a new tab. SVGs
+for a direct link, or click the image to open its SVG or PNG in a new tab. Pictures
 use local Blob URLs so this works in self-contained, offline reports.
 Display-object ownership is retained as diagnostic metadata but is not
 shown on the report cards. Report problems using the source filename and those
@@ -1040,7 +1050,7 @@ Length-prefixed records store their total byte length as uint32 at +2.
 The declared count bounds the command stream; bytes after the final
 record are often unused allocation/heap contents rather than commands.
 Unknown operations or invalid record lengths stop decoding and produce
-diagnostics. Original content exports are retained even when SVG succeeds.
+diagnostics. Handled PIG originals are retained only with --deep.
 
 Text record versions 9/10 contain cached line positions and sparse styles:
   +6: visible text-object rectangle.
@@ -1068,8 +1078,8 @@ Their cached line coordinates already include the saved scroll offset;
 subtracting it again would move the text twice. Bienvenue entries 128
 and 146 have offsets 328 and 56 respectively. Drawing their hidden lines
 without clipping incorrectly overlays neighboring headings/art. The
-SVG preserves the saved scroll position; complete text remains in its
-metadata and the separate text exports. Other drawing records do not
+SVG preserves the saved scroll position; complete text remains in report
+diagnostics, --deep metadata and separate text exports. Other drawing records do not
 inherit the text clip. text_viewports records these bounds/offsets.
 
 Font/style resources (type 0x19, or signature 13 00 / 00 13 in older
@@ -1343,7 +1353,7 @@ bitmap references and the palette active at each draw operation; never
 borrow colors based on table order, physical proximity or color count
 alone. The renderer uses the DIB's own palette when it is present.
 
-PIG SVGs are written before standalone DIB export, including PIGs found
+PIG pictures are written before standalone DIB export, including PIGs found
 in uncovered zlib blocks. Track successful bitmap embedding by entry table
 index, so duplicate/zero entry IDs cannot suppress unrelated resources.
 A partially rendered PIG can still successfully embed individual DIBs;

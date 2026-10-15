@@ -1033,7 +1033,7 @@ export default
 	
 	other :
 	{
-		// Game - These actually work with gameextractor but produce game-specific worthless files that can't be converted further at this time. Could vibe-code further support for the extracted files
+		// Game - These actually work with gameextractor but produce game-specific worthless files that can't be converted further at this time. Could vibe-code further to support the extracted files (via a specific chain if no magic)
 		aesopEngineResourceData         : {name : "AESOP engine Resource data", ext : [".res"], magic : ["AESOP engine Resource data", /^geArchive: RES_AEPOS( |$)/], weakMagic : true},
 		ageOfMythologySaveOrScenario    : {name : "Age of Mythology - Save game or scenario", ext : [".scn", ".svx"], magic : ["Age of Mythology: The Titans save game", "Age of Mythology save game", /^geArchive: AGE3SCN_L33T( |$)/]},
 		albionGameDataArchive           : {name : "Albion game data archive", ext : [".xld"], magic : ["Albion game data archive", /^geArchive: XLD_XLD0( |$)/]},
@@ -1051,6 +1051,7 @@ export default
 		f1ChallengeMAS                  : {name : "F1 Challenge MAS", ext : [".mas"], magic : ["F1 Challenge MAS", /^geArchive: MAS_CUBEMAS( |$)/]},
 		gexLEV                          : {name : "GEX LEV", ext : [".lev"], magic : [/^geArchive: LEV( |$)/]},
 		gPoliceGameData                 : {name : "G-Police game data", ext : [".rdt"], magic : ["G-Police game data", /^geArchive: RDT_RDA2( |$)/]},
+		grandTheftAuto4WTD              : {name : "Grand Theft Auto 4 WTD Archive", ext : [".wtd"], magic : [/^geArchive: WTD_RSC( |$)/]},
 		houseOfTheDeadGameDataContainer : {name : "The House of the Dead game data container", ext : [".rbh"], magic : [/^geArchive: VRAM_PIFF( |$)/, "The House of the Dead game data container"]},
 		hoyleCasinoPRF                  : {name : "Hoyle Casino PRF", ext : [".prf"], magic : [/^geArchive: PRF_PRF( |$)/]},
 		lucasFilmData                   : {name : "LucasFilm Data", ext : [".lfd"], magic : ["LucasFilm Data", "Lucas Film Data - Panel", /^geArchive: LFD_RMAP( |$)/]},
@@ -1066,6 +1067,7 @@ export default
 		valveSourceMap                  : {name : "Valve Source Map", ext : [".bsp"], magic : ["Valve Source BSP format", "Valve Source map", /^geArchive: BSP_VBSP( |$)/]},
 		visualSciencesResource          : {name : "Visual Sciences Resource", ext : [".vsr"], magic : ["Visual Sciences Resource", /^geArchive: VSR_CRID( |$)/], weakMagic : true},
 		wormsDIR                        : {name : "Worms DIR", ext : [".dir"], magic : [/^geArchive: DIR_DIR( |$)/]},
+		xMotorRacingTextures            : {name : "X Motor Racing textures", ext : [".trc", ".pnt", ".shd"], magic : ["X Motor Racing textures", /^geArchive: TRC_TEXTUREPACK4( |$)/], weakMagic : true},
 		zipperInteractiveZBD            : {name : "Zipper Interactive ZBD", ext : [".zbd"], magic : [/^geArchive: ZBD( |$)/]},
 		
 		//////////
@@ -1774,7 +1776,6 @@ export default
 		xenosagaSoundBank                             : {name : "Xenosaga Sound bank", ext : [".vsf"], magic : ["Xenosaga Sound bank"], weakMagic : true},
 		xenosagaSoundInfo                             : {name : "Xenosaga Sound info", ext : [".prj"], magic : ["Xenosaga Sound info"], weakMagic : true},
 		xFBINNUCCGameDataContainer                    : {name : "XFBIN NUCC game data container", ext : [".xfbin"], magic : ["XFBIN NUCC game data container"], weakMagic : true},
-		xMotorRacingTextures                          : {name : "X Motor Racing textures", ext : [".trc", ".pnt", ".shd"], magic : ["X Motor Racing textures"], weakMagic : true},
 		xPlaneAirfoils                                : {name : "X-Plane Airfoils", ext : [".afl"], magic : ["X-Plane Airfoils"], weakMagic : true},
 		xPlaneDrapedPolygon                           : {name : "X-Plane Draped Polygon", ext : [".pol"], magic : ["X-Plane Draped Polygon"], weakMagic : true},
 		xPlanePaintedLine                             : {name : "X-Plane Painted Line", ext : [".lin"], magic : ["X-Plane Painted Line"], weakMagic : true},
@@ -3255,7 +3256,7 @@ export default
 		palmTealInfo                             : {name : "Palm TealInfo", ext : [".pdb"], magic : ["Palm TealInfo", /^TealInfo PalmOS document/]},
 		palmThinkDBDocument                      : {name : "ThinkDB PalmOS document", ext : [".pdb"], magic : [/^ThinkDB PalmOS document/], weakMagic : true},
 		palmTides                                : {name : "Palm Tides", ext : [".pdb"], magic : ["Palm Tides", /^Tides PalmOS document/], weakMagic : true},
-		panda3DBamContainer                      : {name : "Panda3D Bam container", ext : [".bam"], magic : ["Panda3D Bam container"], weakMagic : true},
+		panda3DBamContainer                      : {name : "Panda3D Bam container", ext : [".bam"], magic : ["Panda3D Bam container", /^Panda3D BAM file/], weakMagic : true},
 		pandaSignatureFileSystem                 : {name : "Panda Signature file system", ext : [".sig"], magic : ["Panda Signature file system"]},
 		paperPortSlideShot                       : {name : "PaperPort Slide Show", ext : [".fss"], magic : ["PaperPort slide show"]},
 		papillonPalette                          : {name : "Papillon Palette", ext : [".pal", ".ppal"], magic : ["Papillon Palette"]},
@@ -3882,6 +3883,7 @@ export default
 		zBrushMaterial                           : {name : "ZBrush Material", ext : [".zmt"], magic : ["ZBrush Material"]},
 		zBrushPreset                             : {name : "ZBrush Preset", ext : [".zbp"], magic : ["ZBrush Preset"]},
 		zCalcData                                : {name : "zCalc data", ext : [".tax"], magic : ["zCalc data"]},
+		zeissBOSSBinaryObjectArchive             : {name : "Zeiss BOSS binary object archive", magic : ["Zeiss BOSS binary object archive"]},
 		zeroXBeatSlicerGroove                    : {name : "Zero-X BeatSlicer Groove", ext : [".zgr"], magic : ["Zero-X BeatSlicer Groove"]},
 		zeroOneZeroEditorBookmark                : {name : "010 Editor bookmark", ext : [".1bk"], magic : ["010 Editor bookmark"], weakMagic : true},
 		zmcVisualTabletData                      : {name : "ZMC VisualTablet data", ext : [".ekb"], magic : ["ZMC VisualTablet data"], weakMagic : true},

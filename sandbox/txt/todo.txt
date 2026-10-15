@@ -30,6 +30,11 @@
 \-------------/
 >>> wip
 <<<
+* Better converter for: image/blizzardPicture
+  nconvert doesn't work very well and blpngConverter is an expensive wine64 exclusive lock and the rest are all win7 windows and flaky
+  In fact, probably use vibe2png first, nconvert second and skip the remaining 3 (or at least do strongMatch and hasExtMatch etc)
+
+* http://fileformats.archiveteam.org/wiki/TLzrw1
 
 * ZIP files might have hidden 'metadata' in PKAV/AVEXTRA data. So vibe code support for this.
 	First dexvert needs a new meta program to retrieve this info and append to end of comment (or create if needed)
@@ -90,6 +95,9 @@
 	That way for very large databases I can provide a "quick search" box that will "live filter" the results below, pagination for huge tables, etc
 	In pp, it should take ALL strings and text and ensure it gets indexed so it's fully searchable
   * Now create a vibe2sqlite converter and support then vibe-convert the following:
+	- berkleydb (then after working and reprocessed them all, once the 'netscape cache' files are findable, let discord Archive95 know)
+		https://discmaster.textfiles.com/view/46570/Darrels%20Files.img/Program%20Files/Netscape/Users/dneedham/Cache/fat.db
+		https://discmaster.textfiles.com/view/43160/APPLE_GEEKWEEK_AT_PIKES_PEAK_CD2.ISO/System%20SW%20Sessions%20/SS201%20OpenDoc/Cyberdog%20Custom%20Demos/RT%20Demos/System%20Folder%207.5.3%20ODoc%20Demo/Preferences/Netscape%20%C6%92/Cache%20%C6%92/CCache%20log
     - sqlite2 (and sqlite 1?)
     - CSV, TSV, other delimited text formats
 	- document/fileMakerPro databases converting, give this to vibe code to help it write a converter to sqlite:  https://github.com/evanmiller/fmptools

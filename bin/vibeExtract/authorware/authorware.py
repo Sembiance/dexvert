@@ -1428,7 +1428,7 @@ def main():
     parser.add_argument('outputDir')
     parser.add_argument('--report', action='store_true', help='Write a self-contained HTML review report')
     parser.add_argument('--deep', action='store_true',
-                        help='Write manifest JSON files and retain original PIG, DIB, animation resources, cursor tables, project roots, font tables and sound headers')
+                        help='Include SVG metadata, write manifest JSON files and retain original PIG, DIB, animation resources, cursor tables, project roots, font tables and sound headers')
     args = parser.parse_args()
     input_file, output_dir = args.inputFile, args.outputDir
     make_report = args.report
@@ -1509,26 +1509,28 @@ def main():
     rendered_font_tables = set()
 
     def save_pig(content, prefix, entry_id, index):
-        """Write the SVG and make the sole raw-export decision for this PIG."""
-        result = authorware_pig.render_pig(content, pig_context)
+        """Write the picture and make the sole raw-export decision for this PIG."""
+        result = authorware_pig.render_pig(content, pig_context, deep=args.deep, prefer_png=True)
         svg = result.pop('svg')
+        png = result.pop('png', None)
+        picture, extension, mime = (png, 'png', 'image/png') if png is not None else (svg, 'svg', 'image/svg+xml')
         result.update(id=entry_id, index=index, key=str(index),
                       pig_sha256=hashlib.sha256(content).hexdigest())
         if pig_context.display_pictures is not None and isinstance(index, int):
             result['display_objects'] = pig_context.display_pictures.get(index, [])
         count = 0
-        if svg:
+        if picture:
             platform = result.get('platform', 'unknown')
-            fname = write_output(output_dir, f'{prefix}_{platform}.svg', svg)
+            fname = write_output(output_dir, f'{prefix}_{platform}.{extension}', picture)
             result['file'] = fname
             rendered_font_tables.update(result.get('rendered_font_tables', []))
             for dib_index in result.get('rendered_dibs', []):
                 rendered_dibs.setdefault(dib_index, []).append({'id': entry_id, 'index': index, 'file': fname})
-            print(f'  PIG entry {entry_id}: SVG {result["status"]} -> {fname}')
+            print(f'  PIG entry {entry_id}: {extension.upper()} {result["status"]} -> {fname}')
             count = 1
             if make_report:
                 import base64
-                result['svg'] = 'data:image/svg+xml;base64,' + base64.b64encode(svg).decode('ascii')
+                result['preview'] = f'data:{mime};base64,' + base64.b64encode(picture).decode('ascii')
         # Handling and rendering fidelity are separate: any processed drawing
         # keeps its diagnostics, but its original is needed only in deep mode.
         if args.deep or not result['handled']:
@@ -1538,7 +1540,7 @@ def main():
             print(f'  PIG entry {entry_id}: {reason} -> {fname}')
             count += 1
         else:
-            reason = ('Original PIG omitted; SVG conversion complete' if result['status'] == 'converted'
+            reason = ('Original PIG omitted; picture conversion complete' if result['status'] == 'converted'
                       else 'Original PIG omitted; drawing handled with limitations (see diagnostics)')
             result.update(raw_export='omitted', raw_reason=reason)
         pig_results.append(result)
@@ -1546,13 +1548,13 @@ def main():
         return count
 
     def pig_bitmap_is_rendered(index, dib_offset):
-        """Skip only the bitmap whose owning drawing record reached the SVG."""
+        """Skip only the bitmap whose owning drawing record reached the picture."""
         picture = pigs_by_index.get(index, {})
         if not picture.get('file'):
             return False
         for record in picture.get('rendered_image_records', []):
             if record['offset'] <= dib_offset < record['offset'] + record['length']:
-                picture.update(bitmap_export='rendered_in_svg', bitmap_offset=dib_offset)
+                picture.update(bitmap_export='rendered_in_picture', bitmap_offset=dib_offset)
                 print(f'  PIG entry {picture["id"]}: standalone bitmap omitted; rendered in {picture["file"]}')
                 return True
         return False
@@ -2023,7 +2025,7 @@ def main():
 
     if args.deep and pig_results:
         manifest = {'source': input_file, 'source_sha256': source_hash,
-                    'pictures': [{key: value for key, value in result.items() if key != 'svg'}
+                    'pictures': [{key: value for key, value in result.items() if key not in ('svg', 'preview')}
                                  for result in pig_results]}
         fname = write_output(output_dir, 'pig_manifest.json', json.dumps(manifest, indent=2) + '\n')
         print(f'  PIG reconstruction details -> {fname}')

@@ -1,9 +1,9 @@
 # Vibe coded by Codex
-"""Decode Authorware PIG display lists and reconstruct self-contained SVGs.
+"""Decode Authorware PIG display lists and reconstruct SVG or PNG pictures.
 
 This module keeps record parsing, resource resolution and rendering separate.
 Unknown records stop parsing; rendering limitations are returned as diagnostics
-and embedded in SVG metadata rather than silently declaring a complete picture.
+and, with deep export, embedded in SVG metadata.
 No project scripts, linked files, URLs, or imported code are executed.
 """
 
@@ -11,6 +11,7 @@ import base64
 from collections import Counter, defaultdict
 from functools import lru_cache
 import hashlib
+import io
 import json
 import math
 import re
@@ -595,6 +596,109 @@ def text_advance(text, family, size, attributes):
     return sum(size * (0.28 if c.isspace() else 0.55) for c in text)
 
 
+def single_raster_png(root):
+    """Render our single-image SVG layout as PNG, or return None for vector art.
+
+    Only accept the simple image/viewport structure emitted by Renderer.image;
+    a vector, second image or unfamiliar effect must keep its SVG composition.
+    """
+    def children(node):
+        return [child for child in node if isinstance(child.tag, str)
+                and child.tag not in ('{' + NS + '}metadata', '{' + NS + '}title')
+                and not (child.tag == '{' + NS + '}defs' and not len(child))]
+
+    nodes = children(root)
+    if len(nodes) != 1:
+        return None
+    node = nodes[0]
+    left, top, width, height = map(int, root.get('viewBox').split())
+    clip = (left, top, left + width, top + height)
+    viewport = None
+    if node.tag == '{' + NS + '}svg':
+        if set(node.attrib) - {'x', 'y', 'width', 'height', 'viewBox', 'preserveAspectRatio', 'overflow'}:
+            return None
+        if node.get('preserveAspectRatio') != 'none' or node.get('overflow') != 'hidden':
+            return None
+        nodes = children(node)
+        if len(nodes) != 1:
+            return None
+        x, y, w, h = (int(node.get(key)) for key in ('x', 'y', 'width', 'height'))
+        vx, vy, vw, vh = map(int, node.get('viewBox').split())
+        viewport = (x, y, w, h, vx, vy, vw, vh)
+        clip = (max(left, x), max(top, y), min(left + width, x + w), min(top + height, y + h))
+        node = nodes[0]
+    if node.tag != '{' + NS + '}image' or len(node):
+        return None
+    if set(node.attrib) - {'x', 'y', 'width', 'height', 'preserveAspectRatio', 'href',
+                           '{http://www.w3.org/1999/xlink}href'}:
+        return None
+    if node.get('preserveAspectRatio') != 'none':
+        return None
+    x, y, w, h = (int(node.get(key)) for key in ('x', 'y', 'width', 'height'))
+    if viewport:
+        dx, dy, dw, dh, vx, vy, vw, vh = viewport
+        x, y, w, h = dx + (x-vx)*dw/vw, dy + (y-vy)*dh/vh, w*dw/vw, h*dh/vh
+    href = node.get('href', '')
+    if not href.startswith('data:image/') or ';base64,' not in href:
+        return None
+    content = base64.b64decode(href.split(';base64,', 1)[1], validate=True)
+    if width * height > 40_000_000:
+        raise ValueError('Single-bitmap PNG exceeds the pixel limit')
+    # Keep a native PNG verbatim when no layout conversion is needed. Besides
+    # avoiding resampling, this preserves APNG frames and needs no Pillow.
+    if (content.startswith(b'\x89PNG\r\n\x1a\n') and len(content) >= 24
+            and (x, y, w, h) == (left, top, width, height)
+            and clip == (left, top, left + width, top + height)
+            and struct.unpack_from('>II', content, 16) == (width, height)):
+        return content
+    try:
+        from PIL import Image
+    except ImportError:
+        raise ValueError('Pillow is required to lay out or convert this single-bitmap PNG') from None
+    try:
+        bitmap = Image.open(io.BytesIO(content))
+    except Image.DecompressionBombError as exc:
+        raise ValueError(f'Single-bitmap PNG decoding exceeds the pixel limit: {exc}') from None
+    with bitmap:
+        count = getattr(bitmap, 'n_frames', 1)
+        if max(bitmap.width * bitmap.height, width * height) * count > 40_000_000:
+            raise ValueError('Single-bitmap PNG frames exceed the pixel limit')
+        poster = bool(bitmap.info.get('default_image'))
+        loop = bitmap.info.get('loop', 1)
+        if bitmap.format == 'GIF' and loop:
+            # GIF stores repetitions after the first play; APNG stores plays.
+            loop = bitmap.info['loop'] + 1 if 'loop' in bitmap.info else 1
+        frames, durations = [], []
+        for index in range(count):
+            bitmap.seek(index)
+            frame = bitmap.convert('RGBA')
+            canvas = Image.new('RGBA', (width, height))
+            cl, ct, cr, cb = clip
+            if cr > cl and cb > ct:
+                sx, sy = frame.width / w, frame.height / h
+                if sx == sy == 1 and int(x) == x and int(y) == y:
+                    # Integer translation/cropping needs no resampling. In
+                    # particular, keep semitransparent RGB values lossless.
+                    tile = frame.crop((int(cl-x), int(ct-y), int(cr-x), int(cb-y)))
+                else:
+                    tile = frame.transform((cr-cl, cb-ct), Image.Transform.AFFINE,
+                                           (sx, 0, (cl-x)*sx, 0, sy, (ct-y)*sy),
+                                           resample=Image.Resampling.BICUBIC)
+                canvas.paste(tile, (cl-left, ct-top))
+            frames.append(canvas)
+            if not poster or index:
+                durations.append(bitmap.info.get('duration', 100))
+        output = io.BytesIO()
+        options = {}
+        if count > 1:
+            # Fully composed frames preserve GIF disposal and transparent
+            # pixels. APNG source replacement prevents trails between frames.
+            options = dict(save_all=True, append_images=frames[1:], duration=durations,
+                           loop=loop, disposal=0, blend=0, default_image=poster)
+        frames[0].save(output, 'PNG', **options)
+        return output.getvalue()
+
+
 class Renderer:
     def __init__(self, context, pig, parsed):
         self.context, self.api, self.pig, self.parsed = context, context.api, pig, parsed
@@ -711,7 +815,7 @@ class Renderer:
             self.text_viewports.append({'bounds': list(layout['bounds']), 'scroll_offset': layout['scroll_offset']})
             # Cached baselines already include the scroll offset. Preserve
             # them and clip the text object, leaving neighboring art alone.
-            note = 'Scrollable text is clipped at its saved scroll position; full text is preserved in metadata'
+            note = 'Scrollable text is clipped at its saved scroll position; full text is preserved in diagnostics'
             if note not in self.notes:
                 self.notes.append(note)
         changes = layout['changes']
@@ -1035,7 +1139,7 @@ class Renderer:
         elif tag in (0x60, 0x65, 0x9A):
             self.image(tag, record)
 
-    def render(self):
+    def render(self, *, deep=False, prefer_png=False):
         rendered_image_records = []
         invalid_reference_warnings = []
         for tag, offset, record in self.parsed['records']:
@@ -1058,6 +1162,12 @@ class Renderer:
         self.notes.extend(sorted(self.font_notes))
         if self.texts:
             self.notes.append('Uses installed fonts; unavailable original fonts are substituted by the viewer')
+        png = None
+        if self.drawn and prefer_png:
+            try:
+                png = single_raster_png(self.root)
+            except (ValueError, OSError, OverflowError, EOFError, struct.error) as exc:
+                self.warning(f'Single-bitmap PNG export failed; SVG retained: {exc}')
         result = {'bounds': list(self.bounds), 'platform': self.parsed['platform'],
                   'operations': dict(Counter(f'0x{tag:04X}' for tag, _, _ in self.parsed['records'])),
                   'record_count': len(self.parsed['records']), 'drawn_objects': self.drawn,
@@ -1069,12 +1179,14 @@ class Renderer:
                   'warnings': self.warnings, 'notes': self.notes, 'text': '\n'.join(self.texts),
                   'status': 'partial' if self.warnings else 'converted',
                   'padding_bytes': self.parsed.get('padding_bytes', 0)}
-        if not self.drawn:
+        if png is not None:
+            result.update(png=png, svg=None)
+        elif not self.drawn:
             result['status'] = 'unrendered'
             result['svg'] = None
         else:
-            svg_element(self.root, 'title').text = 'Authorware PIG picture'
-            svg_element(self.root, 'metadata').text = json.dumps(result, ensure_ascii=False)
+            if deep:
+                svg_element(self.root, 'metadata').text = json.dumps(result, ensure_ascii=False)
             result['svg'] = ET.tostring(self.root, encoding='utf-8', xml_declaration=True)
         # Processing recognized records counts as handling the PIG even when
         # operations fail. A valid empty drawing is handled too. Keep export
@@ -1087,11 +1199,11 @@ class Renderer:
         return result
 
 
-def render_pig(data, context):
+def render_pig(data, context, *, deep=False, prefer_png=False):
     parsed = parse_pig(data)
     bounds = parsed['bounds']
     if not bounds or not (0 < bounds[2]-bounds[0] <= 32768 and 0 < bounds[3]-bounds[1] <= 32768):
         return {'status': 'unrendered', 'handled': False, 'svg': None,
                 'warnings': parsed['warnings'] + ['Invalid picture bounds'],
                 'text': '', 'operations': {}, 'drawn_objects': 0, 'record_count': len(parsed['records'])}
-    return Renderer(context, data, parsed).render()
+    return Renderer(context, data, parsed).render(deep=deep, prefer_png=prefer_png)

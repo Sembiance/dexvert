@@ -278,11 +278,11 @@ def report_html(source, source_hash, pictures, assets=(), notice=''):
                 size = f' width="{int(width)}" height="{int(height)}"'
                 card_size = f' style="--picture-width:{int(width) + 2}px"'
                 dimensions = f'{width} × {height}'
-        svg = picture.get('svg')
-        if svg and svg.startswith('data:image/svg+xml;base64,'):
-            title = 'Open ' + picture.get('file', 'SVG for ' + label)
-            art = ('<div class="art"><a class="svg-link" href="#' + anchor + '" target="_blank" rel="noopener" title="' + escape(title, quote=True) + '">'
-                   '<img loading="lazy" decoding="async"' + size + ' src="' + escape(svg, quote=True) + '" alt="' + escape(label, quote=True) + '"></a></div>')
+        preview = picture.get('preview') or picture.get('svg')
+        if preview and preview.startswith(('data:image/svg+xml;base64,', 'data:image/png;base64,')):
+            title = 'Open ' + picture.get('file', 'picture for ' + label)
+            art = ('<div class="art"><a class="picture-link" href="#' + anchor + '" target="_blank" rel="noopener" title="' + escape(title, quote=True) + '">'
+                   '<img loading="lazy" decoding="async"' + size + ' src="' + escape(preview, quote=True) + '" alt="' + escape(label, quote=True) + '"></a></div>')
         else:
             art = '<p class="missing">No renderable picture recovered.</p>'
         warnings = ''.join('<p class="warning">' + escape(str(w)) + '</p>' for w in picture.get('warnings', []))
@@ -299,7 +299,7 @@ def report_html(source, source_hash, pictures, assets=(), notice=''):
                         'runtime scripts and synchronization are not replayed.</p>')
     # Keep diagnostic metadata without duplicating the embedded image data.
     data = {'source': str(source), 'sha256': source_hash,
-            'pictures': [{k: v for k, v in p.items() if k != 'svg'} for p in pictures],
+            'pictures': [{k: v for k, v in p.items() if k not in ('svg', 'preview')} for p in pictures],
             'assets': [{k: v for k, v in a.items() if k not in ('url', 'preview', 'text')} for a in assets]}
     encoded = json.dumps(data, ensure_ascii=True).replace('<', '\\u003c')
     return '''<!doctype html>
@@ -312,19 +312,19 @@ def report_html(source, source_hash, pictures, assets=(), notice=''):
 nav{margin-top:10px}.section-title{font-size:18px;padding:18px 16px 0;margin:0}.asset{width:340px;max-width:100%;min-width:0;border:1px solid #354258;border-radius:6px;background:#1b2432;overflow:hidden}.asset.image{width:max(120px,var(--picture-width,240px))}.asset.text{width:420px}.asset.video{width:480px}.asset h3{font-size:12px;line-height:1.4;margin:0;padding:8px;overflow-wrap:anywhere}.asset audio,.asset video{display:block;width:100%;max-width:100%}.asset iframe{display:block;border:0;border-top:1px solid #354258;width:100%;height:170px;background:#111923}.file-list{padding:16px}table{border-collapse:collapse;width:100%;table-layout:fixed}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #354258;padding:8px;overflow-wrap:anywhere}th:nth-child(1){width:35%}th:nth-child(2){width:12%}td code{font-size:11px}
 </style>
 <header><h1>Authorware extraction review</h1><p>''' + escape(str(source)) + '''</p><p class="muted">''' + escape(totals) + '''</p>
-<p>Scroll through all extracted content. Report problems by entry number or filename. Click a picture to open its SVG in a new tab; click other filenames to download the extracted file.</p>
+<p>Scroll through all extracted content. Report problems by entry number or filename. Click a picture to open its SVG or PNG in a new tab; click other filenames to download the extracted file.</p>
 <p class="muted">Each image keeps its original dimensions when it fits the window. The checkerboard marks transparency within the image. Original fonts may be substituted.</p>''' + notice_html + navigation + '''</header>
 <main>''' + ('<section id="pig-pictures"><h2 class="section-title">PIG pictures · ' + str(len(pictures)) + '</h2><div class="grid">' + ''.join(cards) + '</div></section>' if cards else '') + other_sections + ('' if cards or assets else '<p class="missing">No extracted content recovered.</p>') + '''</main>
 <footer>Source SHA-256: <code>''' + escape(str(source_hash)) + '''</code></footer>
 <script id="payload" type="application/json">''' + encoded + '''</script>
 <script>
 // Vibe coded by Codex
-// Blob links open embedded SVGs offline without blocked data-URL navigation
-// or a second copy of every SVG in the HTML.
-for (const link of document.querySelectorAll('.svg-link')) {
-    const encoded = link.querySelector('img').getAttribute('src').split(',')[1];
+// Blob links open embedded pictures offline without blocked data-URL navigation
+// or a second copy of every picture in the HTML.
+for (const link of document.querySelectorAll('.picture-link')) {
+    const [header, encoded] = link.querySelector('img').getAttribute('src').split(',');
     const bytes = Uint8Array.from(atob(encoded), character => character.charCodeAt(0));
-    link.href = URL.createObjectURL(new Blob([bytes], {type: 'image/svg+xml'}));
+    link.href = URL.createObjectURL(new Blob([bytes], {type: header.slice(5).split(';')[0]}));
 }
 </script></html>'''
 

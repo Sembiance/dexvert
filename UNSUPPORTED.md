@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,017)
+# Unsupported File Formats (4,019)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1098,7 +1098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,835)
+## Other (2,837)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2180,6 +2180,7 @@ Family/Format | Name | Extensions | Notes
 [other/grandPrixCircuitSavedSlot](https://discmaster.textfiles.com/search?format=grandPrixCircuitSavedSlot) | Grand Prix Circuit Saved slot | .stm | 
 [other/grandTheftAuto2MapLayout](https://discmaster.textfiles.com/search?format=grandTheftAuto2MapLayout) | Grand Theft Auto 2 Map Layout | .gmp | 
 [other/grandTheftAuto2StyleData](https://discmaster.textfiles.com/search?format=grandTheftAuto2StyleData) | Grand Theft Auto 2 Style data | .sty | 
+[other/grandTheftAuto4WTD](https://discmaster.textfiles.com/search?format=grandTheftAuto4WTD) | Grand Theft Auto 4 WTD Archive | .wtd | 
 [other/grandTheftAuto5TextureDictionary](https://discmaster.textfiles.com/search?format=grandTheftAuto5TextureDictionary) | Grand Theft Auto 5 Texture Dictionary | .ytd | 
 [other/grandTheftAutoAnimation](https://discmaster.textfiles.com/search?format=grandTheftAutoAnimation) | Grand Theft Auto animation | .ifp | 
 [other/grandTheftAutoFakeText](https://discmaster.textfiles.com/search?format=grandTheftAutoFakeText) | Grand Theft Auto Fake Text | .fxt | 
@@ -3922,6 +3923,7 @@ Family/Format | Name | Extensions | Notes
 [other/zCalcData](https://discmaster.textfiles.com/search?format=zCalcData) | zCalc data | .tax | 
 [other/zCTSystemsGroupVideoDriver](https://discmaster.textfiles.com/search?format=zCTSystemsGroupVideoDriver) | ZCT Systems Group video Driver | .drv | 
 [other/zdaGameDataArchive](https://discmaster.textfiles.com/search?format=zdaGameDataArchive) | ZDA game data archive | .zda | 
+[other/zeissBOSSBinaryObjectArchive](https://discmaster.textfiles.com/search?format=zeissBOSSBinaryObjectArchive) | Zeiss BOSS binary object archive |  | 
 [other/zeldaClassicQuest](https://discmaster.textfiles.com/search?format=zeldaClassicQuest) | Zelda Classic Quest | .qst | 
 [other/zeroXBeatSlicerGroove](https://discmaster.textfiles.com/search?format=zeroXBeatSlicerGroove) | Zero-X BeatSlicer Groove | .zgr | 
 [other/zickyZicksMilkcapsGameData](https://discmaster.textfiles.com/search?format=zickyZicksMilkcapsGameData) | Zicky Zick's Milkcaps game data | .tub | 

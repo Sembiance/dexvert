@@ -1,11 +1,11 @@
-# Supported File Formats (3,933)
+# Supported File Formats (3,937)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (740)
+## Archive (742)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | "The Sims" object | .flr .wll .iff | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/theSimsObject/)
@@ -80,12 +80,12 @@ archive | [Artisoft installation Package](http://fileformats.archiveteam.org/wik
 archive | [ARX Archive](http://fileformats.archiveteam.org/wiki/ARX) | .arx | [deark](https://entropymine.com/deark/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/arx/)
 archive | ASCARON Entertainment game archive | .cpr | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/ascaronEntertainmentGameArchive/)
 archive | [ASD Archive](http://fileformats.archiveteam.org/wiki/ASD_Archiver) | .asd | [unasd](https://www.sac.sk/download/pack/asd020.exe) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/asdArchive/)
-archive | Asura engine Resources package | .asr | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/asuraEngineResourcesPackageGeneric/)
+archive | Asura engine Resources package | .asr | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/asuraEngineResourcesPackageGeneric/)
 archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ATR) | .atr | [atr](https://github.com/jhallen/atari-tools) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atr/) - Several ATR disks (such as Rambrandt.ATR) don't seem to extract. Deark (and other ATR extraction tools) find them corrupted.
 archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | [uniso](https://github.com/Sembiance/dexvert/) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/stDiskImage/)
 archive | ATG Core Cement game data archive | .rcf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/atgCoreCementGameDataArchive/)
 archive | Atomik Cruncher Compressed Data |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atomikCruncher/)
-archive | [Authorware Application/Package](http://fileformats.archiveteam.org/wiki/Authorware) | .app .apr .apw .asw .aas .a3w .a3m .a4p .a4r .a5p .a5r .a6p .a6r .a7p .a7r | [vibeExtract](https://github.com/Sembiance/dexvert) | [73 sample files](https://sembiance.com/fileFormatSamples/archive/authorware/)
+archive | [Authorware Application/Package](http://fileformats.archiveteam.org/wiki/Authorware) | .app .apr .apw .asw .aas .a3w .a3m .a4p .a4r .a5p .a5r .a6p .a6r .a7p .a7r | [vibeExtract](https://github.com/Sembiance/dexvert) | [80 sample files](https://sembiance.com/fileFormatSamples/archive/authorware/)
 archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) | .slb | [unautoCADSlideLibrary](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/autoCADSlideLibrary/) - The sldtoppm utility used to extract these randomly won't extract some images, but then work fine when ran again. This is an issue with sldtoppm as it does this even with a simple bash script.
 archive | AVPACK Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/avPackPacked/)
 archive | AXE Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/axePacked/)
@@ -225,6 +225,7 @@ archive | [EDI Install LZS Compressed Data](http://fileformats.archiveteam.org/w
 archive | [EDI Install LZSS2 Compressed Data](http://fileformats.archiveteam.org/wiki/EDI_Install_packed_file) | $ | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/ediInstallLZSS2/)
 archive | Eko Software game data | .rck | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/ekoSoftwareGameData/)
 archive | Electronic Arts LIB Game Archive | .lib | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/electronicArtsLibGameArchive/)
+archive | Elven Legacy Pack | .pack | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/elvenLegacyPack/)
 archive | Emperor Battle for Dune Archive | .bag | [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/emperorBattleForDuneArchive/)
 archive | Empire Earth 1 Game Archive | .ssa | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/empireEarth1GameArchive/)
 archive | Ensemble Studios Game Archive | .drs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/ensembleStudiosGameArchive/)
@@ -472,6 +473,7 @@ archive | OPTLINK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpw
 archive | Order of War Game Archive | .pkg | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/orderOfWarGameArchive/)
 archive | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [vibeExtract](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/)
 archive | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [vibeExtract](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
+archive | Orion Burger HAG Archive | .hag | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/orionBurgerHAG/)
 archive | [OS/2 Bitmap Array](http://fileformats.archiveteam.org/wiki/OS/2_Bitmap_Array) | .bga .bmp .ico | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/os2BitmapArray/)
 archive | [OS/2 Extended Attributes](http://fileformats.archiveteam.org/wiki/OS/2_extended_attributes) |  | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/os2ExtendedAttributes/)
 archive | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [unpack2](https://github.com/Sembiance/dexvert) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/os2FTCOMP/)
@@ -779,7 +781,7 @@ audio | Aureal Aspen sound bank | .arl | [vibe2wav](https://github.com/Sembiance
 audio | [AVI Audio](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/aviAudio/)
 audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF) | .son | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/siff/) - The .son test files are technically supported by libavformat and ffmpeg/cvlc, yet it often produces very distored WAVs. My hunch is the decompression algo doesn't quite work with my particular test SIFF files. I couldn't locate ANY OTHER converters.
 audio | [Bink Audio](https://wiki.multimedia.cx/index.php/Bink_Audio) | .binka | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/binkAudio/)
-audio | BIS WSS PCM Audio | .wss | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/bisWSSPCMAudio/)
+audio | BIS WSS PCM Audio | .wss | [ffmpeg](https://ffmpeg.org/) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/bisWSSPCMAudio/)
 audio | [Blaster Master VOC Compiled Audio](http://fileformats.archiveteam.org/wiki/VCOMP_(Blaster_Master)) | .exe | [dd](https://www.gnu.org/software/coreutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/vcomp/)
 audio | [BRSTM Wii Audio](http://fileformats.archiveteam.org/wiki/Nintendo_GameCube_/_Wii_BRSTM) | .brstm | [zxtune123](https://zxtune.bitbucket.io/) [vgmstream](https://github.com/vgmstream/vgmstream) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/brstm/)
 audio | Capcom ASTL Audio | .astl | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/capcomASTL/)
@@ -881,7 +883,7 @@ audio | [Qualcomm Purevoice Audio](http://fileformats.archiveteam.org/wiki/Qualc
 audio | [RCA-VOC](http://fileformats.archiveteam.org/wiki/RCA-VOC) | .voc | [devoc](https://github.com/Sembiance/devoc) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/rcaVOC/)
 audio | [RealAudio](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .ra .rma .rmf | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/realAudio/)
 audio | RedSpark | .rsd | [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/redSpark/)
-audio | Regrips Encrypted WAVE Audio | .wav | [GARbro](https://github.com/shiikwi/GARbro) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/regripsEncryptedWAVE/)
+audio | Regrips Encrypted WAVE Audio | .wav | [GARbro](https://github.com/shiikwi/GARbro) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/regripsEncryptedWAVE/)
 audio | RenderWare Stream | .rws | [ffmpeg](https://ffmpeg.org/) | 
 audio | [RK Audio](http://fileformats.archiveteam.org/wiki/RK_Audio) | .rka | [ffmpeg](https://ffmpeg.org/) [rkau](https://www.sac.sk/download/pack/rkau107.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/rkAudio/)
 audio | Rockstar Games RSTM | .rstm | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/rockstarGamesRSTM/)
@@ -1219,14 +1221,14 @@ executable | [EPOC/Symbian Executable](http://fileformats.archiveteam.org/wiki/E
 executable | GeoWorks GEOS application | .geo | [vibeExtract](https://github.com/Sembiance/dexvert) | [13 sample files](https://sembiance.com/fileFormatSamples/executable/geoWorksGEOSApplication/)
 executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [19 sample files](https://sembiance.com/fileFormatSamples/executable/macOSExecutable/)
 executable | [Microsoft Windows Dynamic Link Library](http://fileformats.archiveteam.org/wiki/Dynamic-link_library_(Windows)) | .dll |  | [28 sample files](https://sembiance.com/fileFormatSamples/executable/dll/)
-executable | [MS-DOS/Windows or OS/2 Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe |  | [66 sample files](https://sembiance.com/fileFormatSamples/executable/exe/)
+executable | [MS-DOS/Windows or OS/2 Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe |  | [58 sample files](https://sembiance.com/fileFormatSamples/executable/exe/)
 executable | [Psion IMG/APP](http://fileformats.archiveteam.org/wiki/Psion_IMG/APP) | .app .img | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/psionAPP/)
 executable | [Psion OPO/OPA Executable](http://fileformats.archiveteam.org/wiki/Psion_OPO/OPA) | .opo .opa .app | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/psionOPL/)
 executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/windowsSCR/) - Could be fun to 'run' these in Wine and record the output into a preview.mp4 video
 
 
 
-## Font (48)
+## Font (49)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [fontforge](https://fontforge.org) | [27 sample files](https://sembiance.com/fileFormatSamples/font/adobeType1/)
@@ -1273,6 +1275,7 @@ font | Super-IRG | .sif | [recoil2png](http://recoil.sourceforge.net) | [1 sampl
 font | [TexFont Texture Mapped Font](http://fileformats.archiveteam.org/wiki/TexFont) | .txf | [wuimg](https://codeberg.org/kaleido/wuimg) | [16 sample files](https://sembiance.com/fileFormatSamples/font/texFont/)
 font | The Last Word Font | .f80 | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/font/f80/)
 font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TrueType) | .ttf | [convert](https://www.imagemagick.org/) | [20 sample files](https://sembiance.com/fileFormatSamples/font/ttf/)
+font | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [vibe2png](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/font/universalBitMapFormat/)
 font | [Web Open Font Format](http://fileformats.archiveteam.org/wiki/WOFF) | .woff .woff2 | [fontforge](https://fontforge.org) | [10 sample files](https://sembiance.com/fileFormatSamples/font/woff/) - Some fail to convert because their printable characters are icons and are in very high level charcodes and don't convert with imagemagick convert and thus fail verification.
 font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt and MODERN.fnt
 font | XCar Font | .fnt | [wuimg](https://codeberg.org/kaleido/wuimg) | [9 sample files](https://sembiance.com/fileFormatSamples/font/xCarFont/)
@@ -1329,6 +1332,7 @@ image | [Apple IIGS SH3/SHR](http://fileformats.archiveteam.org/wiki/Apple_II_gr
 image | Apple QuickTake Photo |  | [dcraw](https://www.cybercom.net/~dcoffin/dcraw/) [pfsconvert](http://pfstools.sourceforge.net/) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) | [13 sample files](https://sembiance.com/fileFormatSamples/image/appleQuickTakePhoto/)
 image | [Apple Volume Label Image](http://fileformats.archiveteam.org/wiki/Apple_volume_label_image) |  | [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/appleVolumeLabelImage/)
 image | Arabesque bitmap | .abm .puf | [wuimg](https://codeberg.org/kaleido/wuimg) | [10 sample files](https://sembiance.com/fileFormatSamples/image/arabesqueBitmap/)
+image | ArmA PAA Image | .paa | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/armAPAAImage/)
 image | [Art Director](http://fileformats.archiveteam.org/wiki/Art_Director) | .art | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](http://snisurset.net/code/abydos/) [nconvert](https://www.xnview.com/en/nconvert/) | [17 sample files](https://sembiance.com/fileFormatSamples/image/artDirector/)
 image | [Art Studio](http://fileformats.archiveteam.org/wiki/Art_Studio) | .art .aas | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](http://snisurset.net/code/abydos/) [view64](http://view64.sourceforge.net/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/artStudio/)
 image | Artist by David Eaton | .art | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/artistByEaton/)
@@ -2016,7 +2020,6 @@ image | [TXS](http://fileformats.archiveteam.org/wiki/TXS) | .txs | [recoil2png]
 image | UFLI-editor | .ufl | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/uflEditor/)
 image | Ulead Image | .pe4 | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/uleadTexture/)
 image | Ulead Pattern | .pst | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/uleadPattern/)
-image | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [vibe2png](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
 image | Unreal Engine Texture | .texture2d | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/ueTexture2D/)
 image | [Utah RLE](http://fileformats.archiveteam.org/wiki/Utah_RLE) | .rle | [nconvert](https://www.xnview.com/en/nconvert/) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [wuimg](https://codeberg.org/kaleido/wuimg) [convert](https://www.imagemagick.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/utahRLE/)
 image | [Valve Texture Format](http://fileformats.archiveteam.org/wiki/Valve_Texture_Format) | .vtf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [abydosconvert](http://snisurset.net/code/abydos/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [10 sample files](https://sembiance.com/fileFormatSamples/image/vtf/)
@@ -2642,7 +2645,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,178)
+## Text (1,179)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -3586,6 +3589,7 @@ text | SSH Public key | .pub |  | [10 sample files](https://sembiance.com/fileFo
 text | ST-6 color Table | .tbl |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/st6ColorTable/)
 text | Standard ACIS Text | .sat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/standardACISText/)
 text | Star Trek: Armada Sprite table | .spr |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/starTrekArmadaSpriteTable/)
+text | Star Wolves texture atlas UV coordinates | .tuv |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/starWolvesTextureAtlasUVCoordinates/)
 text | Starcat disks catalogue | .cat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/starcatDisksCatalogue/)
 text | StarDict Info | .ifo |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/starDictInfo/)
 text | Starquake high scores |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/starquakeHighScores/)

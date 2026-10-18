@@ -92,6 +92,7 @@ export default
 		sourceEngineCompiledAINodegraph     : {name : "Source Engine Compiled AI Nodegraph", ext : [".ain"], magic : ["Source Engine Compiled AI Nodegraph"], weakMagic : true},
 		starquakeHighScores                 : {name : "Starquake high scores", magic : ["Starquake high scores (MS-DOS)"]},
 		starTrekArmadaSpriteTable           : {name : "Star Trek: Armada Sprite table", ext : [".spr"], magic : ["Star Trek: Armada Sprite table"], weakMagic : true},
+		starWolvesTextureAtlasUVCoordinates : {name : "Star Wolves texture atlas UV coordinates", ext : [".tuv"], magic : ["Star Wolves texture atlas UV coordinates"]},
 		superTuxFontMeta                    : {name : "SuperTux Font Meta", ext : [".stf"], magic : ["SuperTux Font"], weakMagic : true},
 		superTuxMusicMeta                   : {name : "SuperTux Music Meta", ext : [".music"], magic : ["SuperTux Music"], weakMagic : true},
 		superTuxSpriteMeta                  : {name : "SuperTux Sprite Meta", ext : [".sprite"], magic : ["SuperTux Sprite"], weakMagic : true},

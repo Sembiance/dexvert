@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Vibe coded by Claude
+# Vibe coded by Codex
 
 """Universal BitMap Format (UBF92a) to PNG converter."""
 
@@ -366,11 +367,11 @@ def render_ubf(ubf, chars_per_row=16, spacing=1):
 
 def main():
     if len(sys.argv) != 3:
-        print(f"Usage: {sys.argv[0]} <inputFile> <outputDir>", file=sys.stderr)
+        print(f"Usage: {sys.argv[0]} <inputFile> <outputPNG>", file=sys.stderr)
         sys.exit(1)
 
     input_file = sys.argv[1]
-    output_dir = sys.argv[2]
+    output_path = sys.argv[2]
 
     if not os.path.isfile(input_file):
         print(f"Error: Input file not found: {input_file}", file=sys.stderr)
@@ -382,12 +383,12 @@ def main():
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
 
-    os.makedirs(output_dir, exist_ok=True)
+    output_dir = os.path.dirname(output_path)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
 
-    basename = os.path.splitext(os.path.basename(input_file))[0]
     img = render_ubf(ubf)
-    output_path = os.path.join(output_dir, f"{basename}.png")
-    img.save(output_path)
+    img.save(output_path, format="PNG")
 
     flags_str = []
     if ubf["flags"] & FLAG_CONV_TABLE:

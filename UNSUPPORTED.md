@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,019)
+# Unsupported File Formats (4,020)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1098,7 +1098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,837)
+## Other (2,838)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3433,6 +3433,7 @@ Family/Format | Name | Extensions | Notes
 [other/stormRegionGameDataArchive](https://discmaster.textfiles.com/search?format=stormRegionGameDataArchive) | Storm Region game data archive | .pak | 
 [other/stormWizardResource](https://discmaster.textfiles.com/search?format=stormWizardResource) | StormWizard Resource | .wizard .wizard-all | 
 [other/stosVarData](https://discmaster.textfiles.com/search?format=stosVarData) | STOS Var data | .var | 
+[other/strIOISNDStream](https://discmaster.textfiles.com/search?format=strIOISNDStream) | STR IOISNDStream | .str | 
 [other/strandedIIMapfile](https://discmaster.textfiles.com/search?format=strandedIIMapfile) | Stranded II Mapfile | .sav .s2 | 
 [other/strikeCommanderMap](https://discmaster.textfiles.com/search?format=strikeCommanderMap) | Strike Commander map | .pak | 
 [other/strongNameKey](https://discmaster.textfiles.com/search?format=strongNameKey) | Strong Name Key | .snk | 

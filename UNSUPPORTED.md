@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,020)
+# Unsupported File Formats (4,026)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1098,7 +1098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,838)
+## Other (2,844)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1481,6 +1481,7 @@ Family/Format | Name | Extensions | Notes
 [other/bluRayMoviePlaylistInformation](https://discmaster.textfiles.com/search?format=bluRayMoviePlaylistInformation) | Blu-ray Movie Playlist Information | .mpls | 
 [other/blueByteArchiveFormat](https://discmaster.textfiles.com/search?format=blueByteArchiveFormat) | Blue Byte Archive Format | .bba | 
 [other/blueMaxGameData](https://discmaster.textfiles.com/search?format=blueMaxGameData) | Blue Max game data | .d01 .d02 .d03 .d04 | 
+[other/bmodOMOD](https://discmaster.textfiles.com/search?format=bmodOMOD) | BMOD OMOD | .bmod | 
 [other/bnuportPatchTable](https://discmaster.textfiles.com/search?format=bnuportPatchTable) | BNUPORT Patch Table | .pat | 
 [other/bobTheAmazingLemonLevel](https://discmaster.textfiles.com/search?format=bobTheAmazingLemonLevel) | Bob the Amazing Lemon Level | .blv | 
 [other/bodypaint3D](https://discmaster.textfiles.com/search?format=bodypaint3D) | Bodypaint 3D | .b3d | 
@@ -2173,6 +2174,7 @@ Family/Format | Name | Extensions | Notes
 [other/goldenSectionOrganizerDatabase](https://discmaster.textfiles.com/search?format=goldenSectionOrganizerDatabase) | GoldenSection Organizer database | .gso | 
 [other/goldMineReport](https://discmaster.textfiles.com/search?format=goldMineReport) | GoldMine report | .fp | 
 [other/gothic3GameDataArchive](https://discmaster.textfiles.com/search?format=gothic3GameDataArchive) | Gothic 3 game data archive | .p00 .pak .p01 | 
+[other/gothic3SaveGame](https://discmaster.textfiles.com/search?format=gothic3SaveGame) | Gothic 3 save game | .g3savdat .g3savcpxdat | 
 [other/gPatchPatch](https://discmaster.textfiles.com/search?format=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
 [other/gpsTrack](https://discmaster.textfiles.com/search?format=gpsTrack) | GPS track | .twl | 
 [other/gpsTrackMakerMap](https://discmaster.textfiles.com/search?format=gpsTrackMakerMap) | GPS TrackMaker map | .gtm | 
@@ -2517,6 +2519,7 @@ Family/Format | Name | Extensions | Notes
 [other/machOM68kObject](https://discmaster.textfiles.com/search?format=machOM68kObject) | Mach-O m68k Object | .o | 
 [other/machOObject](https://discmaster.textfiles.com/search?format=machOObject) | Mach-O Object | .o | 
 [other/machOSparcObject](https://discmaster.textfiles.com/search?format=machOSparcObject) | Mach-O SPARC Object | .o | 
+[other/macOSExtendedAttributesDump](https://discmaster.textfiles.com/search?format=macOSExtendedAttributesDump) | macOS extended attributes dump | .xattr .s2z | 
 [other/macOSFSEventsLog](https://discmaster.textfiles.com/search?format=macOSFSEventsLog) | macOS FSEvents log |  | 
 [other/macroExpressMacro](https://discmaster.textfiles.com/search?format=macroExpressMacro) | Macro Express Macro | .mex | 
 [other/macromediaFlashColorTableFile](https://discmaster.textfiles.com/search?format=macromediaFlashColorTableFile) | Macromedia Flash Color Table File | .clr | 
@@ -2903,6 +2906,7 @@ Family/Format | Name | Extensions | Notes
 [other/orionSamplerSample](https://discmaster.textfiles.com/search?format=orionSamplerSample) | Orion Sampler sample | .osp | 
 [other/os2DeviceDriver](https://discmaster.textfiles.com/search?format=os2DeviceDriver) | OS/2 Device Driver | .sys | 
 [other/os2DLL](https://discmaster.textfiles.com/search?format=os2DLL) | OS/2 Dynamic Link Library | .dll | 
+[other/oS2KeyboardLayoutBinary](https://discmaster.textfiles.com/search?format=oS2KeyboardLayoutBinary) | OS/2 Keyboard Layout binary | .kbl | 
 [other/os2Metafile](https://discmaster.textfiles.com/search?format=os2Metafile) | OS/2 Metafile | .met | 
 [other/os2PresentationManagerMetafile](https://discmaster.textfiles.com/search?format=os2PresentationManagerMetafile) | OS/2 Presentation Manager Metafile | .met | 
 [other/os2SyslevelInfo](https://discmaster.textfiles.com/search?format=os2SyslevelInfo) | OS/2 SYSLEVEL info | .pem .x25 .nfs | 
@@ -3182,6 +3186,7 @@ Family/Format | Name | Extensions | Notes
 [other/rebelPieces](https://discmaster.textfiles.com/search?format=rebelPieces) | REBEL Pieces | .pcs | 
 [other/recoloredProject](https://discmaster.textfiles.com/search?format=recoloredProject) | Recolored project | .rcl | 
 [other/redAlertReplay](https://discmaster.textfiles.com/search?format=redAlertReplay) | Red Alert replay | .xmlf .xif | 
+[other/redGlareData](https://discmaster.textfiles.com/search?format=redGlareData) | Red Glare data | .maf | 
 [other/reflectionsCamera](https://discmaster.textfiles.com/search?format=reflectionsCamera) | Reflections Camera | .kam | 
 [other/reflectionsData](https://discmaster.textfiles.com/search?format=reflectionsData) | Reflections Data | .r3 | 
 [other/reflectionsMaterial](https://discmaster.textfiles.com/search?format=reflectionsMaterial) | Reflections Material | .mat | 
@@ -3628,6 +3633,7 @@ Family/Format | Name | Extensions | Notes
 [other/turboprintWizard](https://discmaster.textfiles.com/search?format=turboprintWizard) | Turboprint Wizard | .wizard | 
 [other/turboTaxReturnData](https://discmaster.textfiles.com/search?format=turboTaxReturnData) | TurboTax return data | .tax | 
 [other/turtleBeachPinnacleSoundBank](https://discmaster.textfiles.com/search?format=turtleBeachPinnacleSoundBank) | Turtle Beach Pinnacle sound Bank | .pbf | 
+[other/tutorialWriterHypertext](https://discmaster.textfiles.com/search?format=tutorialWriterHypertext) | TutorialWriter Hypertext | .hyp | 
 [other/tuxGuitarTablature](https://discmaster.textfiles.com/search?format=tuxGuitarTablature) | TuxGuitar Tablature | .tg | 
 [other/tvgenialSkin](https://discmaster.textfiles.com/search?format=tvgenialSkin) | TVgenial Skin | .tvgskin .hpk | 
 [other/tvPaintProject](https://discmaster.textfiles.com/search?format=tvPaintProject) | TVPaint Project | .tvpp .deep .aur | 

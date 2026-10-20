@@ -205,7 +205,7 @@ export const WEAK_VALUES =
 	/^deark: godpaint$/,
 	/^deark: lha$/,
 	/^deark: mpegaudio( \(MP[12] audio\))?$/,
-	/^deark: ogg \(Ogg (Vorbis|\(other\))\)$/,
+	/^deark: ogg \(Ogg (Theora|Vorbis|\(other\))\)$/,
 	/^deark: palmdb \(Palm PDB\)$/,
 	/^deark: pcx \(PCX\)$/,
 	/^deark: png \(CgBI\)$/,
@@ -390,7 +390,7 @@ export const WEAK_VALUES =
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
-	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:Key.PakOpener
+	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:Key.PakOpener, archive:AirNovel.AirOpener
 	// SEEN TWICE:
 	//		archive:Will.ArcOpener, StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener
 	/^archive:Ail\.DatOpener /,
@@ -419,9 +419,10 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat, image:Entis.EriFormat, image:Paprika.NpFormat
-	//		image:RSystem.RsgFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat, image:Ikura.TanFormat, image:BGI.BgiFormat
+	//		image:RSystem.RsgFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat, image:Ikura.TanFormat
+	//		image:Elf.MskFormat
 	// SEEN TWICE:
-	//		image:Herb.GrpFormat, image:Silky.IgfFormat, image:Pan.TblFormat
+	//		image:Herb.GrpFormat, image:Silky.IgfFormat, image:Pan.TblFormat, image:BGI.BgiFormat
 	/^image:Adobe\.PsdFormat /,
 	/^image:CrossNet\.GrbFormat /,
 	/^image:CsWare\.BpcFormat /,
@@ -444,14 +445,14 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DSK_SPIS, DAT_CMP, 000_8, 000_2, GLB
+	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DSK_SPIS, DAT_CMP, 000_2, 000_7, 000_8
 	//		DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
 	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, GB_UBA
-	//		LUG_LIONHEAD, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4, LZ
-	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, DAT_ARCV
+	//		LUG_LIONHEAD, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4, LZ, GLB
+	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, DAT_ARCV, BF_BIG
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XXX_RU
-	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, GSC_NU20_2, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PRS
+	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PRS
 	/^geArchive: 0000?_(5|10|PCW|package)( |$)/,
 	/^geArchive: ARC_(4|6|8|10|11|13|A20|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -510,6 +511,7 @@ export const WEAK_VALUES =
 	/^geArchive: G00S000( |$)/,
 	/^geArchive: GJD( |$)/,
 	/^geArchive: GME( |$)/,
+	/^geArchive: GSC_NU20_2( |$)/,
 	/^geArchive: GUT( |$)/,
 	/^geArchive: HDD( |$)/,
 	/^geArchive: ISO( |$)/,
@@ -644,9 +646,9 @@ export const WEAK_VALUES =
 
 	// idarc
 	// SEEN  ONCE:
-	// 		Terse, ZPack, ZZip (Damien Debin), PSA, HPA, Gather, SBC
+	// 		Terse, ZPack, ZZip (Damien Debin), PSA, HPA, Gather
 	// SEEN TWICE:
-	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug), BMF, CMP
+	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug), BMF, CMP, SBC
 	/^idarc: 777( |$)/,
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
@@ -1317,6 +1319,7 @@ export const WEAK_VALUES =
 	/^PGP Elgamal encrypted session key/,
 	/^PGP key security ring/,
 	/^PGP Secret Sub-key/,
+	/^PGP X448 Public-Key Encrypted Session Key/,
 	/^PHP phar archive/,
 	/^PHP WSDL cache/,
 	/^Picasso 64 Image$/,
@@ -2727,6 +2730,7 @@ export const WEAK_VALUES =
 	/^Scribble Synth data$/,
 	/^Scribe Markup$/,
 	/^Seal registry Data$/,
+	/^Sega Game Gear ROM$/,
 	/^Semi-Virtual Diskette disk image/,
 	/^Sentry Spelling-Checker user dictionary$/,
 	/^Sequencer One Block$/,
@@ -2822,6 +2826,7 @@ export const WEAK_VALUES =
 	/^TRSI Sound Monitor Instrument$/,
 	/^TS Online Dialing Directory$/,
 	/^TurboCALC SpreadSheet$/,
+	/^TutorialWriter Help$/,
 	/^TV-SHOW Script$/,
 	/^Twist Update script$/,
 	/^TWS pixmap\/Icon$/,

@@ -578,6 +578,7 @@ export default
 		finkInfoFile                               : {name : "Fink Info-file", ext : [".info"], magic : ["Fink Info-file"], weakMagic : true},
 		fitsHeaderXtension                         : {name : "FITS Header (xtension)", ext : [".hdr"], magic : ["FITS Header (xtension)"], weakMagic : true},
 		flashProject                               : {name : "Flash Project", ext : [".flp"], magic : ["Flash Project"]},
+		flasmDisassembledFlashActionScriptBytecode : {name : "Flasm disassembled Flash ActionScript bytecode", ext : [".tac", ".flm"], magic : ["Flasm disassembled Flash ActionScript bytecode"]},
 		flipAlbumData                              : {name : "FlipAlbum data", ext : [".flp"], magic : ["FlipAlbum data"]},
 		foldedControlInfo                          : {name : "Folded control info", ext : [".fdo", ".f", ".ftx", ".fc"], magic : ["Folded control info"], weakMagic : true},
 		foltynCommanderConfiguration               : {name : "Foltyn Commander Configuration", ext : [".cfg"], magic : ["Foltyn Commander Configuration"], weakMagic : true},

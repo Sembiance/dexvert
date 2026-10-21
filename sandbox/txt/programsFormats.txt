@@ -1,4 +1,4 @@
-Generated on: 2026-09-22
+Generated on: 2026-10-21
 
 /-------\
 | Linux |
@@ -6400,11 +6400,11 @@ tls-zone66           Zone 66 tileset
 tls-zone66-map       Zone 66 Map Tileset
 
 
->>> GARbro ::: app-arch/GARbroserver-1.0.9 ::: https://github.com/shiikwi/GARbro
+>>> GARbro ::: app-arch/GARbroserver-1.0.13 ::: https://github.com/shiikwi/GARbro
 ID                                     Tag                                      Type     R/W   Description                                                          Signature   Extensions
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-=== ARCHIVE FORMATS (631) ===
+=== ARCHIVE FORMATS (632) ===
 
 archive:Desire.D000Opener              000/DESIRE                               archive  R     Desire resource archive                                              —           .000
 archive:Ads.PogOpener                  060/POG                                  archive  R     ads engine audio archive                                             0x00474F50  .060
@@ -6511,6 +6511,7 @@ archive:KApp.AsdKToolOpener            ASD/KTOOL                                
 archive:KApp.AsdAudioOpener            ASD/SPIEL                                archive  R     Spiel audio archive                                                  —           .asd
 archive:Unity.UnityAssetOpener         ASSETS/UNITY                             archive  R     Unity game engine assets archive                                     —           .assets
 archive:AST.ArcOpener                  AST                                      archive  R     AST script engine resource archive                                   0x32435241  —
+archive:Regrips.AudioResourceOpener    AUDIO/REGRIPS                            archive  R     XOR-obfuscated WAV/Vorbis audio resources                            0xB9B9B6AD  .dat, .wrg
 archive:AVC.DatOpener                  AVC                                      archive  R     AVC engine resource archive                                          —           .dat
 archive:Silky.AwfOpener                AWF                                      archive  R     Silky's audio archive                                                —           .awf
 archive:VnEngine.AxrOpener             AXR                                      archive  R     GEM/vnengine resource archive                                        0x65525841  .axr
@@ -7473,7 +7474,7 @@ image:Crowd.ZbmFormat                  ZBM                                      
 image:BlueGale.ZbmFormat               ZBM/BLUEGALE                             image    R     BlueGale compressed image format                                     0x5F706D61  .zbm
 image:Silky.ZitFormat                  ZIT                                      image    R     Silky's image format                                                 0x1803545A  .zit
 
-=== AUDIO FORMATS (88) ===
+=== AUDIO FORMATS (87) ===
 
 audio:Abogado.AdpAudio                 ADP                                      audio    R     AbogadoPowers audio format                                           —           .adp
 audio:CrossNet.AdpAudio                ADP/CROSSNET                             audio    R     CrossNet ADPCM-compressed audio                                      —           .adp
@@ -7557,7 +7558,6 @@ audio:AnotherRoom.WazAudio             WAZ                                      
 audio:Basil.WhcAudio                   WHC                                      audio    R     Basil audio resource                                                 —           .whc
 audio:WmaAudio                         WMA                                      audio    R     Windows Media Audio format                                           0x75B22630  .wma
 audio:WildBug.WpnAudio                 WPN                                      audio    R     Wild Bug's audio format                                              0x1A444257  .wpn
-audio:Regrips.WrgAudio                 WRG                                      audio    R     Regrips encrypted WAVE file                                          0xB9B9B6AD  .wrg
 audio:BaseUnit.WstAudio                WST                                      audio    R     IPAC ADPCM audio format                                              0x32545357  .wst
 audio:Aaru.Wv1Audio                    WV1                                      audio    R     Aaru compressed audio                                                0x2E315657  .wv1, .wav
 audio:Eve.Wv3Audio                     WV3                                      audio    R     Eve compressed audio format                                          0x2E335657  .wv3, .wav
@@ -7776,6 +7776,19 @@ targa : tga, tpic
 term : term
 tiff : tif, tiff, tx, env, sm, vsm
 zfile : zfile
+
+
+>>> textmode2png ::: media-gfx/Image-TextMode-0.26
+ADF
+ANSI
+ANSIMation
+ATASCII
+AVATAR
+Bin
+IDF
+PCBoard
+Tundra
+XBin
 
 
 >>> imconv ::: media-gfx/imtools-3.0 ::: ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools

@@ -14,5 +14,5 @@ export class pcBoard extends Format
 	metaProvider     = ["ansiloveInfo"];
 	
 	// We do NOT use abydos, because it just falls back to ansilove
-	converters = ["ansilove"];
+	converters = ["ansilove", "textmode2png[format:PCBoard]"];
 }

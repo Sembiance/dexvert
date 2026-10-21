@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,026)
+# Unsupported File Formats (4,027)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1098,7 +1098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,844)
+## Other (2,845)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2178,6 +2178,7 @@ Family/Format | Name | Extensions | Notes
 [other/gPatchPatch](https://discmaster.textfiles.com/search?format=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
 [other/gpsTrack](https://discmaster.textfiles.com/search?format=gpsTrack) | GPS track | .twl | 
 [other/gpsTrackMakerMap](https://discmaster.textfiles.com/search?format=gpsTrackMakerMap) | GPS TrackMaker map | .gtm | 
+[other/grandPrix2BIN](https://discmaster.textfiles.com/search?format=grandPrix2BIN) | Grand Prix 2 BIN Archive | .bin | 
 [other/grandPrix5002GameData](https://discmaster.textfiles.com/search?format=grandPrix5002GameData) | Grand Prix 500 2 game data | .cpv | 
 [other/grandPrixCircuitSavedSlot](https://discmaster.textfiles.com/search?format=grandPrixCircuitSavedSlot) | Grand Prix Circuit Saved slot | .stm | 
 [other/grandTheftAuto2MapLayout](https://discmaster.textfiles.com/search?format=grandTheftAuto2MapLayout) | Grand Theft Auto 2 Map Layout | .gmp | 

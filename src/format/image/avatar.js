@@ -16,5 +16,5 @@ export class avatar extends Format
 	};
 	mimeType       = "text/x-avatar0";
 	forbiddenMagic = TEXT_MAGIC_STRONG;
-	converters     = [`abydosconvert[format:${this.mimeType}]`];
+	converters     = [`abydosconvert[format:${this.mimeType}]`, "textmode2png[format:AVATAR]"];
 }

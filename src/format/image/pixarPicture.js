@@ -6,6 +6,6 @@ export class pixarPicture extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Pixar_picture";
 	ext            = [".pxr", ".pixar", ".pic", ".picio"];
 	forbidExtMatch = true;
-	magic          = ["Pixar picture bitmap", /^Pixar picture .*:pxr:$/];
+	magic          = ["Pixar picture bitmap", /^Pixar picture .*:pxr:$/, "image/x-pxr"];
 	converters     = ["imconv[format:pic]", "nconvert[format:pxr]"];
 }

@@ -1034,6 +1034,7 @@ export default
 	other :
 	{
 		// Game - These actually work with gameextractor but produce game-specific worthless files that can't be converted further at this time. Could vibe-code further to support the extracted files (via a specific chain if no magic)
+		adrenalineRushHourGameData      : {name : "Adrenaline Rush Hour game data", ext : [".bin"], magic : ["Adrenaline Rush Hour game data", /^geArchive: BIN_VSPSDUMP( |$)/], weakMagic : true},
 		aesopEngineResourceData         : {name : "AESOP engine Resource data", ext : [".res"], magic : ["AESOP engine Resource data", /^geArchive: RES_AEPOS( |$)/], weakMagic : true},
 		ageOfMythologySaveOrScenario    : {name : "Age of Mythology - Save game or scenario", ext : [".scn", ".svx"], magic : ["Age of Mythology: The Titans save game", "Age of Mythology save game", /^geArchive: AGE3SCN_L33T( |$)/]},
 		albionGameDataArchive           : {name : "Albion game data archive", ext : [".xld"], magic : ["Albion game data archive", /^geArchive: XLD_XLD0( |$)/]},
@@ -1052,6 +1053,7 @@ export default
 		f1ChallengeMAS                  : {name : "F1 Challenge MAS", ext : [".mas"], magic : ["F1 Challenge MAS", /^geArchive: MAS_CUBEMAS( |$)/]},
 		gexLEV                          : {name : "GEX LEV", ext : [".lev"], magic : [/^geArchive: LEV( |$)/]},
 		gPoliceGameData                 : {name : "G-Police game data", ext : [".rdt"], magic : ["G-Police game data", /^geArchive: RDT_RDA2( |$)/]},
+		grandPrix2BIN                   : {name : "Grand Prix 2 BIN Archive", ext : [".bin"], magic : [/^geArchive: BIN_F1PC( |$)/]},
 		grandTheftAuto4WTD              : {name : "Grand Theft Auto 4 WTD Archive", ext : [".wtd"], magic : [/^geArchive: WTD_RSC( |$)/]},
 		houseOfTheDeadGameDataContainer : {name : "The House of the Dead game data container", ext : [".rbh"], magic : [/^geArchive: VRAM_PIFF( |$)/, "The House of the Dead game data container"]},
 		hoyleCasinoPRF                  : {name : "Hoyle Casino PRF", ext : [".prf"], magic : [/^geArchive: PRF_PRF( |$)/]},
@@ -1078,7 +1080,6 @@ export default
 		absoluteMagicResourceData                     : {name : "Absolute Magic Resource data", ext : [".res"], magic : ["Absolute Magic Resource data"]},
 		abuseDemoData                                 : {name : "Abuse demo Data", ext : [".dat"], magic : ["Abuse demo Data"], weakMagic : true},
 		abuseLevel                                    : {name : "Abuse Level", ext : [".lvl", ".spe"], magic : ["Abuse Level"]},
-		adrenalineRushHourGameData                    : {name : "Adrenaline Rush Hour game data", ext : [".bin"], magic : ["Adrenaline Rush Hour game data"], weakMagic : true},
 		adriftTextAdventure                           : {name : "ADRIFT Text Adventure", ext : [".taf"], magic : ["ADRIFT Text Adventure File", /^Adrift game file/, /^fmt\/1584( |$)/]},
 		advancedCivilizationSavedGame                 : {name : "Advanced Civilization saved game", ext : [".dat"], magic : ["Advanced Civilization saved game"], weakMagic : true},
 		advancedStrategicCommandMap                   : {name : "Advanced Strategic Command Map", ext : [".map"], magic : ["Advanced Strategic Command Map"]},

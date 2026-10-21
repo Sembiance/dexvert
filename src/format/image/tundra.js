@@ -9,5 +9,5 @@ export class tundra extends Format
 	mimeType       = "text/x-tundra";
 	magic          = ["TUNDRA text-mode graphics", /^fmt\/1603( |$)/];
 	metaProvider   = ["ansiloveInfo"];
-	converters     = ["ansilove[format:tnd]", `abydosconvert[format:${this.mimeType}]`];
+	converters     = ["textmode2png[format:Tundra]", "ansilove[format:tnd]", `abydosconvert[format:${this.mimeType}]`];
 }

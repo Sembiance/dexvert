@@ -120,6 +120,18 @@ export default async function programsFormats(xlog)
 		async function sevenZip__p7zip() { return (await runUtil.run("7z", ["i"])).stdout.match(/Formats:([\s\S]+)/)[1]; },
 		async function soffice__libreoffice() { return (await runUtil.run("python3", [path.join(import.meta.dirname, "programsFormats", "sofficeListFormats.py")])).stdout; },
 		async function sox__sox_ng() { return (await runUtil.run("sox", ["--help-format", "all"])).stdout; },
+		async function textmode2png__ImageDASHTextMode()
+		{
+			return (await runUtil.run("perl", ["-MModule::Pluggable::Object", "-e", `
+my $finder = Module::Pluggable::Object->new(
+	search_path => ["Image::TextMode::Format"], require => 1
+);
+for my $module (sort $finder->plugins) {
+    $module =~ s/^Image::TextMode::Format:://;
+    print "$module\n";
+}
+`])).stdout;
+		},
 		async function unar() { return (await runUtil.run("unar", ["--list-formats"])).stdout; },
 		async function uniconvertor__uniconvertorDASHappimage() { return (await runUtil.run("uniconvertor", ["--help"])).stdout.match(/INPUT FILE FORMATS-+([\s\S]+)---OUTPUT FILE FORMATS/)[1]; },
 		async function vgmstream__vgmstreamDASHcli()

@@ -388,11 +388,11 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
-	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener
+	//      archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
-	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:Key.PakOpener, archive:AirNovel.AirOpener
+	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:AirNovel.AirOpener
 	// SEEN TWICE:
-	//		archive:Will.ArcOpener, StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener
+	//		archive:Will.ArcOpener, StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener, archive:Nekopunch.PakOpener, archive:Key.PakOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
@@ -412,7 +412,7 @@ export const WEAK_VALUES =
 	/^archive:Youkai\.VoiceDatOpener /,
 
 	// SEEN  ONCE:
-	// 		audio:RealLive.NwaAudio, audio:Leaf.P16Audio
+	// 		audio:RealLive.NwaAudio, audio:Leaf.P16Audio, audio:UMeSoft.WstrAudio
 	// SEEN TWICE:
 	//		???
 	/^audio:WaveAudio \(WAV\)/,
@@ -449,7 +449,7 @@ export const WEAK_VALUES =
 	//		DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
 	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, GB_UBA
 	//		LUG_LIONHEAD, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4, LZ, GLB
-	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, DAT_ARCV, BF_BIG
+	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, DAT_ARCV, BF_BIG, WAR_WARC
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XXX_RU
 	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PRS

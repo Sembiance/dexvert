@@ -5,7 +5,7 @@ export class herInteractiveSound extends Format
 	name           = "Her Interactive Sound";
 	ext            = [".his"];
 	forbidExtMatch = true;
-	magic          = ["Her Interactive Sound (his)", "Her Interactive Sound 0 (his0)"];
+	magic          = ["Her Interactive Sound (his)", "Her Interactive Sound 0 (his0)", "vgmstream: his"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = ["ffmpeg[libre][format:his][outType:mp3]", "ffmpeg[libre][format:his0][outType:mp3]"];
+	converters     = ["ffmpeg[libre][format:his][outType:mp3]", "ffmpeg[libre][format:his0][outType:mp3]", "vgmstream[types:his]"];
 }

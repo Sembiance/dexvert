@@ -5,7 +5,7 @@ export class sirensSoundLibrary extends Format
 	name           = "Sirens Sound Library Audio";
 	ext            = [".ms"];
 	forbidExtMatch = true;
-	magic          = ["Sirens Sound Library SL3 (sl3)"];
+	magic          = ["Sirens Sound Library SL3 (sl3)", "vgmstream: sl3"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = ["ffmpeg[libre][format:sl3][outType:mp3]"];
+	converters     = ["ffmpeg[libre][format:sl3][outType:mp3]", "vgmstream[types:sl3]"];
 }

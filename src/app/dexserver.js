@@ -22,7 +22,14 @@ const startedAt = performance.now();
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
-const SERVER_ORDER = ["dexrpc", "gt2", "gameextractor", "dragonUnpacker", "GARbro", "binwalkServer", "tridServer", "siegfried", "os", "wine", "classify"];
+const SERVER_ORDER =
+[
+	"dexrpc",
+	["vgmstreamOverseer", "gt2", "gameextractor", "dragonUnpacker", "GARbro", "binwalkServer", "tridServer", "siegfried"],
+	"os",
+	"wine",
+	"classify"
+].map(v => Array.force(v));
 
 if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 {
@@ -51,14 +58,17 @@ await Deno.mkdir(serverStatusDirPath);
 const serverProcs = {};
 async function stopDexserver()
 {
-	xlog.info`Stopping ${SERVER_ORDER.length} servers...`;
-	for(const serverid of Array.from(SERVER_ORDER.flat()).reverse())
+	xlog.info`Stopping ${SERVER_ORDER.flat().length} servers...`;
+	for(const serverids of Array.from(SERVER_ORDER).reverse())
 	{
-		xlog.info`Stopping server ${fg.peach(serverid)}...`;
-		const stopFilePath = path.join(serverStatusDirPath, `stop-${serverid}`);
-		await fileUtil.writeTextFile(stopFilePath, "");
-		await xu.waitUntil(async () => !await fileUtil.exists(stopFilePath), {timeout : xu.SECOND*20});
-		await runUtil.kill(serverProcs[serverid]);
+		await serverids.parallelMap(async serverid =>
+		{
+			xlog.info`Stopping server ${fg.peach(serverid)}...`;
+			const stopFilePath = path.join(serverStatusDirPath, `stop-${serverid}`);
+			await fileUtil.writeTextFile(stopFilePath, "");
+			await xu.waitUntil(async () => !await fileUtil.exists(stopFilePath), {timeout : xu.SECOND*20});
+			await runUtil.kill(serverProcs[serverid]);
+		});
 	}
 
 	await fileUtil.unlink(serverStatusDirPath, {recursive : true});
@@ -76,21 +86,24 @@ xu.waitUntil(async () =>
 	await stopDexserver();
 }, {interval : xu.SECOND*2});
 
-xlog.info`Starting ${SERVER_ORDER.length} servers...`;
-for(const serverid of SERVER_ORDER)
+xlog.info`Starting ${SERVER_ORDER.flat().length} servers...`;
+for(const serverids of SERVER_ORDER)
 {
-	const xlogServer = xlog.clone();
-	xlogServer.mapper = v => `${xu.colon(fg.peach(serverid))}${v}`;
+	await serverids.parallelMap(async serverid =>
+	{
+		const xlogServer = xlog.clone();
+		xlogServer.mapper = v => `${xu.colon(fg.peach(serverid))}${v}`;
 
-	const startedFilePath = path.join(serverStatusDirPath, `started-${serverid}`);
-	const stopFilePath = path.join(serverStatusDirPath, `stop-${serverid}`);
+		const startedFilePath = path.join(serverStatusDirPath, `started-${serverid}`);
+		const stopFilePath = path.join(serverStatusDirPath, `stop-${serverid}`);
 
-	xlog.info`Starting server ${fg.peach(serverid)}...`;
-	const {p} = await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "..", "server", `${serverid}.js`), `--logLevel=${argv.logLevel}`, `--stopFilePath=${stopFilePath}`, `--startedFilePath=${startedFilePath}`), runUtil.denoRunOpts({detached : true, xlog : xlogServer}));
-	serverProcs[serverid] = p;
-	xlog.info`Server ${fg.peach(serverid)} started, waiting for fully loaded...`;
-	await xu.waitUntil(async () => (await fileUtil.exists(startedFilePath)));
-	xlog.info`Server ${fg.peach(serverid)} fully loaded!`;
+		xlog.info`Starting server ${fg.peach(serverid)}...`;
+		const {p} = await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "..", "server", `${serverid}.js`), `--logLevel=${argv.logLevel}`, `--stopFilePath=${stopFilePath}`, `--startedFilePath=${startedFilePath}`), runUtil.denoRunOpts({detached : true, xlog : xlogServer}));
+		serverProcs[serverid] = p;
+		xlog.info`Server ${fg.peach(serverid)} started, waiting for fully loaded...`;
+		await xu.waitUntil(async () => (await fileUtil.exists(startedFilePath)));
+		xlog.info`Server ${fg.peach(serverid)} fully loaded!`;
+	});
 }
 
 xlog.info`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;

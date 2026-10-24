@@ -5,7 +5,7 @@ export class triCrescendoCAF extends Format
 	name           = "Tri-Crescendo CAF Audio";
 	ext            = [".cfn"];
 	forbidExtMatch = true;
-	magic          = ["tri-Crescendo CAF (cfn)"];
+	magic          = ["tri-Crescendo CAF (cfn)", "vgmstream: caf"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = ["ffmpeg[libre][format:cfn][outType:mp3]"];
+	converters     = ["ffmpeg[libre][format:cfn][outType:mp3]", "vgmstream[types:caf]"];
 }

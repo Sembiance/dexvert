@@ -5,7 +5,7 @@ export class arikaNXMS extends Format
 	name           = "Arika NXMS Audio";
 	ext            = [".nxms"];
 	forbidExtMatch = true;
-	magic          = ["Arika NXMS (nxms)"];
+	magic          = ["Arika NXMS (nxms)", "vgmstream: nxms"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = ["ffmpeg[libre][format:nxms][outType:mp3]"];
+	converters     = ["ffmpeg[libre][format:nxms][outType:mp3]", "vgmstream[types:nxms]"];
 }

@@ -20,4 +20,6 @@ import {extractEXEOverlay} from "../src/exeOverlayUtil.js";
 
 const xlog = new XLog("info");
 
-await initRegistry(xlog);
+//await initRegistry(xlog);
+
+xlog.info`${await imageUtil.getInfo("/home/sembiance/Assorted/CHESS.SIX")}`;

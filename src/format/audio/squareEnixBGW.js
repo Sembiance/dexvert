@@ -5,7 +5,7 @@ export class squareEnixBGW extends Format
 	name           = "Square Enix BGW Audio";
 	ext            = [".bgw"];
 	forbidExtMatch = true;
-	magic          = ["Square Enix BGW (bgw)"];
+	magic          = ["Square Enix BGW (bgw)", "vgmstream: bgw"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = ["ffmpeg[libre][format:bgw][outType:mp3]"];
+	converters     = ["ffmpeg[libre][format:bgw][outType:mp3]", "vgmstream[types:bgw]"];
 }

@@ -23,14 +23,58 @@ reboot
 /---------------------------\
 | App Updates (Non-Portage) |
 \---------------------------/
+>>> trid
+cd sandbox/triddefs && ./update.sh
+cd bin/tridServer && ./updateDefs.sh
+>>> 
+
+>>> vgmstream		https://github.com/vgmstream/vgmstream
+# LAST UPDATED: 2026-10-24
+vibe && mv legacy/vgmstreamServer ./
+cd vgmstreamServer/vgmstream && git pull && cd ..
+vibe-codex -c
+# Tell the AI: I've updated ./vgmstream/ with latest git code, ensure the server compiles and works correctly
+# Modify package.sh and bump version
+./package.sh
+emerge vgmstreamServer
+mv vgmstreamServer legacy/
+<<<
+
+>>> GARbro			https://github.com/crskycode/GARbro
+# LAST UPDATED: 2026-10-18
+# IF the git repo has "meaningful" commits since this last update, then proceed:
+vibe && mv legacy/GARbroserver ./
+cd GARbroserver
+vibe-codex -c
+# Tell the AI: Pull down the latest git code from ./GARbro/ and resolve any conflicts and ensure everything builds and functions correctly
+# Modify package.sh and bump version
+./package.sh
+emerge GARbroserver
+mv GARbroserver legacy/
+<<<
+
+>>> gameextractor	https://github.com/wattostudios/GameExtractor
+# LAST UPDATED: 2026-08-01
+vibe && mv legacy/gameextractor ./
+cd gameextractor
+vibe-codex -c
+# Tell the AI: Pull down the latest git code from ./gameextractor/ and resolve any conflicts and ensure everything builds and functions correctly
+./publish.sh
+mv gameextractor legacy/
+<<<
+
+>>> DragonUnPACKer	https://github.com/elbereth/DragonUnPACKer
+# Has not been updated since 2024 so need to do any updates, but if it revives from the dead, would need to have AI handle merging/etc
+<<<
+
+>>> Other items
 App								Last Update		URL															Notes
 ---								-----------		---															-----
-bin/tridServer					2026-08-07		https://mark0.net/soft-trid-e.html							stopDexserver && ./updateDefs.sh
 bin/activemime-format			2019-05-20		https://github.com/idiom/activemime-format
 bin/amiga-bitmap-font-tools		2023-02-03		https://github.com/smugpie/amiga-bitmap-font-tools
 bin/hfsexplorer					2026-04-09		https://github.com/unsound/hfsexplorer
 bin/soundFont2tomid				2023-10-07		https://github.com/grimmdude/MidiWriterJS
-
+<<<
 
 /------------------------------------\
 | Other Converters (see formats.txt) |

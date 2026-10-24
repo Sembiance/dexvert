@@ -5,7 +5,7 @@ export class xactWaveBank extends Format
 {
 	name         = "XACT Wave Bank";
 	ext          = [".xwb"];
-	magic        = ["XACT Wave Bank", "Format: Microsoft XACT Wave Bank", "XWB (Microsoft Wave Bank) (xwb)", /^geArchive: (XWB_WBND|XWB_WBND_4|XWB_WBND_3|XWB_WBND_2)( |$)/];
+	magic        = ["XACT Wave Bank", "Format: Microsoft XACT Wave Bank", "XWB (Microsoft Wave Bank) (xwb)", "vgmstream: wbnd", /^geArchive: (XWB_WBND|XWB_WBND_4|XWB_WBND_3|XWB_WBND_2)( |$)/];
 	metaProvider = ["ffprobe[libre]"];
-	converters   = dexState => [_FFMPEG_CONVERTERS_BUILDER({dexState, format : "xwb", outType : "mp3", libre : true}), "zxtune123"];
+	converters   = dexState => ["vgmstream[types:wbnd]", _FFMPEG_CONVERTERS_BUILDER({dexState, format : "xwb", outType : "mp3", libre : true}), "zxtune123"];
 }

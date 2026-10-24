@@ -5,7 +5,7 @@ export class twoZeroEightAudio extends Format
 	name           = "208 Audio (Ocean Games)";
 	ext            = [".bnk"];
 	forbidExtMatch = true;
-	magic          = ["208 Audio (Ocean Games)", "208 (Ocean Games) (208)"];
+	magic          = ["208 Audio (Ocean Games)", "208 (Ocean Games) (208)", "vgmstream: 208"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = ["ffmpeg[libre][format:208][outType:mp3]"];
+	converters     = ["ffmpeg[libre][format:208][outType:mp3]", "vgmstream[types:208]"];
 }

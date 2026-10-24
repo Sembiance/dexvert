@@ -5,6 +5,6 @@ export class audiokineticWWISE extends Format
 {
 	name       = "Audiokinetic WWISE Audio";
 	ext        = [".wem"];
-	magic      = ["Audiokinetic WWISE Audio"];
-	converters = ["vgmstream"];
+	magic      = ["Audiokinetic WWISE Audio", "vgmstream: wwise"];
+	converters = ["vgmstream[types:wwise]"];
 }

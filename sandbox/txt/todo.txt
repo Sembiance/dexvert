@@ -8,8 +8,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* vgmstreamid? Then also add specific format support to it, then run checkDetector.js
-
 * These appear to already be supported, just need to add a 'dexmagic' match for them: https://github.com/Sembiance/dexvert/issues/45
   See: https://discmaster.textfiles.com/search?detection=434f50594449534b*
 

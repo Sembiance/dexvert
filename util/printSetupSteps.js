@@ -74,6 +74,7 @@ const EXTRA_PACKAGES =
 
 	// GameExtractorServer
 	"games-util/quickbms",
+	"dev-java/openjdk-bin:25",
 
 	// post processing
 	"app-arch/pigz",

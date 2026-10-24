@@ -6,5 +6,5 @@ export class virtualDJAudioSample extends Format
 	ext            = [".vdj"];
 	forbidExtMatch = true;
 	magic          = ["VirtualDJ audio Sample"];
-	converters     = ["vgmstream"];
+	converters     = ["ffmpeg[format:mp3][outType:mp3]"];
 }

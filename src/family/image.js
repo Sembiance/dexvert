@@ -42,10 +42,7 @@ export class image extends Family
 		// SVG's are VERY problematic for imagemagick to deal with. Loading up inkscape in the background and spinning at 100% CPU for ages while it renders some 65,000px wide SVG
 		// So we don't even bother doing getImageInfo/identify and we just load up the file, parse as XML and deduce width/height from that
 		// We can also check to make sure it actually has sub-elements and isn't just empty
-		if(dexid.formatid==="svg")
-			Object.assign(meta, (await Program.runProgram("svgInfo", dexFile, {xlog, autoUnlink : true})).meta);
-		else
-			Object.assign(meta, await imageUtil.getInfo(dexFile.absolute));
+		Object.assign(meta, dexid.formatid==="svg" ? (await Program.runProgram("svgInfo", dexFile, {xlog, autoUnlink : true})).meta : await imageUtil.getInfo(dexFile.absolute));
 
 		if(!meta.width || !meta.height)
 		{

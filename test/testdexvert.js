@@ -240,6 +240,7 @@ const SUPPORTING_FILES = {
 		cloneCDImage            : /\.ccd$/i,
 		installerVISE           : /Tropico Demo Installer\.data$/,
 		halloweenHarryBank      : /INTRO\.FAT$/,
+		orionBurgerHAG          : /\.has$/i,
 		pog                     : /\.pnm$/i,
 		redArchive              : /TIMETREK\.001$/,
 		setupSpecialist         : /SETUP\.\d$/,

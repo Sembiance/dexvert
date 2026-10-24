@@ -5,6 +5,8 @@ export class interplayACM extends Format
 	name           = "Interplay Compressed Audio";
 	website        = "http://fileformats.archiveteam.org/wiki/Interplay_ACM";
 	ext            = [".acm"];
-	magic          = ["Interplay Compressed Audio Format", "Interplay ACM (acm)"];
-	converters     = ["zxtune123", "acm2wav"];
+	forbidExtMatch = true;
+	magic          = ["Interplay Compressed Audio Format", "Interplay ACM (acm)", "vgmstream: acm"];
+	metaProvider   = ["ffprobe"];
+	converters     = ["ffmpeg[format:acm][outType:mp3]", "vgmstream[types:acm]", "acm2wav"];
 }

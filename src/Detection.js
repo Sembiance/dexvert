@@ -8,7 +8,7 @@ import {C} from "./C.js";
 
 export const DETECTOR_PROGRAMS = [
 	"file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "dearkID", "amigaBitmapFontContentDetector", "siegfried", "pc98ripperID", "lsar", "gt2", "disktype", "unp64ID", "detectItEasy", "binwalkID",
-	"xdgMime", "ffprobeID", "soxiID", "librempegprobeID", "nconvertID", "gameextractorID", "exeOverlayID", "idarc", "dragonUnpackerID", "GARbroID"
+	"xdgMime", "ffprobeID", "soxiID", "librempegprobeID", "nconvertID", "gameextractorID", "exeOverlayID", "idarc", "dragonUnpackerID", "GARbroID", "vgmstreamID"
 ];
 
 export const TEXT_MAGIC_STRONG = [

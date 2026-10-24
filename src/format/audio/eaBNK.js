@@ -6,6 +6,6 @@ export class eaBNK extends Format
 	name           = "Electronic Arts BNK File";
 	ext            = [".bnk"];
 	forbidExtMatch = true;
-	magic          = ["EA BNK Audio", /^geArchive: BIG_BNKL( |$)/];
-	converters     = ["vgmstream[extractAll]"];
+	magic          = ["EA BNK Audio", "vgmstream: ea_bnk", /^geArchive: BIG_BNKL( |$)/];
+	converters     = ["vgmstream[types:ea_bnk]"];
 }

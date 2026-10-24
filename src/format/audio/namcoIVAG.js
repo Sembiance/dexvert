@@ -5,7 +5,7 @@ export class namcoIVAG extends Format
 	name           = "Namco IVAG Audio";
 	ext            = [".ivag"];
 	forbidExtMatch = true;
-	magic          = ["Namco IVAG (ivag)"];
+	magic          = ["Namco IVAG (ivag)", "vgmstream: ivag"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = ["ffmpeg[libre][format:ivag][outType:mp3]"];
+	converters     = ["ffmpeg[libre][format:ivag][outType:mp3]", "vgmstream[types:ivag]"];
 }

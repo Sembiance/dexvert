@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Vibe coded by Codex
 # Vibe coded by Claude
 #
 # Supervisor/proxy for GameExtractorServer.jar
@@ -75,7 +76,7 @@ start_time = time.time()
 
 def spawn_worker(worker):
     cmd = JAVA_ARGS + [f"--port={worker.port}"]
-    cwd = os.path.dirname(os.path.abspath(__file__))
+    cwd = os.path.dirname(os.path.realpath(__file__))
     proc = subprocess.Popen(
         cmd, cwd=cwd,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE,

@@ -8,7 +8,7 @@ export class aif extends Format
 	magic        = [
 		// generic
 		"AIFF Audio Interchange File Format", "IFF data, AIFF audio", "Audio Interchange File Format", "IFF data, AIFF-C compressed audio", "AIFF audio data", "AIFF-C", "audio/x-aiff", "audio/x-aifc", "Audio IFF (aiff)", /^soxi: aifc?f?$/,
-		"audio:AiffAudio",
+		"audio:AiffAudio", "vgmstream: aifc",
 		/^fmt\/414( |$)/, /^x-fmt\/136( |$)/,
 
 		// specific
@@ -19,7 +19,7 @@ export class aif extends Format
 	metaProvider = ["soxi"];
 	converters   = [
 		"sox",	// no type because it could be aifc or aiff or aif
-		"ffmpeg[outType:mp3]", "vgmstream", "awaveStudio[matchType:magic]", "ffmpeg[libre][outType:mp3]",
+		"ffmpeg[outType:mp3]", "vgmstream[types:aifc]", "awaveStudio[matchType:magic]", "ffmpeg[libre][outType:mp3]",
 		"GARbro[types:audio:AiffAudio]"
 	];
 }

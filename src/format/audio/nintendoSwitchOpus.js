@@ -5,7 +5,7 @@ export class nintendoSwitchOpus extends Format
 	name           = "Nintendo Switch Opus Audio";
 	ext            = [".opusnsw"];
 	forbidExtMatch = true;
-	magic          = ["Nintendo Switch Opus (opns)"];
+	magic          = ["Nintendo Switch Opus (opns)", "vgmstream: opus_opns"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = ["ffmpeg[libre][format:opns][outType:mp3]"];
+	converters     = ["ffmpeg[libre][format:opns][outType:mp3]", "vgmstream[types:opus_opns]"];
 }

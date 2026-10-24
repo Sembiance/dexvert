@@ -352,7 +352,6 @@ export const WEAK_VALUES =
 	/^MPL2 subtitles \(mpl2\)$/,
 	/^MPlayer subtitles \(mpsub\)$/,
 	/^Naxat ASD \(naxat_asd\)$/,
-	/^NGC \(Nintendo DSP Standard\) \(ngcdspstd\)$/,
 	/^NC camera feed \(nc\)$/,
 	/^NGC \(Nintendo DSP\) STM \(ngcdspstm\)$/,		// librempeg
 	/^Nintendo GC DTK \(adp\)$/,	// librempeg
@@ -377,7 +376,6 @@ export const WEAK_VALUES =
 	/^Sony PS2 ADS \(ads\)$/,
 	/^SubViewer v1 subtitle format \(subviewer1\)$/,
 	/^Tele-typewriter \(tty\)$/,
-	/^THP \(thp\)$/,
 	/^Tiertex Limited SEQ \(tiertexseq\)$/,
 	/^tri-Ace PS2 \(tac\)$/,	// librempeg
 	/^Video CCTV DAT \(luodat\)$/,
@@ -392,7 +390,7 @@ export const WEAK_VALUES =
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
 	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:AirNovel.AirOpener
 	// SEEN TWICE:
-	//		archive:Will.ArcOpener, StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener, archive:Nekopunch.PakOpener, archive:Key.PakOpener
+	//		archive:Will.ArcOpener, archive:StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener, archive:Nekopunch.PakOpener, archive:Key.PakOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
@@ -449,7 +447,7 @@ export const WEAK_VALUES =
 	//		DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
 	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, GB_UBA
 	//		LUG_LIONHEAD, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4, LZ, GLB
-	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, DAT_ARCV, BF_BIG, WAR_WARC
+	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, DAT_ARCV, BF_BIG, WAR_WARC, PACKED_BFPK, ZSM_ZSNDXBOX
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XXX_RU
 	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PRS
@@ -722,6 +720,17 @@ export const WEAK_VALUES =
 
 	// soxi
 	/^soxi: mpc2k$/,
+
+	// vgmstream
+	// SEEN  ONCE:
+	//		???
+	// SEEN TWICE:
+	//		???
+	/^vgmstream: exakt_sc/,
+	/^vgmstream: mp4_aac_ffmpeg/,
+	/^vgmstream: mpeg - MPEG header/,
+	/^vgmstream: raw_pcm/,
+	/^vgmstream: raw_wavm/,
 
 	// xdgMime
 	// SEEN  ONCE:
@@ -1264,7 +1273,6 @@ export const WEAK_VALUES =
 	/^Nintendo Badge Arcade badge/,
 	/^Nintendo DS MPEG Video$/,
 	/^Nintendo Gameboy Music\/Audio Data/,
-	/^Nintendo THP Multimedia/,
 	/^Norton GHost image/,
 	/^Novell LANalyzer capture file/,
 	/^NSQ archive data/,
@@ -2368,7 +2376,6 @@ export const WEAK_VALUES =
 	/^Game Boy Advance ROM$/,
 	/^GameBox game data package/,
 	/^Game Music$/,
-	/^GameCube THP video$/,
 	/^GameMaps Header \(RLEW compression\)$/,
 	/^Garry's Mod Addon$/,
 	/^Gazebo model Configuration$/,

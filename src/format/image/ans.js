@@ -28,7 +28,7 @@ export class ans extends Format
 	converters   = [
 		"ansilove[format:ans]",
 		dexState => (dexState.imageFailedTooTall ? null : "ffmpeg[format:tty][codec:ansi][outType:gif]"),	// if we failed a previous converter due to being too tall, then don't convert to an animated GIF (text/txt/Newsletter)
-		"deark[module:ansiart][charOutType:image]", "textmode2png[format:ANSI]"
+		"deark[module:ansiart][charOutType:image]", "textmode2png[format:ANSI][hasExtMatch]"
 	];
 	notes = "Animated ANSI sequences such as KM-TRANSPORTER.ANS only get converted into a single image with ansilove. It would be nice to 'detect' that it's animated and use ffmpeg instead to convert it into an animated MP4";
 }

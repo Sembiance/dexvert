@@ -4,6 +4,6 @@ export class singleStreamRWSD extends Format
 {
 	name       = "Single Stream RWSD";
 	ext        = [".rwsd"];
-	magic      = ["RWSD Audio Stream"];
-	converters = ["vgmstream"];
+	magic      = ["RWSD Audio Stream", "vgmstream: rwsd"];
+	converters = ["vgmstream[types:rwsd]"];
 }

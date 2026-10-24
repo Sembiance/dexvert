@@ -20,7 +20,7 @@ export {_SKIP_CODES};
 
 export class gameextractorID extends Program
 {
-	website = "https://sourceforge.net/projects/gameextractor/files/";
+	website = "https://sourceforge.net/projects/gameextractor/";
 	loc     = "local";
 	exec    = async r =>
 	{

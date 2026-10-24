@@ -10,6 +10,9 @@ import {path} from "std";
 import {C} from "../src/C.js";
 import {flexMatch} from "../src/identify.js";
 
+// some detectors don't work at all if the extension is not set
+const detectorsKeepExtension = ["vgmstreamID"];
+
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Test a new detector program and outputs all found non-weak magics that are not already in any formats magic list",
@@ -79,7 +82,7 @@ async function checkDetector(detectorid)
 	const matches = [];
 	await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	{
-		const detectTmpFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
+		const detectTmpFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, detectorsKeepExtension.includes(detectorid) ? path.extname(sampleFilePath) : undefined);
 		await Deno.copyFile(sampleFilePath, detectTmpFilePath);	// can't use a symlink as that changes the file type, hard link can't be used across different filesystems, so we have to copy. sad.
 
 		const r = await Program.runProgram(detectorid, await FileSet.create(path.dirname(sampleFilePath), "input", detectTmpFilePath), {flags : {detectTmpFilePath }, xlog : xlog.atLeast("debug") ? xlog : new XLog("error")});

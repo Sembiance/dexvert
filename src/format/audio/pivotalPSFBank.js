@@ -6,7 +6,7 @@ export class pivotalPSFBank extends Format
 	name           = "Pivotal PSF Bank Audio";
 	ext            = [".wss", ".psf"];
 	forbidExtMatch = true;
-	magic          = ["Pivotal PSF Bank (psfb)"];
+	magic          = ["Pivotal PSF Bank (psfb)", "vgmstream: psf_segmented"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = dexState => ([_FFMPEG_CONVERTERS_BUILDER({dexState, format : "psfb", outType : "mp3", libre : true})]);
+	converters     = dexState => (["vgmstream[types:psf_segmented]", _FFMPEG_CONVERTERS_BUILDER({dexState, format : "psfb", outType : "mp3", libre : true})]);
 }

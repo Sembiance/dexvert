@@ -5,7 +5,7 @@ export class eaMicroTalk extends Format
 	name         = "Electronic Arts MicroTalk";
 	website      = "https://wiki.multimedia.cx/index.php/Electronic_Arts_MicroTalk";
 	ext          = [".utk"];
-	magic        = ["Maxis UTalk audio", "Maxis UTK (utk)"];
+	magic        = ["Maxis UTalk audio", "Maxis UTK (utk)", "vgmstream: utk"];
 	metaProvider = ["ffprobe[libre]"];
-	converters   = ["ffmpeg[libre][format:utk][outType:mp3]"];
+	converters   = ["ffmpeg[libre][format:utk][outType:mp3]", "vgmstream[types:utk]"];
 }

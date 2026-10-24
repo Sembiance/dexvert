@@ -5,6 +5,7 @@ export class gameCubeTHPVideo extends Format
 	name           = "GameCube THP Video";
 	ext            = [".thp"];
 	forbidExtMatch = true;
-	magic          = ["THP (thp)", "GameCube THP video"];
+	magic          = ["THP (thp)", "GameCube THP video", /^Nintendo THP Multimedia/];
+	weakMagic      = true;
 	converters     = ["ffmpeg[format:thp][libre]"];
 }

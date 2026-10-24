@@ -7,5 +7,6 @@ export class ubisoftSBxBNM extends Format
 	ext          = [".bnm"];
 	byteCheck    = [{offset : 0, match : [0x00, 0x00, 0x00, 0x00]}];
 	metaProvider = ["ffprobe[libre]"];
-	converters   = dexState => ([_FFMPEG_CONVERTERS_BUILDER({dexState, format : "ubibnm", outType : "mp3", libre : true})]);
+	magic        = ["vgmstream: ubi_bnm"];
+	converters   = dexState => (["vgmstream[types:ubi_bnm]", _FFMPEG_CONVERTERS_BUILDER({dexState, format : "ubibnm", outType : "mp3", libre : true})]);
 }

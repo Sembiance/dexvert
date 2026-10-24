@@ -5,7 +5,7 @@ export class entisEngineAudio extends Format
 	name           = "Entis Engine Compressed Audio";
 	ext            = [".mio"];
 	forbidExtMatch = true;
-	magic          = ["audio:Entis.MioAudio"];
+	magic          = ["audio:Entis.MioAudio", "vgmstream: mio"];
 	weakMagic      = true;
-	converters     = ["GARbro[types:audio:Entis.MioAudio]"];
+	converters     = ["vgmstream[types:mio]", "GARbro[types:audio:Entis.MioAudio]"];
 }

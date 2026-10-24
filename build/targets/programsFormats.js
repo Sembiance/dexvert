@@ -55,7 +55,7 @@ export default async function programsFormats(xlog)
 		async function convert__imagemagick()
 		{
 			const formats = [];
-			for(const row of Array.from(xu.fromHTML(await fileUtil.readTextFile(path.join((await fileUtil.tree("/usr/share/doc", {depth : 1, nofile : true, regex : /^imagemagick-/}))[0], "html/www/formats.html"))).querySelectorAll("table tr")))
+			for(const row of Array.from(xu.fromHTML(await fileUtil.readTextFile(path.join((await fileUtil.tree("/usr/share/doc", {depth : 1, nofile : true, regex : /^imagemagick-/}))[0], "html/www/formats/index.html"))).querySelectorAll("table tr")))
 			{
 				const [tag, mode, description, notes] = (Array.from(row.querySelectorAll("td")) || []).map(c => c.textContent.trim().replaceAll("\n", ""));
 				if(tag?.trim()?.length)
@@ -134,11 +134,7 @@ for my $module (sort $finder->plugins) {
 		},
 		async function unar() { return (await runUtil.run("unar", ["--list-formats"])).stdout; },
 		async function uniconvertor__uniconvertorDASHappimage() { return (await runUtil.run("uniconvertor", ["--help"])).stdout.match(/INPUT FILE FORMATS-+([\s\S]+)---OUTPUT FILE FORMATS/)[1]; },
-		async function vgmstream__vgmstreamDASHcli()
-		{
-			const formatsData = (await runUtil.run("bzcat", [path.join((await fileUtil.tree("/usr/share/doc", {depth : 1, nofile : true, regex : /^vgmstream-cli-/}))[0], "FORMATS.md.bz2")])).stdout;
-			return formatsData.match(/### List([\s\S]+)Sometimes standard codecs/)[1];
-		},
+		async function vgmstream__vgmstreamServer() { return await xu.fetch(`http://${C.VGMSTREAM_HOST}:${C.VGMSTREAM_PORT}/list`); },
 		async function view64() { return (await runUtil.run("view64pnm", ["--help-formats"])).stdout.match(/supports the following formats:([\s\S]+)/)[1]; },
 		async function wuimg() { return (await runUtil.run("wuconv", ["--fmts"])).stderr; },
 		async function xmp__libxmp() { return (await runUtil.run("bzcat", [path.join((await fileUtil.tree("/usr/share/doc", {depth : 1, nofile : true, regex : /^libxmp-/}))[0], "formats.txt.bz2")])).stdout; },

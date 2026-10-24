@@ -15,7 +15,7 @@ export class GARbro extends Program
 		const msg = {inputFilePath : r.inFile({absolute : true}), outputDirPath : r.outDir({absolute : true}), formatId : r.flags.types};
 		const result = await xu.fetch(`http://${C.GARBRO_HOST}:${C.GARBRO_PORT}/extract`, {json : msg, asJSON : true});
 		if(result?.error)
-			r.xlog.error`GARbro error for types ${r.flags.codes}: ${result.error}`;
+			r.xlog.error`GARbro error for types ${r.flags.types}: ${result.error}`;
 	};
 	chain     = r => (r.flags.types.split(",").every(v => v.startsWith("audio:")) ? "sox[type:wav]" : null);
 	renameOut = r => !!r.flags.types.split(",").every(v => v.startsWith("audio:") || v.startsWith("image:"));

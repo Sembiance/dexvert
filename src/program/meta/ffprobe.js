@@ -13,6 +13,9 @@ export class ffprobe extends Program
 	post = r =>
 	{
 		const probeInfo = xu.parseJSON(r.stdout);
+		if(!probeInfo)
+			return;
+		
 		const tagTypes =
 		{
 			stream :

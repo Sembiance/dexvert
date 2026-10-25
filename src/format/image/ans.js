@@ -24,7 +24,7 @@ export class ans extends Format
 		
 		return 0;
 	};
-	metaProvider = ["ansiloveInfo"];
+	metaProvider = ["ansiloveInfo", "ansiloveText"];
 	converters   = [
 		"ansilove[format:ans]",
 		dexState => (dexState.imageFailedTooTall ? null : "ffmpeg[format:tty][codec:ansi][outType:gif]"),	// if we failed a previous converter due to being too tall, then don't convert to an animated GIF (text/txt/Newsletter)

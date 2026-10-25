@@ -42,12 +42,12 @@ async function loadFormatFilePath(formatFilePath, {reload}={})
 	// some manual checks on meta providers based on what converters are being used
 	const requiredMetaProviders =
 	{
-		"convert"       : {provider : "image", skipFormatids : ["pcd", "ttf", "otf"]},
-		"darktable_cli" : {provider : "darkTable"},
-		"ansilove"      : {provider : "ansiloveInfo"},
-		"ffmpeg"        : {provider : "ffprobe", skipIfFlag : ["outType:png", "outType:mp3"]}
+		"convert"       : {providers : "image", skipFormatids : ["pcd", "ttf", "otf"]},
+		"darktable_cli" : {providers : "darkTable"},
+		"ansilove"      : {providers : ["ansiloveInfo", "ansiloveText"]},
+		"ffmpeg"        : {providers : "ffprobe", skipIfFlag : ["outType:png", "outType:mp3"]}
 	};
-	for(const [converter, {provider, skipFormatids, skipIfFlag}] of Object.entries(requiredMetaProviders))
+	for(const [converter, {providers, skipFormatids, skipIfFlag}] of Object.entries(requiredMetaProviders))
 	{
 		if(!Array.isArray(format.converters))	// we only check static converters, not dyunamic ones
 			continue;
@@ -62,10 +62,10 @@ async function loadFormatFilePath(formatFilePath, {reload}={})
 		if(skipFormatids?.includes(formatid))
 			continue;
 		
-		if((format.metaProvider || []).some(v => v===provider || v.startsWith(`${provider}[`)))
+		if(Array.force(providers).every(provider => (format.metaProvider || []).some(v => v===provider || v.startsWith(`${provider}[`))))
 			continue;
 
-		throw new Error(`format ${formatid} has ${converter} as a converter, but NOT ${provider} as a metaProvider.`);
+		throw new Error(`format ${formatid} has ${converter} as a converter, but NOT ${providers} as a metaProvider.`);
 	}
 
 	if(format.ext)

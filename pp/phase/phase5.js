@@ -178,6 +178,10 @@ export default async function phase5({itemWebDirPath, itemThumbDirPath, itemFile
 				continue;
 			}
 
+			// don't index ocrText that we already have as imageText
+			if(fileData?.meta?.imageText?.length)
+				continue;
+
 			fileData.indexData.ocrText = ocrText;
 
 			await fileUtil.writeTextFile(webFilePath, JSON.stringify(fileData));

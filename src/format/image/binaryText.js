@@ -19,7 +19,7 @@ export class binaryText extends Format
 		So we set it as a fallback, so it's handled dead last.
 		We also only convert if the file is between 4,000 and 400,000 bytes as I haven't encountered any binary text files larger than 360k.
 		Even with all these restrictions we will likely convert lots of random .bin files into garbage, but there isn't much of an alternative.`;
-	metaProvider   = ["ansiloveInfo", "ffprobe"];
+	metaProvider   = ["ansiloveInfo", "ansiloveText", "ffprobe"];
 	idCheck        = inputFile => inputFile.size>=4000 && inputFile.size<=400_000;	// .bin is so generic, only try converting if less than 400k, otherwise it's unlikely to be this format
 
 	// Only convert if ffprobe or ansiloveInfo found the proper formatName

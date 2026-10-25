@@ -8,6 +8,6 @@ export class tundra extends Format
 	forbidExtMatch = true;
 	mimeType       = "text/x-tundra";
 	magic          = ["TUNDRA text-mode graphics", /^fmt\/1603( |$)/];
-	metaProvider   = ["ansiloveInfo"];
+	metaProvider   = ["ansiloveInfo", "ansiloveText"];
 	converters     = ["textmode2png[format:Tundra]", "ansilove[format:tnd]", `abydosconvert[format:${this.mimeType}]`];
 }

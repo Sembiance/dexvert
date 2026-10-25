@@ -4,11 +4,6 @@ import {C} from "../../src/C.js";
 import {path, dateParse} from "std";
 
 const TIKA_TIMEOUT = xu.MINUTE*1.5;
-const TEXT_IMAGE_FORMATS =
-[
-	// ANSI text formats, sometimes they convert into HUGE images that can't be OCR'ed well because when resized down the text isn't readable
-	"ans", "artworx", "avatar", "iCEDraw", "pcBoard", "tundra", "xb"
-];
 
 // Phase 4 - First pass at filling textContent field
 export default async function phase4({item, itemWebDirPath, taskRunner, xlog})
@@ -128,14 +123,17 @@ export default async function phase4({item, itemWebDirPath, taskRunner, xlog})
 					// executable
 					"Comments", "CompanyName", "FileDescription", "FileVersion", "InternalName", "OriginalFilename", "LegalCopyright", "LegalTrademarks", "ProductName", "ProductVersion",
 
-					// music & video
-					"title",
+					// font
+					"family", "fullName", "postscriptName",
+
+					// image
+					"imageText",
 
 					// music
 					"author", "type", "tracker", "instruments",
-					
-					// font
-					"family", "fullName", "postscriptName"
+
+					// music & video
+					"title"
 				].forEach(key =>
 				{
 					if(fileData.meta?.[key])
@@ -172,9 +170,6 @@ export default async function phase4({item, itemWebDirPath, taskRunner, xlog})
 					
 					if(fileData.content?.dexid?.formatid==="pdf")
 						contentFilePath = fileData.content.filePath;
-					
-					if(!contentFilePath && TEXT_IMAGE_FORMATS.includes(fileData.formatid))
-						contentFilePath = fileData.filePath;
 
 					// now get content from TIKA
 					if(contentFilePath)

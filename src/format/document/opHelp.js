@@ -5,6 +5,6 @@ export class opHelp extends Format
 	name           = "OPHelp";
 	ext            = [".hlp"];
 	forbidExtMatch = true;
-	magic          = ["OPHelp Help"];
+	magic          = ["OPHelp Help", "Object Professional Help"];
 	converters     = ["vibe2rtf"];
 }

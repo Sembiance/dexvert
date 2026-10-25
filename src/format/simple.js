@@ -25,7 +25,7 @@ export default
 		catalogTranslation       : {name : "Amiga Catalog Translation file", ext : [".ct"], magic : ["catalog translation", "Amiga Catalog Translation"]},
 		centralPointHelp         : {name : "Central Point Help", ext : [".hlp"], magic : ["Central Point Software Help data"]},
 		clarionHelp              : {name : "Clarion Help", ext : [".hlp"], magic : ["Clarion for DOS Help", "Clarion Developer (v2 and above) help data"]},
-		clarionMemo              : {name : "Clarion Memo", ext : [".mem"], magic : ["Clarion Developer (v2 and above) memo data"]},
+		clarionMemo              : {name : "Clarion Memo", ext : [".mem"], magic : ["Clarion Developer (v2 and above) memo data", "Clarion 2 for DOS Memo"]},
 		codeViewHelp             : {name : "Codeview Help", ext : [".hlp"], magic : ["Codeview Help"]},
 		comitHelp                : {name : "COMit Help", ext : [".h!"], magic : ["COMit Help"], weakMagic : true},
 		corelPresentations       : {name : "Corel/WordPerfect Presentations", ext : [".shw", ".mst", ".prt"], magic : ["WordPerfect Presentation", "WordPerfect/Corel Presentations", /^fmt\/(878|1837)( |$)/], website : "http://fileformats.archiveteam.org/wiki/SHW_(Corel)"},
@@ -135,7 +135,7 @@ export default
 	other :
 	{
 		actPhoneQuickList                : {name : "ACT! Phone Quick List", ext : [".pql"], magic : ["ACT! Phone Quick List"], weakMagic : true, idMeta : ({macFileType, macFileCreator}) => macFileType===".PQL" && macFileCreator==="ACT!"},
-		agSIHelpFile                     : {name : "agSI Help File", ext : [".hlp"], magic : ["agSI Help File"]},
+		agSIHelpFile                     : {name : "agSI Help File", ext : [".hlp"], magic : ["agSI Help File", "Andreas Grogel Help File"]},
 		amiDockConfig                    : {name : "AmiDock Configuration", ext : [".config"], magic : ["AmiDock Configuration"], weakMagic : true},
 		amigaGuideIndex                  : {name : "Amigaguide Index", ext : [".index"], magic : ["Amigaguide Index"]},
 		amosMenuBank                     : {name : "AMOS Menu Bank", ext : [".abk"], magic : ["AMOS Menu Bank"]},

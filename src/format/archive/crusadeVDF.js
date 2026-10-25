@@ -5,6 +5,6 @@ export class crusadeVDF extends Format
 	name           = "Crusade VDF Archive";
 	ext            = [".vdf"];
 	forbidExtMatch = true;
-	magic          = ["Crusade VDF"];
+	magic          = ["Crusade VDF", "Crusade game data"];
 	converters     = ["na_game_tool_extract[format:vdf]"];
 }

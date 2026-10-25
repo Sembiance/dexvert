@@ -50,6 +50,17 @@ vibe-codex -c
 # Modify package.sh and bump version
 ./package.sh
 emerge GARbroserver
+# If it fails to build, you may need to get a new list of nugets:
+sudo cp -rv GARbroserver /tmp
+sudo chown -R sembiance:users /tmp/GARbroserver
+cd /tmp/GARbro/server/GARbro.Server
+# Double check the .csproj
+ag TargetFramework GARbro.Server.csproj
+# Generate nuget list
+gdmt restore --sdk-ver 10.0
+# Modify the latest ebuild with the nuget list. Also update the package.sh script to copy this ebuild version for future packages
+rm -rf /tmp/GARbroserver
+vibe
 mv GARbroserver legacy/
 <<<
 

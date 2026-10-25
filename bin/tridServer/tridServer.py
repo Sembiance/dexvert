@@ -47,6 +47,7 @@ def _text_response(handler, status, text):
 def _worker_init(defs_path, cache_size):
     global _TDB, _DEFS_PATH, _RESULT_CACHE, _CACHE_SIZE
     signal.signal(signal.SIGINT, signal.SIG_IGN)
+    signal.signal(signal.SIGTERM, signal.SIG_DFL)
     _DEFS_PATH = defs_path
     _CACHE_SIZE = cache_size
     _RESULT_CACHE = OrderedDict()
@@ -195,16 +196,22 @@ def _find_defs_path(value):
     return str((trid.get_base_path() / "triddefs.trd").resolve())
 
 
-def _warm_workers(executor, workers):
-    futures = [executor.submit(_worker_status, 0.25) for _ in range(workers)]
-    done, _ = wait(futures)
-    statuses = [future.result() for future in done]
-    pids = {status["pid"] for status in statuses}
-    if len(pids) < workers:
-        futures = [executor.submit(_worker_status, 0.25) for _ in range(workers * 2)]
-        done, _ = wait(futures)
-        statuses.extend(future.result() for future in done)
+def _warm_workers(executor, workers, stopping):
+    statuses = []
+    pids = set()
+    for task_count in (workers, workers * 2):
+        if stopping():
+            break
+        futures = [executor.submit(_worker_status, 0.25) for _ in range(task_count)]
+        pending = futures
+        while pending and not stopping():
+            _, pending = wait(pending, timeout=0.1)
+        if stopping():
+            break
+        statuses.extend(future.result() for future in futures)
         pids = {status["pid"] for status in statuses}
+        if len(pids) == workers:
+            break
     return statuses, pids
 
 
@@ -229,27 +236,57 @@ def main():
     if not os.path.exists(defs_path):
         raise SystemExit(f"definitions file not found: {defs_path}")
 
-    # Build or refresh the cache once before workers start, avoiding concurrent cache writes.
-    trid.trdpkg2defs(defs_path, usecache=True)
+    stop_requested = False
 
-    executor = ProcessPoolExecutor(
-        max_workers=args.workers,
-        initializer=_worker_init,
-        initargs=(defs_path, args.cache_size),
-    )
+    def request_stop(signum, frame):
+        nonlocal stop_requested
+        # Do not interrupt pool startup or cleanup with an asynchronous exception.
+        stop_requested = True
+
+    def stopping():
+        return stop_requested
+
+    previous_handlers = {
+        signum: signal.signal(signum, request_stop)
+        for signum in (signal.SIGINT, signal.SIGTERM)
+    }
+    executor = None
+    httpd = None
     try:
-        statuses, pids = _warm_workers(executor, args.workers)
+        # Refresh the cache before workers start, avoiding concurrent cache writes.
+        trid.trdpkg2defs(defs_path, usecache=True)
+        if stopping():
+            return
+
+        executor = ProcessPoolExecutor(
+            max_workers=args.workers,
+            initializer=_worker_init,
+            initargs=(defs_path, args.cache_size),
+        )
+        statuses, pids = _warm_workers(executor, args.workers, stopping)
+        if stopping():
+            return
         if len(pids) < args.workers:
             raise RuntimeError(f"only warmed {len(pids)} of {args.workers} workers")
 
         httpd = TrIDServer(("", args.port), TrIDRequestHandler, executor, args.workers)
+        httpd.timeout = 0.25
         print(f"TrID server ready on port {args.port} with {len(pids)} workers")
         print(f"Definitions: {statuses[0]['defs'] if statuses else 0}")
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        print("\nStopping TrID server")
+        while not stopping():
+            httpd.handle_request()
     finally:
-        executor.shutdown(cancel_futures=True)
+        try:
+            if stopping():
+                print("\nStopping TrID server")
+            if httpd is not None:
+                httpd.ready = False
+                httpd.server_close()
+            if executor is not None:
+                executor.shutdown(wait=True, cancel_futures=True)
+        finally:
+            for signum, handler in previous_handlers.items():
+                signal.signal(signum, handler)
 
 
 if __name__ == "__main__":

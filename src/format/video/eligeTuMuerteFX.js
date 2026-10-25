@@ -5,7 +5,7 @@ export class eligeTuMuerteFX extends Format
 	name           = "Elige Tu Muerte FX Video";
 	ext            = [".mov"];
 	forbidExtMatch = true;
-	magic          = ["Elige Tu Muerte FX WEAK"];
+	magic          = ["Elige Tu Muerte FX WEAK", "Elige Tu Muerte animation"];
 	weakMagic      = true;
 	converters     = ["na_game_tool[format:fx]"];
 }

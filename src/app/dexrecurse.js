@@ -62,6 +62,7 @@ const EXCLUDED_SAMPLE_FORMATS = [
 	"text/magicTextFile",
 	"text/windowsAutorun",
 	"text/windowsHostsList",
+	"video/seventhLevelVideo",
 
 	// modern formats that are 'generated' from others, so often not original. Also pretty modern so no need for many file samples
 	"archive/sevenZip",
@@ -284,7 +285,7 @@ await Deno.mkdir(metaDirPath);
 const inputFullPath = path.resolve(argv.inputPath);
 if((await Deno.stat(inputFullPath)).isFile)
 {
-	if(inputFullPath.endsWith(".tar.gz"))	// eslint-disable-line unicorn/prefer-ternary
+	if(inputFullPath.endsWith(".tar.gz"))
 		await runUtil.run("tar", ["-xf", inputFullPath, "-C", fileDirPath], {xlog});
 	else
 		await runUtil.run("rsync", runUtil.rsyncArgs(inputFullPath, path.join(fileDirPath, path.basename(inputFullPath)), {fast : true}), {xlog});

@@ -5,7 +5,7 @@ export class generalDigiMusic extends Format
 	name         = "General Digital Music";
 	website      = "http://fileformats.archiveteam.org/wiki/General_Digital_Music_module";
 	ext          = [".gdm"];
-	magic        = ["General Digital Music"];
+	magic        = ["General Digital Music", "BWSB General Digital Music module"];
 	metaProvider = ["musicInfo"];
 	converters   = ["xmp", "zxtune123", "openmpt123"];
 }

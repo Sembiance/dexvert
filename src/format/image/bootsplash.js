@@ -4,7 +4,7 @@ export class bootsplash extends Format
 {
 	name         = "Bootsplash Image";
 	filename     = [/^bootsplash$/i];
-	magic        = ["Bootsplash image"];
+	magic        = ["Bootsplash image", "Bootsplash graphics bitmap"];
 	priority     = this.PRIORITY.LOW;
 	converters   = ["tomsViewer"];
 }

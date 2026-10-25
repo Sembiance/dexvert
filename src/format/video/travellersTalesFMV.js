@@ -6,5 +6,6 @@ export class travellersTalesFMV extends Format
 	ext            = [".fmv"];
 	forbidExtMatch = true;
 	magic          = ["Traveller's Tales FMV (ttfmv)"];
+	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[libre][format:ttfmv]"];
 }

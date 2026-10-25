@@ -8,6 +8,6 @@ export class threeGVideo extends Format
 	magic        = ["3GPP/3GPP2 multimedia audio/video", "3GPP multimedia audio/video", "3GPP2 multimedia audio/video", "ISO Media, MPEG v4 system, 3GPP2", "video/3gpp", "video/3gpp2", "Format: MP4 Video[3g2a]",
 		/^Format: MP4 Video\[.*3gp/, /^iso media.* 3gpp/i, /^soxi: 3g[2p]$/, /^fmt\/357( |$)/];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="3gpp" && macFileCreator==="TVOD";
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg"];
 }

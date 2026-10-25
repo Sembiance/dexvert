@@ -20,7 +20,7 @@ export class mpeg2 extends Format
 		"PlayStation Portable Movie Format", "AVCHD video clips - MPEG Transport Stream", "BDAV MPEG-2 Transport Stream (M2TS)"
 	];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="MPG2" || (macFileType==="MPEG" && macFileCreator==="TVOD");
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg", "xanim"];
 	/*converters = dexState =>
 	{

@@ -7,6 +7,6 @@ export class sgiMovie extends Format
 	ext            = [".mv", ".movie", ".sgi"];
 	forbidExtMatch = [".movie"];
 	magic          = ["SGI video", "Silicon Graphics movie file", "video/x-sgi-movie", "Silicon Graphics Movie (mv)", /^fmt\/1901( |$)/];
-	metaProvider   = ["mplayer"];
+	metaProvider   = ["ffprobe"];
 	converters     = ["ffmpeg[format:mv]", "xanim"];
 }

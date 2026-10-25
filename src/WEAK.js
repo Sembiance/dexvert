@@ -1674,7 +1674,7 @@ export const WEAK_VALUES =
 	/^Graham Systems Disk Sqeezer disk image$/,
 	/^Grapher for DOS Symbol$/,
 	/^GraphiCode Programmable Device Format$/,
-	/^GUIX binary standalone resource \(LE\)$/
+	/^GUIX binary standalone resource \(LE\)$/,
 	/^HA compressed archive$/,
 	/^Hi-MD Minidisc ATRAC3\+? audio data container$/,
 	/^HP Xine compressed$/,

@@ -6,5 +6,6 @@ export class cyberflixDreamFactory5 extends Format
 	ext            = [".move"];
 	forbidExtMatch = true;
 	magic          = ["CFDF D5 (Cyberflix DreamFactory v5) (cfdf_d5)"];
+	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[libre][format:cfdf_d5]"];
 }

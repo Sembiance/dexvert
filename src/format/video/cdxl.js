@@ -6,6 +6,6 @@ export class cdxl extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/CDXL";
 	ext          = [".cdxl", ".xl"];
 	magic        = ["Amiga CDXL video", "Commodore CDXL video (cdxl)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:cdxl]"];
 }

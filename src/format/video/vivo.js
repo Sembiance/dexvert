@@ -7,6 +7,6 @@ export class vivo extends Format
 	ext          = [".viv"];
 	magic        = ["Vivo streaming video", "Vivo video data", "Vivo (vivo)", /^fmt\/499( |$)/];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="vivo" && macFileCreator==="Vivo";
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["nihav", "ffmpeg[format:vivo]"];
 }

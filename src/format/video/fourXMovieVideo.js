@@ -6,6 +6,6 @@ export class fourXMovieVideo extends Format
 	website      = "https://wiki.multimedia.cx/index.php/4xm_Format";
 	ext          = [".4xm"];
 	magic        = ["4X Movie video", "RIFF Datei: unbekannter Typ '4XMV'", "4X Technologies (4xm)", "Generic RIFF file 4XMV", /^RIFF.* 4X Movie/, /^fmt\/1150( |$)/];
-	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg"];
+	metaProvider = ["ffprobe"];
+	converters   = ["ffmpeg[format:4xm]"];
 }

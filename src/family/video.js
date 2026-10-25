@@ -15,7 +15,7 @@ export class video extends Family
 			return false;
 		}
 
-		const videoInfo = await videoUtil.getInfo(dexFile.absolute);
+		const videoInfo = await videoUtil.getInfo(dexFile.absolute);	// this uses mplayer for identification, which will work fine for the output which we expect to be mp4
 		if(!videoInfo.width || !videoInfo.height)
 		{
 			xlog.warn`Video failed verification due to not detecting width or height ${videoInfo}`;
@@ -23,22 +23,5 @@ export class video extends Family
 		}
 
 		return {meta : videoInfo};
-	}
-
-	// gets meta information for the given input and format
-	async meta(inputFile, format)
-	{
-		if(!format.metaProvider)
-			return;
-
-		const meta = {};
-		for(const metaProvider of format.metaProvider)
-		{
-			// mplayer meta provider
-			if(metaProvider==="mplayer")
-				Object.assign(meta, await videoUtil.getInfo(inputFile.absolute));
-		}
-
-		return meta;
 	}
 }

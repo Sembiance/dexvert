@@ -7,5 +7,6 @@ export class sigmaTelMotionVideo extends Format
 	ext            = [".smv"];
 	forbidExtMatch = true;
 	magic          = ["SigmaTel Motion Video"];
+	metaProvider   = ["ffprobe"];
 	converters     = ["ffmpeg"];
 }

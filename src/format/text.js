@@ -1156,7 +1156,7 @@ export default
 		winMergeDirectoryFileFilter                : {name : "WinMerge directory/file Filter", ext : [".flt", ".tmpl"], magic : ["WinMerge directory/file Filter"]},
 		winMorphProject                            : {name : "WinMorph project", ext : [".mrf"], magic : ["WinMorph project"], weakMagic : true},
 		winSFV32Checksum                           : {name : "WIN-SFV32 checksum ", ext : [".txt"], magic : ["WIN-SFV32 checksum"]},
-		winUAEConfiguration                        : {name : "WinUAE Configuration", ext : [".uae", ".cache"], magic : ["UAE - WinUAE Configuration", "WinUAE configuration Cache"], weakMagic : true},
+		winUAEConfiguration                        : {name : "WinUAE Configuration", ext : [".uae", ".cache"], magic : ["UAE - WinUAE Configuration", "WinUAE configuration Cache", "UAE/WinUAE configuration", "WinUAE Configuration File"], weakMagic : true},
 		wiseInstallerLog                           : {name : "Wise Installer log", ext : [".log"], magic : ["Wise Installer log"]},
 		wiseScript                                 : {name : "Wise script", ext : [".wse"], magic : ["Wise script"]},
 		wiziTeXEquation                            : {name : "WiziTeX equation", ext : [".tex"], magic : ["WiziTeX equation"]},

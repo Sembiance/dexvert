@@ -6,6 +6,6 @@ export class segaCPKVideo extends Format
 	website      = "https://wiki.multimedia.cx/index.php/Sega_FILM";
 	ext          = [".cpk", ".cak", ".film"];
 	magic        = ["Sega CPK video", "Sega FILM / CPK (film_cpk)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:film_cpk]"];
 }

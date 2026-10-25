@@ -6,5 +6,6 @@ export class rpzaVideo extends Format
 	ext            = [".pdv"];
 	forbidExtMatch = true;
 	magic          = ["RPZA Video (rpza)"];
+	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[libre][format:rpza]"];
 }

@@ -6,6 +6,6 @@ export class mtvVideo extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/MTV_Video_(.AMV)";
 	ext          = [".amv"];
 	magic        = ["RIFF (little-endian) data, AMV", "MTV Movie", "RIFF Datei: unbekannter Typ 'AMV '", /^Generic RIFF file AMV$/];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg"];
 }

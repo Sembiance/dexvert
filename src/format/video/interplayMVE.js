@@ -6,6 +6,6 @@ export class interplayMVE extends Format
 	website      = "https://wiki.multimedia.cx/index.php/Interplay_MVE";
 	ext          = [".mve"];
 	magic        = ["Interplay MVE video", "Interplay MVE Movie", "Interplay MVE (ipmovie)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:ipmovie]"];
 }

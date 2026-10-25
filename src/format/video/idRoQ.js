@@ -6,6 +6,6 @@ export class idRoQ extends Format
 	website      = "https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files";
 	ext          = [".roq"];
 	magic        = ["Id Software RoQ video", "id RoQ (roq)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["na_game_tool[format:roq]", "ffmpeg[format:roq]"];
 }

@@ -7,6 +7,6 @@ export class fli extends Format
 	ext          = [".fli"];
 	magic        = ["FLIC FLI video", "FLI animation", "AutoDesk FLIC Animation", "Autodesk Animator", "FLI/FLC/FLX animation (flic)", "Magic Carpet Flic video", "deark: fli (FLI)", /^x-fmt\/154( |$)/, /^fmt\/(299)( |$)/];
 	idMeta       = ({macFileType}) => ["pFLI", "FLI "].includes(macFileType);
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:flic]", "xanim", "deark[module:fli] -> *ffmpeg[fps:15]", "na_game_tool[format:fli]"];
 }

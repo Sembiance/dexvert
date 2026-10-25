@@ -6,6 +6,6 @@ export class bitmapBrothersJV extends Format
 	website      = "https://wiki.multimedia.cx/index.php/JV";
 	ext          = [".jv"];
 	magic        = ["Bitmap Brothers JV video", "Bitmap Brothers JV (jv)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:jv]"];
 }

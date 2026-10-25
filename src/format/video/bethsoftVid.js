@@ -6,6 +6,6 @@ export class bethsoftVid extends Format
 	website      = "https://wiki.multimedia.cx/index.php/Bethsoft_VID";
 	ext          = [".vid"];
 	magic        = ["Bethesda Softworks video", "Bethesda Softworks VID (bethsoftvid)"];
-	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg"];
+	metaProvider = ["ffprobe"];
+	converters   = ["ffmpeg[format:bethsoftvid]"];
 }

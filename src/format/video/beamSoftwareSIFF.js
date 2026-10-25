@@ -6,6 +6,6 @@ export class beamSoftwareSIFF extends Format
 	website      = "https://wiki.multimedia.cx/index.php/SIFF";
 	ext          = [".vb", ".vbc"];
 	magic        = ["Beam Software SIFF video", "Beam Software SIFF (siff)", /^fmt\/1559( |$)/];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["na_game_tool[format:siff]", "ffmpeg[format:siff]"];
 }

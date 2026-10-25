@@ -19,6 +19,6 @@ export class avi extends Format
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="VfW " || (macFileType==="BINA" && macFileCreator==="AVIC") || (macFileType==="AVI " && macFileCreator==="MSIE");
 	mimeType     = "video/avi";
 	magic        = _AVI_MAGIC;
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = dexState => ["ffmpeg", "ffmpeg[libre]", "nihav", "mencoderWinXP[matchType:magic]", `xanim[fps:${dexState.meta.fps || 10}][matchType:magic]`];
 }

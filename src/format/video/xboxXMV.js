@@ -6,6 +6,6 @@ export class xboxXMV extends Format
 	website      = "https://wiki.multimedia.cx/index.php/XMV";
 	ext          = [".xmv"];
 	magic        = ["Xbox Video", "Microsoft XMV (xmv)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:xmv]"];
 }

@@ -6,6 +6,6 @@ export class dreamForgeVideo extends Format
 	website      = "https://wiki.multimedia.cx/index.php/DFA";
 	ext          = [".dfa"];
 	magic        = ["DreamForge video", "Chronomaster DFA (dfa)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:dfa]"];
 }

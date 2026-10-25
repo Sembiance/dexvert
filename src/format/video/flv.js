@@ -7,6 +7,6 @@ export class flv extends Format
 	ext          = [".flv"];
 	magic        = ["Macromedia Flash Video", "Flash Video", "Format: Flash Video", "video/x-flv", "FLV (Flash Video) (flv)", /^x-fmt\/382( |$)/];
 	idMeta       = ({macFileType}) => ["FLV1", "MFLV"].includes(macFileType);
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:flv]"];
 }

@@ -6,5 +6,6 @@ export class nintendoDSPAudio extends Format
 	ext            = [".dsp"];
 	forbidExtMatch = true;
 	magic          = ["NGC (Nintendo DSP Standard) (ngcdspstd)", "vgmstream: ngc_dsp_aaap", "vgmstream: ngc_dsp_std", "vgmstream: dsp_interleaved"];
+	weakMagic      = ["NGC (Nintendo DSP Standard) (ngcdspstd)"];
 	converters     = ["ffmpeg[libre][outType:mp3][format:ngcdspstd]", "vgmstream[types:ngc_dsp_std,ngc_dsp_aaap,dsp_interleaved]"];
 }

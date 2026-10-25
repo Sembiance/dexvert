@@ -6,6 +6,6 @@ export class nuppelVideo extends Format
 	website      = "https://wiki.multimedia.cx/index.php/Nuppelvideo";
 	ext          = [".nuv"];
 	magic        = ["NuppelVideo (MythTV) video", "NuppelVideo (nuv)", "NuppelVideo video", /^MythTV NuppelVideo/];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:nuv]"];
 }

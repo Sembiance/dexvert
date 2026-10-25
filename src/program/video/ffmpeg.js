@@ -7,9 +7,9 @@ export const _FFMPEG_CONVERTERS_BUILDER = ({dexState, format, outType, libre}) =
 	const prefix = `ffmpeg${libre ? "[libre]" : ""}[format:${format}][outType:${outType}]`;
 
 	if(outType==="pngFrame")
-		return [].pushSequence(0, (dexState.meta.nbReadFrames || 0)).map(i => `${prefix}[numFrames:${dexState.meta.nbReadFrames}][frameNum:${i}]`).join(" & ");
+		return [].pushSequence(0, (dexState.meta.frameCount || 0)).map(i => `${prefix}[numFrames:${dexState.meta.frameCount}][frameNum:${i}]`).join(" & ");
 
-	return [].pushSequence(0, (dexState.meta.nbStreams || 0)).map(i => `${prefix}[numStreams:${dexState.meta.nbStreams}][streamNum:${i}]`).join(" & ");
+	return [].pushSequence(0, (dexState.meta.streamCount || 0)).map(i => `${prefix}[numStreams:${dexState.meta.streamCount}][streamNum:${i}]`).join(" & ");
 };
 
 export class ffmpeg extends Program

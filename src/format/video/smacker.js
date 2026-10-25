@@ -10,6 +10,6 @@ export class smacker extends Format
 		/^geArchive: ZRB_SMK2( |$)/, /^RAD Game Tools Smacker Multimedia .* frames$/, /^fmt\/1234( |$)/
 	];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="DDat" && macFileCreator==="DLCK";
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:smk]"];
 }

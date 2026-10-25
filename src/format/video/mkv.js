@@ -7,6 +7,6 @@ export class mkv extends Format
 	ext          = [".mkv"];
 	priority     = this.PRIORITY.LOW;
 	magic        = ["Matroska Video stream", "Matroska data", "EBML file, creator matroska", "Extensible Binary Meta Language / Matroska stream", "EBML file, Matroska data", "application/x-matroska", "deark: ebml", "Format: Matroska Video", /^fmt\/569( |$)/];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg"];
 }

@@ -18,7 +18,7 @@ export class mov extends Format
 	forbiddenMagic = ["qtvrPano"];	// handled by image/qtvrPano
 	idMeta         = ({macFileType}) => macFileType?.toLowerCase()==="moov" || macFileType==="MMov";	// I've encountered MooV and Moov, so just lowercase it
 	trustMagic     = true;
-	metaProvider   = ["mplayer"];
+	metaProvider   = ["ffprobe"];
 	converters     = dexState =>
 	{
 		const r = [

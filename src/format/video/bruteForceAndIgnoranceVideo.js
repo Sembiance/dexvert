@@ -7,6 +7,6 @@ export class bruteForceAndIgnoranceVideo extends Format
 	ext            = [".bfi"];
 	forbidExtMatch = true;
 	magic          = ["Brute Force and Ignorance video", "Brute Force & Ignorance (bfi)"];
-	metaProvider   = ["mplayer"];
+	metaProvider   = ["ffprobe"];
 	converters     = ["ffmpeg[format:bfi]"];
 }

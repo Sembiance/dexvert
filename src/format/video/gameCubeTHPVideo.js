@@ -7,5 +7,6 @@ export class gameCubeTHPVideo extends Format
 	forbidExtMatch = true;
 	magic          = ["THP (thp)", "GameCube THP video", /^Nintendo THP Multimedia/];
 	weakMagic      = true;
+	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[format:thp][libre]"];
 }

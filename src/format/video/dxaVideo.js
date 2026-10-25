@@ -6,6 +6,6 @@ export class dxaVideo extends Format
 	website      = "https://wiki.multimedia.cx/index.php/DXA";
 	ext          = [".dxa"];
 	magic        = ["DXA video", "DXA (dxa)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:dxa]"];
 }

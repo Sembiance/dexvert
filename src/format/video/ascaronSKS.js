@@ -8,6 +8,6 @@ export class ascaronSKS extends Format
 	forbidExtMatch = true;
 	magic          = ["ASCARON video"];
 	weakMagic      = true;
-	metaProvider   = ["mplayer"];
+	metaProvider   = ["ffprobe"];
 	converters     = ["na_game_tool[format:sks]", "ffmpeg[format:mjpeg]"];
 }

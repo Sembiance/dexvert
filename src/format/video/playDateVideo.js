@@ -6,5 +6,6 @@ export class playDateVideo extends Format
 	ext            = [".pdv"];
 	forbidExtMatch = true;
 	magic          = ["PlayDate Video (pdv)"];
+	metaProvider   = ["ffprobe"];
 	converters     = ["ffmpeg[format:pdv]", "ffmpeg[libre][format:pdv]"];
 }

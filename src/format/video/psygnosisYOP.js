@@ -6,6 +6,6 @@ export class psygnosisYOP extends Format
 	website      = "https://wiki.multimedia.cx/index.php/Psygnosis_YOP";
 	ext          = [".yop"];
 	magic        = ["Psygnosis YOP video", "Psygnosis YOP (yop)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:yop]"];
 }

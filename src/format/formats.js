@@ -37,14 +37,35 @@ async function loadFormatFilePath(formatFilePath, {reload}={})
 	// create the class and validate it
 	const format = formatModule[formatid].create(families[familyid]);
 	if(!(format instanceof Format))
-		throw new Error(`format [${formatid}] at [${formatFilePath}] is not of type Format`);
+		throw new TypeError(`format [${formatid}] at [${formatFilePath}] is not of type Format`);
 
 	// some manual checks on meta providers based on what converters are being used
-	for(const [converter, metaProvider] of Object.entries({"convert" : "image", "darktable_cli" : "darkTable"}))
+	const requiredMetaProviders =
 	{
-		const allowFormatsMetaMismatch = ["ttf", "otf", "pcd"];
-		if(Array.isArray(format.converters) && format.converters.some(v => v===converter || (typeof v==="string" && v.startsWith(`${converter}[`))) && !(format.metaProvider || []).includes(metaProvider) && !allowFormatsMetaMismatch.includes(formatid))
-			throw new Error(`format ${formatid} has ${converter} as a converter, but NOT ${metaProvider} as a metaProvider.`);
+		"convert"       : {provider : "image", skipFormatids : ["pcd", "ttf", "otf"]},
+		"darktable_cli" : {provider : "darkTable"},
+		"ansilove"      : {provider : "ansiloveInfo"},
+		"ffmpeg"        : {provider : "ffprobe", skipIfFlag : ["outType:png", "outType:mp3"]}
+	};
+	for(const [converter, {provider, skipFormatids, skipIfFlag}] of Object.entries(requiredMetaProviders))
+	{
+		if(!Array.isArray(format.converters))	// we only check static converters, not dyunamic ones
+			continue;
+
+		const matchingConverters = format.converters.filter(v => v===converter || (typeof v==="string" && v.startsWith(`${converter}[`)));
+		if(!matchingConverters.length)
+			continue;
+
+		if(skipIfFlag?.length && matchingConverters.some(matchingConverter => skipIfFlag.some(flag => matchingConverter.includes(flag))))
+			continue;
+
+		if(skipFormatids?.includes(formatid))
+			continue;
+		
+		if((format.metaProvider || []).some(v => v===provider || v.startsWith(`${provider}[`)))
+			continue;
+
+		throw new Error(`format ${formatid} has ${converter} as a converter, but NOT ${provider} as a metaProvider.`);
 	}
 
 	if(format.ext)

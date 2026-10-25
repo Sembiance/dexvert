@@ -8,6 +8,6 @@ export class quake2Cinematic extends Format
 	weakExt      = true;
 	magic        = ["Id Software Quake II Cinematic video", "id Cinematic (idcin)"];
 	trustMagic   = true;
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:idcin]"];
 }

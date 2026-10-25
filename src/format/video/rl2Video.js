@@ -6,6 +6,6 @@ export class rl2Video extends Format
 	website      = "https://wiki.multimedia.cx/index.php/RL2";
 	ext          = [".rl2"];
 	magic        = ["RL2 (rl2)", "RL2 video"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:rl2]"];
 }

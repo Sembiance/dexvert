@@ -6,6 +6,6 @@ export class vp6EncodedVideo extends Format
 	website        = "https://wiki.multimedia.cx/index.php/On2_VP6";
 	ext            = [".vp6"];
 	magic          = ["VP6 encoded video", /^geArchive: VP6_MVHD( |$)/];
-	metaProvider   = ["mplayer"];
+	metaProvider   = ["ffprobe"];
 	converters     = ["ffmpeg"];
 }

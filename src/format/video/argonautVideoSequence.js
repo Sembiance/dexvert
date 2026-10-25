@@ -7,6 +7,6 @@ export class argonautVideoSequence extends Format
 	ext            = [".avs"];
 	forbidExtMatch = true;
 	magic          = ["Argonaut Video Sequence video", "Argonaut Games Creature Shock (avs)"];
-	metaProvider   = ["mplayer"];
-	converters     = ["ffmpeg"];
+	metaProvider   = ["ffprobe"];
+	converters     = ["ffmpeg[format:avs]"];
 }

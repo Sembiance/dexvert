@@ -6,6 +6,6 @@ export class eaTCQ extends Format
 	website      = "https://wiki.multimedia.cx/index.php/Electronic_Arts_TGV";
 	ext          = [".tgv"];
 	magic        = ["Electronic Arts TGQ video", "Electronic Arts TGV video"];
-	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg"];
+	metaProvider = ["ffprobe"];
+	converters   = ["ffmpeg[format:ea]"];
 }

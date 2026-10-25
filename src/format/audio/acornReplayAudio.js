@@ -7,6 +7,6 @@ export class acornReplayAudio extends Format
 	ext              = [".rpl"];
 	magic            = ["ARMovie", "RPL / ARMovie (rpl)"];
 	confidenceAdjust = () => -10;	// Reduce by 10 so that acornReplayVideo matches first
-	metaProvider     = ["mplayer"];
+	metaProvider     = ["ffprobe"];
 	converters       = ["nihav[outType:mp3]", "ffmpeg[format:rpl]"];
 }

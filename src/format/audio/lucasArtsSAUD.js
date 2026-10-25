@@ -7,5 +7,6 @@ export class lucasArtsSAUD extends Format
 	ext            = [".sad"];
 	forbidExtMatch = true;
 	magic          = ["LucasArts SAUD (saud)", "Black and White sounds data", "vgmstream: saud", /^geViewer: SAD_SAUD( |$)/];
+	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[libre][format:saud][outType:mp3]", "vgmstream[types:saud]"];
 }

@@ -7,6 +7,6 @@ export class flc extends Format
 	ext          = [".flc"];
 	magic        = ["FLIC FLC video", "FLC animation", "Autodesk Animator Pro FLIC", "FLI/FLC/FLX animation (flic)", "deark: fli (FLC)", /^geViewer: FLC( |$)/, /^fmt\/298( |$)/];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="FLIC" && macFileCreator==="BABL";
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:flic]", "noesis[type:animated]", "xanim", "deark[module:fli] -> *ffmpeg[fps:15]"];
 }

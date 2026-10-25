@@ -6,6 +6,6 @@ export class sierraVMD extends Format
 	website      = "https://wiki.multimedia.cx/index.php/VMD";
 	ext          = [".vmd"];
 	magic        = ["Sierra Video and Music Data video", "Sierra VMD (vmd)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:vmd]", "nihav"];
 }

@@ -89,11 +89,11 @@ const DEXMAGIC_CHECKS = {
 	"Softdisk for Windows Setup (Alt 2)" : [{offset : 0, match : [0x4D, 0x5A]}, {offset : 0x129, match : "INSTALL"}],
 	"SouthPeak Puzzle Archive"           : [{offset : 0, match : "\n\r Copyright "}, {offset : 15, match : "1996 by SouthPeak Interactive"}],
 	"Superscape SVR"                     : [{offset : 0, match : "SVR"}],
-	"Superscape VRT"                     : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\rVRT"}],
+	"Superscape VRT"                     : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd.\x00\n\n\rVRT"}],
 	"Superscape XVR"                     : [{offset : 0, match : "XVR"}],
-	"Superscape Sounds"                  : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\r file SOUNDS\x2ESND"}],
-	"Superscape Sounds (World)"          : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\r file WORLD\x2ESND"}],
-	"Superscape Sounds (Misc)"           : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\r file MISC\x2ESND"}],
+	"Superscape Sounds"                  : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd.\x00\n\n\r file SOUNDS.SND"}],
+	"Superscape Sounds (World)"          : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd.\x00\n\n\r file WORLD.SND"}],
+	"Superscape Sounds (Misc)"           : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd.\x00\n\n\r file MISC.SND"}],
 	"Template Catalog Spinnaker"         : [{offset : 0, match : "CAT "}, {offset : 8, match : "TPLTFORM"}],
 	"TPK Archive"                        : [{offset : 2, match : [0x2D, 0x54, 0x4B]}, {offset : 5, match : [[0x30, 0x31]]}, {offset : 6, match : [0x2D]}],
 	"TTW Compressed File"                : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
@@ -312,6 +312,7 @@ const DEXMAGIC_CHECKS = {
 	"Signum Key-Combination-List" : [{offset : 0, match : `KTOTLIST${" ".repeat(40)}`}],
 	"Signum Shorthands"           : [{offset : 0, match : "TEXTKUERZEL\r\n"}],
 	"Twist Form"                  : [{offset : 0, match : "Listob field:256 label:"}],
+	"WinUAE Configuration File"   : [{offset : 0, match : "config_description="}],
 
 	// video
 	"ACG Movie"                                : [{offset : 0, match : "ACG"}, {offset : 3, match : [[" ", "_"]]}, {offset : 4, match : "MOVIE"}],

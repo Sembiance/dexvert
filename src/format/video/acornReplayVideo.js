@@ -6,6 +6,6 @@ export class acornReplayVideo extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Acorn_Replay";
 	ext          = [".rpl"];
 	magic        = ["ARMovie", "RPL / ARMovie (rpl)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["nihav", "ffmpeg[format:rpl]"];
 }

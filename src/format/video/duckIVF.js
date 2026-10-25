@@ -7,6 +7,6 @@ export class duckIVF extends Format
 	ext            = [".ivf"];
 	forbidExtMatch = true;
 	magic          = ["IVF Video", "IVF VP8 Video", "On2 IVF (ivf)", "Format: Duck IVF", /^Duck IVF video file/];
-	metaProvider   = ["mplayer"];
+	metaProvider   = ["ffprobe"];
 	converters     = ["ffmpeg[format:ivf]"];
 }

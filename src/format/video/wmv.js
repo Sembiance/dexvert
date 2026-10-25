@@ -12,6 +12,6 @@ export class wmv extends Format
 		// specific
 		"Microsoft Digital Video Recording"
 	];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg", "mencoderWinXP"];
 }

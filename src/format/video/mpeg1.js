@@ -4,6 +4,7 @@ export class mpeg1 extends Format
 {
 	name         = "MPEG-1";
 	website      = "http://fileformats.archiveteam.org/wiki/MPEG-1";
+	priority     = this.PRIORITY.LOW;
 	ext          = [".mpg", ".mp1", ".mpeg", ".m1v"];
 	filename     = [/^avseq[^.]+\.dat/i];
 	mimeType     = "video/mpeg";
@@ -14,7 +15,8 @@ export class mpeg1 extends Format
 		// specific
 		"Sofdec video"
 	];
+	weakMagic    = ["video/mpeg", /^MPEG video$/];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="MPGx" || (["M1V ", "MPEG"].includes(macFileType) && macFileCreator==="mMPG") || (macFileType==="MPG " && ["TVOD", "WiLL"].includes(macFileCreator));
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg"];
 }

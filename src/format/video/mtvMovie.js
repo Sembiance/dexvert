@@ -6,6 +6,6 @@ export class mtvMovie extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/MTV_Movie_(.MTV)";
 	ext          = [".mtv"];
 	magic        = ["MTV Multimedia File", "MTV video", "MTV (mtv)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:mtv]"];
 }

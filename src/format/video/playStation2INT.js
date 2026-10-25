@@ -6,5 +6,6 @@ export class playStation2INT extends Format
 	ext            = [".int"];
 	forbidExtMatch = true;
 	magic          = ["PlayStation 2 INT (ubiint)", "vgmstream: raw_int"];
+	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[libre][format:ubiint]"];
 }

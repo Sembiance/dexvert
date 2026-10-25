@@ -6,6 +6,6 @@ export class smjpeg extends Format
 	website      = "https://wiki.multimedia.cx/index.php/SMJPEG";
 	ext          = [".mjpg"];
 	magic        = ["SMJPEG video", /^SMJPEG .*data,.*\d+ frames/, "Loki SDL MJPEG (smjpeg)", /^soxi: smjpeg$/];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:smjpeg]"];
 }

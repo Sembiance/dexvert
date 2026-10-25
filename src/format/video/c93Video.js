@@ -6,6 +6,6 @@ export class c93Video extends Format
 	website      = "https://wiki.multimedia.cx/index.php/C93";
 	ext          = [".c93"];
 	magic        = ["Interplay C93 (c93)"];
-	metaProvider = ["mplayer"];
+	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[format:c93]"];
 }

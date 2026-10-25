@@ -6,5 +6,6 @@ export class mvrCCTV extends Format
 	ext            = [".mvr"];
 	forbidExtMatch = true;
 	magic          = ["MVR CCTV (mvr)"];
+	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[libre][format:mvr]"];
 }

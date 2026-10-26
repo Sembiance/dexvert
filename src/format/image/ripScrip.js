@@ -14,6 +14,6 @@ export class ripScrip extends Format
 	weakMagic    = ["ANSI escape sequence text"];
 	idCheck      = async inputFile => (await fileUtil.readFileBytes(inputFile.absolute, Math.min(32, inputFile.size))).indexOfX([0x21, 0x7C])!==-1;
 	auxFiles     = (input, otherFiles) => (otherFiles?.some(file => _AUX_EXTS.includes(file.ext.toLowerCase())) ? otherFiles.filter(file => _AUX_EXTS.includes(file.ext.toLowerCase())) : false);
-	//keepFilename = true;
-	converters   = ["vibe2svg[multiple]", "pabloDraw", `abydosconvert[format:${this.mimeType}]`];
+	keepFilename = true;
+	converters   = ["vibe2svg[multiple][renameOut]", "pabloDraw", `abydosconvert[format:${this.mimeType}]`];
 }

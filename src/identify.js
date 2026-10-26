@@ -210,6 +210,9 @@ const DIR_CACHE_COLD = new Map();
 
 function dirCacheGet(root)
 {
+	if(C.IS_DEV_MACHINE)
+		return;
+
 	const value = DIR_CACHE_HOT.get(root) || DIR_CACHE_COLD.get(root);
 	if(!value)
 		return;
@@ -229,6 +232,9 @@ function dirCacheGet(root)
 
 function dirCachePut(root, value)
 {
+	if(C.IS_DEV_MACHINE)
+		return;
+
 	DIR_CACHE_COLD.set(root, value);
 	if(DIR_CACHE_COLD.size+DIR_CACHE_HOT.size>C.IDENTIFY_DIR_CACHE_MAX_COUNT)
 		DIR_CACHE_COLD.delete(DIR_CACHE_COLD.keys().next().value);

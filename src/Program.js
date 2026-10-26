@@ -121,7 +121,7 @@ export class Program
 	{
 		flags = {...flags, ...RUNTIME.globalFlags[this.programid]};
 		if(!(f instanceof FileSet))
-			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
+			throw new TypeError(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
 
 		const unknownFlags = Object.keys(flags).subtractAll([...C.GLOBAL_FLAGS, ...Object.keys(this.flags || {})]);
 		if(unknownFlags.length>0)

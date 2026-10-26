@@ -1,0 +1,444 @@
+KHEOPS STUDIO VIDEO (KSV1)
+Binary layout, decoding, and conversion specification
+Revision: 2026-10-26
+
+1. SCOPE AND CONFIDENCE
+
+KSV1 is a little-endian audiovisual container. Its supported profile carries
+rectangular MPEG-4 Part 2 pictures in XV chunks and, optionally, one continuous
+Cryo APC 1.20 ADPCM audio stream in AA chunks. Audio and video are grouped in
+length-delimited frame blocks. The file has a 64-byte header and a four-byte
+zero end marker. It has no container index or separate palette.
+
+This document is self-contained with respect to KSV framing and APC audio
+reconstruction. The video elementary stream uses the established ISO/IEC
+14496-2 codec; its transform, motion-compensation, and entropy-coding tables
+are not a new KSV codec and are not reproduced here. A conforming MPEG-4 Part 2
+decoder supplies those operations. A converter can instead preserve the
+compressed pictures directly in an MPEG-4-compatible container such as AVI.
+
+IMPORTANT LIMIT: this is not a claim of complete semantic reverse engineering
+of every possible KSV variant. The boundaries and handling rules of the profile
+below are established, but some constant header fields' original purposes are
+unproven. In particular, the bit meanings of the audio descriptor, the original
+name/purpose of the legacy field, and additional meanings of the size mode and
+V200 marker are unresolved. The 200 Hz interpretation of the frame-timing field
+is supported by its exact relationship to audio packet durations, but has not
+been verified against an original Kheops player implementation. Sections 3, 5,
+and 11 distinguish these limitations from executable parsing rules. Do not
+assign invented meanings to the unresolved bits.
+
+All positions below are zero-based byte offsets. u8, u16, and u32 are unsigned
+8-, 16-, and 32-bit integers. i32 is signed two's-complement 32-bit. Multi-byte
+container/APC integers are little-endian. MPEG-4 bits are read most-significant
+bit first. Sizes are in bytes unless another unit is explicitly stated.
+
+2. TOP-LEVEL GRAMMAR
+
+    file = header64 frame_block* end_marker
+    end_marker = u32(0)
+    frame_block = u32(block_size) aligned_chunk+
+    aligned_chunk = chunk_header8 payload external_alignment
+
+A nonzero block_size includes its own four-byte size and all child chunks,
+including their external alignment. A block normally contains one XV chunk,
+optionally preceded by one AA chunk. The first audio-bearing block contains
+the APC header; later AA chunks do not repeat it. Audio may end before the last
+video frame. Its stream can also remain audible beyond the last video frame.
+
+Do not identify the end of a block by searching for XV, AA, CRYO_APC, or MPEG
+start-code byte strings. Such byte strings may occur inside compressed data.
+Use explicit lengths and parent boundaries. The zero size word is the end
+marker, not a four-byte frame block. No bytes follow it in the supported profile.
+
+3. FILE HEADER: EXACTLY 64 BYTES
+
+Offset  Size  Type     Meaning / supported values
+------  ----  -------  -----------------------------------------------------
+0x00       4  bytes    ASCII KSV1 (4B 53 56 31), required signature.
+0x04       2  u16      Size-accounting mode: 0x0000 or 0x0100. See below.
+0x06       1  u8       Audio descriptor: 0x00 or 0xB0. See below.
+0x07       1  u8       Display-buffer pixel depth, 16 in this profile.
+0x08       2  u16      Nominal image width in pixels.
+0x0A       2  u16      Nominal image height in pixels.
+0x0C       4  u32      Declared file size, interpreted using 0x04.
+0x10       4  u32      Declared video-frame count.
+0x14       4  bytes    Revision/mux marker: four zero bytes or ASCII V200.
+0x18       2  u16      Frame timing parameter T, operational duration T/200 s.
+0x1A       2  u16      Legacy profile field, fixed value 2; purpose unresolved.
+0x1C       4  u32      Display-buffer size: width * height * 2.
+0x20      32  bytes    Copyright/producer text; fixed-width, not NUL terminated.
+
+The canonical text is "Copyright Kheops Studio" followed by nine ASCII spaces.
+The parser accounts for all 32 bytes. Alternate text has no decoding effect.
+
+Size accounting:
+  mode 0x0100: declared size is the complete physical file length.
+  mode 0x0000: declared size is physical file length minus the sum of external
+               chunk-alignment bytes. It still includes the file header,
+               block/chunk headers, and final zero word.
+
+These are arithmetic rules, not a way to locate the physical EOF. Walk the
+blocks and check their bounds against the actual length. External alignment
+must be consumed even if it was omitted from the declared file size. An audio
+file can use either size mode. Do not treat 0x04 as an audio-present boolean.
+The individual bits and any additional original meaning of this mode word
+are not established.
+
+The descriptor is 0xB0 for the supported APC audio configuration and 0x00 for
+silent streams. Its bit allocation is not established; in particular, do not
+borrow HNM6's audio-flag equations. The actual sample rate and channel count
+come from the embedded APC header. The marker V200 accompanies the muxed APC
+profile; its exact producer-version semantics are not established. The zero
+marker is used by the supported video-only profile.
+
+The 16-bit display-buffer depth does not describe the MPEG-4 compressed pixel
+format. MPEG-4 video normally reconstructs 8-bit planar YUV 4:2:0. The KSV
+buffer size describes a two-byte display surface, not a compressed-frame size.
+The particular 16-bit RGB channel masks of an original display surface cannot
+be inferred from this field.
+
+4. CHUNK HEADER, LENGTHS, AND ALIGNMENT
+
+Each chunk starts with:
+
+Relative  Size  Type   Meaning
+--------  ----  -----  -----------------------------------------------------
++0           4  u32    C: declared chunk size, INCLUDING this 8-byte header.
++4           2  bytes  ASCII type: XV (video) or AA (audio).
++6           1  u8     Fixed zero in the supported profile.
++7           1  u8     Type-dependent alignment descriptor, 0 through 3.
++8         C-8 bytes   Declared payload.
++C       (-C)%4 bytes  External alignment, if any.
+
+The next chunk is at current_start + ((C+3) & ~3).
+All physical chunk starts are four-byte aligned. The chunk's physical span
+must fit inside its enclosing block. A nonzero block size is at least four;
+a chunk size is at least eight. No high-byte size flag is used by this profile;
+parse the complete u32 rather than inheriting the 24-bit size mask used by
+some other Cryo containers.
+
+XV's byte +7 and AA's byte +7 do NOT have the same meaning.
+
+XV:
+  The descriptor records the unaligned video payload's length modulo four
+  when retained by the producer. A payload remainder r=1,2,3 has alignment
+  bytes respectively 01 00 00, 02 00, or 03. A remainder of zero requires no
+  alignment bytes.
+
+  In a raw video chunk, C need not be divisible by four: the alignment bytes
+  are outside C. Other producer/mux passes incorporate alignment bytes into
+  C, making it divisible by four. They can retain the old remainder descriptor
+  or clear it to zero. Therefore +7 is not a universally authoritative count
+  of bytes to subtract from an XV payload.
+
+  Deterministic conversion: copy all C-8 declared payload bytes to the video
+  decoder or output picture packet; exclude ONLY the external alignment
+  selected by C. Any alignment already incorporated in the payload remains
+  harmless trailing packet stuffing. Do not guess a video payload boundary
+  from an apparent 03, 02 00, or 01 00 00 suffix. This avoids deleting genuine
+  compressed bytes and handles both size conventions without heuristics.
+
+AA:
+  The descriptor is a count P of non-audio bytes at the END of the declared
+  payload. The valid audio extent is [chunk+8, chunk+C-P). The bytes in
+  [chunk+C-P, chunk+C) are alignment/storage fill; their values need not be
+  zero and must never be passed to the ADPCM decoder. External alignment,
+  when required by C, is separate from these included P bytes.
+
+  Because ADPCM carries predictor/index state across chunks, decoding even
+  one padding byte can corrupt the sound of subsequent chunks. Padding must
+  be removed from every chunk before concatenation or decoding.
+
+The original intent of the constant byte +6 and every producer's treatment of
+XV's descriptor is not established beyond these supported handling rules.
+
+5. VIDEO CONTENT AND TIMING
+
+XV carries a byte-aligned MPEG-4 Part 2 elementary-stream packet. In this
+profile, each packet contains exactly one video object plane (VOP); an intra
+packet can also contain sequence and object/layer headers. Headers may recur
+at intra pictures. They are part of the packet and must be retained.
+
+MPEG-4 start codes use prefix 00 00 01 followed by one code byte:
+  B0       visual_object_sequence_start_code; profile/level follows.
+  B5       visual_object_start_code.
+  00..1F   video_object_start_code.
+  20..2F   video_object_layer_start_code (VOL).
+  B6       video_object_plane_start_code (VOP).
+Other standardized MPEG-4 start codes are interpreted by the MPEG-4 decoder.
+
+The supported image geometry is a rectangular video object. The VOL defines
+actual width, height, sample aspect ratio, chroma format, and time increment
+resolution. The first two bits following B6 identify the picture coding type:
+0 = intra (I), 1 = predicted (P), 2 = bidirectionally predicted (B), 3 = sprite (S).
+I pictures are AVI keyframes. Inter-picture reference state must persist;
+starting each P picture with a fresh decoder is incorrect.
+
+The converter parses the standard VOL prefix as follows:
+  random_accessible_vol: 1 bit
+  video_object_type_indication: 8 bits
+  is_object_layer_identifier: 1 bit
+    if set: version id 4 bits, priority 3 bits
+  aspect_ratio_info: 4 bits
+    values 1..5: 1:1, 12:11, 10:11, 16:11, 40:33 respectively
+    value 15: explicit pixel-aspect width and height, 8 bits each
+  vol_control_parameters: 1 bit
+    if set: chroma_format 2, low_delay 1, vbv_parameters 1
+      if VBV set: first_half_bit_rate 15, marker 1,
+                  latter_half_bit_rate 15, marker 1,
+                  first_half_vbv_buffer_size 15, marker 1,
+                  latter_half_vbv_buffer_size 3,
+                  first_half_vbv_occupancy 11, marker 1,
+                  latter_half_vbv_occupancy 15, marker 1
+  video_object_layer_shape: 2 bits (zero for rectangular)
+  marker: 1 bit, required to be one
+  vop_time_increment_resolution: 16 bits
+  marker: 1 bit, required to be one
+  fixed_vop_rate: 1 bit
+    if set: fixed_vop_time_increment, ceil(log2(resolution)) bits, minimum 1
+  marker: 1 bit
+  width: 13 bits
+  marker: 1 bit
+  height: 13 bits
+  marker: 1 bit
+The remaining VOL syntax and picture bitstreams are retained verbatim for a
+standard MPEG-4 decoder. This is remuxing, not a substitute partial video codec.
+
+Container timing is applied to successive KSV frame slots:
+    frame_duration = T / 200 seconds
+    frame_rate = 200 / T frames per second
+    presentation_time(frame_number) = frame_number * T / 200
+The first frame has presentation time zero. T=8 gives 25 fps; T=10 gives 20 fps.
+This interpretation exactly matches normal audio packet durations: at 44100
+Hz stereo APC, 1764 encoded bytes represent 40 ms and 2205 represent 50 ms.
+It is a measured structural relationship, not an assumption that every file
+is 25 fps. Verification of the original timing-field definition still requires
+original-player evidence. The converter uses the relationship as stated.
+
+Do not let MPEG-4 internal timing override this outer playback cadence. A VOL
+can still specify 25 Hz while KSV's timing parameter and audio cadence specify
+20 fps. MPEG-4 internal timestamps can also reset during a movie. Preserve the
+picture bytes and use the KSV sequence order for AVI timestamps. Do not infer
+frame rate from total audio duration; a movie can have different audio and
+video end times.
+
+6. APC HEADER AND CONTINUOUS AUDIO STREAM
+
+The first AA payload begins with exactly 32 bytes:
+
+Relative  Size  Type    Meaning
+--------  ----  ------  ----------------------------------------------------
++0           8  bytes   ASCII CRYO_APC.
++8           4  bytes   ASCII 1.20 (the period is literal).
++12          4  u32     Declared audio sample frames, per channel.
++16          4  u32     Sample rate in Hz.
++20          4  i32     Initial left/mono predictor.
++24          4  i32     Initial right predictor (unused for mono).
++28          4  u32     Stereo flag: 0 = mono, 1 = stereo.
+
+This header is immediately followed by APC ADPCM bytes. Subsequent AA payloads
+contain only continuation ADPCM bytes, without new predictors or headers.
+Chunk boundaries do not reset predictor values or step-table indices.
+
+The first audio packet may preload many video frames of sound; a common packet
+contains 32 ordinary audio intervals. This is a buffering arrangement, not a
+1.28-second audio delay. Concatenate valid audio bytes into one track starting
+at time zero. Associate playback time with cumulative decoded sample count,
+not with the containing frame block. Stop audio at its declared sample-frame
+count. Do not pad or stretch audio merely to match video duration.
+
+An entire final audio buffer can be stored even if fewer sample frames are
+valid. After removing AA alignment padding, calculate available frames as
+    available_frames = encoded_byte_count * 2 / channel_count.
+The APC count specifies how many are meaningful. Decode the coded data, but
+emit at most that many sample frames. Remaining decoded frames are final-buffer
+fill, which need not be zero. Such capacity fill is distinct from the alignment
+bytes marked by AA's descriptor. Neither category should become audible output.
+
+For a truncated input, emit min(declared_frames, available_frames). A zero
+sample count denotes zero valid audio frames; do not treat it as an implicit
+"unknown length" sentinel. No such sentinel is established for this profile.
+
+7. APC ADPCM ALGORITHM (COMPLETE)
+
+Maintain a signed predictor p and step index i for each channel. Initialize p
+from the corresponding signed header predictor and initialize i to zero.
+The initial predictor itself is not an emitted PCM sample.
+
+Process the high nibble of each byte first, then the low nibble.
+  Stereo: high nibble is left, low nibble is right, producing one stereo frame.
+  Mono: both nibbles use the mono state, producing two successive mono frames.
+
+For each four-bit code n:
+    step = step_table[i]
+    magnitude = ((2 * (n & 7) + 1) * step) >> 3
+    if n & 8: p = p - magnitude
+    otherwise: p = p + magnitude
+    p = clamp(p, -32768, 32767)
+    i = clamp(i + index_adjust[n & 7], 0, 88)
+    emit p as a signed 16-bit PCM sample
+
+index_adjust = [-1, -1, -1, -1, 2, 4, 6, 8]
+
+step_table, indices 0 through 88:
+       7,     8,     9,    10,    11,    12,    13,    14,
+      16,    17,    19,    21,    23,    25,    28,    31,
+      34,    37,    41,    45,    50,    55,    60,    66,
+      73,    80,    88,    97,   107,   118,   130,   143,
+     157,   173,   190,   209,   230,   253,   279,   307,
+     337,   371,   408,   449,   494,   544,   598,   658,
+     724,   796,   876,   963,  1060,  1166,  1282,  1411,
+    1552,  1707,  1878,  2066,  2272,  2499,  2749,  3024,
+    3327,  3660,  4026,  4428,  4871,  5358,  5894,  6484,
+    7132,  7845,  8630,  9493, 10442, 11487, 12635, 13899,
+   15289, 16818, 18500, 20350, 22385, 24623, 27086, 29794,
+   32767
+
+Use the single multiplication and right shift shown above. Replacing this with
+separately rounded step/8, step/4, step/2 terms changes decoded sample values.
+Output interleaved little-endian signed PCM: L0,R0,L1,R1,... for stereo.
+
+8. COMPLETE BYTE ACCOUNTING
+
+The physical byte count is exactly the sum of:
+  * 64 header bytes;
+  * 4 bytes per nonzero frame-block header;
+  * 8 bytes per chunk header;
+  * each XV's declared payload, including any incorporated packet stuffing;
+  * 32 bytes of initial APC header when audio is present;
+  * valid AA encoded audio plus final-buffer capacity fill;
+  * included AA alignment bytes;
+  * external chunk-alignment bytes;
+  * the final four-byte zero word.
+
+These ranges are disjoint and cover the complete file. Bytes in the MPEG-4
+payload are preserved for its standardized decoder; bytes in the APC coded
+extent are processed by section 7. Padding and capacity fill have storage,
+rather than audible/visible, roles. Explaining their role does not imply that
+arbitrary padding values encode additional metadata.
+
+A byte-span accounting audit establishes that nothing was accidentally skipped.
+It does not establish the original semantics of the unresolved header fields,
+or constitute a separate entropy-level MPEG-4 bitstream proof. Those distinctions
+are necessary when describing completeness.
+
+9. RECOGNITION, UNSUPPORTED INPUT, AND DAMAGE RECOVERY
+
+Never recognize a movie solely by extension or filename. Require KSV1, enough
+header bytes to select the supported profile, and a recoverable MPEG-4 VOL and
+intra picture within bounded XV chunks before creating an output file.
+
+The supplied converter rejects other signatures and unsupported header modes,
+audio descriptors, revision markers, nonzero chunk low flags, unknown chunk
+types, unsupported APC signatures, non-rectangular video objects, multiple VOPs
+per XV, B-VOP reordering, and changing video dimensions/aspect ratios. These
+are explicit limits, not silently guessed layouts. Other Cryo/HNM versions are
+separate formats and are not accepted. Unsupported input produces no output.
+
+For recognized damaged KSV1 input, the converter:
+  * validates child extents against block and physical file bounds;
+  * recovers available bytes of a truncated final chunk;
+  * retains complete preceding packets when the tail is unavailable;
+  * skips a malformed chunk's remainder only when its enclosing block end is
+    still known, allowing the next explicitly bounded block to be examined;
+  * never guesses an offset by searching compressed data for a tag;
+  * retains frame slots with missing video as empty AVI repeat-frame packets;
+  * trusts valid VOL dimensions if header dimensions disagree;
+  * falls back to fixed VOL timing only if KSV's timing parameter is zero;
+  * reports declared-size/count mismatches and absent end markers;
+  * limits audio to the number of actually available sample frames;
+  * emits warnings on standard error, and records them in the optional audit.
+
+If damage leaves no reliable video configuration and intra picture, there is
+nothing safely playable to recover and no AVI is created. Entropy-level video
+damage is preserved in the compressed packets for a player's decoder to
+conceal; the converter is not a native MPEG-4 error-concealment engine. Unknown
+features are rejected, even when KSV1 identification itself is certain.
+
+10. CONVERTER INTERFACE AND AVI OUTPUT
+
+Invocation:
+    python3 kheopsStudioVideo.py inputFile outputFile
+    python3 kheopsStudioVideo.py -verbose inputFile outputFile
+
+The program requires Python 3.10 or later and only the Python standard library.
+It has no external executable, non-standard package, data-table file, or other
+runtime supporting-file dependency. Input is memory mapped; PCM is decoded in
+blocks. Input and output paths must differ. Existing output files are preserved;
+remove an old output explicitly or choose another path before rerunning.
+
+By default, only outputFile is created. No extracted elementary streams, WAVs,
+metadata files, images, caches, or scratch files are written. Warnings go to
+standard error. -verbose additionally creates outputFile.json, containing header
+values, stream properties, warnings, and the exhaustive offset/length byte map.
+The output parent directory must already exist. The output is removed if its
+creation fails midway. Created files have both owner and group read permission.
+
+AVI video uses the generic MP4V FourCC and MPEG-4 Part 2 packets copied without
+image recompression. An XVID tag is deliberately avoided: without an embedded
+encoder version it can trigger inappropriate historical Xvid decoder workarounds.
+Audio uses WAVE_FORMAT_PCM, little-endian signed 16-bit samples at the APC rate
+and channel count. Continuous audio is re-interleaved by playback time, rather
+than preserving the KSV preload arrangement. Different stream end times remain
+different. Audio is not cut to the video end and video is not stretched.
+
+AVI includes a traditional idx1 for the first RIFF segment and OpenDML standard
+and superindices. Large movies are split into RIFF AVI / RIFF AVIX segments at
+approximately 1 GiB, so expansion of ADPCM to PCM can exceed 4 GiB safely.
+There is a limit of 256 indexed segments, less than 2 GiB per packet, and
+32-bit AVI stream lengths. Non-square pixels are described using AVI vprp.
+These are output implementation limits, not inferred KSV format constraints.
+
+Browser previews and the HTML review report are separate, one-time artifacts.
+They are not created by this converter. Their creation can use FFmpeg, but
+FFmpeg is not required to run kheopsStudioVideo.py.
+
+11. WHAT REMAINS UNPROVEN; NEXT REVERSE-ENGINEERING STEPS
+
+The following prevent an honest claim of universal, 100-percent format mastery:
+
+  A. Header 0x06's individual bit meanings and other possible audio profiles.
+  B. Header 0x1A's original purpose; value 2 alone cannot establish semantics.
+  C. Any additional meaning of 0x04, the exact producer meaning of V200, and
+     the original names/units of the timing and display fields.
+  D. Original-player confirmation that T/200 is the playback cadence, and
+     confirmation of initial audio/video scheduling for all producer revisions.
+  E. General producer rules for rewritten XV descriptors and internal stuffing,
+     beyond the deterministic preservation method specified above.
+  F. Undiscovered chunk types, alternate audio codecs, animation profiles,
+     B-picture arrangements, or other KSV revisions.
+
+To resolve these, obtain a legitimately available original KSV player/library
+or encoder and inspect the code paths that read offsets 0x04..0x1F, schedule
+frames, consume AA, and submit XV to Xvid. Controlled encodes or a broader
+corpus with deliberately varied frame rates, mono audio, sample rates, and
+profile flags would distinguish currently invariant fields. Compare output
+playback timestamps and decoded audio sample counts to the original player.
+Do not broaden support by guessing bit meanings from one constant value.
+
+12. PRIMARY TECHNICAL REFERENCES
+
+The KSV-specific structure and accounting rules above are direct binary-format
+analysis. Established codec/container behavior can be checked in:
+
+  ISO/IEC 14496-2, Information technology -- Coding of audio-visual objects --
+  Part 2: Visual (MPEG-4 Part 2 elementary-stream syntax and reconstruction).
+
+  FFmpeg, libavformat/apc.c (APC header field ordering and codec identification):
+  https://github.com/FFmpeg/FFmpeg/blob/master/libavformat/apc.c
+
+  FFmpeg, libavcodec/adpcm.c (ADPCM_IMA_APC and multiplication-form IMA decoding):
+  https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/adpcm.c
+
+  FFmpeg, libavcodec/mpeg4videodec.c (FourCC-dependent decoder workarounds):
+  https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/mpeg4videodec.c
+
+  Xvid, bitstream syntax implementation:
+  https://github.com/arthenica/xvidcore/blob/master/xvidcore/src/bitstream/bitstream.c
+
+  Microsoft AVI RIFF file reference:
+  https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference
+
+These references are not evidence for unresolved KSV header meanings. In
+particular, HNM4/HNM6 parsing rules must not be assumed to apply unchanged.

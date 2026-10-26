@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,023)
+# Unsupported File Formats (4,016)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -600,7 +600,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (122)
+## Font (124)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -654,6 +654,7 @@ Family/Format | Name | Extensions | Notes
 [font/geoWorksGEOSFont](https://discmaster.textfiles.com/search?format=geoWorksGEOSFont) | GeoWorks GEOS Font | .fnt | 
 [font/grxFont](https://discmaster.textfiles.com/search?format=grxFont) | GRX Font | .fnt | 
 [font/homeVideoProducerFont](https://discmaster.textfiles.com/search?format=homeVideoProducerFont) | Home Video Producer Font | .fnt | 
+[font/hpPCLSoftFont](https://discmaster.textfiles.com/search?format=hpPCLSoftFont) | HP PCL Soft Font | .fnt | 
 [font/ibmPCStoryboardFont](https://discmaster.textfiles.com/search?format=ibmPCStoryboardFont) | IBM/PC Storyboard Font | .fac | 
 [font/iffLikeFont](https://discmaster.textfiles.com/search?format=iffLikeFont) | IFF-like Font | .fnt .d03 .d04 .d02 | 
 [font/impulseTrackerFont](https://discmaster.textfiles.com/search?format=impulseTrackerFont) | Impulse Tracker font | .drv | 
@@ -680,6 +681,7 @@ Family/Format | Name | Extensions | Notes
 [font/newsBitmapFont](https://discmaster.textfiles.com/search?format=newsBitmapFont) | NeWS bitmap font | .fb | 
 [font/odFontEditor](https://discmaster.textfiles.com/search?format=odFontEditor) | OD Font Editor | .odf | [1 sample file](https://sembiance.com/fileFormatSamples/font/odFontEditor/) - Just have an extension and never encountered one of these files 'in the wild' and recoil will convert things that are not an OD Font file into a garbage image.
 [font/olitextFont](https://discmaster.textfiles.com/search?format=olitextFont) | Olitext Font | .fnt | 
+[font/os2PMFont](https://discmaster.textfiles.com/search?format=os2PMFont) | OS/2 PM Font | .fnt | 
 [font/overlayFont](https://discmaster.textfiles.com/search?format=overlayFont) | Overlay Font | .olf | 
 [font/pcToolsFont](https://discmaster.textfiles.com/search?format=pcToolsFont) | PC Tools Font | .fnt | 
 [font/pcDraftCADFont](https://discmaster.textfiles.com/search?format=pcDraftCADFont) | PC-Draft-CAD Font | .fon | 
@@ -2854,7 +2856,6 @@ Family/Format | Name | Extensions | Notes
 [other/notationInterchangeFileFormat](https://discmaster.textfiles.com/search?format=notationInterchangeFileFormat) | [Notation Interchange File Format](http://fileformats.archiveteam.org/wiki/Notation_Interchange_File_Format) | .nif | 
 [other/notatorLogicProject](https://discmaster.textfiles.com/search?format=notatorLogicProject) | Notator Logic project | .log .lso | 
 [other/novalogicResourceGameData](https://discmaster.textfiles.com/search?format=novalogicResourceGameData) | Novalogic Resource / game data | .res | 
-[other/novastormMediaAnimation](https://discmaster.textfiles.com/search?format=novastormMediaAnimation) | Novastorm Media animation | .flm | 
 [other/novellNetwareVirtualLoadableModule](https://discmaster.textfiles.com/search?format=novellNetwareVirtualLoadableModule) | Novell Netware Virtual Loadable Module | .vlm .exe | 
 [other/novellSystemPrintDef](https://discmaster.textfiles.com/search?format=novellSystemPrintDef) | Novell System PrintDef Device Definition | .pdf | 
 [other/noxMap](https://discmaster.textfiles.com/search?format=noxMap) | NoX Map | .map .nxz | 
@@ -3731,6 +3732,7 @@ Family/Format | Name | Extensions | Notes
 [other/virusExecutorPatchBrain](https://discmaster.textfiles.com/search?format=virusExecutorPatchBrain) | VirusExecutor Patch Brain | .patchbrain | 
 [other/virusZIIArchiversInfo](https://discmaster.textfiles.com/search?format=virusZIIArchiversInfo) | VirusZ II Archivers info | .archivers | 
 [other/virusZIIIBootblocksData](https://discmaster.textfiles.com/search?format=virusZIIIBootblocksData) | VirusZ III Bootblocks data | .bootblocks | 
+[other/vis5DDatasetObject](https://discmaster.textfiles.com/search?format=vis5DDatasetObject) | Vis5D dataset object | .v5d | 
 [other/viscosityAnimationBitmap](https://discmaster.textfiles.com/search?format=viscosityAnimationBitmap) | Viscosity animation/bitmap | .vsc | 
 [other/visiSerieCADCAMWorkFile](https://discmaster.textfiles.com/search?format=visiSerieCADCAMWorkFile) | VISI-serie CAD/CAM work file | .wkf .mas | 
 [other/visionaireMesh](https://discmaster.textfiles.com/search?format=visionaireMesh) | Visionaire Mesh | .mesh | 
@@ -3952,7 +3954,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (94)
+## Poly (95)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -4004,6 +4006,7 @@ Family/Format | Name | Extensions | Notes
 [poly/mastercam9Geometry](https://discmaster.textfiles.com/search?format=mastercam9Geometry) | Mastercam 9 geometry | .mc9 | 
 [poly/mayaScene](https://discmaster.textfiles.com/search?format=mayaScene) | [Maya Scene](http://fileformats.archiveteam.org/wiki/Maya_scene) | .mb .ma | [7 sample files](https://sembiance.com/fileFormatSamples/poly/mayaScene/) - Maya 5 would only open 1 of my sample files, the others being newer than that. Assimp claims some ASCII version support, but didn't handle any of my samples. MilkShape3D also says limited support for ASCII, but it crashed on all my samples. It's also a massive pain to get Maya running and due to the tiny number of files in the wild, just not worth supporting right now.
 [poly/meshworkModel](https://discmaster.textfiles.com/search?format=meshworkModel) | Meshwork model | .mesh | 
+[poly/metaStream3DObject](https://discmaster.textfiles.com/search?format=metaStream3DObject) | MetaStream 3D object | .mts | 
 [poly/msFlightSimulator3DModel](https://discmaster.textfiles.com/search?format=msFlightSimulator3DModel) | Microsoft Flight Simulator 3D model | .mdl | 
 [poly/mobile3DGraphic](https://discmaster.textfiles.com/search?format=mobile3DGraphic) | [Mobile 3D Graphic](http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html) | .m3g | 
 [poly/ninja3DModel](https://discmaster.textfiles.com/search?format=ninja3DModel) | Ninja 3D Model | .nj | 
@@ -4052,7 +4055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (30)
+## Video (20)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -4061,28 +4064,18 @@ Family/Format | Name | Extensions | Notes
 [video/amigaGL](https://discmaster.textfiles.com/search?format=amigaGL) | Amiga GL | .gl | 
 [video/deluxeVideo](https://discmaster.textfiles.com/search?format=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 [video/eaMADVideo](https://discmaster.textfiles.com/search?format=eaMADVideo) | [EA MAD Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
-[video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?format=fmTownsMovieVideo) | FM Towns Movie video | .mov | 
-[video/fujitsuMovie](https://discmaster.textfiles.com/search?format=fujitsuMovie) | Fujitsu Movie | .mve | 
 [video/golemInto](https://discmaster.textfiles.com/search?format=golemInto) | Golem Into Video | .xfl | 
-[video/imperiumGalacticaAnimation](https://discmaster.textfiles.com/search?format=imperiumGalacticaAnimation) | Imperium Galactica Animation | .ani | [1 sample file](https://sembiance.com/fileFormatSamples/video/imperiumGalacticaAnimation/)
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?format=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
-[video/kheopsStudioVideo](https://discmaster.textfiles.com/search?format=kheopsStudioVideo) | Kheops Studio Video | .ksv | [5 sample files](https://sembiance.com/fileFormatSamples/video/kheopsStudioVideo/)
 [video/lzaAnimationVideo](https://discmaster.textfiles.com/search?format=lzaAnimationVideo) | LZA animation/video | .lza | 
-[video/mdecVideoStream](https://discmaster.textfiles.com/search?format=mdecVideoStream) | MDEC video stream | .str | [4 sample files](https://sembiance.com/fileFormatSamples/video/mdecVideoStream/)
-[video/metaStream3DObject](https://discmaster.textfiles.com/search?format=metaStream3DObject) | MetaStream 3D object | .mts | 
 [video/movieSetterSet](https://discmaster.textfiles.com/search?format=movieSetterSet) | MovieSetter Set | .set | 
-[video/novastormMediaVideo](https://discmaster.textfiles.com/search?format=novastormMediaVideo) | Novastorm Media video | .fa .fza .mza | 
 [video/ntitler](https://discmaster.textfiles.com/search?format=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 [video/pageFlipperPlusFXAnimation](https://discmaster.textfiles.com/search?format=pageFlipperPlusFXAnimation) | PageFlipper Plus F/X animation |  | 
 [video/pcAnimatePlusAnimation](https://discmaster.textfiles.com/search?format=pcAnimatePlusAnimation) | PC Animate Plus Animation | .ani | 
 [video/riffANIM](https://discmaster.textfiles.com/search?format=riffANIM) | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/)
 [video/roxanneAnimation](https://discmaster.textfiles.com/search?format=roxanneAnimation) | Roxanne animation | .rox | 
-[video/screenCamVideo](https://discmaster.textfiles.com/search?format=screenCamVideo) | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | 
 [video/theDirector](https://discmaster.textfiles.com/search?format=theDirector) | [The Director Animation/Slideshow](https://www.computinghistory.org.uk/det/63951/The-Director/) | .film | [1 sample file](https://sembiance.com/fileFormatSamples/video/theDirector/)
 [video/hannaBarberaAnimationWorkshop](https://discmaster.textfiles.com/search?format=hannaBarberaAnimationWorkshop) | The Hanna-Barbera Animation Workshop animation | .xsh | 
 [video/toonBoomStudioAnimation](https://discmaster.textfiles.com/search?format=toonBoomStudioAnimation) | Toon Boom Studio animation | .tbd .tbp | 
-[video/vis5DDatasetObject](https://discmaster.textfiles.com/search?format=vis5DDatasetObject) | Vis5D dataset object | .v5d | 
-[video/webExRecording](https://discmaster.textfiles.com/search?format=webExRecording) | WebEx Recording | .wrf .wot | 
 [video/wingCommander3Movie](https://discmaster.textfiles.com/search?format=wingCommander3Movie) | Wing Commander III MVE movie | .mve | [1 sample file](https://sembiance.com/fileFormatSamples/video/wingCommander3Movie/)
 [video/xbvVideo](https://discmaster.textfiles.com/search?format=xbvVideo) | [XBV Video](https://wiki.multimedia.cx/index.php/XBV) | .xbv | [1 sample file](https://sembiance.com/fileFormatSamples/video/xbvVideo/)
 

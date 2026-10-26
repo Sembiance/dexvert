@@ -1,0 +1,753 @@
+FUJITSU MOVIE (FJMV) FILE FORMAT
+==============================
+Revision: 2026-10-26
+
+1. Scope and status
+-------------------
+This document describes the little-endian RIFF/FJMV movie container, versions
+0x00000001 and 0x00000101, and these video coding identifiers:
+
+  FF02, FS00, FS02, FS04     Fujitsu92, palette/block coding
+  FY00, FY02, FY04          Fujitsu93, luminance/chroma coding
+  FV02                     FujitsuWVQ, hierarchical vector quantization
+  AN10                     FujitsuRLEr, native-color run-length coding
+
+It specifies the byte layouts and decoding operations for that profile.
+Compression identifiers with different suffixes can select the same decoder;
+the suffix must not be used to guess a different packet layout.
+
+The native video decoders were reconstructed from Fujitsu's MVS01D and MVSD1
+through MVSD4 routines, including their integer arithmetic. The accompanying
+Python implementation is an independent translation; it does not load those
+libraries, execute machine code, or require an emulator.
+
+This is not a claim that every historical Fujitsu Movie extension is known.
+In particular, the converter does not implement multiple simultaneous video
+or audio tracks, positioned images, changes in image dimensions, independent
+display dimensions, sound loops, other compression identifiers, or unknown
+per-frame extensions. Such track/container variants are rejected before the
+output is opened. The FY auxiliary stream described below is not implemented
+when nonempty. Nonzero reserved extensions are not assigned invented meanings.
+
+Some descriptive field names, particularly the human-readable information
+strings and palette allocation categories, are reconstructed names rather
+than quotations from a published Fujitsu structure definition. The physical
+layout is specified independently of those names. Hardware fine tuning and
+instrument-loop playback are outside the supported movie playback profile.
+
+2. Notation, coordinates, and color
+-----------------------------------
+All integer values are little-endian unless explicitly stated otherwise.
+u8/u16/u32 denote unsigned integers; s16/s32 denote signed two's-complement
+integers. Four-character identifiers are literal byte strings, case sensitive.
+Offsets in a chunk table below start at the first byte of its PAYLOAD, not at
+its eight-byte chunk header. File offsets are absolute and start at zero.
+
+Text fields are fixed-size, NUL-terminated, zero-filled byte arrays. Japanese
+text is decoded as CP932/Shift-JIS. A full field must still be consumed after
+its first NUL. None of the textual fields controls packet recognition.
+
+Decoded image coordinates start at the top left. The native color word is:
+
+  bit 15        unused by the true-color renderer
+  bits 14..10   green, 0..31
+  bits  9..5    red,   0..31
+  bits  4..0    blue,  0..31
+
+Thus native color = (green << 10) | (red << 5) | blue. It is GRB555,
+not the RGB555 arrangement commonly associated with Windows 16-bit DIBs.
+The converter expands a five-bit component c to floor(255*c/31).
+
+Fujitsu92 and AN10 use dimensions rounded up to multiples of eight. Fujitsu93
+and WVQ use dimensions rounded up to multiples of four. Decode the whole
+padded image, then crop its right and bottom edges to the declared size.
+
+3. Outer container
+-------------------
+File offset  Size  Meaning
+0            4     'RIFF'
+4            4     RIFF length, normally physical file length minus eight
+8            4     'FJMV'
+12           ...   Chunks, starting with 'cftc'
+
+Each chunk consists of a four-byte tag, a u32 payload length, and that many
+payload bytes. Unlike ordinary padded RIFF streams, FJMV chunks are packed:
+DO NOT add an alignment byte after an odd-length chunk. The next tag is at
+current_offset + 8 + payload_length.
+
+Known tags are cftc, 'ver ', info, tdir, bhdr, bctl, shdr, sctl, bmov, tsnd,
+and mdib. The space in 'ver ' is part of its identifier.
+
+There is a legacy writer length defect: both the RIFF extent and info file
+length can overstate physical EOF by four bytes while every chunk is complete.
+These are stale length declarations, not four implicit bytes to synthesize.
+Read physically available, bounded chunks and report the mismatch.
+
+4. Chunk directories and common identifiers
+-------------------------------------------
+A directory entry is 16 bytes:
+
+  +0  four bytes  chunk tag
+  +4  u32         payload length, excluding the chunk header
+  +8  u16         track identifier (or tag-specific identifier)
+ +10  u16         sequence identifier
+ +12  u32         absolute offset of the chunk's tag
+
+The ID/sequence pair mirrors the first four payload bytes for track chunks.
+Container-only entries have zero IDs. The version entry identifies its version
+in this position. These fields are not universally a track number: do not
+interpret the beginning of an info title or a tdir count as a track ID.
+
+A track-bearing payload normally starts with u16 track ID and u16 sequence.
+Track headers/control tables have sequence zero. Data chunks have positive
+sequence identifiers. Sequence IDs can repeat after editing: they identify
+logical time groups, not unique physical chunks.
+
+cftc:
+  +0 u32 reserved, zero in the supported profile
+  +4 an array of 16-byte directory entries through the end of the payload
+
+There is no stored entry count; it is (payload_length-4)/16. The directory
+includes its own chunk and the remaining physical chunks. Its entries can be
+checked against actual tag, length, identifier, and offset values.
+
+tdir:
+  +0 u16 number of tracks
+  +2 that many 16-byte directory entries, referring to bhdr/shdr headers
+
+'ver ':
+  +0 u32 version: 1 or 0x101
+  +4 u16 reserved, zero
+  Total length: 6 bytes.
+
+5. File information: info
+-------------------------
+Offset  Size  Description
+0       41    title
+41      23    creation date/time text
+64      41    creator text
+105     23    modification date/time text
+128     41    editor text
+169     41    copyright/rights text
+210     4     declared complete file length
+214     2     video duration in whole seconds, rounded upward
+216     2     video track count
+218     2     primary video track ID
+220     2     audio track count
+222     2     primary audio track ID, zero when absent
+Total: 224 bytes.
+
+The duration at 214 is ceil(video_duration_ms/1000). It is not the number of
+keyframes or physical bmov chunks. The reference decoder uses total frame
+count * 10 / this field to calculate an approximate overall frame rate.
+Use bmov timestamps and rates for precise presentation times instead.
+
+6. Video track header and index
+--------------------------------
+bhdr:
+  +0  u16 track ID
+  +2  u16 sequence, zero
+  +4  four bytes 'vdeo' or 'anim'
+  +8  u32 total source frame count
+ +12  u32 track representation/version, 1 in this profile
+ +16  u16 image width
+ +18  u16 image height
+ +20  u16 display width
+ +22  u16 display height
+ +24  u32 native color depth, 16
+ +28  four-byte compression identifier
+ +32  u16 number K of keyframes
+ +34  K u16 keyframe numbers, one-based and strictly increasing
+ +34+2K  41-byte track name
+
+Total length = 75 + 2*K. The first keyframe is frame 1. The track name is a
+string field, even when every byte of it is zero; it is not packet padding.
+
+The keyframe table is authoritative. A physical bmov chunk can start with a
+delta frame; a keyframe can occur in the middle of a bmov chunk. Neither the
+chunk's position nor byte patterns in a packet determine whether it has a
+palette or starts a new prediction group.
+
+bctl:
+  +0 u16 track ID
+  +2 u16 zero
+  +4 u16 number B of physical video chunks
+  +6 B entries, eight bytes each:
+       u32 absolute bmov chunk offset
+       u16 one-based number of its first frame
+       u16 logical sequence identifier
+
+Total length = 6 + 8*B. Repeated sequence identifiers are legal.
+
+7. Video data: bmov
+-------------------
+Offset  Type   Description
+0       u16    track ID
+2       u16    logical sequence identifier
+4       u32    start timestamp in milliseconds
+8       u16    image width
+10      u16    image height
+12      s16    horizontal placement; -32768 selects default placement
+14      s16    vertical placement; -32768 selects default placement
+16      u16    frame count N in this chunk
+18      u32    frame rate multiplied by ten (75 means 7.5 frames/second)
+22      ...    N frame-table entries, eight bytes each
+
+Each frame entry is u32 offset followed by u32 length. Offset zero refers to
+payload byte 22 + 8*N, not to the file, chunk header, or frame-table start.
+Frames occupy the specified ranges in this data area. There is no implicit
+per-frame alignment. Contiguous payloads end exactly at the bmov boundary.
+
+For local frame index i starting at zero, the reference player's integer
+presentation timestamp is:
+
+  chunk_start_ms + floor(i * 10000 / rate_times_ten)
+
+Use each chunk's own rate and timestamp. In particular, the nominal time
+span of a logical group and the number of its frames need not imply an
+identical spacing at the following chunk boundary. Edited tracks can also
+change frame rate. The final frame is held for floor(10000/rate_times_ten) ms.
+
+Frame numbers for the keyframe table continue across all video chunks.
+Prediction for all four codec families uses the most recent KEYFRAME, not
+an unconditional copy of the immediately preceding decoded frame. Current-
+image spatial prediction, where specified, uses pixels already reconstructed
+in the current image.
+
+8. Frame prefixes and palette data
+-----------------------------------
+Fujitsu92 (FF02/FS00/FS02/FS04):
+  At a keyframe, first read 256 little-endian native-color words (512 bytes).
+  Retain this palette until the next keyframe. Then decode the codec packet.
+  Delta frames contain only the codec packet.
+
+Fujitsu93, WVQ, and AN10:
+  Every frame starts with a 20-byte codec extension.
+    +0 u8 chroma packing selector for FY: 0 or 1; zero for WVQ and AN10
+    +1 19 bytes reserved, zero in the supported profile
+
+  The first frame of the track then has a 256-byte palette allocation map.
+  Later keyframes do not repeat this allocation map.
+
+  Every keyframe then has:
+    4096 bytes: inverse palette lookup table
+    1024 bytes: 256 four-byte display palette entries
+
+  A display entry is B, R, G, unused, in that byte order. Its native color is
+  ((G>>3)<<10) | ((R>>3)<<5) | (B>>3). The fourth byte is ignored/cleared by
+  the reference display-palette conversion.
+
+  The inverse table maps a 12-bit reduced color to an eight-bit palette
+  index. Its index is (G4<<8)|(R4<<4)|B4, with four bits per component.
+  Palette allocation categories distinguish unavailable (0), fixed (1), and
+  available/allocatable (3) display palette slots. The reference API maps
+  other externally supplied category values to unavailable. These are
+  indexed-display allocation controls, not per-pixel alpha.
+
+  The codec packet follows these prefixes. Its offset in a frame is 5396
+  for the first track frame, 5140 for a later keyframe, and 20 for a delta.
+  These offsets follow from the tables, rather than from packet signatures.
+
+The display map, inverse lookup, and display palette enable eight-bit screen
+playback. Native-color AVI reconstruction does not quantize through them.
+Consuming them without applying that optional display conversion preserves
+more of the encoded image information.
+
+9. Fujitsu92 codec
+-------------------
+Round width/height up to eight. There are M = width*height/64 raster-ordered
+8x8 blocks. Packet layout:
+
+  M bytes       one mode per block
+  u16 L         primary operand area length
+  L bytes       primary area
+  remaining     secondary nibble area for mode 28
+
+The primary reader starts immediately after L. The secondary reader starts
+L bytes after that primary start. The reference encoder leaves two unused
+bytes at the end of the primary area. They need not be zero and do not
+represent pixels or a checksum. The primary operands therefore consume L-2
+bytes. Secondary nibbles are high nibble first, packed continuously across
+mode-28 blocks. An unused final low nibble has no image meaning.
+
+The output buffer persists between frames, which matters for deferred edge
+interpolation. A separate reference buffer holds the last decoded keyframe.
+The initial buffers are black.
+
+Mode 0: 64 palette indices in row-major order, one per pixel.
+
+Modes 1,2,3,5,6: current-image spatial copies.
+Modes 11,12,13,15,16: keyframe-reference copies.
+Modes 21,22,23,25,26: solid palette rectangles.
+
+The final decimal digit selects rectangle dimensions:
+  1: 8x8; 2: 8x4; 3: 4x8; 5: 4x4; 6: 4x2.
+Traverse rectangles column first, then top to bottom within that column.
+For example, four 4x4 rectangles are TL, BL, TR, BR.
+
+A solid rectangle has one palette index. A copied rectangle has one vector
+byte. Its high nibble is dx and low nibble dy, each sign-magnitude: bit 3 is
+negative and bits 2..0 are magnitude. Negative zero is zero.
+
+For a keyframe copy, source = rectangle_origin + (dx,dy).
+For a current-image copy, source = enclosing_8x8_origin +
+(dx,dy - rectangle_height - 7). This common block origin is significant:
+it is NOT the individual subrectangle origin. Copy each source row into the
+corresponding destination row, respecting earlier current-image writes.
+
+Mode 28: adaptive solid/literal subdivision.
+  Read one secondary nibble and one primary u16 mask.
+  Nibble bits 3,2,1,0 describe 4x4 tiles TL,BL,TR,BR.
+  A set nibble bit makes its whole 4x4 tile a single palette index.
+  Otherwise split that tile into four 2x2 tiles, again TL,BL,TR,BR.
+  The primary mask has four corresponding bits per 4x4 tile, bit 15 first.
+  A set bit makes the 2x2 tile a single palette index; otherwise read four
+  indices in row-major pixel order. Mask positions still belong to a 4x4
+  tile even when that whole tile is solid; do not compact the mask bits.
+
+Mode 35: four-color 4x4 tiles.
+  Read four four-byte masks (16 bytes), followed by four sets of four palette
+  indices (16 bytes). Tiles are TL,BL,TR,BR. Each mask is a little-endian
+  32-bit integer; successive two-bit indices, least-significant first,
+  describe row-major pixels within its tile. Total primary bytes: 32.
+
+Mode 42: eight-color 8x4 tiles.
+  Read two 12-byte masks (24 bytes), then two sets of eight palette indices
+  (16 bytes), top tile followed by bottom tile. Treat each 12-byte mask as
+  a little-endian integer and consume three bits per row-major pixel, least
+  significant first. Total primary bytes: 40.
+
+Mode 55: two-color 4x4 tiles.
+  Read four u16 masks (8 bytes), then four sets of two palette indices
+  (8 bytes). Tile order TL,BL,TR,BR; mask bits are least-significant first
+  in row-major pixel order. Total primary bytes: 16.
+
+Modes 91 and 92: checkerboard sampling and interpolation.
+  Mode 92 first reads a u32 correction mask; mode 91 has an all-zero mask.
+  Read 32 palette indices for positions where (x+y) is even, row-major.
+  Visit the remaining 32 positions row-major, mask bit 31 first. A set bit
+  supplies an explicit additional palette index. Otherwise interpolate the
+  immediate left and right native-color words using:
+
+    average(a,b) = (((a & 0x7bdf) + (b & 0x7bdf)) >> 1) | 0x0421
+
+  This is the exact packed integer operation, including its forced low bits.
+  It is not an ordinary arithmetic average of expanded RGB channels.
+
+  Missing pixels at x=7 on even rows cannot yet use the following block.
+  Defer those pixels by remembering the corresponding row numbers. After
+  decoding the next 8x8 block, fill the word immediately before that block's
+  left edge on each remembered row, from the words two places before the
+  left edge and at the left edge. This is linear buffer addressing, including
+  scanline transitions. Flags are replaced after each block. The last block
+  has no following block, so any deferred words retain their buffer value.
+  On odd rows, x=0 uses the preceding linear word as its left neighbor.
+
+  Mode 91 uses 32 primary bytes. Mode 92 uses 36 + popcount(mask).
+
+Other mode values are invalid in this codec profile. Do not search for an
+alternative packet start when a mode is invalid.
+
+10. Fujitsu93 codec (FY00/FY02/FY04)
+-------------------------------------
+The frame extension selector determines the header:
+  selector 0: three u32 lengths A,B,C
+  selector 1: five u32 lengths A,B,C,U,V
+
+These lengths are followed by:
+  A bytes skip bitmap
+  B bytes auxiliary area
+  C bytes encoded luminance blocks
+  chroma data
+
+The auxiliary area is empty in the implemented profile; a nonempty area is
+not silently interpreted as another known stream. The historical decoder
+locates luminance by skipping both A and B.
+
+Round image dimensions to four. There are N = width*height/16 raster-ordered
+4x4 blocks. Luminance is represented internally as N consecutive 16-byte
+blocks, with pixels row-major within each block. It is NOT a full-image
+row-major luminance plane.
+
+If A is zero all blocks are coded. Otherwise the skip bitmap has at least
+ceil(N/8) bytes, most-significant bit first. A set bit copies that whole block
+from the keyframe luminance reference. A clear bit has a coded command.
+
+A coded block begins with a byte whose high three bits are mode and low five
+bits are the luminance of pixel 0 (the anchor). Commands have total lengths:
+  mode:   0  1  2  3  4  5   6  7
+  bytes:  1  5  3  3  2  5  11  3
+
+First parse ALL commands and install their anchors. Only then reconstruct
+blocks in raster order. This two-pass rule permits interpolation from anchors
+belonging to blocks to the right and below.
+
+Let t[0..15] be the current block in row-major order, a=t[0], r the anchor
+of the next block, b the anchor one block row below, and d its diagonal.
+These are linear block-array accesses; virtual storage beyond the image is
+zero in the converter. Let avg(x,y)=floor((x+y)/2), rb=avg(r,d), bd=avg(b,d).
+
+Mode 0:
+  t2=avg(a,r); t8=avg(a,b); t10=avg(t8,rb)
+  t1=avg(a,t2); t3=avg(t2,r)
+  t4=avg(a,t8); t12=avg(t8,b)
+  t9=avg(t8,t10); t11=avg(t10,rb)
+  t6=avg(t2,t10); t14=avg(t10,bd)
+  t5=avg(a,t10); t15=avg(t10,d)
+  t7=avg(r,t10); t13=avg(b,t10)
+
+Mode 1:
+  Reconstruct mode 0, then read a little-endian u32 correction word.
+  For t15 down through t1, consume two low bits and apply delta [0,+1,+2,-1].
+  Clamp each corrected value to 0..31. The remaining high two bits are unused;
+  the anchor is not corrected by this word.
+
+Mode 2:
+  Read a u16 mask. For t15 down through t1, consume a low bit and choose
+  a or min(a+1,31). The high unused bit does not replace the anchor.
+
+Mode 3:
+  As mode 2, choosing a or max(a-1,0).
+
+Mode 4:
+  Read u8 distance D. Copy pixels 1..15 from block current_index-D.
+  Keep the newly supplied anchor. The distance is in whole 4x4 blocks.
+
+Mode 5:
+  Read u32. For t15 down through t1 consume two low bits and select from
+  [a, min(a+1,31), min(a+2,31), max(a-1,0)]. Top two bits are unused.
+
+Mode 6:
+  Read five u16 values. Each supplies the next three luminances, high field
+  first: bits 14..10, 9..5, 4..0. They fill t1 through t15. Bit 15 is zero
+  in valid five-bit data. The reference implementation's word-pair reads do
+  not uniformly mask a set high bit, so a nonzero reserved bit is malformed,
+  not an additional luminance precision bit.
+
+Mode 7:
+  Read u16: t2=bits14..10, t8=bits9..5, t10=bits4..0.
+  Fill other pixels using the mode-0 equations, except:
+    t7=avg(t2,rb); t13=avg(t8,bd).
+  Bit 15 is zero in valid data.
+
+Selector-1 chroma:
+  U and V give the byte lengths of two packed planes. Each plane has one
+  chroma value per 4x4 block. Groups of three bytes contain four six-bit
+  fields, most significant first. The reference native-color decoder drops
+  the least significant bit of each six-bit field. For bytes a,b,c:
+    q0 = a >> 3
+    q1 = ((a & 3) << 3) | (b >> 5)
+    q2 = ((b & 15) << 1) | (c >> 7)
+    q3 = (c >> 1) & 31
+  A plane occupies 3*ceil(N/4) bytes; unused final fields are padding.
+  The first plane is U and the second is V. Both are updated each frame.
+
+Selector-0 chroma:
+  There are no U,V length words. On odd one-based positions within a
+  keyframe group, read two uncompressed N-byte planes of five-bit values.
+  On even positions reuse the preceding chroma planes.
+
+Color reconstruction is defined by the following exact lookup offsets.
+C(x)=min(31,max(0,x)); Y is the reconstructed five-bit luminance.
+
+  R = C(Y + Rshift[V])
+  B = C(Y + Bshift[U])
+  G = floor(C(Y + GRshift[V])/2) + floor(C(Y + GBshift[U])/2)
+
+Index order in each table is 0 through 31:
+
+Rshift:
+ -20 -16 -14 -13 -11 -10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0
+  0 1 2 3 4 5 6 7 8 9 10 11 13 14 16 20
+GRshift:
+ 20 17 15 13 12 10 9 8 7 6 5 4 3 2 1 0
+  0 -1 -2 -3 -4 -5 -6 -7 -8 -9 -10 -12 -13 -15 -17 -20
+Bshift:
+ -25 -21 -18 -16 -15 -13 -11 -10 -9 -8 -6 -5 -4 -3 -2 -1
+  1 2 3 4 5 6 8 9 10 11 13 15 16 18 21 25
+GBshift:
+ 10 8 7 6 6 5 4 4 3 3 2 2 2 1 1 0
+  0 -1 -1 -2 -2 -2 -3 -3 -4 -4 -5 -6 -6 -7 -8 -10
+
+Pack the resulting channels as GRB555. Applying a generic YUV-to-RGB matrix
+would not reproduce these tables. Save reconstructed luminance as the
+prediction reference only at a keyframe.
+
+11. FujitsuWVQ codec (FV02)
+----------------------------
+Round dimensions to four. Packet:
+  +0 u8 version, zero
+  +1 two reserved bytes, zero in the supported profile
+  +3 u8 codebook update bitmap; low four bits correspond to books 0..3
+  +4 for each set bit, ascending book order:
+       u32 number of update bytes, a multiple of eight, at most 2048
+       that many bytes replacing the beginning of the selected codebook
+  then u32 command-stream length
+  then that many bytes of block commands
+
+Each book stores up to 256 vectors, each four little-endian GRB555 words.
+A vector's order is TL,TR,BL,BR. A codebook update can replace a prefix;
+retain the rest. The four books persist between frames.
+
+Process raster-ordered 4x4 blocks. A command byte has these meanings:
+  bit 7     inter prediction from the keyframe
+  bit 6     intra base-color update (ignored for an inter block)
+  bit 5     component-clamped arithmetic rather than packed arithmetic
+  bit 4     a coarse vector index follows
+  bits 3..0 fine-vector indices present for quadrants TL,TR,BL,BR
+
+The intra base-color accumulator starts at zero for each frame and persists
+between blocks. Its exact representation is a pair of 16-bit native colors
+inside a u32 accumulator, because packed addition can carry between them.
+
+When bit 7 is clear and bit 6 is set, read a byte q:
+  q<128: read a second byte r; the new base is (q<<8)|r. Replicate that
+         value into both halves of the accumulator. This literal is BIG-ENDIAN.
+  q>=128: add a replicated native-color delta selected by q&127.
+
+The first 125 deltas are the triple nested sequence
+  g = 2,1,0,-1,-2; r = 2,1,0,-1,-2; b = 2,1,0,-1,-2,
+with g outermost and b innermost, each delta g*1024+r*32+b. Entries 125,126,127
+are +3072, -3072, +96. Treat the selected delta as a u16, replicate it into
+a u32, and add modulo 2^32. Preserve any carry into the upper half.
+
+For intra blocks, coarse indices use book 0 and fine indices book 1.
+For inter blocks, coarse indices use book 2 and fine indices book 3.
+All indices are u8. Read the coarse index before the fine indices.
+A coarse vector supplies one base color per 2x2 quadrant. Each fine vector
+supplies the four residual values of its quadrant in row-major order.
+
+Define clamped addition of k native-color words as, independently per channel:
+  clamp(sum(channel values) - 16*(k-1), 0, 31).
+
+Intra, clamped:
+  Without coarse vector, expand the base accumulator to four quadrant colors.
+  With coarse vector, clamped-add it to the corresponding base colors.
+  A quadrant without a fine vector is solid. With a fine vector, clamped-add
+  each fine value to its quadrant's coarse/base color.
+
+Inter, clamped:
+  Coarse vector present: use its four values.
+  Coarse vector absent: use 0x3def (15,15,15) for each quadrant.
+  For each pixel, clamp the sum of its keyframe value, its quadrant value,
+  and its fine value when present, subtracting 16 for each additional term.
+  The absent-coarse default of 15 is intentional and differs from the packed
+  path's default of 16.
+
+Packed arithmetic:
+  Operate on horizontal pairs of pixels as little-endian u32 values.
+  For each added vector, subtract replicated 0x4210 (16,16,16) modulo 2^32.
+  Preserve carries/borrows between component fields and between the two words.
+  This is not independently clamped channel arithmetic.
+
+  Intra coarse stage: accumulator + coarse pair - 0x42104210.
+  Intra fine stage: replicated quadrant color + fine pair - 0x42104210.
+  Missing coarse or fine terms leave the corresponding base unchanged.
+
+  Inter coarse default is 0x4210. Per pixel pair, combine the keyframe pair
+  with replicated coarse color, subtract 0x42104210, and, when a fine vector
+  is present, add its pair and subtract 0x42104210 again.
+
+Save the finished image as the inter reference only when the track keyframe
+table marks this frame as a keyframe. A packet's command stream must account
+for exactly the padded image's 4x4 blocks.
+
+12. AN10 native-color run-length codec
+---------------------------------------
+After the common frame prefix:
+  u8 mode (0 intra, 1 inter)
+  u32 command count
+  that many commands
+
+Mode 0:
+  control 0..128: copy control+1 literal u16 pixels
+  control 129..255: repeat the following u16 pixel 257-control times
+
+Mode 1:
+  control 0: read u8 count and u16 pixel; repeat pixel count times
+  control 1..127: copy that many pixels from the keyframe reference at the
+                 current output position
+  control 128..255: copy control&127 literal u16 pixels
+
+Pixels are native GRB555 and scan the padded image in row-major order.
+The command count counts commands, not bytes or pixels. Output must fill the
+padded image exactly. A zero-length inter literal is a valid zero-output
+command. Reference updates are controlled by the track keyframe table.
+
+13. Audio track: shdr, sctl, tsnd
+----------------------------------
+shdr has 93 bytes:
+  +0 u16 track ID
+  +2 u16 sequence, zero
+  +4 four bytes 'snd '
+  +8 u32 movie PCM sample rate / bytes per second
+ +12 u32 complete audio sample count
+ +16 u32 track representation/version, 1
+ +20 32-byte FM Towns sound descriptor:
+       +0  8-byte sound name
+       +8  u32 sound/instrument ID
+      +12  u32 sample data length
+      +16  u32 loop start, in samples
+      +20  u32 loop length, in samples
+      +24  u16 hardware frequency control
+      +26  s16 frequency adjustment
+      +28  u8 base musical note
+      +29  3 reserved bytes
+ +52 41-byte track name
+
+The sample count at shdr+12 and descriptor length at shdr+32 describe the
+same audio data. The movie rate at shdr+8 provides the explicit media time
+base. Do not estimate this rate from the hardware frequency control, a
+nominal chip clock, a filename, or a desired modern audio rate. Frequency,
+fine tuning, and base note belong to the retained FM Towns sound descriptor;
+they do not change the stored number of PCM bytes.
+
+The supported streaming profile has zero loop start and length. The precise
+instrument-playback interpretation of nonzero fine tuning, reserved bytes,
+and loops is not established here; the converter is not a hardware sound
+instrument emulator. Looped audio is explicitly rejected.
+
+sctl:
+  +0 u16 track ID
+  +2 u16 zero
+  +4 u16 number S of sound chunks
+  +6 S entries of ten bytes:
+       u32 absolute tsnd chunk offset
+       u32 tsnd payload length, including its eight-byte payload header
+       u16 sequence identifier
+
+Total length = 6 + 10*S.
+
+tsnd:
+  +0 u16 track ID
+  +2 u16 sequence identifier
+  +4 u32 timestamp in milliseconds
+  +8 remaining bytes: mono eight-bit sign-magnitude PCM
+
+For stored byte b, signed amplitude is:
+  b&0x80 set: +(b&127)
+  otherwise: -(b&127)
+
+Both 0x00 and 0x80 represent zero. Conversion to unsigned eight-bit PCM is
+128 + signed_amplitude. In these length-delimited movie packets, 0xff is a
+sample of amplitude +127, not a container terminator. Do not apply the
+RF5C68 hardware's RAM loop-marker interpretation to a tsnd file byte stream.
+
+Place a chunk at sample index floor(timestamp_ms * rate / 1000). Gaps are
+silence. Complete adjacent data chunks normally concatenate without gaps.
+The converter preserves all audio samples even when the audio lasts longer
+than the video. It does not resample the audio in the AVI. Browser preview
+transcoding can resample separately.
+
+14. Optional display bitmap: mdib
+----------------------------------
+  +0 u16 track ID
+  +2 u16 sequence
+  +4 embedded bitmap beginning with 'BM'
+
+The embedded bitmap has its own file header, DIB header, palette if indexed,
+and raster data. It is a display/poster resource, not a video frame or an
+extra audio packet. Its bytes do not belong to the frame timeline.
+
+The implemented bitmap form is indexed, eight-bit, uncompressed, with a
+14-byte bitmap file header and a 40-byte BITMAPINFOHEADER. Offsets below are
+relative to the embedded 'BM', i.e. mdib payload byte 4:
+
+   +0  2 bytes  'BM'
+   +2  u32      complete embedded bitmap length
+   +6  u16      reserved, zero
+   +8  u16      reserved, zero
+  +10  u32      pixel offset, relative to 'BM'
+  +14  u32      DIB header length, 40
+  +18  s32      width, positive
+  +22  s32      height; positive is bottom-up, negative is top-down
+  +26  u16      planes, 1
+  +28  u16      bits per pixel, 8
+  +30  u32      compression, 0 (uncompressed)
+  +34  u32      raster byte count; zero is also valid for uncompressed data
+  +38  s32      horizontal pixels per meter
+  +42  s32      vertical pixels per meter
+  +46  u32      palette entry count; zero means 256
+  +50  u32      important palette entry count; zero means all
+  +54  ...      palette entries, four bytes each: blue, green, red, reserved
+
+The pixel offset may leave a gap after the palette. Raster row stride is
+(width+3)&~3 bytes. Each row begins with width palette indices and ends
+with stride-width ignored alignment bytes. The complete raster occupies
+stride*abs(height) bytes. Palette reserved bytes and row alignment bytes
+are not alpha or additional pixels. These palette indices are independent
+of Fujitsu92 compressed-frame palette indices.
+
+A legacy embedded bitmap can declare a pixel offset two bytes before the
+end of its complete color table. This is an inconsistent bitmap offset, not
+an overlap in the enclosing movie stream. The raster can be bounded from
+the DIB header, palette length, row stride, and complete embedded file size.
+The converter parses and decodes this resource in memory, reports the invalid
+offset, and uses the actual video frames for AVI output. It does not turn a
+poster into a timeline frame. Other embedded bitmap encodings are rejected.
+
+15. Recognition, corruption, and output behavior
+-------------------------------------------------
+Recognition requires the RIFF signature, FJMV form type, initial cftc tag,
+supported version, supported track structure, and an explicitly supported
+codec identifier. File extensions and filenames are irrelevant.
+
+Unknown top-level chunk types, codec identifiers, or unsupported track
+structures fail before creating an AVI. No searching for plausible pixel
+patterns, heuristic palette detection, or per-file exceptions is used.
+
+For a positively identified movie with malformed data:
+  * report incorrect redundant lengths or index entries;
+  * use physically bounded complete chunks and explicitly indexed frames;
+  * hold the previous decoded picture when a frame cannot be decoded;
+  * after a damaged keyframe, hold until the next listed keyframe;
+  * reject a file with no decodable video frame;
+  * if a timestamp regresses, shift that frame and later video timestamps
+    forward so the offending frame follows the preceding frame at its
+    declared nominal interval. Report the shift. The intended timing of a
+    corrupt timestamp cannot be recovered with certainty.
+
+The current implementation cannot recover arbitrary corruption of chunk
+headers or missing track/keyframe tables. It never invents a replacement
+codec, guesses packet boundaries, or claims that a held frame was decoded.
+
+CLI:
+  python3 fujitsuMovie.py inputFile outputFile
+  python3 fujitsuMovie.py inputFile outputFile -verbose
+
+Default output is only the requested AVI; diagnostics go to stderr.
+-verbose additionally writes outputFile.json. There are no persistent
+intermediate files and no required companion binaries, lookup-table files,
+third-party Python modules, or external executables.
+
+AVI video uses lossless PNG packets (MPNG), with PCM unsigned eight-bit mono
+audio when present. The AVI uses a fixed time quantum equal to the GCD of
+integer video timestamps and final duration. Empty AVI video chunks hold
+the preceding picture between source timestamps. A final repeated picture
+packet ensures the final hold has a decodable endpoint. Consequently AVI
+stream sample counts include time slots and need not equal source frame
+counts. The source frames themselves are not temporally discarded.
+
+Classic RIFF AVI has a four-gigabyte limit; OpenDML large-file output is not
+implemented. PNG encoding preserves the expanded decoded pixels, not the
+original lossy compression. Any lossy browser preview is a separate report
+artifact and is not used to create the AVI.
+
+16. Remaining work for broader format coverage
+------------------------------------------------
+To extend coverage beyond this documented profile:
+  1. Obtain structural examples and reference-player behavior for additional
+     tracks, nondefault placements, dimension changes, and display scaling.
+  2. Recover mixing/compositing rules and implement them with explicit track
+     time bases; do not assume concatenation or silent track dropping.
+  3. Characterize nonempty FY auxiliary areas and nonzero codec extensions
+     against the appropriate historical decoder versions.
+  4. Establish sound-loop and fine-tuning behavior from the relevant Towns
+     sound API, including how it relates to the explicit movie time base.
+  5. Add OpenDML indexing when output beyond classic RIFF limits is needed.
+
+The display-only allocation map and reserved extension fields are accounted
+for by location and decoder effect. Their treatment here does not establish
+unobserved future meanings or guarantee compatibility with arbitrary later
+Fujitsu products. Complete decoding of the documented profile should not be
+mistaken for a proof that every file ever called a Fujitsu Movie uses it.

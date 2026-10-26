@@ -26,6 +26,7 @@ const EXCLUDED_SAMPLE_FORMATS = [
 	"archive/aaruDiskImage",
 	"archive/cdi",
 	"archive/cloopImage",
+	"archive/dungeonSiege2Resource",
 	"archive/goosebumpsCFS",
 	"archive/grandTheftAutoSanAndreasIMGArchive",
 	"archive/hemeraThumbnailsArchive",

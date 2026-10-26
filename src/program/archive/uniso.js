@@ -45,6 +45,7 @@ export class uniso extends Program
 		return Program.denoArgs(Program.binPath("uniso.js"), ...a);
 	};
 	runOptions = ({env : Program.denoEnv()});
+	filenameEncoding = () => (RUNTIME.globalFlags?.osHint?.chinese ? "cp936" : "windows-1252");
 	post       = r =>
 	{
 		const meta = xu.parseJSON(r.stdout, {});

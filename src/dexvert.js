@@ -144,7 +144,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, prete
 			
 			if(cwdExt===null)
 			{
-				if(format.ext)	// eslint-disable-line unicorn/prefer-ternary
+				if(format.ext)
 					cwdExt = format.ext.find(ext => ext===inputFile.ext.toLowerCase() || ext===id.fileSizeMatchExt) || format.ext[0];
 				else
 					cwdExt = inputFile.ext;

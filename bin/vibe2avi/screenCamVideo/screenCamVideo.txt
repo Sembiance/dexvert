@@ -1,0 +1,639 @@
+LOTUS SCREENCAM SCM VIDEO FORMAT
+Reverse-engineered description and implementation notes
+26 October 2026
+
+STATUS AND SCOPE
+
+This document describes the SCMOV family with version strings 1.0, 2.0,
+2.1, 3.0 and 3.1. Filename extensions do not identify this format. It is
+an indexed recording of Windows graphics operations, cursor movements,
+and optional sampled audio, not a sequence of independently compressed
+screenshots. Other products named ScreenCam are outside this scope.
+
+This is NOT a claim of complete, byte-for-byte semantic understanding of
+all possible SCM files. The graphics operand encodings and the two audio
+encodings described below are implemented. Some container flags, ancillary
+metadata values, legacy thumbnail details, and unreferenced bytes remain
+unresolved. Those gaps are listed explicitly at the end. Unresolved bytes
+must not be presented as understood padding simply because playback does
+not need them. The converter does not silently guess an unknown opcode,
+codec, object type, or file version.
+
+Unless stated otherwise, integers are little endian. u8/u16/u32 mean
+unsigned integers of the stated width; i16/i32 are two's-complement signed
+integers. Offsets in container tables are absolute byte offsets from the
+beginning of the file. There is no general object alignment requirement.
+Times are milliseconds. Arithmetic on recording ticks is modulo 2^32.
+
+1. FILE ORGANIZATION
+
+The physical layout consists of a 560-byte file header, object payloads,
+and an object directory. The directory's position is stored in the header;
+it is not found by searching for marker bytes. It commonly follows the
+payloads, but readers must use its offset and size rather than assume that
+it ends at EOF. Object IDs, not directory positions, connect objects.
+
+File header:
+  Offset  Bytes  Description
+       0     7   80 53 43 4D 4F 56 76: byte 80 followed by ASCII "SCMOVv"
+       7     3   ASCII version: "1.0", "2.0", "2.1", "3.0", or "3.1"
+      10     1   NUL terminator
+      11     3   Header slack; not part of the signature. May be nonzero.
+      14     2   Flags. Values 5 and 7 are supported. Bit 1 denotes audio;
+                  the complete meanings of the other bits are unresolved.
+      16     4   Directory offset
+      20     4   Directory byte length; must be divisible by 22
+      24     4   Presentation duration in milliseconds
+      28     2   Legacy field, normally 1 before v3 and 0 in v3
+      30     2   Screen width in pixels
+      32     2   Screen height in pixels
+      34     2   Legacy field, normally 1 before v3 and 0 in v3
+      36     2   Windows code-page identifier, or 0 for legacy/default
+      38     2   Legacy field, normally 1 before v3 and 0 in v3
+      40   520   Opaque header extension/slack. Old writers can leave
+                  nonzero process-memory contents here. Its complete
+                  internal semantics have not been established.
+
+The 22-byte directory record is:
+  +0 u16 kind; +2 u32 ID; +6 u32 payload offset; +10 u32 payload length;
+  +14 u32 presentation start; +18 u32 presentation duration.
+
+An empty object can have length zero and an offset of zero. Non-timed
+objects use either zero or FFFFFFFF in the timing fields, depending on the
+writer. An object's numeric ID need not be consecutive. IDs must be unique.
+A type-1 record with duration zero is inactive and must not be rendered;
+its obsolete payload reference may even overlap a subsequently saved object.
+
+Kinds described here:
+   1  Screen-segment descriptor
+   2  Audio-segment descriptor
+   3  Initial graphics state
+   4  Timed graphics stream
+   5  Audio data
+  13  Legacy thumbnail
+  14  Movie metadata
+  21  BMP thumbnail
+  26  Segment metadata
+
+Only active directory records define live objects. Bytes beyond or between
+those objects are not graphics packets merely because their contents
+resemble graphics. The implementation records their ranges in verbose
+output; it does not invent meanings or merge them into playback.
+
+2. SCREEN-SEGMENT DESCRIPTOR (KIND 1)
+
+The payload is 102 bytes:
+  +0       u16    Legacy descriptor value, normally 1
+  +2..39   38 B   Reserved/opaque, normally zero
+  +40      u32    Legacy recording tick; not the movie's presentation origin
+  +44      u16    Device-structure version, normally 1
+  +46      u16    Screen width
+  +48      u16    Screen height
+  +50      u16    Horizontal device-size field, normally 72
+  +52      u16    Vertical device-size field, normally 72
+  +54      i32    Device color-count/capability field
+  +58      u16    Device plane count, normally 1
+  +60      u16    Device bits per pixel
+  +62..77  16 B   Reserved/opaque, normally zero
+  +78      u32    ID of initial graphics object (kind 3)
+  +82      u32    ID of timed graphics object (kind 4)
+  +86      u32    ID of thumbnail object (kind 13 or 21), or empty reference
+  +90      u32    Source trim/start field
+  +94      u32    Segment length field
+  +98      u32    Original/source length field
+
+The exact units and historical interpretation of the device-size fields
+and every use of the final three editing fields are not independently
+established. The verified playback profile has zero source trim. The
+converter rejects nonzero trim rather than infer editing semantics.
+
+The directory entry supplies the segment's place on the presentation
+clock. Initialize a new graphics state for each screen segment, replay all
+kind-3 packets in order, then replay kind-4 packets. Subtract the first
+kind-4 packet's tick from subsequent ticks to get segment-relative time;
+add the directory entry's presentation start. The recording tick at +40 is
+not substituted for this first packet tick. Equal-timestamp packets are
+executed in file order and constitute one simultaneous screen update.
+
+The last image holds through the segment's duration. The implementation
+supports sequential segments with a fixed screen size. Overlapping screen
+segments and changes of dimensions are explicitly unsupported.
+
+3. GRAPHICS PACKETS
+
+Kinds 3 and 4 are concatenations of:
+  u32 recording_tick
+  u16 command_byte_count
+  u8  commands[command_byte_count]
+
+The six-byte packet header is not included in command_byte_count. No
+padding follows a packet. The command stream must finish exactly at its
+packet boundary. Compression state persists between packets and is reset
+by opcode 3B. A packet is not a keyframe; starting playback in its middle
+without its preceding state will usually give incorrect results.
+
+Each command starts with an opcode byte. If bit 7 is clear, execute one
+instance. If bit 7 is set, a following u8 gives the instance count; clear
+bit 7 to get the actual opcode. Each instance has its own operands. The
+repeat byte is not a repeat of a previously decoded operand sequence.
+The implemented valid profile requires a nonzero instance count.
+
+4. PRIMITIVE OPERAND ENCODINGS
+
+U: compact unsigned word
+  Read b=u8. If b!=FF, value=b. Otherwise read a following u16.
+
+S: compact signed word
+  Read b=u8. If b!=FF, interpret b as signed 8-bit. Otherwise read i16.
+  Thus -1 requires FF FF FF; it cannot be represented by a lone FF.
+
+Z: compact allocation size
+  Read b=u8. Let n=b>>6 and v=b&63. Read n further bytes, each updating
+  v=(v<<8)|byte. This operand's continuation bytes are big endian.
+
+P: compressed point; E: compressed extent
+  P and E have separate previous-value pairs and separate 128-slot caches.
+  Start with all previous values and all cached deltas zero.
+  Read control c. If c&80, retrieve delta from cache[c&7F]. Otherwise:
+    bits 0,1 select low/high bytes of delta-x;
+    bits 2,3 select low/high bytes of delta-y;
+    absent bytes are zero; assemble each pair as signed little-endian i16;
+    if bit 4 is set, OR delta-x with 0100;
+    if bit 5 is set, negate delta-x;
+    if bit 6 is set, negate delta-y;
+    store the delta at ((delta-x & 15)<<3)|(delta-y & 7).
+  Add delta to this operand family's previous pair, retain it, return it.
+  The caches hold DELTAS, not absolute coordinates.
+
+Q: compressed (x,y,width,height)
+  Has its own previous quadruple and 128-slot delta cache.
+  Read control c. If c&80, retrieve delta from cache[c&7F]. Otherwise:
+    read an additional u8 byte-presence mask;
+    its bits 0..7 select the eight little-endian bytes of four signed i16s;
+    absent bytes are zero;
+    c bits 2,1,0 OR 0100 into dx,dy,dwidth respectively;
+    c bits 6,5,4,3 negate dx,dy,dwidth,dheight respectively;
+    cache at ((((dx&3)*4+(dy&3))*4+(dwidth&3))*2+(dheight&1)).
+  Add delta to the previous quadruple, retain it, return it.
+
+R: rectangle
+  Decode Q and return (x,y,x+width,y+height). R and Q share their cache and
+  previous value. R is not a fourth independent coordinate family.
+
+C: compressed color
+  Has a previous four-byte BGRA/flag value and a 128-slot delta cache,
+  initially all zero. Read c. If c&80, retrieve cache[c&7F]. Otherwise bits
+  0..3 indicate which of four delta bytes follow, in order; absent bytes
+  are zero. Cache the delta at:
+    ((((d[2]&CF)|(d[0]>>2))>>3)|(d[1]&E1))>>1
+  Add each delta byte to its corresponding previous byte modulo 256.
+  For an RGBQUAD the resulting bytes are B,G,R,reserved. For a GDI
+  COLORREF, reorder to numeric R|(G<<8)|(B<<16)|(flags<<24).
+  Flag 01 in the high byte denotes a logical-palette index in the low byte
+  of the COLORREF. Resolve it against the current recording palette.
+
+5. BITMAP BLOCK CACHE AND RUN-LENGTH CODING
+
+Bitmap payloads use a separate 128-slot LRU cache backed by a 49152-byte
+arena. Cache state is reset by 3B. A block reference is one byte with bit
+7 set; its low seven bits are the slot number. A new block begins with two
+bytes in big-endian order, with the high bit clear. The resulting 15-bit
+number is the compressed length, followed immediately by that many bytes.
+
+For insertion, choose the oldest slot, but walk backward over preceding
+empty slots in the LRU order to choose the first available empty slot.
+Initially the LRU order is slots 0..127 and the first inserted slot is 0.
+Release the chosen slot's old allocation. Store the compressed bytes in
+an allocation rounded up to four bytes. Use the first free extent large
+enough, allocating from its high end. Coalesce adjacent freed extents.
+If no extent fits, compact the cache: put the new entry at arena offset
+zero, then retain entries in most-recent-first order while leaving space
+for a four-byte free-extent header. Once an entry cannot fit, discard it
+and all less-recent entries. Move every inserted or referenced slot to
+the front of the LRU order. A reference to an empty slot is malformed.
+
+Within each compressed block, repeat until its exact compressed length
+has been consumed:
+  tag<80: copy tag following literal bytes;
+  tag>=80: repeat the following byte tag&7F times.
+The RLE token boundaries cannot cross compressed block boundaries. A
+zero-length literal performs no action. A repeat with zero count still
+consumes its value byte. Output may span multiple bitmap-load commands.
+
+42 starts a bitmap buffer and loads a block. 43 reads an explicit Z
+allocation size, then starts the buffer and loads a block. 44 appends a
+block to the existing buffer. These opcodes do not themselves draw.
+The allocation size describes storage; it is not a replacement for the
+compressed length or an additional payload to skip.
+
+6. BITMAP DESCRIPTIONS
+
+45: U(depth_tag), U(color_count), U(width), color-table operands
+46: U(compression), then the same fields as 45; if compression!=0, an
+    additional U(height) appears after width and before the color table.
+45 implies compression zero.
+
+The low seven bits of depth_tag specify 1,2,4,8,16,24,or32 bits per pixel.
+Bit 7 clear means color-table entries are one-byte indices into the
+current recording palette. Bit 7 set means direct color-table entries.
+For direct entries with compression=3, read three raw u32 bit masks.
+Otherwise read color_count C operands. Indexed entries consume exactly
+color_count bytes. A color_count of zero is meaningful and consumes no
+color operands; it is not shorthand for 256 compressed colors.
+
+For compression zero the row stride is 4*ceil(width*depth/32), except for
+compact two-bit data. The compact two-bit stride is:
+  (((floor((width*4+7)/8)+3)>>1) & ~1)
+Height is floor(number_of_buffer_bytes/stride). A remaining partial row
+is unused by the original rendering path; it is not a new command.
+
+For each full row after the first, add the preceding DECODED row to it,
+byte by byte, modulo 256. Row zero is literal. The reconstructed array is
+a Windows bottom-up DIB. Its padding bytes participate in the differencing.
+For depth 2, expand each byte's four two-bit pixels, most significant
+pixel first, into two bytes of four-bit pixel indices. The resulting
+normal DIB has depth 4 and a four-byte-aligned row stride.
+
+Compression values 1,2,3 have the standard Windows BI_RLE8, BI_RLE4 and
+BI_BITFIELDS meanings; their explicit height is used and the vertical
+byte-difference step is not performed. BI_RGB is zero. Unlisted
+compression values are rejected.
+
+A depth-1, zero-color-count bitmap used as a source bitmap is monochrome.
+For 45 its implicit colors are palette endpoints in indexed mode, or
+black/white in direct mode. For 46 its implicit colors normally derive
+from current text/background colors, except that a two-entry palette uses
+its endpoints. Monochrome GDI blits use the destination text/background
+colors as prescribed by Windows GDI. A direct DIB blit and a bitmap blit
+are therefore not interchangeable.
+
+7. GRAPHICS OPCODE TABLE
+
+All opcode numbers below are hexadecimal. Repeated command instances obey
+the same operand layout. "byte" means uncompressed u8. GDI names identify
+the operation and its standard Windows semantics, including map mode,
+clipping, selected objects, palette colors, and raster operations.
+For device-coordinate operations, restore map mode, window origin,
+window extent, viewport origin, and viewport extent in that order.
+Using SaveDC/RestoreDC instead changes MM_ISOTROPIC rounding and can
+produce different geometry after repeated bitmap operations.
+
+  00 P,byte                         BitBlt current bitmap at P, byte=ROP3
+  01 P                              Copy current DIB at P
+  02 Q,P,byte                       Screen-to-screen BitBlt; Q destination,
+                                    P source, byte ROP3
+  03 Q,byte                         PatBlt rectangle, byte ROP3
+  04 Q                              PatBlt with PATCOPY (F0)
+  05 Q,Q,byte                       StretchBlt bitmap to screen
+  06 Q,Q,byte                       StretchBlt screen to screen
+  07 Q,Q,byte                       StretchDIBits, specified ROP3
+  08 Q,P                            DIB copy with destination extent
+                                    transformed from device to logical units
+  09 U(n),P,bytes[n]                TextOutA
+  0A P,byte(flags),[R],U(n),[S*n],
+       bytes[n]                     ExtTextOutA: bit7 includes R, bit6
+                                    includes signed per-byte advances;
+                                    low bits 1 and 2 are ETO_OPAQUE and
+                                    ETO_CLIPPED. No NUL required in text.
+  0B R,R                            Arc
+  0C R,R                            Chord
+  0D R                              Ellipse
+  0E R,R                            Pie
+  0F P                              LineTo
+  10 P,P                            MoveTo followed by LineTo
+  11 P,C                            SetPixel
+  12 U(n),P*n                       Polygon; see continuation rule below
+  13 U(n),P*n                       Polyline; same continuation rule
+  14 R                              Rectangle
+  15 R,E                            RoundRect; E is corner ellipse size
+  16 P,C                            FloodFill
+  17 P,C,U                          ExtFloodFill; U is fill mode
+  18 C                              SetBkColor
+  19 C                              SetTextColor
+  1A U                              SetBkMode
+  1B U                              SetROP2
+  1C U                              SetPolyFillMode
+  1D U                              SetStretchBltMode
+  1E U                              SetMapMode; values 2..6 are replayed
+                                    as MM_ANISOTROPIC (8)
+  1F byte                           Brush origin: x=byte>>4, y=byte&7
+  20 P                              SetViewportOrgEx
+  21 E                              SetViewportExtEx
+  22 P                              SetWindowOrgEx
+  23 E                              SetWindowExtEx
+  24 U(style),E(width),C             Create/select pen
+  25 E(width),C                     Create/select PS_SOLID pen
+  26                                Select NULL_PEN
+  27 byte                           Stock pen: bit0=0 black, bit0=1 white
+  28 U(style),C,S(hatch)             Create/select brush
+  29                                Create/select pattern brush from bitmap
+  2A byte(slot)                     Create pattern brush and cache in slot
+                                    0..11, then select it
+  2B C,U(hatch)                     Create/select hatched brush
+  2C                                Create/select DIB pattern brush
+  2D                                Select NULL_BRUSH
+  2E byte                           bit7=0: select cached brush by slot;
+                                    bit7=1: stock brush, bit0=0 black,
+                                    bit0=1 white
+  2F S*5,U(n),bytes[8],bytes[n]     Create/select LOGFONTA; see below
+  30 U                              SetTextCharacterExtra
+  31 U(break_count),U(extra)        SetTextJustification
+  32 U                              SetTextAlign
+  33 U(first),U(last),C*(last-first+1)
+                                    Set inclusive recording-palette range
+  34 R                              Set clipping rectangle
+  35 E                              Frame current region with selected brush
+  36                                Invert current region
+  37                                Paint current region with selected brush
+  38 Q,U(stride)                    Define/show monochrome cursor; see below
+  39                                Hide cursor
+  3A u16(x),u16(y)                  Move cursor in screen/device coordinates
+  3B                                Reset operand and bitmap compression state
+  3D U(mode),[R]                    Saved screen: mode0 save R, mode1 restore
+                                    to R and release, mode2 discards saved state
+  41 U                              MessageBeep notification identifier
+  42 block                          Reset/load bitmap bytes
+  43 Z,block                        Allocate/reset/load bitmap bytes
+  44 block                          Append bitmap bytes
+  45 bitmap-description             Uncompressed DIB description
+  46 bitmap-description             Explicit-compression DIB description
+  47 U(n),R*n                       Define paint region as union of rectangles
+  48 U(n),R*n                       Define clip region as union of rectangles
+  49 U(polygons),U(count)*polygons,
+       P*sum(count)                 PolyPolygon
+  4A Q,U(stride),U(extra)           Define/show color cursor
+
+3C,3E,3F,40 and values above 4A are not assigned by this implementation.
+They are not silently skipped. No length field permits skipping an
+arbitrary unknown command safely.
+
+For 0B,0C,0E, the second R provides the two radial points, passed as its
+left/top and right/bottom pairs. It still uses the R encoding, including
+addition of origin and size; it is not two P operands.
+
+Polygon continuation: at the start, 12/13 read a point count; 49 reads a
+polygon count followed by that many individual point counts. Consume at
+most 256 points per command instance. If incomplete, the next instance
+continues at the next point without repeating any counts. Only draw when
+all points have arrived. Region commands 47/48 similarly consume at most
+128 rectangles per instance and only read their count on the first
+instance. The two region operations share continuation state; the
+polygon operations share their continuation state.
+
+LOGFONT: the five signed words are height, width, escapement, orientation,
+and weight. The following eight bytes are italic, underline, strikeout,
+charset, output precision, clipping precision, quality, and pitch/family.
+The final n bytes are the face name without an implied stored terminator.
+Font files are not embedded. Exact glyph shapes require compatible fonts
+and a compatible GDI implementation. ANSI text decoding depends on the
+recorded charset/code page and installed font support.
+
+ROP3's byte is its eight-input truth table, placed in bits 16..23 of the
+GDI raster-operation value. Do not reduce all blits to SRCCOPY. XOR and
+monochrome source operations are essential for correct screens.
+
+The paint region and clipping region are separate state. GDI rectangle
+coordinates are not necessarily device pixels; honor the map mode and
+window/viewport transformations. 00 and 01 temporarily use device-pixel
+coordinates. Capture the framebuffer only after the complete timestamp
+has executed, then overlay the separate cursor image.
+
+8. CURSORS
+
+Cursor pixel data comes from the current decoded bitmap byte buffer,
+without the DIB vertical-difference transform. In 38/4A, Q contains
+hotspot x,y and cursor width,height. U(stride) is the monochrome mask's
+bytes per row. Cursor masks have top-down row order and high-bit-first
+pixels within each byte.
+
+38 contains stride*height AND-mask bytes followed by the same number of
+XOR-mask bytes. For each pixel:
+  output = (screen & (AND_bit ? FFFFFF : 000000))
+           XOR (XOR_bit ? FFFFFF : 000000).
+This also represents an inverted screen pixel when both bits are 1.
+The original replay implementation uses 32-by-32 cursor backing bitmaps.
+
+4A contains the same AND mask, then width*height one-byte color indices
+for the XOR image. Resolve those indices against the recording palette.
+Its additional U operand is consumed by the original replay routine but
+is not used there; its writer-side purpose remains unresolved.
+
+The legacy replay routine crops transparent top rows for monochrome
+cursors. Its stored position refers to the cropped rectangle. Movement
+sets that position to (recorded position - hotspot + crop origin).
+A shape change adjusts the stored position by old hotspot minus new
+hotspot, without compensating for a changed crop origin. The converter
+reproduces this behavior, including the resulting transient displacement
+until the next recorded move. Horizontal origin remains zero in this
+legacy replay path. Color cursors do not use this cropping step.
+
+9. AUDIO
+
+A kind-2 descriptor has 20 bytes:
+  +0..5    6 B   Legacy/reserved bytes, normally zero
+  +6       u16   Decoded samples per second
+  +8       u16   Decoded bits per sample
+  +10      u16   Decoded channel count
+  +12      4 B   Encoding identifier
+  +16      u32   ID of kind-5 data object
+
+Identifiers:
+  4E 4F 4E 45 ("NONE") or 00 00 00 00: raw PCM
+  01 00 00 00: VocalTec IMA ADPCM variant described below
+Other identifiers are unsupported. The absence of a RIFF/WAVE header in
+kind 5 is normal. Format information belongs to kind 2.
+
+PCM uses unsigned 8-bit samples or signed little-endian 16-bit samples.
+Stereo is interleaved left, right. Directory start/duration fields place
+and bound the audio segment on the movie clock. Extra physical samples
+outside its presentation interval are not appended to the movie. Fill
+gaps with digital silence (80 for 8-bit PCM, 0000 for 16-bit PCM).
+The converter supports sequential mono/stereo tracks of one consistent
+sample format; it rejects overlapping tracks and mid-movie format changes.
+
+VocalTec compressed audio uses 256-byte independent blocks:
+  +0 i16 initial predictor
+  +2 u8  initial step-table index, 0..88
+  +3 u8  unused/reserved, not interpreted by the decoder
+  +4..255 252 bytes, each containing two ADPCM nibbles
+
+Emit the initial predictor, then decode each byte's HIGH nibble before
+its LOW nibble. A full block produces 505 samples. This ordering differs
+from common WAVE IMA ADPCM. There are no cross-block predictor dependencies.
+
+IMA step table, indices 0 through 88:
+  7,8,9,10,11,12,13,14,16,17,19,21,23,25,28,31,34,37,41,45,
+  50,55,60,66,73,80,88,97,107,118,130,143,157,173,190,209,230,
+  253,279,307,337,371,408,449,494,544,598,658,724,796,876,963,
+  1060,1166,1282,1411,1552,1707,1878,2066,2272,2499,2749,3024,
+  3327,3660,4026,4428,4871,5358,5894,6484,7132,7845,8630,9493,
+  10442,11487,12635,13899,15289,16818,18500,20350,22385,24623,
+  27086,29794,32767
+
+For nibble n and current step s:
+  diff = (s>>3)
+       + (s    if n&4 else 0)
+       + (s>>1 if n&2 else 0)
+       + (s>>2 if n&1 else 0)
+  predictor += -diff if n&8 else diff
+  clamp predictor to [-32768,32767]
+  index += [-1,-1,-1,-1,2,4,6,8][n&7]
+  clamp index to [0,88]
+  emit predictor
+The individual integer shifts must happen before addition.
+
+The supported VocalTec profile presents 11025 Hz, 8-bit mono. Convert the
+16-bit reconstructed predictor to the stored descriptor's unsigned
+8-bit output by arithmetic_shift_right(predictor,8)+128. This reproduces
+the original codec output. A partial final block with at least its
+four-byte header can produce a partial set of samples. A shorter tail
+cannot supply a predictor and is discarded as malformed trailing audio.
+
+MessageBeep commands are operating-system notifications, not recorded
+waveforms. The converter consumes their operands but does not synthesize
+an arbitrary platform-dependent beep into the audio track.
+
+10. METADATA AND THUMBNAILS
+
+Kinds 14 and 26 use a sequence of u16 tag, u32 byte length, and that many
+value bytes. A tag-zero, length-zero record terminates the object. Lengths
+include any NUL in a stored string. There is no TLV alignment padding.
+
+Kind 14 tags:
+  1 author string
+  2 organization string
+  3 u16 boolean-like option; full meaning unresolved
+  4 u16 recording bits per pixel
+  5 u16 recording width
+  6 u16 recording height
+  7 u16 auxiliary field; meaning unresolved
+  8 u16 auxiliary field; meaning unresolved
+  9 u16 auxiliary field; meaning unresolved
+
+Kind 26 tags:
+  1 u32 screen descriptor ID
+  2 u32 audio descriptor ID, zero for none
+  3 segment title string
+  4 additional NUL-terminated string; full meaning unresolved
+
+The converter walks and bounds every TLV and exposes its exact raw value
+in verbose JSON. These fields do not become AVI picture frames. Damaged
+ancillary metadata is reported without discarding independently intact
+movie graphics or audio.
+
+Kind 21 is a normal BMP file including its "BM" file header, its DIB
+header, color table or bit masks, and pixel data. The BMP's own offsets,
+compression, dimensions, and row-padding rules apply. It is a thumbnail,
+not an alternative source of movie frames.
+
+Kind 13 is a legacy thumbnail object. Its known prefix is:
+  +0 u16 width; +2 u16 height; +4 u16 row bytes;
+  +6 u16 bits per pixel; +8 u16 planes; +10 u16 reserved.
+For depths through 8 it has 2^depth three-byte R,G,B entries after the
+12-byte prefix, followed by row_bytes*height bitmap bytes. Higher depths
+omit the palette. Stored allocation lengths round up to 32-byte boundaries.
+Unused allocation tail bytes do not extend the image. An object can
+contain only the prefix and palette, with no complete pixel array.
+The exact display convention for every legacy thumbnail variant is not
+fully validated. The converter bounds and describes these objects but
+does not render thumbnails into the video or claim to preserve them in AVI.
+
+11. IMPLEMENTATION AND COMMAND LINE
+
+  python3 screenCamVideo.py inputFile outputFile
+  python3 screenCamVideo.py -verbose inputFile outputFile
+
+The default successful invocation leaves only the requested AVI file.
+Diagnostic warnings go to stderr. With -verbose, an additional
+outputFile.json describes the parsed objects, auxiliary values, operation
+counts, duration, recovery warnings, and unreferenced ranges. It also
+prints a summary. No original-player files are required at runtime.
+
+Dependencies:
+  Python 3 with NumPy;
+  Wine with 64-bit Windows application support;
+  Xvfb;
+  screenCamVideoRender.exe beside screenCamVideo.py.
+The supplied C source builds the rendering helper with MinGW-w64:
+  x86_64-w64-mingw32-gcc -O2 -s -o screenCamVideoRender.exe \
+      screenCamVideoRender.c -lgdi32 -luser32
+
+The helper executes expanded GDI calls from the Python parser, using an
+isolated temporary Wine prefix and X server. It does not execute the
+recording as machine code and does not load a proprietary decoder.
+Temporary renderer and output files are cleaned after normal completion
+or handled errors. Existing destination files are only replaced after
+successful conversion. Output permissions are set to 0664.
+
+AVI video uses lossless ZMBV with 32-bit pixels, zlib compression, 16x16
+blocks, and exact 1 ms stream ticks. Unchanged intervals are zero-length
+AVI video chunks (dropped-frame holds); they do not need duplicate pixel
+payloads. Audio is interleaved PCM. The first frame and periodic refresh
+frames are full ZMBV keyframes; changed blocks use XOR deltas. A 1000-tick
+stream is not a claim of 1000 distinct recorded images per second.
+Two explicit closing pictures establish the final hold interval for
+readers that otherwise extrapolate sparse frame durations.
+Some basic AVI applications do not support ZMBV or dropped-frame holds;
+FFmpeg/VLC-compatible readers are appropriate. Browser previews can use
+MP4/H.264, but those previews are separate, lossy presentation artifacts.
+FFmpeg is used for the one-time report, not by the converter itself.
+
+Resource limits are explicit implementation limits: dimensions at most
+16384 per axis, decompressed bitmap buffers at most 256 MiB, decoded audio
+at most 512 MiB, cursors at most 32x32, and AVI 1.0 output below 4 GiB.
+Files exceeding a limit are not silently scaled, truncated, or sampled.
+
+12. ERROR HANDLING, UNRESOLVED WORK, AND NEXT STEPS
+
+Signature mismatch: reject immediately and produce no output.
+Known signature but unimplemented version, object kind, graphics opcode,
+audio codec, editing profile, or rendering feature: reject; do not guess.
+An absent or truncated directory prevents deterministic identification of
+object boundaries. This implementation cannot reconstruct that index and
+does not scan payload bytes to invent one.
+
+For a malformed operand in a timed packet, complete packets before that
+packet can be recovered. The output stops at the damaged packet's known
+time and contains none of its partially applied drawing operations.
+The shortened duration is reported. A damaged initial state cannot safely
+be used this way. Broader repairs, missing-index reconstruction, and
+resynchronization after unknown bytes are not implemented. Empty graphics
+tracks are reported rather than replaced by fabricated movie frames.
+
+Remaining work before claiming complete format support:
+  * Determine the writer-side meanings of header flags and legacy fields,
+    the 520-byte extension, descriptor reserved ranges and device fields,
+    metadata options 3/7/8/9 and kind-26 tag 4, and cursor 4A's extra word.
+    Trace original serialization routines and compare controlled recordings
+    that change one setting at a time.
+  * Establish historical edit/trim semantics, overlapping tracks, changing
+    screen sizes, alternate audio codecs, and any other object kinds.
+    Add support only after their layouts and playback semantics are known.
+  * Fully validate legacy thumbnail row/plane conventions and allocation
+    slack, and identify the provenance of all unreferenced physical tails.
+    Unreferenced does not mean semantically understood.
+  * Validate every rendering path against original Windows environments,
+    including palette animation, all mapping/region combinations, unusual
+    cursor sizes, multibyte text, and original font substitutions. Current
+    GDI replay depends on Wine and its available fonts; font-independent,
+    historically exact pixels are not guaranteed.
+  * Add a deterministic recovery strategy for damaged indices only if
+    original container invariants make object boundaries provable.
+
+Structural coverage, successful AVI decoding, and agreement on selected
+reference frames do not establish universal byte-for-byte semantic
+completeness. This document and converter deliberately state that limit.
+
+REFERENCE MATERIAL
+
+Original Lotus ScreenCam players distributed by IBM (used for analysis
+and validation; not redistributed or required by the implementation):
+https://public.dhe.ibm.com/software/lotus/desktop/123/utils/scrncamp.zip
+https://public.dhe.ibm.com/software/lotus/desktop/ScreenCam/archive/scplayer.zip
+
+Windows GDI operation and bitmap semantics:
+https://learn.microsoft.com/en-us/windows/win32/gdi/windows-gdi
+https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfoheader
+
+ZMBV encoder reference used to verify output framing:
+https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/zmbvenc.c

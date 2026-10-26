@@ -7,5 +7,5 @@ export class accentDemoMakerSequence extends Format
 	forbidExtMatch = true;
 	magic          = ["Accent DemoMaker Sequence"];
 	weakMagic      = true;
-	unsupported    = true;	// 1,059 unique files on discmaster, but this is a very application specific 'animated' type format, not really able to make a converter for it I don't think
+	unsupported    = true;	// 1,059 unique discmaster files, all are less than 60k and are very application specific 'animated' type format, thus a converter would be difficult and may not produce anything interesting
 }

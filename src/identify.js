@@ -17,7 +17,7 @@ function flexMatch(value, matcher, fullStringMatch)
 export {flexMatch};
 
 // A list of family types. Order is the secondary order they will be matched in the case of multiple 'types' of matches (magic, etc, filename) across multiple categories
-const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "poly", "font", "text", "executable", "other"];
+const FAMILY_MATCH_ORDER = ["archive", "document", "video", "audio", "music", "image", "poly", "font", "text", "executable", "other"];
 
 // list of 'meta' keys that may appear as fileMeta[k] or in the result of a program r.meta[k] that should always be inherited and exposed in the file meta itself
 export const ID_META_INHERIT = ["macFileType", "macFileCreator", "proDOSType", "proDOSTypeCode", "proDOSTypePretty", "proDOSTypeAux"];
@@ -397,7 +397,7 @@ export async function identify(inputFileRaw, {fromDexvert, xlog=new XLog()}={})
 				xlog.trace`${formatid} strongMagicMatches: ${strongMagicMatches}`;
 			const magicMatch = weakMagicMatchesHard.length || weakMagicMatchesSoft.length || strongMagicMatches.length;
 			let weakMatch = false;
-			if(!strongMagicMatches.length && (weakMagicMatchesSoft.length || weakMagicMatchesHard.length))	// eslint-disable-line unicorn/prefer-ternary
+			if(!strongMagicMatches.length && (weakMagicMatchesSoft.length || weakMagicMatchesHard.length))
 				weakMatch = true;
 
 			if((format.weakFileSize || []).includes(f.input.size))

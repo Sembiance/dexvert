@@ -1,0 +1,625 @@
+WebEx Recording Format: WOTF version 0x0600 desktop/audio profile
+Independent reconstruction, 2026-10-26
+
+STATUS AND SCOPE
+
+This document specifies the reconstructed container and the implemented desktop
+and G.723.1 recording profile. It is NOT a complete specification of all WRF
+versions, and it does NOT claim that every field's meaning is established.
+Structural byte accounting and semantic understanding are different claims.
+Unresolved fields are explicitly identified below; treating them as an opaque
+blob is not equivalent to reverse engineering their contents.
+
+The accompanying converter accepts the WOTF signature and version 0x00000600.
+It implements the screen commands listed here, JPEG and raw/DEFLATE RGB bitmaps,
+clipping, cached monochrome/color pointers, supported brush operations, and a
+single G.723.1 speech channel. Unimplemented record types, commands, codecs,
+offscreen drawing, and dynamic desktop-size changes are rejected before an
+output is opened. ARF, newer Webex MP4 recordings, and unrelated .wrf formats
+are outside this profile.
+
+The remaining obstacles to a complete semantic specification are:
+* the exact meaning and generation rule of the header word at offset 0x10;
+* portions of the file/block control fields and their nonzero variants;
+* complete interpretation of the capability-negotiation byte stream;
+* complete semantics of the sharing-control and ASCE lifecycle parameters;
+* the producer's generation rule for the obsolete audio-offset table;
+* exact platform-specific rendering of the system pointer and hatch brushes;
+* the reference player's treatment of audio/event clock disagreement.
+
+Every field in the supported layout is bounded and assigned a structural role.
+The converter does not search for plausible JPEGs, scan for likely packet
+headers, guess dimensions, infer codecs from filenames, or use recording-specific
+names, offsets, dimensions, or identifiers. It relies on declared lengths,
+explicit opcodes, compression selectors, dimensions, codec IDs, and checksums.
+
+NOTATION
+
+Offsets are zero-based byte offsets. u8/u16/u32 are unsigned integers; s8/s16
+are signed two's-complement integers. All multibyte integers are little-endian,
+except values inside standard JPEG bitstreams. No implicit alignment is inserted
+between container records or screen commands. A rectangle is left, top, right,
+bottom, with the right and bottom edges excluded. Pixel origin is upper left.
+An owner ID is a 32-bit application-sharing context identifier, not a file offset.
+
+1. FILE ORGANIZATION
+
+  fixed header (36 bytes)
+  title bytes
+  description bytes
+  segment table, when segment_count is nonzero
+  block header + timed records
+  block header + timed records
+  ... through physical end of file
+
+1.1 Fixed header
+
+Offset  Size  Field
+0x00      4   ASCII WOTF (57 4f 54 46)
+0x04      4   format version; this profile is 0x00000600
+0x08      4   declared total file length in bytes
+0x0c      4   recording duration, in centiseconds
+0x10      4   legacy counter; semantic meaning UNRESOLVED
+0x14      4   file control word; only zero is implemented; meaning UNRESOLVED
+0x18      4   segment_count
+0x1c      4   number of block headers
+0x20      2   title byte count
+0x22      2   description byte count
+
+Title and description immediately follow the header, without terminators or
+alignment. The byte encoding is not identified by this header. The converter
+retains these strings using Latin-1 as a reversible byte-to-character mapping;
+that does not assert that the original text encoding was Latin-1.
+
+The duration is a summary. It has lower precision than the per-record clock.
+The legacy word at 0x10 is not used as an absolute seek offset: its value need
+not point to a record boundary. It must not be used to partition the file.
+
+1.2 Segment table
+
+Present if segment_count != 0, following both text strings:
+
+  u32 capacity       number of bytes in the table allocation after this header
+  u32 control        zero in the supported profile; meaning UNRESOLVED
+  u8  table[capacity]
+
+The default segment has no explicit entry. The remaining segment_count - 1
+entries are packed as:
+
+  u8  name_length
+  u32 start_position  segment position; exact unit/semantics not fully verified
+  u32 record_offset  segment seek value; exact relative base not fully verified
+  u8  name[name_length]
+
+Unused table allocation is zero-filled in the supported profile. Nonzero slack
+is rejected as an unsupported extension. The playback parser does not need the
+segment table to decode the sequential video or audio. Segment navigation is
+not exported to AVI. Named-segment interpretation remains partially unresolved.
+
+2. BLOCKS AND TIMED RECORDS
+
+2.1 Block header (36 bytes)
+
+Offset  Size  Field
+0         1   block type: 7
+1         4   block duration in centiseconds
+5         4   bytes of timed records following this 36-byte header
+9         1   control A: 1 in the supported profile; meaning UNRESOLVED
+10        1   refresh indicator: 0 or 1
+11       25   control/reserved storage; zero in the supported profile
+
+The refresh indicator correlates with periodic desktop state retransmission;
+its complete reference-player semantics are not established. The converter
+processes all explicit screen commands in sequence and never manufactures a
+refresh based on this indicator. Block summaries do not reset or add to the
+millisecond event clock. The next block begins at:
+
+  block_offset + 36 + block_payload_length
+
+There is no block padding or magic-string search. The 25 zero bytes are consumed
+and checked, rather than omitted from byte accounting. Nonzero control variants
+are unsupported, not assumed to be harmless padding.
+
+2.2 Timed-record header (5 bytes)
+
+Offset  Size  Field
+0         1   packed type/length byte
+1         2   delay since preceding timed record, milliseconds
+3         2   low sixteen bits of stored payload length
+
+  type = packed_byte & 0x0f
+  payload_length = low_length | ((packed_byte >> 4) << 16)
+  timestamp_ms = preceding_timestamp_ms + delay
+
+The first preceding timestamp is zero. The timestamp accumulator continues
+across block boundaries. Stored payload length excludes the five-byte header.
+The high nibble of the first byte extends the LENGTH; it is not a codec flag.
+Types implemented here:
+
+  1 = screen-command packet
+  2 = audio packet
+
+A record cannot extend beyond its parent block. Unknown types are unsupported.
+
+2.3 Screen-command packet payload
+
+  u32 expanded_length
+  u8  data[payload_length - 4]
+
+If expanded_length == 0, data is already the unpacked command stream. Otherwise
+data is one WebEx compressed member, and its expanded size must equal
+expanded_length. Several commands can be present in one packet. Commands are
+applied in order at that packet's timestamp.
+
+2.4 WebEx compressed member
+
+This is a gzip-like wrapper with the four-byte MTIME field omitted:
+
+  1f 8b             gzip identification bytes
+  08                DEFLATE method
+  00                flags (no optional fields)
+  u8 XFL            gzip extra-flags advisory byte
+  u8 OS             gzip producer-OS advisory byte
+  raw DEFLATE data
+  u32 CRC32         CRC of the complete expanded data
+  u32 ISIZE         expanded byte count modulo 2^32
+
+The DEFLATE stream starts at byte 6, not byte 10. XFL and OS do not change the
+compression algorithm. XFL 0 and OS 11 are ordinary values; OS 11 denotes NTFS
+in gzip's OS namespace. A standard gzip reader expecting MTIME cannot directly
+read this shortened wrapper. The same member format is used inside compressed
+bitmap commands.
+
+The converter requires exactly one complete DEFLATE member, matching CRC32 and
+ISIZE, with no trailing compressed bytes. Expanded members are limited to
+128 MiB for bounded memory use. This is an implementation resource limit, not
+a newly inferred format restriction. DEFLATE itself is specified in RFC 1951;
+the standard gzip header/trailer conventions are in RFC 1952.
+
+3. SCREEN-COMMAND STREAM
+
+Every command begins with:
+
+Offset  Size  Field
+0         1   opcode
+1         4   command length, including this header and all variable data
+5         4   owner/application-sharing context ID
+9       ...   opcode-specific body
+
+Commands are tightly concatenated. A length less than 9, or one crossing the
+expanded packet boundary, is malformed. All body offsets below are relative to
+byte 9 of the command. Cache keys include owner ID where applicable. The
+implementation displays one desktop canvas; it does not reproduce a meeting
+player's auxiliary participant or chat user interface from metadata.
+
+3.1 Opcode 0x01: ASCE lifecycle metadata
+
+  u8 event
+  u8 name_length
+  u16 extension_length
+  u8 name[name_length]
+  u8 extension[extension_length]
+
+Event 10 announces participant/context metadata including a name. Event 9 is a
+lifecycle departure/removal notification. The complete lifecycle semantics and
+extension interpretation are unresolved. Names and extensions are retained in
+verbose diagnostics and are not painted into the desktop. The packet's raster
+updates already contain any recorded on-screen meeting interface.
+
+3.2 Opcode 0x02: desktop dimensions (body size 4)
+
+  u16 width
+  u16 height
+
+Establishes the desktop canvas in pixels. The canvas initially contains black
+pixels until covered by explicit drawing commands. Repeated dimensions do not
+erase the canvas. This implementation rejects dimension changes, dimensions
+above 16384, and canvases above 32 million pixels.
+
+3.3 Opcode 0x0c: cache notification (body size 1)
+
+  u8 operation
+
+Operations 0 and 1 are accepted. Their complete lifecycle meanings remain
+unresolved. In the inspected playback callback they do not directly erase the
+desktop or cached drawing objects. The decoder preserves those objects until
+explicitly replaced. Other operation values require additional implementation.
+
+3.4 Opcode 0x10: capability negotiation
+
+  u16 capability_length
+  u8 capabilities[capability_length]
+
+The blob is bounded and retained verbatim in verbose diagnostics. Its internal
+negotiation syntax has NOT been completely decoded. No video dimensions,
+compression selection, or audio codec is guessed from these bytes; those are
+obtained from the explicit media commands. Opaque retention is a known semantic
+gap, not a claim of complete handling.
+
+3.5 Opcode 0x14: pointer position (body size 4)
+
+  s16 x
+  s16 y
+
+Coordinates locate the active pointer's hotspot. Moving a pointer restores the
+underlying desktop at its old location; pointer pixels are an overlay, never
+committed to the cached desktop image.
+
+3.6 Opcode 0x19: select system pointer (empty body)
+
+Selects the platform's standard pointer. No pixels are stored in this command.
+The converter uses a conventional monochrome arrow with hotspot (0,0). Exact
+appearance varies by OS/theme and cannot be reconstructed from this command
+alone; the chosen arrow is a presentation approximation.
+
+3.7 Opcodes 0x1a / 0x1b: select cached pointer (body size 1)
+
+  u8 pointer_cache_index
+
+0x1a selects a monochrome pointer created by 0x24. 0x1b selects a color pointer
+created by 0x25. Pointer caches are separated by owner and pointer type.
+
+3.8 Opcode 0x1e: cache clipping region
+
+  u8 region_index
+  u16 rectangle_count
+  repeat rectangle_count times:
+      s16 left, top, right, bottom
+
+The region is the union of the stored rectangles. Each drawing operation names
+a region cache entry. Drawing is clipped to that region, the destination
+rectangle, and the desktop bounds. It is incorrect to paint an entire JPEG
+key image without applying its associated blit region. Empty regions draw
+nothing. Inverted rectangles are malformed.
+
+3.9 Opcode 0x1f: cache bitmap
+
+Offset  Size  Field
+0         1   cache bank
+1         2   width
+3         2   height
+5         1   bits per pixel
+6         4   stored bitmap-data byte count N
+10        1   index within the cache bank
+11        1   compression selector
+12        N   bitmap bytes
+
+The cached object is keyed by (owner, bank, index). Banks are separate object
+namespaces; they are not codecs. Subsequent definitions replace a cache slot.
+Compression selectors:
+
+  0: raw Windows DIB pixel array
+  1: complete JPEG image; 24 bits per pixel
+  2: WebEx compressed member containing a raw DIB pixel array
+
+Raw DIB rows are bottom-up. Their stride is:
+
+  stride = ((width * bits_per_pixel + 31) // 32) * 4
+
+Pixel data size must equal stride * height. Row alignment bytes are non-image
+padding, not pixels. They may contain arbitrary values and are consumed as part
+of the defined stride. There is no BITMAPINFOHEADER in the bitmap payload.
+
+Implemented raw pixel formats:
+* 16-bit: little-endian RGB555; red bits 10..14, green 5..9, blue 0..4;
+  bit 15 is not a color component. Five-bit components expand to eight bits as
+  (v << 3) | (v >> 2).
+* 24-bit: consecutive B, G, R bytes per pixel.
+* 32-bit: B, G, R, unused byte per pixel; no alpha compositing.
+
+JPEG must start with SOI, end with EOI, and have the same dimensions as the
+bitmap command. JPEG marker segments, entropy-coded coefficients, quantization
+and Huffman tables follow the standard JPEG format. Pillow/libjpeg performs
+that decoding. The renderer does not re-interpret JPEG data as raw pixels.
+Palette-indexed DIBs and other compression selectors are unsupported.
+
+3.10 Opcode 0x20: cache brush (body size 16)
+
+  u8 brush_index
+  u8 origin_x
+  u8 origin_y
+  u8 style
+  u8 hatch
+  u8 red, green, blue
+  u8 monochrome_pattern[8]
+
+The last eight bytes define an 8x8 one-bit pattern, one row per byte, high bit
+first, with DIB bottom-up row order. The supported styles are Windows solid (0),
+hatched (2), and pattern (3).
+Hatch selectors 0..5 denote horizontal, vertical, forward diagonal, backward
+diagonal, cross, and diagonal cross. The reference Mac player's fixed masks,
+expressed as eight consecutive bottom-up bytes, are:
+
+  0  ff 00 ff 00 ff 00 ff 00
+  1  aa aa aa aa aa aa aa aa
+  2  80 40 20 10 08 04 02 01
+  3  01 02 04 08 10 20 40 80
+  4  10 10 10 ff 10 10 10 10
+  5  81 42 24 18 81 42 24 18
+
+The converter uses these masks and the brush's origin_x/origin_y to position
+the repeated 8x8 tile. This follows the reference serialization/rendering code;
+exact pixel parity across player/OS versions still requires visual verification.
+
+3.11 Opcode 0x22: cache RGB color (body size 4)
+
+  u8 color_index
+  u8 red, green, blue
+
+3.12 Opcodes 0x24 / 0x25: cache pointer bitmap
+
+  u8 pointer_cache_index
+  u16 hotspot_x, hotspot_y
+  u16 width, height
+  u8 AND_plane[mask_stride * height]
+  u8 XOR_plane[...]
+
+mask_stride = ((width + 15) // 16) * 2. AND mask rows are bottom-up, with the
+most significant bit representing the leftmost pixel. For 0x24 the XOR plane
+has the same one-bit layout. For 0x25 it is a bottom-up BGR24 DIB with DWORD
+aligned rows. The command body is exactly these fields and planes.
+
+Overlay equation, independently for each RGB component:
+
+  displayed_pixel = (desktop_pixel AND expanded_AND_bit) XOR XOR_pixel
+
+For monochrome XOR, a bit expands to either 0x00 or 0xff in every component.
+This supports transparent, black, white, and inverted pointer pixels. Pointer
+pixels are clipped at desktop edges. Cached cursor definitions do not themselves
+select that cursor; a separate 0x1a or 0x1b command does so.
+
+3.13 Opcode 0x2a: IE5 memory-device-context control (body size 10)
+
+  u16 task_id
+  u16 device_context_id
+  u8 action
+  s16 width, height
+  u8 flags
+
+The implemented profile accepts action 3 with zero task, context, dimensions,
+and flags, corresponding to destruction of all offscreen device contexts.
+Other memory-DC creation/deletion variants are not implemented. The accepted
+profile cannot create offscreen drawing surfaces, so destroying them has no
+raster effect. Zero device_context_id in blits selects the desktop target.
+
+3.14 Opcode 0x33: pattern blit (body size 21)
+
+Offset  Size  Field
+0         2   task_id
+2         2   destination device-context ID
+4         2   destination x, signed
+6         2   destination y, signed
+8         2   width, signed
+10        2   height, signed
+12        1   ternary raster-operation byte
+13        1   foreground color cache index
+14        1   background color cache index
+15        1   brush cache index
+16        1   pattern bitmap width parameter, signed
+17        1   pattern bitmap height parameter, signed
+18        1   color-table index
+19        1   clipping-region index
+20        1   flags
+
+Implemented: desktop context 0, color-table index 0, flags 0, and PATCOPY
+raster operation 0xf0. PATCOPY fills the destination from the selected brush,
+subject to the selected clipping region. Solid brushes use their stored RGB
+color. For hatch/monochrome pattern brushes, a one bit selects the drawing
+foreground color cache entry, and a zero bit selects the brush's stored RGB.
+The background index is still parsed. The width/height parameters belong to
+the color/indexed pattern conversion path; they do not adjust the origin of
+the supported solid or fixed 8x8 monochrome brushes. Other raster operations,
+color pattern brushes, and indexed palettes need further implementation.
+
+3.15 Opcode 0x35: bitmap memory blit (body size 23)
+
+Offset  Size  Field
+0         2   task_id
+2         2   destination device-context ID
+4         1   bitmap index
+5         1   bitmap cache bank
+6         2   destination x, signed
+8         2   destination y, signed
+10        2   width, signed
+12        2   height, signed
+14        1   ternary raster-operation byte
+15        1   foreground color index
+16        1   background color index
+17        2   source x, signed
+19        2   source y, signed
+21        1   color-table index
+22        1   clipping-region index
+
+Implemented: desktop context 0, color-table 0, and SRCCOPY raster operation
+0xcc. Copy the specified source rectangle from the cached bitmap to the
+destination, clipped as described above. Cached RGB bitmaps do not use the
+foreground/background color fields under SRCCOPY; those fields are still parsed.
+A missing bitmap or region is a damaged-state condition, not an invitation to
+guess a replacement. The task ID names the originating drawing context and
+has no additional visual effect for the supported desktop context.
+
+3.16 Opcode 0x93: sharing control (body size 6)
+
+  u8 command
+  u8 parameter
+  u32 value
+
+Commands 9, 11, and 147 are recognized as control metadata. Their fields are
+retained in verbose diagnostics. The complete state-machine meaning of their
+parameters is unresolved. They do not introduce an independently encoded image
+or audio frame. The converter renders explicit following raster updates; it
+cannot claim complete reproduction of all non-raster player UI state.
+
+4. AUDIO PACKETS
+
+An outer type-2 payload is a concatenation of self-sized audio batches. There
+is no outer expanded-length word and no DEFLATE layer for these audio packets.
+
+4.1 Batch header and legacy table
+
+Offset  Size  Field
+0         2   magic 0xabcd (bytes cd ab)
+2         2   complete batch length, including header/table/slots
+4         2   number of time slots N
+6         2   batch duration in milliseconds
+8         2   flags; zero in the supported profile
+10       2N   legacy offset/index table, N little-endian words
+10+2N   ...   N sequential time slots
+
+Each supported time slot represents 30 ms. Thus batch_duration == N * 30.
+The legacy table is present physically and included in all byte accounting.
+The reference player's sequential unpacking path skips this table and reads
+slots consecutively. Entries can be stale or outside the batch; they MUST NOT
+be used as trusted seek offsets. The producer's exact generation rule for these
+values has not been determined. The converter retains every table verbatim in
+verbose diagnostics and uses the verified sequential playback grammar.
+
+4.2 Time slot
+
+  u16 channel_count
+  repeat channel_count times:
+      u16 channel_id
+      u16 codec_id
+      u16 encoded_byte_count
+      u16 data_offset_from_slot_start
+      u16 descriptor_reserved
+  encoded channel payload(s)
+
+The supported profile has one channel, channel ID 0, codec ID 1 (G.723.1),
+and reserved word 0. The data offset is 2 + 10 * channel_count, i.e. 12 for one
+channel. The slot ends immediately after its encoded payload. Multi-channel
+mixing and other codec IDs are deliberately unsupported.
+
+G.723.1 uses 8000 decoded samples/second and 240 samples per 30 ms frame. The
+low two bits of the first encoded byte select the frame form:
+
+  0: 24 bytes, 6.3 kbit/s speech
+  1: 20 bytes, 5.3 kbit/s speech
+  2:  4 bytes, SID/comfort-noise information
+  3:  1 byte, untransmitted frame
+
+Encoded byte count must agree with that mode. The remaining speech bit fields,
+LSP indices, pitch/adaptive and fixed codebooks, gains, synthesis, postfiltering,
+and comfort-noise state follow ITU-T G.723.1. PyAV/libavcodec performs stateful
+decoding; frames must not be decoded with a fresh codec instance each time.
+
+4.3 Audio timestamps and clock disagreement
+
+A timed audio packet's timestamp is its recorded END time. Its nominal start
+is the packet timestamp minus the sum of its batch durations. This end-time
+interpretation is corroborated by the reference player's playback call.
+
+Nominal audio duration can disagree with elapsed event time. Concatenating all
+PCM samples at 8000 Hz while leaving video timestamps unchanged can accumulate
+synchronization error. A complete reconstruction of the reference player's
+clock correction remains outstanding.
+
+The converter therefore uses an EXPLICIT conversion policy, not an inferred
+format field: decode every speech frame in order, then resample each packet's
+complete PCM onto the interval between consecutive recorded audio endpoints.
+The first packet starts at max(0, end - nominal_duration). Uncovered leading
+or trailing time is silence. Resampling uses linear interpolation at output
+sample centers and rounds to signed 16-bit PCM. This keeps the event timeline
+and packet endpoints aligned, but is not proven bit-identical to vendor
+playback. Speech decoding is standard; this clock adaptation is a known
+fidelity limitation and must not be described as fully reverse engineered.
+
+5. OUTPUT AND ERROR POLICY
+
+Usage:
+
+  python3 webExRecording.py inputFile outputFile
+  python3 webExRecording.py -verbose inputFile outputFile
+
+The output is an AVI with lossless 24-bit TSCC video and, if audio exists,
+8000 Hz mono signed 16-bit little-endian PCM. JPEG loss already present in the
+input is not reversed. No further lossy video compression is introduced in AVI.
+TSCC here is merely the chosen OUTPUT codec; it is not the WRF input codec.
+
+Video time base is 1/1000 second. Nonempty video packets are emitted only when
+screen/cursor state changes. The AVI muxer represents intervening millisecond
+ticks with empty repeat slots. Therefore a stream can report a nominal 1000 fps
+or a very large nb_frames; this does not mean 1000 captured images per second.
+Screen commands sharing a timestamp are applied before that timestamp's image
+is emitted. Independent full key images are emitted at least when a changed
+frame occurs 60 seconds after the previous key image. A terminal hold establishes
+the duration. Duration is the larger of the header's centisecond duration and
+the accumulated child-record clock, with a minimum one-millisecond final hold
+when needed. The AVI muxer handles container indexing and OpenDML splitting.
+
+The converter uses NumPy, Pillow, and PyAV. It has been exercised with PyAV
+18.0.0. PyAV must include the G.723.1 decoder, TSCC decoder metadata, PCM encoder,
+and AVI muxer. A separately installed ffmpeg executable and Cisco/WebEx
+binaries are not runtime requirements. No supporting binary/data files are
+loaded from disk. Output is muxed in memory, so peak memory includes the AVI,
+input bytes, cached images, PCM timeline, and muxer buffers.
+
+Default mode creates only the requested AVI. It does not create temporary named
+files, thumbnails, extracted frames, logs, or metadata sidecars. Diagnostics go
+to stderr. With -verbose, it also writes outputFile.json with byte ranges, counts,
+metadata, warnings, and an explicit semantic_completeness=false flag. Output
+permissions always include read permission for both user and group.
+
+Identification and validation precede output creation. Wrong magic, unsupported
+version, unknown opcodes/codecs/features, and unsupported control variants cause
+failure without touching an existing destination. Input and output paths cannot
+be identical. All supported media commands are preflighted before conversion.
+
+Recognized malformed input is recovered only at declared boundaries. A bad CRC
+or damaged command framing is reported and the packet is skipped. If framing
+is valid but a command body is damaged, its successfully applied command prefix
+is retained and the remainder is skipped. A truncated packet ends at its
+declared block boundary or physical EOF. Parsing may continue with a later
+known block. There is no heuristic resynchronization search. A missing cached
+object causes a warned drawing failure until usable state arrives. A damaged
+speech frame can become one explicitly warned 30 ms silence frame. If no usable
+video is recoverable, conversion fails without creating an output. Unknown
+features cannot reliably be distinguished from arbitrary corruption and are
+conservatively rejected. File-system errors during the final destination write
+can still leave a partial file; successful parsing does not guarantee disk I/O.
+
+6. VERIFICATION AND NEXT WORK
+
+The decoder can account for every byte of an accepted file structurally using
+header/table/block/record ranges and nested payload lengths. Compressed members
+are checksum-verified. That evidence does not resolve the semantic unknowns in
+sections 1, 2, 3.1, 3.3, 3.4, 3.16 and 4.1.
+
+To complete the reverse engineering:
+1. Trace the recorder/editor code that writes the fixed header, segment records,
+   block control fields and audio table. Generate controlled recordings while
+   independently varying those fields; derive their generation rules.
+2. Decode the full capability and sharing-control state machines, including
+   departure, cache selection and screen-sharing transitions.
+3. Compare decoded frames against an instrumented matching-era WebEx player,
+   including clipping, hatch phases, and system-pointer resources.
+4. Trace the audio scheduling/clock correction path and compare synchronized
+   decoded PCM with a reference playback capture to replace the explicit
+   resampling policy with established reference semantics.
+5. Add independently constructed conformance fixtures for unimplemented WOTF
+   features before broadening the accepted profile. Recognizing a version
+   number alone is not evidence that all its possible commands are supported.
+
+REFERENCE MATERIAL
+
+The container and command layouts above come from byte-level analysis and
+inspection of Cisco's publicly downloadable player serialization/playback
+routines, including TSCacheBitmapOrder, TSMemoryBltOrder, TSPatternBltOrder,
+TSUpdateRegionOrder, TSUpdateMonoPointerPDU, TSUpdateColorPointerPDU,
+CWotPlayer::WOTPlayAudioMedia, and CVOIPAppClient::UnpackChunkIntoVoice.
+The converter is an independent implementation and does not execute those
+vendor binaries.
+
+Cisco player downloads:
+https://www.webex.com/video-recording.html
+
+Standard compression specifications:
+https://www.rfc-editor.org/rfc/rfc1951
+https://www.rfc-editor.org/rfc/rfc1952
+
+Standard speech codec:
+https://www.itu.int/rec/T-REC-G.723.1
+
+Output TSCC interoperability reference (FFmpeg decoder implementations):
+https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/tscc.c
+https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/msrledec.c

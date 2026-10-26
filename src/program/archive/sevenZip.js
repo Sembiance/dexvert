@@ -31,7 +31,7 @@ export class sevenZip extends Program
 		
 		return {};
 	};
-	filenameEncoding = () => (RUNTIME.globalFlags?.osHint?.macintoshjp || RUNTIME.globalFlags?.osHint?.fmtownsjpy ? "cp932" : "windows-1252");
+	filenameEncoding = () => (RUNTIME.globalFlags?.osHint?.macintoshjp || RUNTIME.globalFlags?.osHint?.fmtownsjpy ? "cp932" : (RUNTIME.globalFlags?.osHint?.chinese ? "cp936" : "windows-1252"));
 
 	postExec = async r =>
 	{

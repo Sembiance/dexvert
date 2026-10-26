@@ -1,0 +1,698 @@
+TOON BOOM STUDIO SERIALIZED DRAWINGS AND PROJECTS
+Reverse engineering specification and implementation boundary
+
+STATUS
+
+This is an INCOMPLETE specification of the Toon Boom Studio binary serialization
+family. It describes an executable drawing grammar for revisions 25, 27, 30, 31,
+and 51, and a restricted project grammar. It does not claim that every stored
+field's semantics, every possible revision, or every rendering feature is known.
+Fields whose purposes remain unresolved are explicitly identified below. Assigning
+a type and boundary to such a field is not equivalent to understanding its meaning.
+
+The companion converter can render vector drawings and recover certain projects
+with static drawing layers. It cannot reproduce projects containing animated pegs,
+advanced transforms, masks, effects, imported media or sound tracks. Such inputs
+are recognized as Toon Boom documents and rejected without creating an output.
+Do not use this document as an authoritative vendor specification.
+
+1. PHYSICAL REPRESENTATION
+
+The stream is byte packed. There is no alignment padding between scalar fields.
+Unless stated otherwise, all integers and floating-point values are little endian.
+
+  u8    unsigned 8-bit integer
+  u16   unsigned 16-bit integer
+  u32   unsigned 32-bit integer
+  u64   unsigned 64-bit integer / opaque identity token
+  f32   IEEE 754 binary32
+  f64   IEEE 754 binary64
+  bytes[n] exactly n bytes
+
+Numbers need not begin at naturally aligned addresses. A reader must not cast the
+stream to compiler-aligned native structures.
+
+Strings have a u32 length followed by character storage, with no terminating NUL:
+
+  revision < 51:  length bytes
+  revision = 51:  length UTF-16LE code units (2 * length bytes)
+
+The length in revision 51 is a count of UTF-16 code units, not Unicode code points.
+For older strings the implementation preserves byte values using Latin-1. Their
+original locale/code-page semantics have not been established for non-ASCII text.
+A string can be empty. Neither paths nor names are trusted as instructions.
+
+There is no general outer chunk length, compression wrapper, checksum, or index
+in the implemented grammar. Collections are length prefixed. Parsing must follow
+the record structure; searching the stream for an apparent class tag is unsafe
+because tag-like bytes also occur inside coordinates, identifiers and strings.
+
+2. DOCUMENT HEADER
+
+Offset  Size  Type       Meaning
+0       25    bytes     ASCII "ToonBoomTechnologiesInc " followed by NUL
+25      3     bytes     Two ASCII decimal revision digits followed by NUL
+28      4     u32       Document kind: 0 = project, 1 = vector drawing
+32      1     u8        Revision 51 only: unresolved document flag
+
+The signature includes one space after "Inc". The revision is text, not a binary
+integer. The body begins at offset 32 in revisions 25/27/30/31 and at offset 33 in
+revision 51. Filename suffixes do not participate in recognition.
+
+The commonly used .tbd suffix denotes a single drawing. The .tbp suffix denotes a
+project with references to external drawing assets. A drawing contains neither a
+frame rate nor an exposure timeline. A project is not a self-contained movie.
+
+Class identifiers are u16 values in revisions 27 and later. Revision 25 uses the
+length-prefixed class names described in the string encoding section instead.
+
+  Numeric ID  Legacy class name       Role
+  202         VectorDrawingObj        Vector drawing root
+  205         GR_Color                Geometric fill / palette association
+  121         CM_Color                Palette color definition
+  120         [not established]       Project palette manager
+  201         [not established]       Project brush collection
+  300         [not established]       Scalar animation function
+
+Revision 25 also prefixes each drawing layer with the string "Layer".
+The absence of a numeric ID above does not imply that a record can be skipped.
+
+3. DRAWING ROOT: REVISIONS 25, 27, 30, 31
+
+  class(VectorDrawingObj)
+  u32 layer_count
+  Layer[layer_count]
+  u32 local_color_count
+  LocalColor[local_color_count]
+  end of file
+
+A Layer is:
+
+  class("Layer")                 revision 25 only
+  u32 layer_index
+  u32 edge_count
+  Edge[edge_count]
+
+Layers are ordered. The layer_index is stored separately from the collection
+position. Layer geometry includes filled contours, visible centerline strokes,
+and edges that have no visible stroke.
+
+In revision 25, the fill-reference table is RESET at the beginning of every layer.
+For revisions 27/30/31 it persists across drawing layers. This distinction is
+essential: interpreting revision 25 reference indices as drawing-global indices
+can yield syntactically readable but incorrectly associated fills.
+
+4. DRAWING ROOT: REVISION 51
+
+  u16 class_id = 202
+  u8 drawing_attribute               semantic meaning unresolved
+  u8 has_art                         0 or 1
+  u32 art_count
+  Art[art_count]
+
+If art_count is zero, the root ends here and the file has no color table. In the
+implemented empty form has_art is also zero. This is a valid blank drawing.
+
+For a nonempty root, the Art records are followed by:
+
+  u32 local_color_count
+  LocalColor[local_color_count]
+  end of file
+
+An Art is:
+
+  u32 node_count
+  Node[node_count]
+
+A supported Node is:
+
+  u32 node_type = 2
+  u8 node_attribute_0 = 1             meaning unresolved
+  u16 node_attribute_1               meaning unresolved
+  u32 edge_count
+  Edge[edge_count]
+  u32 child_count = 0
+
+The meaning of the root attribute and node attributes is not completely known.
+In particular, they must not be advertised as a fully decoded layer model.
+Other node types and nonzero child_count are not implemented. Multiple art collections are rejected because their interpretation is unvalidated.
+
+Revision 51 has a shared object table for fills and geometry across the drawing.
+Index zero denotes a null object. Inline objects get successive indices beginning
+at one. Only newly serialized objects allocate an index. References do not.
+
+5. EDGE RECORD
+
+  u8 edge_style
+  f32 stroke_width
+  u64 stroke_color_id
+  FillPointer side_a_fill
+  FillPointer side_b_fill
+  u8 endpoint_flag_a                 revisions 30, 31, 51 only
+  u8 endpoint_flag_b                 revisions 30, 31, 51 only
+  Geometry                          see version rules below
+
+There is no endpoint flag storage in revisions 25 or 27.
+The endpoint flags have Boolean-sized values, but their exact editing/rendering
+semantics are unresolved. The renderer does not apply them to the path geometry.
+
+Implemented edge-style values are:
+
+  0  Filled-region boundary with no visible centerline stroke.
+  1  Boundary with fills on both sides; exact style distinction unresolved.
+  2  Non-rendered edge in the current renderer; exact semantics unresolved.
+  4  Visible centerline stroke using stroke_width and stroke_color_id.
+
+These descriptions distinguish implementation behavior from established intent.
+In particular, style 2 must not be called fully understood. Other style values
+cause an unsupported-format-feature error.
+
+Coordinates and widths are in drawing units. There is no intrinsic raster size.
+The supported render model uses a Cartesian coordinate system with positive Y
+upward. Raster output flips the Y axis.
+
+6. FILL POINTER AND GEOMETRIC FILL
+
+A FillPointer starts with a u16 is_new field:
+
+  is_new = 0:
+    u32 object_index
+
+    Index 0 means no fill. Other indices identify previously serialized fills.
+    The type at the target index must be a fill, not geometry.
+
+  is_new = 1:
+    class(GR_Color)
+    FillBody
+
+    Allocate the next object index for this new fill.
+
+Other values are not implemented.
+
+FillBody in revisions 25/27/30/31:
+
+  f64 x0
+  f64 y0
+  f64 x1
+  f64 y1
+  u64 color_id
+
+The four coordinates describe the fill axis. The implementation converts this
+axis to the affine matrix:
+
+  a = x1 - x0; b = y1 - y0
+  (a, b, c, d, tx, ty) = (a, b, -b, a, x0, y0)
+
+FillBody in revision 51:
+
+  u8 transform_enabled               Boolean; exact flag semantics unresolved
+  f64 a
+  f64 b
+  f64 c
+  f64 d
+  f64 tx
+  f64 ty
+  u64 color_id
+
+The matrix maps a fill-space point (u,v) into drawing coordinates:
+
+  x = a*u + c*v + tx
+  y = b*u + d*v + ty
+
+A disabled-transform record still stores all six doubles. Omitting them would
+misalign the stream. Disabled cases with nonidentity matrices are unvalidated.
+The renderer currently uses the serialized matrix. Solid colors do not require
+a matrix for painting. A gradient with a singular matrix cannot be rendered.
+
+Identifiers are opaque unsigned 64-bit tokens. They are compared byte exactly;
+they must not be decoded as a timestamp, float or string without further evidence.
+
+7. GEOMETRY AND SHARED OBJECTS
+
+In revisions 25/27/30/31, Geometry is always inline:
+
+  u16 point_count
+  bytes[ceil(point_count/8)] on_curve_bitmap
+  Point[point_count]
+
+Each Point is f32 x, f32 y.
+
+In revision 51, Geometry begins with:
+
+  u8 is_reference
+
+  is_reference = 0:
+    Inline geometry as above. Allocate the next shared object index for it.
+
+  is_reference = 1:
+    u32 object_index identifying earlier inline geometry
+
+The shared table includes fill bodies and inline geometry in serialization order.
+For example, a new fill can receive index 1 and the following geometry index 2.
+There is not a separate geometry-only numbering sequence. The referenced object
+must be geometry. Null or forward geometry references are invalid.
+
+In revisions before 51, geometry does not allocate a shared object index.
+
+Point i is an on-curve point when:
+
+  (on_curve_bitmap[i // 8] >> (i % 8)) & 1 == 1
+
+Thus bits within a byte are ordered least significant first. The bitmap length
+rounds up; unused bits in its final byte have no corresponding points. Their
+possible nonzero meaning has not been established.
+
+A nonempty supported path begins and ends on on-curve points. Between consecutive
+on-curve points:
+
+  no off-curve points       straight line
+  one off-curve point       quadratic Bezier curve
+  two off-curve points      cubic Bezier curve
+
+Longer off-curve runs are unsupported. A quadratic from P0 through control C to P1
+can be represented exactly as a cubic with controls:
+
+  C0 = P0 + (2/3)*(C-P0)
+  C1 = P1 + (2/3)*(C-P1)
+
+An endpoint repeated at the end can encode a closed path. An individual edge need
+not be closed: filled contours are assembled from multiple edges.
+
+8. FILL TOPOLOGY AND PAINT ORDER
+
+For each layer/node, gather edges by geometric fill identity. In the implemented
+model, edges on side A use their stored direction; edges on side B use their
+reverse direction. Reversing a Bezier segment also reverses the order of its
+control points.
+
+Join a segment only to another whose first point is exactly equal to its final
+point. Float32 values become exact Python float values on decoding; no tolerance,
+nearest-neighbor selection, endpoint snapping or coordinate rounding is used.
+A fill's directed graph must have equal incoming and outgoing degree at every
+vertex. Extract closed directed contours, including holes, and fill with a
+nonzero winding rule. Paint visible strokes after fills within each node; process
+nodes in stored order.
+
+The renderer uses round stroke caps and joins, Cairo antialiasing, and gradient
+padding beyond the last stops. The original application's exact cap/join policy,
+fill-edge antialiasing, color management and compositing have not been validated.
+The endpoint flags and unresolved node attributes may affect some of these details.
+Consequently, structural decoding and closed-contour checks do not establish
+pixel-for-pixel native rendering fidelity.
+
+9. LOCAL COLOR TABLE
+
+Each LocalColor is:
+
+  u64 table_key
+  ColorDefinition
+
+The table_key must equal the color_id at the end of ColorDefinition.
+
+A ColorDefinition is:
+
+  class(CM_Color)                    numeric class ID 121
+  u32 color_type
+  u32 attribute_0                    unresolved
+  u32 attribute_1                    unresolved
+  u32 stop_count
+  ColorStop[stop_count]
+  String name
+  u64 color_id
+
+Each ColorStop is:
+
+  f64 position
+  u8 red
+  u8 green
+  u8 blue
+  u8 alpha
+  u32 stop_editor_id
+
+The stop_editor_id is distinct from the stable 64-bit color identifier. Its role
+in editing is not completely established. The byte order of channels in the
+stream is RGBA. Alpha 0 is transparent and 255 opaque.
+
+Supported color types:
+
+  0  Solid. The renderer uses the first stop's RGBA value.
+  1  Linear gradient along fill-space (0,0) to (1,0).
+  2  Radial gradient centered on fill-space (0,0), unit radius.
+
+The affine transform positions and scales the gradient, including ellipses for
+nonuniformly transformed radial gradients. Stop positions must be ordered and
+within [0,1]. Texture paints and other color-type codes are unsupported.
+
+10. PROJECT PREAMBLE AND PALETTES
+
+Projects share the document header. For revision 27 the body begins with a String
+project_name. This string is absent in revisions 30/31/51. Revision 25 projects
+are not implemented.
+
+The project then contains:
+
+  u32 selected_palette
+  u16 palette_manager_class = 120
+  u32 palette_count
+  ProjectPalette[palette_count]
+
+A ProjectPalette is:
+
+  String name
+  u64 palette_id
+  u32 selected_variant
+  u32 variant_count
+  PaletteVariant[variant_count]
+
+A PaletteVariant is:
+
+  u32 variant_id
+  String variant_name
+  u32 color_count
+  ColorDefinition[color_count]
+
+Project palette definitions omit the separate table_key used by local drawing
+color tables. They still end with their own 64-bit color_id. The rendering
+implementation uses the project color value in preference to a drawing's fallback
+value for the same ID. Multiple palette variants are rejected; selecting and applying such variants is
+not implemented.
+
+11. EXTERNAL REFERENCES AND ELEMENT COLLECTION
+
+After the palettes:
+
+  u32 external_reference_count
+  ExternalReference[external_reference_count]
+  u32 scene_collection_count = 1
+  u16 element_collection_class = 2
+  u32 element_count
+  Element[element_count]
+
+An ExternalReference is:
+
+  u16 inline_marker = 1
+  u16 class_id = 17
+  u64 asset_id
+  String asset_name
+
+These records identify external imported media. The media payload is not stored
+inside this reference record. Playback of imported media is unsupported.
+
+The known beginning of an Element is:
+
+  u16 element_class
+  u32 element_id
+  u32 attribute_0                    unresolved
+  u32 attribute_1                    unresolved
+  u16 inline_properties_marker = 1
+  u16 properties_class
+  String element_name
+  u32 properties_attribute          unresolved
+  u32 properties_id_or_legacy_value
+  class-specific body
+
+Established/partially mapped element classes include:
+
+  element  properties   Role and implementation status
+  3        6            Drawing column; restricted revision 51 support
+  7        9            Camera; static camera support
+  8        10           Animated peg; unsupported
+  11       15           Sound track; unsupported
+  12       [unresolved] Imported media; unsupported
+
+Other classes are rejected. There is no known general length field permitting
+unimplemented elements to be skipped safely. An unknown record therefore ends
+safe parsing; downstream bytes must not be guessed to be a new element.
+
+12. CAMERA BODY
+
+The supported camera body is:
+
+  u8 legacy_flag                    revision 27 only
+  f64 camera_x
+  f64 camera_y
+  f64 camera_z
+  f64 logical_height
+  f64 logical_width
+  u8 projection_flag                precise semantics unresolved
+  f64 horizontal_field_of_view      degrees
+  ScalarFunction
+  u16 editor_attribute_0            unresolved
+  u16 editor_attribute_1            unresolved
+  u32 editor_attribute_2            unresolved
+
+A ScalarFunction is:
+
+  u16 class_id = 300
+  u32 key_count
+  ScalarKey[key_count]
+
+A ScalarKey has exactly 32 bytes:
+
+  f32 time
+  f32 value
+  u16 attribute_0
+  u16 attribute_1
+  f32 control_a_time
+  f32 control_a_value
+  u16 control_a_attribute
+  f32 control_b_time
+  f32 control_b_value
+  u16 control_b_attribute
+
+The control-point flags and interpolation behavior are not fully established.
+The converter accepts this camera function only when every key value equals the
+stored static field of view. Animated camera lens playback is not implemented.
+
+The implemented static perspective projection for a drawing at depth z uses:
+
+  focal_pixels = output_width / (2*tan(field_of_view/2))
+  drawing_scale = focal_pixels / (camera_z - z)
+
+The camera center maps to the output center, with Y reversed. This describes the
+current projection implementation, not a proof of every native camera mode.
+Animated camera parenting, camera rotation and arbitrary projection modes remain
+unsupported. A drawing behind the camera is not painted.
+
+13. DRAWING COLUMN BODY
+
+Following the common properties header:
+
+  u32 last_drawing_id
+  u32 drawing_count
+  DrawingReference[drawing_count]
+
+A DrawingReference is:
+
+  u32 drawing_id
+  u32 legacy_attribute              revisions before 51 only
+  String drawing_label
+  u32 repeated_drawing_id
+  u8 flag_0                         unresolved editing/asset-state flag
+  u8 flag_1                         unresolved editing/asset-state flag
+
+The two drawing IDs must agree.
+
+In revision 51 the references are followed by a static transform and then the
+exposure list. In older revisions the exposure list precedes the transform; full
+legacy transform decoding is not implemented.
+
+The supported revision 51 static transform occupies 81 bytes:
+
+  +0    12    3*f32    translation x, y, z
+  +12   36    bytes    unresolved transform attributes; supported value all zero
+  +48   4     u32      unresolved transform attribute; supported value 1
+  +52   8     bytes    unresolved transform attribute; supported value all zero
+  +60   16    2*f64    scale_x, scale_y
+  +76   4     u32      unresolved attribute; supported value 0
+  +80   1     u8       unresolved editor flag
+
+The restricted zero/default values above are accepted as an identity rotation and
+pivot state. Nondefault fields at +12 through +59 or +76 cause rejection. No
+attempt is made to infer an arbitrary transformation from an unimplemented layout.
+
+An exposure list is:
+
+  u32 frame_count
+  Exposure[frame_count]
+
+Each Exposure is u32 drawing_id, u32 attribute. A zero drawing_id is an empty cell.
+The converter supports attribute = 0. Exposure cells explicitly describe successive
+frames; repeated IDs represent holds. The column is blank past the end of its
+stored exposures. The project duration is the largest supported exposure count.
+
+For flattened asset directories, the implemented lookup rule is:
+
+  element_name + "-" + drawing_label + ".tbd"
+
+Lookup is case sensitive and confined to the input's directory, or the explicitly
+provided --asset-dir. It does not search adjacent projects, guess renamed assets,
+strip numeric suffixes, or silently replace missing drawings with similarly named
+files. Original multi-directory project packaging and every asset-location
+convention are not yet specified. The flattened lookup rule is a converter input
+convention, not a claim that the project stores that entire filename string.
+
+14. SCENE VIEWS AND PROJECT TRAILER
+
+After the element collection:
+
+  u32 scene_count
+  Scene[scene_count]
+  u32 next_element_id
+  u32 active_camera_id
+  u32 scene_selector_or_editor_id     precise meaning unresolved
+  u32 current_frame_or_editor_id      precise meaning unresolved
+  u16 brush_collection_class = 201
+  u32 brush_count
+  Brush[brush_count]
+  u32 editor_tail_0                   unresolved
+  u32 editor_tail_1                   unresolved
+  u16 editor_tail_2                   unresolved
+  u8 view_flags[4]                    revision 51 only; unresolved
+  u32 frames_per_second
+  u32 output_height
+  u32 output_width
+  end of file
+
+A Scene is:
+
+  String name
+  u32 background_rgba                revision 51 only; little-endian RGBA bytes
+  u8 enabled
+  u32 view_count
+  View[view_count]
+
+A View is:
+
+  u16 view_type
+  u32 entry_count
+  ViewEntry[entry_count]
+
+A ViewEntry is an unaligned 11-byte record:
+
+  u32 element_id
+  u8 attribute_0
+  u32 attribute_1
+  u8 attribute_2
+  u8 attribute_3
+
+View 4 is used for the camera-view layer order by the implementation; view 5 is
+stored separately. For drawing entries, the converter supports attributes (1,1,0,1). Camera-view
+entry flags do not control selection of the active camera; its separate ID does. Their exact
+individual meanings, and arbitrary alternative values, are not fully established.
+It renders camera-view entries in reverse listed order. Only a single enabled
+scene is supported.
+
+A Brush is:
+
+  u32 minimum_size
+  u32 maximum_size
+  bytes[12] attributes_unresolved
+  String name
+
+The brush attribute bytes are retained in verbose field maps, but are not claimed
+to be understood. Some can plausibly be application state or unused storage;
+that possibility is not evidence that they can be labeled zero padding or ignored
+in a complete format specification. The drawing renderer uses widths stored in
+edges rather than these editor brush presets.
+
+15. AUDIO AND OTHER UNIMPLEMENTED FEATURES
+
+A drawing contains no audio record in the implemented grammar. Project sound
+tracks are separate element records; they can name external audio assets. A
+sound filename is not an embedded audio payload. The sound-record timing, trim,
+gain, lip-sync annotations, mixing and mute semantics are not fully decoded.
+
+The converter rejects sound-track projects before opening an output AVI. It does
+not silently produce a supposedly complete video while dropping an existing
+sound track. AUDIO CONVERSION IS NOT IMPLEMENTED. This is a material limitation.
+
+Other unresolved areas include:
+
+  * animated peg classes and their scalar, 3D-position and rotation functions;
+  * effect and mask/cutter compositing and parent-child relationships;
+  * imported SWF/bitmap/media playback and embedded versus external asset variants;
+  * project versions and transform variants beyond the restricted grammar;
+  * alternate node types, child nodes, multiple art planes, and texture paints;
+  * selection of palette variants and arbitrary scene-view flags;
+  * some line-style, endpoint, root, node, color and brush attribute semantics;
+  * original application's exact rasterization, antialiasing and color management;
+  * platform-specific legacy string encodings and complete project path rules.
+
+No complete claim about unknown revisions or all files using this signature is
+possible from the current implementation.
+
+16. CONVERTER OPERATION AND FAILURE POLICY
+
+Usage:
+
+  python3 toonBoomStudioAnimation.py inputFile outputFile
+  python3 toonBoomStudioAnimation.py -verbose inputFile outputFile
+
+Python 3.10+, Pycairo (the "pycairo" Python package), the system Cairo library,
+and an ffmpeg executable on PATH are required. The converter needs no other local
+supporting files. Project inputs additionally require their actual drawing assets.
+
+Ordinary conversion leaves only the requested AVI file. It creates no persistent
+PNG, MP4, SVG, JSON, extracted-media directory or other sidecar. Encoding uses a
+temporary AVI beside the destination; it is atomically renamed on success and
+removed on failure. A pre-existing destination is preserved on conversion failure.
+Input and output cannot be the same path.
+
+The -verbose switch additionally writes outputFile.json. It records the input
+revision, output parameters, warnings, statistics and a sequential field map with
+byte offsets, lengths, scalar encodings and values. This byte map includes fields
+explicitly marked unresolved; it is not a statement of complete semantic decoding.
+
+Standalone drawing defaults are an explicit presentation policy:
+
+  640 x 480 pixels, 12 fps, 2-second hold, white background;
+  fit the visible geometry/control-point bounds with a margin;
+  retain the drawing's proportions and reverse Y for raster coordinates.
+
+Those dimensions, timing, white background and framing are not recovered from
+the drawing file. They can be changed with --width, --height, --fps and --duration.
+Projects use their stored dimensions, frame rate and supported exposure cells.
+The output AVI contains lossless FFV1 video. The implemented input subset has no
+supported audio streams, so these AVIs are silent.
+
+Recognition checks the entire fixed signature, revision syntax and kind before
+loading rendering dependencies or creating output files. Unknown revisions,
+classes or record variants are reported as unsupported rather than interpreted
+using heuristic searches or byte-pattern resynchronization. File extension alone
+never causes acceptance. Numeric counts and reads are bounded; invalid pointers,
+non-finite coordinates, invalid curve structures and unmatched color identities
+are detected.
+
+For recognized malformed inputs, recovery is limited to data that can still be
+interpreted structurally. A damaged local palette may leave earlier complete
+colors usable; artwork needing unavailable colors is omitted with a warning.
+Missing project drawing assets leave blank cells/layers with an explicit warning.
+If there is no renderable recoverable artwork, or no safe way to find the next
+record, conversion fails without committing an AVI. No placeholder drawing or
+invented audio is substituted.
+
+Current resource limits are a 256 MiB input, at most one million counted records,
+output dimensions up to 8192 on each axis, and frame rates up to 240. These are
+implementation limits, not format limits.
+
+17. WORK NEEDED FOR A COMPLETE SPECIFICATION
+
+Use a working original application to generate controlled before/after documents
+that change one property at a time. Preserve full external asset trees and export
+reference frames and audio from the original application. The next work should:
+
+  1. Identify the remaining root/node/edge/color/brush fields with controlled edits.
+  2. Decode the full project element dispatch and all function/transform records,
+     including parent relationships, curve interpolation and coordinate spaces.
+  3. Decode sound clips, start/trim offsets, gain envelopes, mute/loop rules and
+     lip-sync data; validate sample-accurate audio against native exports.
+  4. Implement masks, effects, imported media, palettes and packaging/path rules.
+  5. Differentially compare rendered pixels and audio samples with native output
+     across versions, gradients, strokes, pivots, layer orders and scene changes.
+  6. Expand malformed-input recovery using proven record boundaries, without
+     guessing the location or meaning of unsupported data.
+
+These steps require additional evidence to distinguish unimplemented fields and
+native behavior reliably. Merely consuming all bytes, storing opaque byte spans,
+or making plausible-looking previews does not satisfy complete reverse engineering.

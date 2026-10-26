@@ -1,0 +1,616 @@
+SONY STR / MDEC VIDEO IN 2,048-BYTE SECTOR USER-DATA FORM
+Format specification and converter behavior
+
+1. Scope and information limits
+
+This document describes a headerless sequence of 2,048-byte sector user-data
+records containing Sony PlayStation STR video, with BS compression version 2
+or 3, and optionally the surviving prefixes of interleaved four-bit CD-XA
+ADPCM audio sectors. It specifies the container, compressed video syntax,
+audio prefix syntax, padding, and the conversion policy independently of any
+particular recording or filename.
+
+The representation has no global header, directory, extension-dependent
+semantics, timestamps, frame-rate field, checksum, audio coding-info field,
+or CD sector addresses. It is NOT a raw CD sector image. Raw 2,352-byte sectors,
+2,336-byte Mode-2 records, 2,324-byte Form-2 payloads, and RIFF/CDXA wrappers
+are separate representations and are outside this converter's input scope.
+
+A crucial distinction: accounting for every byte present is possible, but
+recovering information omitted by a sector extraction is not. In particular:
+
+* A full XA audio payload contains 18 groups of 128 bytes (2,304 bytes).
+  A 2,048-byte prefix contains exactly 16 groups. Groups 16 and 17 are absent,
+  not encoded elsewhere in the STR header or its padding.
+* XA file/channel identifiers, mono/stereo mode, sample rate, emphasis,
+  bit-depth flags, EOF flags, and disc-sector addresses reside in omitted
+  CD/XA headers. Redundancy in the sound-group parameters is consistent with
+  four-bit audio, but is not a replacement for the missing coding-info byte.
+* Frame numbers establish picture order, not a frame rate. A sector count
+  establishes storage size, not playback duration or original disc speed.
+* An all-zero record can mean filler or a silent XA prefix. With the XA
+  submode omitted, these meanings cannot always be distinguished.
+* Multiple XA channels cannot be separated reliably without their identifiers.
+
+No analysis of the surviving bytes can uniquely restore these omissions.
+This is therefore a precise description of the supported extracted
+representation, not a claim to recover an original disc or its exact timing.
+The converter decodes all valid surviving video and audio data and explicitly
+conceals missing audio. It cannot promise a bit-exact original soundtrack.
+An intact raw disc extraction with the XA subheaders and complete Form-2
+payloads, plus playback timing from the player or other reliable metadata,
+is required for that stronger result.
+
+2. Numbers, offsets, and physical records
+
+Offsets below are hexadecimal unless shown as ordinary decimal counts.
+All multibyte integer fields are unsigned little-endian unless stated
+otherwise. Bitstrings in codec tables are written in decoding order.
+
+The file consists of consecutive records, each exactly 0x800 (2,048) bytes.
+Record N begins at byte offset N * 0x800, starting with N = 0. There is no
+file header and no file footer. A partial final record is truncated input.
+STR video records begin with bytes 60 01 01 80. The supported input begins
+with a recognizable video header at offset zero. An extension is irrelevant.
+
+Records can be interleaved. A frame's sector index identifies the location of
+that sector's bytes inside the frame, independent of intervening audio
+records. Physical audio placement uses external timing parameters, not the
+STR video frame size.
+
+3. STR video sector header: 0x20 bytes
+
+Offset  Bytes  Field               Meaning
+00      2      StStatus            0x0160; standard Sony STR status/version ID
+02      2      StType              0x8001; system-defined MDEC video
+04      2      StSectorOffset      Zero-based chunk index within this frame
+06      2      StSectorSize        Allocated video-sector count for this frame
+08      4      StFrameNo           Frame sequence number, normally starts at 1
+0C      4      StFrameSize         Compressed frame byte count, INCLUDING BS
+                                  header; excludes every STR header and all
+                                  sector-allocation padding
+10      2      StMovieWidth        Visible picture width in pixels
+12      2      StMovieHeight       Visible picture height in pixels
+14      2      StHeadM low         MDEC DMA word count, defined below
+16      2      StHeadM high        0x3800; MDEC command high halfword
+18      2      StHeadV low         Quantization scale Q, 1 through 63
+1A      2      StHeadV high        BS bitstream version, 2 or 3
+1C      4      Reserved            Zero for the supported standard variant
+20      7E0    Frame payload       2,016 consecutive bytes of frame allocation
+
+The four-byte signature at 00 is the two little-endian fields at 00 and 02.
+Each video sector carries its own complete header. All fields other than the
+chunk index repeat for every sector of a frame. Reserved nonzero extensions
+are not silently interpreted as this standard variant.
+
+StFrameSize is a BYTE count in this representation. Historical SDK text
+sometimes labels it as a word count; multiplying it by four here is wrong.
+The count includes the eight-byte BS header present only once in the
+reassembled payload. Allocated sector count is not necessarily the minimum
+number required by the compressed image: deliberately empty payload chunks
+can reserve constant playback bandwidth.
+
+If L = StFrameSize, C = StSectorSize, and j = StSectorOffset, then:
+
+    0 <= j < C
+    8 <= L <= C * 2016
+    frame-relative payload byte offset = j * 2016
+    meaningful bytes in this sector = min(2016, max(0, L - j * 2016))
+
+Concatenate the sector payloads in chunk-index order and retain the first L
+bytes. Every byte after L in the allocated payload belongs to sector padding,
+not another frame, sound, a checksum, or another hidden stream. Common
+padding values are 0x00 and 0xFF. Padding has no decoding semantics and is not
+required to be zero; its exact histogram is included in verbose accounting.
+
+The width and height determine ceil(width / 16) * ceil(height / 16)
+macroblocks. Decode complete macroblocks and crop the right and bottom edges
+to the visible dimensions. The converter supports one constant picture size
+per stream, with dimensions from 1 to 4096; changing dimensions require a
+separate output-size policy and are rejected before writing.
+
+4. Reassembled BS header and DMA length
+
+Offset  Bytes  Meaning
+00      2      W: MDEC input word count rounded for DMA transfer
+02      2      0x3800
+04      2      Quantization scale Q
+06      2      Compression version, 2 or 3
+08      ...    Variable-length bitstream
+
+These eight bytes must equal sector-header bytes 14 through 1B. They are not
+removed before passing a compressed frame to the MDEC decoder.
+
+Let K be the number of expanded 16-bit MDEC codes: one DC/qscale code per
+block, one code per AC coefficient, and one end-of-block code per block.
+Then the encoded word count is:
+
+    W = 32 * ceil(K / 64)
+
+Equivalently, round the number of 32-bit words required for K halfwords up
+to a multiple of 32 words. The padding needed for a hardware DMA transfer is
+not additional compressed picture data. The command is 0x38000000 | W:
+decode, 24-bit output, unsigned output, output mask-bit flag clear. W is not
+the compressed file size or the number of pixels.
+
+5. Compressed bit order and block order
+
+After the BS header, each little-endian 16-bit word is consumed from bit 15
+to bit 0. For example, stored bytes 34 12 represent word 0x1234 and yield
+bits 0001001000110100. Codewords can cross words and sector boundaries.
+There is no byte alignment between blocks or macroblocks.
+
+Macroblocks are column-major: visit x = 0..ceil(width/16)-1, and for each x
+visit y = 0..ceil(height/16)-1. Each macroblock contains six 8x8 DCT blocks:
+
+    Cr, Cb, Y top-left, Y top-right, Y bottom-left, Y bottom-right
+
+The chroma planes are sampled at half the luma resolution horizontally and
+vertically (4:2:0). Macroblock order must not be confused with scanline order.
+Each block contains a DC value, zero or more run/level AC values, then EOB.
+
+6. Version-2 DC and version-3 differential DC
+
+Version 2: consume exactly ten bits and sign-extend them as a two's-complement
+integer in [-512, 511]. The expanded first halfword is (Q << 10) | (DC & 1023).
+
+Version 3: keep three DC predictors, initialized to zero at the beginning of
+every frame, one each for Cr, Cb, and all Y blocks. Select a prefix table,
+read the indicated number S of following bits, and obtain difference D:
+
+    S = 0: D = 0
+    S > 0 and highest following bit is 1: D = unsigned following value
+    otherwise: D = unsigned following value - (2**S - 1)
+
+Add 4*D to the component predictor. The result is the ten-bit DC value and
+must remain in [-512, 511]. The Y predictor continues across all four luma
+blocks and across macroblocks. Predictors do not reset between macroblocks.
+The expanded first halfword uses the same Q/DC arrangement as version 2.
+
+S  Chroma prefix  Luma prefix
+0  00             100
+1  01             00
+2  10             01
+3  110            101
+4  1110           110
+5  11110          1110
+6  111110         11110
+7  1111110        111110
+8  11111110       1111110
+
+Prefixes not represented by this table are invalid at a DC position.
+
+7. AC coefficients, escapes, and the complete codebook
+
+After DC, initialize scan index I = 0. Read an AC prefix from the table below.
+For an ordinary (R, A) entry, consume one additional sign bit: 0 means +A,
+1 means -A. Set I = I + R + 1, require I <= 63, and place the signed level at
+zigzag position I. Unwritten AC positions remain zero. An ordinary entry
+expands to the halfword (R << 10) | (signed_level & 1023).
+
+Special prefixes, with no ordinary sign suffix:
+
+    10      EOB: terminate block; expanded halfword 0xFE00
+    000001  Escape: read six unsigned run bits R and ten signed,
+            two's-complement level bits. Advance I by R + 1. All level bit
+            patterns are syntactically representable, including zero.
+
+There is no MPEG-1 short first-coefficient special case here. The table is
+used after every DC. Ordinary prefixes below do not include their sign bit.
+
+Prefix             R   A
+11                  0   1
+0100                0   2
+00101               0   3
+0000110             0   4
+00100110            0   5
+00100001            0   6
+0000001010          0   7
+000000011101        0   8
+000000011000        0   9
+000000010011        0  10
+000000010000        0  11
+0000000011010       0  12
+0000000011001       0  13
+0000000011000       0  14
+0000000010111       0  15
+00000000011111      0  16
+00000000011110      0  17
+00000000011101      0  18
+00000000011100      0  19
+00000000011011      0  20
+00000000011010      0  21
+00000000011001      0  22
+00000000011000      0  23
+00000000010111      0  24
+00000000010110      0  25
+00000000010101      0  26
+00000000010100      0  27
+00000000010011      0  28
+00000000010010      0  29
+00000000010001      0  30
+00000000010000      0  31
+000000000011000     0  32
+000000000010111     0  33
+000000000010110     0  34
+000000000010101     0  35
+000000000010100     0  36
+000000000010011     0  37
+000000000010010     0  38
+000000000010001     0  39
+000000000010000     0  40
+011                 1   1
+000110              1   2
+00100101            1   3
+0000001100          1   4
+000000011011        1   5
+0000000010110       1   6
+0000000010101       1   7
+000000000011111     1   8
+000000000011110     1   9
+000000000011101     1  10
+000000000011100     1  11
+000000000011011     1  12
+000000000011010     1  13
+000000000011001     1  14
+0000000000010011    1  15
+0000000000010010    1  16
+0000000000010001    1  17
+0000000000010000    1  18
+0101                2   1
+0000100             2   2
+0000001011          2   3
+000000010100        2   4
+0000000010100       2   5
+00111               3   1
+00100100            3   2
+000000011100        3   3
+0000000010011       3   4
+00110               4   1
+0000001111          4   2
+000000010010        4   3
+000111              5   1
+0000001001          5   2
+0000000010010       5   3
+000101              6   1
+000000011110        6   2
+0000000000010100    6   3
+000100              7   1
+000000010101        7   2
+0000111             8   1
+000000010001        8   2
+0000101             9   1
+0000000010001       9   2
+00100111           10   1
+0000000010000      10   2
+00100011           11   1
+0000000000011010   11   2
+00100010           12   1
+0000000000011001   12   2
+00100000           13   1
+0000000000011000   13   2
+0000001110         14   1
+0000000000010111   14   2
+0000001101         15   1
+0000000000010110   15   2
+0000001000         16   1
+0000000000010101   16   2
+000000011111       17   1
+000000011010       18   1
+000000011001       19   1
+000000010111       20   1
+000000010110       21   1
+0000000011111      22   1
+0000000011110      23   1
+0000000011101      24   1
+0000000011100      25   1
+0000000011011      26   1
+0000000000011111   27   1
+0000000000011110   28   1
+0000000000011101   29   1
+0000000000011100   30   1
+0000000000011011   31   1
+
+Zigzag order, expressed as row-major indices into the 8x8 coefficient array:
+
+     0,  1,  8, 16,  9,  2,  3, 10,
+    17, 24, 32, 25, 18, 11,  4,  5,
+    12, 19, 26, 33, 40, 48, 41, 34,
+    27, 20, 13,  6,  7, 14, 21, 28,
+    35, 42, 49, 56, 57, 50, 43, 36,
+    29, 22, 15, 23, 30, 37, 44, 51,
+    58, 59, 52, 45, 38, 31, 39, 46,
+    53, 60, 61, 54, 47, 55, 62, 63
+
+After the last block's EOB, consume a ten-bit trailer:
+
+    Version 2: 0111111111
+    Version 3: 1111111111
+
+Then zero-fill to the next 32-bit boundary. The BS header plus the complete
+aligned bitstream occupies StFrameSize bytes. These zero alignment bits are
+part of the BS frame; sector-allocation padding is a separate layer. There
+are normally 0 through 31 alignment bits. A damaged trailer, wrong DMA word
+count, or noncanonical unused tail can be reported while retaining a picture
+whose complete coefficient data has already decoded successfully.
+
+8. Coefficients to picture samples
+
+The standard quantization matrix is listed in row-major order:
+
+     2 16 19 22 26 27 29 34
+    16 16 22 24 27 29 34 37
+    19 22 26 27 29 34 34 38
+    22 22 26 27 29 34 37 40
+    22 26 27 29 32 35 40 48
+    26 27 29 32 35 40 48 58
+    26 27 29 34 38 46 56 69
+    27 29 35 38 46 56 69 83
+
+For conventional MDEC reconstruction, the DC coefficient is DC * 2.
+An AC coefficient is approximately level * Q * matrix[position] / 8,
+with integer rounding and clipping defined by the decoder implementation.
+Apply an 8x8 inverse DCT, then add the unsigned sample bias of 128. In the
+usual mathematical notation, each output sample before clipping is
+
+    128 + (1/4) * sum[u=0..7,v=0..7](
+      C(u)*C(v)*F(u,v)*cos((2*x+1)*u*pi/16)*cos((2*y+1)*v*pi/16))
+
+where C(0)=1/sqrt(2), C(k)=1 otherwise, and F is the dequantized coefficient.
+Clamp unsigned output samples to [0,255]. Chroma is centered at 128.
+Conversion to RGB uses full-range YCbCr, conventionally:
+
+    R = Y + 1.402 * (Cr - 128)
+    G = Y - 0.344136 * (Cb - 128) - 0.714136 * (Cr - 128)
+    B = Y + 1.772 * (Cb - 128)
+
+The supplied converter deliberately delegates pixel reconstruction to
+FFmpeg's MDEC decoder rather than claiming to emulate the PlayStation's
+integer IDCT hardware. Its exact coefficient path is:
+
+* Version 2 DC is stored in FFmpeg's IDCT array as 2*DC + 1024.
+* Version 3 FFmpeg predictors start at 128, accumulate D (not 4*D), and
+  provide 8*predictor to the IDCT array.
+* Ordinary AC magnitudes use (A*Q*matrix) >> 3, then apply the sign.
+* Escaped magnitudes use the same scale followed by oddification:
+  ((scaled_magnitude - 1) | 1), then apply the sign.
+* FFmpeg applies its selected integer IDCT and clamps to byte output.
+
+These are implementation details of the chosen software renderer; small
+rounding differences from a console or another decoder are possible.
+Full-range 4:2:0 planes are converted to RGB using the BT.601 matrix; the
+resulting RGB pixels are stored losslessly as FFV1 bgr0. This avoids ambiguous
+YUV range signaling in AVI. The conversion adds no lossy video encoding
+stage, but does not promise a bit-exact match
+to analog console output or a particular hardware revision.
+
+9. Four-bit XA ADPCM prefix record
+
+An audio-prefix record has no STR header or unique magic number. Its entire
+0x800 bytes are 16 consecutive sound groups of 0x80 bytes. The record is
+recognized only within an already-established STR sequence and only when
+every group's redundant parameter bytes and parameter ranges satisfy the
+four-bit grammar. All-zero records are listed separately because their
+semantic type is ambiguous. There is no confidence score or entropy test.
+
+Sound group layout:
+
+Offset  Bytes  Meaning
+00      4      Parameters for sound units 0,1,2,3
+04      4      Exact redundant copy of units 0,1,2,3 parameters
+08      4      Parameters for sound units 4,5,6,7
+0C      4      Exact redundant copy of units 4,5,6,7 parameters
+10      70     28 little-endian four-byte sample rows
+
+Each parameter byte consists of filter in the high nibble and right-shift
+range in the low nibble. Supported values: filter 0..3, range 0..12. A group
+contains eight sound units, each with 28 signed four-bit residuals.
+
+For sample row n (0..27) and sound unit u (0..7), the residual nibble is:
+
+    byte = group[0x10 + 4*n + floor(u/2)]
+    nibble = (byte >> (4*(u mod 2))) & 15
+    signed_residual = nibble if nibble < 8 else nibble - 16
+
+Thus low and high nibbles of a byte belong to successive sound units, not
+successive samples in the same unit. Every parameter copy and every nibble
+is checked or decoded; no audio-prefix bytes are skipped as padding.
+
+For each channel, maintain previous samples H1 and H2, initially zero.
+Filter coefficients (A,B) are:
+
+    Filter 0: (  0,   0)
+    Filter 1: ( 60,   0)
+    Filter 2: (115, -52)
+    Filter 3: ( 98, -55)
+
+For each residual, using signed arithmetic shifts:
+
+    S = (signed_residual << 12) >> range
+    P = S + ((A*H1 + B*H2 + 32) >> 6)
+    P = clamp(P, -32768, 32767)
+    H2 = H1; H1 = P
+
+In stereo, units 0,2,4,6 belong to left, and 1,3,5,7 to right. Emit units
+as (0,1), (2,3), (4,5), (6,7), interleaving each pair's 28 PCM samples.
+In mono, emit units 0 through 7 in order with one shared predictor history.
+A group yields 112 stereo sample frames or 224 mono sample frames.
+
+The 16 surviving groups yield 1,792 stereo sample frames. A complete
+18-group packet would yield 2,016. The absent two groups account for 224
+stereo sample frames (448 mono frames), exactly 1/9 of the packet. Their
+samples and the predictor history they would establish are irretrievable.
+
+The recovery policy is explicit: decode each surviving prefix starting with
+zero predictor history, then insert silence for the missing groups. Resetting
+at each prefix avoids claiming knowledge of the absent predictor state, but
+can alter the beginning of the next prefix. Silence is concealment, not a
+reconstruction of the original audio. No interpolation claims to recover
+lost data. An intact source is needed to eliminate periodic gaps/artifacts.
+
+A four-bit group whose parameters repeat in additional ways may also satisfy
+the eight-bit redundancy pattern; the stripped data alone cannot certify
+four-bit versus eight-bit coding in all cases. This converter's declared
+audio interpretation is four-bit, single-channel-stream XA. It does not
+support eight-bit XA or multiplexed language tracks without identifiers.
+
+10. Timing and output policy
+
+The following values are external parameters, not decoded file fields:
+
+    --fps             Frames per second, positive rational; default 15
+    --xa-rate         PCM sample rate; 37800 (default) or 18900
+    --xa-channels     2 (default stereo) or 1 (mono)
+    --sector-rate     Original physical sectors per second; default 150
+    --audio-offset    First audio packet time relative to first picture;
+                      default 0 seconds; can be positive or negative
+
+For frame number F, first frame F0, and frame rate R, presentation time is
+(F-F0)/R. Missing numbers are concealed to preserve this numbering schedule.
+The starting number may be zero or another value; it is normalized to zero
+time, rather than causing an invented leading delay.
+
+For an audio record at physical index S, the first recognized audio record
+S0, sample rate A, sector rate D, and offset T:
+
+    starting PCM sample frame = round(((S-S0)/D + T) * A)
+
+The implementation uses Python's round-to-nearest, ties-to-even rule. Audio
+starts from the declared offset, not automatically from S0/D: CD read-ahead
+and player buffering are absent from this representation. Prefixes are not
+concatenated without gaps, since that would shorten the soundtrack. Zero
+records and missing positions contribute silence according to the selected
+clock. Overlapping packets under inconsistent settings cause an error before
+output; the program does not guess a replacement clock.
+
+Audio is retained after the last video frame. If audio finishes first, silence
+extends it to the video duration. Browser previews may hold the last picture
+while the remaining soundtrack finishes. Video-only streams have no invented
+silent audio track. A file consisting exclusively of silent XA-like records
+has no unambiguous audio signature; such records are treated as filler.
+
+The defaults permit a two-positional-argument invocation. They are a stated
+playback policy, not a heuristic estimate or proof of the intended rate.
+Actual original timing, audio mode, and initial synchronization remain
+unverified without the omitted metadata or playback code.
+
+11. Identification, malformed input, and unsupported variants
+
+Before opening any output file, the converter requires a plausible standard
+STR header at offset zero, including a valid chunk allocation, dimensions,
+MDEC command, and quantizer. An initial chunk zero is corroborated by its
+matching repeated BS header. If that copy is damaged, or the stream begins
+with a later chunk, a second consistent video header in the next 64 sector
+positions can instead corroborate the format. Unsupported BS versions,
+nonzero standard-header extension fields, nonincreasing sequences, or changing
+picture dimensions fail before output. There is no arbitrary-byte magic scan,
+filename-based exception, frame-rate inference, or per-recording branch.
+
+After recognition, every physical record is classified and every valid
+picture is entropy-decoded. Malformed recognized input is salvaged:
+
+* Unknown or truncated physical records are reported and ignored.
+* Missing required chunks or invalid coefficient syntax invalidate that
+  picture; other independently coded pictures remain usable.
+* Duplicate chunks retain the first occurrence and generate a warning.
+* Conflicting repeated metadata is reported; the first frame header governs
+  assembly and the embedded BS header must agree before decoding.
+* Missing allocation-only padding does not invalidate complete picture data.
+* Damaged trailers, noncanonical alignment, or word-count disagreement are
+  reported but do not destroy already-complete coefficient data.
+* Missing or undecodable pictures hold the preceding valid picture. Before
+  the first valid picture, concealment uses a generated black picture.
+* If no complete picture survives, conversion fails and creates no output.
+
+It is impossible to guarantee recognition of an arbitrarily damaged file
+whose identifying headers are destroyed. Rejection of an unprovable format
+is preferable to treating an unrelated binary as a movie. Likewise, an
+unknown record inside a recognized stream can be damaged data or an
+unsupported extension; it is reported as unrecognized, not fully understood.
+The verbose all_bytes_classified flag makes this distinction explicit.
+
+The parser permits frame-number gaps only up to max(1000, 10*observed_frames)
+output frames, as a memory/time resource guard. It uses in-memory media and
+classic indexed RIFF AVI, not OpenDML; output at or above 4 GiB is unsupported.
+Memory usage is several times the input/output media sizes. This is not an
+unbounded streaming implementation for arbitrarily large recordings.
+
+12. Converter use, dependencies, and generated files
+
+    python3 mdecVideoStream.py inputFile outputFile
+    python3 mdecVideoStream.py inputFile outputFile --fps 15 -verbose
+
+Dependencies: Python 3.10 or newer, using only its standard library, and an
+ffmpeg executable on PATH (or supplied with --ffmpeg). FFmpeg must have the
+MDEC decoder, FFV1 encoder, PCM signed-16 encoder, AVI demuxer/muxer, and
+scale/format filters enabled. No downloaded tables, companion libraries,
+Python packages, network access, or supporting data files are needed at
+runtime. The text document is not a runtime dependency.
+
+The default command writes only outputFile. It does not write temporary AVI,
+WAV, raw video, indexes, extracted sectors, cache files, logs, or metadata.
+All intermediate media and finalization buffers remain in memory. The final
+output is created only after recognition, parsing, decoding, and encoding
+succeed. An existing output is not overwritten. Output must differ from the
+input, and its parent directory must already exist. A failed final write
+removes the incomplete newly created output; an existing file is untouched.
+
+With -verbose (or --verbose), the program additionally writes
+outputFile.audit.json. This records input SHA-256, complete sector spans,
+byte-category totals, padding values, per-frame bit/code counts, all warnings,
+concealed frame numbers, audio placements, and chosen timing parameters.
+Warnings go to stderr even without -verbose. Created output files have user
+and group read permission explicitly enabled.
+
+AVI video is RGB (bgr0), FFV1 level 3, with independently encoded frames and
+slice CRCs.
+Optional audio is uncompressed little-endian signed 16-bit PCM. The AVI has
+corrected RIFF and movi lengths, stream lengths, and an idx1 index, even though
+FFmpeg's intermediate output was piped through a nonseekable stream. A
+browser-viewable report or MP4 preview is a separate one-time activity, never
+an automatic converter side effect.
+
+13. Byte coverage model
+
+Every input byte belongs to exactly one physical category:
+
+    STR header bytes
+    declared BS frame bytes (including the BS header)
+    sector-allocation padding bytes
+    XA parameter bytes, including redundant copies
+    XA residual sample bytes
+    zero-record bytes (filler or silent-XA ambiguity)
+    damaged/unrecognized bytes, if present
+
+The sum must equal the entire input length. For a valid BS frame, its bits
+also divide exactly into 64 header bits, DC bits, AC/EOB bits, ten trailer
+bits, and zero alignment bits. MDEC code count independently checks the DMA
+header word count. No bytes are silently dropped from the accounting.
+
+Complete syntactic coverage does not prove that missing bytes are recoverable,
+that filler had one unique original meaning, that a soundtrack mode has been
+identified without its metadata, or that software IDCT is hardware-bit-exact.
+Those limitations are intrinsic or explicitly stated implementation choices.
+
+14. Primary implementation references
+
+Sony Computer Entertainment, File Formats, streaming data and MDEC animation:
+https://psx.arthus.net/sdk/Psy-Q/DOCS/FileFormat47.pdf
+
+FFmpeg, MDEC software decoder (pixel reconstruction and bit syntax):
+https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/mdec.c
+
+FFmpeg, MPEG-1 AC and quantization format tables:
+https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/mpeg12data.c
+
+jPSXdec, STR version-2 / version-3 bitstream implementations:
+https://github.com/m35/jpsxdec/blob/readme/jpsxdec/src/jpsxdec/psxvideo/bitstreams/BitStreamUncompressor_STRv2.java
+https://github.com/m35/jpsxdec/blob/readme/jpsxdec/src/jpsxdec/psxvideo/bitstreams/BitStreamUncompressor_STRv3.java
+
+jPSXdec, MDEC DMA length calculation and XA sound-group implementation:
+https://github.com/m35/jpsxdec/blob/readme/jpsxdec/src/jpsxdec/psxvideo/mdec/Calc.java
+https://github.com/m35/jpsxdec/blob/readme/jpsxdec/src/jpsxdec/adpcm/XaAdpcmDecoder.java
+
+The executable implements container parsing and validation independently and
+invokes the installed FFmpeg executable for pixel reconstruction and FFV1
+encoding. The tables in this document are numerical format definitions.

@@ -1,0 +1,1200 @@
+RIPscrip 1.54: byte format, graphics model, and SVG converter reference
+===================================================================
+
+1. Scope and status
+-------------------
+
+Remote Imaging Protocol Script (RIPscrip) is a terminal command stream,
+usually stored in a DOS text file. It is not simply a collection of geometric
+objects: drawing, terminal text, indexed colors, mouse fields, clipboard data,
+and host commands share state. This reference describes the classic 1.54
+command language and its companion EGA icon encoding. RIPscrip 2.x and later
+have different facilities and are outside this format profile.
+
+The accompanying ripScrip.py independently implements the static graphics
+profile described here. It does NOT constitute a complete RIPterm emulator.
+In particular, it does not reproduce a live BBS session, interactive prompts,
+user clicks, host-command template evaluation, file transfer, external program
+execution, or undocumented vendor extensions. Unknown or damaged commands are
+reported, not reverse engineered by guessing their intent. Arbitrary data
+outside the stream can be accounted for without its meaning being known.
+
+The rasterizer implements explicit integer line/ellipse algorithms and cubic
+Bezier evaluation. Its pixel decisions have not been exhaustively compared
+against the original DOS BGI/RIPterm binaries. Exact historical equivalence of
+ellipse boundaries, thick-line junctions, polygon rounding, text metrics, and
+button decoration is therefore NOT established. This matters particularly
+when a one-pixel boundary difference changes a later flood fill. There is no
+claim of complete byte-level semantic understanding or pixel-perfect fidelity
+for every possible file. Section 15 lists the remaining work precisely.
+
+2. File identity, character encoding, and framing
+------------------------------------------------
+
+There is no mandatory binary header, magic version number, checksum, length
+field, file extension, or central index. Recognize the grammar, not the name.
+A physical command line starts with ASCII !| (21 7C hexadecimal), with ! at
+column zero. Each subsequent command on that line starts with | (7C).
+
+    !|c0F|L00000A0A
+
+selects color 15 and draws from (0,0) to (10,10). In this document, unqualified
+numbers in explanations are decimal. Bytes shown as hexadecimal are explicitly
+identified. Examples and field values on the wire use base 36.
+
+SOH (01 hexadecimal) or STX (02 hexadecimal), followed by |, can introduce a
+command run in the middle of a text line. An ordinary !| in the middle of a
+text line is literal terminal text, not a command introducer.
+
+A physical line containing only ! is also terminal text: the required | is
+absent. It displays an exclamation mark in an open text window and its line
+ending advances the terminal cursor. This is distinct from !|# or an empty
+separator between command lines. The converter preserves this literal text
+in both normal and strict-framing modes. A viewer that ignores all terminal
+text may omit it; that does not establish that the byte is metadata or a
+complete RIP command.
+
+The command introducer is followed by:
+
+    | [level digits] opcode numeric-fields [text-field]
+
+An absent level means level zero. A level begins with 1..9; additional decimal
+digits denote sublevels. Up to nine level digits are defined. Leading zero is
+not a level introducer. Opcodes are case sensitive. Except for two ESC opcodes,
+they are printable non-digit bytes. Thus p and P are distinct, as are T and 1T.
+There is no separator between adjacent numeric fields.
+
+A backslash immediately before a line ending removes the backslash and that
+line ending from the logical command. It may split numeric fields, strings,
+or an opcode. CRLF, LF, and CR line endings are recognized. A noncontinued line
+ending ends the command line. An unescaped | ends a variable-length string and
+introduces the next command. EOF also terminates a string.
+
+In the published grammar, a new physical line beginning with | alone is
+terminal text unless the preceding physical line ended with a continuation
+backslash. It does not inherit command mode across an ordinary line ending.
+Some viewers, including PabloDraw, accept bare | commands more permissively.
+An absent ! therefore does not by itself establish an authoring mistake; it
+can reflect the behavior of the tools that created or displayed the stream.
+
+The converter enables a bounded compatibility grammar by default. At physical
+column zero, while RIP processing is enabled, a bare | starts a command line
+if an explicitly introduced recognized command has already established the
+stream and the first bare command is recognized and syntactically complete.
+The ordinary numeric, text, escape, and continuation rules determine that
+completeness. After that first command, the rest of the line uses normal
+command parsing and malformed-command recovery. No characters are inserted,
+and byte offsets continue to refer to the original input. Ordinary text
+inside a line, indented pipes, unknown first opcodes, and incomplete first
+commands remain terminal text. Pipe-prefixed ASCII borders and noncommand
+templates are therefore preserved. A file containing only bare commands does
+not establish format identity. DOS EOF and disabled RIP processing still apply.
+
+Counted-polygon recovery: if normal parsing rejects a p, P, or l command at an
+unescaped line ending inside its coordinate list, the default parser retries
+that list using the already decoded vertex count. The retry must find exactly
+four base-36 digits per declared vertex: two for x and two for y. It permits a
+single CRLF, CR, or LF between digits, including between the two digits of a
+coordinate. At least one coordinate digit must precede the first such break,
+and a base-36 digit must immediately follow each break. Normal backslash
+continuations remain valid. After the required digits, only a command
+delimiter, line ending, DOS EOF, or physical EOF can end the recovered command.
+No blank line, space, invalid digit, control, introducer, missing coordinate,
+abbreviated coordinate, or extra trailing character is accepted by this retry.
+The vertex count and opcode themselves must have parsed normally.
+
+Recovery is all-or-nothing: failure retains the original malformed command and
+ordinary treatment of the following bytes. A command that already parses
+successfully is never extended; in particular, a valid abbreviated final
+coordinate keeps its published meaning. Other command types and strings are
+not joined across bare line endings. This is an explicit malformed-file
+recovery rule, not part of the published line grammar or a claim about every
+historical viewer. It neither guesses coordinate values nor infers geometry
+from the image. A damaged command followed by literal base-36-only text that
+exactly satisfies this grammar is inherently ambiguous; --strict-framing
+disables the retry and preserves the literal line interpretation.
+
+Each recovered command generates a recovery diagnostic. Its event span covers
+the original coordinate bytes and intervening line endings. In the verbose
+audit, recovered_polygons lists each command's start/end offsets, opcode,
+vertex_count and line_break_offsets; command spans also record those offsets
+in recovered_linebreaks. No source bytes are changed or omitted from the audit.
+
+Empty-line compatibility: by default, in a graphics-only input stream, one or
+more completely empty physical lines immediately between RIP command lines
+are treated as file separators, not terminal newlines. Graphics-only means
+that no terminal-text event anywhere in the input contains bytes other than
+CR or LF. Any other terminal payload, including spaces, tabs, or ANSI display
+controls, disables this extension for the entire input, preserving text cursor
+placement and scrolling in mixed streams. RIP auto-sensing/enable/disable
+controls are framing events, not terminal-text events. Metadata and DOS EOF
+tails are likewise not terminal text. Graphics text commands remain allowed.
+Imported scenes are classified independently.
+
+The preceding line must end in command mode; the next
+line must begin with an accepted command introducer or accepted bare command,
+and its first command must decode completely. CRLF is one line ending; lone
+CR and LF are also recognized. Only the empty lines are classified as
+separators, not the preceding command's own line ending. The following do not
+qualify: leading/trailing blank lines, lines containing spaces or tabs, blanks
+adjacent to ordinary text, and runs interrupted by terminal controls, DOS EOF,
+or an unknown/malformed first command. Disabled processing still applies to
+introducers as described above. Escaped continuations retain their ordinary
+command meaning.
+
+This is an explicit file-viewing compatibility extension. The published
+grammar routes a line without a RIP introducer to the terminal window,
+including an empty line. Literal newline scrolling can move graphics that
+overlap that window and thereby open borders used by subsequent flood fills.
+The extension avoids that effect for blank separators between command blocks;
+it does not infer repairs from image content or discard terminal text. Some
+file viewers, including PabloDraw, ignore the entire outside-command text
+channel; this converter preserves it outside the bounded exception above.
+
+Use --strict-framing to require the published introducers, explicit polygon
+continuations, and literal handling of empty lines. This switch also applies
+to imported scenes. In that
+mode bare lines are terminal text, and empty lines can scroll the text window;
+both can overwrite graphics and affect subsequent fills. The verbose audit
+lists accepted bare-line offsets under bare_command_line_offsets and empty-line
+offsets under blank_separator_offsets. It records the selected strict_framing
+setting, and classifies separator bytes separately without losing their spans.
+
+Within strings, \! encodes !, \| encodes |, and \\ encodes one backslash. At the
+end of a physical line, two backslashes mean a literal backslash; three mean a
+literal backslash followed by line continuation. Historical readers also quote
+other bytes following a backslash; the converter uses this behavior, without
+inventing numeric values for invalid characters.
+
+Most syntax is seven-bit ASCII. Text bytes are interpreted using the DOS IBM
+CP437 character repertoire; the graphics fonts have their own glyph coverage.
+CP437 graphics characters at byte values below 32 are possible in graphics
+strings, whereas the terminal text channel interprets control characters.
+There is no UTF-8 BOM or Unicode escape syntax in the classic protocol.
+
+Bytes on a command line after the required fixed fields but before the next
+unescaped | or line ending are ignored by the protocol. A parser must still
+consume and account for them. Bytes outside command lines go to the text
+window, including ANSI escape sequences, subject to the explicit empty-line
+compatibility exception above. A closed text window consumes them
+without displaying them. BBS-side substitutions such as @PAUSE@ and other
+software-specific macros are not RIPscrip syntax; offline conversion renders
+such text literally when the text window is visible.
+
+RIP_NO_MORE, |#, announces that transmission of a scene is complete and mouse
+input may be acted upon. Three consecutive copies are customary. It is NOT a
+file EOF opcode: commands later in the stream can continue drawing.
+
+DOS files can use 1A hexadecimal (Ctrl-Z) as physical text EOF. The converter
+ends scene parsing there, while retaining any subsequent bytes in the audit.
+Metadata can follow this marker. Nonpadding data after EOF is diagnosed when
+it does not belong to a recognized terminal SAUCE trailer. Data after EOF is
+never reinterpreted as additional drawing commands by searching for | bytes.
+
+3. Numbers
+----------
+
+A MegaNum is an unsigned base-36 number. Digits 0..9 represent
+0..9; uppercase A..Z represent 10..35. Its value is the sum of each digit times
+the corresponding power of 36, most significant digit first.
+
+    Width   Maximum       Example
+      1           35      Z = 35
+      2        1,295      0F = 15; HR = 639; 9P = 349; A0 = 360
+      3       46,655      ZZZ = 46,655
+      4    1,679,615      1EKF = 65,535
+      5   60,466,175      Used for reserved fields
+      6 2,176,782,335     Used for reserved fields
+      8 2,821,109,907,455 Used for reserved fields
+
+Numeric fields before another parameter require the listed width, including
+leading zero padding. General syntax rule 10 of the 1.54 specification permits
+a variable-width numeric parameter LAST in a command: leading zeroes may be
+omitted there. Thus |cF| and |c0F| both select color 15, |W0| selects COPY mode,
+and |L00000A5| draws from (0,0) to (10,5). In a polygon or polyline, only the
+last vertex's Y coordinate may be shortened; the point count and preceding
+coordinates retain their specified widths. In a command ending with text,
+every preceding numeric field still requires its complete width, even when
+the text is empty. The final numeric field must contain at least one digit.
+
+The converter accepts one through the listed number of digits in a final
+numeric field when it reaches |, an uncontinued line ending, DOS EOF, or file
+EOF. Continuations are removed before determining whether the command ended.
+This is a grammar rule, not recovery from a damaged command. Extra bytes after
+a complete field retain the ignored-tail behavior described in section 2.
+Lowercase digits, spaces within numbers, and signed numbers are not MegaNums.
+A decoder must not silently treat an absent field or invalid digit as zero.
+Coordinates can be syntactically larger than the screen because a two-digit
+field permits 1,295. Clipping and command-specific validation are separate
+from numeric decoding.
+
+4. Display and drawing state
+----------------------------
+
+The classic screen is 640 by 350 indexed pixels. X increases to the right,
+Y increases downward. The graphics viewport is an inclusive rectangle. BGI
+coordinates are relative to its upper-left origin; drawing is clipped to the
+viewport and the physical display. The all-zero viewport disables graphics
+commands that use it. The separate text window uses character-cell units.
+Both windows occupy the same framebuffer and can overwrite each other.
+
+Pixel indices are 0..15; each maps through a mutable palette to one of 64 EGA
+colors. EGA master color bits are secondary red, green, blue in bits 5,4,3,
+and primary red, green, blue in bits 2,1,0. Channel values are:
+
+    R = 170*bit2 + 85*bit5
+    G = 170*bit1 + 85*bit4
+    B = 170*bit0 + 85*bit3
+
+The standard master indices for logical colors 0..15 are:
+
+    0, 1, 2, 3, 4, 5, 20, 7, 56, 57, 58, 59, 60, 61, 62, 63
+
+They yield black, blue, green, cyan, red, magenta, brown, light gray, dark
+gray, light blue, light green, light cyan, light red, light magenta, yellow,
+and white. Palette index zero is the graphics background. A palette change
+recolors existing pixels; baking colors into objects at draw time is wrong.
+The historical prose palette table contains transposed/mistyped brown and
+gray entries; the EGA bit encoding and standard colors resolve those errors.
+These RGB triplets are a conventional modern encoding of the EGA signal
+levels, not measurements of a particular CRT. For example, logical color 10
+is light green (#55FF55), while color 2 is green (#00AA00). PabloDraw's default
+palette uses slightly different channel levels (#57FF57 and #00AB00 for those
+entries). Such small differences do not account for an entire bright region
+turning dark; that can result from different flood-fill coverage or palette
+selection. Original CRT brightness and contrast settings affected appearance.
+
+State includes drawing color, fill color, fill pattern, line pattern, line
+thickness, drawing write mode, font/style/orientation, graphics cursor, text
+window/cursor/ANSI attributes, mouse regions, button style, and clipboard.
+The converter starts with drawing color 7, background index 0, solid fill in
+color 0, solid one-pixel lines, COPY mode, font 0 at size 1, full-screen
+viewport, and an 80 by 43 text window. State changes persist until changed.
+RESET_WINDOWS clears both windows, resets their extents and palette, deletes
+mouse fields and clipboard; it does not imply every other style is reset.
+
+Circles compensate for EGA pixels being taller than wide. For C, A, and I,
+the converter uses the PabloDraw-compatible ratio 371/480 (350/480 * 1.06),
+with rx = radius and ry = floor(radius * 371/480). The derived radius is
+truncated, not rounded to nearest: radius 6 yields ry=4, and radius 40 yields
+ry=30. A one-pixel radius change can open a border after a subsequent drawing
+operation, changing which region a later flood fill reaches. This precise
+ratio is a renderer compatibility choice: the 1.54 protocol specifies EGA
+aspect correction without prescribing its numerical ratio or rounding rule.
+Exact equivalence to each original RIPterm/BGI release is not established.
+Explicit ellipses use their given radii directly. The SVG's intrinsic size
+and viewBox are both 640 by 350,
+so a source pixel occupies one CSS pixel at normal zoom. It preserves this
+aspect ratio when resized. Stretching 350 rows to 480 introduces uneven stroke
+thickness, especially in small text, and is not applied by default. Historical
+monitor aspect correction and BGI's integer circle correction are separate
+from the native pixel grid exported here.
+
+5. Level-zero command dictionary
+--------------------------------
+
+Notation: name:n is an n-digit MegaNum; TEXT consumes the remainder of the
+logical command; res denotes a reserved numeric field. An empty argument
+list consumes no payload. Every row includes the entire payload layout.
+
+Opcode  Name              Ordered payload
+------  ----------------  --------------------------------------------------
+w       TEXT_WINDOW       x0:2 y0:2 x1:2 y1:2 wrap:1 size:1
+v       VIEWPORT          x0:2 y0:2 x1:2 y1:2
+*       RESET_WINDOWS     (empty)
+e       ERASE_WINDOW      (empty)
+E       ERASE_VIEW        (empty)
+g       GOTOXY            x:2 y:2
+H       HOME              (empty)
+>       ERASE_EOL         (empty)
+c       COLOR             color:2
+Q       SET_PALETTE       c0:2 c1:2 ... c15:2
+a       ONE_PALETTE       index:2 master:2
+W       WRITE_MODE        mode:2
+m       MOVE              x:2 y:2
+T       TEXT              TEXT
+@       TEXT_XY           x:2 y:2 TEXT
+Y       FONT_STYLE        font:2 direction:2 size:2 res:2
+X       PIXEL             x:2 y:2
+L       LINE              x0:2 y0:2 x1:2 y1:2
+R       RECTANGLE         x0:2 y0:2 x1:2 y1:2
+B       BAR               x0:2 y0:2 x1:2 y1:2
+C       CIRCLE            cx:2 cy:2 radius:2
+O       OVAL              cx:2 cy:2 start:2 end:2 rx:2 ry:2
+o       FILLED_OVAL       cx:2 cy:2 rx:2 ry:2
+A       ARC               cx:2 cy:2 start:2 end:2 radius:2
+V       OVAL_ARC          cx:2 cy:2 start:2 end:2 rx:2 ry:2
+I       PIE_SLICE         cx:2 cy:2 start:2 end:2 radius:2
+i       OVAL_PIE_SLICE     cx:2 cy:2 start:2 end:2 rx:2 ry:2
+Z       BEZIER            x1:2 y1:2 x2:2 y2:2 x3:2 y3:2 x4:2 y4:2 count:2
+P       POLYGON           count:2 (x:2 y:2) repeated count times
+p       FILL_POLYGON      count:2 (x:2 y:2) repeated count times
+l       POLYLINE          count:2 (x:2 y:2) repeated count times
+F       FILL              x:2 y:2 border:2
+=       LINE_STYLE        style:2 pattern:4 thickness:2
+S       FILL_STYLE        style:2 color:2
+s       FILL_PATTERN      row0:2 row1:2 ... row7:2 color:2
+#       NO_MORE           (empty)
+
+w: x/y are inclusive character-cell coordinates, not pixels. The published
+disabling form sets all parameters to zero: |w0000000000. This converter treats
+all-zero window coordinates as disabling text display, independently of the
+wrap and font fields. wrap=1 allows line wrapping and scrolling;
+wrap=0 leaves the cursor at the right/bottom boundary. Font size selects:
+
+    size   cell     columns  rows
+      0     8x8       80      43
+      1     7x8       91      43
+      2     8x14      80      25
+      3     7x14      91      25
+      4    16x14      40      25
+
+Malformed-font recovery: a font value outside 0..4 is diagnosed. When all four
+window coordinates are zero, the converter still closes the text window and
+retains its previous valid font internally. No new font needs to be selected
+for an invisible window. ASCII text, line scrolling, ANSI erasure, and form
+feeds cannot paint through that closed window; graphics commands continue to
+draw normally. A later valid nonzero window definition enables text again.
+If the invalid font accompanies nonzero window coordinates, the entire window
+command is ignored, retaining the preceding window and cursor. This is a
+best-effort recovery policy for malformed fields, not a claim that out-of-range
+font numbers are defined by RIPscrip 1.54. The input arguments remain unchanged
+in the byte audit. It applies in both ordinary and --strict-framing modes.
+
+Coordinates are zero based. Defining a different window homes the cursor.
+Changing only wrap does not. g moves the cursor within that window; H homes
+it; e clears it and homes the cursor. > clears from the cursor through the
+right edge using graphics background index 0. ANSI ESC[K instead uses the
+current ANSI background color. E clears only the graphics viewport.
+
+c chooses logical drawing color 0..15. Q replaces all palette entries; a
+replaces one. Master values are 0..63. W=0 uses COPY and W=1 uses XOR of
+logical four-bit pixel indices. XOR is not RGB blending or a CSS blend mode.
+
+m changes the graphics text cursor without drawing. T draws there and moves
+it after the text; @ supplies the position first. Other geometry commands do
+not change this cursor. Y's reserved field is zero. Its font and scale rules
+are described in section 7.
+
+X always overwrites one pixel in the drawing color; it ignores write mode.
+L, R, P, l, and Z obey drawing color, line style, thickness, and write mode.
+R draws an outline between opposite inclusive corners. B fills a rectangle
+with no outline, ignoring line styles and write mode. P closes the last point
+to the first; l does not. Counts are documented as 2..512. p fills by the
+even-odd rule and then outlines the boundary; only the outline uses XOR.
+
+Polygon scan conversion uses integer edge crossings. Orient each nonhorizontal
+edge from its upper endpoint (xt,yt) toward its lower endpoint (xb,yb). It
+contributes one crossing on rows yt <= y < yb, at:
+
+    x = xt + trunc_toward_zero((xb-xt)*(y-yt)/(yb-yt))
+
+Truncate the displacement before adding xt, not the complete x coordinate.
+Horizontal edges do not contribute crossings. Sort the integer crossings,
+pair them in order, and fill every pixel between each pair inclusively.
+Keep duplicate crossings: a coincident pair fills one pixel. Thus a two-point
+nonhorizontal polygon can fill a one-pixel span per participating row. These
+rules do not depend on vertex order or starting vertex. Rounding continuous
+left crossings up and right crossings down instead leaves incorrect gaps
+between polygon fills and subsequent strokes. Clipping limits the rows and
+spans written, without changing the original edges used for interpolation.
+
+Filled-polygon compatibility rule: this converter follows PabloDraw's
+convention that drawing color INDEX 0 suppresses the outline of p, leaving
+the interior fill active. This applies even if palette entry 0 is remapped
+to a visible color. A nonzero index mapped to black still produces an outline.
+It does not apply to P, l, L, R, or other primitives: explicit black lines
+remain visible. For nonzero drawing colors, p uses the current line pattern,
+thickness and write mode for its outline as usual. This is a renderer
+compatibility behavior, not a different byte encoding. The published 1.54
+specification says p draws an outline in the current color without documenting
+this exception; equivalence to original DOS RIPterm for color 0 is unverified.
+
+Angles are decimal degrees encoded as MegaNums: zero is rightward, 90 upward,
+180 leftward, 270 downward. Arcs proceed counterclockwise, wrapping through
+zero when start > end. 0..360 denotes a full ellipse/circle. Equal angles draw
+nothing. C, O, o, A, V, I, and i use line thickness but ignore line pattern and
+write mode. o draws a filled full ellipse. I and i join the arc ends to the
+center with radii and fill the resulting sector. O and V both describe an
+elliptical arc in the 1.54 dictionary.
+
+Z describes a cubic Bezier with endpoints P1 and P4 and controls P2/P3:
+
+    P(t) = (1-t)^3 P1 + 3(1-t)^2 t P2 + 3(1-t)t^2 P3 + t^3 P4
+
+For count=n, draw straight segments between samples at t=0,1/n,...,1.
+Use double-precision arithmetic. The converter rounds samples with floor(x+0.5).
+Every segment uses the current line pattern and write mode; drawing shared
+segment endpoints twice in XOR can leave gaps. A zero segment count is invalid.
+
+F is border-color flood fill: connected non-border pixels reachable from the
+seed are replaced, including differently colored interior pixels. It is not
+"replace only pixels matching the seed color." Connectivity is horizontal and
+vertical. Stop at the viewport boundary; do not change border pixels. A seed
+already equal to the border color does nothing. Fill ignores write mode.
+
+Single-pixel screen-edge compatibility rule: a maximal horizontal non-border
+run consisting of only column 0 or only column 639 is left unchanged and is
+not traversed by the fill. This also applies when the fill seed is in that
+run. Runs at least two pixels wide and one-pixel passages inside the screen
+remain fillable. The rule is independent of fill index, palette, pattern, and
+vertical propagation direction. It is tied to the physical display columns,
+not inferred from the image or extended to arbitrary clipping boundaries.
+Without this rule, a fill can pass around a line ending at column 638 and
+spread back into an adjacent region through column 639.
+
+This is an explicitly tested PabloDraw compatibility behavior, not a rule
+stated in the wire-format specification. Ninety-six isolated cases cover
+left/right edges, interior passages, one/two-pixel widths, both vertical
+directions, black/nonblack fill indices, and solid/empty/patterned fills.
+All match the installed reference renderer after normalizing palette levels.
+Equivalence across original DOS RIPterm/BGI versions remains unverified.
+
+Color-index-zero flood-fill compatibility rule: this converter follows the
+directional behavior observed in PabloDraw when F uses fill color INDEX 0.
+Fill the seed's horizontal non-border run, then propagate independently up
+and down through overlapping runs on successive rows. Each branch keeps its
+vertical direction; it does not reverse around an overhang to enter a region
+that is reachable only by turning back toward the seed row. Thus some pixels
+in the same connected non-border region can remain unchanged. Nonzero fill
+indices retain connected-region filling, including such return paths, subject
+to the single-pixel screen-edge exception above.
+The rule depends on the fill index, even when index 0 is remapped to a visible
+color. A nonzero index mapped to black, or an empty pattern that writes only
+background pixels, does not activate it.
+
+This is renderer compatibility behavior, not malformed-input recovery or a
+rule stated by the wire-format specification. The published F description
+says fill propagates in all directions and does not document this exception.
+PabloDraw attributes it to BGI behavior; equivalence across original DOS
+RIPterm/BGI versions has not been independently verified.
+
+6. Line and fill bit patterns
+----------------------------
+
+Line thickness is 1 or 3 pixels. Line styles and their 16-bit masks are:
+
+    0 solid     FFFF hexadecimal
+    1 dotted    3333 hexadecimal
+    2 centered  1E3F hexadecimal
+    3 dashed    1F1F hexadecimal
+    4 custom    low 16 bits of the four-digit MegaNum pattern field
+
+The converter traverses each line from the endpoint with smaller y, or from
+smaller x for a horizontal line. It uses integer Bresenham steps with exact
+half-pixel ties advancing toward the other endpoint. Reversing a line's
+arguments therefore leaves its covered pixels unchanged. The most significant
+mask bit is used at the start of this traversal. Advance one mask position per
+raster step, wrapping after sixteen positions; restart for each constituent
+line. Thick lines widen perpendicular to their major axis. A zero-length thick
+line draws a horizontal three-pixel span. Historical corner/junction decisions,
+pattern phase, and custom-mask bit order remain fidelity qualifications;
+solid-line agreement does not certify all patterned lines against PabloDraw
+or original BGI. These are rendering rules, not input-detection heuristics.
+
+Fill patterns repeat an eight-by-eight monochrome tile. Bit 7 of a row is its
+leftmost pixel; row 0 is its top row. A one bit draws the fill color; a zero
+bit draws palette index 0, not transparency. Pattern phase is aligned to the
+physical screen. S replaces a custom pattern; s replaces a predefined one.
+The following bytes are hexadecimal, not MegaNums:
+
+    ID  Description           Eight row bytes
+     0  background            00 00 00 00 00 00 00 00
+     1  solid                 FF FF FF FF FF FF FF FF
+     2  horizontal lines      FF FF 00 00 FF FF 00 00
+     3  light slash           01 02 04 08 10 20 40 80
+     4  slash                 E0 C1 83 07 0E 1C 38 70
+     5  backslash             F0 78 3C 1E 0F 87 C3 E1
+     6  light backslash       A5 D2 69 B4 5A 2D 96 4B
+     7  hatch                 FF 88 88 88 FF 88 88 88
+     8  crosshatch            81 42 24 18 18 24 42 81
+     9  interleaved           CC 33 CC 33 CC 33 CC 33
+    10  sparse dots           80 00 08 00 80 00 08 00
+    11  dense dots            88 00 22 00 88 00 22 00
+
+Custom rows are eight two-digit numbers, each in 0..255, followed by a color
+in 0..15. Pattern 0 always uses the background, regardless of fill color.
+The table follows the numerical pattern diagrams in the 1.54 specification;
+some captions in that document are inconsistent with their pattern numbers.
+
+7. Graphics fonts and CHR data
+-----------------------------
+
+The font selector is a two-digit number:
+
+    0 bitmap 8x8    1 Triplex       2 Small       3 Sans Serif
+    4 Gothic        5 Script        6 Simplex     7 Triplex Script
+    8 Complex       9 European     10 Bold
+
+Font 0 uses the DOS CP437 8x8 bitmap, matching the font data used by PabloDraw.
+It differs from the older IBM CGA ROM font in several letters and digits.
+Both have eight-by-eight cells, but their glyph shapes are not interchangeable.
+The font data is embedded; PabloDraw is not a runtime dependency.
+
+Direction 0 is horizontal. Direction 1 rotates the baseline counterclockwise,
+reading bottom to top. Graphics text is transparent outside the glyph strokes
+and observes COPY/XOR. No browser font substitution is needed: the converter
+contains font data and draws the glyphs into the indexed screen.
+
+Bitmap font sizes 1..10 multiply pixels by the size. BGI vector font sizes do
+NOT multiply their native coordinates by the size number. Their rational scale
+factors for sizes 1..10 are:
+
+    3/5, 2/3, 3/4, 1, 4/3, 5/3, 2, 5/2, 3, 4.
+
+The published Y command specifies sizes 1..10. As malformed-input recovery,
+the converter accepts size 0 as the minimum size 1, matching PabloDraw's
+lower-bound handling. It still applies the requested font and direction.
+For font 0 this means ordinary 8-by-8 bitmap cells; for a vector font this
+means the size-1 scale above. Rejecting the entire command would leave an
+unrelated previous font active. This fallback is a compatibility behavior,
+not an additional size defined by the RIPscrip specification or a claim about
+every historical renderer's handling of zero.
+
+The zero remains diagnosed, and parsed arguments and the byte audit retain
+the original value. Invalid font numbers, invalid directions, and sizes above
+10 still reject the font-style command; nonzero reserved fields remain
+diagnosed independently. This recovery applies in strict-framing mode too:
+that switch governs line framing rather than numeric renderer validation.
+
+Coordinates are integer scaled, truncating signed values toward zero. Character
+advances are integer scaled independently. The glyph baseline and cell height
+come from the font's ascender/descender fields. Unsupported glyph codes draw
+no strokes; they are not replaced with an unrelated Unicode typeface.
+
+For vertical CHR text, the initial rotation offset is the scaled total of the
+unscaled glyph advances, truncated once after summation. Individual character
+origins still advance by their separately truncated widths. These are distinct
+measurements: for two advances of 10 units at scale 2/3, the rotation offset is
+13 pixels, while the two pen advances total 12 pixels. Substituting the latter
+for the rotation offset shifts every glyph and can change subsequent flood
+fill coverage. Horizontal text and bitmap-font placement do not use this CHR
+rotation offset. One hundred isolated vertical-font checks, covering all ten
+CHR fonts at all ten scales, match the installed PabloDraw reference; this
+does not establish equivalence for every glyph, state, or historical renderer.
+
+A Borland CHR font is a binary font resource, separate from the RIP stream.
+Following a copyright/header string and byte 1A is a little-endian 16-bit
+header offset, four-byte font name, file-size/version fields, and header pad.
+At that header offset H the stroke font header contains:
+
+    H+0    1 byte       '+' signature
+    H+1    2 bytes LE   character count N
+    H+3    1 byte       reserved
+    H+4    1 byte       first character code
+    H+5    2 bytes LE   stroke-data offset relative to H
+    H+7    1 byte       scan flag
+    H+8    signed byte origin-to-capital height
+    H+9    signed byte origin-to-baseline
+    H+10   signed byte origin-to-descender
+    H+11   4 bytes     short name/reserved
+    H+15   1 byte      reserved
+    H+16   N*2 bytes   little-endian glyph offsets relative to stroke data
+    next   N bytes     glyph advances
+    next               stroke instruction data
+
+Each stroke instruction consists of x and y bytes. Bit 7 of x indicates an
+instruction; zero terminates the glyph. With x bit 7 set, y bit 7 clear means
+move, and y bit 7 set means draw a line from the previous point. Bits 0..6 are
+signed seven-bit two's-complement coordinates. Native y points upward. A raw
+bitmap font is 256 glyphs of eight or fourteen row bytes each, with bit 7 on
+the left. The 7-column and double-width TTY cells adapt these bitmap rows.
+
+8. Level-one command dictionary
+------------------------------
+
+Opcode  Name              Ordered payload
+------  ----------------  --------------------------------------------------
+1M      MOUSE             num:2 x0:2 y0:2 x1:2 y1:2 click:1 clear:1 res:5 TEXT
+1K      KILL_MOUSE_FIELDS (empty)
+1T      BEGIN_TEXT        x0:2 y0:2 x1:2 y1:2 res:2
+1t      REGION_TEXT       justify:1 TEXT
+1E      END_TEXT          (empty)
+1C      GET_IMAGE         x0:2 y0:2 x1:2 y1:2 res:1
+1P      PUT_IMAGE         x:2 y:2 mode:2 res:1
+1W      WRITE_ICON        res:1 TEXT(filename)
+1I      LOAD_ICON         x:2 y:2 mode:2 clipboard:1 res:2 TEXT(filename)
+1B      BUTTON_STYLE      width:2 height:2 orientation:2 flags:4 bevel:2
+                          fore:2 shadow:2 bright:2 dark:2 surface:2 group:2
+                          flags2:2 underline:2 corner:2 res:6
+1U      BUTTON            x0:2 y0:2 x1:2 y1:2 hotkey:2 flags:1 res:1 TEXT
+1D      DEFINE            flags:3 res:2 TEXT
+1ESC    QUERY             mode:1 res:3 TEXT
+1G      COPY_REGION       x0:2 y0:2 x1:2 y1:2 res:2 destination_y:2
+1R      READ_SCENE        res:8 TEXT(filename)
+1F      FILE_QUERY        mode:2 res:4 TEXT(filename)
+
+ESC in this table means the actual byte 1B hexadecimal, not letters E S C and
+not a caret escape. Reserved fields are normally zero. LOAD_ICON is unusual:
+its two-digit reserved field is specified as the literal MegaNum "10".
+Readers often tolerate other reserved values; they do not acquire a new meaning.
+
+1M creates a rectangular mouse field. num is obsolete and should be zero.
+click=1 inverts its visual area while pressed. clear=1 resets the screen before
+sending its host command. At most 128 mouse fields and mouse buttons exist at
+once; nonmouse decorative buttons do not count. Hit testing checks newest
+fields first. Save positions in global coordinates so a later viewport change
+does not move existing hit areas. 1K deletes all such regions without clearing
+the image. In a static SVG these fields have no click-to-host side effects.
+
+1T begins a text region; 1t supplies already word-wrapped lines; 1E ends it.
+Direction is always horizontal. justify=0 uses the left margin. justify=1
+spreads the whitespace gaps to align both margins. Lines advance vertically
+by the current font height; lines beyond the bottom are discarded, not
+scrolled. Font and color can change between lines. Regions do not nest.
+
+1C replaces the clipboard with the indicated inclusive rectangle. Invalid
+coordinates leave it unchanged. A clipboard remembers width, height, indexed
+pixels, original position, and viewport. 1P places it at x,y, obeying viewport
+clipping; an image that goes beyond the right edge is rejected. The converter
+also rejects other off-screen image extents instead of reading outside memory.
+
+Image modes are 0 COPY, 1 XOR, 2 OR, 3 AND, 4 NOT. For source S and destination
+D, result is respectively S, S xor D, S or D, S and D, S xor 15. NOT means
+invert the source; it does not mean invert the old destination.
+
+1W stores the clipboard as an icon under a filename. 1I loads an icon and
+draws it; clipboard=1 also makes it the current clipboard. If no extension is
+present, append .ICN. Paths/subdirectories are not legal in an icon filename.
+Both LOAD_ICON and icon buttons resolve filenames case-insensitively among
+files in the directory of the RIP script being interpreted. No parent,
+child, global icon, or working directory is searched. An explicit extension
+is used verbatim, so .IC1, .IC4, .IC5, .IC6 and other names can identify the
+same supported bitmap encoding. Two directory entries matching the requested
+name case-insensitively are ambiguous: diagnose and skip instead of choosing
+one arbitrarily. Unavailable or invalid files do not stop later drawing.
+
+Decoded pixels retain their logical color indices. They obey the scene's
+current palette, graphics viewport, image write mode, clipboard operations,
+and icon-button dimensions and decorations. The final SVG includes these
+pixels in its own filled paths and needs no external icon or PNG at viewing
+time. Native decoding requires no third-party image library or subprocess;
+no PNG, extracted icon, or cache file is written by ordinary conversion.
+
+RIPterm reports a load error visibly if a file is missing. The converter emits
+a diagnostic and omits unavailable pixels instead of fabricating the image.
+WRITE_ICON is simulated in memory, including subsequent reads of that name;
+it never writes an unsolicited file to disk.
+
+1G copies an absolute screen region vertically, without applying the viewport
+or clearing the source. It is overlap safe. Round x0 down to a multiple of
+8 and x1 up to a multiple of 8. The destination preserves x and starts on
+destination_y. If it would extend off screen, the entire operation is ignored.
+
+1R invokes another local scene using the same graphics state; execution of
+the caller resumes afterward with the callee's changes intact. It must be the
+last command on its physical/logical line. The converter looks for a sibling
+file using case-insensitive DOS-style names and limits recursion to 16 levels.
+It never fetches resources from a network. Missing scenes are diagnosed.
+
+1D defines a variable. Flags are additive: 1 persistent storage, 2 forbid a
+blank answer, 4 noninteractive if possible. The text grammar is:
+
+    identifier[,decimal-width]:[?question?][default-value]
+
+Identifiers contain 1..12 letters/digits/underscores and start with a letter.
+Default field width is 60; widths are 1..60. Absence of a needed value can
+still require an interactive prompt even with flag 4. The converter records
+available defaults in memory and diagnoses a required interactive value.
+
+1ESC queries host-command text. mode=0 evaluates immediately; mode=1 evaluates
+on a click in graphics outside mouse fields; mode=2 does the same for the text
+window, with character-cell mouse coordinates. $OFF$ disables a deferred query.
+Queries can have active side effects, so treating them all as no-ops is wrong.
+The converter executes supported immediate screen/clipboard/window actions;
+it records deferred and nonvisual queries without sending anything externally.
+
+1F asks about a local file and sends a host response. mode=0 returns 0 or 1;
+mode=1 appends CR; mode=2 returns 0 CR or 1.size CR; mode=3 returns
+1.size.date.time CR; mode=4 includes filename before size. Date/time use the
+terminal's DOS conventions. These are host responses, not image content.
+
+9. Button style and button text
+-------------------------------
+
+1B defines the style for subsequent 1U commands. Colors are logical 0..15.
+orientation is 0 above, 1 left, 2 centered, 3 right, 4 below. width and height
+both nonzero supply fixed plain-button dimensions; otherwise 1U supplies the
+opposite corners. Icon and clipboard buttons derive dimensions from the image.
+Their x1/y1 fields are unused; zero values do not mean that the button extends
+to the screen origin. Fixed width/height in the style apply only to plain
+buttons, not icon buttons.
+
+If the icon cannot be loaded (missing, invalid, or unreadable), the converter
+reports the resource error and skips the entire icon button. Without the image
+there is no defined rectangle for its border, label, or effects. No fallback
+rectangle is invented from unused fields, and the failed button does not
+alter the clipboard/style, register a mouse region, or invert existing pixels.
+Subsequent commands continue normally. The referenced icon must be supplied
+to reconstruct that button; its bitmap cannot be recovered from the RIP
+command alone. A missing clipboard likewise causes a clipboard button to be
+skipped.
+
+flags is a 16-bit bitset encoded in four MegaNum digits:
+
+       1 clipboard button          2 invert while pressed
+       4 reset on click            8 chisel effect
+      16 recessed outside border  32 label drop shadow
+      64 auto-clipboard          128 icon button
+     256 plain surface button    512 exterior bevel
+    1024 mouse button           2048 underline first hotkey occurrence
+    4096 alternate hot icon     8192 include descenders in vertical centering
+   16384 radio group           32768 sunken interior border
+
+Clipboard, icon, and plain types are mutually exclusive. The group field
+identifies one of 36 button/template groups. flags2 bits are 1 checkbox group,
+2 highlight hotkey, 4 optional click/zoom animation, 8 left-justify label,
+16 right-justify label. Radio and checkbox group modes are mutually exclusive.
+Left/right label justification applies to above/center/below orientations and
+uses a 10-pixel inset, increased to 20 with chisel.
+
+The bevel grows all four sides outward by bevel pixels, with bright upper/left
+and dark lower/right edges. The recess adds a black one-pixel outline and an
+inverted one-pixel bevel outside it. The recess is excluded from the mouse
+image and clipboard. Sunken uses an inverted bevel one pixel inside. Chisel
+uses a shadowed interior groove, with insets based on button height:
+
+    Height        x-inset  y-inset
+      0..11          1        1
+     12..24          3        2
+     25..39          4        3
+     40..74          6        5
+     75..149         7        5
+    150..199         8        6
+    200..249        10        7
+    250..299        11        8
+    300 or more     13        9
+
+Label shadow is offset one pixel right and down. fore draws the actual label;
+shadow draws the shadow. Underline/highlight use underline color; corner
+pixels use corner color. Vertical centering takes the font's capital body
+into account, optionally including descenders with bit 8192. Exact historical
+font metric tables and decorative pixel choices need reference validation.
+
+Auto-clipboard saves the rendered button before its label and without recess,
+then changes subsequent style to clipboard mode. It clears icon/plain type,
+chisel, bevel, auto-clipboard, and sunken flags. The clipboard dimensions may
+therefore include the exterior bevel.
+
+1U's hotkey is an ASCII/CP437 byte code encoded in two base-36 digits. 255
+means any key. Its instance flags are 1 initially selected, 2 Enter-default.
+Initial selection has meaning for checkbox/radio groups. The 1.54 prose is
+inconsistent about whether initial selection sends a host command; the static
+converter does not transmit host commands on initial drawing or on clicks.
+
+Its text is up to three segments separated by literal <>:
+
+    [icon-filename][<>label][<>host-command]
+
+Empty segments are legal. <> inside this payload is unrelated to the | command
+delimiter. For a nonicon button, the first segment is normally empty. A hot icon
+uses the same filename with extension .HIC while pressed, falling back to the
+inverse normal image when absent. A static image has no pressed interaction.
+
+10. Host-command action language
+--------------------------------
+
+Host strings occur in mouse fields, buttons, and queries. They are not general
+RIP drawing strings. Expanding them requires the terminal's session state.
+A caret or backquote followed by a letter expresses a control byte; ^M is CR,
+^G BEL, ^L form feed, ^[ ESC. The literal ESC opcode still requires byte 1B.
+Dollar-delimited variable names are case insensitive.
+
+Ordinary built-ins and their response values are:
+
+    RIPVER              RIPSCRIP plus two-digit major/minor, vendor/subversion
+    DATE                MM/DD/YY
+    MONTH, MONTHNUM     full month name; two-digit 01..12
+    DAY, DOY            day 01..31; day of year 001..366
+    YEAR, FYEAR         two-digit year; four-digit year
+    TIME                HH:MM:SS in 24-hour time
+    HOUR, MHOUR         hour 01..12; hour 00..23
+    MIN, SEC, AMPM      00..59; 00..59; AM or PM
+    DATETIME            Unix-style weekday/month/day/time/year string
+    TIMEZONE            terminal timezone name, or NONE
+    DOW, ADOW, WDAY     full weekday, abbreviated weekday, Sunday=0..Saturday=6
+    WOY, WOYM           week 00..53, Sunday-first or Monday-first
+    X, Y, XY            last mouse coordinates; graphics use four decimal digits
+    XYM, M              coordinates plus button state; three-character LMR state
+    MSTAT               whether a mouse is installed, YES/NO
+    TWIN                text window exists, YES/NO
+    TWFONT              current text font selection
+    TWH, TWW            text-window height and width
+    TWX0, TWY0          upper-left text-cell coordinates
+    TWX1, TWY1          lower-right text-cell coordinates
+    CURX, CURY          text cursor coordinates
+    CURSOR              text cursor enabled status
+    STATBAR             status bar enabled status
+
+Active variables perform an action and normally contribute no response text:
+
+    RESET               same effects as RESET_WINDOWS
+    EGW, ETW            clear graphics viewport; clear text window
+    SAVE, SAVE0..SAVE9   save screen and graphics viewport
+    RESTORE, RESTORE0..RESTORE9
+                        restore screen/viewport; numbered saves are consumed
+    SMF, RMF, MKILL     save, restore, delete mouse fields
+    STW, RTW, DTW       save/restore text settings, or disable text window
+    SCB, RCB, PCB       save/restore clipboard, or paste at original location
+    SAVEALL             STW, SCB, SMF, SAVE in sequence
+    RESTOREALL          RTW, RCB, RMF, RESTORE in sequence
+    CON, COFF           text cursor on/off
+    SBARON, SBAROFF     terminal status bar on/off
+    VT102ON, VT102OFF   terminal keyboard emulation mode
+    DWAYON, DWAYOFF     doorway/pass-through keyboard mode
+    HKEYON, HKEYOFF     button hotkey recognition
+    TABON, TABOFF       keyboard cycling through mouse regions
+    BEEP, BLIP, MUSIC, ALARM, PHASER, REVPHASER
+                        terminal speaker sound effects
+    APP0..APP9          invoke an externally configured application
+
+The converter uses in-memory saves for implemented actions. It does not create
+RIPTERM.SAV, clipboard files, or other terminal state files. Cursor blink,
+status-bar chrome, keyboard routing, and sound have no SVG image representation.
+No external applications are executed. Unknown immediate variables are
+reported as needing session data; they are not filled with invented answers.
+
+A pick list uses (([question::]item,item,...)). Prefix the question with * to
+require a choice. An item can be response@display-label. A description can
+mark its hotkey with paired underscores or tildes. The marker characters in a
+response are literal transmitted characters, so hotkey markers should be in
+the display label. There are at most 20 entries and 1,024 bytes per list in
+1.53 and later. ESC cancellation yields an empty response unless forbidden.
+
+Templates are associated with group identifiers 0..9,A..Z. [g:]text defines a
+template, with $?$ marking its insertion point. [g]text feeds text through it;
+[037]text feeds through templates 0,3,7 in that order. [] explicitly bypasses
+templates. $?g$ embeds a template's contents. A nested embedded template has
+limited expansion: the second embedded level is inserted literally. A chain
+has at most 36 entries and the result at most 4,095 characters. Variables,
+control characters and lists expand at each template processing step; one
+step is not allowed to construct a new expression for a later parse.
+Radio groups require one selected dependency; checkbox groups can contribute
+multiple selected responses. A static SVG cannot determine user choices.
+
+The converter retains mouse host strings and query arguments in verbose data.
+It executes direct immediate active variables with known visual effects.
+It diagnoses immediate template/pick-list requests and does not implement the
+full session action language. This is a stated capability boundary, not an
+alternative grammar for those fields.
+
+11. Terminal control and level-nine transfers
+--------------------------------------------
+
+Auto-sensing uses ESC [ ! or ESC [ 0 !. A terminal responds with
+RIPSCRIPxxyyvs: xx is major version, yy minor, v vendor (0 generic, 1 TeleGrafix,
+2 Mustang), and s vendor revision. ESC [ 1 ! disables normal command parsing;
+ESC [ 2 ! enables it. These sequences themselves produce no image.
+
+The terminal text channel supports CR, LF, TAB, BS, BEL, FF, and a subset of
+ANSI/VT100. The converter implements cursor movement A/B/C/D/E/F/G/d/H/f,
+save/restore s/u and ESC7/ESC8, clear J/K, basic SGR foreground/background,
+bright/reverse attributes, default colors, and cursor/wrap controls. Blink is
+represented in its visible phase. Unsupported ANSI sequences are diagnosed.
+It is not an exhaustive VT102 state machine; scroll-margin and character-edit
+sequences are not implemented.
+
+System command 9ESC has fields:
+
+    mode:1 protocol:1 file_type:2 reserved:4 [filename] <>
+
+mode=0 requests download, 1 upload. The filename is variable-length text (a
+historical table misleadingly annotates it with :2). <> terminates that text.
+Protocols 0..7 are Xmodem checksum, Xmodem CRC, Xmodem-1K, Xmodem-1K/G, Kermit,
+Ymodem, Ymodem-G, Zmodem. File types 0..5 are display RIP, save RIP, save icon,
+save help, composite dynamic batch, active dynamic batch. Filename is required
+for uploads and nonbatch protocols. A line ending, not |, must follow; the
+next bytes belong to the transfer protocol. This is not a static vector-file
+payload, and ripScrip.py diagnoses it rather than implementing modem transfers.
+
+12. Icon file encoding
+----------------------
+
+An EGA icon begins with four bytes:
+
+    offset 0: uint16 little-endian, pixel width minus one
+    offset 2: uint16 little-endian, pixel height minus one
+
+Let W=stored_width+1, H=stored_height+1, stride=ceil(W/8). For each scanline,
+store four consecutive bitplanes in order 3,2,1,0, each stride bytes long.
+The leftmost pixel uses bit 7 of the first byte. Right-edge pad bits are unused.
+Color is the sum of the four corresponding bits weighted 8,4,2,1. There is no
+palette in the icon; use the current scene palette. Pixel bytes occupy
+4*stride*H bytes, beginning immediately at offset 4. The specification describes
+one extra undefined trash byte after the bitmap. Stored BGI/RIP icon buffers
+also occur with two unused trailing bytes. The converter accepts zero, one,
+or two trailing bytes, whose values need not be zero. They do not change the
+header length, image dimensions, palette, or pixel positions. The complete
+required bitmap must be present; truncated data and longer unrecognized tails
+are rejected. No missing pixels are guessed or padded.
+
+There is no icon magic signature. Within a scene, the LOAD_ICON reference
+provides context; the header, size, and plane layout must agree. Other formats
+named .ICN, compressed images, and 256-color icons are not this EGA profile.
+.HIC uses the same encoding for the pressed image of a button.
+
+For example, a two-pixel row [1,14] has bitplane bytes 40 40 40 80 hexadecimal,
+width-minus-one 01 00, and height-minus-one 00 00. A complete buffer can be:
+
+    01 00 00 00 40 40 40 80 00
+
+Do not confuse the four row planes with four whole-image planes.
+
+13. SAUCE and non-RIP trailers
+-----------------------------
+
+SAUCE is optional descriptive metadata, not RIP drawing syntax. A conventional
+SAUCE record is exactly 128 bytes at the physical end of a file:
+
+    Offset Size  Meaning
+       0     5   ASCII SAUCE
+       5     2   ASCII version 00
+       7    35   title, padded text
+      42    20   author, padded text
+      62    20   group, padded text
+      82     8   date YYYYMMDD
+      90     4   little-endian original file size
+      94     1   data type
+      95     1   file type
+      96     2   TInfo1 little-endian
+      98     2   TInfo2 little-endian
+     100     2   TInfo3 little-endian
+     102     2   TInfo4 little-endian
+     104     1   comment count N
+     105     1   flags
+     106    22   TInfoS / older filler bytes
+
+RIP is conventionally character data type 1, subtype 3, with dimensions and
+color count in TInfo fields. Preserve other fields without treating them as
+rendering instructions. If N>0, a block immediately before the record consists
+of ASCII COMNT followed by N fixed 64-byte comment lines. A DOS EOF marker
+usually separates the scene from the metadata. Original file size may be
+stale; do not use it to truncate a valid command stream.
+
+The converter recognizes the final standard SAUCE record and correctly sized
+preceding comment block. It also recovers one preceding stale SAUCE record
+under the following explicit, jointly required conditions:
+
+* A standard final SAUCE record identifies character data, RIP subtype (1,3),
+  with no comment block. A DOS EOF byte immediately precedes this final record.
+* The candidate older record occupies the complete span immediately before
+  that EOF, at most 128 bytes. It starts as terminal text immediately after a
+  command line whose final parsed event before its newline is RIP_NO_MORE (#).
+  An earlier DOS EOF already protects subsequent bytes; this recovery does not
+  reprocess or display such bytes.
+* The candidate begins with SAUCE00 or a nonempty suffix of that signature
+  after loss of a contiguous prefix. It retains all 35 title bytes, 20 author
+  bytes, 20 group bytes, and eight ASCII date digits. The text fields contain
+  no control bytes below 32; their content need not match the final record.
+* Its original-file-size value must be exactly the candidate's starting byte
+  offset. All subsequent binary fields must match the final record exactly.
+  Either these fields are intact or every NUL byte has been removed. No other
+  changes, extra bytes, interposed commands, or approximate matches qualify.
+* There must be exactly one candidate satisfying the complete byte comparison.
+
+These checks describe malformed-file recovery, not an alternate SAUCE
+encoding or a universally supported historical reader behavior. The final
+valid record remains the authoritative metadata. A recovered older record is
+excluded from terminal rendering, given a metadata diagnostic, and retained
+as a sauce-recovered byte span. The verbose recovered_sauce list contains its
+start/end offsets, decoded metadata, count of missing signature bytes, and
+count of removed NUL bytes. This preserves every existing input byte; it does
+not rewrite the input or synthesize replacement bytes in the audit.
+--strict-framing controls RIP line framing and does not disable this metadata
+recovery. A # command by itself still never truncates the command stream.
+
+Other repeated/embedded metadata, vendor-specific records such as MftInfFmt01,
+truncated comment blocks, and appended stale bytes may remain in a diagnosed
+post-EOF span. Unverified bytes before EOF retain their ordinary protocol/text
+meaning. Such bytes are preserved in verbose audits but are not claimed as
+semantically decoded metadata or part of RIPscrip 1.54.
+
+14. Converter interface and output guarantees
+---------------------------------------------
+
+Usage:
+
+    python3 ripScrip.py inputFile outputDirectory
+    python3 ripScrip.py inputFile outputDirectory -verbose
+    python3 ripScrip.py inputFile outputDirectory --strict-framing
+
+The default accepts the bounded bare-line, counted-polygon, and empty-line
+compatibility rules in section 2. --strict-framing disables all three, including in imported
+scenes; it does not disable other documented renderer compatibility behaviors.
+
+The second argument is a directory, created as necessary after successful
+recognition and rendering. Only SVG screen files are written by default.
+Screens are numbered from one in source order. The names are N.svg, with
+the number padded to the number of decimal digits in the total screen count:
+one screen uses 1.svg; two use 1.svg and 2.svg; seventeen use
+01.svg through 17.svg. No index, PNG, or other sidecar is produced.
+
+Screen extraction follows explicit stream structure:
+
+* A full reset (*) after drawing begins another screen. E does so only when
+  the active graphics viewport covers the entire display. Consecutive setup
+  resets without intervening drawing do not create empty intermediate screens.
+* A # notification alone never splits a picture. Later drawing, labels, and
+  buttons can continue the same screen. Repeated # notifications are redundant.
+* In a stream containing multiple screens, a capture ends at the last drawing,
+  palette, clear, immediate-query, or # command before the next screen. Terminal
+  text after this capture is still consumed but does not cover the exported
+  picture. This keeps intervening BBS footers and pause text out of snapshots.
+  Single-screen streams retain their complete terminal-text rendering.
+* An explicitly labeled host resource record has a standalone @NAME line,
+  followed by a standalone $RIP$ line and a RIP stream. NAME starts with an
+  ASCII letter or underscore and continues with letters, digits, or underscores.
+  The next standalone @NAME line ends that record. Each such RIP record starts
+  from fresh interpreter state and its label is included in the SVG title.
+  Only lines parsed as ordinary terminal text can be record delimiters; text
+  inside RIP command parameters cannot delimit records. This is a bounded
+  host-container convention, not an additional RIP opcode or a general BBS
+  macro interpreter. Other host records remain in the byte audit.
+
+Ordinary sequential screens retain drawing state until commands change it;
+snapshots own independent copies of their pixels and palettes. Frame boundaries
+are top-level stream commands: arbitrary overpainting and clears executed inside
+an included local scene are not currently expanded into additional snapshots.
+The included scene itself is still executed in the caller's rendering state.
+
+Each file is an XML SVG with self-contained
+paths, no linked fonts, raster images, scripts, external URLs, or supporting
+assets. It represents a captured indexed framebuffer as merged rectangles
+inside color-grouped paths. Native 640 by 350 intrinsic dimensions avoid
+fractional pixel stretching at normal zoom. Integer magnification preserves
+uniform pixel blocks; fractional browser zoom or thumbnail scaling can still
+discard or unevenly sample fine pixel details. These are vector SVG elements,
+but not preserved
+editable Bezier/text primitives: clipping, flood fill, XOR, palette changes,
+and screen copies are resolved on the EGA grid first.
+
+With -verbose (or --verbose), outputDirectory/audit.json is additionally written.
+It contains input size/hash, every contiguous byte span and its raw base64
+bytes, parsed commands, diagnostics and offsets, SAUCE, recovered_sauce,
+mouse fields, queries,
+variable defaults, strict_framing, bare_command_line_offsets,
+blank_separator_offsets, recovered_polygons, and each screen's
+filename, label, source byte range, and replay-prefix start. Concatenating
+raw span bytes reproduces the entire
+input. A covered byte is not necessarily a semantically understood byte: the
+auditor distinguishes unknown opcodes, malformed payloads, and opaque tails.
+
+All screen conversion is completed in memory before creating output directories
+or replacing files. Each SVG is atomically replaced. This is not a filesystem
+transaction across all output files if a disk/write error interrupts publication.
+Wrong-format input or a recognized later-version dialect returns exit code 2
+without creating or replacing output. A positively recognized 1.54 stream
+with damage is rendered as far as its known commands allow; malformed commands
+are skipped through the next actual delimiter/line ending, diagnostics go to
+stderr, and exit code is 0 if its SVG screens were saved. No guessed digits, sample-name
+rules, palette inference, or repair based on image appearance are used.
+Existing output is preserved on a recognition or rendering failure. Input and
+output must be different paths. Existing unrelated directory contents remain.
+The <decimal digits>.svg namespace is reserved for converter output: after
+a successful write, obsolete screen files in that namespace are removed, so
+rerunning with fewer screens or changed number padding does not leave stale
+images. Legacy out_<decimal digits>.svg screen files are also removed after a
+successful write. Input-path collisions, including stale-screen removal, are
+rejected.
+
+Output files are mode 0664, readable by owner and group. New directories request
+mode 0775 subject to the process umask. Python 3.10 or later
+and only its standard library are required. Original font data is compressed
+inside the script. There is no runtime dependence on PabloDraw, an SDK,
+Pillow, ImageMagick, system fonts, or internet access. An input referencing
+icons or other scenes still needs those content assets as sibling files;
+unavailable assets are explicitly diagnosed. Imported scenes are limited to
+16 nested invocations. Script-requested saves remain in memory.
+
+The regression suite runs with:
+
+    python3 -B -m unittest discover -s tests -v
+
+15. Remaining implementation and verification work
+--------------------------------------------------
+
+The static converter is useful, but the following prevent a claim of full
+RIPterm compatibility or universal exact reproduction:
+
+* Compare original RIPterm/BGI output against an independent pixel oracle for
+  all octants, ellipse radii, segment roundings, polygon edge rules, line masks,
+  thick joints, fill phases, text directions, and button flags. In particular,
+  a flood-fill mismatch can amplify a one-pixel discrepancy.
+  Full-circle sectors currently omit the radial seam drawn by PabloDraw;
+  matching circle outlines does not establish identical sector rendering.
+  An isolated vertical 8-by-8 bitmap-font comparison at size 1 places the
+  converter's glyphs one pixel above PabloDraw's. This also occurs with the
+  zero-size fallback; the size normalization itself agrees. Verify the
+  original BGI rotation anchor before claiming exact vertical bitmap placement.
+* Confirm historical button text metrics, hotkey underline positions, selected
+  hot-icon/radio behavior, decorative corners, and legacy text-cell variants.
+  The converter derives label extents from the actual font strokes but has not
+  validated every placement against each original RIPterm font release.
+* Supply referenced icons and included scenes. They cannot be reconstructed
+  from a filename alone. A missing asset produces an incomplete image.
+* Implement full host templates, pick lists, variable persistence, terminal
+  applications, and user-input events in an interactive terminal if those are
+  required. An SVG snapshot cannot supply missing session choices or host data.
+* Expand ANSI/VT102 support for scroll regions, insertion/deletion, alternate
+  modes, and terminal-specific behavior if inputs require them.
+* Research damaged streams and nonstandard trailers separately. Accounted
+  opaque bytes are not evidence that a vendor format has been deciphered.
+* RIPscrip 2.x/3.x fonts, pen styles, bitmap loading, audio, and other extensions
+  require a separate versioned implementation. The 1.54 converter rejects
+  identified 2.x extension opcodes rather than quietly dropping them.
+
+16. Sources and independent implementation provenance
+----------------------------------------------------
+
+Protocol facts were checked against TeleGrafix Communications' July 1993
+RIPscrip Graphics Protocol Specification 1.54, including the icon appendix:
+https://github.com/bbs-land/remote-imaging-protocol/blob/main/version/1.54/text/RIPScrip-1.54.txt
+
+The later-version opcode distinction was checked against the original
+RIPscrip 2.0 Alpha 4 draft, not inferred from extensions of filenames:
+https://github.com/bbs-land/remote-imaging-protocol/blob/main/version/2.0/text/RIPScrip-2.0-alpha-4.txt
+
+PabloDraw was consulted as a behavioral reference, including its stream,
+font, and BGI implementation. Its code is not imported, executed, copied, or
+required by the converter:
+https://github.com/cwensley/pablodraw
+
+Deark's ripicon decoder was used as an independent pixel comparison for native
+16-color icon decoding, including stored buffers with two trailing bytes.
+It is used for one-time verification/report assets, not at converter runtime:
+https://github.com/jsummers/deark/blob/master/formats.txt
+
+IBM's RT PC Guide to Operations, September 1986, page 3-6 documents the
+5154 Enhanced Color Display brightness and contrast adjustments. These are
+relevant when distinguishing palette values from a particular CRT appearance:
+https://www.bitsavers.org/pdf/ibm/pc/rt/75X0178_IBM_RT_PC_Guide_to_Operations_2ed_Sep86.pdf
+
+Original CHR font DATA was obtained independently from the archival font
+resources accompanying the protocol reference, not from PabloDraw:
+https://github.com/bbs-land/remote-imaging-protocol/tree/main/version/1.54/assets/fonts
+
+IBM 8x14 bitmap font DATA was obtained from the VGA text-mode font archive:
+https://github.com/viler-int10h/vga-text-mode-fonts/tree/master/FONTS/PC-IBM
+
+DOS CP437 8x8 bitmap DATA was independently obtained from the same archive:
+https://github.com/viler-int10h/vga-text-mode-fonts/blob/master/FONTS/SYSTEM/DOSMIXED/CP437.F08
+Its SHA-256 matches the reference renderer's bitmap, without copying a
+resource from that renderer or executing it during conversion.
+
+These archived font resources retain their original provenance and rights;
+embedding data does not make it newly authored converter code. The script's
+font decoders, command parser, rasterizer, SVG generation, and CLI are an
+independent implementation. Embedded resource SHA-256 digests follow:
+
+    BOLD.CHR   ee8b45d7491e1bc61936923f8642f1766c58dee7c528fa542e727092a914d07e
+    DOS-CP437.F08 b8c58a575869ca4f1e8faf94cdd55781f89bdc1db64575d6ef38c4575bb04f0f
+    EGA8.F14   657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1
+    EURO.CHR   783392b9fd0414a9c768db7741808811de63c599b34f92acb2d967e74993c6b1
+    GOTH.CHR   8620ae9db9dd874b842f67f7153721a5681fef3cd9e99af0fde41f3b1194f183
+    LCOM.CHR   69d210b35c0c3e74cb6cfe9062b471579c43f3cf12fcc8c76f63b96235e9d9bb
+    LITT.CHR   ea3f22a9bd93e0fd9e2bb7814ac60543100315aaf4e21dd70204561930095449
+    SANS.CHR   edd4db0e5735ce0872d60137819e2b74a590d069be7585269b7b6d675e319bbc
+    SCRI.CHR   04fde2931ba5392c55791b0c99c0c6790cfae97e9792b5833e40e87e19730bf7
+    SIMP.CHR   8d51af7680da29886481166fbc352141e6c615dd97927521b06cb2548f940acf
+    TRIP.CHR   831963618a5dbf3562e12c3b4b8bab3ed3879143de3c7cd9293be171a44282db
+    TSCR.CHR   305e2a9657902fef2a52b25e398a5e2fca4cd0ace0fc0208704b2cb5c360b187

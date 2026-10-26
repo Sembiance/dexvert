@@ -4,7 +4,7 @@ export class ripIcon extends Format
 {
 	name       = "RIP Icon";
 	website    = "http://fileformats.archiveteam.org/wiki/RIPscrip_Icon";
-	ext        = [".icn"];
+	ext        = [".icn", ".ic1", ".ic4", ".ic5", ".ic6"];
 	mimeType   = "image/x-rip-icon";
 	magic      = ["deark: ripicon"];	// "RIPTerm Image :ript:" is too weak and steals hpPalmtopIcon
 	priority   = this.PRIORITY.HIGH;	// such a generic extension, but set high priority due to giving deark an explict module to use which seems to fail properly

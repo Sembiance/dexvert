@@ -6,6 +6,6 @@ export class psxGIM extends Format
 	website        = "https://web.archive.org/web/20230817135907/http://wiki.xentax.com/index.php/GIM_Image";
 	ext            = [".gim"];
 	forbidExtMatch = true;
-	magic          = ["PlayStation Graphics Image Map", "image:Psp.GimFormat"];
+	magic          = ["PlayStation Graphics Image Map", "image:Psp.GimFormat", /^geArchive: GIM_MIG( |$)/];
 	converters     = ["gim2png", "GARbro[types:image:Psp.GimFormat]", "noesis[type:image]"];
 }

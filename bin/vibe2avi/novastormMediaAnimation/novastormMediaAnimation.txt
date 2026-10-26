@@ -1,0 +1,499 @@
+NOVASTORM MEDIA PCFM ANIMATION FORMAT
+====================================
+
+Scope and terminology
+---------------------
+
+This document specifies the DOS Novastorm PCFM animation stream and its
+stateful paletted block codec. It describes every opcode accepted by the
+original DOS decoder, including opcodes not needed by every animation.
+The supported presentation stream consists of PCFM, SPAL, FRAM and EOFL
+records, optionally preceded by SHED and interleaved with SAMP records.
+
+Some Novastorm game resources use additional records, including ZBUF and
+HMSK for gameplay information. Those resource extensions, standalone sound
+resources and other platforms' movie formats are outside this profile.
+They must not be silently interpreted as this animation profile.
+
+All offsets and lengths below are in bytes. All multibyte integer fields
+are unsigned little-endian unless explicitly stated otherwise. FourCC
+identifiers are literal ASCII bytes. Hexadecimal numbers have a 0x prefix.
+A pixel is ultimately an index into a 256-entry global RGB palette.
+
+There is no file-wide length field, checksum, compression wrapper, index,
+version field, alignment requirement, or implicit padding. Chunk lengths
+are the only container boundaries. In particular, odd-sized chunks are
+immediately followed by the next chunk header at an odd offset.
+
+1. Chunk framing and identification
+----------------------------------
+
+Every chunk has this layout:
+
+  Relative offset   Length   Meaning
+  0                 4        FourCC chunk identifier
+  4                 4        Payload length L, excluding this 8-byte header
+  8                 L        Payload
+
+The next header is at current_offset + 8 + L. Do not scan compressed data
+for FourCC strings: an identical byte sequence can occur inside a payload.
+
+A silent animation begins with the eight bytes:
+
+  50 43 46 4D 06 00 00 00       PCFM, payload length 6
+
+The supported PCM-bearing form begins with:
+
+  53 48 45 44 08 00 00 00       SHED, payload length 8
+
+and its PCFM header begins at absolute offset 16. Identification requires
+both records in this case. A filename extension is not an identification
+criterion. FLM and FA are customary extensions, not authoritative types.
+
+Normal record order:
+
+  [SHED] PCFM SPAL { [SAMP ...] FRAM } EOFL
+
+Brackets denote optional content; braces denote repetition. A decoder can
+also apply additional SPAL palette updates before subsequent FRAM records.
+SAMP bytes form one continuous PCM stream in their physical order.
+
+2. PCFM: image geometry and frame count
+--------------------------------------
+
+Payload length is exactly 6:
+
+  Offset   Type   Meaning
+  0        u16    Number of video frames
+  2        u16    Image width W, in pixels
+  4        u16    Image height H, in pixels
+
+W and H must be positive multiples of 8. Let BX = W/8, BY = H/8 and
+N = BX*BY. N must be divisible by 8 because the frame update bitmap contains
+exactly N/8 bytes. The original decoder processes eight bitmap bits per
+iteration; there is no rounded-up bitmap-byte or partial-block convention.
+
+There is no frame-rate field, duration field, aspect-ratio field or
+per-frame timestamp in PCFM or FRAM. The frame count is not a playback
+speed. Playback of a silent stream requires a clock supplied by the host.
+Native pixel dimensions are specified; a display aspect correction is not.
+
+The original implementation has small fixed buffers and narrower internal
+block counters. Those are implementation limits, not additional bytes in
+the file. A modern decoder can use dynamically sized arrays while obeying
+the encoded geometry and whole-bitmap-byte requirement.
+
+3. SPAL: global palette updates
+------------------------------
+
+  Offset   Type       Meaning
+  0        u16        First global palette index F
+  2        u16        Number of consecutive entries C
+  4        3*C bytes  RGB triplets for entries F through F+C-1
+
+L = 4 + 3*C, and F+C must not exceed 256. Each component is a six-bit VGA
+DAC value, normally 0..63, stored in a byte. Triplets are red, green, blue.
+The two leading u16 values are a starting index and an entry count; they
+are not a second chunk-length field.
+
+A VGA-compatible interpretation uses the low six bits of each component.
+For an 8-bit RGB output, a conventional exact range expansion is:
+
+  v = component & 63
+  component8 = (v << 2) | (v >> 4)
+
+This maps 0 to 0 and 63 to 255. It does not add a gamma transform.
+A palette update preserves entries outside its range. A self-contained
+animation must define every global palette entry it displays. Entries
+owned by the surrounding game interface need not be present if unused.
+
+4. Persistent image state
+-------------------------
+
+The image is divided into 8x8 blocks. Each block retains TWO independent
+pieces of state between frames:
+
+  P[0..15]       Sixteen global palette indices: the block's local palette.
+  S[y][x]        Sixty-four selectors, each 0..15, for y,x in 0..7.
+
+A displayed pixel is global_palette[P[S[y][x]]]. A change to P alone can
+therefore change every visible pixel using that entry, without changing S.
+A decoder that stores only the final RGB image cannot correctly implement
+palette-only commands.
+
+Block order is COLUMN-MAJOR:
+
+  block_index = block_x * BY + block_y
+  pixel_x = 8 * block_x + local_x
+  pixel_y = 8 * block_y + local_y
+
+Process the top block of the leftmost block column first, then descend
+that column before moving eight pixels right. Within a displayed block,
+y=0 is its top row and x=0 is its leftmost pixel.
+
+Initialize the local palettes and selector arrays to zero before the
+first frame. Untouched state is retained exactly, including unused local
+palette entries. Do not truncate an existing local palette when a later
+command updates only its first two or four entries.
+
+5. FRAM: frame header and update bitmap
+--------------------------------------
+
+  Offset        Length   Meaning
+  0             2        Zero-based frame number, u16
+  2             N/8      Block update bitmap
+  2 + N/8       variable Commands for marked blocks, in block order
+
+Bitmap byte i represents blocks 8*i through 8*i+7. Bit 7 represents the
+first block, bit 0 the last. A zero bit retains that block's entire state
+and consumes no command. A one bit consumes exactly one block command.
+
+There is no command terminator and no per-block compressed size. Parse
+exactly the commands selected by the bitmap. The last command must end
+exactly at the FRAM payload end. Any remaining bytes are malformed input,
+not padding. Frame numbers normally run from zero to frame_count-1.
+
+6. Block command overview
+-------------------------
+
+Each command begins with a one-byte opcode. Any palette updates come
+first, followed by any row mask, followed by pixel-selector data. The
+following are the complete set of 119 valid opcodes:
+
+  00, 08, 09, 0A, 0C, 0D, 0E, 20, 30,
+  40, 44, 48, 4C, 50, 54, 58, 5C, 60, 64, 68, 6C, 70,
+  80..AF, B0, C0..EF.
+
+All other opcode byte values are invalid in this codec. In particular,
+0x10 is not an escape or a second codec variant.
+
+Three pixel-update modes recur below:
+
+  mode 0: No selector data; retain all 64 selectors.
+  mode 1: Read an 8-bit row mask; update only marked rows.
+  mode 2: Update all eight rows; no row mask is present.
+
+For mode 1, mask bit y selects displayed local row y. Process selected
+rows in descending y order, 7 through 0. Thus bit 7 selects the bottom
+row, and its data comes first. Unselected rows retain their old selectors.
+A zero row mask is a valid no-op for one-bit selectors. It is invalid for
+the compressed two-bit and four-bit update paths: the original compressed
+paths require a positive output-row count.
+
+All selector data represents absolute replacement selectors, not XOR or
+addition against the previous frame.
+
+6.1 Solid commands
+
+  Opcode  Payload        Action
+  00      empty          Set all S to zero; preserve all P.
+  20      one byte C     Set P[0]=C, then set all S to zero.
+
+Neither command clears P[1..15].
+
+6.2 One-bit selector commands, 0x40..0x6C
+
+Only multiples of four in this range are valid. For opcode O:
+
+  mode = (O >> 4) - 4
+  if O & 8: read one byte into P[0]
+  if O & 4: read one byte into P[1]
+
+Read the P[0] replacement before the P[1] replacement if both are present.
+No other P entries change. Apply the mode above.
+
+Selector data is one byte per selected row. Bit 7 selects x=0 and bit 0
+selects x=7. Each bit is the local palette selector 0 or 1. Rows are in
+descending y order for both modes 1 and 2.
+
+6.3 Two-bit selector commands, 0x80..0xAF
+
+  mode = (O >> 4) - 8
+  palette_mask = O & 15
+
+For i=0..3 in ascending order, if palette_mask & (8 >> i), read one byte
+into P[i]. Preserve all unselected entries. The palette mask is contained
+entirely in the opcode, with no extra palette-mask byte.
+
+Apply the mode. Pixel data uses the paired-run two-bit encoding in
+section 7. Produce eight selectors for each selected row, in descending
+y order. This row order applies to both modes 1 and 2.
+
+6.4 Four-bit selector commands, 0xC0..0xEF
+
+  mode = (O >> 4) - 12
+
+If the low nibble is NONZERO, it is a four-entry palette mask, exactly
+like section 6.3: its bits 3..0 select P[0]..P[3]. No additional mask is
+read, and P[4..15] is preserved.
+
+If the low nibble is ZERO, read a u16 extended palette mask. Its bit 15
+selects P[0], bit 14 selects P[1], ..., bit 0 selects P[15]. Read the
+replacement bytes in ascending local-palette order. The mask itself is
+little-endian even though its entry selection runs from bit 15 downward.
+An extended mask of zero preserves the palette.
+
+Apply the mode. Pixel data uses the paired-run four-bit encoding.
+
+IMPORTANT ROW-ORDER DIFFERENCE:
+
+  mode 1: Selected rows in descending y order, like the other families.
+  mode 2: All rows in ASCENDING y order, top to bottom.
+
+The full four-bit decoder copies its expanded row buffer forwards. The
+masked path places rows using a descending row index. Implementations
+must preserve this difference; treating all commands alike flips the
+contents of some blocks vertically.
+
+6.5 Local-palette reference commands
+
+These commands first read one unsigned byte D. The source is block
+current_block + D, not an absolute index, signed displacement, motion
+vector, or byte offset. Copy the specified prefix of the source's P into
+the current P. The source must be inside the image.
+
+  Opcode   Entries copied   Selector bits   Mode
+  08       2                1               0
+  09       2                1               1
+  0A       2                1               2
+  30       4                2               0
+  70       4                2               1
+  B0       4                2               2
+  0C       16               4               0
+  0D       16               4               1
+  0E       16               4               2
+
+For D=0 the palette copy is a no-op. For D>0 the source block has not yet
+been updated in this frame, so its retained palette is normally from the
+preceding frame. Only the palette is copied; selectors are decoded or
+retained according to the mode. Use the row orders already specified for
+the relevant selector width, including ascending rows for opcode 0x0E.
+
+7. Paired-run selector compression
+---------------------------------
+
+Two-bit and four-bit selector data uses runs of one to four equal
+selectors. It does not use a conventional byte RLE escape code.
+
+Let K be eight times the selected-row count. Decode exactly K selectors
+as a continuous stream; runs can cross row boundaries. Consecutive groups
+use a control byte L holding four 2-bit run-length codes:
+
+  run 0 length = ((L >> 6) & 3) + 1
+  run 1 length = ((L >> 4) & 3) + 1
+  run 2 length = ((L >> 2) & 3) + 1
+  run 3 length = ( L       & 3) + 1
+
+Runs are processed in PAIRS. Always consume both values belonging to a
+pair, even if the first run fills the remaining output. If that pair
+produces too many selectors, discard the excess. Once K selectors have
+been produced, terminate at the end of that pair, not the group or row.
+Discarded selectors are defined compression tail data, not corruption.
+
+7.1 Two-bit values
+
+Each group occupies two bytes:
+
+  L, V
+
+V contains the four selectors in bits 7..6, 5..4, 3..2, and 1..0.
+Process runs 0 and 1 first. If more output is required, process runs 2
+and 3. If the first pair already completes K, the low nibbles of L and V
+have no effect on the image, but both bytes have still been consumed.
+There is no additional byte alignment or terminator.
+
+Pseudocode:
+
+  while output_count < K:
+      L = read_u8()
+      V = read_u8()
+      for pair in [0, 1]:
+          for j in [0, 1]:
+              i = 2*pair + j
+              append ((V >> (6-2*i)) & 3), repeated
+                     (((L >> (6-2*i)) & 3) + 1) times
+          if output_count >= K:
+              keep first K selectors and finish
+
+7.2 Four-bit values
+
+Each complete group occupies three bytes:
+
+  L, V01, V23
+
+The high and low nibbles of V01 give selectors for runs 0 and 1.
+The high and low nibbles of V23 give selectors for runs 2 and 3.
+
+Read L and V01 and expand the first pair. If that pair completes K,
+finish immediately: V23 DOES NOT EXIST in that group and must not be
+consumed. The low nibble of L is then ignored. Otherwise read V23 and
+expand its pair. A final four-bit group therefore consumes two or three
+bytes, depending on where the requested output ends.
+
+Pseudocode:
+
+  while output_count < K:
+      L = read_u8()
+      for pair in [0, 1]:
+          V = read_u8()
+          append V >> 4, repeated
+                 (((L >> (6-4*pair)) & 3) + 1) times
+          append V & 15, repeated
+                 (((L >> (4-4*pair)) & 3) + 1) times
+          if output_count >= K:
+              keep first K selectors and finish
+
+8. SHED and SAMP: optional PCM sound profile
+------------------------------------------
+
+SHED has an eight-byte payload:
+
+  Offset   Type   Meaning
+  0        u32    Sound Blaster time constant T; valid range 0..255
+  4        u32    Nominal PCM bytes per video frame A; must be positive
+
+The upper three bytes of the time-constant field must be zero in the
+supported profile. No stereo or alternate sample-format flags are defined
+by this profile. A nonconforming header must be rejected rather than
+interpreted as a guessed audio encoding.
+
+A SAMP payload is uncompressed unsigned 8-bit, mono PCM. Every payload
+byte is one sample; 128 is the silence midpoint. There is no extra sample
+header inside SAMP. Concatenate SAMP payloads in container order without
+including container headers or adding file-alignment bytes.
+
+The hardware time-constant clock is:
+
+  exact_samples_per_second = 1,000,000 / (256 - T)
+
+A sound-bearing playback clock can be expressed as that sample rate
+ divided by A. A normal interleaved stream supplies A samples per frame.
+Timing is derived from SHED, not from estimates based on content or total
+file size. SAMP lengths delimit available audio even on a damaged stream.
+
+AVI's PCM WAVEFORMAT sample rate is an integer. The converter rounds the
+hardware rate to the nearest integer R and uses R/A frames per second by
+default, keeping the sample count and frame cadence aligned. This changes
+the ideal clock by at most half a sample per second and does not alter or
+resample any PCM byte. An explicit --fps overrides the video clock only.
+
+Silent PCFM animation streams do not acquire audio merely because their
+surrounding game uses sound. Sound stored separately cannot be recovered
+from a file that contains no SAMP records.
+
+9. EOFL and validation
+----------------------
+
+EOFL is an empty chunk: L must equal zero. It marks the logical end of
+the stream. No footer follows it. Strict validation requires:
+
+  * Supported signature and header lengths.
+  * Positive, block-aligned geometry and an integral bitmap byte count.
+  * Valid palette ranges and complete RGB triplets.
+  * A usable global palette before the first displayed frame.
+  * Exactly the bitmap-selected commands, each with valid operands.
+  * In-range local-palette references.
+  * Complete frame payload consumption with no trailing bytes.
+  * Sequential frame numbers and agreement with the declared count.
+  * EOFL at the physical end of the file.
+
+No checksum can establish whether otherwise valid-looking pixel bytes
+have been altered. A malformed opcode establishes an invalid stream but
+cannot identify the first altered byte or reconstruct missing information.
+The format has no error-correction data.
+
+10. Converter behavior and recovery policy
+-----------------------------------------
+
+Command line:
+
+  python3 novastormMediaAnimation.py inputFile outputFile
+  python3 novastormMediaAnimation.py inputFile outputFile --fps 14
+  python3 novastormMediaAnimation.py inputFile outputFile -verbose
+
+The converter requires Python 3.10 or newer and uses only its standard
+library. It does not invoke FFmpeg and needs no decoder executable,
+tables, external Python packages, or other supporting files. It contains
+its own AVI writer. Native image dimensions are retained.
+
+The output is classic RIFF AVI with lossless uncompressed 24-bit BGR
+video, a complete idx1 index, and unsigned 8-bit PCM when present. The
+uncompressed output can be substantially larger than the source.
+
+Without -verbose, the only file opened for writing is the requested AVI.
+Warnings go to standard error. -verbose additionally writes a JSON audit
+at outputFile + '.json', including chunk offsets, frame consumption,
+opcode totals, clock selection and any recovery warnings. Report previews
+are a separate one-time reporting operation, not converter side effects.
+
+A silent input defaults to nominal 14 frames per second. This is an
+explicit presentation policy consistent with the original player's
+approximately 14 Hz cadence, not a field recovered from the animation.
+Use --fps, including a rational such as 30000/1001, when the external
+playback clock is known. Square pixels are used because no pixel-aspect
+metadata exists in this profile.
+
+Identification, structural inspection and a complete decoding preflight
+run before opening the AVI. Unsupported chunks and audio profiles fail
+with a nonzero exit status and no new output. Existing output files are
+untouched on those failures. The converter does not delegate foreign
+formats to a general-purpose decoder. Input and output cannot be the same
+file, including through hard links or symlinks.
+
+Once the stream is positively identified, recoverable damage produces
+warnings and the available animation:
+
+  * Missing EOFL: preserve available frames.
+  * Incorrect declared frame count: preserve physical FRAM records.
+  * Incorrect frame serials: retain physical frame order; warn.
+  * Truncated chunk: retain its available payload; do not guess a new
+    boundary inside compressed data.
+  * Damaged block command: commit only fully decoded commands before it;
+    restore the failing block's pre-command state; retain the remaining
+    blocks. Continue at the next declared chunk boundary.
+  * Truncated bitmap: retain the previous image for that frame.
+  * Trailing frame bytes: warn and ignore the unconsumed suffix.
+  * Partial palette: apply complete RGB triplets; retain other entries.
+  * Undefined displayed global colors: render black and warn.
+  * Nonempty EOFL or data after EOFL: warn; stop at logical end.
+  * Truncated PCM: preserve all available PCM samples.
+
+This is deterministic containment, not error correction. Damage to a
+retained block palette or selector can affect later delta frames until
+replaced by subsequent commands. No bytes are borrowed from other inputs,
+no file names or hashes select special cases, and no opcode resynchronizer
+searches for plausible-looking byte patterns. An irrecoverable header
+without usable geometry or palette information cannot yield a video.
+
+Implementation resource limits: at most 16,777,216 pixels, dimensions
+fitting AVI's signed 16-bit frame rectangle, and a classic AVI below
+4 GiB. The script rejects outputs exceeding these limits before writing.
+OpenDML AVI, automatic output splitting, gameplay-only ZBUF/HMSK resource
+extensions and alternate platform codecs are not implemented.
+
+11. Evidence and reproducibility
+-------------------------------
+
+The command definitions, palette persistence, reference arithmetic,
+run-pair termination, row-order exception and column-major rendering
+were derived from the original DOS player's x86 routines. Independent
+execution of those routines was used to compare both decoder state and
+rendered pixel indices against this implementation. All 119 valid opcode
+entries were exercised, including randomized incoming block state.
+
+Historical public research identifies the container family and its PCM
+association, but its early video-codec description was incomplete. It is
+not the source of the opcode semantics defined here:
+
+  https://multimedia.cx/mmentry-2004-04-10.html
+
+The original DOS demo used for implementation verification is archived at:
+
+  https://archive.org/details/Novastorm
+
+Neither the original player nor its machine code is required or included
+in the converter. No completeness claim extends to damaged bytes that
+cannot be decoded, unidentified extensions or external timing information
+that the file does not contain. To recover a damaged source exactly,
+obtain intact source bytes; a codec implementation cannot infer them
+without information absent from the stream.

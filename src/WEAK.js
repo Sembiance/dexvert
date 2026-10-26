@@ -386,13 +386,14 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
-	//      archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener
+	//      archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener, archive:Peach.NijiDatOpener, archive:Youkai.DatOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
 	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:AirNovel.AirOpener
 	// SEEN TWICE:
 	//		archive:Will.ArcOpener, archive:StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener, archive:Nekopunch.PakOpener, archive:Key.PakOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
+	/^archive:AviOpener \(GENERIC AVI\)/,
 	/^archive:BlackRainbow\.DatOpener /,
 	/^archive:Broccoli\.MpegVideoOpener /,
 	/^archive:CandySoft\.FpkOpener /,
@@ -405,6 +406,7 @@ export const WEAK_VALUES =
 	/^archive:Guyzware.GdpOpener /,
 	/^archive:Mink\.GrpOpener /,
 	/^archive:Mokopro\.NNNNOpener /,
+	/^archive:MpgOpener \(GENERIC MPG\)/,
 	/^archive:Parsley\.CgV1Opener /,
 	/^archive:Xuse\.BinOpener /,
 	/^archive:Youkai\.VoiceDatOpener /,
@@ -447,7 +449,9 @@ export const WEAK_VALUES =
 	//		DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
 	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, GB_UBA
 	//		LUG_LIONHEAD, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4, LZ, GLB
-	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, DAT_ARCV, BF_BIG, WAR_WARC, PACKED_BFPK, ZSM_ZSNDXBOX
+	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, DAT_ARCV, BF_BIG, WAR_WARC, PACKED_BFPK, ZSM_ZSNDXBOX, IMG_AFS_2, PFS_PFS, DBS_WAVFILE
+	//		BMC_BM, AUDIOPKG_V18, XWB_WBND_5, SPD_HEAD, IBT_DXT_DXT, TLB_HLIB, SFX_5, DAT_WWWW, ANI_ANI, DAT_CHELALIC, ARC_16, 000_12, 000_13
+	//		001_5, BIN_7L_2, ZXC_90, GRP_3, PRE_OPEN_2
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XXX_RU
 	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PRS
@@ -495,6 +499,7 @@ export const WEAK_VALUES =
 	/^geArchive: CWG_VW( |$)/,
 	/^geArchive: DATA_KAPL( |$)/,
 	/^geArchive: DBS( |$)/,
+	/^geArchive: DLL_MZ( |$)/,
 	/^geArchive: DNI_DIRT( |$)/,
 	/^geArchive: DTA(_DTA)?( |$)/,
 	/^geArchive: DSRES_DSIGTANK( |$)/,
@@ -503,6 +508,7 @@ export const WEAK_VALUES =
 	/^geArchive: FMF_FMF( |$)/,
 	/^geArchive: FSB_FSB5( |$)/,
 	/^geArchive: FTR_MFIL( |$)/,
+	/^geArchive: FLD( |$)/,
 	/^geArchive: FLX( |$)/,
 	/^geArchive: FOG( |$)/,
 	/^geArchive: FUK_XV4( |$)/,
@@ -723,7 +729,7 @@ export const WEAK_VALUES =
 
 	// vgmstream
 	// SEEN  ONCE:
-	//		???
+	//		seb
 	// SEEN TWICE:
 	//		???
 	/^vgmstream: exakt_sc/,
@@ -1900,7 +1906,7 @@ export const WEAK_VALUES =
 	/^WordPerfect document \(Amiga\)$/,
 	/^Wyse WY-60 soft font$/,
 	/^X1 compressed archive$/,
-	/^XBase DataBase File \(generic/,
+	/^[xX]Base DataBase File \(generic/,
 	/^Xexor disk image$/,
 	/^XMash compressed disk image$/,
 	/^XNA Framework Content Pipeline Binary/,
@@ -2820,6 +2826,7 @@ export const WEAK_VALUES =
 	/^TIM2 PlayStation2 bitmap$/,
 	/^Tim Newport-Peace's Special Use Airspace Format$/,
 	/^Timed Text Markup Language/,
+	/^Toon Boom Studio animation$/,
 	/^Tools Media Corp\. Texture$/,
 	/^Tomato ARM config format$/,
 	/^TOPO topographic Data$/,

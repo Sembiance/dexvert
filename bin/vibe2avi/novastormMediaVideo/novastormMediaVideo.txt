@@ -1,0 +1,559 @@
+NOVASTORM PCFM MEDIA STREAM
+Binary format specification and converter behavior
+Revision: 2026-10-26
+
+1. SCOPE AND NOTATION
+
+This document describes the DOS Novastorm PCFM video codec and its sequential
+chunk container, including SHED/SAMP sound, SPAL palettes, HMSK collision
+masks, and ZBUF depth maps. It is sufficient to implement the bytecode decoder
+without access to an encoder. File extensions are not part of identification.
+Console video formats and other Psygnosis resource formats are outside this
+specification.
+
+All multibyte integers are unsigned and little-endian unless stated otherwise.
+u8, u16 and u32 occupy one, two and four bytes. Hexadecimal opcode values have
+the prefix 0x. Byte offsets in field tables are relative to the chunk payload.
+Coordinates have origin at the top left. Width is horizontal; height is
+vertical. Palette indices and local color selectors are different quantities.
+
+The codec and auxiliary-data behavior described here were recovered from the
+DOS implementation, including its opcode dispatch table, expansion routines,
+renderer, collision queries, and sound driver. There are 119 legal block
+opcodes. No hidden byte padding or opaque per-frame trailer is required.
+
+Important limits of what the file itself expresses:
+
+* There are no checksums, timestamps, explicit frame durations, keyframe flags,
+  or reliable resynchronization markers independent of the chunk lengths.
+* The game can supply palette entries, timing, overlays, sprites, and sound
+  effects externally. These cannot be recovered from a media stream that does
+  not contain them.
+* Corruption that leaves valid bytecode is indistinguishable from intentional
+  image or sound data. Destroyed or missing bytes cannot be reconstructed from
+  this format alone. Recognizing the location of such bytes is not decoding
+  their original contents.
+
+2. CONTAINER
+
+Every chunk has this structure:
+
+  Offset  Size  Meaning
+       0     4  Four literal ASCII tag bytes; case sensitive
+       4     4  u32 payload_length
+       8     N  Payload, where N = payload_length
+
+The next chunk starts at current_offset + 8 + payload_length. There is NO
+alignment padding, including after an odd-length payload. This differs from
+RIFF. A chunk header or payload may begin at an odd file offset. The input
+container has no enclosing RIFF header, directory, index, version number, or
+total-length field.
+
+The stream starts with optional SHED, then PCFM, then SPAL. Frame groups
+contain an optional SAMP preceding FRAM, with optional ZBUF and/or HMSK
+following that frame. Either order of ZBUF and HMSK is supported. EOFL ends
+the stream. Auxiliary data pertains to the associated video frame, rather
+than constituting an additional video frame. When an auxiliary chunk is
+absent, the game's previous auxiliary state persists. Its initial state is
+an empty hit mask and a depth map filled with 0xF.
+
+Tags and payload sizes:
+
+  SHED     8              Sound playback parameters
+  PCFM     6              Video geometry and declared frame count
+  SPAL     4 + 3 * count  VGA palette range
+  SAMP     block_length  Unsigned 8-bit mono PCM
+  FRAM     variable      Frame number, block mask, block update bytecode
+  HMSK     variable      Horizontal collision-mask row records
+  ZBUF     288           Packed 32 by 18 depth codes
+  EOFL     0             End of stream
+
+There are no known additional tags in this profile. A consumer should not
+assume that an unrecognized tag at an expected boundary is safely skippable:
+the boundary or length may itself have been overwritten.
+
+3. SHED: SOUND HEADER
+
+  Offset  Type  Meaning
+       0   u32  Sound Blaster DSP time constant T; upper 24 bits zero
+       4   u32  Nominal PCM samples/bytes per video frame, B
+
+T is in 0..255. The implemented DMA block profile has B in 1..65535.
+The associated sound coding is mono unsigned linear 8-bit PCM. The DSP rate
+corresponding to the time constant is:
+
+  exact_sample_rate = 1,000,000 / (256 - T) samples per second
+
+For T = 193 this is 1,000,000/63, approximately 15873.015873 Hz. The second
+field is a byte/sample count, not a sample rate, bit rate, or duration. A
+common playback configuration is B = 1133.
+
+Evidence qualification: the DOS video-opening routine skips the SHED chunk
+and uses sound-driver defaults rather than reading these two values into the
+driver. Those defaults correspond to the fields above; DSP command 0x40
+uses T and the sample-copy/DMA routines use B. Interpreting arbitrary other
+SHED values by the same parameter model is the converter's generalization;
+their use by other game executables has not been independently established.
+The physical eight-byte layout and the supported parameter constraints are
+unambiguous. This qualification must not be mistaken for an explicit frame
+rate stored in SHED.
+
+Without SHED, a PCFM stream can contain video alone. An isolated SAMP without
+sound parameters is not sufficient to establish a playback sample rate.
+
+4. PCFM: VIDEO HEADER
+
+  Offset  Type  Meaning
+       0   u16  Declared number of frames, F
+       2   u16  Image width W in pixels
+       4   u16  Image height H in pixels
+
+F, W and H are positive. W and H must be multiples of eight. Let:
+
+  BX = W / 8
+  BY = H / 8
+  N  = BX * BY
+
+The supported DOS renderer uses one-byte BX and BY values, so both must be
+in 1..255. N must be divisible by eight for the frame block-mask layout.
+The ordinary gameplay canvas is 256 by 144, with BX = 32, BY = 18, N = 576.
+The converter computes these quantities from the header.
+
+There is no codec ID, duration, frame rate, bit depth, aspect ratio, sound
+channel count, or audio rate inside PCFM. Codec state is persistent across
+FRAM chunks. F is a count, not a last-frame index.
+
+5. SPAL: GLOBAL PALETTE
+
+  Offset  Type/size  Meaning
+       0        u16  First palette entry P
+       2        u16  Number of entries C
+       4      3 * C  Consecutive RGB triplets for entries P through P+C-1
+
+Require 1 <= C <= 256 and P + C <= 256. Each component is an unsigned VGA
+six-bit DAC value in 0..63, stored in a complete byte with its upper two bits
+zero. The order is red, green, blue. There is no alpha component.
+
+SPAL modifies only its specified range. Palette entries outside that range
+are not supplied by this chunk. In the game, these can belong to other game
+graphics. A standalone renderer needs an explicit initial palette policy.
+The converter initializes unspecified entries to black and applies SPAL
+updates in stream order. It maps a six-bit component v to eight bits using
+(v << 2) | (v >> 4), preserving both endpoints. This is a display mapping;
+the source stores six-bit components, not sRGB transfer characteristics.
+
+6. SAMP: AUDIO DATA
+
+Every payload byte is one unsigned 8-bit mono PCM sample. The value 128 is
+silence, 0 is the negative endpoint, and 255 is the positive endpoint. There
+is no predictor, compression, packet header, sample counter, alignment byte,
+or per-chunk sample-rate field. Retain the entire payload in physical order.
+
+The ordinary SAMP payload has exactly B bytes. One block accompanies one
+FRAM. If an audio-enabled frame has no SAMP, the original player supplies B
+bytes of 128. SAMP itself does not include game sound effects mixed from other
+resources at runtime. A file conversion cannot reproduce those effects.
+
+7. FRAM: FRAME LAYOUT AND PERSISTENT BLOCK STATE
+
+  Offset          Size  Meaning
+       0             2  u16 frame number, ordinarily zero-based
+       2           N/8  Updated-block bit mask
+   2+N/8      variable  One block operation for each set mask bit
+
+For block i, the mask test is:
+
+  mask[i // 8] & (0x80 >> (i % 8))
+
+Process blocks in ascending i. A clear bit changes nothing and consumes no
+operation. A set bit consumes exactly one opcode and its operands. There is
+no explicit block-operation count and no per-block byte length. After all N
+mask bits have been examined, the payload must be exhausted exactly.
+
+Blocks are COLUMN-MAJOR, unlike the ZBUF cells:
+
+  block_x = i // BY
+  block_y = i % BY
+  pixel_origin = (8 * block_x, 8 * block_y)
+
+Each block stores:
+
+* C[0..15]: sixteen global palette indices, one byte each.
+* S[0..7][0..7]: sixty-four local selectors, each in 0..15.
+
+The displayed pixel at local position (x,y) is global_palette[C[S[y][x]]].
+Unmodified colors and selectors persist between frames. Zero initialization
+is used for the standalone decoder. A self-contained first frame must define
+all state it needs; no reference picture is implicitly stored elsewhere in
+the file. There is no periodic state reset or implicit reset when the frame
+number changes.
+
+The DOS representation stores each row as a 32-bit word with eight nibbles:
+the leftmost selector is bits 31..28, the rightmost is bits 3..0. These words
+describe the decoded state; they are not generally literal words on disk.
+
+8. BLOCK OPERATIONS
+
+An operation updates local colors, selectors, or both. Color operands are
+global palette indices. No opcode directly writes RGB values. When the
+selector update mode is "none", all old selectors survive, even when the
+new operation changes fewer colors than the old selectors can address.
+
+8.1 Clear operations
+
+  Opcode  Operands  Action
+  0x00    none      Set all 64 selectors to 0; retain all C entries.
+  0x20    u8 v      Set C[0] = v; set all selectors to 0; retain C[1..15].
+
+Neither operation fills all sixteen color entries.
+
+8.2 One-bit selector families
+
+  Opcodes                  Selector update
+  0x40 0x44 0x48 0x4C      none
+  0x50 0x54 0x58 0x5C      selected rows, raw 1-bit pixels
+  0x60 0x64 0x68 0x6C      all rows, raw 1-bit pixels
+
+In each group, opcode bit 3 requests a new C[0] byte, and bit 2 requests a
+new C[1] byte. Read C[0] first if selected, then C[1]. Thus 0x40 is a no-op,
+0x44 changes C[1] only, 0x48 changes C[0] only, and 0x4C changes both.
+Other entries C[2..15] remain unchanged. Selector operands follow the colors.
+
+8.3 Two-bit selector families
+
+  Opcodes     Selector update
+  0x80..0x8F  none
+  0x90..0x9F  selected rows, 2-bit run-pair coding
+  0xA0..0xAF  all rows, 2-bit run-pair coding
+
+The low opcode nibble is a four-entry color update mask:
+bit 3 selects C[0], bit 2 C[1], bit 1 C[2], and bit 0 C[3]. Read one byte
+per selected entry in ascending entry order. Leave C[4..15] unchanged.
+An all-zero color mask is valid. Selector operands follow these colors.
+
+8.4 Four-bit selector families
+
+  Opcodes     Selector update
+  0xC0..0xCF  none
+  0xD0..0xDF  selected rows, 4-bit run-pair coding
+  0xE0..0xEF  all rows, 4-bit run-pair coding
+
+For low opcode nibble 1..15, update the first four C entries according to
+the same four-entry mask used in section 8.3.
+
+For low opcode nibble 0, read an ADDITIONAL u16 color mask. Bit 15 selects
+C[0], bit 14 C[1], ..., bit 0 C[15]. Read the selected color bytes in
+ascending C index order. This mask can be zero. Its bytes are little-endian;
+the significance of its bits is still C[0] at bit 15. In particular, 0xC0,
+0xD0 and 0xE0 always consume this two-byte mask.
+
+8.5 Color-reference operations
+
+  Opcodes: none / selected / all   Colors copied   Selector coding
+  0x08 / 0x09 / 0x0A              first 2         raw 1-bit
+  0x30 / 0x70 / 0xB0              first 4         2-bit run pairs
+  0x0C / 0x0D / 0x0E              all 16          4-bit run pairs
+
+Every such opcode first reads a u8 offset d. Copy the indicated prefix of C
+from block i+d to block i. Require i+d < N. The offset is unsigned, relative
+to the current block, and expressed in column-major block units. Zero is
+legal and means self-reference. These instructions do not copy selectors.
+The source block's state is read at the time of the operation. For d > 0 it
+has not yet been updated during the current frame, so its previous-frame
+colors are used. The selector operands, if any, follow d.
+
+8.6 Invalid opcodes
+
+The complete legal set is the union of sections 8.1 through 8.5: 119 values.
+Every remaining byte value is invalid, including 0x01..0x07, 0x0B, 0x0F,
+most values in 0x10..0x7F, 0xB1..0xBF, and 0xF0..0xFF. There is no generic
+fallback opcode, motion-vector family, escape byte, or end-of-block marker.
+
+9. SELECTOR ROWS AND RUN-PAIR CODING
+
+9.1 Selected rows
+
+After any color operands, a selected-row operation reads a u8 row mask.
+Bit 7 selects the BOTTOM row y=7; bit 0 selects the TOP row y=0. Traverse
+selected rows in descending y order, from 7 to 0. Unselected rows retain
+their complete prior selector contents. This ordering applies to raw
+one-bit, two-bit RLE, and selected-row four-bit RLE operations.
+
+A zero selected-row mask is malformed for the DOS decoder: its unpacking
+loops do not support an empty target. A safe implementation must reject it.
+
+9.2 All rows
+
+There is no row-mask byte for a full-block operation. The target is 64
+selectors. The stream row order is:
+
+  one-bit raw:   y=7,6,5,4,3,2,1,0  (bottom to top)
+  two-bit RLE:   y=7,6,5,4,3,2,1,0  (bottom to top)
+  four-bit RLE:  y=0,1,2,3,4,5,6,7  (TOP TO BOTTOM)
+
+The full four-bit case is deliberately different from the selected-row
+four-bit case. Within every row, pixels run from left to right.
+
+9.3 Raw one-bit selectors
+
+Read exactly one byte for each target row. Bit 7 gives the leftmost pixel's
+selector and bit 0 gives the rightmost. Each selector is 0 or 1. No bit
+packing crosses a row boundary.
+
+9.4 Run lengths shared by the two-bit and four-bit encodings
+
+Each control byte describes TWO PAIRS of runs. The high control nibble
+describes the first pair and the low nibble describes the second. Given a
+descriptor nibble d:
+
+  first_run_length  = (d >> 2) + 1
+  second_run_length = (d & 3) + 1
+
+Both lengths are 1..4. A pair supplies a first selector a and second selector
+b. Emit a for the first run length, then b for the second run length. There
+is no condition requiring a != b. Append output continuously across target
+rows; run boundaries need not coincide with row boundaries. Selected rows
+are concatenated for this purpose, excluding the unselected rows entirely.
+
+9.5 Two-bit selectors
+
+Read a control byte c, then one value byte v. For c's high-nibble pair:
+
+  a = (v >> 6) & 3
+  b = (v >> 4) & 3
+
+For c's low-nibble pair:
+
+  a = (v >> 2) & 3
+  b = v & 3
+
+Process the high pair first, then the low pair only if more pixels are
+needed. Both value pairs share the same already-consumed value byte.
+Repeat with another control/value pair until the target is full.
+
+9.6 Four-bit selectors
+
+Read a control byte c, then a value byte v for its high-nibble descriptor.
+The first selector is v >> 4 and the second is v & 15. If more pixels are
+needed after that run pair, read a SECOND value byte and apply the same
+selector extraction to c's low-nibble descriptor. Repeat as necessary.
+
+Unlike the two-bit case, each pair has its own value byte. If the target
+finishes after the first pair, there is no second value byte to consume.
+
+9.7 Exact termination and unused bits
+
+Stop as soon as a complete run pair fills or exceeds the target pixel count.
+Discard any pixels from that pair beyond the target. Overrun of the final
+pair is valid; it is not an additional row or block. Never read another pair
+merely to align the input. If termination follows a control byte's first
+pair, the low control nibble is unused. In the two-bit case, the value byte's
+low nibble is also unused. Those bits belong to the consumed bytes but do
+not affect the decoded image. No restrictions apply to their values.
+
+10. HMSK: GAMEPLAY HIT MASK
+
+HMSK describes a fixed 256 by 144 collision plane, independent of PCFM block
+ordering. It is not a transparency or display mask. Expand row records from
+y=0 to y=143. Each record begins with a u8 opcode h:
+
+  h = 0..15:
+    Initial membership bit = h >> 3.
+    Number of horizontal edge bytes = h & 7.
+    Read exactly that many u8 x coordinates, in stored order.
+    Produce one row with this initial bit and edge list.
+
+  h = 17..160:
+    Produce h-16 rows, all with initial bit 0 and no edges.
+
+  h = 161..255:
+    Produce h-160 rows, all with initial bit 1 and no edges.
+
+  h = 16:
+    Invalid zero-length run.
+
+Runs cannot extend beyond row 143. The expanded result must contain exactly
+144 rows, and the payload must be consumed exactly. A solid-one run longer
+than 95 rows needs more than one record.
+
+Coordinates are absolute x positions, not delta lengths. Do NOT sort or
+reject a nonmonotonic edge list. The exact game query for x in 0..255 is:
+
+  membership = initial_bit
+  for edge in stored_edge_order:
+      if x < edge:
+          break
+      membership = membership XOR 1
+  return membership
+
+For monotonic edges this is the familiar alternating-span representation,
+with a toggle at x=edge. With nonmonotonic edges, the early stop remains
+significant. Counting every edge <= x without that stop can give a different
+result. Repeated edge positions are permitted. A row without edges has its
+initial bit everywhere.
+
+The DOS decoder represents each row internally using eight bytes: a header
+whose bit 7 is the initial bit and low three bits are the edge count, followed
+by the edge bytes. Unused internal bytes are not stored in the file and are
+irrelevant to the query. The converter exposes the complete row records in
+verbose JSON and implements the query as mask_hit().
+
+11. ZBUF: GAMEPLAY DEPTH
+
+The payload is exactly 288 bytes, representing 576 four-bit depth codes in
+a 32-column by 18-row ROW-MAJOR grid. Each cell covers an 8 by 8 region of
+the 256 by 144 gameplay coordinate plane. For cell (cx,cy):
+
+  byte = payload[cy * 16 + cx // 2]
+  code = byte >> 4          if cx is even
+         byte & 15         if cx is odd
+
+For pixel coordinates use cx=x//8 and cy=y//8. Thus a packed byte covers
+16 horizontal pixels; its high nibble covers the left eight.
+
+Codes 0..14 are quantized game-depth values; the gameplay comparisons use
+code << 4 (0,16,...,224), sometimes with object-specific biases. Code 0 is
+also used by foreground collision tests. Code 15 is the far/no-obstacle
+sentinel, not an ordinary finite depth at 240. There is no physical-unit,
+camera-calibration, or perspective metadata in ZBUF.
+
+Depth codes are not palette indices, image alpha, run lengths, or codec
+references. A video renderer must not composite the depth map onto FRAM.
+The converter decodes and validates every ZBUF and exposes its 18 rows of
+32 codes in verbose JSON. No gameplay simulation is required for AVI output.
+
+12. EOFL AND CORRECTNESS CHECKS
+
+EOFL has an empty payload. No bytes follow it in a complete standalone
+stream. A reader should validate all of the following:
+
+* Header order, exact fixed payload lengths, dimensions, and palette ranges.
+* Each chunk boundary and length against the remaining file size.
+* FRAM block-mask length, all opcode assignments, operand availability,
+  color-reference bounds, row masks, and exact payload exhaustion.
+* HMSK expanded height and exact payload exhaustion; ZBUF's exact length.
+* Declared versus recovered frame counts and normal frame-number ordering.
+* EOFL presence and absence of trailing bytes.
+
+These checks identify structural errors, not all corrupted values. An audio
+byte, color index, legal opcode operand, or legal mask edge can change while
+every structural check still succeeds.
+
+13. STANDALONE CONVERTER
+
+Invocation:
+
+  python3 novastormMediaVideo.py inputFile outputFile.avi
+  python3 novastormMediaVideo.py inputFile outputFile.avi -verbose
+  python3 novastormMediaVideo.py inputFile outputFile.avi --fps 14
+  python3 novastormMediaVideo.py inputFile outputFile.avi --fps 1443/103
+
+Python 3.8 or later and the standard library are sufficient. No codec DLL,
+FFmpeg installation, game executable, external palette, Pillow, NumPy, or
+other supporting file is required to run the converter. The documentation
+and regression tests are not runtime dependencies.
+
+The default writes only the requested AVI. Diagnostics go to standard error
+and a short completion message goes to standard output. It creates no
+temporary files, extracted audio, image sequence, or metadata sidecar.
+-verbose (also --verbose) additionally writes outputFile.avi.json, including
+chunk offsets, lengths, statuses, frame numbers, byte accounting, opcode
+counts, warnings, decoded HMSK rows, and decoded ZBUF codes. Created output
+files have mode 0664, subject to filesystem support. The destination's parent
+directory must already exist. Input/output identity, including hard links,
+is rejected.
+
+The output is classic indexed RIFF AVI with bottom-up uncompressed 24-bit
+BGR frames and, when SHED is present, unsigned 8-bit mono PCM. Source video
+pixels are rendered directly; no lossy video compression is applied. Source
+PCM samples are copied without normalization, interpolation, or gain changes.
+AVI's own chunk-alignment padding is written as required by RIFF; this does
+not imply any padding in the source format.
+
+AVI has an integer audio sample-rate field. The converter rounds the DSP rate
+to the nearest integer. Unless --fps is supplied, audio-enabled streams use:
+
+  AVI_sample_rate = round(1,000,000 / (256-T))
+  AVI_frame_rate = AVI_sample_rate / B
+
+For T=193 and B=1133, these are 15873 Hz and 1443/103 frames/s. This policy
+aligns one complete sound block with one video frame. It is a deterministic
+muxing policy, not a recovered PCFM timestamp. The original game also has
+external scheduler timing. Audio-free streams default to the nominal game
+cadence of 14 frames/s; --fps is necessary when a different external cadence
+is intended. An explicit --fps changes video timing but not PCM sample rate.
+The source does not provide enough information to infer arbitrary external
+timing. Square pixels are used because no aspect-ratio field is present.
+
+The muxer supports classic AVI below 4 GiB. It does not implement OpenDML
+multi-RIFF extensions. If the generated output would exceed that limit, the
+converter fails and removes its partial output. Larger exports require an
+OpenDML muxer or another container; this is an output-container limit.
+
+14. IDENTIFICATION AND DAMAGED-INPUT POLICY
+
+Before opening the destination, the converter requires a valid optional
+eight-byte SHED, exact six-byte PCFM, supported geometry, and a complete valid
+initial SPAL. It does not identify the format by name or extension and does
+not write anything for an unrelated input. Invalid/unsupported identifying
+headers are rejected without creating or truncating the destination. If a
+recognizable header is damaged so severely that geometry or the initial
+palette cannot be established, no defensible rendering can be produced.
+
+After recognition, a structurally bad FRAM at a known chunk boundary is
+handled atomically: restore its incoming block state, output the previous
+picture, and continue at the next known boundary. Before the first complete
+frame there is no prior picture to repeat, so such a frame and its associated
+audio are skipped. Missing state updates can affect subsequent interframes
+until their relevant state is overwritten. A syntactically valid later frame
+does not prove that its displayed image is now identical to the lost original.
+
+Malformed auxiliary data is reported but does not suppress a valid picture.
+Available SAMP bytes are retained even when their declared length is unusual
+or the final audio chunk is truncated. A genuinely omitted audio chunk for a
+frame supplies silence as described above. The converter retains physical
+frame order and warns about unexpected frame numbers; it does not invent
+missing intermediate frames based on those numbers. Available trailing PCM
+can make recovered audio slightly longer than recovered video.
+
+At an unknown tag/boundary or an incomplete chunk header, stop and retain the
+validated prefix. Do not scan arbitrary compressed data for plausible tags:
+the same bytes can occur inside audio or video payloads. A truncated known
+chunk is treated as damaged, without reading beyond EOF. Trailing bytes
+after EOFL are reported. A missing terminator or count mismatch is reported.
+No data is substituted from a same-name file or another copy.
+
+Exit status is zero when an AVI was produced, including a warned partial
+recovery; it is nonzero for rejected input, no decodable picture, or a fatal
+output error. A fatal error after AVI creation removes the partial AVI.
+The destination is otherwise overwritten when a recognized video is
+successfully converted. Preserve an existing destination separately if needed.
+
+Verbose byte accounting partitions the complete input into parsed eight-byte
+chunk headers, successfully interpreted payloads, entire available payloads
+of damaged chunks, and unparsed tails. The sum equals the input byte length.
+"Damaged payload" conservatively includes the whole affected payload, even
+if some of its leading operands were readable. This is coverage accounting,
+not a claim that unrecoverable bytes have been understood.
+
+15. REMAINING LIMITS AND HOW TO REMOVE THEM
+
+All legal opcodes and the listed auxiliary chunk grammars are implemented.
+The following cannot be supplied by further bytecode guessing:
+
+* Overwritten sectors and truncated tails need an intact copy or a fresh
+  extraction from the original medium. Safe recovery across a lost boundary
+  needs independently verified offsets, not a tag-signature search.
+* A value changed to another legal value needs a trusted checksum or original
+  copy to identify and repair it.
+* Exact externally scheduled playback needs the relevant game/player timing
+  or a supplied --fps value. General SHED values beyond the established DOS
+  configuration need an encoder or another implementation to verify their
+  original intended use independently.
+* An externally defined palette entry, HUD overlay, sprite, or runtime sound
+  effect needs the corresponding game resources and execution context.
+* Exports exceeding classic AVI size limits need OpenDML support.
+
+Those limitations are distinct from unknown opcode semantics. In particular,
+there is no basis for claiming that every byte of a damaged file can be
+decoded or that a checksum-free stream is necessarily free of corruption.

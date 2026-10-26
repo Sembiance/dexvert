@@ -10,6 +10,7 @@ export class jpg extends Format
 	magic            = [
 		"JFIF JPEG bitmap", "JPEG image data", "JPEG bitmap", "JPEG File Interchange Format", "JFIF-EXIF JPEG Bitmap", "Macintosh JPEG bitmap (MacBinary)", "HSI JPEG bitmap", "image/jpeg", "piped jpeg sequence (jpeg_pipe)", "Format: JPEG",
 		"JPEG Stereoscopic bitmap", /^deark: jpeg \(JPEG\/(Exif|JFIF)/, /^deark: jpeg \((JPEG \(other\)|JPEG-HDR)\)/, /^deark: jpeg$/, /^JPEG (CMYK|Grayscale|TrueColor) \(v[\d.]+\) :(frm|fsy|jpeg|jps|mph):$/, "JPEG based file :*:",
+		/^geViewer: JPEG_JFIF( |$)/,
 		/^idarc: JPG /,	// trailing space intentional
 		"Pegasus JPEG bitmap",	// supposedly a variant of JPEG but it seems to work just fine as a normal JPEG
 		"OpalVision JPEG bitmap", // some sort of JPG variant, but seems to convert just fine (VPRNCE07.jpeg)

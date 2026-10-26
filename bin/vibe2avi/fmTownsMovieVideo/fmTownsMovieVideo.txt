@@ -1,0 +1,428 @@
+FM TOWNS MOV2 MOVIE FORMAT
+MOVE / MOVPLAY / MOVREC and Ugoku Zansu
+=====================================
+
+Scope and implementation status
+-------------------------------
+This document describes the MOV2 container and its 320 x 240, 16-bit image
+instruction set. MOV2 is a program of persistent image-buffer updates, delays,
+finite loops and sound commands. It is not QuickTime, despite the usual .MOV
+extension. The related VD00 and VD02 formats are different containers and are
+outside this specification and the accompanying converter.
+
+The image instruction grammar, container fields, playback control and sound
+command envelopes are documented below. The converter implements all seven
+image block types, including types not commonly emitted by later encoders.
+It parses sound commands and F000 uploads but DOES NOT RENDER AUDIO. It is
+therefore not a complete audiovisual MOV2 player. A complete implementation
+also needs Towns FM/PCM instrument-bank loading and sound synthesis, including
+external FMB, PMB and SND resources and the Towns BIOS sound API behavior.
+Those companion formats and their synthesis engines are not fully specified
+here. Their absence must not be confused with absence of sound commands.
+
+There is no field identifying the player revision. Early and later players
+interpret some fields differently. This is an actual compatibility ambiguity,
+not something a parser can reliably infer from a filename or image content.
+The converter selects the later, 1993 playback behavior by default and exposes
+--legacy-player for the early scrolling and repeat-count behavior.
+
+Notation and storage rules
+--------------------------
+Offsets are in bytes. Integer fields are unsigned little-endian unless stated
+otherwise. u8, u16 and u32 occupy 1, 2 and 4 bytes. s8 is a signed byte.
+Hexadecimal numbers have a 0x prefix. There is no implicit alignment between
+records: a u16 or u32 can start at an odd file offset. Sizes exclude the header
+of their own record unless explicitly stated. No checksum is defined.
+
+The file consists of a 256-byte main header followed by frame records. A frame
+record consists of a 32-byte frame header and its declared payload. A nonempty
+payload is a u16 block count followed by that many length-delimited blocks.
+There is no frame index table, palette or separate in-file sound track.
+
+Main header: 256 bytes
+----------------------
+Offset  Size  Meaning
+0       4     ASCII signature MOV2 (4D 4F 56 32).
+4       4     Bits per stored pixel: 16.
+8       4     Total movie-body bytes; excludes this 256-byte header.
+12      4     Number of stored frame records, before loop expansion.
+16      4     Image-buffer width: 320 pixels.
+20      4     Image-buffer height: 240 pixels.
+24      4     Image-buffer row stride: 640 bytes.
+28      4     Main wait, in nominal 1/60-second ticks.
+32      2     Display rectangle left x coordinate.
+34      2     Display rectangle top y coordinate.
+36      2     Display rectangle right x coordinate, inclusive.
+38      2     Display rectangle bottom y coordinate, inclusive.
+40      8     FMB instrument-bank basename, without extension.
+48      6     Instrument numbers for FM channels 0, 1, 2, 3, 4, 5.
+54      2     Reserved; no playback operation.
+56      8     PMB instrument-bank basename, without extension.
+64      8     Instrument numbers for PCM channels 64 through 71.
+72      8     SND buffer slot 0 name or allocation descriptor.
+80      8     SND buffer slot 1 name or allocation descriptor.
+88      8     SND buffer slot 2 name or allocation descriptor.
+96      8     SND buffer slot 3 name or allocation descriptor.
+104     8     SND buffer slot 4 name or allocation descriptor.
+112     8     SND buffer slot 5 name or allocation descriptor.
+120     8     SND buffer slot 6 name or allocation descriptor.
+128     8     SND buffer slot 7 name or allocation descriptor.
+136     14    Signed pan values for channels 0..5, then 64..71.
+150     1     Timing mode in bit 0: 0 wait then display; 1 display then wait.
+151     105   Reserved; no playback operation.
+
+The display rectangle does not change compression addresses or buffer size.
+All image instructions still address the complete 320 x 240 canvas. Rectangle
+width is right-left+1, and height is bottom-top+1. The old all-zero rectangle
+means the complete canvas, not a one-pixel movie. Values outside the canvas or
+inverted endpoints are malformed. Cropping to the rectangle is a standalone
+export decision; the original application could place the movie on a larger
+screen. The MOV2 file does not store that application's screen or placement.
+
+Names use the DOS/Japanese environment's byte encoding (CP932 in the
+converter), terminate at the first NUL, and may occupy all eight bytes. Append
+.FMB, .PMB or .SND as appropriate. Files are external to the MOV2 byte stream.
+The converter resolves basenames in the input directory without case
+sensitivity and reports missing or ambiguous names. It does not follow path
+separators inside these basename fields. Bytes after a terminating NUL do not
+contribute to a filename.
+
+For an SND slot, a nonzero first byte selects the name interpretation. A zero
+first byte instead selects an allocation descriptor: bytes +0..+3 have no
+name meaning, and bytes +4..+7 are the u32 capacity to allocate. Zero capacity
+means no buffer. These buffers can receive F000 upload blocks. They are logical
+sample-buffer slots, not eight independently playing hardware channels.
+
+Pan -64 is full left, 0 is center, and +63 is full right. Out-of-range signed
+values are clamped by the player. The high seven bits at offset 150 have no
+assigned timing operation. Writers should zero unused and reserved bytes.
+
+Frame header: 32 bytes
+---------------------
+Offset  Size  Meaning
+0       4     Page/frame number, normally increasing from zero.
+4       4     Frame payload bytes; excludes this 32-byte header.
+8       2     Early player: horizontal display scroll offset.
+10      2     Early player: vertical display scroll offset.
+12      2     Additional frame wait, in nominal 1/60-second ticks.
+14      2     Loop control word.
+16      4     Sound event 0 (reserved in the early player).
+20      4     Sound event 1.
+24      4     Sound event 2.
+28      4     Sound event 3, or SND-buffer playback command.
+
+Frame numbers are labels, not byte offsets or timestamps. Frames are located
+by adding 32 plus the payload size to the current frame offset. A payload of
+zero bytes is an image no-op; timing, sound and loop fields still apply. A
+nonempty payload must contain its two-byte block count, even when it is zero.
+
+The later player treats bytes 8..11 as reserved and explicitly clears them
+before displaying. The early player uses x and y as a cyclic display origin:
+output pixel (xout,yout) reads buffer ((xout+x) mod 320,(yout+y) mod 240).
+This changes presentation, not the persistent decoding buffer or motion source
+coordinates. Valid early offsets are 0..319 and 0..239. The converter ignores
+invalid offsets with a warning when early compatibility is selected.
+
+Timing
+------
+A frame's stored delay is main_wait + frame_wait. It is a count of vertical
+synchronization ticks, conventionally described as 1/60 second. It is not a
+constant-rate header FPS value. Real execution also takes decoding time and
+can depend on the selected player and hardware synchronization. Exact physical
+wall-clock timing cannot be recovered from MOV2 alone.
+
+Mode 0 waits and then presents the new image. Thus a frame's wait holds the
+previous displayed image. Mode 1 presents the new image and then waits, so the
+wait belongs to the image just decoded. Sound commands are processed after
+the frame display routine returns: in mode 0 this follows presentation; in
+mode 1 it follows the post-presentation wait. A faithful sound renderer must
+preserve this ordering and the sound engine's state across frame boundaries.
+
+A zero sum means that no explicit wait was requested. It does not encode 10,
+30 or any other recoverable fixed FPS. Early unsynchronized players could run
+as fast as decoding allowed. For a deterministic export, the converter uses
+10 fps for zero-delay frames by default, as an explicit user-selected policy.
+--zero-wait-fps accepts 10, 15, 30 or 60. Nonzero stored waits are unchanged.
+
+The AVI time base is 60 ticks/second. Mode 0 starts with a black image for the
+first delay and retains the last displayed image for one terminal tick, so
+that the last display event is visible. That final 1/60 second is an export
+endpoint convention, not an extra field in the source. Mode 1 needs no extra
+terminal tick. Whole-movie repetition in a player UI is not encoded as an
+infinite file duration; the converter exports one outer traversal.
+
+Loops
+-----
+0x0000: no loop operation.
+0x0001..0x7FFF: start a loop with the specified count.
+0x8000..0xFFFF: end the innermost loop; writers normally emit 0xFFFF.
+
+The loop start and end frames are both included in each iteration. Control is
+processed after the frame's display and sound operations. At a start frame,
+push its position and remaining repeat count unless returning to that same
+active start. At an end frame, jump to the stored start if repeats remain,
+otherwise pop the loop. Image and sound state persist through the jump;
+a loop is not a request to restore a saved framebuffer.
+
+Later playback interprets N as N total iterations (initial remaining count
+N-1). Early playback initializes the remaining count to N, giving N extra
+iterations, or N+1 total. There is no revision discriminator in the file.
+The intended nesting limit is eight. The converter diagnoses unmatched ends,
+excess nesting and unterminated starts rather than reproducing unsafe memory
+accesses of an old player. --max-frames limits expanded source-frame visits;
+the default is 10,000,000 and is checked before creating the AVI.
+
+Sound events and upload behavior
+-------------------------------
+Every sound event is four u8 fields:
+
+    enable, channel_or_buffer, note, velocity
+
+For instrument events, enable=0 means no operation; the other three bytes
+have no effect. A nonzero enable requests key-off on the selected channel,
+then key-on with the note and velocity if velocity is nonzero. Thus velocity
+zero explicitly stops that channel. FM channel numbers are 0..5 and PCM
+instrument channels are 64..71. Instrument assignments come from the main
+header. Notes and velocities are passed to the Towns sound API; they are not
+PCM bytes or frequencies stored directly in the movie.
+
+The early player uses the events at offsets 20 and 24, leaving offset 16
+reserved. The later player uses all three. The event at offset 28 is overloaded:
+when SND buffers have been allocated/loaded, its second byte is buffer index
+0..7, and playback uses physical PCM channel 71. Enable 1 selects SND_pcm_play;
+enable >=2 selects SND_pcm_play2. Playback first stops the existing PCM stream
+on channel 71, then passes the note, velocity and selected SND buffer to the
+chosen API. A zero enable does nothing. This is not interchangeable with an
+instrument key-off event. If SND-buffer mode is inactive, the later player
+uses offset 28 as a fourth ordinary instrument event.
+
+SND-buffer mode depends on successful allocation/loading, so failure to find
+companion assets can change original-player behavior. The converter reports
+missing assets and never substitutes an invented instrument or guessed sound.
+
+F000 block uploads are described below. The original frame dispatcher retains
+the last F000 upload descriptor in a frame; after decoding/display and before
+the SND trigger, the player copies it to the selected allocated SND buffer,
+provided its size does not exceed the buffer capacity. Consequently, multiple
+F000 blocks in one frame do not imply multiple independent playback commands.
+Uploaded bytes include whatever SND header/sample representation the sound API
+expects. The outer MOV2 grammar supplies their exact byte count but does not
+turn them into an AVI-compatible audio stream.
+
+A complete audio implementation must load instrument banks, retain envelope
+and oscillator state, implement channel pan and velocity, synthesize the
+YM2612 FM and RF5C68 PCM paths with Towns BIOS semantics, and honor SND playback
+modes and uploads. It must then interleave the resulting samples at the frame
+event times. The accompanying converter does not yet implement those steps,
+even if companion files are provided. It emits a video-only AVI and an explicit
+warning when sound commands or embedded uploads are present.
+
+Image buffer and pixel format
+-----------------------------
+The logical buffer is 153600 bytes: 240 rows of 320 little-endian u16 pixels.
+Pixel (x,y) is at byte address y*640 + x*2. A compression address is a byte
+address, never a pixel index. Runs may cross rows and 65536-byte address pages;
+the high/low address grouping does not split the actual copy operation.
+
+Bits 0..4 contain blue, bits 5..9 red, and bits 10..14 green. Bit 15 is the
+Towns hardware transparency flag, not an extra color bit. On a standalone
+black underlay a transparent pixel is black. An external application's other
+video planes are not contained in the file and cannot be reconstructed. The
+converter expands an opaque five-bit channel c to floor(c*255/31) in 8-bit RGB.
+The file does not specify a color profile, gamma transform or CRT calibration.
+
+Initialize the decoding buffer to black for standalone export. Decode each
+frame's blocks in stored order. Pixels that are not written retain their
+previous value. Before processing the frame, preserve an immutable copy of
+the preceding full buffer for motion reads. All motion instructions in the
+frame read that same snapshot, even if earlier instructions have overwritten
+the source region in the current output buffer. Display scrolling and cropping
+must not alter that snapshot.
+
+Block envelope
+--------------
+Offset  Size  Meaning
+0       2     Block type.
+2       4     Block-body byte count.
+6       count Exactly that many body bytes.
+
+A zero-size body is a no-op, including for a normally structured block type.
+The next block starts immediately after the body; do not align it. An unknown
+block type can be skipped safely by its length in a positively identified MOV2
+container, but its visual/audio effect is then unsupported and must be reported.
+There is no defined padding at the end of a populated known block or frame.
+
+Variable run length
+-------------------
+Read a u8 n. If n < 255, that is the length. Otherwise read u16 n. If n < 65535,
+that is the length. Otherwise read a u32 n, which is the length. The escape
+bytes do not count toward the run length. Length zero writes nothing; the
+run's other fields still occupy their specified bytes. Word types count
+2-byte units, and dword types count 4-byte units. The dword value is an ordered
+pair of pixels, which need not have equal colors.
+
+Address groups
+--------------
+The following reusable structure encodes runs sharing address high words:
+
+    u16 number_of_groups
+    repeat number_of_groups times:
+        u16 address_high
+        u16 number_of_runs
+        repeat number_of_runs times:
+            u16 address_low
+            variable_length count
+            optional run data, as specified by the block type
+
+The absolute byte address is (address_high << 16) | address_low. A valid image
+write starts on an even address and lies wholly inside the 153600-byte buffer.
+A dword run requires only pixel alignment, not four-byte alignment. Counts and
+addresses are independent; none is an implicit end marker.
+
+Type 0x0222: word fill, run-local value
+-------------------------------------
+The body is one address-groups structure. After each run length is a u16 pixel
+value. Write that value count times starting at the run address. The value is
+present even if count is zero.
+
+Type 0x1222: word fills grouped by value
+---------------------------------------
+    u16 number_of_values
+    repeat number_of_values times:
+        u16 pixel_value
+        address_groups, with no extra per-run data
+
+Write the current pixel_value count times for each run in its address groups.
+
+Type 0x1422: dword fills grouped by value
+----------------------------------------
+Identical to 0x1222, except pixel_value is a u32 containing two pixels and each
+run length counts repetitions of this four-byte pattern. A run of length N
+writes 4*N bytes (2*N pixels).
+
+Type 0x2222: word literal runs
+-----------------------------
+The body is one address-groups structure. Each run length is followed by
+2*count literal bytes, copied verbatim to the run address.
+
+Type 0x2422: dword literal runs
+------------------------------
+The body is one address-groups structure. Each run length is followed by
+4*count literal bytes, copied verbatim to the run address.
+
+Type 0x3010: individually positioned motion boxes
+------------------------------------------------
+    u16 number_of_boxes
+    repeat number_of_boxes times:
+        u32 destination_byte_address
+        u16 source_x_in_pixels
+        u16 source_y_in_pixels
+
+Each operation copies a 16 x 16 pixel square from the preceding-frame snapshot
+to the current buffer. Each copied row is 32 bytes; both buffers have 640-byte
+row stride. The destination need not lie on the 16-pixel tile grid. Its address
+must be even and its derived pixel origin must fit a 16 x 16 square inside the
+canvas. Source x must be <=304 and source y <=224. There is no wraparound.
+Later writes can overwrite an earlier destination without changing its source
+snapshot. A box descriptor is exactly eight bytes after the initial count.
+
+Type 0x3110: complete raster of motion boxes
+------------------------------------------
+A nonempty body is exactly 1200 bytes: 300 consecutive pairs of u16 source_x,
+u16 source_y. There is no initial box count or stored destination address.
+For pair i, where 0<=i<300, destination x=(i mod 20)*16 and y=floor(i/20)*16.
+Copy a 16 x 16 square from the preceding-frame snapshot using the same rules
+as 0x3010. This covers the complete canvas in 20 columns by 15 rows.
+
+Type 0xF000: SND-buffer upload
+-----------------------------
+    u32 buffer_index             (0..7)
+    u32 bytes_to_copy
+    u8  data[bytes_to_copy]
+
+A populated block body is exactly 8+bytes_to_copy bytes. It carries no drawing
+operation. Buffer allocation, last-upload selection and sound command ordering
+are described in the sound section. The converter parses and validates this
+envelope but does not synthesize or copy it into a working audio engine.
+
+File boundaries, reserved data and damage
+-----------------------------------------
+The declared movie end is 256+main_header.body_size. Bytes beyond this boundary
+are outside the MOV2 movie; the format does not assign them an additional frame,
+checksum or sector-padding role. In particular, their mere presence does not
+extend the declared frame sequence. An implementation can report or preserve
+them diagnostically, but should not scan them for plausible pictures and append
+those pictures silently. There is no mandated 512-byte file alignment.
+
+Reserved fields have known absence of playback semantics in the selected
+revision. Zero is the conventional value; a nonzero value is not a license to
+invent a new operation. Likewise, the unused bytes of disabled sound events
+are not additional commands. Byte accounting must distinguish such storage
+from active operands rather than discarding it without explanation.
+
+A robust parser validates the MOV2 signature and fixed image layout before
+creating output. Unsupported dimensions/depth/stride should be refused. For a
+recognized but damaged movie, follow declared lengths with strict file and
+parent-record bounds. Retain completed operations before a truncated operand;
+never consume bytes from the next block to finish it. Invalid buffer addresses
+must not cause memory writes outside the image. Partial frame/block headers,
+unused payload tails and mismatched counts should be diagnosed. Recovery by
+scanning for guessed frame signatures is not part of this format.
+
+The converter walks records inside the declared body, reports a mismatch with
+the stored frame count, and bounds a truncated body by physical EOF. It keeps
+complete operations before an error, retains the previous image elsewhere,
+and continues at the next declared record boundary when available. Unknown
+blocks are skipped with a warning. It cannot reconstruct missing pixels,
+missing frame headers or absent external resources. A file with no recoverable
+frame is rejected without an AVI. A truncated main header is also rejected.
+
+Converter interface and output
+------------------------------
+    python3 fmTownsMovieVideo.py inputFile outputFile
+    python3 fmTownsMovieVideo.py inputFile outputFile -verbose
+    python3 fmTownsMovieVideo.py inputFile outputFile --legacy-player
+
+The converter uses only Python 3.9+ standard-library modules; it needs no
+original player binaries, ffmpeg, emulator, image library or supporting data
+file to decode video. Output is RIFF AVI 1.0 with lossless PNG (MPNG) video,
+24-bit RGB, and a 60-Hz stream time base. Empty AVI video chunks hold the
+preceding picture; an explicit final PNG packet fixes the stream endpoint.
+Players need PNG-in-AVI support. No audio stream is currently produced.
+
+Only outputFile is created by default. Warnings go to stderr. -verbose also
+creates outputFile.json with parsed headers, frame/block offsets, byte ranges,
+trailer information and warnings. Neither mode creates extracted frames or
+temporary media files. Existing output paths are refused, and a failed new AVI
+write is removed. Files created by the converter have mode 0664. The script
+never overwrites its input. RIFF AVI 1.0 limits the output to less than 4 GiB;
+OpenDML output would be needed to exceed that bound.
+
+Remaining work for complete audiovisual support
+----------------------------------------------
+Implement and independently validate FMB/PMB loading, SND header and sample
+interpretation, both SND playback calls, FM/PCM synthesis and exact event
+ordering. Obtain the referenced companion banks/samples when absent; a MOV2
+command stream cannot recover their waveforms or instrument parameters.
+Validate resulting audio against the original Towns sound API or a verified
+machine emulator, then add synchronized PCM audio to the AVI. The current
+video-only implementation must not be described as 100% format support.
+
+Primary evidence
+----------------
+Container descriptions and original decoder/player implementations by Hiroshi
+Toda, archived with the FM Towns Free Software Collections, establish the
+field meanings and algorithms. Later library machine code resolves behavior
+not exposed in the older player source. These are research references, not
+runtime dependencies, and no original player binary is bundled:
+
+MOVE documentation and original assembly decoder:
+https://discmaster.textfiles.com/view/659/FM%20Towns%20Free%20Software%20Collection%204%20-%20Disc%201.iso/toda/move.doc
+https://discmaster.textfiles.com/view/659/FM%20Towns%20Free%20Software%20Collection%204%20-%20Disc%201.iso/toda/src/asm/move32.asm
+
+Original MOVPLAY source:
+https://discmaster.textfiles.com/view/659/FM%20Towns%20Free%20Software%20Collection%204%20-%20Disc%201.iso/toda/src/movplay.c
+
+Ugoku Zansu documentation and later playback library:
+https://discmaster.textfiles.com/view/664/FM%20Towns%20Free%20Software%20Collection%209.iso/t_os/tool/ugoku/ugoku.doc
+https://discmaster.textfiles.com/view/664/FM%20Towns%20Free%20Software%20Collection%209.iso/t_os/tool/ugoku/src/ugokulib/ugoku.lib

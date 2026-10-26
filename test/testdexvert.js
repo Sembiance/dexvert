@@ -118,6 +118,7 @@ const FORMAT_OS_HINT = {
 	},
 	"archive/iso" :
 	{
+		"990426_1712.iso"                     : "chinese",
 		"OS_user_4.0.iso"                     : "nextstep",
 		"Random-Dot 3D.iso"                   : "macintoshjp",
 		"Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp",
@@ -259,7 +260,8 @@ const SUPPORTING_FILES = {
 		doomPicture        : /PNAMES$/,
 		fractalImageFormat : /\.ftt$/i,
 		printMasterShape   : /\.sdr$/i,
-		quakeGFXLMP        : /palette\.lmp$/
+		quakeGFXLMP        : /palette\.lmp$/,
+		ripScrip           : /\.ic[n1456]$/i
 	},
 	music :
 	{

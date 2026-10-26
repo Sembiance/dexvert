@@ -1,0 +1,458 @@
+IMPERIUM GALACTICA ANIMATION: SPIDYANI VERSION 2
+Binary format specification and converter behavior
+
+Scope
+-----
+This document describes the SpidyAni2 animation container with six-bit VGA RGB
+palettes or direct eight-bit RGB palettes, both differential RLE encodings,
+optional LZSS compression, and signed PCM sound. It specifies byte order, field sizes, instruction
+semantics, frame assembly, and audio interpretation sufficiently to implement
+an independent decoder. The extension is commonly .ANI, but identification
+must use the signature, never the filename.
+
+The container does not encode playback frame rate or audio start delay. These
+are external player parameters. Consequently a file alone cannot establish
+its exact original presentation timing. Other application-dependent details,
+including the complete language-ID enumeration, are not encoded as descriptive
+metadata. The limitations section distinguishes these facts from implemented
+binary decoding rules.
+
+Notation and overall organization
+---------------------------------
+U8 means an unsigned byte. U16LE is an unsigned two-byte little-endian integer:
+value = byte[0] + 256 * byte[1]. All multi-byte numbers in this format are
+little-endian. Offsets below are hexadecimal unless labeled otherwise.
+
+A file is:
+    19-byte main header
+    zero or more typed blocks, concatenated without padding
+    physical EOF
+
+The three block identifiers are the exact case-sensitive four-byte ASCII
+strings "Pal ", "Hang", and "Data". The trailing space in "Pal " matters.
+There is no generic chunk-size field, directory, footer, checksum, frame-end
+tag, timestamp, or alignment padding. Payload sizes depend on the tag and
+main-header flags. Searching payloads for these strings is incorrect because
+the same byte sequences can occur inside compressed images or PCM data.
+
+Main header (19 decimal bytes, 0x13)
+------------------------------------
+Offset   Size     Type       Meaning
+00       8        bytes      ASCII "SpidyAni" (53 70 69 64 79 41 6E 69).
+08       1        U8         ASCII version character '2' (0x32), not integer 2.
+09       2        U16LE      Encoding flags.
+0B       2        U16LE      Number of complete video frames.
+0D       2        U16LE      Complete frame width, in pixels.
+0F       2        U16LE      Complete frame height, in pixels.
+11       2        U16LE      Language/localization identifier.
+13                          First block begins here.
+
+The exact nine-byte identification sequence is "SpidyAni2". Dimensions must
+be nonzero. The frame count counts complete images, not Data blocks: a frame
+may occupy multiple strips. It does not include frames a presentation system
+might synthesize to hold an image while sound finishes.
+
+The language field is metadata, not a frame-rate field. Known assignments are
+1 = English and 2 = Hungarian. Other numerical IDs are allowed, do not change
+the codec, and must not be interpreted as an audio rate or delay. The complete
+mapping of IDs to languages is not established here.
+
+Flags (bit 0 is the least significant bit)
+-----------------------------------------
+Mask     Meaning in the supported profile
+0001     Required set bit for the compressed-image profile.
+0004     Clear: RLE method 1. Set: RLE method 2.
+0020     Clear: RLE payloads directly. Set: Data headers include an LZSS-output
+         size and each block selects LZSS or the explicit bypass sentinel.
+
+The supported combinations are 0x0001, 0x0005, 0x0021, and 0x0025. The meaning
+of bit 0 when clear, and of bits outside mask 0x0025, is not established.
+These are unsupported profiles, not flags a decoder may silently ignore.
+There is no known palette-depth flag in this mask.
+
+Palette block: "Pal "
+----------------------
+Relative offset   Size       Meaning
+00                4          ASCII "Pal ".
+04                768        256 consecutive RGB triplets.
+304                          Next block begins (772 bytes total).
+
+Entry i is at payload offsets 3*i, 3*i+1, 3*i+2: red, green, blue. Each
+component in the original VGA profile is an integer in 0..63, stored in one
+byte. All eight stored bits must be read and checked; the high two bits are
+not padding to mask off. Expand a component to an eight-bit channel as c << 2,
+giving 0..252. Do not substitute c*255/63 if matching the original decoder's
+color values is required. There is no alpha channel or transparent index.
+
+A palette block replaces all 256 entries and remains active until the next
+palette block. Multiple changes within one animation are valid. Pixel history
+must remain as palette indices. A skipped index in the next frame is rendered
+with the current palette, so a palette change can recolor unchanged pixels.
+The current palette is applied after all strips of a frame have been decoded.
+A palette block alone does not emit an additional video frame.
+
+The direct eight-bit RGB variant uses the same 256 RGB triplets, block size,
+signature, and encoding flags. Its components are already in 0..255 display
+units: use each R,G,B byte unchanged. Do not multiply by four, swap red and
+blue, or remove any low bits. Image compression and frame assembly are
+identical to the original six-bit profile.
+
+There is no header field that unambiguously chooses the palette interpretation.
+The converter's default --palette-mode auto uses this compatibility policy:
+  * Scan all structurally parsed palette blocks before rendering any frames.
+  * If any palette component anywhere in the file exceeds 63, use direct RGB8
+    for EVERY palette in the file, including earlier or later dark palettes.
+  * Otherwise use the original six-bit VGA interpretation for the whole file.
+
+This policy follows visual confirmation of direct RGB for the eight-bit
+variant. It is not an encoded format flag or an infallible depth detector.
+An eight-bit animation whose palettes all contain values <=63 is ambiguous;
+use --palette-mode rgb8 when its interpretation is known externally. Conversely,
+a damaged six-bit palette with a high component cannot always be distinguished
+from a valid eight-bit palette; --palette-mode vga6 forces strict six-bit
+validation. No filename, dimensions, directory, hash, or per-file exception
+table influences automatic selection.
+
+Sound block: "Hang"
+-------------------
+Relative offset   Size       Meaning
+00                4          ASCII "Hang".
+04                1270       PCM samples, one byte per sample.
+4FA                          Next block begins (1274 bytes total).
+
+The sound format is 22050 samples/second, one channel, signed eight-bit PCM.
+Each byte is a two's-complement sample: 00 is silence, 7F is +127, 80 is -128,
+and FF is -1. There is no sound header, predictor, companding, compression,
+channel identifier, length word, or timestamp inside a sound block.
+
+Concatenate every Hang payload in physical file order to obtain the audio
+sample stream. Its duration is total_audio_bytes / 22050 seconds. A block's
+duration is 1270/22050 seconds. Block interleaving can include audio preload;
+a Hang block's location relative to a Data block is not an audio timestamp.
+In particular, 22050/1270 is not a general video frame-rate derivation.
+
+To store these samples in conventional unsigned eight-bit PCM, XOR every byte
+with 0x80. This is a reversible representation change, with no resampling or
+volume change. The converter uses PCM_U8 in AVI and preserves every sample.
+
+Data block without the LZSS flag (flags & 0x20 == 0)
+---------------------------------------------------
+Relative offset   Size       Meaning
+00                4          ASCII "Data".
+04                2          U16LE stored RLE payload length S.
+06                2          U16LE strip width W.
+08                2          U16LE strip height H.
+0A                S          RLE bytecode payload.
+0A+S                         Next block begins.
+
+The payload uses the RLE method selected by main-header bit 2. S counts only
+the payload, not the tag or the six bytes of size/dimension fields. In this
+header layout S is an ordinary length; the LZSS bypass sentinel described
+below applies only when the LZSS header layout is in use.
+
+Data block with the LZSS flag (flags & 0x20 != 0)
+------------------------------------------------
+Relative offset   Size       Meaning
+00                4          ASCII "Data".
+04                2          U16LE RLE-stream length U (LZSS output size).
+06                2          U16LE stored-size field S.
+08                2          U16LE strip width W.
+0A                2          U16LE strip height H.
+0C                variable   Payload as determined below.
+
+If S != 0xFFFF:
+    Read exactly S bytes and LZSS-decompress them to exactly U bytes.
+    Feed those U bytes to the selected RLE decoder.
+    The next block begins at 0x0C + S.
+
+If S == 0xFFFF:
+    LZSS is bypassed for this block only.
+    Read exactly U bytes of already uncompressed RLE bytecode.
+    The next block begins at 0x0C + U.
+
+Thus U measures RLE bytecode, not the final pixel count. A bypass block can
+occur anywhere in an otherwise LZSS-coded stream. There is no persistent
+change of compression mode after a bypass block.
+
+Strip geometry and differential frame assembly
+-----------------------------------------------
+Create a width*height byte buffer of palette indices and initialize it to
+zero. It is retained across frames. The coordinate origin is the upper left;
+pixels are in row-major order, left to right, then top to bottom. Each Data
+block describes a full-width horizontal strip, W equal to the main width.
+H is positive and is no greater than the complete frame height. There are
+no encoded x/y offsets, tiles, row padding, or scanline terminators.
+
+At the beginning of a frame, set accumulated_rows = 0. Decode each strip
+starting at pixel offset accumulated_rows*width and covering W*H pixels.
+Then increase accumulated_rows by H. When it equals the main height, render
+and emit one complete frame using the current palette and reset only
+accumulated_rows to zero. Keep the entire index buffer for the next frame.
+A valid set of strips never exceeds the main height. Palette and sound blocks
+may occur between image blocks and do not increase accumulated_rows.
+
+Large images are split into strips to accommodate the original small-buffer
+implementation. Do not hardcode a particular strip height, number of strips,
+width, frame size, or strip arrangement. The encoded dimensions determine
+assembly. Each strip has a separate RLE byte stream and, if applicable, a
+fresh LZSS dictionary. RLE runs may cross rows within their strip.
+
+Both RLE encodings
+------------------
+The destination pointer begins at the first pixel of the strip. Skipping
+advances this pointer without modifying index bytes: it is a delta from the
+previous image, not transparent black or an XOR operation. Filling or copying
+writes palette indices, not RGB components. Values in literal operands and
+fill operands are always ordinary unsigned indices in 0..255, even when they
+look like control bytes.
+
+There is no bytecode terminator. Decode the complete payload and require that
+the destination pointer finishes exactly at the strip end. An instruction
+must not write or skip outside the strip. A two-byte count is U16LE and has
+its exact value; do not add one. A zero extended count is a no-op, with its
+operands still consumed. Zero-length fill instructions still consume their
+fill-value byte. A zero-length literal copy consumes its two count bytes.
+
+RLE method 1 (flag 0x0004 clear)
+
+Control byte C     Additional bytes             Operation
+00..7F            none                         Write C once; advance 1 pixel.
+80                count: U16LE                 Skip count pixels.
+81..BF            none                         Skip (C & 0x3F) pixels.
+C0                count: U16LE, value: U8       Fill count pixels with value.
+C1..FF            value: U8                    Fill (C & 0x3F) pixels with value.
+
+An index >=128 cannot be a method-1 standalone literal control byte. It can
+be written using a fill, including a one-pixel fill with C=0xC1. Method 1's
+C=0 is a literal zero, not an extended literal count.
+
+RLE method 2 (flag 0x0004 set)
+
+Control byte C     Additional bytes             Operation
+00                count: U16LE, count bytes    Copy count literal index bytes.
+01..7F            C bytes                      Copy C literal index bytes.
+80                count: U16LE                 Skip count pixels.
+81..BF            none                         Skip (C & 0x3F) pixels.
+C0                count: U16LE, value: U8       Fill count pixels with value.
+C1..FF            value: U8                    Fill (C & 0x3F) pixels with value.
+
+Only the 00..7F cases differ between the two methods. Method 2 is not PCX RLE,
+PackBits, Microsoft RLE8, or a format with end-of-line escape codes.
+
+LZSS layer
+----------
+Initialize a 4096-byte circular dictionary to all zeros for EACH Data block.
+Initialize its write cursor to 0xFEE (4078 decimal). Initialize output empty.
+The dictionary is not carried between strips or frames and is not seeded
+with spaces. All dictionary positions are valid references, including zeros
+that have not yet been overwritten.
+
+Read a flag byte F. For bit numbers k=0 through 7 in increasing order, while
+there is still compressed input remaining:
+
+  If (F >> k) & 1 == 1:
+    Read one literal byte V.
+    Append V to the RLE output stream.
+    Store V at dictionary[write_cursor].
+    Set write_cursor = (write_cursor + 1) & 4095.
+
+  If (F >> k) & 1 == 0:
+    Read two bytes A and B, in that order.
+    read_offset = A | ((B & 0xF0) << 4).
+    length = (B & 0x0F) + 3.
+    Repeat for j=0 through length-1:
+      V = dictionary[(read_offset + j) & 4095].
+      Append V to the RLE output stream.
+      Store V at dictionary[write_cursor].
+      Set write_cursor = (write_cursor + 1) & 4095.
+
+After eight tokens, read another flag byte if input remains. The match offset
+is an absolute circular-dictionary index, not a backwards distance. Matches
+can overlap the current write position, so bytes must be copied sequentially.
+A single slice from an unchanging dictionary is incorrect for such matches.
+Both dictionary reading and writing wrap at 4096.
+
+A literal uses one token-data byte; a match uses two. A flag byte's high bits
+can be unused when fewer than eight tokens remain. Those unused bits have no
+effect and are not required to be zero. There is no end-of-stream token: the
+stored payload length supplies the boundary. A final lone match operand is
+truncation. Require both complete compressed-input consumption and equality
+between the actual decompressed length and U. Do not silently zero-fill a
+short LZSS result to make its size match the header.
+
+Presentation parameters absent from the file
+---------------------------------------------
+The container establishes image order and audio sample order, but has no
+frame-rate or audio-delay field. The language identifier and counts are not
+substitutes for these parameters. Neither the ratio of total audio duration
+to frame count nor the physical interleaving is a reliable timing rule.
+
+The converter's default is an explicit presentation policy of 17.89 frames
+per second and zero audio start delay, corresponding to the default used by
+the Open-IG player. It is not recovered timing or a promise of exact original
+synchronization. The original player's per-animation choices can differ.
+The converter contains no filename-specific, hash-specific, or directory-
+specific rate/delay table. Use --fps and --audio-delay when authoritative
+external timing is available. FPS accepts a decimal or rational fraction;
+audio delay is a nonnegative number of seconds, rounded to the nearest sample
+(ties to even) at 22050 Hz. Sound never loses samples to fit the picture count.
+
+Converter usage, output, and dependencies
+----------------------------------------
+    python3 imperiumGalacticaAnimation.py inputFile outputFile
+    python3 imperiumGalacticaAnimation.py inputFile outputFile -verbose
+    python3 imperiumGalacticaAnimation.py inputFile outputFile --fps 20
+    python3 imperiumGalacticaAnimation.py inputFile outputFile \
+        --fps 1789/100 --audio-delay 1/2
+
+Python 3.8 or newer and an FFmpeg executable are required. All Python imports
+are from the standard library. FFmpeg must include the FFV1 encoder, rawvideo
+and AVI handling, and PCM_U8 support. --ffmpeg selects an executable explicitly.
+No Java runtime, external codec implementation, data table, palette file,
+third-party Python package, report assets, or other supporting file is needed
+at runtime.
+
+The only file written by a normal conversion is outputFile. No temporary
+video, sound, image, log, JSON, or metadata files are created. Even -verbose
+only prints diagnostics to stderr; it does not create sidecars. Executing the
+script directly does not create a Python bytecode cache. The converter pipes
+an uncompressed AVI representation to FFmpeg in memory. FFmpeg writes the
+requested, seekable, indexed output AVI with lossless FFV1 BGR video and, when
+present, unsigned eight-bit 22050-Hz mono PCM. File extensions do not control
+the output format. Existing destinations and identical input/output paths
+are refused. The finished file is readable by its owner and group.
+
+All original image dimensions are retained, including odd widths/heights.
+FFmpeg receives bottom-up BGR DIB rows padded to four-byte boundaries; this
+padding belongs only to the intermediate AVI and is unrelated to ANI data.
+The completed FFV1 file represents the exact RGB values of the selected
+palette interpretation. No interpolation, scaling, denoising, or synthesized
+fade is used.
+
+If the audio ends after the last source image at the chosen FPS, the converter
+holds that image for enough additional output frames to include all sound.
+If audio ends earlier, no audio is invented to match the picture length.
+An explicitly requested audio delay adds silence at the beginning. Source
+frame count, output frame count, and timing policy are distinguished in
+verbose diagnostics.
+
+Validation and recovery policy
+------------------------------
+A different signature/version or unsupported flag combination is rejected
+before output creation. In explicit vga6 mode, palette components above 63
+are also rejected. Auto mode instead selects direct RGB8 for such palettes,
+using one interpretation consistently throughout the file.
+Classification does not depend on file extension or name. A header is checked
+before the rest of a potentially unrelated input is read.
+
+For a positively identified, damaged supported-profile file:
+  * Trust only structural lengths; never search arbitrary bytes for a tag.
+  * Decode complete known blocks and retain known pixels from partial RLE
+    instructions where their meaning is established.
+  * Clip a damaged overflowing instruction to its strip and report the error;
+    never allow an instruction to resize the image buffer or modify another
+    strip. Leave undecoded pixels at their previous indices.
+  * On a bad LZSS stream, use the decoded prefix, report the length/operand
+    failure, and resume at the following structurally bounded block if possible.
+  * Recover a partial final frame using retained indices for missing rows.
+  * Preserve a truncated final audio payload's available samples.
+  * Keep an incomplete replacement palette's available prefix and retain the
+    missing entries from the preceding palette. Before any palette exists,
+    recovery uses black and explicitly reports the missing palette.
+  * Ignore neither unexpected trailing bytes nor count mismatches: report them.
+    An unknown block has no defined length, so decoding stops at that boundary.
+  * Use the number of images actually recovered, not invented images based
+    on a damaged declared count. A final-image hold for audio is separate.
+
+If no frame geometry or image data can be recovered, fail without an AVI.
+The implementation has an explicit 100-million-pixel image allocation limit;
+this is a resource-safety limit, not an encoded format restriction. Requested
+rates must fit AVI's 32-bit rate/scale fields; audio including explicit delay
+must fit its 32-bit sample-count field. These conditions produce errors.
+FFmpeg errors remove an incomplete new output. Warnings are written to stderr.
+
+A high palette component could mean the direct-RGB profile or corruption;
+those cases cannot always be distinguished from the bytes. Auto mode follows
+the direct-RGB compatibility policy. Explicit vga6 mode is available when
+strict validation of an original six-bit file is required.
+
+The Python module also exposes inspect(), frames(), and audit() for strict
+research validation. audit() requires exact block coverage, complete RLE and
+LZSS consumption, exact strip extents, and exact frame counts, and returns
+opcode statistics and a SHA-256 over decoded indices and palettes. Its
+internal audit_palette option permits inspection of palette bytes even when
+explicit vga6 mode would reject them. Normal conversion never enables this
+option. inspect() records the resolved palette_mode; verbose output records
+both that mode and the requested palette_mode_requested value.
+
+Palette selection and optional comparison modes
+----------------------------------------------
+The --palette-mode option selects one fixed interpretation for all palettes
+in an input. The default is auto, resolved from the entire file as specified
+above. Palette selection does not alter block parsing, frame indices, RLE,
+LZSS, audio, or presentation timing.
+
+Mode            Meaning
+auto            Default: RGB8 if any component exceeds 63 anywhere in the file;
+                otherwise VGA6. One mode is chosen before decoding frames.
+vga6            Require components 0..63, output RGB = component << 2.
+rgb8            Read each stored RGB triplet directly as eight-bit RGB.
+rgb8-to-vga6    Keep RGB order, output each component as component & 0xFC.
+                This removes the two low bits, equivalent to first reducing
+                to six-bit precision then expanding with << 2.
+bgr8            Treat each stored triplet as B,G,R instead of R,G,B, with
+                no component scaling.
+vga6-lowbits    Keep RGB order, output (component & 63) << 2. This models
+                taking only six low bits at the palette DAC interface.
+
+Example:
+    python3 imperiumGalacticaAnimation.py inputFile outputFile --palette-mode rgb8
+
+rgb8 is the confirmed interpretation for the direct-RGB variant. The remaining
+comparison modes are retained as explicit experiments, not automatic choices.
+rgb8-to-vga6 differs from rgb8 by at most three units per component; bgr8 and
+vga6-lowbits test alternate channel order and low-bit masking. Their availability
+does not establish that a particular writer/player intended those encodings.
+In all modes, conversion writes only the requested AVI, and
+unrelated signatures/versions and unsupported codec flags are still rejected.
+
+Completeness boundaries and further work
+----------------------------------------
+The six-bit and direct-RGB SpidyAni2 profiles' header, all three block types, both
+RLE methods, LZSS, bypass blocks, frame splitting, differential pixels,
+palette changes, and PCM data are implemented. No unknown opaque payload is
+silently discarded in a valid file of either profile.
+
+This is not a specification of every hypothetical SpidyAni version or flag
+combination. Meaning for other flag bits, an uncompressed profile with bit 0
+clear, other versions, other block tags, and the full language-ID enumeration
+would require evidence from their writer/player or additional defined data.
+The converter does not claim support for them.
+
+Exact original FPS and audio offset require external playback settings or
+analysis of the original game player; they cannot be derived uniquely from
+this container. The next step for exact presentation is to obtain those
+settings and supply them explicitly. Palette-depth selection remains a stated
+compatibility policy because the shared header has no reliable discriminator.
+Entirely dark eight-bit palettes require an explicit override or external
+knowledge. No per-file exception table is part of this converter.
+
+Technical references
+--------------------
+The container and instruction behavior can be cross-checked with the Open-IG
+project's technical descriptions and original decoder implementation. The
+implementation here is an independent Python decoder; Open-IG source is not
+a runtime dependency.
+
+Container description:
+https://github.com/akarnokd/open-ig/wiki/ANI-Format
+RLE bytecode description:
+https://github.com/akarnokd/open-ig/wiki/Custom-RLE
+LZSS description:
+https://github.com/akarnokd/open-ig/wiki/Custom-LZSS
+
+Decoder source revision: 9891378f2f00ba83d51ad92773f8cb2dd9744b12
+https://github.com/akarnokd/open-ig/tree/9891378f2f00ba83d51ad92773f8cb2dd9744b12/src/hu/openig/tools/ani
+Relevant files: SpidyAniFile.java, SpidyAniDecoder.java, RLE.java, LZSS.java,
+Framerates.java, and framerates.xml. The separate frame-rate configuration is
+evidence that timing is a player input rather than an encoded header field.

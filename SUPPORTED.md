@@ -1,4 +1,4 @@
-# Supported File Formats (3,958)
+# Supported File Formats (3,968)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -123,7 +123,7 @@ archive | [Cabinet](http://fileformats.archiveteam.org/wiki/Cabinet) | .cab | [c
 archive | Capcom ARC game archive | .arc | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/capcomARC/)
 archive | Castle Strike Game Archive | .rda | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/castleStrikeGameArchive/)
 archive | [CAZIP File](http://fileformats.archiveteam.org/wiki/CAZIP) | .caz _ | [deark](https://entropymine.com/deark/) [cazip](https://support.broadcom.com/external/content/release-announcements/CAZIP.exe-CAZIPXP.exe-and-Applyptf/7844) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/cazip/)
-archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh .img .toast | [uniso](https://github.com/Sembiance/dexvert/) [hfsexplorer](https://github.com/unsound/hfsexplorer) [fuseiso](https://sourceforge.net/projects/fuseiso) [aaru](https://github.com/aaru-dps/Aaru) [deark](https://entropymine.com/deark/) [cabextract](https://www.cabextract.org.uk/) | [114 sample files](https://sembiance.com/fileFormatSamples/archive/iso/) - This is a pretty big catch-all for many iso-like formats. Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported. PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs as each CD's data tracks are different per game. NOTE: If the tracks are split across multiple .bin files, the 'first track' will merge with following non-audio tracks (which won't be processed, unless of type audio, those get processed alone)
+archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh .img .toast | [uniso](https://github.com/Sembiance/dexvert/) [hfsexplorer](https://github.com/unsound/hfsexplorer) [fuseiso](https://sourceforge.net/projects/fuseiso) [aaru](https://github.com/aaru-dps/Aaru) [deark](https://entropymine.com/deark/) [cabextract](https://www.cabextract.org.uk/) | [115 sample files](https://sembiance.com/fileFormatSamples/archive/iso/) - This is a pretty big catch-all for many iso-like formats. Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported. PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs as each CD's data tracks are different per game. NOTE: If the tracks are split across multiple .bin files, the 'first track' will merge with following non-audio tracks (which won't be processed, unless of type audio, those get processed alone)
 archive | CD-i Real Time File | .rtf | [vibeExtract](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/realTimeFile/)
 archive | CEBE Compress Expand Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/cebeCompressExpandPacked/)
 archive | Centauri Resources Archive | .res | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/centauriResources/)
@@ -576,7 +576,7 @@ archive | Roland Disk Format | .dat | [vibeExtract](https://github.com/Sembiance
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar .exe | [unrar](https://www.rarlab.com/rar_add.htm) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [23 sample files](https://sembiance.com/fileFormatSamples/archive/rar/)
 archive | RPACK Archive | .rpack | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/rpack/)
 archive | RPG Maker Encrypted Archive | .rgss2a .rgss3a .rgssad | [rgssExtractor](https://github.com/KatyushaScarlet/RGSS-Extractor) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/rpgMakerEncryptedArchive/)
-archive | [RTPatch Self-Extracting Archive](http://justsolve.archiveteam.org/wiki/RTPatch) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/rtPatchSFX/)
+archive | [RTPatch Self-Extracting Archive](http://justsolve.archiveteam.org/wiki/RTPatch) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/rtPatchSFX/)
 archive | Rumble Fighter game data archive | .nsz | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/rumbleFighterGameDataArchive/)
 archive | Runaway: The Dream of the Turtle Archive | .000 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/runawayTheDreamOfTheTurtleArchive/)
 archive | Runes of Magic Game Archive | .fdb | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/runesOfMagicGameArchive/)
@@ -759,7 +759,7 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (196)
+## Audio (195)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | 208 Audio (Ocean Games) | .bnk | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/twoZeroEightAudio/)
@@ -797,8 +797,7 @@ audio | CompressWave audio | .cwav | [ffmpeg](https://ffmpeg.org/) [vgmstream](h
 audio | [CoreAudio Format](http://fileformats.archiveteam.org/wiki/Core_Audio_Format) | .caf | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/coreAudio/)
 audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_ADPCM) | .v8 .cvx | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/covoxADPCM/)
 audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [GARbro](https://github.com/shiikwi/GARbro) | [17 sample files](https://sembiance.com/fileFormatSamples/audio/voc/)
-audio | CRI ADX | .adx | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/adxCRI/)
-audio | CRI AFS | .afs | [ffmpeg](https://ffmpeg.org/) | 
+audio | CRI ADX | .adx | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/adxCRI/)
 audio | Cryo Interactive APC Audio | .apc | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/cryoInteractiveAPC/)
 audio | Cyberflix DreamFactory CFDF Audio | .trk | [vgmstream](https://github.com/vgmstream/vgmstream) [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/cyberflixDreamFactoryCFDFAudio/)
 audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [vibe2wav](https://github.com/Sembiance/dexvert) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/dataShowSound/)
@@ -892,7 +891,7 @@ audio | [Qualcomm Purevoice Audio](http://fileformats.archiveteam.org/wiki/Qualc
 audio | [RCA-VOC](http://fileformats.archiveteam.org/wiki/RCA-VOC) | .voc | [devoc](https://github.com/Sembiance/devoc) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/rcaVOC/)
 audio | [RealAudio](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .ra .rma .rmf | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/realAudio/)
 audio | RedSpark | .rsd | [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/redSpark/)
-audio | RenderWare Stream | .rws | [ffmpeg](https://ffmpeg.org/) | 
+audio | RenderWare Stream | .rws | [vgmstream](https://github.com/vgmstream/vgmstream) [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/renderWareStream/)
 audio | [RK Audio](http://fileformats.archiveteam.org/wiki/RK_Audio) | .rka | [ffmpeg](https://ffmpeg.org/) [rkau](https://www.sac.sk/download/pack/rkau107.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/rkAudio/)
 audio | Rockstar Games RSTM | .rstm | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/rockstarGamesRSTM/)
 audio | Sample DUMP Exchange Audio | .sdx | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/sampleDUMPExchange/)
@@ -1292,7 +1291,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (813)
+## Image (814)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1913,12 +1912,12 @@ image | Red Storm RSB | .rsb | [nconvert](https://www.xnview.com/en/nconvert/) [
 image | ReGIS | .regis | [abydosconvert](http://snisurset.net/code/abydos/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/regis/)
 image | [REKO Cardset](http://fileformats.archiveteam.org/wiki/REKO_Cardset) | .reko .deck .rkp | [deark](https://entropymine.com/deark/) [reko2png](https://github.com/Sembiance/reko2png) | [17 sample files](https://sembiance.com/fileFormatSamples/image/rekoCardset/)
 image | [Rembrandt True Color Picture](http://fileformats.archiveteam.org/wiki/Rembrandt) | .tcp | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/rembrandt/)
-image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [pabloDraw](http://picoe.ca/products/pablodraw/) [abydosconvert](http://snisurset.net/code/abydos/) | [15 sample files](https://sembiance.com/fileFormatSamples/image/ripScrip/)
+image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [vibe2svg](https://github.com/Sembiance/dexvert) [pabloDraw](http://picoe.ca/products/pablodraw/) [abydosconvert](http://snisurset.net/code/abydos/) | [22 sample files](https://sembiance.com/fileFormatSamples/image/ripScrip/)
 image | Renderware Texture | .txd_tex | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [29 sample files](https://sembiance.com/fileFormatSamples/image/renderwareTexture/)
 image | Reunion Graphic | .pic | [wuimg](https://codeberg.org/kaleido/wuimg) | [8 sample files](https://sembiance.com/fileFormatSamples/image/reunionGraphic/)
 image | [Ricoh JSI Image](http://justsolve.archiveteam.org/wiki/J6I) | .j6i | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/ricohJ6I/)
 image | RIFF Palette | .pal | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/riffPalette/)
-image | [RIP Icon](http://fileformats.archiveteam.org/wiki/RIPscrip_Icon) | .icn | [deark](https://entropymine.com/deark/) [abydosconvert](http://snisurset.net/code/abydos/) | [16 sample files](https://sembiance.com/fileFormatSamples/image/ripIcon/)
+image | [RIP Icon](http://fileformats.archiveteam.org/wiki/RIPscrip_Icon) | .icn .ic1 .ic4 .ic5 .ic6 | [deark](https://entropymine.com/deark/) [abydosconvert](http://snisurset.net/code/abydos/) | [20 sample files](https://sembiance.com/fileFormatSamples/image/ripIcon/)
 image | [Rocky Interlace Picture](http://fileformats.archiveteam.org/wiki/Rocky_Interlace_Picture) | .rip | [recoil2png](http://recoil.sourceforge.net) | [134 sample files](https://sembiance.com/fileFormatSamples/image/rockyInterlace/)
 image | RollerCoaster Tycoon Picture | .tp4 | [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [13 sample files](https://sembiance.com/fileFormatSamples/image/rollerCoasterTycoonPicture/)
 image | [RPG Maker XYZ Bitmap](http://fileformats.archiveteam.org/wiki/XYZ_(RPG_Maker)) | .xyz | [xyz2png](https://github.com/EasyRPG/Tools) [wuimg](https://codeberg.org/kaleido/wuimg) [nconvert](https://www.xnview.com/en/nconvert/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/rpgMakerXYZ/)
@@ -2015,6 +2014,7 @@ image | [Tiny Stuff](http://fileformats.archiveteam.org/wiki/Tiny_Stuff) | .tn1 
 image | [TkImg RAW Image](http://fileformats.archiveteam.org/wiki/TkImg_RAW) | .raw | [tkimgConvert](http://tkimg.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/tkImgRAW/)
 image | [Tobias Richter Fullscreen Slideshow](http://fileformats.archiveteam.org/wiki/Tobias_Richter_Fullscreen_Slideshow) | .pci | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](http://snisurset.net/code/abydos/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/tobiasRichterSlideshow/)
 image | [TommySoftware CAD/Draw Drawing](http://fileformats.archiveteam.org/wiki/CAD/DRAW) | .t4g .t3g .t2g .mpg | [CADDraw](https://archive.org/details/t425l1e_zip) | [12 sample files](https://sembiance.com/fileFormatSamples/image/CADDrawDrawing/)
+image | Toon Boom Studio Drawing | .tbd | [vibe2svg](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/image/toonBoomStudioDrawing/)
 image | Total Annihilation GAF Image | .gaf | [nconvert](https://www.xnview.com/en/nconvert/) | [15 sample files](https://sembiance.com/fileFormatSamples/image/totalAnnihilationGAF/)
 image | [ToyBox Icon](http://fileformats.archiveteam.org/wiki/ToyBox_icon) | .tbi | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/toyBoxIcon/)
 image | TRS-80 | .grf .max .p41 .pix | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) | [12 sample files](https://sembiance.com/fileFormatSamples/image/trs80Star/)
@@ -2656,7 +2656,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,182)
+## Text (1,183)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2845,7 +2845,7 @@ text | CLISP byte-compiled Lisp program | .fas |  | [13 sample files](https://se
 text | Cloanto Personal Paint Rexx script | .pprx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/cloantoPersonalPaintRexxScript/)
 text | Cloanto Personal Paint Settings | .set |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/cloantoPersonalPaintSettings/)
 text | Clustal Alignment format | .nbrf .aln |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/clustalAlignmentFormat/)
-text | COBOL source | .cbl |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/cobol/)
+text | COBOL source | .cbl |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/cobol/)
 text | Code::Blocks Dependencies | .depend |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/codeBlocksDependencies/)
 text | CODESYS Symbols | .sym |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/codesysSymbols/)
 text | ColdFusion Component | .cfc |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/coldFusionComponent/)
@@ -3356,6 +3356,7 @@ text | Orbiter scenario | .scn |  | [11 sample files](https://sembiance.com/file
 text | ORIGIN System Checksum | .chk |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/originSystemChecksum/)
 text | OS/2 Install Catalog File | .icf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/os2InstallCatalogFile/)
 text | OS/2 install Package | .pkg |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/os2InstallPackageMeta/)
+text | OS/2 Mahjongg Solitaire game layout | .mah |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/os2MahjonggSolitaireGameLayout/)
 text | OS/2 Network Information File | .nif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/os2NetworkInformationFile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .rexx .rex |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/rexx/)
 text | OVA Manifest | .mf |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/ovaManifest/)
@@ -3844,7 +3845,7 @@ text | ZIM Wiki |  |  | [9 sample files](https://sembiance.com/fileFormatSamples
 
 
 
-## Video (179)
+## Video (188)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 video | [3GP/3GPP2 Video](http://fileformats.archiveteam.org/wiki/3GP) | .3gp .3g2 | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/threeGVideo/)
@@ -3914,7 +3915,9 @@ video | [Flash Video](http://fileformats.archiveteam.org/wiki/FLV) | .flv | [ffm
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [ffmpeg](https://ffmpeg.org/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) | [19 sample files](https://sembiance.com/fileFormatSamples/video/flc/)
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) [na_game_tool](https://nihav.org/game_tool.html) | [15 sample files](https://sembiance.com/fileFormatSamples/video/fli/)
 video | FLK Animation | .flk | [na_game_tool](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/video/flkAnimation/)
+video | FM Towns Movie video | .mov | [vibe2avi](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/video/fmTownsMovieVideo/)
 video | FM Towns MVB Video | .mvb | [na_eofdec](https://nihav.org/eofdec.html) | [3 sample files](https://sembiance.com/fileFormatSamples/video/fmTownsMVBVideo/)
+video | Fujitsu Movie | .mve | [vibe2avi](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/video/fujitsuMovie/)
 video | [FutureVision FST video](https://wiki.multimedia.cx/index.php/FutureVision_FST) | .fst | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/futureVisionFSTVideo/)
 video | GameCube THP Video | .thp | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/video/gameCubeTHPVideo/)
 video | Gates of Skeldal Video | .mgf | [na_game_tool](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/gatesOfSkeldalVideo/)
@@ -3928,6 +3931,7 @@ video | [IBM PhotoMotion MM Video](https://wiki.multimedia.cx/index.php/IBM_Phot
 video | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/idRoQ/)
 video | [IFF YAFA Animation](http://fileformats.archiveteam.org/wiki/YAFA) | .yafa | [abydosconvert](http://snisurset.net/code/abydos/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/iffYAFA/)
 video | Ikarion Movie | .mvi | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/ikarionMovie/)
+video | Imperium Galactica Animation | .ani | [vibe2avi](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/video/imperiumGalacticaAnimation/)
 video | [Intel Indeo Video File](https://wiki.multimedia.cx/index.php/Indeo_IVF) | .ivf | [nihav](https://git.nihav.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/intelIndeoVideoFile/)
 video | [Intelligent Games Video/cutscene](https://wiki.multimedia.cx/index.php/Intelligent_Games_MOV) | .mov | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/intelligentGamesVideoCutscene/)
 video | Interactive Pictures Video | .evd .gvd .fvd | [na_game_tool](https://nihav.org/game_tool.html) | [12 sample files](https://sembiance.com/fileFormatSamples/video/interactivePicturesVID/)
@@ -3939,6 +3943,7 @@ video | [Interspective Animation](https://wiki.multimedia.cx/index.php/Interspec
 video | [JAM Video](https://wiki.multimedia.cx/index.php/JAM) | .jam | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/jamVideo/)
 video | [Jazz Jackrabbit 2 Video](https://wiki.multimedia.cx/index.php/Jazz_Jackrabbit_2_J2V) | .j2v | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/jazzJackrabbit2Video/)
 video | [KDV video](https://wiki.multimedia.cx/index.php/KDV) | .kdv | [na_game_tool](https://nihav.org/game_tool.html) | [11 sample files](https://sembiance.com/fileFormatSamples/video/kdvVideo/)
+video | Kheops Studio Video | .ksv | [vibe2avi](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/video/kheopsStudioVideo/)
 video | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php/Space_Adventure_MOV) | .mov .img .mv0 .mv1 .mv3 .mv4 .mv5 .mv6 .mv7 .mv8 .mv9 .im0 .im1 .im2 | [na_game_tool](https://nihav.org/game_tool.html) | [1 sample file](https://sembiance.com/fileFormatSamples/video/knowledgeAdventureMovie/)
 video | Lantern Movie | .mov | [na_eofdec](https://nihav.org/eofdec.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/lanternMovie/)
 video | [Legend Entertainment Q Video](https://wiki.multimedia.cx/index.php/Legend_Entertainment_Q) | .q | [na_game_tool](https://nihav.org/game_tool.html) | [13 sample files](https://sembiance.com/fileFormatSamples/video/legendEntertainmentQ/)
@@ -3951,6 +3956,7 @@ video | Magic Lantern DIFF Animation | .diff | [vibe2avi](https://github.com/Sem
 video | [MAGIX Video](http://fileformats.archiveteam.org/wiki/MAGIX_Video) | .mxv | [na_eofdec](https://nihav.org/eofdec.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/magixVideo/)
 video | [Mailestrom ANM](https://wiki.multimedia.cx/index.php/Maelstrom_ANM) | .anm | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/maelstromANM/)
 video | [Matroska Video](http://fileformats.archiveteam.org/wiki/MKV) | .mkv | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/mkv/)
+video | MDEC video stream | .str | [vibe2avi](https://github.com/Sembiance/dexvert) | [4 sample files](https://sembiance.com/fileFormatSamples/video/mdecVideoStream/)
 video | Microids GRN Video | .grn | [na_game_tool](https://nihav.org/game_tool.html) | [1 sample file](https://sembiance.com/fileFormatSamples/video/microidsGRN/)
 video | [Motion JPEG 2000](http://fileformats.archiveteam.org/wiki/MJ2) | .mj2 .mjp2 | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/motionJPEG2000/)
 video | [Motion Pixels MVI](https://wiki.multimedia.cx/index.php/Motion_Pixels) | .mvi | [nihav](https://git.nihav.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/video/motionPixelsMVI/)
@@ -3966,6 +3972,8 @@ video | MVR CCTV Video | .mvr | [ffmpeg](https://ffmpeg.org/) | [1 sample file](
 video | [NEOchrome Animation](http://fileformats.archiveteam.org/wiki/NEOchrome_Animation) | .ani | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/video/neochromeAnimation/)
 video | [Network Q RAC Rally full motion video](https://wiki.multimedia.cx/index.php/Network_Q_RAC_Rally_FMV) |  | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/networkQRACRallyFMV/)
 video | Ninell Animation |  | [na_game_tool](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/ninellAnimation/)
+video | Novastorm Media animation | .flm | [vibe2avi](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/video/novastormMediaAnimation/)
+video | Novastorm Media video | .fa .fza .mza | [vibe2avi](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/video/novastormMediaVideo/)
 video | [Nullsoft Video](https://wiki.multimedia.cx/index.php/Nullsoft_Video) | .nsv | [ffmpeg](https://ffmpeg.org/) | [6 sample files](https://sembiance.com/fileFormatSamples/video/nullsoftVideo/)
 video | [NuppelVideo](https://wiki.multimedia.cx/index.php/Nuppelvideo) | .nuv | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/nuppelVideo/)
 video | [NXL Video](https://wiki.multimedia.cx/index.php/NXL) | .nxl | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/nxlVideo/)
@@ -3991,6 +3999,7 @@ video | [RealVideo](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .rv
 video | [Reaper video](https://wiki.multimedia.cx/index.php/Reaper) | .fmv | [na_game_tool](https://nihav.org/game_tool.html) | [14 sample files](https://sembiance.com/fileFormatSamples/video/reaperVideo/)
 video | [RL2 Video](https://wiki.multimedia.cx/index.php/RL2) | .rl2 | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/rl2Video/)
 video | RPZA Video | .pdv | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/rpzaVideo/)
+video | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | [vibe2avi](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/video/screenCamVideo/)
 video | [Sega CPK video](https://wiki.multimedia.cx/index.php/Sega_FILM) | .cpk .cak .film | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/segaCPKVideo/)
 video | Sesame Street STR Video | .str | [na_game_tool](https://nihav.org/game_tool.html) | [1 sample file](https://sembiance.com/fileFormatSamples/video/sesameStreetSTR/)
 video | [Sierra Robot Animation](https://wiki.multimedia.cx/index.php/Robot_Animation) | .rbt | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/sierraRobotAnimation/)
@@ -4015,6 +4024,7 @@ video | [Video Master Film](http://fileformats.archiveteam.org/wiki/Video_Master
 video | Video Toaster RTV Video | .rtv | [na_eofdec](https://nihav.org/eofdec.html) | [3 sample files](https://sembiance.com/fileFormatSamples/video/videoToasterRTV/)
 video | [VivoActive Streaming Video](https://wiki.multimedia.cx/index.php/Vivo) | .viv | [nihav](https://git.nihav.org/) [ffmpeg](https://ffmpeg.org/) | [18 sample files](https://sembiance.com/fileFormatSamples/video/vivo/)
 video | [VPX1 Video Package](https://wiki.multimedia.cx/index.php/VPX1) | .vpx | [na_game_tool](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/video/vpx1VideoPackage/)
+video | WebEx Recording | .wrf .wot | [vibe2avi](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/video/webExRecording/)
 video | [WEBM Video](http://fileformats.archiveteam.org/wiki/WebM) | .webm | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/webmVideo/)
 video | [Westwood Studios Vector Quantized Animation](https://wiki.multimedia.cx/index.php/VQA) | .vqa | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/westwoodStudiosVQA/) - FFMPEG only has partial support. The HQ ones don't appear to be supported at all despite being documented out there. I tried VQA2AVI but that just produced black videos.
 video | Whale's Voyage II LSD Video | .lsd | [na_game_tool](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/whalesVoyageIILSD/)

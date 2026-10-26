@@ -16,6 +16,7 @@
 \-------------/
 >>> wip
 * videos in unsupported.js video (already started)
+  Also those in src/format/video/ with unsupported set
 <<<
 
 * ZIP files might have hidden 'metadata' in PKAV/AVEXTRA data. So vibe code support for this.
@@ -120,6 +121,9 @@ Otherwise the ttf.js lib we vibe code will need to have a renderer and render to
 
 * Game map viewing could be greatly improved, doom, quake, etc etc to where it could be all textured and more of a "fly around" the map rather than the roate the 3D model it is now
 
+* Several macromediaDirector images still come out all messed up, I bet a vibe coded one (especially if it leans on scummvm code to learn) could do MUCh better
+  Examples:
+	https://discmaster.textfiles.com/browse/46939/1996-091/RELHST.zip/HISTORY.ARJ/HISTORY/GUNS.DXR
 
 /---------------\
 | High Priority |

@@ -70,6 +70,7 @@ export default
 		originSystemChecksum                : {name : "ORIGIN System Checksum", ext : [".chk"], magic : ["ORIGIN System Checksum"]},
 		orbiterMesh                         : {name : "Orbiter mesh", ext : [".msh"], magic : ["Orbiter mesh"], weakMagic : true},
 		orbiterScenario                     : {name : "Orbiter scenario", ext : [".scn"], magic : ["Orbiter scenario"], weakMagic : true},
+		os2MahjonggSolitaireGameLayout      : {name : "OS/2 Mahjongg Solitaire game layout", ext : [".mah"], magic : ["OS/2 Mahjongg Solitaire game layout"]},
 		piklib8Script                       : {name : "Piklib 8 script", ext : [".class", ".cnv", ".def", ".decoded"], magic : ["Piklib 8 script"], weakMagic : true},
 		playStation2SystemConfiguration     : {name : "PlayStation 2 system configuration", ext : [".cnf"], magic : ["PlayStation 2 system configuration"], weakMagic : true},
 		plbmGamesDataBaseIndex              : {name : "PLBM Games Data Base index", ext : [".dbk"], magic : ["PLBM Games Data Base index"], weakMagic : true},

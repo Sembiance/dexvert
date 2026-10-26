@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {dexvert} from "../dexvert.js";
-import {identify} from "../identify.js";
+import {identify, clearIdentifyCache} from "../identify.js";
 import {XLog} from "xlog";
 import {DexFile} from "../DexFile.js";
 import {initRegistry} from "../dexUtil.js";
@@ -16,6 +16,12 @@ const xlog = new XLog("error", {alwaysEcho : true, logger : line => logLines.pus
 
 await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta, op, change={}, dexvertOptions={}}) =>
 {
+	if(op==="clearIdentifyCache")
+	{
+		clearIdentifyCache();
+		return {cleared : true};
+	}
+
 	logLines.clear();
 	xlog.level = logLevel;
 	
@@ -27,7 +33,7 @@ await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta
 		const changeXLog = new XLog("info", {logger : v => changeLogLines.push(v)});
 		if(op==="formatChange")
 			await formatChanged(change, changeXLog);
-		if(op==="programChange")
+		else if(op==="programChange")
 			await programChanged(change, changeXLog);
 		return {changeResult : changeLogLines.join("\n")};
 	}

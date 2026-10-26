@@ -92,6 +92,7 @@ if(argv.direct)
 
 xlog.trace`Making RPC call to dexserver...`;
 
+await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/clearIdentifyCache`);
 const rpcData = {op : "dexvert", inputFilePath : path.resolve(argv.inputFilePath), outputDirPath : path.resolve(argv.outputDirPath), logLevel : argv.logLevel, liveOutput : true, fileMeta : xu.parseJSON(argv.fileMeta), dexvertOptions};
 const {r, log, err} = await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
 if(err)

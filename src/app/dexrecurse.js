@@ -229,6 +229,7 @@ else
 }
 
 const AGENT_COUNT = +(await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/agentCount`));
+await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/clearIdentifyCache`);
 
 const ALL_MAGICS = new Set();
 const EXISTING_SAMPLE_FILES = {};

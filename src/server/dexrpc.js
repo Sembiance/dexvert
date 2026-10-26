@@ -84,6 +84,12 @@ xlog.info`Starting web RPC...`;
 const routes = new Map();
 
 routes.set("/agentCount", () => new Response(agentCount.toString()));
+routes.set("/clearIdentifyCache", async () =>
+{
+	await dexPool.broadcast({op : "clearIdentifyCache"});
+	return new Response("true");
+});
+
 routes.set("/status", async () =>
 {
 	const status = await dexPool.status();

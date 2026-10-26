@@ -1,0 +1,375 @@
+ANIMATION MAGIC ANI: BINARY FORMAT AND DECODING SPECIFICATION
+===========================================================
+
+Scope and certainty
+-------------------
+
+This document describes the little-endian Animation Magic ANI container,
+versions 1 and 2, with a static RIFF palette, scanline RLE video, and PCM audio.
+It is independent of filenames and filename extensions. It is not the Windows
+RIFF/ACON animated-cursor format, nor a general description of all files named
+ANI. All offsets below are decimal unless explicitly prefixed with 0x.
+
+The layout, frame boundaries, index, palette, pixel compression, and audio
+byte representation are described completely for the supported profile.
+There are two semantic uncertainties that prevent a claim of complete reverse
+engineering of the entire format family:
+
+* The 32-bit value at file offset 12 is 1 in the supported profile. Its original
+  name and the meaning of other values are not established.
+* The first four bytes of each video payload are zero in the supported profile.
+  Their function, subdivision, and meaning when nonzero are not established.
+  They MUST be excluded from the RLE stream. Treating them as four literal
+  pixels is incorrect even when a transparent first scanline hides the error.
+
+The video-buffer field is strongly inferred to be an allocation/capacity hint;
+its precise original API semantics are not proven. Constant fields are
+validated, not silently skipped or assigned invented meanings. The supplied
+decoder rejects an unsupported header discriminator or nonzero frame prefix.
+This document is a usable specification of the supported profile, not a claim
+that unseen variants of those fields have been decoded.
+
+Integer notation and packing
+----------------------------
+
+u8:  unsigned 8-bit integer.
+u16: unsigned 16-bit integer, least significant byte first.
+u32: unsigned 32-bit integer, least significant byte first.
+Tags are literal four-byte ASCII strings, including their trailing spaces.
+There is no implicit alignment or structure padding in the outer ANI format.
+Unaligned u16/u32 values are normal. Only the embedded RIFF palette uses RIFF
+subchunk padding. Image and audio chunks can start at odd byte offsets.
+
+Overall organization
+--------------------
+
+  Fixed header (46 bytes for version 1, 50 bytes for version 2)
+  Frame-offset table (one u32 per frame)
+  Embedded RIFF PAL palette
+  Frame 0: video length, video payload, audio length, audio payload
+  Frame 1: video length, video payload, audio length, audio payload
+  ...
+
+The outer ANI file is NOT a RIFF file. In particular, its length convention is
+different from RIFF's. No extension-based guessing or tag scanning is needed.
+
+Fixed header
+------------
+
+Offset v1  Offset v2  Type  Field
+---------  ---------  ----  -------------------------------------------------
+0          0          4B   Signature: ASCII "ANI "
+4          4          u32  Declared complete file size MINUS FOUR bytes
+8          8          4B   Header tag: ASCII "hdr "
+12         12         u32  Constant/discriminator: 1; semantics unresolved
+16         16         u32  Format version: 1 or 2
+20         20         u16  Video frames per second (F)
+22         22         u32  Audio sample frames per second (S)
+absent     26         u16  Audio channel count (C)
+absent     28         u16  Bits per channel sample (B)
+26         30         u16  Image width in pixels (W)
+28         32         u16  Image height in pixels (H)
+30         34         u32  Declared video-frame count (N)
+34         38         u32  Compressed-video buffer/capacity hint (V)
+38         42         u32  Nominal audio-block byte-count hint (A)
+42         46         u32  Frame-offset table length in BYTES (T)
+
+For version 1 the absent audio fields are implicitly C=1 and B=8. Version 2
+stores them explicitly. The implementation supports C=1 or 2 and B=8 or 16.
+The 16-bit/stereo paths use standard PCM representation; they have not been
+verified against an original producer emitting those combinations.
+
+The declared file end is 4 + u32_at_offset_4, NOT 8 + that value. For a complete
+file this equals the physical length. A mismatch is a damage indication, not
+a reason to misidentify a truncated ANI as a different format.
+
+W, H, and F must be nonzero. A positive audio payload requires S>0. No pixel
+aspect ratio, explicit audio start offset, variable-rate frame timestamps,
+video orientation flag, or external-background filename exists in this layout.
+Video orientation is top row first, left pixel first.
+
+V is not the size of a decoded image, a duration, or a frame-table offset.
+Version-2 producers can set it to the largest video payload length, including
+the four-byte prefix. Version-1 producers can use a fixed larger capacity.
+An actual video length exceeding V is reported, but the per-frame length is
+used for parsing; an allocation hint must not delimit the stream.
+
+A is nominal metadata, not the authoritative length of every audio packet.
+It can be stale. Actual packet lengths can disagree with A even when the
+sampling rate and all frame boundaries are consistent. Never replace a
+packet's stored audio length with A, S/F, or a filename-dependent value.
+
+Frame-offset table
+------------------
+
+Let HS be 46 or 50 according to the version. The table starts at HS and has
+T bytes. In a consistent file T=4*N. Entry i is u32(HS+4*i).
+
+Let P=HS+T be the start of the RIFF palette and let D be the byte immediately
+following the entire RIFF palette. The absolute location of frame i's video
+length is:
+
+    frame_start[i] = D + offset[i]
+
+Offsets are relative to the END of the palette, not the file start, the table,
+or the start of the RIFF chunk. The first entry is zero. Entries increase
+strictly. There is no extra end-of-file/sentinel entry. For non-final frames,
+the next entry supplies an independent check of the current record's end.
+
+An offset can point beyond the physical EOF of a truncated file. That is
+missing data, not an alternative offset base. Do not scan the audio or RLE
+payload for supposed chunk tags to recover it.
+
+Embedded palette
+----------------
+
+The usual single-data-chunk palette is:
+
+Relative  Type  Meaning
+offset
+--------  ----  -------------------------------------------------------------
+0         4B    "RIFF"
+4         u32   RIFF size R: bytes after the first eight palette bytes
+8         4B    "PAL "
+12        4B    "data"
+16        u32   Data size Q = 4 + 4*K
+20        u16   Logical palette version 0x0300 (bytes 00 03)
+22        u16   Number of palette entries K
+24        4*K B K consecutive PALETTEENTRY records
+
+Each PALETTEENTRY consists of:
+
+    u8 red; u8 green; u8 blue; u8 flags;
+
+Components are full 8-bit intensities, not VGA 6-bit values. The order is RGB,
+not BGR. The fourth byte is a Windows logical-palette flag byte, not an ANI
+alpha channel. Zero is the normal value. GDI flag bits are PC_RESERVED=0x01,
+PC_EXPLICIT=0x02, and PC_NOCOLLAPSE=0x04. PC_RESERVED and PC_NOCOLLAPSE concern
+palette allocation; they do not change the explicit RGB intensities in a
+true-color rendering. PC_EXPLICIT instead references a system hardware palette
+and cannot be resolved without that external palette. The converter rejects
+PC_EXPLICIT and undefined flag bits rather than interpreting them as colors.
+
+With only this data chunk, R=16+4*K and the palette occupies 24+4*K bytes.
+The common values K=128 and K=256 occupy 536 and 1048 bytes respectively.
+The codec can address only entries 0 through 127. Entries 128 through 255 in
+a larger palette are still real palette metadata and must be parsed; they are
+not frame data or a second palette.
+
+More generally, RIFF subchunks have a four-byte tag, u32 payload length, that
+many payload bytes, and one alignment byte if the payload length is odd. The
+RIFF length includes subchunk padding; a subchunk length excludes its pad byte.
+The decoder accepts a structurally bounded JUNK subchunk and accounts for its
+bytes as RIFF filler. Other palette subchunk types are unsupported. It requires
+exactly one valid data chunk with 1 <= K <= 256 and Q=4+4*K. PAL version values
+other than 0x0300 are unsupported. The start of the frame region is D=P+8+R.
+
+Palette index 0 denotes transparent pixels, regardless of its stored RGB.
+Its RGB can be white or another color without making those pixels opaque.
+Transparency reveals the game's separate background. Background images and
+their placement/compositing instructions are not embedded in this container.
+An independent renderer must choose a background or receive it externally.
+The supplied converter chooses a solid black matte. It resets the image for
+every frame and does not reveal the previous animation frame through index 0.
+
+Frame record layout
+-------------------
+
+At frame_start[i]:
+
+    u32 Lvideo
+    u8  video_payload[Lvideo]
+    u32 Laudio
+    u8  pcm_payload[Laudio]
+
+No pad bytes are inserted, including after odd-sized video or audio payloads.
+Each length excludes its own four-byte length word. Lvideo includes the
+four-byte zero prefix. The size of the complete frame record is:
+
+    4 + Lvideo + 4 + Laudio
+
+That size must equal offset[i+1]-offset[i] when another frame follows.
+The final frame ends at the declared file end in a complete consistent file.
+
+The video payload is:
+
+    4 bytes: 00 00 00 00, meaning unresolved; required by this profile
+    Lvideo-4 bytes: RLE pixel data
+
+These prefix bytes are not pixels, a second outer length, RIFF alignment,
+audio, or a palette update in the supported profile. Their invariant value
+does not establish whether their original type was u32, two u16 fields, or
+something else. No such interpretation should be invented from all-zero data.
+
+Video RLE
+---------
+
+Each frame is independently compressed. Initialize an output pixel cursor
+x=0, y=0. Read tokens after the four-byte frame prefix, without skipping any
+other bytes. Produce scanlines in increasing y and pixels in increasing x.
+
+If the first token byte c is in 0x00..0x7F:
+
+    Emit one pixel with palette index c. Advance one pixel.
+
+If c is in 0x80..0xFF:
+
+    Read one further unsigned byte n.
+    The palette index is c & 0x7F.
+    If n is nonzero, emit exactly n copies of that index.
+    If n is zero, emit W-x copies, filling the remainder of this scanline.
+
+When x reaches W, set x=0 and advance y. A zero-count run encountered at x=0
+therefore emits a full scanline. It does not mean an empty run, 256 pixels,
+end-of-frame, or skip-to-next-command. The maximum explicitly encoded nonzero
+run is 255 pixels. Wider scanlines use multiple tokens or a zero-count run.
+No token may cross a scanline boundary. Index zero is emitted/marked transparent
+like any other index; it does not advance a separate delta-frame cursor.
+
+A complete, valid frame consumes exactly Lvideo-4 input bytes and produces
+exactly W*H output indices. There is no end-of-frame marker and no legitimate
+unused compressed tail. All literal bytes, run-opcode bytes, and count bytes
+are part of the byte accounting. A trailing run opcode lacking its count is
+a partially stored token, not an alternate one-byte opcode.
+
+Worked example with W=4 and H=2 (prefix omitted):
+
+    01 82 02 03 84 00
+
+The decoded index rows are:
+
+    1 2 2 3
+    4 4 4 4
+
+Audio and timing
+----------------
+
+Audio is uncompressed, interleaved integer PCM. There is no ADPCM predictor,
+compressed audio packet header, signedness switch, or per-frame WAV header.
+
+B=8:  one unsigned byte per channel; silence is 0x80.
+B=16: signed little-endian two's-complement samples; silence is 0x0000.
+C=1:  consecutive mono samples.
+C=2:  left then right channel sample for each audio sample frame.
+
+The PCM block alignment is C*(B/8). A valid audio packet has a byte length
+divisible by this value. Laudio can be zero. Concatenate packet payloads in
+frame order without their length words. The audio clock is S sample frames per
+second; the video clock is F images per second. Video frame i starts at i/F.
+Audio sample frame j starts at j/S. Neither clock should be replaced with a
+nominal playback rate such as 22050 Hz or 10 fps.
+
+Packet sizes need not make those clocks land at exactly identical endpoints.
+For example, rounding S/F down at each packet can shorten the audio slightly.
+Do not time-stretch the PCM or drop/duplicate samples to make every packet
+equal one video-frame duration. The converter retains the native PCM bytes,
+sample rate, channel count, and bit depth. A positive sampling rate with all
+zero-length audio packets produces a video-only AVI.
+
+Validation, recognition, and damage recovery
+--------------------------------------------
+
+Recognition uses both fixed-position tags, the version, the supported header
+discriminator, the version-dependent fields, the table extent, and a valid
+RIFF PAL at its exact calculated location. No filename rules, signature scans,
+color guesses, or sample-specific exceptions are involved. Unknown versions,
+nonzero frame prefixes, and unsupported audio/palette variants are rejected
+before an output is published. The requested output remains absent, or an
+existing output remains unchanged, on rejection or encoding failure.
+
+For recognized but damaged input, the converter reports each problem and:
+
+* Accepts a physical file shorter than its declared length. Uses only indexed
+  frame records whose starts exist; it does not synthesize the absent ending.
+* Recovers all complete video frames, including a frame with truncated audio.
+* Decodes a truncated video packet through its last complete valid RLE token.
+  Undecoded pixels remain transparent/black. A missing run count is not guessed.
+* Retains every available PCM byte. A final partial interleaved sample is
+  completed with silence bytes so that the AVI audio stream is well formed.
+* Does not pad a truncated final audio packet to the declared full duration.
+* Can insert silence for an interior missing PCM tail when its length is
+  explicitly present and later frame records remain. It does not infer an
+  audio length when the length word itself is missing.
+* Stops a malformed RLE stream at a run that would cross a row or at the full
+  image boundary, and reports any unconsumed payload bytes.
+* Reports unexpected tails/gaps as uninterpreted data, rather than claiming
+  that unknown bytes are harmless alignment or another recognized format.
+
+This recovery is an explicit damaged-input policy, not a heuristic extension
+to the valid codec. Damaged dimensions, incomplete palettes, non-increasing
+indexes, or an incomplete fixed header may make safe recovery impossible;
+those inputs fail with a diagnostic and no new output. Lost content cannot be
+reconstructed from metadata. The implementation does not borrow data from
+other files, even if a complete copy happens to be available elsewhere.
+
+Converter interface and output
+------------------------------
+
+    python3 animationMagicAnimation.py inputFile outputFile
+
+Optional machine-readable structural audit:
+
+    python3 animationMagicAnimation.py inputFile outputFile --audit-json audit.json
+
+Python 3.10 or newer and the ffmpeg executable on PATH are required. ffmpeg
+must provide its rawvideo/PCM inputs, FFV1 encoder, and AVI muxer. There are no
+third-party Python modules, helper decoders, background files, palette files,
+or other runtime supporting files. The .txt document is not loaded by the code.
+
+Output is AVI with lossless FFV1 video and native PCM audio. RGB values are
+preserved exactly after transparent pixels are composited against black.
+The AVI does not preserve an editable transparency mask or unused palette
+metadata. The original input remains the archival copy of those fields.
+Temporary audio/AVI files are created beside the output and removed afterward.
+The completed AVI is published by atomic rename and has permissions 0664.
+The destination directory must already exist. Input and output must differ.
+
+Exit codes:
+  0: AVI created without detected structural damage.
+  2: AVI created with explicit damage-recovery warnings on stderr, or the
+     optional audit file could not be written (the valid AVI is retained).
+  1: Rejected/unrecoverable input, missing dependency, or encoding/I/O failure.
+
+The optional audit lists offset/length/category spans covering physical bytes,
+per-frame RLE statistics, source/output PCM counts, and recovery diagnostics.
+Its semantic_completeness flag is deliberately false. Byte coverage is not
+equivalent to proving the meaning of an invariant constant. The decoder reads
+the input into memory, and its working memory includes one decoded RGB image.
+It refuses an image exceeding a 2 GiB raw-frame working-size ceiling.
+
+Remaining work to extend certainty or support
+---------------------------------------------
+
+1. Obtain the original ANI encoder/player source, or disassemble the relevant
+   original player routines. Trace the reads at file offset 12 and the first
+   four bytes of each video payload. Determine whether alternative values
+   select codecs, carry coordinates/flags, or have another purpose. Do not
+   use any of those possibilities as facts until verified.
+2. Trace the uses of V and A to prove the allocation-hint interpretation and
+   define their exact contractual constraints.
+3. Validate version-2 stereo and 16-bit PCM against independently produced
+   originals, and obtain evidence before adding other bit depths/channels.
+4. If source-game presentation is required, obtain the separate background
+   images and the game's compositing/display rules. Such rules and assets
+   cannot be recovered from the described ANI bytes alone.
+
+Reference material
+------------------
+
+The ANI byte layout, prefix separation, exact length relationships and RLE
+boundary rules above were established by direct binary analysis. Relevant
+independent primary material for transparency and standard embedded types:
+
+* Kostya Shishkov, "The Magic of Animation" (original reverse-engineering
+  account, 2021): https://codecs.multimedia.cx/2021/05/the-magic-of-animation/
+* Microsoft, PALETTEENTRY structure:
+  https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-paletteentry
+* Microsoft, Devices and Data Types (PCM representation and channel packing):
+  https://learn.microsoft.com/en-us/windows/win32/multimedia/devices-and-data-types
+* Microsoft/IBM, Multimedia Programming Interface and Data Specifications,
+  section "Palette File Format" (original standard, archived copy):
+  https://www.mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Docs/riffmci.pdf
+
+The primary reverse-engineering account establishes the external-background
+behavior; it does not settle the unresolved constant fields. The standard
+palette and PCM references do not specify Animation Magic's private header.

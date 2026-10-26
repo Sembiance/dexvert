@@ -1,0 +1,487 @@
+BLIZZARD PICTURE: BLP1 AND BLP2
+Binary layout, pixel decoding, validation, and implementation boundaries
+
+1. SCOPE AND CONVENTIONS
+
+BLP is a texture container containing one image and up to sixteen individually
+addressed resolutions (mipmaps). This document describes the BLP1 and BLP2
+container layouts, BLP1 JPEG and indexed pixels, and BLP2 indexed, BC1/DXT1,
+BC2/DXT3, BC3/DXT5, and uncompressed BGRA pixels. BLP0, which uses external
+mipmap files, is outside this specification and is not accepted by the
+accompanying converter. Unknown encoding values are not synonyms for known
+encodings.
+
+Offsets below are absolute byte offsets from the beginning of the file unless
+explicitly described as relative. Intervals are half-open: [offset, offset+size).
+u8, u16, and u32 denote unsigned integers of those bit widths. All BLP integers
+and block-compression integers are little-endian. The four-byte file signature
+is a byte string, not an integer requiring byte swapping. JPEG marker lengths,
+frame dimensions, and other multibyte JPEG parameters are big-endian.
+
+Pixel order is left to right, then top to bottom. There is no vertical flip.
+Alpha zero means fully transparent; 255 means fully opaque. Color values are
+straight, not premultiplied by alpha. PNG export preserves the decoded channel
+values without gamma conversion. BLP provides no universal embedded ICC
+profile, physical resolution, or reliable transfer-function declaration.
+
+Important distinction: a complete byte-location map is not proof that every
+byte has a known semantic meaning. The legacy BLP1 extra field's original
+purpose is not established. Arbitrary data outside addressed objects, excess
+payload bytes, and bytes after a JPEG end marker have no defined pixel meaning.
+Their contents must not be assigned invented meanings. These limitations are
+explicit in section 11 and in the converter's machine-readable audits.
+
+2. BLP1 FIXED HEADER (156 BYTES / 0x9C)
+
+Offset  Size  Type       Name and interpretation
+0x00       4  bytes      Signature: ASCII "BLP1" (42 4C 50 31).
+0x04       4  u32        Content: 0 = JPEG, 1 = indexed direct pixels.
+0x08       4  u32        Alpha precision. Indexed: 0, 1, 4, or 8.
+                        JPEG: normally 0 or 8; see section 6.
+0x0C       4  u32        Width of mip level zero, in pixels.
+0x10       4  u32        Height of mip level zero, in pixels.
+0x14       4  u32        Legacy extra field. Preserve its value. Values such
+                        as 3, 4, and 5 do not establish distinct pixel layouts.
+                        No verified semantic interpretation is asserted here.
+0x18       4  u32        Mipmap presence flag: 0 = level zero only;
+                        nonzero = mipmaps intended.
+0x1C      64  u32[16]    Absolute mipmap offsets, indexed by level 0..15.
+0x5C      64  u32[16]    Declared mipmap byte lengths, indexed by level 0..15.
+
+For content 0, the JPEG content header starts at 0x9C:
+
+0x9C       4  u32        S: shared JPEG prefix length.
+0xA0       S  bytes      Exact prefix prepended to each mipmap's payload.
+
+For content 1, the indexed content header starts at 0x9C:
+
+0x9C    1024  bytes      256 entries, each four bytes B, G, R, X.
+                        X is not used as pixel alpha by the indexed layout
+                        described here; alpha is stored separately per pixel.
+
+Thus indexed pixel data cannot start before 0x49C (1180). JPEG data cannot
+start before 0xA0+S, but may start later because absolute offsets permit gaps.
+Do not assume that JPEG pixel data starts at 1180 or any other fixed address.
+
+3. BLP2 FIXED HEADER (148 BYTES / 0x94)
+
+Offset  Size  Type       Name and interpretation
+0x00       4  bytes      Signature: ASCII "BLP2" (42 4C 50 32).
+0x04       4  u32        Content/type. Supported direct texture layout uses 1.
+                        The magic determines BLP version; this word is not
+                        the version encoded by the final signature byte.
+                        Type 0 is associated with JPEG in some descriptions
+                        but is not a verified BLP2 path in this implementation.
+0x08       1  u8         Encoding: 1 = indexed, 2 = BC/DXT, 3 = raw BGRA.
+0x09       1  u8         Alpha precision/presence; encoding-specific.
+0x0A       1  u8         Alpha encoding: meaningful for encoding 2.
+0x0B       1  u8         Mipmap presence flag, normally 0 or 1.
+0x0C       4  u32        Level-zero width.
+0x10       4  u32        Level-zero height.
+0x14      64  u32[16]    Absolute mipmap offsets.
+0x54      64  u32[16]    Mipmap byte lengths.
+0x94    1024  bytes      256 BGRX palette entries for encoding 1.
+                        The entire area is present but unused for encodings
+                        2 and 3. It is not a second image or an alpha plane.
+
+Direct pixel data normally begins at or after 0x494 (1172). The palette area
+belongs to the content header; it is not included in the 148-byte fixed header.
+
+Encoding 1 accepts alpha precision 0, 1, 4, or 8. The alpha-encoding byte is
+not a bit count or a compression selector for indexed data and is ignored
+for decoding that encoding, while retained in the audit.
+
+Encoding 2 dispatches using the alpha-encoding byte, not inferred payload size:
+
+Alpha encoding   Block format       Bytes/block    Alpha declaration
+0                BC1 / DXT1               8        0 or 1; retain block alpha
+1                BC2 / DXT3              16        4 or 8 indicates alpha
+7                BC3 / DXT5              16        normally 8 indicates alpha
+
+For BC1, the alpha declaration is not authoritative when it contradicts
+the blocks: the decoded RGBA preserves the transparent selector even for
+declaration 0, and diagnoses that mismatch. See section 7.2. This is a BC1
+bitstream rule, not a black-color transparency heuristic.
+
+The physical alpha precision of BC2 is four bits even when the header's
+alpha declaration is 8. The converter also accepts declaration 4 for BC3
+without changing BC3's endpoint/index layout. Declaration 0 forces an opaque
+result while still consuming the alpha bytes in BC2/BC3 blocks. Other dispatch
+values are rejected. A payload twice the expected BC1 length does not justify
+switching to BC2, BC3, a different width, or a guessed row stride.
+
+Encoding 3 stores four bytes per pixel, B,G,R,A. The converter accepts alpha
+declaration 8 to use A or 0 to force opacity; A still occupies a byte for 0.
+Other alpha precisions and encoding 4 are outside the implemented contract.
+
+4. MIPMAP ADDRESSING AND FILE LAYOUT
+
+For table index i:
+
+    width_i  = max(1, floor(width_0  / 2^i))
+    height_i = max(1, floor(height_0 / 2^i))
+    pixels_i = width_i * height_i
+
+The normal complete chain has floor(log2(max(width_0,height_0)))+1 levels,
+including level zero. Each dimension is independently clamped to one; for
+rectangular images one dimension can remain one while the other shrinks.
+Dimensions need not be powers of two for these decoding rules. There are
+only sixteen locator slots, so encoders should respect that chain capacity.
+
+Each mip is independently addressed and decoded. The two locator arrays are
+parallel arrays, not an array of interleaved offset/length pairs. Offset zero
+and length zero denote an unused entry. An offset with zero length is an
+empty entry, not an instruction to consume the remainder of the file. Length
+with no usable offset is malformed. Do not stop examining the table at its
+first zero pair; a damaged file may have later recoverable entries.
+
+The offsets, not physical adjacency, establish ownership of bytes. Levels
+need not be in ascending physical order. Gaps, shared/overlapping payload
+ranges, and trailing bytes can exist. Aliased data is decoded separately for
+each referenced level. A decoder must not read through a declared boundary
+to make up a short indexed or block payload. Repeated 1x1 entries beyond the
+normal chain can be decoded but should be diagnosed as redundant.
+
+The mipmap flag expresses intent; it does not replace the locator arrays.
+For recovery, the converter examines every nonempty declared entry even when
+the flag is zero. It does not synthesize missing mipmap levels. Each PNG is a
+separate still image; mipmaps are not animation frames.
+
+5. INDEXED PIXELS AND PACKED ALPHA (BOTH VERSIONS)
+
+Let N = width_i * height_i and d = alpha precision.
+
+Relative range             Meaning
+[0, N)                     N palette indices, one u8 per pixel.
+[N, N+ceil(N*d/8))          Packed alpha plane, absent when d=0.
+
+Required payload size is N + floor((N*d+7)/8). The alpha plane follows the
+entire index plane, not each row. No row alignment or row padding is inserted.
+
+For pixel number p, the first three bytes of palette entry index[p] supply
+B, G, R. The fourth palette byte is consumed as unused X and must not replace
+the separate alpha sample. Consequently a palette filled with X=0 does not
+make the image invisible.
+
+If d=0: A=255. Otherwise:
+
+    bit_offset = p*d
+    packed = payload[N + floor(bit_offset/8)]
+    value = (packed >> (bit_offset mod 8)) & ((1<<d)-1)
+    A = floor(value*255 / ((1<<d)-1))
+
+For d=1 the first pixel is bit 0, then bit 1, up to bit 7. For d=4 the first
+pixel is the low nibble and the second is the high nibble. For d=8 each alpha
+sample occupies one byte. The expansions are 0/255 for one bit, value*17 for
+four bits, and unchanged for eight bits. Unused high bits of the final alpha
+byte do not describe extra pixels and are ignored. Do not invert alpha.
+
+6. BLP1 JPEG STREAMS
+
+For every declared level, assemble:
+
+    jpeg_stream = shared_prefix[0:S] + mip_payload[0:declared_length]
+
+This is byte concatenation. The split may occur inside a JPEG marker, a
+segment length, a segment payload, or elsewhere. A common prefix can end
+immediately after the two-byte SOF marker while frame dimensions reside in
+each mip suffix. Do not demand a complete JPEG header in the prefix or SOI
+at the beginning of each suffix. S may be zero when each suffix is complete.
+Conversely, when the mipmap flag is zero, the shared prefix can contain the
+complete level-zero JPEG and the level-zero payload length can be zero. That
+case is decoded directly from the prefix without inventing a suffix range.
+
+The usual BLP JPEG representation has four 8-bit components in B,G,R,A order.
+The JPEG frame, sampling descriptors, quantization tables, Huffman tables,
+and scan parameters describe the compressed components. Component numbers
+are identifiers used by scan selectors, not RGB channel names. Component
+order supplies the BLP channel order.
+
+Decode the stored components directly. Do not interpret four components as
+CMYK printing ink, invert them as Adobe CMYK, or convert the first three from
+YCbCr. In the accompanying converter, Pillow/libjpeg is explicitly told that
+both input and output are raw CMYK-shaped four-channel data; then the channels
+are rearranged to R,G,B,A. The CMYK designation here only selects a four-band
+codec interface. Three-component compatibility streams are treated as raw
+B,G,R with opaque alpha, also suppressing YCbCr conversion.
+
+Alpha is inside the JPEG stream; no separate alpha plane follows the JPEG.
+The normal alpha declaration is 8, which uses the fourth channel, or 0, which
+makes the exported image opaque. Noncanonical declarations do not describe
+4-, 6-, 7-, or 9-bit JPEG channels: the frame still explicitly specifies its
+actual precision. For recovery of a noncanonical nonzero declaration, the
+converter retains the explicit fourth 8-bit component and issues a warning.
+This is a stated recovery policy, not a newly inferred meaning for invalid
+header values. It can differ from software which treats all invalid values
+as alpha absent. The intended original alpha semantics cannot be proved from
+an invalid declaration alone.
+
+JPEG framing and payload accounting:
+
+* FF D8 is Start of Image (SOI), without a length.
+* FF D9 is End of Image (EOI), without a length.
+* Ordinary markers have FF, a nonzero marker code, a big-endian u16 length,
+  then length-2 payload bytes. The length includes its own two bytes but not
+  the FF/code pair. Repeated FF bytes before a marker code are fill bytes.
+* APP0..APP15 and COM carry application data or comments. They are not pixels.
+  An APP0 JFIF marker does not override BLP's raw component interpretation.
+* DQT (FF DB) defines quantization tables. Each table begins with precision
+  and table-number nibbles, followed by 64 zigzag-ordered quantizers of one
+  or two bytes each according to precision.
+* DHT (FF C4) defines Huffman tables. Each starts with class/table-number
+  nibbles, 16 code-length counts, then the corresponding symbol values.
+* SOF0 (FF C0) is baseline sequential DCT, SOF1 is extended sequential DCT,
+  SOF2 is progressive DCT. The frame gives precision, height, width, component
+  count, and for each component its identifier, horizontal/vertical sampling
+  factors, and quantization-table number. This implementation supports the
+  8-bit three- and four-component forms that Pillow/libjpeg can decode.
+* SOS (FF DA) gives scan component identifiers, DC/AC Huffman table selectors,
+  spectral start/end, and successive approximation parameters. An entropy-
+  coded scan follows. Progressive JPEG can contain several scans.
+* Within entropy data, FF 00 means a literal FF entropy byte. FF D0..D7 are
+  restart markers. DRI (FF DD) supplies the restart interval. A different
+  unstuffed marker ends the current scan. An arbitrary search for FF D9 that
+  ignores segment lengths and stuffing is not a valid JPEG parser.
+
+The entropy representation encodes quantized 8x8 DCT coefficients, including
+DC differences and AC run-length/value symbols. A compliant JPEG decoder
+performs Huffman decoding, sign reconstruction, inverse quantization, inverse
+DCT, sample level shifting/clamping, and any sampling-factor reconstruction.
+Progressive scans refine the coefficients according to their scan parameters.
+These operations are delegated to libjpeg rather than a custom partial JPEG
+codec. ITU-T T.81 is the normative definition of JPEG coding; BLP does not
+introduce a new entropy codec. Small IDCT rounding differences across JPEG
+implementations can occur without any change to the container interpretation.
+
+The JPEG frame has its own dimensions. On disagreement with the enclosing
+mip dimensions, this converter preserves the upper-left overlap and crops or
+pads at the right and bottom; padding is transparent black. It never rescales
+the texture to disguise a dimension mismatch.
+
+EOI ends the JPEG stream even when the enclosing mip length is larger. Extra
+bytes are not an alpha plane. Zero excess bytes can be classified as unused
+zero slack; arbitrary nonzero bytes remain semantically unresolved. Unreferenced
+JPEG-looking fragments elsewhere in the BLP do not become additional mipmaps
+without locator entries.
+
+7. BC/DXT BLOCK LAYOUT
+
+For width W and height H, blocks_x=ceil(W/4), blocks_y=ceil(H/4). Blocks are
+stored left to right, then top to bottom. Every block represents 4x4 pixels,
+including at the right/bottom edges and for 1x1 or 2x2 mips. Decode the complete
+block and retain only pixels inside W,H. Required size is blocks_x*blocks_y
+times the block byte size. There is no inter-block or per-row padding.
+
+Pixel p inside a block has local x=p mod 4, y=floor(p/4), for p=0..15.
+
+7.1 Color block (8 bytes)
+
+Relative offset  Size  Meaning
+0                   2  c0, little-endian RGB565 endpoint.
+2                   2  c1, little-endian RGB565 endpoint.
+4                   4  Sixteen two-bit selectors, little-endian u32.
+
+RGB565 uses bits 15..11 for R, 10..5 for G, and 4..0 for B. Expand endpoints
+to eight bits by replication, not by simply leaving their low bits zero:
+
+    R8 = (R5<<3) | (R5>>2)
+    G8 = (G6<<2) | (G6>>4)
+    B8 = (B5<<3) | (B5>>2)
+
+Let C0,C1 be the expanded RGB triples. Per-channel integer interpolation:
+
+Four-color mode:
+    C2 = floor((2*C0 + C1)/3)
+    C3 = floor((C0 + 2*C1)/3)
+Three-color mode:
+    C2 = floor((C0+C1)/2)
+    C3 = (0,0,0)
+
+Selector[p] = (selectors >> (2*p)) & 3. It chooses C0,C1,C2,C3. Endpoint
+comparison is between the original unsigned RGB565 words, not their brightness.
+
+7.2 BC1 / DXT1
+
+A BC1 block is exactly the color block. If c0>c1 use four-color mode; otherwise
+use three-color mode. In three-color mode selector 3 is transparent black
+(R=G=B=A=0). All other selectors are opaque, including selectors that resolve
+to black RGB. Equality of endpoints selects three-color mode.
+
+The decoder preserves this block-defined alpha even when the BLP header's
+alpha declaration is zero. Some legacy BLP descriptions instead prescribe
+opaque black for that combination; that interpretation loses transparency
+present in files with conflicting header declarations. Preserving the raw
+BC1 RGBA matches Direct3D's DXT1 block semantics and the pywowlib BLP decoder.
+The audit records the number of in-bounds transparent-selector pixels per
+mip and warns when it conflicts with declaration zero. No pixel color, file
+name, or image shape is used to decide transparency. Rendering blend state
+in the originating application is outside the BLP texture container.
+
+7.3 BC2 / DXT3
+
+Relative bytes 0..7 contain sixteen explicit four-bit alpha samples as a
+little-endian 64-bit field. Sample p is (bits >> (4*p)) & 15, expanded by 17.
+Bytes 8..15 contain the color block. Always use four-color mode regardless
+of the ordering of c0 and c1. Never apply BC1's transparent-selector rule.
+
+7.4 BC3 / DXT5
+
+Relative byte 0 is alpha endpoint a0, byte 1 is a1, and bytes 2..7 are sixteen
+three-bit alpha indices packed as a little-endian 48-bit integer. Bytes 8..15
+are a color block, always decoded in four-color mode.
+
+Alpha lookup table begins with A[0]=a0, A[1]=a1. If a0>a1:
+
+    A[2..7] = floor(((7-j)*a0+j*a1)/7), for j=1..6.
+
+Otherwise:
+
+    A[2..5] = floor(((5-j)*a0+j*a1)/5), for j=1..4;
+    A[6]=0; A[7]=255.
+
+Pixel p uses A[(indices >> (3*p)) & 7]. The colors and alpha are independent;
+do not multiply color by alpha during decode.
+
+8. RAW BGRA
+
+BLP2 encoding 3 has exactly W*H*4 bytes per mipmap. Pixel p occupies relative
+bytes 4*p through 4*p+3 in B,G,R,A order. Rearrange to R,G,B,A for PNG. There
+is no palette lookup, separate alpha plane, compression, or row alignment.
+The fixed 1024-byte content-header palette area is still consumed and ignored.
+
+9. VALIDATION, RECOGNITION, AND RECOVERY
+
+Require the exact BLP1 or BLP2 signature. Filenames and extensions are not
+evidence of format. Unknown container/content/encoding combinations fail
+without writing a destination; no image sniffing or alternate-format fallback
+is performed. Supported-but-malformed BLP data is handled deterministically:
+
+* A truncated fixed header cannot supply reliable dimensions/addresses and
+  cannot be recovered. A zero dimension is invalid.
+* The implementation imposes a 67,108,864-pixel limit per image to bound memory
+  use. This is an implementation resource limit, not an on-disk bit limit.
+* Every one of the sixteen table pairs is inspected. A damaged level does not
+  invalidate independent intact levels. Missing entries are not generated.
+* Addresses into the fixed/content header are diagnosed and not decoded.
+  Addresses beyond EOF supply no bytes. A payload extending beyond EOF is
+  truncated to the actual available bytes, with a diagnostic.
+* For indexed data, missing indices, palette colors, or alpha samples produce
+  transparent pixels. Known colors may remain in RGB where alpha is missing.
+  Available bytes are not shifted to reinterpret an absent alpha plane.
+* For raw BGRA, incomplete pixels are transparent. For BC, an incomplete
+  block is transparent, while complete preceding blocks are decoded normally.
+* JPEG without EOI is passed to libjpeg's truncated-stream recovery. A stream
+  with missing indispensable frame/tables or undecodable data can remain
+  unrecoverable. Codec recovery is not proof of the original lost pixels.
+* Excess data is recorded and not used to infer another codec or dimensions.
+* BC1 transparent selectors are retained despite a zero-alpha declaration;
+  the mismatch is reported, without treating all black pixels as transparent.
+* Redundant mips, empty offset entries, conflicting flags, and JPEG dimension
+  mismatches are retained in diagnostics rather than silently normalized.
+
+The command line selects level zero when available, otherwise the lowest
+numbered recoverable level, and reports that fallback. --mip N explicitly
+selects a level and fails if that level cannot be recovered. No output is
+written if no level is recoverable. Files already present at the output path
+are not touched on format rejection or decode failure.
+
+PNG serialization happens in memory, followed by a temporary file in the
+destination directory and atomic replacement. Each output file is mode 0664
+(user/group read and write, others read). For multi-file export, atomicity is
+per file, not a transaction across all PNGs and the audit.
+
+10. CONVERTER INTERFACE AND AUDIT
+
+    python blizzardPicture.py inputFile outputFile
+    python blizzardPicture.py inputFile outputFile --mip 2
+    python blizzardPicture.py inputFile outputFile --all-mipmaps --audit audit.json
+
+outputFile receives PNG regardless of its filename extension. --all-mipmaps
+writes other recoverable levels beside it as outputStem.mipNN.png. The
+destination directory must already exist. Exit code is 0 when the requested
+image is written and 2 on handled errors. Warnings go to stderr. No diagnostic
+or error image is created in place of a failed decode.
+
+Python 3 and Pillow with JPEG support are required; Pillow 13.0.0 was used for
+validation. No external commands, sidecar files, palettes, or sample-dependent
+lookup tables are needed by blizzardPicture.py. All container, indexed, raw,
+and BC decoding logic is in that file. Pillow supplies JPEG decoding and PNG
+writing. The converter uses Pillow's low-level JPEG tile arguments to suppress
+color conversion; JPEG channel tests should be rerun after Pillow upgrades.
+
+The optional JSON audit records all header fields, every locator pair, each
+declared level's status, JPEG markers/scan spans, recovery diagnostics, and
+physical byte regions with offsets, lengths, classifications, and SHA-256
+hashes. JPEG segment offsets are logical offsets in prefix+suffix; physical
+regions use BLP file offsets. Shared JPEG bytes appear only once in physical
+coverage, although they are logically reused by all mipmaps. Overlapping
+references count only once in covered_bytes. Unused palette bytes and alpha
+packing bits are consumed according to their defined no-pixel-effect roles.
+
+unaccounted_bytes measures gaps in the physical byte map. An understood=false
+region instead means the range is located but its original meaning is not
+established. Neither a zero unaccounted count nor successful PNG output proves
+that the original encoder's intentions are completely recovered.
+
+11. EXPLICIT LIMITATIONS AND NEXT STEPS
+
+The supported pixel layouts are implemented for all declared mipmap slots.
+This is not a claim of universal support for every possible BLP extension or
+100% semantic reverse engineering of every byte an encoder may leave behind.
+
+Unresolved points:
+
+* BLP1's extra word has a known location and value, but its historical purpose
+  is not established. It is recorded verbatim and is not used as an encoding
+  selector. Old descriptions that connect it to palette alpha or team color
+  conflict with other implementations and experiments.
+* Arbitrary nonzero gaps, trailers, excess fixed-size payload bytes, and data
+  after JPEG EOI have no established role in the addressed image. They may be
+  stale encoder output, but that is a hypothesis, not a format rule. They are
+  hashed and reported as unresolved rather than decoded using guessed offsets.
+* Noncanonical alpha declarations cannot establish original rendering intent.
+  The documented JPEG recovery policy preserves the stored fourth component.
+* BLP2 type 0/JPEG, unknown direct encodings including 4, unsupported alpha
+  combinations, and non-8-bit/unusual JPEG component layouts are not claimed
+  as implemented. BLP0 is a distinct out-of-scope format.
+* Missing bytes cannot be reconstructed exactly from the container alone.
+  Transparent fills and libjpeg recovery are visibly documented salvage.
+
+To close those gaps, obtain original encoder/decoder source or controlled
+round-trip fixtures that establish the extra field's intended behavior;
+compare before/after files from the responsible writers to identify excess
+data provenance; obtain verified fixtures and rendering references for any
+additional BLP2 encoding before assigning dispatch rules; and recover intact
+copies of truncated mipmaps for lossless reconstruction. Nonzero unaddressed
+bytes should remain opaque unless such independent evidence establishes their
+meaning. Parsing resemblance alone is insufficient.
+
+12. REFERENCES
+
+The layouts and byte accounting above are checked directly against binary
+structure and independent pixel vectors. These sources provide additional
+implementation and algorithm cross-checks; none substitutes for the explicit
+rules and limitations in this document.
+
+Dr Super Good, BLP Specifications (WC3), original experimental investigation:
+https://www.hiveworkshop.com/threads/blp-specifications-wc3.279306/
+
+Kanma BLPConverter, container definitions and decoder implementation:
+https://github.com/Kanma/BLPConverter/blob/master/blp_internal.h
+https://github.com/Kanma/BLPConverter/blob/master/blp.cpp
+
+Microsoft, Block Compression (Direct3D 10), BC1/BC2/BC3 storage and edge blocks:
+https://learn.microsoft.com/en-us/windows/win32/direct3d10/d3d10-graphics-programming-guide-resources-block-compression
+
+Microsoft, Opaque and 1-Bit Alpha Textures (Direct3D 9), per-block DXT1 alpha:
+https://learn.microsoft.com/en-us/windows/win32/direct3d9/opaque-and-1-bit-alpha-textures
+
+pywowlib BLP decoder, DXT1 dispatch and transparent-selector preservation:
+https://github.com/wowdev/pywowlib/blob/master/blp/BLP2PNG/native/BlpConvert.cpp
+
+Pillow, JPEG decoder color-space override and BLP plugin source:
+https://github.com/python-pillow/Pillow/blob/main/src/libImaging/JpegDecode.c
+https://github.com/python-pillow/Pillow/blob/main/src/PIL/BlpImagePlugin.py
+
+ITU-T Recommendation T.81 / ISO/IEC 10918-1, JPEG coding definition:
+https://www.itu.int/rec/T-REC-T.81/en

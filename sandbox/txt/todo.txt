@@ -8,30 +8,15 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* These appear to already be supported, just need to add a 'dexmagic' match for them: https://github.com/Sembiance/dexvert/issues/45
-  See: https://discmaster.textfiles.com/search?detection=434f50594449534b*
 
-* Add support for EMU3 disk images (archive/emu3Filesystem.js  (already exists)): https://github.com/dagargo/emu3fs
-
-* discmaster could then in theory show a 'view as text' link on images that have this imageText meta, then if ?text it will show that as text content
-  Test with #53 to pick up: https://discmaster.textfiles.com/view/53/YPA.ISO/other_goodies/dup_stuff/dup_mar.lha/Dark_Unicorn_Dispatch/DUP_MAR.ANSI
-  Should be able to find afterwards: https://discmaster.textfiles.com/search?q=%22kiki+stockhammer+left%22&qfields=name&qfields=t&itemid=53
-  Then reprocess on discmaster: https://discmaster.textfiles.com/search?format=ans&format=artworx&format=avatar&format=iCEDraw&format=pcBoard&format=tundra&format=xb
 
 
 /-------------\
 | Vibe Viable |
 \-------------/
 >>> wip
+* videos in unsupported.js video (already started)
 <<<
-* This is a 40MB file, but only a single 2 second audio clip is coming out, vibe-update GARbro to support extracting all of the audio then reprocess them all
-  https://discmaster.textfiles.com/view/46316/TPCG_021.ISO/Disc_Content/Indie%20Games/AaaaAAaaa!!!/Aaaaa_A_Reckless_Disregard_for_Gravity_Alpha.exe/app/Data/audio_resource.dat
-
-* Better converter for: image/blizzardPicture
-  nconvert doesn't work very well and blpngConverter is an expensive wine64 exclusive lock and the rest are all win7 windows and flaky
-  In fact, probably use vibe2png first, nconvert second and skip the remaining 3 (or at least do strongMatch and hasExtMatch etc)
-
-* http://fileformats.archiveteam.org/wiki/TLzrw1
 
 * ZIP files might have hidden 'metadata' in PKAV/AVEXTRA data. So vibe code support for this.
 	First dexvert needs a new meta program to retrieve this info and append to end of comment (or create if needed)
@@ -41,13 +26,7 @@
 	Also have the vibe code create a 2nd tool that has the bare minimum fastest fewest byte reads to just "determine" if the zip has this data
 	Then create a selectiveReprocess.js for zip that only includes zips that actually have this data
 
-* Check to see if any of these can be converted with gameextractor vibe: https://discmaster.textfiles.com/search?extension=txd_tex&family=unknown
-
-* ADX files that didn't convert: https://discmaster.textfiles.com/browse/46309/Fights%202005.bin/TeenageMutantNinjaTurtles/Setup.rar/bgm.afs
-
-* teenyWeenyGamesBMVVideo	https://discmaster.textfiles.com/search?extension=bmv&detection=2b%3F%3F%3F%3F%3F%3F3a*
-
-* Other videos in unsupported.js video
+* http://fileformats.archiveteam.org/wiki/TLzrw1
 
 * Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)
   NOTE: If I come across ones that have consistent "metadata" on the exe, I can use an agent with running "exiftool -quiet -json" to find what to reprocess

@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,030)
+# Unsupported File Formats (4,023)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -4052,21 +4052,15 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (37)
+## Video (30)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?format=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
 [video/accentShowSequence](https://discmaster.textfiles.com/search?format=accentShowSequence) | Accent Software Show Sequence | .seq | [11 sample files](https://sembiance.com/fileFormatSamples/video/accentShowSequence/) - Old MS-DOS software. Couldn't find a standalone player/converter, and also probably wasn't very popular.
 [video/amigaGL](https://discmaster.textfiles.com/search?format=amigaGL) | Amiga GL | .gl | 
-[video/animationMagicAnimation](https://discmaster.textfiles.com/search?format=animationMagicAnimation) | Animation Magic video/Animation | .ani | 
-[video/astoundAnimation](https://discmaster.textfiles.com/search?format=astoundAnimation) | Astound Animation | .awa | 
-[video/avssVideo](https://discmaster.textfiles.com/search?format=avssVideo) | [AVSS Video](http://ohlandl.ipv7.net/video/actionmedia.html) | .avs | 
-[video/criwareSofdec2Movie](https://discmaster.textfiles.com/search?format=criwareSofdec2Movie) | CRIWARE/Scaleform Sofdec2 Movie | .usm | [3 sample files](https://sembiance.com/fileFormatSamples/video/criwareSofdec2Movie/)
 [video/deluxeVideo](https://discmaster.textfiles.com/search?format=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 [video/eaMADVideo](https://discmaster.textfiles.com/search?format=eaMADVideo) | [EA MAD Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
-[video/emblazeVideo2](https://discmaster.textfiles.com/search?format=emblazeVideo2) | Emblaze Video 2 | .ev2 | [1 sample file](https://sembiance.com/fileFormatSamples/video/emblazeVideo2/)
-[video/evaVideo](https://discmaster.textfiles.com/search?format=evaVideo) | EVA3/EVA5 video | .eva | [3 sample files](https://sembiance.com/fileFormatSamples/video/evaVideo/)
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?format=fmTownsMovieVideo) | FM Towns Movie video | .mov | 
 [video/fujitsuMovie](https://discmaster.textfiles.com/search?format=fujitsuMovie) | Fujitsu Movie | .mve | 
 [video/golemInto](https://discmaster.textfiles.com/search?format=golemInto) | Golem Into Video | .xfl | 
@@ -4084,7 +4078,6 @@ Family/Format | Name | Extensions | Notes
 [video/riffANIM](https://discmaster.textfiles.com/search?format=riffANIM) | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/)
 [video/roxanneAnimation](https://discmaster.textfiles.com/search?format=roxanneAnimation) | Roxanne animation | .rox | 
 [video/screenCamVideo](https://discmaster.textfiles.com/search?format=screenCamVideo) | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | 
-[video/teenyWeenyGamesBMVVideo](https://discmaster.textfiles.com/search?format=teenyWeenyGamesBMVVideo) | Teeny Weeny Games BMV Video | .bmv | [4 sample files](https://sembiance.com/fileFormatSamples/video/teenyWeenyGamesBMVVideo/)
 [video/theDirector](https://discmaster.textfiles.com/search?format=theDirector) | [The Director Animation/Slideshow](https://www.computinghistory.org.uk/det/63951/The-Director/) | .film | [1 sample file](https://sembiance.com/fileFormatSamples/video/theDirector/)
 [video/hannaBarberaAnimationWorkshop](https://discmaster.textfiles.com/search?format=hannaBarberaAnimationWorkshop) | The Hanna-Barbera Animation Workshop animation | .xsh | 
 [video/toonBoomStudioAnimation](https://discmaster.textfiles.com/search?format=toonBoomStudioAnimation) | Toon Boom Studio animation | .tbd .tbp | 

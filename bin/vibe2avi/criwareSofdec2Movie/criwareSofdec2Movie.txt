@@ -1,0 +1,538 @@
+CRI USM / Sofdec Movie container
+MPEG-1/Sofdec video, ADX audio, and SBT text subtitle profile
+======================================================================
+
+STATUS AND SCOPE
+
+This is an independently researched description, not a CRI specification.
+It describes a usable, precisely bounded profile of the CRI USM container,
+including its older headers. It is NOT a complete specification of every
+Sofdec2 codec or of every proprietary metadata field. In particular, the
+seven-byte prefix of certain MPEG user-data records, the exact derivation
+of several encoder buffer hints, and some subtitle header fields remain
+unresolved. These limitations must not be confused with byte coverage:
+identifying the extent of a field does not establish its full semantics.
+
+The accompanying converter recognizes CRID/@UTF containers, decodes clear
+MPEG-1 with the supported Sofdec DC extension, decodes unencrypted type-3
+ADX version 3/4, and extracts SBT subtitles. MPEG decoding, inverse DCT,
+FFV1 encoding, and AVI muxing use FFmpeg. The Python code implements the
+container and ADX decoder itself; it does not depend on FFmpeg's USM reader.
+The MPEG entropy codebooks are not reproduced here. ISO/IEC 11172-2 and
+the referenced MPEG decoder define that part of the bitstream.
+
+Encrypted streams, HCA, H.264, VP9, MPEG-2, alpha streams, additional stream
+identifiers, and other ADX encodings are outside this implementation. They
+are not silently treated as the supported codecs. With -verbose, subtitle
+text is emitted to SRT sidecars; it is not embedded or burned into the AVI. AVI preserves
+all decoded video and audio streams independently, not a mix of languages.
+
+The converter normalizes video to a zero start and a constant declared
+frame rate. General nonzero stream start delays, variable presentation
+timelines, and proprietary display/color/alpha transforms are not fully
+implemented. Nonuniform video packet clocks are reported. No language
+mapping is inferred from subtitle channel numbers or source filenames.
+
+INTEGER AND OFFSET CONVENTIONS
+
+Unless specified otherwise, integers are unsigned big-endian. Positions
+are byte offsets. A range [a,b) includes a and excludes b. Four-byte tags
+are literal ASCII, not host-endian integers. Metadata types can explicitly
+select signed integers or IEEE-754 floating point. SBT records are the
+important little-endian exception. ADX PCM output is signed little-endian
+16-bit, although ADX headers and scales are big-endian.
+
+There is no independent file-size field before the first chunk, no RIFF
+wrapper, and no MPEG program-stream or transport-stream wrapper. A USM is
+a concatenation of length-delimited chunks. Elementary stream bytes must
+be taken from content chunks only; UTF tables, control messages, and
+declared transport padding are not codec input.
+
+CHUNK HEADER
+
+Every ordinary chunk begins with this 32-byte header:
+
+ Offset  Bytes  Interpretation
+ 0x00      4    Chunk identifier: CRID, @SFV, @SFA, or @SBT in this profile.
+ 0x04      4    Body size B; excludes the initial eight bytes.
+ 0x08      1    Reserved/unknown flag byte; zero in the clear profile.
+ 0x09      1    Payload offset H, measured from chunk position + 8.
+ 0x0A      2    Trailing padding size P.
+ 0x0C      1    Stream channel number. Independent namespaces per tag.
+ 0x0D      2    Reserved; zero in the supported profile.
+ 0x0F      1    Payload kind, described below.
+ 0x10      4    Scheduling timestamp T.
+ 0x14      4    Scheduling clock rate R.
+ 0x18      8    Reserved; zero in the supported profile.
+
+For a chunk at absolute position C:
+
+ next chunk          = C + 8 + B
+ payload start       = C + 8 + H
+ payload end         = C + 8 + B - P
+ payload byte count  = B - H - P
+ extended header     = [C + 32, C + 8 + H)
+ trailing padding    = [C + 8 + B - P, C + 8 + B)
+
+Require B >= 24, H >= 24, H + P <= B, and all available ranges within the
+file. H is commonly 24, making the payload begin immediately after the
+32-byte header. P can be zero or quite large. Padding is zero-filled in
+the supported profile. Readers must use the stored lengths, not assume
+32-byte or 2048-byte alignment. Header chunks are often aligned to 32/64
+bytes, the directory often occupies 2048 bytes, and data chunk alignment
+can vary. None of those common sizes is a file-identification rule.
+
+Payload kinds:
+
+ 0  Contents: video elementary bytes, audio elementary bytes, SBT records.
+ 1  Header: an @UTF directory or stream-information table.
+ 2  Control: one of the exact 32-byte messages below.
+ 3  Metadata: an @UTF table, such as a video seek index.
+
+The following control strings include their spaces and one final zero:
+
+ '#HEADER END     ===============\0'
+ '#METADATA END   ===============\0'
+ '#CONTENTS END   ===============\0'
+
+Each is scoped by its enclosing tag and channel. There is no single global
+end marker required after the last stream. Type-2 payloads are not media.
+The first chunk is CRID kind 1 containing CRIUSF_DIR_STREAM. A common phase
+order is directory, per-stream headers, header-end controls, seek metadata,
+metadata-end controls, interleaved media chunks, content-end controls.
+Readers can follow chunk sizes without assuming this precise ordering.
+
+TIMING
+
+T/R gives a nominal scheduling time in seconds where R is nonzero. Video
+content commonly advances T by 100, with R equal to 100 times its frame
+rate. The stream header supplies the rational playback frame rate as
+framerate_n/framerate_d. Preserve this ratio exactly: a decimal 29.97
+and the MPEG sequence-header rate 30000/1001 are different rationals.
+
+Video packets are in decoding order. MPEG picture temporal_reference and
+I/P/B dependencies determine display order; assigning each compressed
+packet a display timestamp directly would mishandle B pictures. The
+converter supplies the declared constant rate to the MPEG decoder and
+lets it reorder pictures before AVI encoding.
+
+ADX content includes an initial ADX header packet and terminal ADX marker.
+Their timestamps do not represent audio samples. Audio packet scheduling
+clocks need not precisely match accumulated ADX samples. Correct audio
+duration is total_samples / sampling_rate, with each sample counted once
+per channel. Do not stretch audio to the packet clock or video length.
+
+UTF TABLE ENCODING
+
+A kind-1 or kind-3 table payload starts with the following header:
+
+ Offset  Bytes  Interpretation
+ 0x00      4    '@UTF'
+ 0x04      4    Table size S, excluding the first eight bytes.
+ 0x08      4    Row region offset, relative to table + 8.
+ 0x0C      4    String pool offset, relative to table + 8.
+ 0x10      4    Binary/blob region offset, relative to table + 8.
+ 0x14      4    Table name offset, relative to the string pool.
+ 0x18      2    Column count N.
+ 0x1A      2    Fixed row byte length L.
+ 0x1C      4    Row count M.
+ 0x20     ...   Column descriptors, followed by row and pool regions.
+
+Validate the region order. The final logical table byte is at S + 8.
+Each column descriptor consists of a one-byte flag and a four-byte name
+offset into the string pool. A constant value follows its descriptor if
+the storage class requires it. Names and ordinary strings end with NUL.
+Strings are commonly UTF-8. The converter retains raw string bytes as
+hexadecimal too, so non-UTF-8 names do not require an encoding guess.
+
+The flag's high nibble is the storage class:
+
+ 0x1: zero/default value, with no encoded value in descriptor or rows.
+ 0x3: a single constant follows the descriptor and applies to all rows.
+ 0x5: a separate value is present in each row.
+
+The flag's low nibble selects the type:
+
+ 0x0 / 0x1: unsigned / signed 8-bit integer, one byte.
+ 0x2 / 0x3: unsigned / signed 16-bit integer, two bytes.
+ 0x4 / 0x5: unsigned / signed 32-bit integer, four bytes.
+ 0x6 / 0x7: unsigned / signed 64-bit integer, eight bytes.
+ 0x8: IEEE-754 binary32, four bytes.
+ 0x9: IEEE-754 binary64, eight bytes.
+ 0xA: four-byte string-pool-relative offset.
+ 0xB: two four-byte integers: blob-relative offset and blob byte count.
+
+For example, 0x54 means a per-row u32, 0x52 a per-row u16, 0x50 a per-row
+u8, and 0x5A a per-row string pointer. Every row stores its per-row columns
+in descriptor order. The sum of their encoded widths must be exactly L.
+Row i begins at table + 8 + row_offset + i*L. A blob's bytes are not stored
+inline in the row; its descriptor points into the binary region.
+
+Null/default string values refer to offset zero. '<NULL>' is a common
+ordinary string-pool sentinel, not a magic separate integer value. Strings
+may share offsets. Readers should bounds-check every string terminator and
+blob extent. Extra zero space between sections or at the end is alignment;
+unreferenced nonzero bytes must be retained and reported as unresolved.
+Encrypted UTF signatures and other storage classes are not implemented.
+
+DIRECTORY TABLE: CRIUSF_DIR_STREAM
+
+This directory commonly has one container row and one row per stream.
+These are schema names, not fields at invariant row byte offsets:
+
+ filename  String. Encoder/source label; may refer to an original source
+           filename. It is not a path that a decoder should open.
+ filesize  u32. Container row: physical USM byte length. Stream row: encoded
+           elementary byte count. Video per-packet zero prefixes may be
+           excluded. Includes ADX header and end marker for audio.
+ datasize  u32. Additional encoder size field, often zero. Its nonzero
+           semantics are not established by this implementation.
+ stmid     u32. FourCC packed big-endian, e.g. 0x40534656 is @SFV,
+           0x40534641 is @SFA, 0x40534254 is @SBT. Zero is the container row.
+ chno      u16. Stream channel number; 0xFFFF denotes the container row.
+ minchk    u16. Decoder buffering/chunk-count hint; does not size the file.
+ minbuf    u32. Buffer-size hint in bytes. For the supported video profile
+           it equals the largest individual encoded picture payload after
+           excluding its zero prefix. Container/audio/subtitle formulas
+           remain unresolved; do not apply the video rule to other tags.
+ avbps     u32. Nominal average encoded bits per second. For video/audio,
+           floor(8*filesize/playback_seconds). The container value is the
+           sum of the stream values. Subtitle scheduling uses its cue span
+           rather than the video duration. This field is not a clock.
+
+Directory values should be cross-checked with parsed stream identifiers
+and byte totals. A stale directory size does not justify reading beyond
+physical EOF. A decoder can still recover correctly delimited media from
+a confirmed USM with damaged directory hints.
+
+VIDEO_HDRINFO
+
+ width, height         Coded image dimensions, u32.
+ mat_width, mat_height Material/storage dimension metadata, u32.
+ disp_width,
+ disp_height           Display dimension metadata, u32.
+ scrn_width            Additional screen-width metadata, u32; exact
+                       nonzero rendering semantics are unresolved.
+ mpeg_dcprec           DC coefficient precision in bits, u8; 8 or 11 in
+                       the supported implementation.
+ mpeg_codec            Codec selector, u8. This profile implements 1,
+                       MPEG-1 including the Sofdec DC extension.
+ alpha_type            u32. Zero means no alpha in the supported profile.
+ total_frames          Number of coded pictures, u32.
+ framerate_n,
+ framerate_d           Rational playback frames per second, u32/u32.
+ metadata_count        Number of metadata table chunks for the stream.
+ metadata_size         Total allocated metadata chunk bytes, including
+                       chunk headers and padding, excluding the following
+                       metadata-end control; not just UTF payload bytes.
+ ixsize                Video input buffer allocation: in this profile it
+                       equals the largest picture payload without its zero
+                       prefix, also stored in the directory's minbuf.
+ pre_padding           Optional u32 count of zero prefix bytes per video
+                       payload. Older headers can omit it while retaining
+                       zero prefixes. Absence alone is not used to choose
+                       or remove a fixed number of bytes.
+
+Metadata is schema-driven. Column order and constant/per-row storage may
+vary. The converter records all supplied columns. It uses coded dimensions
+and the rational rate; arbitrary material/display transforms remain outside
+its implemented profile. MPEG syntax is cross-checked against dimensions.
+
+VIDEO_SEEKINFO
+
+Metadata tables of this name contain these columns:
+
+ ofs_byte   u64 absolute USM chunk offset, pointing at @SFV, not its payload.
+ ofs_frmid  signed i32 zero-based frame index in coded packet order.
+ num_skip   signed i16 preroll/skip count associated with the seek point.
+ resv       signed i16 reserved value, normally zero.
+
+Seek entries identify access points associated with sequence/GOP starts.
+Read all rows, not just the first. Verify offset targets and frame indices.
+Linear decoding does not need the index. Nonzero num_skip and resv are
+retained, but precise random-access preroll behavior is not implemented.
+
+MPEG-1 / SOFDEC ELEMENTARY VIDEO
+
+Concatenate kind-0 payloads belonging to a single @SFV channel. Keep the
+sequence headers, GOP headers, picture headers, slice data, user data,
+sequence-end marker and legal zero stuffing. Never concatenate channels.
+The directory elementary filesize can exclude zero bytes before the first
+MPEG start code in each payload; those zero prefixes are accounted for
+separately. Zero-prefix recognition uses the MPEG start-code syntax, not
+filenames, file sizes, a guessed codec, or a search for a next USM chunk.
+
+MPEG start codes are byte-aligned 00 00 01 followed by one byte:
+
+ 00: picture header. Temporal reference, picture coding type, VBV delay,
+     optional motion-vector fields, and extra information precede slices.
+ 01..AF: slice headers and entropy-coded macroblocks, as defined by MPEG-1.
+ B2: user data, extending to the next start code.
+ B3: sequence header.
+ B7: sequence end.
+ B8: group-of-pictures header and time code.
+
+The first 64 bits after B3 have fields of widths:
+ 12 width; 12 height; 4 aspect ratio; 4 frame-rate code;
+ 18 bitrate value; 1 marker bit; 10 VBV buffer size; 1 constrained flag;
+ 1 load-intra-matrix flag; 1 next bit (matrix data if that flag is set).
+After the first 63 bits, parse quantization-matrix flags and data as a
+bitstream, not as byte-aligned fields. A present matrix has 64 eight-bit
+entries in zigzag order. The non-intra matrix flag follows the intra
+matrix when one is present.
+
+Frame-rate codes 1..8 correspond to 24000/1001, 24, 25, 30000/1001, 30,
+50, 60000/1001 and 60. MPEG bitrate units are 400 bits/s; VBV units are
+16384 bits. The container's exact rational playback rate takes precedence
+when supplied. Intra/P/B picture prediction, motion compensation,
+quantization, VLC decoding and IDCT follow MPEG-1 with the extension below.
+
+Sofdec/TMPG user data can contain this byte sequence:
+
+ TMPGEXS\0 00000028 IDCPREC\0 00000008 00000003 TMPGEXE\0 00000000
+
+The eight-character numbers are ASCII hexadecimal, not binary integers.
+The opening region declares 0x28 bytes: the 24-byte IDCPREC record plus
+the 16-byte closing record. IDCPREC has an eight-byte value payload of
+'00000003'. The value 3 selects precision 8+3 = 11 bits. Decoder behavior
+requires the DC predictor to start at 128 << 3 and intra quantizer entry
+zero to be 1. FFmpeg has a TMPGEXS path implementing this behavior.
+
+A seven-byte proprietary prefix followed by NUL can precede TMPGEXS.
+Its exact internal meaning is unresolved. The converter records every
+distinct user-data byte string and occurrence count, passes it unchanged
+to FFmpeg, and does not invent field names for its unknown bytes.
+Other TMPG records and precision modes require further implementation.
+MPEG-2 B5 extensions are explicitly rejected by this converter.
+
+AUDIO_HDRINFO
+
+ sampling_rate  u32 samples per second per channel.
+ total_samples  u32 decoded samples per channel, including a partial
+                last ADX block only up to the declared sample count.
+ num_channels   u8 channels within this one audio stream.
+ ixsize         u32 buffer/index allocation hint, exact derivation unresolved.
+ audio_codec    Optional codec selector. 2 denotes ADX. Older headers omit
+                this field; validate the actual ADX header in that case.
+
+Multiple @SFA channel numbers are independent audio tracks; they must not
+be mistaken for left and right channels of a single ADX stream. Stereo is
+expressed by num_channels and the ADX header. Tracks can have different
+lengths, and short tracks should not truncate the rest of the movie.
+
+ADX TYPE 3 HEADER AND BLOCKS
+
+Concatenate all kind-0 @SFA payloads for one stream. Its ADX header is:
+
+ Offset Bytes Meaning
+ 0x00     2   0x8000.
+ 0x02     2   Offset O; compressed data starts at O + 4.
+ 0x04     1   Encoding 3: fixed predictor computed from high-pass frequency.
+ 0x05     1   Block byte size, 18 in this profile.
+ 0x06     1   Residual width, 4 bits.
+ 0x07     1   Audio channel count.
+ 0x08     4   Sample rate Hz.
+ 0x0C     4   Total decoded samples per channel.
+ 0x10     2   High-pass cutoff Hz.
+ 0x12     1   ADX header version, 3 or 4 here.
+ 0x13     1   Flags/revision, zero here. Encrypted variants are unsupported.
+
+Version 4 adds four reserved bytes at 0x14 and initial predictor history
+from 0x18. For each channel, two signed big-endian int16 values are stored:
+the preceding sample h1, then the sample before that h2. The history area
+occupies max(channels,2)*4 bytes, so mono also has an extra four-byte slot.
+Version 3 has no initial history and starts h1=h2=0.
+
+When room is present before the copyright signature, a 24-byte loop area
+follows the base/history fields: two u16 fields for sample alignment and
+loop type, followed by five u32 values for loop enable/count, loop start
+sample, loop start byte, loop end sample, loop end byte. The converter
+records these and converts one finite playback pass. Exact behavior of
+unusual loop flags and additional AINF/CINF application extensions is not
+implemented. Remaining header bytes are retained verbatim in the audit.
+
+The six bytes immediately preceding compressed data must be '(c)CRI'.
+Header size is O+4, not O and not a fixed 288. Header padding is not audio.
+
+For channel count C, each block group has 18*C bytes, one 18-byte block per
+channel in channel order. Each block stores a big-endian u16 scale word
+followed by 16 bytes, or 32 signed four-bit residuals. Consume high nibble
+first. Nibbles 0..7 mean 0..7; nibbles 8..15 mean -8..-1.
+
+The type-3 scale is stored_scale + 1. The fixed predictors are calculated
+from sample rate Fs and cutoff Fh:
+
+ a = sqrt(2) - cos(2*pi*Fh/Fs)
+ b = sqrt(2) - 1
+ c = (a - sqrt((a+b)*(a-b))) / b
+ k1 = trunc(c * 8192)
+ k2 = trunc(-c*c * 4096)
+
+For a version-4 block, each decoded sample is:
+
+ predicted = (k1*h1 + k2*h2) >> 12
+ sample = clamp_signed_16(residual*(stored_scale+1) + predicted)
+ h2 = h1
+ h1 = sample
+
+The shift is arithmetic, including negative values. Prediction uses the
+previous clipped sample. Version-3 early-decoder behavior computes the two
+products' arithmetic shifts separately, then adds them. Later proprietary
+decoders can decode version-3 streams with the version-4 rounding rule;
+bit-exact equivalence to every historical decoder is not claimed.
+
+Decode all channel blocks and retain at most total_samples output samples
+per channel. The final block's extra residuals are codec padding; they are
+decoded/accounted for but must not lengthen the output. Preserve initial
+history values even when nonzero. Plain FFmpeg ADX decoding is not used
+here because its observed implementation differs on scale/history handling.
+
+At a block-group boundary, 0x8001 is a terminal marker. Its next u16 is the
+number of remaining marker payload bytes; common markers are 18 bytes
+total with 14 zero bytes after the two words. This is not an ADPCM block
+and contributes no samples. Verify its declared extent and preserve any
+unexpected trailing data in diagnostics. A truncated stream can yield
+all complete block groups before the damage without synthesizing missing
+tail samples. A damaged individual channel block can use zero residuals
+with an explicit warning while retaining predictor continuity.
+
+SBT TEXT SUBTITLES
+
+@SBT kind-1 metadata is SUBTITLE_HDRINFO:
+
+ time_unit      u32 header/mux scheduling metadata; it is not necessarily
+                the time unit of SBT records.
+ total_time     u32. Exact semantics unresolved; do not use it as cue end.
+ num_channels   u8 number of distinct subtitle language/channel IDs.
+ content_xsize  u32 maximum stored text byte count, including terminators.
+ ixsize         u32 buffer/index hint, often zero.
+
+Kind-0 payloads contain length-delimited subtitle records. All five words
+in the following header are LITTLE-ENDIAN:
+
+ Offset Bytes Meaning
+ 0x00     4   Language/channel ID; it is not a standardized ISO language ID.
+ 0x04     4   Ticks per second U, strictly positive.
+ 0x08     4   Cue start in ticks.
+ 0x0C     4   Cue duration in ticks, NOT an absolute end time.
+ 0x10     4   Text byte count N, including terminal zero byte(s).
+ 0x14     N   UTF-8 text followed by terminal zero byte(s).
+
+The next record begins at current + 20 + N. A payload can contain multiple
+records. Start seconds = start/U; end seconds = (start+duration)/U. Preserve
+all terminal zero counts in a byte audit, but remove them for display.
+Multiple languages can have records with identical start times in any
+order; group by record language ID, not outer @SBT channel alone. Invalid
+UTF-8 is retained as raw hex and shown with replacement characters.
+
+AVI OUTPUT, SIDECARS AND DEPENDENCIES
+
+Run:
+ python3 criwareSofdec2Movie.py inputFile outputFile
+
+By default, only the AVI output file is written. To also write metadata and
+subtitle sidecars, pass -verbose (or its alias --verbose):
+ python3 criwareSofdec2Movie.py -verbose inputFile outputFile
+
+outputFile is written as AVI regardless of its extension. Use '.avi' for
+player compatibility. The parent directory must already exist. Python
+3.10 or newer, ffmpeg, and ffprobe on PATH are required. There are no
+third-party Python modules, network calls, key files, compiled helpers,
+or other supporting runtime files. --ffmpeg and --ffprobe accept explicit
+executable paths. FFmpeg needs its MPEG-1 decoder, FFV1 encoder, PCM/WAV
+support, and AVI muxer. FFV1 is lossless relative to decoded frames;
+integer IDCT/color behavior can vary among decoder implementations.
+
+The AVI contains FFV1 level-3 video with slice CRCs and signed 16-bit PCM
+audio, preserving each independent track. This favors fidelity over file
+size. Short audio tracks remain short. Audio is not trimmed to the shortest
+stream. The source is never modified. The finalized AVI replaces an
+existing destination only after encoding and output validation succeed.
+
+Only with -verbose, the converter also writes:
+ outputFile.json: SHA-256, complete chunk extent ledger, table schemas and
+ values, timing fields, byte totals, original names, controls, video syntax
+ counts, user-data hex, ADX headers and block accounting, subtitle records,
+ output probe results, warnings, and explicit research limitations.
+ outputFile.sbtC.languageL.srt: subtitle sidecars, one per outer stream C
+ and record language ID L. Numbers deliberately do not guess language names.
+
+Without -verbose, subtitle data is parsed but no SRT or JSON files are
+written. Existing sidecars from earlier runs are not removed.
+
+All finalized outputs are readable by both owner and group. Temporary
+elementary streams and PCM WAVs are cleaned up automatically. Artifact
+installation uses atomic replacement per file, not a transaction spanning
+the AVI and all sidecars. An operating-system error during the final group
+of replacements can leave some completed sidecars installed.
+
+RECOGNITION, DAMAGE AND UNSUPPORTED INPUTS
+
+Recognition requires CRID at byte zero, coherent first-chunk framing,
+@UTF at the declared payload location, and a structurally valid table named
+CRIUSF_DIR_STREAM with directory columns. A filename extension or a lone
+four-byte signature is insufficient. Recognition occurs before temporary
+or destination files are created. Failed recognition leaves no artifacts
+and does not alter an existing destination. Errors go to stderr, exit 2.
+
+Once identification is established, truncated final payloads, stale byte
+counts, bad seek targets, damaged later metadata, unexpected padding and
+missing end controls are reported. Media recovery follows known chunk
+boundaries. The parser never searches arbitrary bytes for a plausible next
+USM header. If a chunk size destroys knowledge of the next boundary, only
+the certain prefix is used. A damaged root too incomplete for positive
+identification is rejected. This conservative rule can reject real but
+severely damaged USM files; it does not claim to recognize them by guesswork.
+
+Unsupported codecs or stream types fail explicitly before destination
+installation. Malformed ADX headers with no safe decoder parameters and
+video without a recoverable sequence header can also prevent conversion.
+There is no universal repair guarantee. FFmpeg can conceal damaged MPEG
+blocks; diagnostics and a recovered-picture count are retained in the
+audit. Unparsed corrupt tails are counted as unparsed, not understood.
+
+BYTE ACCOUNTING AND REMAINING WORK
+
+The chunk ledger partitions the physical file into headers, any extended
+headers, typed payloads and trailing padding. Metadata parsing additionally
+accounts for descriptors, row values, strings, blobs and region gaps.
+Video start-code counts and byte lengths cover its compressed elementary
+stream, with zero prefixes recorded. The MPEG decoder processes compressed
+picture data. ADX accounting covers header, channel groups, trimmed final
+samples and end marker. SBT accounting includes its five fields, text and
+terminal bytes. A zero remainder in the physical ledger is a structural
+coverage result, NOT a proof of complete semantic understanding.
+
+To close the remaining gaps:
+
+1. Obtain a documented vendor decoder/encoder interface or perform
+   controlled encoding experiments varying one setting at a time to
+   determine the proprietary MPEG prefix, buffer hints, datasize,
+   material/screen dimensions, and subtitle total_time.
+2. Establish exact random-seek preroll, arbitrary start offsets and
+   variable timeline behavior against an independent reference player.
+3. Verify video color/display transforms and integer decoder output
+   against the vendor player, especially for differing display dimensions.
+4. Add explicit, tested implementations for additional USM codec selectors,
+   alpha and encrypted variants, using supplied keys where required.
+5. Validate uncommon ADX application extensions and historical rounding
+   modes against the corresponding reference decoder versions.
+
+IMPLEMENTATION REFERENCES
+
+Container parsing and codec identifiers:
+ https://github.com/FFmpeg/FFmpeg/blob/master/libavformat/usmdec.c
+MPEG-1 decoding and TMPGEXS handling:
+ https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/mpeg12dec.c
+MPEG-1 video normative syntax:
+ ISO/IEC 11172-2, Coding of moving pictures and associated audio for digital
+ storage media at up to about 1,5 Mbit/s -- Part 2: Video.
+ADX header/history layout:
+ https://github.com/vgmstream/vgmstream/blob/master/src/meta/adx.c
+ADX residual scaling and predictor arithmetic:
+ https://github.com/vgmstream/vgmstream/blob/master/src/coding/adx_decoder.c
+Independent SBT record parsing:
+ https://github.com/Youjose/PyCriCodecs/blob/main/CriCodecs/src/usm/usm_subtitle.cpp
+Independent UTF and USM schema implementations:
+ https://github.com/Youjose/PyCriCodecs/tree/main/CriCodecs/src/utf
+ https://github.com/Youjose/PyCriCodecs/blob/main/CriCodecs/src/usm/usm_builder.cpp

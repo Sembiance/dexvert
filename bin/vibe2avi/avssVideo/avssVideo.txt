@@ -1,0 +1,643 @@
+INTEL DVI / AVSS FILE FORMAT, VERSION 3
+Verified container layout and RTV 2.0 / RTV 2.1 / ADPCM4E decoding
+Revision: 2026-10-25
+
+STATUS AND SCOPE
+
+This is a standalone description of the Intel Audio/Video Support System
+(AVSS) container and the codec subset implemented by avssVideo.py. It is NOT
+a complete specification of the entire AVSS family. The unresolved items are
+listed explicitly at the end. In particular, PLV 1.0 and dvaud44 are identified
+but not decoded. No claim that every byte has a known semantic meaning is made.
+
+There is a distinction between locating every byte and understanding every
+byte: the parser accounts for all file regions, but some codec fields and
+payloads remain unresolved. Storing a field or skipping a sized region does
+not constitute reverse engineering that field.
+
+The target format is a binary Intel DVI container with an IVDV standard header
+and an SSVA AVL header. It is unrelated to AviSynth scripts, Argonaut AVS,
+Chinese AVS video elementary streams, or the DVI display connector.
+
+CONVENTIONS
+
+All integer fields are little-endian. u16/u32 are unsigned 16/32-bit integers;
+s16/s32 are signed integers of those widths. Offsets are absolute byte offsets
+from the beginning of the file unless specifically stated otherwise. There is
+no machine-native struct padding: the offsets below define the on-disk layout.
+Four-character identifiers were stored as numeric constants, so their byte
+order is the reverse of their usual printed logical name.
+
+Fixed string arrays contain a NUL-terminated ASCII name when initialized. The
+bytes after the first NUL do not belong to the name. Old writers can leave
+arbitrary storage contents in unused arrays, padding, and string suffixes.
+Do not reject an otherwise valid file because those bytes are nonzero.
+
+File structures and frame storage are normally aligned to four bytes.
+Substream HeaderSize is its logical length; its storage length is rounded up
+to a multiple of four. Do not include that alignment in the header version.
+
+FILE ORGANIZATION
+
+  DVI standard header
+  AVL header
+  stream-header array
+  substream-header pool
+  optional stream groups / labels
+  frame records, each containing a frame header and all stream payloads
+  optional codec-specific video sequence header
+  optional frame directory
+  optional unstructured annotation
+
+The offsets, not this schematic order, locate the structures. Optional tables
+can be absent. The implementation checks that assigned regions do not overlap.
+
+1. DVI STANDARD HEADER
+
+Offset Size Type  Meaning
+     0    4 u32   FileId = 0x56445649; stored bytes 49 56 44 56, "IVDV"
+     4    2 u16   HeaderSize, normally 12; historical value 1 also means 12
+     6    2 u16   HeaderVersion = 1
+     8    4 u32   AnnotationOffset; zero means absent
+
+The annotation is unstructured application data, not another compressed stream.
+The implementation supports annotation extending from its offset to EOF. Other
+placements are not implemented. A DVI still-image header alone is insufficient
+to identify AVSS: require the following SSVA signature as well.
+
+2. AVL HEADER
+
+This 120-byte header begins immediately after the standard header. All offsets
+in this table are relative to the start of the AVL header.
+
+Offset Size Type  Meaning
+     0    4 u32   HeaderId = 0x41565353; stored "SSVA"
+     4    2 u16   HeaderSize = 120
+     6    2 u16   HeaderVersion = 3
+     8    2 u16   StreamGroupCount
+    10    2 u16   StreamGroupSize
+    12    4 u32   StreamGroupOffset
+    16    2 u16   StreamGroupVersion
+    18    2 u16   StreamSize = 44
+    20    2 u16   StreamVersion = 3
+    22    2 u16   StreamCount
+    24    4 u32   StreamOffset, beginning of stream-header array
+    28    4 u32   HeaderPoolOffset, beginning of substream-header pool
+    32    4 s32   LabelCount
+    36    4 u32   LabelOffset
+    40    2 u16   LabelSize
+    42    2 u16   LabelVersion
+    44    4 u32   VideoSeqHeaderOffset
+    48    2 u16   VideoSeqHeaderSize in bytes
+    50    2 u16   FrameVersion = 3
+    52    4 s32   FrameCount
+    56    4 s32   FrameSize including header; zero for variable-size records
+    60    4 u32   FirstFrameOffset
+    64    4 u32   EndOfFrameOffset, intended first byte after frame storage
+    68    2 u16   FrameHeaderSize = 12 + 4*StreamCount
+    70    2 u16   FrameDirectorySize = 4, size of ONE directory entry
+    72    4 u32   FrameDirectoryOffset; zero means absent
+    76    2 u16   FrameDirectoryVersion = 3
+    78    2 u16   FramesPerSecond, integer nominal playback rate
+    80    4 u32   UpdateFlag; zero when not being updated
+    84    4 u32   FreeBlockOffset; unused in the supported profile
+    88   32 byte  Patch, reserved application/writer storage
+
+Zero group or label count makes the corresponding offset unused. The size and
+version defaults need not be zero just because the table is absent. A directory
+offset of zero likewise does not make its entry-size or version fields invalid.
+
+FramesPerSecond is historically rounded to an integer. It cannot by itself
+distinguish 30 from 30000/1001. The converter uses the stated integer rate; it
+does not guess an NTSC time base from duration or image content.
+
+The converter does not implement nonempty stream groups, labels, free-block
+editing chains, or codec-specific sequence headers. These are identified and
+reported as unsupported, not treated as video bytes.
+
+3. STREAM HEADER, VERSION 3
+
+There are StreamCount consecutive StreamSize-byte entries at StreamOffset.
+The array index is the stream number and determines payload order in frames.
+
+Offset Size Type  Meaning
+     0    4 u32   HeaderId = 0x5354524d; stored "MRTS"
+     4    2 u16   Type
+     6    2 u16   SubType
+     8    2 u16   HeaderCount, number of substream descriptions
+    10    2 s16   NextStreamNumber, legacy linking field; commonly -1 or zero
+    12    2 s16   StreamGroupNumber; commonly -1 or zero without groups
+    14    2 u16   Pad
+    16    4 u32   Flag; bit 2 (0x4) indicates variable frame size
+    20    4 s32   FrameSize, declared maximum payload bytes per frame
+    24    4 u32   FirstHeaderOffset, first substream description
+    28   16 char  StreamName
+
+There is no HeaderSize member between HeaderId and Type in this 44-byte
+revision. Some secondary descriptions mistakenly insert one and describe
+inconsistent sizes. The enclosing AVL header supplies the stream-header size.
+
+Known Type values:
+  2 compressed audio
+  3 compressed image/video
+  5 associated per-frame application data
+  6 uncompressed image
+  7 padding stream
+
+For video, SubType identifies planes: 1=Y, 11=U, 12=V, 13=YVU, 14=YUV.
+For the implemented audio profile, SubType is zero. Only type 3/subtype 13
+RTV 2.0/2.1 and type 2 ADPCM4E are currently decoded. The meaning of stream
+flag bit 0, which can accompany bit 2, is not established by this document.
+
+4. COMMON SUBSTREAM PREFIX
+
+Each substream header starts with the following common 104-byte layout:
+
+Offset Size Type  Meaning
+     0    4 u32   HeaderId, specific to the stream type
+     4    2 u16   HeaderSize in bytes, excluding storage alignment
+     6    2 u16   HeaderVersion
+     8   80 char  OriginalFile, provenance/path text; not an external dependency
+    88    4 s32   OriginalFrame, source/edit provenance, often -1 or zero
+    92    2 s16   OriginalStream, source/edit provenance
+    94    2 u16   Pad / writer storage; not reliably zero
+    96    4 s32   FrameCount, span for this substream description
+   100    4 u32   NextHeaderOffset; zero terminates the description chain
+
+The value 0x7fffffff in FrameCount acts as an effectively unlimited span.
+HeaderCount and NextHeaderOffset describe changes within a stream, not extra
+simultaneous stream slots. The parser follows and bounds the linked headers;
+the converter currently rejects more than one description per stream.
+
+5. VIDEO SUBSTREAM HEADER
+
+HeaderId = 0x43494d47, stored "GMIC" (logical CIMG).
+Revision 3 is 132 bytes; revision 4 is 136 bytes.
+The common prefix is followed by:
+
+Offset Size Type  Meaning
+   104    2 s16   XPosition of the image rectangle
+   106    2 s16   YPosition
+   108    2 u16   XLength, nominal image width
+   110    2 u16   YLength, nominal image height
+   112    2 s16   XCrop, alternate/cropped extent
+   114    2 s16   YCrop
+   116    2 s16   DropFrame, legacy scheduling field
+   118    2 s16   DropPhrase, legacy scheduling field
+   120    4 s32   StillPeriod, intra-frame interval; -1 means unspecified
+   124    2 u16   BufferMinimum
+   126    2 u16   BufferMaximum
+   128    2 u16   DecodeAlgorithm
+   130    2 u16   Pad2
+   132    4 s32   DCFId, compression-service identifier (revision 4 only)
+
+Known Intel algorithm identifiers include:
+    5 PLV 1.0                 6 PLV 1.5
+   20 PLV 2.0                21 PLV 2.0.1
+  128 PIC                   129 JPEG
+  192 RTV 1.0               194 RTV 1.5H
+  195 RTV 1.5               200 RTV 2.0
+  201 RTV 2.1               202 RTV 2.2
+
+Only 200 and 201 are decoded by this implementation. Algorithm family names
+are not evidence that a different version has an identical bitstream.
+
+The converter requires zero position, crop, and drop fields. StillPeriod is
+descriptive: actual intra-frame flags, not a presumed interval, control decoding.
+
+6. AUDIO SUBSTREAM HEADER
+
+HeaderId = 0x41554449, stored "IDUA" (logical AUDI).
+Revision 4 has logical length 162 bytes, occupying 164 bytes after alignment.
+Revision 5 has length 168 bytes.
+
+Offset Size Type  Meaning
+   104   16 char  LibraryName
+   120   16 char  AlgorithmName, e.g. "adpcm4e", "pcm8", "dvaud44"
+   136    4 s32   DataRate, nominal compressed audio bits/second
+   140    2 u16   CutoffFrequency
+   142    2 u16   Parameter3, legacy algorithm parameter
+   144    2 u16   LeftVolume, percent; normally 100
+   146    2 u16   RightVolume, percent; normally 100
+   148    4 s32   LoopOffset, normally -1
+   152    4 s32   StartingFrame, normally zero
+   156    4 u32   Flag, legacy channel/playback flags
+   160    2 u16   FrameRate, nominal packet playback rate
+   162    2 u16   Pad2 (revision 5 only)
+   164    4 s32   DCFId (revision 5 only)
+
+Historical documentation disagrees on audio flag encodings. Do not derive
+ADPCM4E channel count from Flag alone: the packet discriminator identifies it
+directly. The packet's sample rate is authoritative for implemented ADPCM4E.
+The meaning of Parameter3 and nonzero Pad2 values for dvaud44 remains unresolved.
+The converter rejects nonzero StartingFrame and non-default volume settings.
+
+A declared audio stream can have zero payload length in every frame. This is
+an empty track, not evidence that PCM silence was encoded. It is omitted from
+the AVI with a warning. A nonempty unknown audio codec rejects the conversion,
+so a successful conversion never silently drops an unsupported soundtrack.
+
+7. FRAME RECORDS
+
+FrameHeaderSize bytes precede every frame's payloads:
+
+Offset Size Type  Meaning
+     0    4 s32   FrameNumber, normally zero-based and sequential
+     4    4 u32   PreviousOffset, previous frame-header location, or zero
+     8    4 u32   Checksum
+    12  4*N u32   StreamFrameSize[N], one payload length for each stream
+
+The header checksum is fully established:
+
+  XOR of EVERY little-endian 32-bit word of the header = 0x46524d48
+
+Equivalently, Checksum is 0x46524d48 XOR FrameNumber XOR PreviousOffset XOR
+all StreamFrameSize values. This constant is the numeric tag FRMH. The checksum
+protects the header, not the compressed payload. A file may legitimately leave
+PreviousOffset zero throughout.
+
+After the header, read exactly StreamFrameSize[0] bytes for stream 0, then the
+same for streams 1..N-1. The next frame starts immediately afterward. Do not
+apply additional alignment not already included in those lengths.
+
+The file's FrameCount counts synchronized frame records; a zero payload or a
+codec-defined dummy record does not remove that tick from the video timeline.
+The nominal time of record k is k/FramesPerSecond.
+
+Some edited streams retain an original following-frame header after a video's
+declared codec bitstream. It is recognizable structurally when the entire
+remaining region has the frame-header size and the FRMH XOR checksum. It is
+source provenance, not another displayed frame: its lengths and offsets refer
+to the original source stream. The converter recognizes such trailing headers
+by exact length/alignment/checksum properties and excludes them from pixels.
+Other surplus bytes are reported as unresolved rather than scanned for frames.
+
+8. FRAME DIRECTORY
+
+At FrameDirectoryOffset, each four-byte entry contains a u32:
+
+  offset = entry & 0x7fffffff
+  independently_accessible = bool(entry & 0x80000000)
+
+The high bit means all streams can be entered at that record. It is not part of
+the offset. FrameCount entries normally appear. An additional four-byte terminal
+value can equal EndOfFrameOffset; that value is an end marker, not a frame.
+The implementation accepts that precisely identified terminal entry.
+
+The sequential frame record layout is sufficient when there is no directory.
+Directory entries are checked against independently parsed record positions.
+
+9. RTV 2.0 / RTV 2.1 PAYLOAD
+
+The codec works on Y,V,U planes, with chroma quarter-sized in both dimensions
+(YVU 4:1:0). Each sample is eight bits. There are no motion vectors in the
+implemented RTV2 coding: prediction is either vertical within the current
+intra frame or at the same position in the preceding decoded frame.
+
+The first 16 bytes are the generic Intel encoded-bitstream header:
+
+Offset Size Type  Meaning
+     0    2 u16   CodeAlgVer = 200 or 201
+     2    2 u16   CodeFlag; bit 2 (4) = intra, zero = predicted
+     4    4 u32   CodeSize, bits including the codec header and storage padding
+     8    4 u32   CodeReserved; normally zero
+    12    2 u16   CodeYLen, nominal height
+    14    2 u16   CodeXLen, nominal width
+
+For other Intel codecs, generic CodeFlag can also encode plane selection in
+bits 4..5 (0=Y, 1=V, 2=U), and bit 1 concerns bitstream ordering. Those flags
+must not be interpreted as RTV2 intra flags. They are not implemented here.
+
+A zero-sized video payload is a null update. A 16-byte payload whose CodeSize
+is 128 is the SDK-defined dummy update. Both retain the preceding displayed
+image for one frame tick. Neither contains entropy codes.
+
+A regular RTV2 payload has another 16 bytes:
+
+Offset Size Type  Meaning
+    16    2 u16   RTV flags:
+                   0x0004 intra, repeats generic intra bit
+                   0x0008 coded height is half nominal height
+                   0x0100 coded width is half nominal width
+    18    2 u16   Quantizer selection; bits 0..1 luma, bits 2..3 chroma
+    20    2 u16   Encoder auxiliary word; semantics not fully established
+    22    2 u16   Auxiliary/storage word; semantics not established
+    24    8 u8    Prefix-group suffix-bit counts e[0..7]
+    32    * bits  Entropy stream: Y plane, then V plane, then U plane
+
+The reduction bits at offset 16 are explicitly consumed by Intel's software
+converter. They must not be replaced by an unconditional half-size assumption.
+The coded dimensions are obtained by applying each reduction independently.
+The decoder requires coded width divisible by 8 and coded height divisible by 4.
+These restrictions make each chroma row an even number of pixels.
+
+The codec storage ends at ceil(CodeSize/8), which can precede the enclosing
+stream payload's end. A decoder terminates the entropy stream after reconstructing
+the exact number of pixels in the three planes. The remaining 0..31 bits within
+the rounded coded region are alignment storage and can be nonzero. They are not
+extra pixels or a second code table.
+
+9.1 Entropy codes
+
+Within each byte, consume bits least-significant first. A symbol's logical code
+is a unary prefix of g one bits followed by a zero, followed by e[g] suffix bits.
+Interpret those suffix bits in encounter order as an unsigned MSB-first integer q.
+For g in 0..7:
+
+  base[g] = sum(2**e[j] for j in 0..g-1)
+  symbol = SYMBOLS[base[g] + q]
+
+The ordinal must be less than 143. Eight consecutive prefix one bits are invalid.
+Groups beyond ordinal 142 contain unused code space. The standard suffix counts
+are 2,3,3,4,4,4,6,6, but every frame supplies its own eight-byte description.
+RTV 2.0 can change the description between frames. A decoder must rebuild or
+select the table using all eight values, including on predicted frames.
+
+SYMBOLS, as consecutive hexadecimal bytes (143 total):
+  01028103048205068384070885090a0b0c0d0e860f108788111213148915168a1718
+  8b191a8c1b1c8d1d1e8e1f208f212290232425262728292a2b2c2d2e2f303132
+  333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f50515253
+  5455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f7071727374
+  75767778797a7b7c7d7e7f
+
+Symbols 1..127 select a two-pixel vector. Symbols 129..144 encode a run of
+2*(symbol-128) zero-delta pixels, i.e. 2..32 pixels. Runs cannot cross a row.
+Symbols zero and 128 do not occur in the symbol alphabet.
+
+9.2 Pixel reconstruction
+
+For a vector symbol s, select bytes T[2*s] and T[2*s+1] from the plane's
+quantizer table. The signed deltas are those byte values minus 128.
+
+For an intra frame:
+  * First row: each output pixel is the corresponding vector-table byte.
+    A zero run writes 128.
+  * Later rows: add each delta to the pixel directly above in the CURRENT
+    plane and clamp to 0..255. A zero run copies those pixels from above.
+
+For a predicted frame:
+  * Start from a copy of the preceding decoded plane.
+  * Add floor(3*delta/4) to each selected pixel and clamp to 0..255.
+  * A zero run leaves the previous pixels unchanged.
+
+In particular, negative division rounds toward negative infinity, matching an
+arithmetic right shift by two. Do not truncate negative deltas toward zero.
+Intra frames need no previous frame. Predicted frames require a matching-size
+reference. State is committed only after all three planes decode successfully.
+
+9.3 Codebook values
+
+Four tables each contain 128 consecutive two-byte vectors. The first two bytes
+are vector zero (not emitted as a vector symbol); every later pair is indexed
+by its symbol value. The four complete tables appear in Appendix A. These are
+codec constants, not codebooks inferred from an individual file.
+
+9.4 Presentation
+
+Undo coded horizontal/vertical reduction by pixel/row replication to the
+substream's nominal grid. The documented DVI pixel aspect is 5:4. The converter
+then maps to square pixels by multiplying nominal width by 5/4. Its resampling
+method is nearest neighbor; no new temporal samples are interpolated.
+The AVI video is FFV1 with 4:4:4 YUV after chroma upsampling. FFV1 is lossless
+for the raster passed to it; the original RTV source was already lossy.
+
+10. ADPCM4E PAYLOAD
+
+This is Intel's blocked four-bit audio, not a WAV IMA-ADPCM block. Using a
+generic WAV IMA decoder would give the wrong block layout, sample counts,
+and arithmetic.
+
+Offset Size Type  Meaning
+     0    2 u16   Encoded block bytes following this eight-byte header
+     2    1 u8    Discriminator 0xff
+     3    1 u8    1 = mono ADPCM4E; 3 = stereo ADPCM4E
+     4    2 u16   Decoded samples/second PER CHANNEL
+     6    2 u16   Reserved; zero for this implemented packet revision
+     8    * byte  Encoded blocks
+
+The packet length must equal 8 + the first field. A header with no encoded
+bytes is a dummy packet. Rates are read from the packet, not fixed to 22050
+or inferred from byte count. The sample rate and channel count must remain
+constant in an output track.
+
+Each mono block is 16 little-endian words (32 bytes). Stereo groups contain
+32 words (64 bytes), interleaved as word 0 left/right, word 1 left/right, etc.
+For each channel:
+
+  word 0: four continuation nibbles decoded with the preceding block's state
+  word 1: predictor/step reset word
+  words 2..15: 56 new ADPCM nibbles
+
+Consume nibbles from a 16-bit word in bit positions 12..15, 8..11, 4..7, 0..3,
+in that order. This is NOT ordinary low-nibble-first byte decoding.
+
+In the reset word, low 7 bits are the step index (0..88). The remaining bits
+are the signed 16-bit predictor, with low 7 bits zeroed. Assign the predictor
+and step index to state; do NOT emit the predictor as a PCM sample.
+
+The first block's continuation word has no predecessor and is consumed but
+not emitted. All later continuation words are decoded before applying their
+block's new reset. Thus N blocks yield 60*N - 4 PCM samples per channel:
+56 in the first block, 60 in every later block. Decoder state continues across
+AVSS packet boundaries. Neither packet boundaries nor reset words insert an
+additional sample. The exact behavior was checked against the original Intel
+software decoder under CPU emulation.
+
+10.1 Sample arithmetic
+
+Let n be the nibble, p the signed predictor and i the step index.
+
+  m = 2*(n & 7) + 1
+  if n & 8: m = -m
+  delta = floor(m * STEP[i] / 8)
+  p = signed16((p + delta) modulo 65536)
+  emit p
+  i = clamp(i + INDEX[n & 7], 0, 88)
+
+Intel's arithmetic is a signed multiplication followed by an arithmetic shift,
+and the predictor wraps to 16 bits. It is not the split-shift, saturating
+arithmetic used by many other IMA implementations.
+
+INDEX = -1,-1,-1,-1,2,4,6,8
+
+STEP (89 integers, indexed 0..88):
+  7,8,9,10,11,12,13,14,16,17,19,21,23,25,28,31,34,37,41,45,50,55,60,
+  66,73,80,88,97,107,118,130,143,157,173,190,209,230,253,279,307,337,
+  371,408,449,494,544,598,658,724,796,876,963,1060,1166,1282,1411,
+  1552,1707,1878,2066,2272,2499,2749,3024,3327,3660,4026,4428,4871,
+  5358,5894,6484,7132,7845,8630,9493,10442,11487,12635,13899,15289,
+  16818,18500,20350,22385,24623,27086,29794,32767
+
+The AVI contains signed 16-bit PCM at the declared decoded rate and channel
+count. The converter does not resample to a guessed rate, stretch audio to
+match the video duration, trim valid samples, or synthesize an empty track.
+
+11. IDENTIFICATION, VALIDATION, AND RECOVERY
+
+Recognition requires both IVDV and SSVA plus the implemented structure versions.
+File extensions and filenames are irrelevant. Unknown types or codec revisions
+are unsupported even when the container is positively recognized.
+
+All parsing is based on explicit lengths, offsets, counts, and checksums. No
+byte-pattern resynchronization or trial-codec fallback is used. Unsupported
+files do not create an output AVI, and an existing output path remains intact.
+Conversion first decodes to private temporary files and only atomically replaces
+the output after FFmpeg successfully writes a complete AVI.
+
+For recognized supported files with inconsistent or damaged contents:
+  * Use frame-record lengths and the declared record count for sequential reads.
+    A stale EndOfFrameOffset alone must not cut off a valid final record.
+  * Treat the directory, annotation, sequence-header start, and physical EOF as
+    bounds; never run frame payloads into those regions.
+  * Report incorrect header checksums, previous links, stored frame numbers,
+    declared maximum sizes, and directory offsets. Do not silently rewrite them.
+  * Retain complete length-delimited records before a truncated final record.
+  * If a video picture cannot decode, repeat the last intact image for that tick.
+    Before the first intact intra image, use an explicitly reported black
+    concealment frame. Never use a partly decoded image as prediction state.
+    If no image can decode, reject the conversion.
+  * Stop damaged audio at the last valid packet; preserve video and any decoded
+    audio. Unknown audio formats are rejected rather than concealed.
+
+Recovery cannot repair every form of damage. If the structural lengths are
+untrustworthy or structures overlap, conversion can fail. Arbitrary corrupt
+files are not an excuse to search for plausible frames heuristically.
+
+Implementation resource limits: at most 100 simultaneous streams, integer frame
+rates 1..1000, and at most 16,777,216 nominal pixels per video stream. Prefix
+descriptions with more than 15 suffix bits in any group are unsupported. These
+are implementation limits, not established format-wide limits.
+
+The --inspect option produces a JSON region audit without decoding. Its
+byte_accounting measures range coverage, not semantic completeness. The
+semantic_completeness field is deliberately false. Reported metadata ranges
+can contain reserved or unresolved fields as described here.
+
+12. IMPLEMENTATION AND DEPENDENCIES
+
+Usage:
+  python3 avssVideo.py inputFile outputFile
+  python3 avssVideo.py --inspect inputFile
+
+Requires Python 3.10+ standard library and FFmpeg on PATH, with rawvideo/WAV
+input, scaling, FFV1, PCM, and AVI output support. No external Python libraries,
+downloaded decoder binaries, hardware, original source-media paths, or codebook
+files are needed. Codebooks are embedded in avssVideo.py.
+
+The implementation is distributed under LGPL 2.1 or later; the accompanying
+avssVideo.LICENSE.txt contains the license. The vector constants are credited
+to FFmpeg/NihAV and Konstantin Shishkov. The license text is not a runtime input.
+
+The report-generation helper additionally uses ffprobe and FFmpeg's libx264/AAC
+encoders. Its browser MP4s are viewing derivatives; the AVI files are the main
+outputs. Those report assets are not runtime dependencies of the converter.
+
+13. UNRESOLVED FEATURES AND NEXT STEPS
+
+This implementation does not satisfy a claim of 100% semantic understanding
+of all AVSS bytes. Known outstanding work:
+
+  1. PLV 1.0 compressed plane data and its sequence-header tables. The generic
+     16-byte plane header, container frame lengths, plane IDs and dimensions
+     are known; entropy coding, reconstruction, sequence-table semantics and
+     remaining bit assignments are not. Obtain the matching Intel i750 PLV
+     decompression microcode/SDK and either emulate it or compare against a
+     working ActionMedia board. Reverse engineer the sequence tables before
+     attempting a software decoder. PLV 1.5/2.x are separate unimplemented codecs.
+
+  2. dvaud44. Its name and packet bounds are known, and its payload resembles
+     a DVI/IMA-family ADPCM variant. Exact header bit meanings, nibble schedule,
+     sample counts, and channel/timing behavior have not been established.
+     Obtain Digital Video Arts' matching NewWorld/DVision audio codec or a
+     trusted hardware playback capture, then establish exact state transitions
+     and sample counts. Guessing that a toggling header bit is a channel ID is
+     insufficient evidence. No speculative audio is emitted.
+
+  3. RTV auxiliary words at payload offsets 20 and 22; stream flag bit 0;
+     some legacy audio flags and parameters; behavior of non-default reserved
+     fields. Inspect the original encoder/microcode and correlate actual writes,
+     rather than assigning names from value patterns. These fields are parsed
+     or explicitly located but not claimed to be fully explained.
+
+  4. Nonempty stream groups, labels, edit/free-block chains, description changes,
+     positioned/cropped streams, and other codecs. More primary structure
+     definitions and independent conformance material are required. Rejecting
+     these features is a support boundary, not proof of malformed input.
+
+  5. Exact hardware timing where the container stores only a rounded frame rate,
+     and exact hardware chroma/pixel interpolation. A bit-exact pixel-codec
+     reconstruction is distinguishable from reproducing the analog board's
+     presentation pipeline. The converter's spatial resampling is explicitly
+     specified above.
+
+REFERENCES AND EVIDENCE
+
+Intel/IBM AVKALG.H, AVK software version 1 release 2, distributed in the
+ActionMedia programmer package. Primary definitions for generic encoded
+headers, algorithm IDs, dummy packets and nominal audio rates:
+  http://ohlandl.ipv7.net/video/amiiprog.zip
+
+Intel AVSTOAVI X1.01 and its documentation. Primary software evidence for
+RTV reduction flags and ADPCM4E state, block arithmetic and sample emission:
+  http://ohlandl.ipv7.net/video/am2_avsavi.exe
+  http://ohlandl.ipv7.net/video/avsavi.txt
+
+FFmpeg Intel Indeo 2 decoder and vector tables, Konstantin Shishkov:
+  https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/indeo2.c
+  https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/indeo2data.h
+
+NihAV's DVI demuxer and RTV2 research by Konstantin Shishkov; independently
+useful for variable prefix-code construction. This converter does not adopt
+its unconditional half-resolution or hardcoded audio-rate assumptions:
+  https://nihav.org/
+  https://codecs.multimedia.cx/2025/09/proto-indeo-revisited/
+
+Encyclopedia of Graphics File Formats, Intel DVI chapter (secondary reference).
+Its incorrect STREAMHEADER size member and typographical identifier mistakes
+must be corrected using the byte layouts given above:
+  https://www.fileformat.info/format/dvi/egff.htm
+
+APPENDIX A: RTV VECTOR TABLES
+
+The following hex strings are complete, ordered bytes of each table. Whitespace
+is insignificant; each pair of bytes is one vector. Quantizer numbers are 0..3.
+
+Table 0:
+  80 80 84 84 7c 7c 7f 85 81 7b 85 7f 7b 81 8c 8c 74 74 83 8d 7d 73 8d 83 73 7d 77 89 89 77 89 77
+  77 89 8c 95 74 6b 95 8c 6b 74 7c 90 84 70 90 7c 70 84 96 96 6a 6a 82 98 7e 68 98 82 68 7e 97 a2
+  69 5e a2 97 5e 69 a2 a2 5e 5e 8b a3 75 5d a3 8b 5d 75 71 95 8f 6b 95 71 6b 8f 78 9d 88 63 9d 78
+  63 88 7f a7 81 59 a7 7f 59 81 a4 b1 5c 4f b1 a4 4f 5c 96 b1 6a 4f b1 96 4f 6a b2 b2 4e 4e 65 9b
+  9b 65 9b 65 65 9b 89 b4 77 4c b4 89 4c 77 6a a3 96 5d a3 6a 5d 96 73 ac 8d 54 ac 73 54 8d b4 c3
+  4c 3d c3 b4 3d 4c a4 c3 5c 3d c3 a4 3d 5c c4 c4 3c 3c 96 c6 6a 3a c6 96 3a 6a 7c ba 84 46 ba 7c
+  46 84 5b ab a5 55 ab 5b 55 a5 63 b4 9d 4c b4 63 4c 9d 86 ca 7a 36 ca 86 36 7a b6 d7 4a 29 d7 b6
+  29 4a c8 d7 38 29 d7 c8 29 38 a4 d8 5c 28 d8 a4 28 5c 6c c1 94 3f c1 6c 3f 94 d9 d9 27 27 80 80
+
+Table 1:
+  80 80 85 85 7b 7b 7e 87 82 79 87 7e 79 82 8f 8f 71 71 84 8f 7c 71 8f 84 71 7c 75 8b 8b 75 8b 75
+  75 8b 8e 9a 72 66 9a 8e 66 72 7b 93 85 6d 93 7b 6d 85 9b 9b 65 65 82 9d 7e 63 9d 82 63 7e 9b a8
+  65 58 a8 9b 58 65 a9 a9 57 57 8d aa 73 56 aa 8d 56 73 6e 99 92 67 99 6e 67 92 76 a2 8a 5e a2 76
+  5e 8a 7f af 81 51 af 7f 51 81 ab ba 55 46 ba ab 46 55 9a bb 66 45 bb 9a 45 66 bb bb 45 45 60 a0
+  a0 60 a0 60 60 a0 8b be 75 42 be 8b 42 75 66 aa 9a 56 aa 66 56 9a 70 b5 90 4b b5 70 4b 90 be cf
+  42 31 cf be 31 42 ab d0 55 30 d0 ab 30 55 d1 d1 2f 2f 9a d3 66 2d d3 9a 2d 66 7b c5 85 3b c5 7b
+  3b 85 54 b4 ac 4c b4 54 4c ac 5e be a2 42 be 5e 42 a2 87 d8 79 28 d8 87 28 79 c0 e8 40 18 e8 c0
+  18 40 d5 e8 2b 18 e8 d5 18 2b ab e9 55 17 e9 ab 17 55 68 cd 98 33 cd 68 33 98 ea ea 16 16 80 80
+
+Table 2:
+  80 80 86 86 7a 7a 7e 88 82 78 88 7e 78 82 92 92 6e 6e 85 92 7b 6e 92 85 6e 7b 73 8d 8d 73 8d 73
+  73 8d 91 9e 6f 62 9e 91 62 6f 79 97 87 69 97 79 69 87 a0 a0 60 60 83 a2 7d 5e a2 83 5e 7d a0 b0
+  60 50 b0 a0 50 60 b1 b1 4f 4f 8f b2 71 4e b2 8f 4e 71 6b 9e 95 62 9e 6b 62 95 74 a9 8c 57 a9 74
+  57 8c 7f b8 81 48 b8 7f 48 81 b4 c5 4c 3b c5 b4 3b 4c 9f c6 61 3a c6 9f 3a 61 c6 c6 3a 3a 59 a7
+  a7 59 a7 59 59 a7 8d ca 73 36 ca 8d 36 73 61 b2 9f 4e b2 61 4e 9f 6d bf 93 41 bf 6d 41 93 ca df
+  36 21 df ca 21 36 b3 df 4d 21 df b3 21 4d e1 e1 1f 1f 9f e3 61 1d e3 9f 1d 61 7a d3 86 2d d3 7a
+  2d 86 4c be b4 42 be 4c 42 b4 57 ca a9 36 ca 57 36 a9 88 e9 78 17 e9 88 17 78 cc fb 34 05 fb cc
+  05 34 e6 fb 1a 05 fb e6 05 1a b4 fd 4c 03 fd b4 03 4c 63 dc 9d 24 dc 63 24 9d fe fe 02 02 80 80
+
+Table 3:
+  80 80 87 87 79 79 7e 89 82 77 89 7e 77 82 95 95 6b 6b 86 96 7a 6a 96 86 6a 7a 70 90 90 70 90 70
+  70 90 94 a4 6c 5c a4 94 5c 6c 78 9b 88 65 9b 78 65 88 a6 a6 5a 5a 83 a9 7d 57 a9 83 57 7d a6 b9
+  5a 47 b9 a6 47 5a ba ba 46 46 92 bc 6e 44 bc 92 44 6e 67 a3 99 5d a3 67 5d 99 72 b0 8e 50 b0 72
+  50 8e 7f c3 81 3d c3 7f 3d 81 be d2 42 2e d2 be 2e 42 a5 d4 5b 2c d4 a5 2c 5b d4 d4 2c 2c 52 ae
+  ae 52 ae 52 52 ae 8f d8 71 28 d8 8f 28 71 5b bb a5 45 bb 5b 45 a5 69 cb 97 35 cb 69 35 97 d8 f0
+  28 10 f0 d8 10 28 bd f1 43 0f f1 bd 0f 43 f3 f3 0d 0d a5 f6 5b 0a f6 a5 0a 5b 78 e2 88 1e e2 78
+  1e 88 42 c9 be 37 c9 42 37 be 4f d8 b1 28 d8 4f 28 b1 8a fd 76 03 fd 8a 03 76 db ff 25 01 ff db
+  01 25 f9 ff 07 01 ff f9 01 07 be ff 42 01 ff be 01 42 5e ed a2 13 ed 5e 13 a2 ff ff 01 01 80 80

@@ -1,0 +1,834 @@
+EMBLAZE VIDEO 2: CONTAINER, VIDEO AND AUDIO BITSTREAMS
+===================================================
+Reverse-engineered playback specification, revision 1
+
+Scope and confidence
+--------------------
+This document describes the single-file Emblaze Video 2 (EV2) container and
+its variable-length-coded H.263-derived video with GSM full-rate audio.
+It is based on the executable behavior of the GEO Java player distributed
+in 1998, including its GetData, EmblazeVideo and jsdec classes. The related
+Emblaze Audio elementary-stream wrapper is distinguished, not incorporated
+as an alternative EV2 container.
+
+This is NOT a claim that every possible Emblaze variant is fully understood.
+The authoring meaning of the ignored byte at file offset 35 has not been
+recovered. The player has arithmetic-coding and PB-picture paths, which are
+identified below but are outside the fully described and implemented VLC
+profile. Advanced prediction is recognized and delegated to an H.263 decoder;
+its complete overlapped-motion algorithm is not reproduced here. No invented
+meaning is assigned to unknown authoring metadata. The peculiar large-length
+expressions below reproduce the player; their intended encoder semantics
+have not been established independently for nonzero upper bytes.
+
+The companion converter handles the VLC I/P profile, including unrestricted
+motion vectors, custom dimensions, embedded GSM, timestamp gaps and bounded
+recovery of damaged pictures. It rejects SAC, PB pictures, changing dimensions,
+and unsupported source-format codes explicitly. It is therefore not a complete
+implementation of every feature in the original player. A roadmap appears at
+the end. Within this scope, compressed syntax is parsed to individual block
+coefficients rather than treated as unexplained opaque payload.
+
+1. Conventions
+--------------
+File offsets and bit offsets are zero-based. Bytes are unsigned. Video and
+GSM fields are transmitted most significant bit first within each byte.
+Concatenate elementary-stream payloads BEFORE reading bits. Packet boundaries
+need not be picture boundaries or start-code boundaries. A picture start code
+can have its first zero byte in the preceding video packet.
+
+"u(n)" means an unsigned n-bit integer. Arithmetic right shift is written >>.
+Integer divisions of negative numbers in the original Java code truncate
+toward zero, except >>, which rounds down. Distinguish these operations in
+motion-vector and fixed-point synthesis implementations.
+
+The container has no global checksum, packet CRC, packet type identifier,
+filename, palette, codec table, frame-count field, or explicit duration.
+Its compressed-video VLC tables are fixed codec definitions, not file data.
+The original player loads those tables from a separate resource, ev.bin.
+The converter embeds their mathematical definitions and needs no such file.
+
+2. Recognition and fixed header
+-------------------------------
+Offset  Size   Meaning
+0       27     ASCII "GEO INTERACTIVE MEDIA GROUP"
+27       1     0x1A, end of the vendor signature
+28       4     02 00 00 00, EV2 version identifier
+32       1     Audio-present flag: 0=no audio packets, 1=audio packets
+33       1     Integer component of the presentation frame rate
+34       1     Decimal fractional component of the presentation frame rate
+35       1     Ignored auxiliary byte; original reader discards it
+36       4     Declared total video elementary-stream bytes
+40       4     Declared total audio elementary-stream bytes
+44       ...   Alternating length-prefixed packets
+
+Do not recognize EV2 by extension or by the 28-byte vendor signature alone.
+The vendor signature is shared with other GEO formats. In particular, a
+vendor signature immediately followed by GSM frames starting with high
+nibble 0xD is the separate EA audio wrapper, not an EV2 video container.
+A converter for this EV2 profile must reject that wrapper.
+
+The original reader treats the version as a Java big-endian readInt equal
+to 0x02000000; equivalently the four literal bytes above. They are not an
+ASCII version string.
+
+Frame rate is obtained by decimal concatenation:
+    FPS = decimal(str(byte33) + "." + str(byte34))
+Examples: 29 and 97 mean 29.97; 7 and 5 mean 7.5, not 7.05.
+Use an exact rational for timestamps. A zero rate is malformed.
+
+The auxiliary byte at 35 is read and discarded unconditionally. It is not
+used to choose a decoder, dimensions, audio rate, frame count, or timestamp
+scale in this player. Its existence and playback behavior are known; its
+original authoring name, interpretation, and permitted values are unknown.
+Preserve its value in an audit rather than asserting that it is a codec ID.
+
+The legacy reader's total-length arithmetic is:
+    TOTAL(b0,b1,b2,b3) = b0 + 256*b1 + 65536*b2 + 4096*b3.
+This is the actual expression in the reader, including the unusual weight
+of b3. When b3=0 it equals the low 24 bits of a little-endian integer. It is
+not justified to silently substitute a different expression for other values.
+Totals are allocation/accounting metadata, not offsets. A mismatch with
+bytes physically present is damage or inconsistent metadata, not grounds
+for guessing a different layout. Actual packet boundaries govern extraction.
+
+3. Packet stream
+----------------
+Starting at offset 44, read a 4-byte packet header, then the specified number
+of payload bytes. The first packet is video. If audio-present is 1, packet
+roles alternate video, audio, video, audio, ... until EOF. If the flag is 0,
+every packet is video. Zero-length packets still occupy their 4-byte header
+and still participate in alternation.
+
+For header bytes b0,b1,b2,b3:
+    keyframe_flag = (b3 & 0x80) != 0
+    length = b0 + 256*b1 + 4096*b2 + 65536*(b3 & 0x7F)
+
+This expression is also intentionally the original reader's expression.
+The upper coefficients overlap lower bit weights. It is not conventional
+little-endian u31. For short packets with b2=0 and (b3&127)=0 the low two
+bytes are the ordinary little-endian length. The high flag bit is excluded
+from length arithmetic.
+
+The flag on a video packet is a seeking hint that an intra picture is at
+that boundary. It does not replace the actual picture-type bit. The legacy
+player records the concatenated video offset minus one (clamped to zero)
+and pairs it with the beginning of the following audio packet. This explains
+why packet payloads can start after the first byte of a picture start code.
+On audio packets the high flag bit is consumed but has no playback use.
+Seeking hints need not be trusted to decode the sequential stream.
+
+No packet alignment or RIFF-style pad byte exists. Move forward by exactly
+4+length. Append payloads to their corresponding elementary stream. Audio
+is decoded across packet boundaries; packet lengths need not be multiples
+of the GSM frame size to permit correct concatenation.
+
+EOF at a packet boundary is permitted. A header shorter than four bytes is
+a truncated header. A short payload is a truncated packet. Zero bytes after
+a damaged payload can still parse as zero-length packet headers; they are
+not evidence for a special padding section or a new chunk type. Count these
+bytes explicitly and report contradictory totals. The format has no general
+resynchronization marker at the packet level.
+
+4. Picture and group start codes
+--------------------------------
+Read the video elementary stream MSB first. The common prefix is 17 bits:
+    00000000000000001
+It is followed by a 5-bit group number GN:
+    GN=0: picture start (22-bit value 0x20)
+    GN=1..30: group-of-blocks (GOB) start
+    GN=31: end of sequence (22-bit value 0x3F)
+
+Before a start code, zero alignment/stuffing bits may be present. The legacy
+reader locates the 17-bit prefix one bit at a time. A syntax-aware decoder
+knows when a picture's full macroblock raster has been decoded and may then
+consume zero stuffing. It should not discard arbitrary nonzero garbage as
+"padding". An EOF after a complete picture and zero alignment bits is valid;
+the original reader synthesizes an end code after EOF for its internal loop.
+No physical end-of-sequence code is required.
+
+A GOB header has GN followed by GFID:u(2) and GQUANT:u(5). GQUANT replaces
+the current quantizer. The GEO implementation maps GN directly to macroblock
+row GN, and resets the top motion predictor for that row. For a complete
+sequential raster the next macroblock address is GN*macroblock_width.
+Skipped or out-of-order groups require explicit error recovery, not an
+assumption that missing coefficients are present.
+
+5. EV2 picture header
+---------------------
+Field                   Bits     Interpretation
+PSC                     22       Common start prefix followed by GN=0
+TR                      20       Presentation frame number
+Marker                   1       Must be 1
+H.263 identifier         1       Must be 0
+Split-screen indicator   1       H.263 presentation flag
+Document-camera flag     1       H.263 presentation flag
+Freeze-picture release   1       H.263 presentation flag
+Source format            3       Dimension code below
+Custom height           13       Present only for source format 4
+Custom width            13       Present only for source format 4
+Picture type             1       0=I picture, 1=P picture
+Unrestricted MV          1       H.263 Annex D motion vectors
+Syntax arithmetic        1       0=VLC profile, 1=SAC profile
+Advanced prediction      1       H.263 Annex F/overlapped motion prediction
+PB picture               1       Additional B-picture payload exists if 1
+QUANT                    5       Initial quantizer, valid range 1..31
+CPM                      1       Consumed and ignored by the GEO reader
+TRB                      3       Present only when PB=1
+BQUANT                   2       Present only when PB=1
+PEI                      1       Extra information follows if 1
+PSUPP                    8       Present when preceding PEI=1
+PEI                      1       Repeat PSUPP/PEI until PEI=0
+
+The source-format table is:
+    1: 128 x 96
+    2: 176 x 144
+    3: 352 x 288
+    4: custom HEIGHT first, then WIDTH, each unsigned 13-bit
+    5: 240 x 176
+    0,6,7: unsupported by this decoder profile
+
+This differs from standard H.263: TR is 20 rather than 8 bits; source format
+4 means explicit dimensions instead of 4CIF; source format 5 means 240x176
+instead of 16CIF. Simply deleting the outer container does not make a
+standard .h263 stream. Only the ordinary H.263 macroblock syntax is shared.
+
+The legacy single-file reader does not consume PSBI even if CPM=1. It only
+consumes the single CPM bit. Adding a standards-derived PSBI here would
+misalign this implementation's bitstream. PSUPP bytes have no rendering
+semantics in the original player but are structurally consumed.
+
+Round each display dimension upward independently to a multiple of 16 for
+coding: CW=16*ceil(W/16), CH=16*ceil(H/16). There are CW/16 columns and CH/16
+rows of macroblocks. Picture padding is actual coded pixel data, not spare
+bytes to skip. The video has Y, Cb, Cr planes with 4:2:0 chroma subsampling.
+
+The bitstream and reference planes have the bottom-up orientation used by
+the single-file GEO player. Render by vertically reversing the coded image,
+then removing CH-H lines from its TOP and CW-W columns from its right.
+Equivalently crop the first H coded rows before reversing them. Do not crop
+the bottom of the already flipped image. Display pixels are square.
+
+TR describes the presentation tick, not the ordinal number of stored
+pictures. Its time is TR/FPS seconds from the stream origin. A missing tick
+holds the previous picture. Audio starts at time zero, so skipping repeated
+images without representing their duration causes cumulative desynchrony.
+TR is a 20-bit field; a verified rollover can be unwrapped by 2^20. Ambiguous
+backward jumps are malformed metadata. The companion implements only the
+unambiguous transition from the maximum counter value; general backward
+jumps are not guessed into wraps. A nonzero initial TR holds the first
+available intra image back to time zero as an explicit recovery policy.
+
+6. VLC macroblock syntax
+------------------------
+Macroblocks are processed left to right, then top to bottom. Each consists
+of six 8x8 transform blocks: upper-left Y, upper-right Y, lower-left Y,
+lower-right Y, Cb, Cr, in that order.
+
+For an I picture:
+    MCBPC, CBPY, optional DQUANT, six block payloads.
+For a P picture:
+    COD; if COD=0, MCBPC, CBPY, optional DQUANT,
+    motion vector difference(s) when required, six block payloads.
+
+COD=1 is a skipped P macroblock: copy the colocated previous-picture samples,
+use motion vector zero, and do not read MCBPC, CBPY, DQUANT or coefficients.
+For the non-PB profile, an intra macroblock's motion vector is also zero.
+
+MCBPC is a VLC. Its decoded value is mode + (CBPC<<4):
+    mode 0: INTER, one vector
+    mode 1: INTER_Q, one vector and DQUANT
+    mode 2: INTER4V, four luma vectors (advanced-prediction mode)
+    mode 3: INTRA
+    mode 4: INTRA_Q, with DQUANT
+    value 255: stuffing; read another macroblock code without advancing raster
+CBPC's high bit marks Cb coefficients and low bit marks Cr coefficients.
+The complete codebooks are in Appendix A.
+
+The CBPY table in Appendix A returns a four-bit value appropriate for inter
+macroblocks. For intra macroblocks XOR that value with 15. Combine:
+    CBP = (CBPY<<2) | CBPC.
+CBP bit 5 corresponds to the first luma block and bit 0 to Cr.
+
+DQUANT is u(2): 00=-1, 01=-2, 10=+1, 11=+2. Add it to the current QUANT
+and clamp to 1..31, matching the legacy implementation. The updated value
+persists across subsequent macroblocks until changed again or reset by a
+picture/GOB header.
+
+Each intra block always starts with an unsigned 8-bit DC coefficient.
+Value 255 represents DC value 128. Values 0 and 128 are reserved in valid
+H.263 syntax. The reconstructed transform DC is decoded_value*8.
+If its CBP bit is zero, the remaining coefficients are all zero.
+For an inter block no separate DC byte exists. A zero CBP bit means all
+transform coefficients are zero and no coefficient data is read.
+
+7. Transform coefficient syntax and reconstruction
+--------------------------------------------------
+Initialize the scan index to 1 for an intra block and to 0 for an inter
+block. Read a coefficient VLC from Appendix A. For an ordinary entry, the
+table gives LAST, RUN, LEVEL and a separate one-bit sign follows (0 positive,
+1 negative). RUN skips that many zero coefficients. Place the signed level
+at the resulting scan index. LAST=1 ends this block. Otherwise increment
+the scan index by one and decode another coefficient. An index >=64 is
+malformed.
+
+The escape VLC is 0000011. After it read LAST:u(1), RUN:u(6), LEVEL:s(8).
+LEVEL is two's-complement, and there is no additional sign bit. Values 0 and
+-128 are reserved. Escape supports levels and runs not represented by the
+ordinary table. In the converter's packed VLC table the escape sentinel is
+7167; ordinary packed values are (LAST<<12)|(RUN<<4)|LEVEL.
+
+The scan order maps scan positions to row-major 8x8 coefficient indices:
+  0,1,8,16,9,2,3,10,17,24,32,25,18,11,4,5,
+  12,19,26,33,40,48,41,34,27,20,13,6,7,14,21,28,
+  35,42,49,56,57,50,43,36,29,22,15,23,30,37,44,51,
+  58,59,52,45,38,31,39,46,53,60,61,54,47,55,62,63.
+
+For non-DC coefficients (and all coefficients of inter blocks), with
+quantizer Q and nonzero signed level L:
+    magnitude = Q*(2*abs(L)+1) - (1 if Q is even else 0)
+    F = sign(L)*magnitude.
+There is no JPEG quantization matrix and no differential DC predictor.
+
+Apply an 8x8 inverse discrete cosine transform:
+    f[y,x] = (1/4) * sum(v=0..7,u=0..7,
+               C[u]*C[v]*F[v,u]*cos((2*x+1)*u*pi/16)
+                                *cos((2*y+1)*v*pi/16)),
+    C[0]=1/sqrt(2), C[k>0]=1.
+The original fast implementation is an integer approximation, not floating
+point evaluation of this formula. Its output is clipped to [-256,255].
+For intra blocks store and clip the spatial result to [0,255]. For inter
+blocks add it to the motion-compensated prediction and clip to [0,255].
+There is no extra +128 applied to intra samples: their DC already carries
+the component's mean. Different conforming integer IDCT implementations
+can differ slightly in reconstructed pixels and subsequent predictions.
+The converter uses FFmpeg's decoder IDCT; it does not promise pixel identity
+with the Java fast IDCT. It does preserve all coded coefficients.
+
+8. Motion compensation
+-----------------------
+Motion-vector VLC values are in Appendix A. Interpret values 32..63 as
+value-64. Each component is in half-luma-sample units. Predict the component
+from the componentwise median of the left, above and above-right vectors.
+At the top picture/GOB row use the left vector in place of both upper
+candidates. At the left and right image boundary, absent lateral candidate
+vectors are zero. Intra and skipped macroblocks contribute zero vectors.
+The prediction is reset for each picture.
+
+Let pred be the predicted component and delta the signed decoded component;
+start with v=pred+delta. Without unrestricted vectors:
+    if v>31: v-=64
+    if v<-32: v+=64
+With the unrestricted-vector header bit:
+    if pred<-31 and v<-63: v+=64
+    if pred>32 and v>63: v-=64
+These are the original H.263 Annex D rules. They are NOT the different
+variable-length motion-vector representation of H.263+ UMV mode. Converting
+only a header to H.263+ and enabling UMV there would corrupt decoding.
+
+For ordinary one-vector macroblocks, use v for all four luma blocks. Derive
+each chroma vector component as:
+    c = v>>1, if v is divisible by 4;
+    c = (v>>1)|1, otherwise.
+For a pixel displacement v, the integer displacement is v>>1 and the
+half-sample fraction is v&1. One horizontal or vertical half-sample average
+is (a+b+1)>>1. A diagonal half-sample average is (a+b+c+d+2)>>2. These are
+performed on the reference picture, never the partially reconstructed
+current picture. At permitted out-of-picture positions, extend the nearest
+edge sample. Advanced prediction also permits out-of-picture references.
+
+INTER4V and overlapped motion compensation are H.263 Annex F features.
+A fully independent decoder must additionally implement its subblock median
+predictors, weighted five-predictor overlap, boundary substitutions and
+four-vector chroma rounding. The companion hands these operations to the
+Intel H.263 decoder. This document does not claim to replace the complete
+Annex F specification.
+
+The original player's YCbCr-to-RGB coefficients are integer fixed point:
+    Yt = 76309*(Y-16)
+    R = clip8((Yt + 104448*(Cr-128)) >> 16)
+    G = clip8((Yt - 24759*(Cb-128) - 53109*(Cr-128)) >> 16)
+    B = clip8((Yt + 132798*(Cb-128)) >> 16).
+It uses nearest-neighbor chroma replication over 2x2 pixels. The AVI stores
+YUV video so players perform their own display conversion. The converter
+marks limited-range SMPTE 170M/BT.601-family color and square pixels.
+
+9. Audio framing: every bit of a GSM full-rate packet
+----------------------------------------------------
+Audio is standard GSM 06.10 full-rate RPE-LTP, not GSM-MS/WAV49, AMR, ADPCM,
+MP3, or mu-law compressed input. A frame is exactly 33 bytes (264 bits) and
+yields 160 signed 16-bit PCM samples at 8000 Hz, mono, i.e. 20 ms.
+There is no separate sample-rate or channel-count field in this EV2 profile.
+Keep GSM decoder state across all frames and all container packet boundaries.
+
+Bit offset   Width   Field
+0               4    Magic nibble 1101 (0xD)
+4               6    LARc[0]
+10              6    LARc[1]
+16              5    LARc[2]
+21              5    LARc[3]
+26              4    LARc[4]
+30              4    LARc[5]
+34              3    LARc[6]
+37              3    LARc[7]
+40            224    Four 56-bit subframes
+
+For subframe s=0..3 let B=40+56*s:
+B+0             7    Nc: long-term prediction lag
+B+7             2    bc: long-term prediction gain code
+B+9             2    Mc: RPE grid position
+B+11            6    xmaxc: RPE amplitude code
+B+17+3*k        3    xmc[k], k=0..12: thirteen RPE pulse codes
+
+Thus 4+36+4*(7+2+2+6+13*3)=264, with no unassigned/padding bits.
+All packed fields are unsigned; signs emerge during inverse quantization.
+Nc outside 40..120 is a defined use of the previous valid lag, not an
+invalid-frame test. The previous valid lag starts at 40. Do not reject
+legitimate frames merely for Nc outside that range.
+
+10. GSM synthesis algorithm
+----------------------------
+The following describes the full-rate PCM reconstruction, including the
+constants needed to interpret the packed fields. Use signed 16-bit
+saturation S(x)=min(32767,max(-32768,x)) for each indicated fixed-point
+operation. Rounded multiply M(a,b)=S((a*b+16384)>>15). Use arithmetic shifts;
+for a negative shift count reverse the direction. An absolute value of
+-32768 is 32767 in the reflection-coefficient conversion. Start all filter
+state, both previous/current LAR vectors, the nine short-term state values,
+and the de-emphasis state at zero; initialize the previous lag to 40.
+
+Decode the eight log-area ratios using these tables, in order:
+    MIC = [-32,-32,-16,-16,-8,-8,-4,-4]
+    B2  = [0,0,4096,-5120,188,-3584,-682,-2288]
+    INV = [13107,13107,13107,13107,19223,17476,31454,29708]
+    t = S(((LARc[i]+MIC[i])<<10)-B2[i])
+    LARnew[i] = S(2*M(INV[i],t)).
+
+For each of the four subframes:
+(a) Inverse RPE amplitude quantization:
+    exp = (xmaxc>>3)-1 if xmaxc>15, otherwise 0
+    mant = xmaxc-(exp<<3)
+    if mant==0: exp=-4; mant=7
+    otherwise:
+        while mant<=7: mant=(mant<<1)|1; exp-=1
+        mant-=8
+    FAC = [18431,20479,22527,24575,26623,28671,30719,32767]
+    shift = 6-exp
+    rounding = 1<<(shift-1), with signed-shift handling when shift<=0
+    pulse[k] = S(M(FAC[mant],(2*xmc[k]-7)<<12)+rounding) >> shift
+(b) Set excitation[0..39]=0 and excitation[Mc+3*k]=pulse[k].
+(c) If 40<=Nc<=120 update the previous valid lag to Nc; otherwise reuse it.
+    Gain table QLB=[3277,11469,21299,32767], select gain=QLB[bc].
+    Maintain a 120-sample decoded residual history. Sequentially for k=0..39:
+        residual[k]=S(excitation[k]+M(gain,residual_history_at(k-lag))).
+    Negative indices address prior residual samples; nonnegative indices
+    address already synthesized samples in this subframe. Append these 40
+    samples to history and retain the most recent 120. Concatenate the four
+    residual blocks into 160 samples for the frame.
+
+Interpolate each component of the LAR vectors over the frame:
+    samples 0..12:  S(S((old>>2)+(new>>2))+(old>>1))
+    samples 13..26: S((old>>1)+(new>>1))
+    samples 27..39: S(S((old>>2)+(new>>2))+(new>>1))
+    samples 40..159: new
+The shifts are individually evaluated before addition. For each interval,
+convert each interpolated LAR value a to a reflection coefficient r:
+    t=abs_saturated(a)
+    if t<11059: rmag=2*t
+    elif t<20070: rmag=t+11059
+    else: rmag=S((t>>2)+26112)
+    r=-rmag if a<0 else rmag.
+
+For each sample, run the eight-stage short-term synthesis lattice. State
+v[0..8] persists across intervals and frames:
+    sri=residual_sample
+    for i from 7 down to 0:
+        sri=S(sri-M(r[i],v[i]))
+        v[i+1]=S(v[i]+M(r[i],sri))
+    v[0]=sri
+Then de-emphasize and scale:
+    msr=S(sri+M(previous_msr,28180))
+    PCM = signed16(S(2*msr) & 0xFFF8)
+    previous_msr=msr.
+After the frame, use LARnew as LARold for the following frame.
+
+The Java audio output subsequently maps PCM to 8-bit mu-law for the historic
+Sun audio API. That mu-law table is a playback-interface adaptation, not an
+EV2 file field. Preserve the full reconstructed PCM in an AVI audio stream;
+there is no reason to introduce the additional mu-law quantization loss.
+
+11. Lossless bitstream adaptation used by the converter
+------------------------------------------------------
+The converter does not ask FFmpeg to detect EV2. Python identifies the outer
+container, parses its packets, reads every picture header, and walks all VLC
+macroblock payloads, including run/level escape data. For the supported
+profile it rebuilds only the picture header into the syntax accepted by
+FFmpeg's h263i (Intel H.263) decoder. Coefficient and motion data are retained
+bit for bit. Original frame timestamps remain in the separate conversion
+schedule; the intermediary decoder receives their low 8 bits.
+
+The intermediary AVI specifies the padded coded width and height, with
+FourCC I263. The adapted header fields, in bit order, are:
+    PSC 22=0x20; TR 8; original five flags; source format 3=7;
+    original five mode bits;
+    Intel extended format 3=6;
+    reserved 2=0; loop-filter 1=0; reserved 1=0; improved-PB 1=0;
+    reserved 5=0; marker 5=1;
+    pixel-aspect 4=1;
+    display-width 9; marker 1=1; display-height 9;
+    original QUANT/CPM/PEI suffix;
+    original macroblock payload; zero byte-alignment stuffing.
+
+The Intel decoder deliberately skips the two display-size fields and uses
+the AVI dimensions for its raster. The converter writes representable
+values in those unused fields (clamped to 511) while preserving the actual
+coded dimensions in AVI. This does not change decoded sample coordinates.
+This choice retains the original Annex D motion syntax. It avoids the
+incompatible H.263+ UMV codewords. SAC and PB are rejected before adaptation.
+
+Decode to planar YUV420. Present at the exact rational FPS, inserting held
+images for missing timestamps. Flip/crop as described above. Encode FFV1
+version 3 intra frames into AVI and convert GSM to signed little-endian
+16-bit mono PCM. FFV1 is lossless relative to the decoded YUV frames; it does
+not make the original lossy H.263 source lossless, and it does not eliminate
+IDCT implementation differences. Preserve all available audio samples even
+if the final audio and video durations differ by part of one video tick.
+Do not truncate either track merely to force identical end times.
+
+12. Error handling and output contract
+--------------------------------------
+Usage:
+    python3 emblazeVideo2.py inputFile outputFile
+Optional byte/syntax accounting:
+    python3 emblazeVideo2.py inputFile outputFile --audit audit.json
+
+Requirements: Python 3.9+ standard library and ffmpeg on PATH with h263i,
+gsm, ffv1 and pcm_s16le support and the AVI/rawvideo/GSM demuxers and AVI
+muxer. No third-party Python packages, Java runtime, downloaded player,
+VLC resource file, or auxiliary codec DLL is a runtime dependency.
+
+The target profile is recognized by exact signature and version bytes,
+never by the filename extension. Another format, an unsupported coding
+mode, or a target too damaged to yield any picture exits nonzero and does
+not create or replace the requested AVI. Diagnostics go to stderr. Files
+with a signature but no version identifier cannot be conclusively identified
+as EV2 and are rejected as such.
+
+The converter first parses the whole stream and checks mode support. Once
+confirmed target data is found, it recovers complete packets and complete
+pictures up to the first unrecoverable video error. In a damaged P picture
+without advanced prediction it retains complete macroblocks, discards the
+incomplete macroblock's bits, and fills the remaining raster with valid
+COD=1 copy operations. That is explicit concealment, not recovery of the
+lost original pixels. In an I picture or an advanced-prediction picture it
+stops at the preceding recoverable picture. It does not perform speculative
+scanning for later apparent keyframes inside damaged payloads.
+
+An incomplete final GSM frame is omitted. A complete frame with an invalid
+GSM high nibble is replaced by a defined silent GSM frame, maintaining its
+20 ms time slot and recording a diagnostic. Bad outer-header fields that
+prevent interpretation, such as an unknown audio flag or zero frame rate,
+fail because the correct intended values cannot be inferred safely.
+
+The output is built in a temporary directory beside the destination and
+atomically installed only after both decoder and encoder succeed. Existing
+output files survive failed recognition or conversion. Successful files
+have mode 0664. The implementation guards against identical input/output
+paths and timelines exceeding 20 million frames. It reads compressed input
+into memory and expands its video bits for syntax validation; very large
+inputs may require substantial memory. Temporary decoded YUV occupies
+1.5*CW*CH bytes per stored picture. Unsupported dimension changes are
+reported rather than silently scaling images into a different raster.
+
+The optional audit records:
+- fixed header bytes and auxiliary field;
+- every packet header's file offset, raw bytes, stream role, advertised and
+  available size, elementary-stream offset, and keyframe hint;
+- every parsed picture's timestamp, exact bit boundaries and macroblock count;
+- alignment/stuffing, end codes, terminal zeros and damaged tail lengths;
+- exact source/output counts, inserted holds, GSM frame/sample counts;
+- each recovery action and contradictory declared length.
+
+Byte coverage and semantic certainty are different. A byte can be accounted
+for as an ignored field or corrupted coefficient data without knowing the
+encoder's original intended value. A claim of literal 100% original semantics
+would be unjustified where metadata is unknown or data has been overwritten.
+
+13. Remaining work for a complete family specification
+-------------------------------------------------------
+1. Recover encoder documentation or an encoder executable to establish the
+   authoring meaning of the ignored auxiliary byte and intended treatment
+   of the overlapping high-byte length arithmetic.
+2. Implement syntax-based arithmetic coding, including its probability tables,
+   bit-stuffing layer, arithmetic state resets and all symbol mappings; compare
+   against an independent original decoder. The archived Java path contains
+   suspicious table initialization that must not be blindly treated as a
+   reliable general reference. FFmpeg h263i does not support SAC.
+3. Implement PB-picture reconstruction and scheduling with TRB/BQUANT and the
+   original MODB/CBPB syntax, rather than assuming the newer improved-PB mode
+   is interchangeable. Validate the placement of both displayed pictures.
+4. Specify and independently validate every Annex F boundary case, GOB
+   recovery case, changing-size stream and counter-wrap behavior. The current
+   advanced-prediction path relies on the external decoder's implementation.
+5. If exact historical rendering is required, replace the standard decoder
+   IDCT/color display path with the original integer IDCT and RGB conversion,
+   and compare pixel-for-pixel rather than within H.263 IDCT tolerance.
+6. Extend corruption recovery only where surviving packet boundaries and a
+   fully validated intra picture give an unambiguous restart. No algorithm
+   can reconstruct bytes that have actually been replaced or lost.
+
+Primary implementation references
+----------------------------------
+Archived GEO distribution (Java class files and fixed codec tables):
+https://samples.mplayerhq.hu/internets/emblaze/www.glacierbay.com/ev.jar
+https://samples.mplayerhq.hu/internets/emblaze/www.glacierbay.com/ev.bin
+Relevant methods: GetData constructor/read_append; EmblazeVideo
+getpicturehdr/getMBs/getblock/find_pmv/motion_decode/ConvertYUVtoRGB;
+jsdec.gsm_decode and its synthesis routines.
+
+FFmpeg's documented implementation of the intermediary header and shared
+macroblock decoder:
+https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/intelh263dec.c
+https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/ituh263dec.c
+These links identify evidence and the external implementation; the EV2
+container rules and supported VLC codebooks are reproduced in this document.
+
+APPENDIX A. COMPLETE VLC CODEBOOKS FOR THE DESCRIBED PROFILE
+===========================================================
+Intra/inter MCBPC values use mode+(CBPC<<4), with 255 meaning stuffing.
+CBPY values below use the inter interpretation; XOR with 15 for intra.
+Motion values 32..63 represent negative differences after subtracting 64.
+Coefficient codewords exclude their following sign bit.
+
+Intra MCBPC
+-----------
+Codeword          Decoded value
+1                 3
+001               19
+010               35
+011               51
+0001              4
+000001            20
+000010            36
+000011            52
+000000001         255
+
+Inter MCBPC
+-----------
+Codeword          Decoded value
+1                 0
+010               2
+011               1
+0010              32
+0011              16
+00011             3
+000100            4
+000101            48
+0000011           51
+0000100           34
+0000101           18
+0000110           33
+0000111           17
+00000011          35
+00000100          19
+00000101          50
+000000001         255
+000000010         52
+000000011         36
+000000100         20
+000000101         49
+
+CBPY
+----
+Codeword          Decoded value
+11                0
+0011              15
+0100              3
+0101              5
+0110              1
+0111              10
+1000              2
+1001              12
+1010              4
+1011              8
+00010             7
+00011             11
+00100             13
+00101             14
+000010            9
+000011            6
+
+Motion-vector difference
+------------------------
+Codeword          Decoded value
+1                 0
+010               1
+011               63
+0010              2
+0011              62
+00010             3
+00011             61
+0000110           4
+0000111           60
+00000110          7
+00000111          57
+00001000          6
+00001001          58
+00001010          5
+00001011          59
+0000010010        10
+0000010011        54
+0000010100        9
+0000010101        55
+0000010110        8
+0000010111        56
+00000001000       24
+00000001001       40
+00000001010       23
+00000001011       41
+00000001100       22
+00000001101       42
+00000001110       21
+00000001111       43
+00000010000       20
+00000010001       44
+00000010010       19
+00000010011       45
+00000010100       18
+00000010101       46
+00000010110       17
+00000010111       47
+00000011000       16
+00000011001       48
+00000011010       15
+00000011011       49
+00000011100       14
+00000011101       50
+00000011110       13
+00000011111       51
+00000100000       12
+00000100001       52
+00000100010       11
+00000100011       53
+000000000100      30
+000000000101      34
+000000000110      29
+000000000111      35
+000000001000      28
+000000001001      36
+000000001010      27
+000000001011      37
+000000001100      26
+000000001101      38
+000000001110      25
+000000001111      39
+0000000000101     32
+0000000000110     31
+0000000000111     33
+
+Transform coefficients
+----------------------
+Codeword          LAST  RUN  LEVEL
+10                   0    0      1
+110                  0    1      1
+0111                 1    0      1
+1110                 0    2      1
+1111                 0    0      2
+01011                0    5      1
+01100                0    4      1
+01101                0    3      1
+001100               1    4      1
+001101               1    3      1
+001110               1    2      1
+001111               1    1      1
+010000               0    9      1
+010001               0    8      1
+010010               0    7      1
+010011               0    6      1
+010100               0    1      2
+010101               0    0      3
+0000011           ESCAPE: read LAST(1), RUN(6), signed LEVEL(8)
+0010000              1    8      1
+0010001              1    7      1
+0010010              1    6      1
+0010011              1    5      1
+0010100              0   12      1
+0010101              0   11      1
+0010110              0   10      1
+0010111              0    0      4
+00010011             1   16      1
+00010100             1   15      1
+00010101             1   14      1
+00010110             1   13      1
+00010111             1   12      1
+00011000             1   11      1
+00011001             1   10      1
+00011010             1    9      1
+00011011             0   14      1
+00011100             0   13      1
+00011101             0    2      2
+00011110             0    1      3
+00011111             0    0      5
+000010001            1   24      1
+000010010            1   23      1
+000010011            1   22      1
+000010100            1   21      1
+000010101            1   20      1
+000010110            1   19      1
+000010111            1   18      1
+000011000            1   17      1
+000011001            1    0      2
+000011010            0   22      1
+000011011            0   21      1
+000011100            0   20      1
+000011101            0   19      1
+000011110            0   18      1
+000011111            0   17      1
+000100000            0   16      1
+000100001            0   15      1
+000100010            0    4      2
+000100011            0    3      2
+000100100            0    0      7
+000100101            0    0      6
+0000000100           1   28      1
+0000000101           1   27      1
+0000000110           1   26      1
+0000000111           1   25      1
+0000001000           0    9      2
+0000001001           0    8      2
+0000001010           0    7      2
+0000001011           0    6      2
+0000001100           0    5      2
+0000001101           0    3      3
+0000001110           0    2      3
+0000001111           0    1      4
+0000100000           0    0      9
+0000100001           0    0      8
+00000000100          1    1      2
+00000000101          1    0      3
+00000000110          0    0     11
+00000000111          0    0     10
+00000100000          0    0     12
+00000100001          0    1      5
+00000100010          0   23      1
+00000100011          0   24      1
+00000100100          1   29      1
+00000100101          1   30      1
+00000100110          1   31      1
+00000100111          1   32      1
+000001010000         0    1      6
+000001010001         0    2      4
+000001010010         0    4      3
+000001010011         0    5      3
+000001010100         0    6      3
+000001010101         0   10      2
+000001010110         0   25      1
+000001010111         0   26      1
+000001011000         1   33      1
+000001011001         1   34      1
+000001011010         1   35      1
+000001011011         1   36      1
+000001011100         1   37      1
+000001011101         1   38      1
+000001011110         1   39      1
+000001011111         1   40      1

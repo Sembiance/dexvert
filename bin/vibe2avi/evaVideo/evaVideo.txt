@@ -1,0 +1,442 @@
+HP PALMTOP EVA3 / EVA5 VIDEO FILE FORMAT
+======================================
+
+1. Scope and conventions
+------------------------
+
+This document specifies the original HP 100LX/200LX Easy Video Animation
+formats identified by the four-byte signatures EVA3 and EVA5. They are
+Tetsushi Yamamoto's palmtop raster-video formats, not the unrelated MSX EVA
+movie format or Sharp Extended Vector Animation. A filename extension is
+neither required nor sufficient to identify this format.
+
+The supported raster profile is 96 columns by 92 rows, four grayscale levels,
+and the nominal 3:2 display aspect. These values are constants of the original
+format/player, not values to infer from file size or image content. EVA5 stores
+them explicitly; the original EVA 2.50 player rejects other raster values.
+There is no documented alternate palette, raster depth, or raster geometry
+within this profile. EVA4 is a related intermediate format but is deliberately
+outside the scope of this converter.
+
+All multibyte header fields and image lengths are unsigned little-endian
+integers. A byte contains eight bits. Hexadecimal values use the 0x prefix.
+Offsets are zero based. No structure has implicit alignment or padding.
+Unless explicitly described as a bit field, a field occupies whole bytes.
+
+This specification combines the format author's header documentation and
+compression reference code with inspection of the original EVA 2.50 player
+and the independently written A2E 0.2A encoder. In particular, PCM format 2
+is implemented by EVA 2.50 although the short published EVA5 description lists
+only PCM formats 0 and 1. The converter handles all three.
+
+2. Signature and comment
+------------------------
+
+Offset    Size       Meaning
+0         4          ASCII EVA3 (45 56 41 33) or EVA5 (45 56 41 35).
+4         variable   Comment/title bytes, ending before the first 0x1A.
+4+C       1          Comment terminator, exactly 0x1A.
+5+C       variable   Binary header, described separately below.
+
+C is the number of comment bytes, which may be zero. There is no fixed-size
+comment area, length word, NUL terminator, or character escape convention.
+The first 0x1A after the signature always ends the comment. An embedded 0x1A
+cannot be represented as comment content. Other byte values, including NUL,
+are opaque metadata and do not change video or audio decoding. The format has
+no character-set declaration; a decoder must not guess a character encoding
+in order to determine the header boundary. ASCII or Japanese text is common,
+but preserving the original bytes is the lossless metadata treatment.
+
+In the remaining header tables, H = 5 + C, the offset immediately after the
+terminator. The binary header starts immediately at H even when H is odd.
+
+3. EVA3 header and frame records
+--------------------------------
+
+Offset    Size       Meaning
+H+0       2          N: total number of video frames.
+H+2       1          F: frames per second, an integer from 1 through 255.
+H+3       1          Reserved; writers set this to zero.
+H+4       2208*N     Consecutive raw video frames.
+
+The byte at H+3 is NOT the high byte of a 16-bit frame rate. The original
+encoder and player read the frame rate from the single byte at H+2 and discard
+the reserved byte separately.
+
+Each frame consists of exactly 2208 bytes: 96 * 92 * 2 / 8. There are no
+per-frame headers, lengths, timestamps, flags, palettes, or audio records.
+Frame i (zero based) starts at H + 4 + 2208*i. Every frame is independent;
+the image data is not an XOR or difference against the preceding frame.
+
+The expected total file length is H + 4 + 2208*N. Frame i is displayed for
+1/F seconds starting at i/F, and the video duration is N/F seconds. EVA3
+does not carry audio, and bytes after the declared image array are not an
+implicitly appended soundtrack.
+
+4. Pixel representation and display
+------------------------------------
+
+The packed raster is row major, from the upper-left corner: left to right
+within each row, followed by the next row below. A row occupies 24 bytes.
+There is no scan-line padding, interlacing, plane separation, or row reversal.
+
+For a packed byte b, the four pixel values in display order are:
+
+    (b >> 6) & 3, (b >> 4) & 3, (b >> 2) & 3, b & 3
+
+The ordered grayscale values are 0 = black, 1 = dark gray, 2 = light gray,
+3 = white. A conventional full-range 8-bit grayscale representation is
+0, 85, 170, 255 respectively. There is no embedded palette, transfer function,
+gamma value, or physical LCD calibration. This digital mapping preserves the
+four stored levels; it does not attempt to simulate a particular old display.
+
+The stored raster is 96 by 92. The format's nominal image display aspect is
+3:2, as represented by EVA5 hwrate = 0x18. The original player uses the same
+display path for EVA3 and EVA5, so the converter uses that presentation
+convention for EVA3 as well; EVA3 does not encode a separate aspect field.
+For a 96-by-92 raster, a 3:2 display aspect corresponds to a pixel/sample
+aspect of 23:16. These are distinct from the raster dimensions. Hardware-
+dependent scaling, dithering, and the player's optional zoom/trick modes
+are presentation effects, not additional data in the file.
+
+5. EVA5 header
+---------------
+
+Offset    Size       Name        Meaning
+H+0       2          frames      N: total number of interleaved frame records.
+H+2       2          width       96, stored as 60 00.
+H+4       2          height      92, stored as 5C 00.
+H+6       1          color       2 bits per video pixel.
+H+7       1          hwrate      Nominal width/height display aspect times 16;
+                                0x18 (24 / 16 = 3/2) for this profile.
+H+8       1          pcmfmt      PCM packing format: 0, 1, or 2; see section 6.
+H+9       2          pcmfrq      R: audio sample frequency in Hz, nonzero.
+H+11      2          pcmlen      A: packed PCM bytes per frame, nonzero.
+H+13      1          dummy       Reserved; writers set this to zero.
+H+14      variable               First frame record.
+
+N is an unsigned 16-bit count. A and R are unsigned 16-bit quantities. A is
+a packed BYTE count, not a sample count. Header fields are not bit-aligned
+with one another; pcmfrq and pcmlen may begin at odd absolute file offsets.
+
+EVA5 has no independent frames-per-second field. Let S be samples per packed
+audio byte: S = 1 << pcmfmt. Then:
+
+    samples per frame = A * S
+    frame duration    = A * S / R seconds
+    frames per second = R / (A * S)
+    total duration    = N * A * S / R seconds
+
+These ratios are exact. In particular, do not round the frame rate to the
+nearest integer or substitute a standard television rate. Encoders may
+truncate a computed bytes-per-frame value to an integer, so the stored ratio
+can differ slightly from the encoder's intended rate. The stored values
+determine the actual file timing.
+
+Every frame has the same audio duration, even when its compressed image
+length differs. Neither audio nor video has an independent timestamp.
+There is no zero-length-audio/silent-video timing convention in this profile;
+zero R or A makes the timing undefined. Encoded silence is ordinary PCM.
+
+6. EVA5 audio representation
+-----------------------------
+
+All audio is unsigned linear PCM, mono. There is no ADPCM predictor, delta
+coding, adaptive state, sign-magnitude representation, channel interleave,
+codec header, or compression beyond packing low-bit-depth samples.
+
+pcmfmt   Bits/sample   Samples/byte   Sample order within a byte
+0        8             1             b
+1        4             2             bits 7..4, then bits 3..0
+2        2             4             bits 7..6, 5..4, 3..2, 1..0
+
+For conversion to unsigned 8-bit PCM, LEFT ALIGN each sample:
+
+    format 0: b
+    format 1: b & 0xF0, (b & 0x0F) << 4
+    format 2: b & 0xC0, (b & 0x30) << 2,
+              (b & 0x0C) << 4, (b & 0x03) << 6
+
+Thus 4-bit PCM becomes the values 0, 16, ..., 240, and 2-bit PCM becomes
+0, 64, 128, 192. Do not multiply 4-bit values by 17 or 2-bit audio values
+by 85: that differs from the original player's expansion and shifts the
+unsigned midpoint. Silence/midpoint is code 128, 8, or 2 respectively.
+
+For example, packed byte 0x1B represents:
+
+    format 0: [27]
+    format 1: [16, 176]
+    format 2: [0, 64, 128, 192]
+
+Every packed byte contributes all of its samples, including the last byte
+of an odd-length PCM block. No PCM block padding is specified. Audio blocks
+concatenate in frame order without gaps, overlap, or per-frame resets.
+
+The original player turns PCM into hardware speaker PWM and allows volume
+and carrier-frequency changes. These are playback effects. An AVI should
+contain the underlying PCM samples, not a recording of the PWM carrier or
+an emulation of the speaker's analog response.
+
+7. EVA5 frame-record structure
+-------------------------------
+
+Starting at H+14, read exactly N records. If P is the start of a record:
+
+Offset    Size       Meaning
+P         A          Packed PCM audio bytes for this frame.
+P+A       2          L: length in bytes of the compressed image payload.
+P+A+2     L          Image bytecode, described in section 8.
+
+The next record starts at P + A + 2 + L. The length L excludes its own
+two-byte field and excludes audio. L counts control bytes AND literal
+bytes. No frame alignment or pad byte is inserted when L or A is odd.
+The expected file length is H + 14 + sum(A + 2 + L[i]) over all N records.
+
+There is no trailer, index, terminator frame, checksum, separate key-frame
+marker, or secondary stream after these records. The comment terminator
+has no special meaning within PCM, image-length words, or image bytecode.
+
+8. Compressed video bytecode
+----------------------------
+
+Compression operates on the 2208 packed VIDEO BYTES, not on individual
+pixels, audio samples, or scan lines. The output is the packed raster
+described in section 4. Operations may cross a row boundary.
+
+Keep a mutable 2208-byte raster buffer. After a complete frame this buffer
+is the previous frame for the next record. At the start of each image
+payload, reset the output cursor q to zero, retaining the buffer contents.
+Read the payload sequentially. Each command starts with one control byte c.
+The two most significant bits select one of four operations:
+
+Bits of c   Operation
+00aaabbb    Skip aaa existing output bytes, then copy bbb literal input bytes.
+01aaaaaa    Skip aaaaaa existing output bytes. No literal input follows.
+10bbbbbb    Copy bbbbbb literal input bytes. No initial skip.
+11aaaccc    Skip aaa existing output bytes, then repeat the byte immediately
+            before the resulting output cursor ccc times. No input follows.
+
+The fields encode their literal unsigned values; there is NO implicit +1.
+Three-bit lengths range from 0 to 7, and six-bit lengths range from 0 to 63.
+
+Skip:
+    Increase q by the skip count. The corresponding buffer bytes retain
+    their previous-frame values. No bytes are consumed beyond the control.
+
+Literal copy:
+    Read the specified number of consecutive bytes from the image payload,
+    copy them into buffer[q:q+count], and advance both input and output
+    cursors by that count. A literal may have any value, including bytes
+    that would otherwise be opcodes; literals are not interpreted as commands.
+
+Repeat:
+    After any skip, take the value at buffer[q-1], write count copies of
+    that one byte at q, and advance q by count. If the skip was nonzero,
+    this value can come from the retained previous frame. The reference
+    is not necessarily the last literal input byte. Repetition can start
+    at a row boundary and copy the final packed byte of the preceding row.
+    A positive repeat requires q > 0.
+
+All of 0x00, 0x40, 0x80, and 0xC0 are no-operations: consume the control
+byte and do not move q or consume literals. Zero skip with positive copy,
+positive skip with zero copy, and zero repeat are also well-defined.
+
+The initial frame must establish the complete image using literals and
+valid repetitions. It cannot depend on an uninitialized preceding frame.
+The original encoder enforces this by not emitting previous-frame skips
+for frame zero. Later frames may be composed entirely of skips.
+
+A complete image payload consumes exactly L input bytes and advances q
+to exactly 2208. Zero-operation commands may follow the last output byte.
+An operation that exceeds the raster, a literal that exceeds the payload,
+an undefined positive repeat, or a final q below 2208 is malformed.
+There is no end-of-frame opcode: L is the sole compressed input boundary.
+A zero-length payload leaves the buffer unchanged, but does not cover the
+raster and is diagnosed as an incomplete image by this converter.
+
+Decoder pseudocode for structurally valid data:
+
+    q = 0
+    p = 0
+    while p < L:
+        c = payload[p]; p += 1
+        select c >> 6:
+            0: skip = (c >> 3) & 7; copy = c & 7; repeat = 0
+            1: skip = c & 63;       copy = 0;     repeat = 0
+            2: skip = 0;            copy = c & 63; repeat = 0
+            3: skip = (c >> 3) & 7; copy = 0;     repeat = c & 7
+        q += skip
+        copy 'copy' bytes from payload[p] into buffer[q]
+        p += copy; q += copy
+        if repeat != 0:
+            value = buffer[q - 1]
+            write 'repeat' copies of value starting at buffer[q]
+            q += repeat
+
+There is no Huffman table, LZ dictionary, hidden alignment, bit accumulator,
+or additional frame-dependent state. The codec is reversible for the pixels
+actually stored. An encoder may have applied lossy preprocessing before
+compression; the file provides no information to reverse that preprocessing.
+
+9. Recognition, validation, and deterministic recovery
+-------------------------------------------------------
+
+A decoder should first require the exact four-byte signature. It should
+then parse the comment terminator and version-specific binary header,
+validating the constants and all values needed for timing. Filename,
+file-size divisibility, text contents, or visual plausibility are not format
+recognition rules. An arbitrary byte stream that happens to begin with a
+valid, structurally consistent header is indistinguishable from an EVA file;
+this format has no authenticity marker or integrity checksum.
+
+The converter rejects unsupported signatures, unsupported EVA5 raster
+profiles, unknown PCM codes, incomplete binary headers, zero timing fields,
+zero declared frame count, or a file with no recoverable frames. A malformed
+header that does not establish geometry, timing, or record boundaries cannot
+be repaired without inventing information. Such failures leave no output
+file and preserve an existing destination.
+
+After a supported complete header, recovery is conservative and explicit:
+
+* A nonzero reserved byte is reported and retained in the AVI's source-header
+  metadata. It has no defined effect on decoding. It is not silently treated
+  as an extension flag or as part of the preceding field.
+* A truncated raw frame preserves available bytes and retains the missing
+  part from the preceding frame. Before the first frame, the recovery buffer
+  is initialized to black. This initialization is a concealment policy for
+  damage, not an inferred property of a valid first frame.
+* A truncated PCM block preserves all available packed samples and fills
+  missing samples with unsigned midpoint 128, keeping that recovered frame's
+  declared duration. Its missing video repeats the preceding raster.
+* A missing or partial image-length word ends recovery at that record.
+  Available audio is retained and the previous raster is displayed.
+* A truncated literal copies all available bytes within the known payload
+  and raster. Unknown pixels retain the buffer's previous values.
+* Out-of-raster writes are discarded; known control and literal boundaries
+  continue to be parsed inside that payload. A repeat with no preceding byte
+  leaves the affected output pixels unchanged. Short output retains the tail.
+* A damaged payload with an intact L does not prevent reading subsequent
+  records at their explicit boundaries. If L itself is corrupt, the format
+  supplies no reliable way to find a later frame. No resynchronization scan,
+  guessed length, or inferred timestamp is attempted.
+* Entirely absent records at EOF are omitted instead of fabricating frames.
+* Bytes remaining after N records are reported as invalid trailing data and
+  are not interpreted as additional frames or audio. The audit identifies
+  their exact range. These are not part of a valid EVA file.
+
+Recovered output is accompanied by warnings. A successful recovery exits
+with status zero; a rejection/unrecoverable failure exits with status one.
+There is no checksum to detect damage that still produces valid command
+and length fields. The converter cannot distinguish such damage from an
+intentionally encoded image or audio signal.
+
+10. Converter and AVI representation
+-------------------------------------
+
+Invocation:
+
+    python3 evaVideo.py <inputFile> <outputFile>
+
+Requirements: Python 3.10 or later, standard library only. No FFmpeg, Pillow,
+NumPy, native decoder, shared library, external executable, reference archive,
+or data file is required by evaVideo.py. The output directory must exist.
+The input and output cannot refer to the same file, including via hard links
+or symbolic links. A different existing destination is atomically replaced
+only after the AVI is successfully completed. Files are written with mode
+0664 (user and group readable and writable, others readable).
+
+The output is RIFF AVI with an index. Video is uncompressed 8-bit indexed
+DIB at the original 96-by-92 raster size. A fixed 256-entry grayscale palette
+maps the expanded values exactly; only indices 0, 85, 170, and 255 are used.
+AVI DIB rows are bottom up, so the writer reverses their order from EVA.
+No image pixels are cropped, interpolated, or discarded. The AVI vprp
+property declares 3:2 display aspect without resampling the stored pixels.
+Players ignoring vprp may show the original 96:92 raster shape.
+
+EVA5 creates a second stream: WAVE_FORMAT_PCM, unsigned 8-bit mono at exactly
+R Hz. Video and audio chunks are interleaved once per frame. EVA3 creates
+one video stream and no synthetic audio track. The AVI video stream's
+dwRate/dwScale ratio stores the exact rational EVA rate; rounding in AVI's
+legacy microseconds-per-frame field does not replace that rational timing.
+
+The top-level AVI chunk 'evah' contains the complete original EVA header:
+signature, original comment bytes, terminator, and binary fields. This is
+converter metadata, NOT an EVA file-format feature. Ordinary AVI players
+skip it. RIFF chunk padding, lengths, palettes, and index entries belong to
+AVI and must not be confused with EVA record structure.
+
+The parser's Python API also returns a byte-range audit with exact offsets,
+lengths, roles, opcode counts, and warnings. Each source byte belongs to
+exactly one range. On a valid file, the ranges cover the entire source with
+no gaps, overlap, invalid trailing data, or unexplained bytes. A range of
+compressed-video bytes is further accounted for by its opcode count plus
+its literal-byte count; every control bit and every literal pixel is defined
+by section 8. Audio byte values are exhaustively defined by section 6.
+
+11. Completeness and limits
+---------------------------
+
+All fields and payload byte values of the original EVA3/EVA5 raster profile
+described here are implemented, including all four video opcode classes,
+all zero-length suboperations, and 8-, 4-, and 2-bit mono PCM. There are no
+uninterpreted format fields, content-dependent heuristics, sample-name tests,
+or sample-specific offsets in the decoder. Reserved and comment bytes have
+their defined metadata roles rather than invented media semantics.
+
+This is not a claim to support undocumented later extensions with different
+dimensions, bit depths, aspect codes, or PCM coding. Their headers are
+explicitly rejected. Supporting such an extension would require its format
+definition or a matching encoder/player, followed by independent validation.
+EVA4, MSX EVA, and vector-animation EVA are intentionally not accepted.
+
+The AVI writer uses classic RIFF AVI, whose 32-bit size fields limit one
+output to approximately 4 GiB. An output exceeding that limit is rejected
+without committing a partial file. Supporting larger outputs would require
+an OpenDML/AVIX writer or an external muxer. This is an output-container
+implementation limit, not an unresolved EVA byte or compression feature.
+Ordinary filesystem, memory, and disk-space constraints also apply.
+
+12. Primary sources and verification basis
+-------------------------------------------
+
+Tetsushi Yamamoto (Digiyama), translated by Toshiki Sasabe:
+  "About the EVA5 Format (temporary edition)", EVA5_FMT.DOC.
+  Author's reference source files EVACV.C, EVA4TO5.C, and EXPAND.C.
+  Distribution: https://casio.ledudu.com/HPLX/eva5fmt.zip
+
+Tetsushi Yamamoto:
+  EVA 2.50, original DOS player and Japanese manual, January 1996.
+  Distribution: https://casio.ledudu.com/HPLX/eva250.lzh
+
+RYOKO, Ichiro (R.,Ichiro):
+  A2E 0.2A AVI-to-EVA encoder and accompanying documentation, 1996.
+  Distribution: https://casio.ledudu.com/HPLX/a2e02a3.zip
+
+These are research references, not runtime dependencies. The converter is
+an independent Python implementation; the downloaded programs are not
+redistributed with it.
+
+Implementation evidence that resolves omissions in the short specification:
+
+* EVACV.C reads EVA3 count as two bytes, rate as one byte, and the reserved
+  byte separately; its FSIZE is 24 * 92. Its first-frame encoder never uses
+  a previous-frame skip.
+* EXPAND.C defines all four command classes, literal lengths without an
+  implicit increment, and the repetition source after the skip.
+* EVA 2.50 validates 96, 92, 2, and 0x18 in its header parser. It accepts
+  PCM codes 0 through 2, with separate expansion branches for codes 1 and 2.
+* In the EVA 2.50 load image (excluding the DOS EXE header), code at 0x23B6
+  through 0x2436 expands packed PCM. It confirms the sample order and zero
+  filling of low bits. The code at 0x222A through 0x223C confirms the factors
+  of two and four in the packed-audio byte/sample relationship.
+* A2E's unadjusted 4-bit packing writes (first_sample & 0xF0) plus
+  (second_sample >> 4), independently confirming most-significant-first
+  audio ordering. Its raster packing similarly places the leftmost pixel
+  in bits 7..6.
+
+The accompanying regression tests exercise independent known byte vectors,
+delta inheritance, all PCM modes, odd PCM lengths, malformed/truncated data,
+header rejection, source preservation, and atomic output. Additional research
+validation compared all 256 video control values against the author's C
+expander and all 256 packed audio values against the original player's
+executed expansion instructions.

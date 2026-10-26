@@ -1003,12 +1003,8 @@ export default
 	video :
 	{
 		amigaGL                       : {name : "Amiga GL", ext : [".gl"], magic : ["Amiga GL"], weakMagic : true},
-		animationMagicAnimation       : {name : "Animation Magic video/Animation", ext : [".ani"], magic : ["Animation Magic video/Animation"]},
-		astoundAnimation              : {name : "Astound Animation", ext : [".awa"], magic : ["Astound Animation"]},
-		avssVideo                     : {name : "AVSS Video", ext : [".avs"], magic : ["AVSS Video"], weakMagic : true, website : "http://ohlandl.ipv7.net/video/actionmedia.html"},
-		criwareSofdec2Movie           : {name : "CRIWARE/Scaleform Sofdec2 Movie", ext : [".usm"], magic : ["CRIWARE Sofdec2 Movie", "CRI USM (usm)", /^Scaleform video$/]},
-		emblazeVideo2                 : {name : "Emblaze Video 2", ext : [".ev2"], magic : ["Emblaze Video 2 video", "Emblaze Video/Audio (generic)"]},
-		evaVideo                      : {name : "EVA3/EVA5 video", ext : [".eva"], magic : [/^EVA[35] video$/], weakMagic : true},
+		
+		// vibe code left off here
 		fmTownsMovieVideo             : {name : "FM Towns Movie video", ext : [".mov"], magic : ["FM Towns Movie video"]},
 		fujitsuMovie                  : {name : "Fujitsu Movie", ext : [".mve"], magic : ["Fujitsu Movie format video", "Generic RIFF file FJMV"]},
 		hannaBarberaAnimationWorkshop : {name : "The Hanna-Barbera Animation Workshop animation", ext : [".xsh"], magic : ["The Hanna-Barbera Animation Workshop animation data"]},
@@ -1024,7 +1020,6 @@ export default
 		pcAnimatePlusAnimation        : {name : "PC Animate Plus Animation", ext : [".ani"], magic : ["PC Animate Plus Animation"], weakMagic : true},
 		roxanneAnimation              : {name : "Roxanne animation", ext : [".rox"], magic : ["Roxanne animation"]},
 		screenCamVideo                : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video", "Lotus Screen Cam Datei", /^fmt\/1938( |$)/], website : "https://wiki.multimedia.cx/index.php/SCM"},
-		teenyWeenyGamesBMVVideo       : {name : "Teeny Weeny Games BMV Video", ext : [".bmv"], magic : ["Teeny Weeny Games BMV Video"], weakMagic : true},
 		toonBoomStudioAnimation       : {name : "Toon Boom Studio animation", ext : [".tbd", ".tbp"], magic : ["Toon Boom Studio animation"], weakMagic : true},
 		vis5DDatasetObject            : {name : "Vis5D dataset object", ext : [".v5d"], magic : ["Vis5D dataset object"], weakMagic : true},
 		webExRecording                : {name : "WebEx Recording", ext : [".wrf", ".wot"], magic : ["WebEx Recording"], weakMagic : true},

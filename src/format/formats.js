@@ -45,7 +45,7 @@ async function loadFormatFilePath(formatFilePath, {reload}={})
 		"convert"       : {providers : "image", skipFormatids : ["pcd", "ttf", "otf"]},
 		"darktable_cli" : {providers : "darkTable"},
 		"ansilove"      : {providers : ["ansiloveInfo", "ansiloveText"]},
-		"ffmpeg"        : {providers : "ffprobe", skipIfFlag : ["outType:png", "outType:mp3"]}
+		"ffmpeg"        : {providers : "ffprobe", skipIfFlag : ["outType:png", "outType:mp3"], skipFormatids : ["swf"]}
 	};
 	for(const [converter, {providers, skipFormatids, skipIfFlag}] of Object.entries(requiredMetaProviders))
 	{

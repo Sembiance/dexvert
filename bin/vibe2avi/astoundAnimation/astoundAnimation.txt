@@ -1,0 +1,682 @@
+ASTOUND / GOLD DISK ANIMATION: ACCELERATED GDAW FORMAT
+Reverse-engineered specification and decoder profile, revision 1
+
+STATUS AND SCOPE
+
+This is a standalone description of the accelerated, little-endian GDAW
+animation format. It describes the grammar, raster dependency graph, RLE
+codecs, compressed resources, palettes, and timeline used by the accompanying
+converter. It is NOT a complete specification of every Gold Disk product or
+of every field's semantics. In particular, successfully delimiting every
+byte does not establish the meaning of every byte. Unresolved meanings and
+unsupported behaviors are explicitly listed below. Do not describe this
+revision as a 100% reverse engineering of the format.
+
+The profile has a GDAW root, an initial RSRC containing RLE4 or RLE8, a VERS
+chunk, a PREF chunk, further resources, and a SEEN timeline. This is an
+accelerated movie: the raster graph already contains the composited pictures,
+including rendered actors and text. Editor objects remaining in the file can
+supply interaction metadata. Rendering those objects again would duplicate
+content. Other GDAW profiles can contain editable bitmap actors, external
+resources, transitions, MIDI, movies, and additional commands. They are not
+interchangeable with this profile and are not implemented here.
+
+The two accepted version numbers are 0x00010A1A and 0x00020000. No significance
+is assigned to the individual version-number bytes beyond these identifiers.
+
+1. BYTE ORDER, TYPES, AND FRAMING
+
+All numeric fields below are little-endian unless another byte order is
+explicitly stated. Four-character identifiers are literal ASCII bytes in
+file order; they must not be byte-reversed. A word is an unsigned 16-bit
+integer; a doubleword is an unsigned 32-bit integer. Coordinates are signed
+16-bit integers. There is no automatic alignment between GDAW fields or
+chunks. In particular, an odd-length string can leave the next identifier
+at an odd file offset.
+
+An uppercase container or binary-pool chunk is:
+
+    char tag[4]
+    uint32 payload_length
+    byte payload[payload_length]
+
+The length excludes its own eight-byte header. A GDAW root's end is therefore
+8 + root.payload_length. Child lengths must remain within the parent.
+
+Most lowercase tags are typed fields. The first two characters encode the
+representation. The last two identify the property, but do not change its
+storage size:
+
+    prefix  representation after the four-byte identifier
+    by      uint8
+    wd      uint16
+    dw      uint32
+    ps      uint8 byte_count; byte text[byte_count]
+    pt      int16 x; int16 y
+    rc      int16 left; int16 top; int16 right; int16 bottom
+    td      uint32 byte_count; byte data[byte_count]
+    tz      uint32 byte_count; DCL block sequence of exactly byte_count bytes
+    nn      no payload
+
+Strings have no terminating NUL in the GDAW string field. Windows ANSI text
+is represented as Windows-1252 by the converter; no code-page declaration is
+known. Unassigned code points are retained by Python's surrogateescape.
+
+nndn ends the scalar-property portion of an object. It occupies exactly four
+bytes. SEEN can have a FRAM chunk after its nndn. Other container nesting is
+determined by the outer chunk length. The grammar must not be parsed by
+searching for ASCII strings: identifiers also occur in pixels, strings,
+compressed bitstreams, and embedded files.
+
+RLE4 and RLE8 payloads are binary pools, not nested tagged objects. Their
+records are delimited by explicit BKGD offsets and sizes. All other uppercase
+chunks in the supported grammar contain tagged children.
+
+2. CONTAINER ORGANIZATION
+
+    GDAW
+      RSRC
+        RLE4 and/or RLE8 binary pool
+      VERS
+      PREF
+      RSRC
+        PALT*
+        ACTR*
+        BKGD*
+        SWND*
+      SEEN
+        scene properties, nndn
+        FRAM
+          BKEV*, TMEV*, CREV*, SNEV*, MKEV*, DSEV*, PTEV*, PLEV*
+          PATH
+            PRTK*
+              PTIN*
+
+The asterisk means zero or more. The accelerated decoder supports one scene,
+one raster depth, and one FRAM. It identifies content by tags rather than
+assuming fixed offsets for VERS, PREF, resources, or SEEN. Multiple RSRC
+containers are combined. Scalar fields can repeat, and repetition is
+significant in raster descriptors, actor metrics, and path elements.
+
+3. VERS AND PREF
+
+VERS fields:
+    dwvr  file version identifier
+    pscr  copyright/producer string
+    dwdt  saved date/time word; epoch and timezone are not proven
+    nndn  property terminator
+
+The date/time values are consistent with a seconds counter beginning in
+1900, but that is not a verified decoding rule. The converter preserves the
+raw integer in its audit and does not use it to reconstruct playback.
+
+PREF fields:
+    wdzz  compression selection; 0x707A has file bytes 'zp' and uses DCL
+    tzpi  compressed preview BMP, described in sections 4 and 5
+    wdac  acceleration color mode: 1 = RLE4; 2 = RLE8
+    ptex  animation width and height, in pixels
+    ptan  animation anchor/origin pair; only (0,0) is implemented
+    nndn  terminator
+
+The preview has its own dimensions and palette. It is not the full-resolution
+first frame, and is not an authoritative palette source for later frames.
+The converter decompresses and validates it independently of the video.
+The exact nonzero-anchor interpretation is not established.
+
+4. TZ BLOCK WRAPPER AND PKWARE DCL COMPRESSION
+
+A tz payload consists of independent blocks until the outer byte_count is
+exhausted. Each block has:
+
+    uint32 compressed_length
+    uint32 expanded_length
+    byte compressed_data[compressed_length]
+
+The block header is not included in compressed_length. There is no padding
+between blocks and no shared dictionary between blocks. Concatenate expanded
+blocks in order. A preview BMP can split its file header, DIB header, color
+table and pixel data into separate blocks; this is an allocation convention,
+not an additional format layer. A sound can occupy one large block.
+
+DCL is the PKWARE Data Compression Library's implode representation, not
+DEFLATE and not a ZIP archive. The bitstream begins with two ordinary bytes:
+
+    uint8 literal_mode    0 = raw literals; 1 = Huffman-coded literals
+    uint8 dictionary_bits 4, 5, or 6
+
+Subsequent bits are read least-significant-bit first within each byte. Read a
+flag bit for each token:
+
+    0: read a literal (8 raw bits, or one literal Huffman symbol); append it.
+    1: read a length symbol, its extra bits, then a distance symbol and its
+       extra bits; copy the indicated earlier output bytes.
+
+Length-symbol base values, indexed 0..15:
+    3,2,4,5,6,7,8,9,10,12,16,24,40,72,136,264
+Extra-bit counts:
+    0,0,0,0,0,0,0,0,1,2,3,4,5,6,7,8
+
+Length = base + extra bits. Length 519 is the end-of-stream token: it has no
+distance. Otherwise let k=2 when length=2, or k=dictionary_bits for all other
+lengths. Distance = (distance_symbol << k) + k extra bits + 1. The distance
+must not point before the beginning of expanded output. Copies can overlap;
+for example, distance 1 repeats the last output byte.
+
+The three Huffman code-length tables below use a compact notation. For each
+integer r, append (r>>4)+1 instances of length (r&15). The resulting lengths
+are assigned to symbols in increasing symbol order.
+
+Literal lengths:
+    11,124,8,7,28,7,188,13,76,4,10,8,12,10,12,10,8,23,8,9,7,6,7,8,7,6,55,8,23,
+    24,12,11,7,9,11,12,6,7,22,5,7,24,6,11,9,6,7,22,7,11,38,7,9,8,25,11,8,11,
+    9,12,8,12,5,38,5,38,5,11,7,5,6,21,6,10,53,8,7,24,10,27,44,253,253,253,252,
+    252,252,13,12,45,12,45,12,61,12,45,44,173
+Length-symbol lengths:
+    2,35,36,53,38,23
+Distance-symbol lengths:
+    2,20,53,230,247,151,248
+
+An unambiguous decoder for these canonical codes is:
+    count[n] = number of symbols with bit length n
+    symbols = all symbols sorted by (length, original symbol number)
+    code = first = index = 0
+    for n = 1..13:
+        code |= next_bit XOR 1
+        if code < first + count[n]:
+            return symbols[index + code - first]
+        index += count[n]
+        first = (first + count[n]) << 1
+        code <<= 1
+
+The end token must occur within compressed_length and produce precisely
+expanded_length bytes. The unused high bits in the final compressed byte are
+bit-packing fill; they do not encode another token. There must be no extra
+whole bytes after that byte. DCL does not provide a checksum in this wrapper.
+
+5. EMBEDDED PREVIEW BMP
+
+The expanded tzpi is a Windows BMP:
+    offset  size  field
+    0       2     'BM'
+    2       4     entire BMP size
+    6       2     reserved word
+    8       2     reserved word
+    10      4     pixel-array offset from start of BMP
+    14      4     DIB header size, 40
+    18      4     signed pixel width
+    22      4     signed pixel height
+    26      2     planes, 1
+    28      2     bits per pixel, 4 or 8
+    30      4     compression, 0 (BI_RGB)
+    34      4     image byte size, or zero
+    38      4     signed horizontal pixels per meter
+    42      4     signed vertical pixels per meter
+    46      4     palette entry count, zero means 2^depth
+    50      4     important-color count
+    54      4*N   B,G,R,reserved palette entries
+
+The pixel offset follows the palette. A row occupies
+4 * ceil(width * depth / 32) bytes. Four-bit pixels put the left pixel in the
+high nibble. Positive heights store rows bottom first; negative heights store
+rows top first. Row padding bytes and unused nibble bits have no pixel role.
+The reserved words and palette reserved bytes are not playback controls.
+
+6. PALETTES
+
+PALT fields:
+    psnm  palette name, referenced by PTEV
+    wdvr  logical-palette version, 0x0300
+    wdne  number of entries, 236 in the supported layout
+    tdpe  236 four-byte entries: red, green, blue, flags
+    nndn  terminator
+
+These are Windows PALETTEENTRY records, NOT BMP BGR records. Flags 0x04 mean
+PC_NOCOLLAPSE. The 236 colors occupy indices 10 through 245. Indices 0..9 and
+246..255 are reserved system colors. Their physical display realization can
+vary with Windows display drivers and system state. For deterministic export
+this decoder uses the following RGB values:
+
+Indices 0..9:
+    (0,0,0), (128,0,0), (0,128,0), (128,128,0), (0,0,128),
+    (128,0,128), (0,128,128), (192,192,192), (192,220,192), (166,202,240)
+Indices 246..255:
+    (255,251,240), (160,160,164), (128,128,128), (255,0,0), (0,255,0),
+    (255,255,0), (0,0,255), (255,0,255), (0,255,255), (255,255,255)
+
+RLE4's built-in System palette, indices 0..15:
+    (0,0,0), (128,0,0), (0,128,0), (128,128,0), (0,0,128), (128,0,128),
+    (0,128,128), (128,128,128), (192,192,192), (255,0,0), (0,255,0),
+    (255,255,0), (0,0,255), (255,0,255), (0,255,255), (255,255,255)
+
+The palette named System need not have a PALT resource. For RLE8 it uses the
+reserved ends above and Gold Disk's built-in 236-color middle table. The table
+is specified here as consecutive RGB triples, in hexadecimal, with no flags
+or padding. It was recovered from the player, not from a movie preview:
+
+    ffffccffff99ffff66ffff33ffff00ffccffffccccffcc99ffcc66ffcc33ffcc00ff99ffff99ccff9999ff9966ff9933
+    ff9900ff66ffff66ccff6699ff6666ff6633ff6600ff33ffff33ccff3399ff3366ff3333ff3300ff00ffff00ccff0099
+    ff0066ff0033ccffffccffccccff99ccff66ccff33ccff00ccccffcccccccccc99cccc66cccc33cccc00cc99ffcc99cc
+    cc9999cc9966cc9933cc9900cc66ffcc66cccc6699cc6666cc6633cc6600cc33ffcc33cccc3399cc3366cc3333cc3300
+    cc00ffcc00cccc0099cc0066cc003399ffff99ffcc99ff9999ff6699ff3399ff0099ccff99cccc99cc9999cc6699cc33
+    99cc009999ff9999cc9999999999669999339999009966ff9966cc9966999966669966339966009933ff9933cc993399
+    9933669933339933009900ff9900cc99009999006699003366ffff66ffcc66ff9966ff6666ff3366ff0066ccff66cccc
+    66cc9966cc6666cc3366cc006699ff6699cc6699996699666699336699006666ff6666cc666699666666666633666600
+    6633ff6633cc6633996633666633336633006600ff6600cc66009966006666003366000033ffff33ffcc33ff9933ff66
+    33ff3333ff0033ccff33cccc33cc9933cc6633cc3333cc003399ff3399cc3399993399663399333399003366ff3366cc
+    3366993366663366333366003333ff3333cc3333993333663333333333003300ff3300cc33009933006633003300ffff
+    00ffcc00ff9900ff6600ff3300ccff00cccc00cc9900cc6600cc330099ff0099cc0099990099660099330066ff0066cc
+    0066990066660066330033ff0033cc003399003366003333ee0000dd0000aa0000880000770000550000440000220000
+    00ee0000dd0000bb0000aa000088000077000055000044000022000000ee0000dd0000bb0000aa000088000077000055
+    000044000022eeeeeeddddddbbbbbbaaaaaa888888777777555555444444222222111111
+
+PTEV changes the current palette beginning with its specified frame; palette
+state persists until another palette event. Recoloring does not change the
+stored raster indices. Duplicate PALT names require a definition of resource
+replacement order; the converter uses the last definition in file order.
+Only the 236-entry/flag-4 custom layout is implemented.
+
+7. BKGD AND THE RASTER DEPENDENCY GRAPH
+
+An accelerated BKGD starts with byty='r' (114), psnm (resource name), and
+usually wdrn (count of raster records). It can instead have no raster records
+and a pspl palette name. It ends with nndn.
+
+Each raster record is the following sequence of tagged fields:
+    byrt  'r' (114)
+    wd#f  source frame number
+    wd#t  target frame number
+    dw4o  absolute file offset for RLE4, or dw8o for RLE8
+    dw4s  byte length for RLE4, or dw8s for RLE8
+
+A record with source=target is a complete independently addressable frame.
+A record with source!=target transforms the source index image into the
+target index image. Pixels untouched by a delta retain their source values.
+Record order and resource name are not the presentation order. An early
+record can be the transition to the second frame, followed by an independent
+encoding of the first frame. Loop-return edges also exist.
+
+Frame numbers are one-based. Record offsets are relative to byte zero of the
+whole GDAW file, not to RSRC or RLE payload starts. No record includes a BMP
+header, palette, dimensions, or additional size prefix. Its length includes
+its final RLE end marker and all literal alignment bytes.
+
+To reconstruct a requested frame, first use its self-edge if one exists.
+Otherwise find a path from a known frame through directed edges and apply
+all deltas. A conforming graph should produce the same target regardless of
+the valid route taken. A mismatch is an inconsistency worth reporting, not
+an excuse to silently change the transition. The decoder reconstructs every
+frame, validates every edge, and reports disagreements with the independently
+reconstructed target. It uses canonical reconstructed frames for linear
+export. Thus a contradictory return edge is not reproduced in that export.
+
+Every byte in the RLE pools must belong to an explicitly referenced record.
+Unreferenced data, incompatible record depths, and overlapping unequal spans
+are rejected rather than interpreted using a guessed record boundary.
+
+8. RLE4 AND RLE8 COMMANDS
+
+The command language is Windows BI_RLE4 / BI_RLE8. Start each record with
+x=0, y=0, where y=0 is the BOTTOM row of the image. Commands begin with two
+bytes n,v:
+
+    n>0       Draw n pixels and increase x by n.
+              RLE8: every pixel is v.
+              RLE4: alternate high nibble of v, low nibble of v, beginning
+              with the high nibble, and stop after exactly n pixels.
+
+    00 00     End of line: x=0; y+=1.
+    00 01     End of bitmap: the record ends immediately after these bytes.
+    00 02 dx dy
+              x += unsigned dx; y += unsigned dy. Skipped pixels persist.
+
+    00 n, n>=3
+              Absolute run of n pixels. RLE8 consumes n literal bytes.
+              RLE4 consumes ceil(n/2) bytes, high nibble first. If the number
+              of literal BYTES is odd, consume one alignment byte. Increase
+              x by n. The padding byte and an unused final low nibble have
+              no display meaning and need not be used as pixels.
+
+All runs must remain in the declared canvas. End of line need not mean the
+row was filled, and a record need not visit every row. A record containing
+only 00 01 is a valid unchanged-image delta. Drawing a delta onto a fresh
+black canvas will lose its source image; delta decoding is persistent.
+
+9. SWND AND EMBEDDED WAVE FILES
+
+SWND fields:
+    wdty  resource kind; 0x0077 and 0x7677 identify the supported WAV forms
+    psnm  sound resource name
+    dwfs  expanded file byte size
+    tzfd  compressed complete sound file
+    nndn  terminator
+
+The historical reason for the two WAV resource-kind encodings is not known.
+Both carry a RIFF/WAVE file. The input's actual decompressed length and RIFF
+length are checked separately. An omitted final RIFF pad byte is recoverable
+without dropping its preceding PCM sample.
+
+RIFF/WAVE consists of 'RIFF', uint32(size of remainder), 'WAVE', then chunks:
+    char id[4]; uint32 size; byte payload[size]; byte pad_if_size_odd
+RIFF sizes exclude the leading eight bytes. Chunk sizes exclude the eight-byte
+header and the optional pad. Unlike GDAW, RIFF pads chunk payloads to even
+byte lengths.
+
+The supported fmt payload is PCM WAVEFORMAT:
+    uint16 format_tag = 1
+    uint16 channels = 1 or 2
+    uint32 samples_per_second
+    uint32 average_bytes_per_second
+    uint16 block_align
+    uint16 bits_per_sample = 8 or 16
+    [uint16 extension_size = 0, if the fmt payload has 18 bytes]
+
+block_align = channels * bits_per_sample / 8; average byte rate = sample rate
+* block_align. data contains interleaved PCM frames. Eight-bit PCM is unsigned
+with silence 128. Sixteen-bit PCM is signed little-endian with silence zero.
+Sample rates are read from the embedded WAV; they must not be rounded to a
+familiar nominal rate.
+
+LIST/INFO is metadata. Its first four bytes are INFO; subsequent entries use
+the RIFF chunk grammar. ICRD contains a creation-date string and ISFT contains
+a software string. Their sizes include any string terminator; odd-sized
+entries also have a pad byte. This information does not affect the waveform.
+JUNK is explicitly unused RIFF padding and may be skipped by its declared
+length. Other metadata chunk types, including fact, cue, plst, smpl and DISP,
+are rejected by this decoder profile rather than accepted without a complete
+interpretation. Other WAV codecs, MIDI, and CD/external audio are rejected.
+
+Sound playback is a single WAV channel: a new WAV event interrupts/replaces
+the current waveform. It is not a mix of simultaneously playing WAV effects.
+A sound marked to loop repeats its PCM until replaced or killed. A normal
+sound can end between video frames. AVI output contains stereo 44,100 Hz
+16-bit PCM resampled by FFmpeg from the original rate; this is an export
+representation, not an input-format constant.
+
+10. SCENE AND EVENTS
+
+SEEN fields before FRAM:
+    psnm  scene/movie name
+    wdnf  number of timeline frames
+    wdnn  scene-related count, value 1 in the implemented profile; its general
+          meaning and support for other values are unresolved
+    nndn  end of properties
+
+FRAM holds event objects. It does not contain one chunk per image. Event
+objects carry wdif, a one-based timeline-frame index. File ordering can group
+events by type; reconstruct the timeline by wdif and preserve file order for
+multiple events at the same frame.
+
+Common event fields:
+    wdif  frame index
+    nnhi  hidden/generated event marker, no payload; it is NOT a command to
+          suppress the event during playback
+    nndn  end of event properties
+
+BKEV -- background event:
+    psnm  BKGD resource name
+    byal  alignment selector; 'z' is the accelerated profile value
+The RLE graph is already keyed to the timeline's frame numbers. The resource
+reference is validated; it does not imply a filename on disk.
+
+TMEV -- timing event:
+    wddy  requested frames per second, persisting from this frame onward
+    nnen  optional inability-to-maintain-rate alert flag
+The original Windows player is limited by hardware and timer granularity.
+The converter uses the declared ideal rate and no hardware-speed simulation.
+An explicit rate at the first frame is required; no rate is guessed.
+
+SNEV -- sound event:
+    wdty  fallback operation/type: 'wv' (0x7677) = WAV; 'kl' (0x6C6B) = kill all
+    pssn  optional named sound resource
+    nnlp  loop the named sound
+IMPORTANT: when pssn resolves to a sound, the original player plays the
+resource using its own type. This takes precedence over wdty. A named sound
+with wdty='kl' is therefore not discarded as a kill event. When the resource
+name is absent, 'wv' stops the WAV channel and 'kl' stops all sound channels.
+The supported profile has only a WAV channel.
+
+PTEV -- palette event:
+    psnm  named PALT or built-in System palette
+
+MKEV -- marker event:
+    psnm  marker name used as a branch destination by play control
+
+CREV -- cursor event:
+    nnsh  show the window cursor; absence hides it
+    nnan  retain the current OS pointer position instead of moving it
+    ptpx  target position relative to the displayed animation origin
+The player first tests nnsh. If the cursor is to be shown and nnan is absent,
+it adds the animation origin to ptpx, converts client to screen coordinates,
+and calls SetCursorPos. If nnan is present, the pointer stays where it is.
+The cursor shape comes from the window class, with the system arrow as a
+fallback; hiding uses SetCursor(NULL). These operations affect OS state, not
+the accelerated raster. The converter parses these properties but does not
+draw an OS cursor whose initial position and shape are external to the file.
+Only zero ptpx is accepted in this revision.
+
+DSEV -- dissolve/fade event:
+    wdty  transition kind; 'pf' (0x6670) in the implemented subset
+    dwti  transition time parameter
+    pstc  transition-specific string
+    pt1r  x/y counts in the randomized block-order grid for pf
+    pt1b  x/y pixel dimensions of a reveal block for pf
+The pf handler performs a randomized rectangular-block reveal. It generates
+a permutation of pt1r.x * pt1r.y block offsets, tiles those offsets across
+the display rectangle, and copies clipped rectangles of size pt1b from the
+target image. The complete random generator and runtime scheduling are not
+yet specified. pstc encodes control flags: its characters t, u, and x map to
+internal bits 4, 2, and 1; their full combinations remain unresolved.
+Only dwti=0 with an empty pstc is accepted. The converter exports the final
+RLE surface and allocates no separate duration to the intermediate block
+copies. This is an idealized zero-duration export, not a simulation of the
+original hardware-dependent reveal speed. Nonzero-duration transitions are
+rejected rather than approximated.
+
+PLEV -- playback-control event:
+    byty  'p' = pause, 'l' = loop, 'e' = end playback
+
+Pause properties:
+    wddy  time limit in tenths of a second; zero disables the time limit
+    nnws  release when WAV playback completes
+    nnml  release on left mouse input
+    nnmr  release on right mouse input
+    nnak  release on any keystroke
+    wdvk  specific virtual-key value
+A completion condition can release a pause. If multiple completion
+conditions are enabled, they are alternatives. A mouse/key wait has no
+intrinsic duration in the file. WAV completion cannot occur for an
+indefinitely looping WAV unless another action stops it.
+
+Loop properties:
+    psmt  destination marker name, earlier than the loop event
+    wdcn  repeat count; 0xFFFE means infinite, not 65,534 normal repetitions
+    nnbf  break on user input
+    nnwv  break when WAV playback completes
+The latter loop flags are confirmed by the newer MCI player's tag reader and
+runtime checks: nnbf maps to bit 1 of its loop flags, nnwv to bit 2. The nnwv
+condition can jump past the loop's end while it is still traversing the loop
+range. This asynchronous behavior is not implemented in the converter.
+Ordinary finite loop counts are implemented, including marker lookup.
+
+'e' ends playback after displaying the event frame. The program does not
+invent an additional hold or append an unrequested full trailing waveform.
+
+11. ACTR / PATH INTERACTION METADATA
+
+The accelerated text-actor subtype has no glyph bitmap or font description
+in the metadata described here; the rendered text is already in the RLE
+pictures. Its properties are:
+
+    psnm  actor resource name
+    pspl  palette name
+    wdkd  actor kind, 'tx' (0x7874) for text
+    nnel  element-metadata flag (full semantic expansion unresolved)
+    wdek  element kind, 'tx'
+    ptex  text element extent
+    wdal  alignment value, zero supported
+    dwtc  Windows COLORREF text color
+    dwbc  Windows COLORREF background color
+    rctr  text layout rectangle
+    wdmc  number of character-metric rectangles
+    rccr  repeated character rectangles
+    wdnc  character count property (relationship to spaces not fully proven)
+    wdnw  count of word-position records
+    wdwp  repeated word positions
+    wdnl  count of line-position records
+    wdlp  repeated line positions
+    nndn  terminator
+
+COLORREF stores red, green, and blue in its lowest, next, and third bytes.
+A high byte of 0 is ordinary RGB; a high byte of 2 is PALETTERGB and requests
+the nearest matching logical-palette color. The text is already rasterized
+in this accelerated profile, so the converter does not rematch these colors.
+
+PATH holds PRTK track containers; each contains PTIN properties:
+    wdfn  starting timeline frame
+    psnm  track name
+    psst  referenced actor/string name
+    ptbs  base position pair
+    ptof  offset pair
+    wdsh  shadow/history property
+    wdsf  shadow/future property
+    wdia  interaction-action selector, 'sp' in the accepted subtype
+    wdig  interaction trigger flags, 0x0210 in the accepted subtype
+    wdik  Windows virtual-key code for the trigger
+    tdie  nested serialized event; its offsets are relative to this payload
+    tdel  repeated eight-byte per-frame track element
+    nndn  terminator
+
+tdie contains an ordinary event chunk, including its tag and size. A stop
+interaction contains a PLEV with wdif=0, byty='e', nndn. Frame zero here means
+an interaction-associated event rather than a scheduled timeline event.
+
+An eight-byte tdel is stored as:
+    int16 x_offset
+    int16 y_offset
+    uint16 cel_index
+    uint16 element_flags
+The static accepted subtype has zero offsets, cel_index=1, and flags 1 or 2.
+The precise distinction between those flag values, and the bit definitions
+of wdig, remain unresolved. The records are parsed and validated, but the
+converter does not implement hit-testing or keyboard input. It accepts only
+a stop-play interaction, which does not change the autonomous no-input
+raster sequence. An AVI cannot preserve this interactive behavior.
+
+12. CONVERTER CONTRACT AND EXPORT POLICY
+
+    python3 astoundAnimation.py inputFile outputFile
+
+Python 3.10+ and the ffmpeg executable are required. The script includes its
+own container, DCL, RLE, palette, BMP, and WAV parsers. It needs no nonstandard
+Python library, companion binary, downloaded player, or local palette file.
+FFmpeg is used for PCM resampling and FFV1/AVI encoding, not for decoding GDAW.
+
+The output is AVI with lossless FFV1 video and PCM audio. Source dimensions
+are preserved. Each image is held for the declared frame interval, extended
+by a timed pause or a finite wait for audio. Ideal interval durations use
+rational arithmetic. Cumulative video boundaries are rounded to the nearest
+millisecond for AVI; audio boundaries are rounded to the nearest 44,100 Hz
+sample. The AVI stream's 1000/1 nominal rate expresses the 1 ms time base;
+it is not the original animation speed. AVI gap frames represent image holds.
+A final duplicate picture ensures the last hold is represented by the video
+stream's declared duration.
+
+The relationship between an ideal frame interval and the original player's
+OS-driven pause polling is not claimed to be cycle-exact. The export model
+uses the larger of the normal frame interval and the requested pause hold.
+Combined time-and-WAV pause conditions use the first enabled completion.
+Original timer rounding, loading delays, cursor timing, and audio-driver
+latency cannot be inferred from a file alone.
+
+By default, the converter first attempts normal playback. If mouse/key waits,
+infinite loops, audio-driven loops, or waits on indefinitely looping WAVs
+prevent a finite autonomous export, it automatically makes a PARTIAL PREVIEW:
+it bypasses all loop branches and mouse/key waits, visits source frames once,
+and retains timed pauses and finite WAV-completion holds. It prints a warning
+with the reason and records the fallback in the audit. No option is required.
+Ordinary finite loops retain their normal playback unless fallback is needed.
+--linearize-interactive remains available to force this behavior explicitly.
+Linearization is an export choice, not a claim about original execution or
+a guessed user-input recording.
+
+--audit-json PATH writes the parsed tree, byte offsets, scalar values,
+compressed-block extents, expanded hashes, sound metadata, RLE command counts,
+alternate-edge disagreements, partial-preview status/reason, warnings, and
+rational timeline. It does not
+label unknown metadata as understood. --max-seconds N adjusts the default
+one-hour export limit. Resource limits also cap single DCL expansions and
+canvas dimensions; rejection is explicit.
+
+An unrelated file is rejected using GDAW/RSRC/RLE identification and an
+allowlisted grammar, before an output is created. Unsupported encodings and
+versions also produce no output. Automatic linearization applies only to the
+playback conditions described above; it does not override format validation
+or resource/export limits. All preflight work occurs before encoding.
+The final AVI is installed atomically; a failed conversion leaves an existing
+output unchanged. Temporary files are removed. Final output permissions are
+0664 (readable by owner and group).
+
+For confirmed target files with corruption, the parser uses declared
+boundaries, retains complete fields, and reports truncation. A damaged preview
+can be omitted. A damaged sound can be replaced by silence. An invalid RLE
+record retains its safely decoded prefix over the source image. Reconstruction
+cannot proceed if required dimensions, timing, resources, or reachable raster
+states are unavailable. The program then fails with a diagnostic rather than
+inventing a dimension, frame rate, palette, missing record, or data boundary.
+Unknown WAV metadata layouts and unknown GDAW tags are not corruption-recovery
+opportunities: they can be unsupported valid features and are rejected.
+
+13. REMAINING WORK REQUIRED FOR A COMPLETE SPECIFICATION
+
+The following prevent a claim of complete format support:
+
+* Prove the dwdt epoch/timezone, general wdnn and ptan meanings, version
+  encoding, both SWND type variants, and all actor/path flag bits.
+* Complete the DSEV control-flag combinations, duration units, random-order
+  generator, and scheduling of intermediate block reveals. Implement their
+  rendering where it is not baked into an accelerated raster stream. An OS
+  cursor overlay requires externally supplied cursor state and assets.
+* Implement audio-completion loop interruption, user-input timelines, richer
+  interactive actions, and original event re-entry/state-restoration rules.
+  An infinite or user-controlled presentation additionally requires a chosen
+  finite input script before it has a unique finite AVI representation.
+* Establish complete behavior for multiple scenes, palette layouts other than
+  the 236-entry form, external objects, MIDI, CD audio, embedded video,
+  nonaccelerated editor objects, and additional tag families. Those are not
+  supported merely because their outer containers might be recognizable.
+* Verify ideal pause/export timing against instrumented original playback,
+  including simultaneous completion conditions and frame-entry ordering.
+* Establish a canonical treatment of contradictory graph edges and of colors
+  reserved by the original Windows environment. No unique historical desktop
+  palette or mouse pointer is encoded in the accelerated movie alone.
+
+The next reverse-engineering step is controlled authoring with the original
+editor: change one setting at a time, save before/after files, and compare
+both bytes and instrumented player behavior. Trace the tagged-property readers
+and corresponding consumers in the original player, rather than assigning
+semantics solely from two-letter names. Use an explicit keyboard/mouse event
+recording to validate interactive exports. Additional nonaccelerated or
+multi-scene files need a separately specified supported profile.
+
+14. REFERENCES AND EVIDENCE
+
+Primary implementation/reference materials:
+
+* Gold Disk Animation Works distribution and MCI Animation Driver v2.01.00:
+  https://archive.org/details/animation-works
+  Its help documents frame rates, tenths-of-second pauses, loop controls,
+  sound replacement, and palette events. Original player tag readers and
+  playback routines establish the resource-name precedence for sound events,
+  the infinite-loop sentinel, and loop interruption flags.
+* Mark Adler, PKWARE DCL decoder and code tables:
+  https://github.com/madler/zlib/blob/master/contrib/blast/blast.c
+* Microsoft, Windows bitmap compression:
+  https://learn.microsoft.com/en-us/windows/win32/gdi/bitmap-compression
+* Microsoft, PALETTERGB:
+  https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-palettergb
+* Microsoft, PALETTEENTRY:
+  https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-paletteentry
+
+This document combines direct binary analysis with those primary materials.
+It intentionally separates verified storage rules, implemented playback
+semantics, deterministic export policies, and unresolved fields.

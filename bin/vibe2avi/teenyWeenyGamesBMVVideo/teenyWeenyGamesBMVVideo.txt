@@ -1,0 +1,445 @@
+TEENY WEENY GAMES BMV VIDEO
+Headerless Discworld II stream format and decoding specification
+Revision 1, 2026-10-25
+
+1. Scope
+
+This document specifies the headerless, 8-bit indexed-color BMV stream used by
+Discworld II, including its block-coded stereo differential audio. All integers
+are unsigned unless stated otherwise. Multi-byte integers are little-endian.
+Offsets and lengths count bytes, not words. There is no alignment between fields.
+
+The headered Discworld Noir format beginning with the ASCII signature BMVi is a
+different format. Its container, 16-bit video and alternate audio are outside this
+document and are deliberately not accepted by the accompanying converter.
+
+The ordinary headerless profile is specified completely below. Two limits on a
+claim of universal support must be explicit: the extended-mode flag 0x40 has no
+established semantics here, and text commands refer to strings and fonts stored
+outside the movie. The converter rejects extended-mode streams and preserves text
+commands as metadata without rendering unavailable external resources. Section 10
+describes the additional work necessary for these cases.
+
+2. Fixed playback parameters and state
+
+There is no file header, magic signature, codec identifier, dimension field,
+version field, frame count, duration, timestamp, seek table, or checksum.
+
+  Image width             640 pixels
+  Image height            429 pixels
+  Pixel organization      one 8-bit palette index per pixel
+  Pixel order             rows top to bottom; columns left to right
+  Palette                 256 RGB entries, 8 bits per component
+  Frame rate              12 frames/second
+  Audio sample rate       22050 sample pairs/second
+  Audio channels          2, left then right
+  Decoded audio           signed 16-bit PCM
+  Input buffering slot    25600 bytes (25 KiB)
+
+The framebuffer persists across packets. Store it between two additional,
+zero-filled, 640-byte guard rows. These rows are readable by prediction and are
+never output or modified. In coordinates relative to the first visible pixel,
+the readable address interval is [-640, 275200). The visible interval is
+[0, 274560). Prediction uses this flat address space; it is not clipped at row
+edges. The converter initializes the visible framebuffer and palette to zero.
+For a self-contained movie, the opening packets must establish any palette and
+pixels they will use; a stream relying on pre-existing game screen state cannot
+recreate that external state from its movie bytes alone.
+
+Maintain two 16-bit audio accumulators, initially zero. They persist across all
+audio blocks and packets. Palette contents persist until replaced.
+
+Each ordinary packet displays exactly one frame. Frame i is presented at i/12
+seconds, starting with i=0. Slot-fill and end opcodes consume no presentation time.
+Audio blocks concatenate in packet order at 22050 Hz; there is no timestamp or
+reset at a video packet boundary. Audio length is quantized in 32-pair blocks,
+so the final audio and video durations can differ slightly. Do not resample or
+truncate audio to force exact equality. Runtime CD prefetching and buffering
+delays are player implementation details, not additional encoded movie time.
+
+3. Top-level stream grammar
+
+Start at file offset zero and read the next opcode byte.
+
+  00: Slot skip. Discard bytes through the end of the current 25600-byte slot.
+      The next packet position is (floor(opcode_offset / 25600) + 1) * 25600.
+      The opcode and following slot fill have no length field and represent no
+      video or audio. The fill bytes are not packet opcodes. Their values have
+      no decoding effect; zero is the conventional fill value. If EOF intervenes,
+      the stream is truncated. Slot boundaries are relative to file offset zero.
+
+  01: End of movie. This is a single byte, without a length or payload. The movie
+      terminates immediately. Bytes following this marker are outside the movie
+      grammar; a strict validator should report them, rather than interpreting
+      them as frames. The converter accounts for them separately and reports
+      nonzero trailing data. No playable data after this marker is recovered.
+
+  Other ordinary opcodes: A flags byte, three-byte payload length, and payload.
+
+Ordinary packet layout:
+
+  Relative offset  Size        Meaning
+  0                1           flags
+  1                3           payload_length, unsigned little-endian
+  4                length      payload
+
+The length excludes the four-byte packet header. The next packet starts at
+current_offset + 4 + length. There is no even-byte padding. A packet can cross
+one or more slot boundaries; never split it at those boundaries. Slot skipping
+only applies when 00 appears at the expected next packet boundary.
+
+Ordinary packet types have the low two bits equal to 2 or 3. Flags:
+
+  Mask  Meaning
+  01    With no explicit displacement, use prediction displacement -640.
+        If clear, use displacement zero. Often called intra versus delta.
+        This is a prediction choice, not a command to clear the framebuffer.
+  02    Ordinary frame packet indicator, set in types 2 and 3.
+  04    A signed 16-bit explicit framebuffer displacement is present.
+  08    A complete 768-byte palette is present.
+  10    One text command is present.
+  20    A counted block-audio field is present.
+  40    Extended-mode indicator; unsupported by this specification's profile.
+        Do not invent a payload layout from this flag or silently clear it.
+  80    Select the eight-byte PRINT command instead of the ten-byte TALK
+        command. Only meaningful when 10 is set.
+
+Test exact 00 and 01 opcodes before interpreting the flags. Other low-two-bit
+patterns are outside the ordinary profile. 80 without 10 is inconsistent.
+
+Fields in every ordinary packet have the following fixed order. Omit fields
+whose flags are clear; do not leave holes or padding:
+
+  1. Audio block count and audio blocks, if 20 is set.
+  2. One PRINT or TALK command, if 10 is set.
+  3. Complete palette, if 08 is set.
+  4. Explicit prediction displacement, if 04 is set.
+  5. Compressed picture, occupying all remaining payload bytes.
+
+The picture is nonempty and must reconstruct exactly 274560 indices. The length
+field is the sole packet-size authority. There is no compressed-picture length
+inside the payload and no picture-end opcode.
+
+4. Audio field and exact sample reconstruction
+
+  Size        Meaning
+  1           number_of_blocks, 0 through 255
+  65 * count  audio blocks
+
+Each block generates 32 stereo sample pairs (128 decoded bytes). Its structure:
+
+  Offset  Size  Meaning
+  0       1     scale-selector byte C
+  1       64    32 pairs of signed 8-bit differences, left then right
+
+The selector uses all eight bits, with the right-channel selection crossing the
+byte boundary. Define:
+
+  R = (C >> 1) | ((C & 1) << 7)       # rotate right one bit
+  left_index  = R & 15
+  right_index = R >> 4
+
+Equivalently, left_index = (C >> 1) & 15, and
+right_index = ((C >> 5) | ((C & 1) << 3)).
+
+Scale lookup table, indexed 0 through 15:
+
+  16512, 8256, 4128, 2064, 1032, 516, 258, 192,
+  129, 88, 64, 56, 48, 40, 36, 32
+
+For each of the 32 pairs and each channel independently:
+
+  signed_difference = byte_value if byte_value < 128 else byte_value - 256
+  increment = floor(signed_difference * scale / 32)
+  accumulator = (accumulator + increment) modulo 65536
+  output = accumulator if accumulator < 32768 else accumulator - 65536
+
+Division must round toward negative infinity; an arithmetic right shift by five
+has this behavior. Do not use truncation toward zero. Wrap the accumulated sum
+to 16 bits; do not saturate it. The product and increment require more than
+16 bits before this wrap. The output is the accumulated value, not the increment.
+
+Example: selector FF chooses scale 32 for both channels. A block of repeated
+01 FF pairs, starting from zero predictors, outputs (1,-1), (2,-2), ... (32,-32).
+The following identical block starts at (33,-33), not (1,-1).
+
+The original player inserts 57 silent blocks, or 1824 zero stereo pairs, for
+an ordinary packet without flag 20. This does not reset the accumulators. A
+present audio field with count zero emits no samples; it is different from an
+absent audio field. The converter emits an audio stream only if at least one
+packet has the audio flag. If none do, the movie is exported as video-only.
+
+ScummVM's PrepAudio reconstruction implements the accumulating behavior above.
+FFmpeg's BMV audio decoder instead emits clipped scaled differences without
+accumulation; direct BMV-to-AVI transcoding through that decoder is therefore
+not an equivalent audio reconstruction. The accompanying converter decodes BMV
+audio itself and supplies ordinary PCM to the AVI encoder.
+
+5. Palette and displacement
+
+The palette is exactly 768 bytes:
+
+  R[0], G[0], B[0], R[1], G[1], B[1], ... R[255], G[255], B[255]
+
+Components are full eight-bit intensities, not six-bit VGA values. There is no
+alpha channel, palette count, or first-entry index. Replace all 256 entries.
+Entry zero is a real stored color. Engine-specific UI or subtitle reservations
+do not change the movie's stored palette. Expand each reconstructed pixel index
+through the palette active for that frame. Palette changes do not alter stored
+indices and apply even to pixels copied from the preceding frame.
+
+If flag 04 is set, read a signed two's-complement little-endian 16-bit byte
+displacement D. Otherwise D=-640 when flag 01 is set, or D=0 when it is clear.
+An explicit displacement overrides the implicit choice.
+
+Select decoding direction using D:
+
+  Forward: D <= -640 or D >= 0
+  Reverse: -640 < D < 0
+
+Forward decoding starts at compressed byte zero and visible pixel zero, then
+advances both byte/pixel cursors upward. Reverse decoding starts at the final
+compressed byte and visible pixel 274559, then decrements both cursors. The
+palette, commands, audio and displacement fields are always read in normal
+forward file order. Only the compressed picture is traversed backwards.
+
+6. Compressed picture control coding
+
+There are three operations:
+
+  DELTA (0): Copy indices from framebuffer position destination + D.
+  RAW   (1): Copy literal indices from the compressed byte stream.
+  RUN   (2): Repeat the index just written in the direction of traversal.
+
+Every operation has a positive pixel count L. Operations cycle in the order
+DELTA, RAW, RUN, DELTA. A one-bit selector either takes the next operation or
+skips it to take the following one. Initialize the previous operation to RUN,
+so the first operation can be DELTA or RAW, never RUN. At each operation:
+
+  operation = (previous_operation + 1 + selector) modulo 3
+
+The selector and length share an unsigned variable-length control value V:
+
+  selector = V & 1
+  L = (V >> 1) - 1
+
+Read V in four-bit nibbles. Within each fetched control byte the low nibble
+is read first, followed by the high nibble, even during reverse traversal.
+A nibble less than 4 is a continuation and contributes two bits. A nibble from
+4 through 15 is the final nibble and contributes all four bits. Contributions
+are assembled least-significant first:
+
+  V = 0
+  shift = 0
+  repeat:
+      n = next_control_nibble()
+      V = V | (n << shift)
+      if n & 12 != 0: stop
+      shift = shift + 2
+
+For example, terminal nibble 4 gives selector=0 and L=1. Terminal nibble 5 gives
+selector=1 and L=1. The nibble sequence 1, 4 gives V=1+(4<<2)=17, selector=1,
+L=7. There is no unary-prefix code, byte-aligned integer, or separate opcode.
+
+Control and literal bytes share the same source cursor. Keep one optional
+cached high nibble:
+
+  next_control_nibble():
+      if a cached high nibble exists:
+          return it and clear the cache
+      C = input[source_cursor]
+      source_cursor += direction
+      cache C >> 4
+      return C & 15
+
+RAW reads complete bytes starting at the current source cursor without using
+or clearing a cached nibble. The next operation can therefore use a cached
+high nibble belonging to a byte physically before the preceding literal run.
+Advancing a conventional contiguous bit reader over the literals is incorrect.
+
+After decoding V, check 1 <= L <= remaining_visible_pixels, select the operation,
+and perform it for L pixels. For each pixel in traversal order:
+
+  DELTA:
+      framebuffer[destination] = framebuffer[destination + D]
+      destination += direction
+
+  RAW:
+      framebuffer[destination] = input[source_cursor]
+      source_cursor += direction
+      destination += direction
+
+  RUN:
+      color = framebuffer[destination - direction]
+      repeat L times:
+          framebuffer[destination] = color
+          destination += direction
+
+DELTA is an in-place ordered copy. References can see pixels already written
+in the same frame. D=0 retains the corresponding previous-frame pixels. D=-640
+predicts from the preceding row, which may have just been decoded. An overlapping
+forward copy from an earlier region repeats its already-written pattern; a
+single snapshot copy of the whole source range would produce the wrong result.
+
+Stop immediately after 274560 pixels have been produced. All compressed bytes
+must have been consumed either as control bytes or RAW bytes. If a high nibble
+remains cached at this point, it is unused fill with no decoding effect. Its
+value need not be interpreted as another operation. There are no additional
+whole-byte terminators or padding bytes in an ordinary picture payload.
+
+Bounds violations, unterminated codes, missing literal bytes, extra whole bytes,
+and counts exceeding the remaining image are malformed picture data. Values
+must be bounded by the fixed frame size before allocating or copying memory.
+
+7. Text commands
+
+Flag 10 includes exactly one command, immediately after audio and before palette.
+These commands do not store text characters. They reference the game's external
+localized string table and fonts. Coordinates are signed pixel coordinates;
+string IDs are read as signed 16-bit values by the engine.
+
+TALK, flag 80 clear, ten bytes:
+
+  Offset  Size  Meaning
+  0       2     x, signed 16-bit
+  2       2     y, signed 16-bit
+  4       2     string_id, signed 16-bit
+  6       1     duration in video frames
+  7       1     red
+  8       1     green
+  9       1     blue
+
+PRINT, flag 80 set, eight bytes:
+
+  Offset  Size  Meaning
+  0       2     x, signed 16-bit
+  2       2     y, signed 16-bit
+  4       2     string_id, signed 16-bit
+  6       1     duration in video frames
+  7       1     font_id
+
+The engine resolves substring zero of the external string ID, centers text at
+the requested coordinates, and adjusts it to remain on screen. Font ID 1 selects
+the tag/print font; other values select the talk font. TALK uses the talk font
+and the supplied color, and is conditional on the player's subtitle setting.
+There are separate current tag and talk text objects; a new command for a slot
+replaces that slot's previous text. The engine's expiry frame is the current
+frame plus duration, and it deletes the text after the current frame exceeds
+that value. Text overlays do not become part of the video prediction buffer.
+
+The converter records every field as a bmv_commands JSON array in the AVI comment
+metadata. Rendering equivalent overlays additionally requires the matching string
+table, fonts, locale, and engine layout behavior. A generic font can be used for
+approximate rendering when the string contents are known. The command stores
+only a numeric string ID: substituting a font cannot recover missing wording,
+and displaying an invented string would not reproduce the command faithfully.
+
+8. Recognition, validation and damaged-file policy
+
+Because BMV has no identifying header, no byte test can establish historical
+provenance with mathematical certainty. The extension is not evidence. A file
+whose bytes satisfy the complete grammar is indistinguishable from a deliberately
+constructed file with identical bytes. Conversely, damage before any complete
+frame may be indistinguishable from an unrelated format.
+
+Use structural recognition, not a score or a content heuristic: parse an ordinary
+packet with legal fields and successfully decode a complete image with bounded
+references and exact payload consumption. A complete-file validator repeats this
+for every packet, follows explicit slot skips, and requires the end opcode. Do
+not search forward for plausible packet starts after losing a length boundary.
+
+The converter does not commit an output before recognition and decoding. Its
+behavior is deterministic:
+
+  * Empty input, a BMVi header, or a failure before a complete valid picture:
+    reject, leaving the requested output absent or an existing output untouched.
+  * Extended-mode flag 40 anywhere: reject the unsupported profile, even if an
+    earlier frame was decodable; do not silently output a partial conversion.
+  * After a valid frame establishes the ordinary grammar, a damaged picture:
+    retain the last intact image for that packet's frame time, keep a complete
+    palette update if available, and resume at the declared next packet boundary.
+  * Incomplete audio: retain all complete 65-byte blocks; do not invent the
+    missing differences or reset predictors. Damaged audio can cause uncertainty
+    in later prediction because the format has no predictor checkpoints.
+  * Truncated optional field: retain fields decoded before it, hold the previous
+    image, and skip only the remaining bytes of that bounded packet.
+  * Truncated header or invalid packet type after recognition: stop; do not scan
+    the rest of the file for apparent synchronization bytes.
+  * Missing final 01: preserve decoded frames and warn.
+  * Extra bytes after 01: stop at 01, account for the trailer, warn if nonzero.
+
+Warnings identify recovery. The decode() API also offers salvage=False for strict
+validation of malformed streams. Ignored slot fill and an unused final high
+nibble are defined unused storage, not evidence of corruption.
+
+9. Converter interface, output and audit
+
+Run:
+
+  python3 teenyWeenyGamesBMVVideo.py input.bmv output.avi
+
+Requirements: Python 3.10 or newer, its standard library, and an ffmpeg executable
+on PATH built with the PNG decoder, FFV1 encoder, PCM encoder and AVI muxer. No
+third-party Python packages, game installation, data tables on disk, or companion
+scripts are required for ordinary audiovisual decoding. The tables are embedded.
+
+The converter implements the container and both BMV decoders in Python. It spools
+indexed PNG frames and already-decoded little-endian PCM to temporary files, then
+invokes FFmpeg with those inputs. FFmpeg never receives BMV as an input. The AVI
+contains lossless FFV1 video at the original 640x429 and 12 fps, and PCM signed
+16-bit stereo at 22050 Hz when audio is present. Palette colors are expanded
+without resizing, quantization, gamma conversion, or a frame-rate change.
+
+The output is written to a temporary file in the destination directory and is
+atomically renamed only after successful muxing. It is made user/group-readable
+and writable (mode 0664). Failures remove temporary output and leave any existing
+destination untouched. The destination directory must already exist. Input and
+output must not refer to the same file. Temporary spool files are removed on exit.
+The implementation holds the input and audit in memory, so very large inputs
+require corresponding RAM and temporary storage.
+
+The importable decode() and convert() functions return an audit dictionary with
+half-open byte intervals [start,end), per-field totals, packet flags, displacements,
+frame counts, control/literal byte counts, unused nibble values, and SHA-256 hashes
+of the decoded RGB24 and PCM byte streams. Its intervals must partition the input
+exactly, without gaps or overlaps. Picture cursor accounting separately requires
+control_bytes + literal_bytes == compressed_picture_bytes. Neither successful
+accounting nor a checksum can certify the semantics of an explicitly reported
+damaged field; recovery regions are identified rather than concealed.
+
+10. Remaining boundaries and how to extend support
+
+Extended-mode flag 40: determine its behavior from an original player executable
+and a stream exercising the flag before adding support. The ordinary decoder
+cannot deduce a new layout from a flag name. Historical fixed-size audio paths
+selected by engine state rather than this stream's counted-block layout are also
+not covered; they require a separately identified profile, not guessed detection.
+
+External text: supply the corresponding localized string resources, choose the
+original fonts for exact reproduction or a substitute font for approximate
+rendering, reproduce the game's centering/clipping/color rules, and render the text
+after video prediction. Current metadata preserves the complete command. Without
+the external string contents, neither the wording nor its appearance can be
+recovered from the BMV file in isolation, regardless of which font is selected.
+
+External initial picture/palette state: supply that state if a movie depends on
+it. Zero initialization is deterministic but cannot recover absent game resources.
+
+Headerless identification: a signature cannot be retroactively invented. Damaged
+opening packets require out-of-band provenance or a future explicit force/profile
+option; the current interface conservatively refuses them.
+
+11. Primary implementation references
+
+The field grammar and algorithms above are written independently. These public
+implementations provide comparison points and clarify engine behavior:
+
+ScummVM Tinsel BMV player, including slot handling, text commands, guard rows,
+audio accumulation, and insertion of silence for absent audio:
+https://github.com/scummvm/scummvm/blob/cd291a35eaeadcf2c77430d6ab7b271ee108f935/engines/tinsel/bmv.cpp
+
+FFmpeg BMV demultiplexer and video decoder (video comparison only; see the audio
+reconstruction distinction in section 4):
+https://github.com/FFmpeg/FFmpeg/blob/6e80ec9dc5d7ea83c3abac641aa08ad7849c9e98/libavformat/bmv.c
+https://github.com/FFmpeg/FFmpeg/blob/6e80ec9dc5d7ea83c3abac641aa08ad7849c9e98/libavcodec/bmvvideo.c
+https://github.com/FFmpeg/FFmpeg/blob/6e80ec9dc5d7ea83c3abac641aa08ad7849c9e98/libavcodec/bmvaudio.c

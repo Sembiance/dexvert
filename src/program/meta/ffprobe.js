@@ -6,10 +6,11 @@ export class ffprobe extends Program
 	website = "https://ffmpeg.org/";
 	package = "media-video/ffmpeg";
 	flags   = {
-		libre       : "Use librempegprobe instead of ffprobe"
+		libre       : "Use librempegprobe instead of ffprobe",
+		countFrames : "Count frames in video stream (NOTE: Expensive op)"
 	};
 	bin  = r => (r.flags.libre ? "librempegprobe" : "ffprobe");
-	args = r => ["-v", "error", "-show_packets", "-show_streams", "-show_format", "-of", "json", r.inFile()];
+	args = r => ["-v", "error", ...(r.flags.countFrames ? ["-select_streams", "v:0", "-count_frames"] : []), "-show_packets", "-show_streams", "-show_format", "-of", "json", r.inFile()];
 	post = r =>
 	{
 		const probeInfo = xu.parseJSON(r.stdout);
@@ -23,6 +24,7 @@ export class ffprobe extends Program
 				"width"           : {type : "number"},
 				"height"          : {type : "number"},
 				"nb_frames"       : {type : "number", rename : "frameCount"},
+				"nb_read_frames"  : {type : "number", rename : "frameCount"},
 				"duration"        : {type : "number", rename : "streamDuration", convert : v => +v*xu.SECOND},
 				"codec_name"      : {type : "string"},
 				"codec_long_name" : {type : "string"},
@@ -42,7 +44,9 @@ export class ffprobe extends Program
 
 		for(const [sectionName, sectionTags] of Object.entries(tagTypes))
 		{
-			const section = sectionName==="stream" ? (probeInfo.streams || []).find(o => o.codec_type==="video") : probeInfo[sectionName];
+			let section = probeInfo[sectionName];
+			if(sectionName==="stream")
+				section = probeInfo.streams?.find(o => o.codec_type==="video") || probeInfo.streams?.find(o => o.codec_type==="audio") || probeInfo.streams?.[0];
 			if(!section || !Object.isObject(section))
 				continue;
 
@@ -61,7 +65,11 @@ export class ffprobe extends Program
 					{
 						delete r.meta[key];
 						if(fallback)
+						{
 							r.meta[key] = getValue(section[fallback]);
+							if(isNaN(r.meta[key]))
+								delete r.meta[key];
+						}
 					}
 				}
 			}

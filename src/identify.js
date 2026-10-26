@@ -208,12 +208,6 @@ export async function getIdMeta(inputFile)
 const DIR_CACHE_HOT = new Map();
 const DIR_CACHE_COLD = new Map();
 
-export function clearIdentifyCache()
-{
-	DIR_CACHE_HOT.clear();
-	DIR_CACHE_COLD.clear();
-}
-
 function dirCacheGet(root)
 {
 	const value = DIR_CACHE_HOT.get(root) || DIR_CACHE_COLD.get(root);

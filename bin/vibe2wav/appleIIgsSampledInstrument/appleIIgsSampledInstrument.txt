@@ -1,0 +1,501 @@
+APPLE IIGS SAMPLED INSTRUMENT FORMAT (ASIF)
+Wire format, historical producer deviations, and extraction behavior
+==================================================================
+
+1. Scope and status
+
+ASIF is an EA IFF 85 container holding unsigned eight-bit wave memory and
+Apple IIgs Note Synthesizer instrument definitions. It describes instruments,
+not a timed musical performance. The same instrument can play different
+notes, durations, velocities, envelopes, oscillator combinations and output
+channels. Consequently a WAV extraction of its samples is not a unique or
+complete rendering of the instrument.
+
+This document specifies the published Apple layout and distinguishes it from
+historical writer deviations. The accompanying converter extracts sample
+data, parses all the published instrument fields, and diagnoses malformed
+structures. It is NOT a complete Note Synthesizer or ES5503 emulator. It does
+not claim to reconstruct missing recording rates, damaged bytes, private
+extensions, or the original meaning of arbitrary bytes outside FORM.
+
+There is no version field identifying the historical rate encodings. The
+integer-Hz convention described below is an observed structural convention;
+its generality is not established by the published Apple specification.
+Recognition of that convention cannot prove the intent of every possible
+writer. Therefore its rate interpretation requires an explicit --legacy-hz
+option or playback-rate override; it is not guessed by default. Complete
+format support remains unfinished in the areas listed in section 11.
+A byte ledger accounts for storage boundaries;
+it must not be confused with complete semantic understanding.
+
+2. Identification and primitive types
+
+The data fork begins with these twelve bytes:
+
+  Offset  Length  Meaning
+       0       4  ASCII FORM (46 4f 52 4d)
+       4       4  Unsigned big-endian size of the FORM payload
+       8       4  ASCII ASIF (41 53 49 46)
+
+The signature is required. Extensions, filenames and directories are not
+identifiers. FORM AIFF, FORM AIFC, FORM 8SVX, RIFF WAVE, resource-fork sounds,
+raw PCM and other Apple IIgs instrument formats are different formats.
+
+The ProDOS assignment is file type $D8, auxiliary type $0002. Earlier ASIF
+documentation used $CA/$8000. Those filesystem attributes are not bytes in
+this data fork. A parser operating on a plain file need not have them.
+
+All offsets in this document are byte offsets. All ordinary Words are
+little-endian unsigned 16-bit values unless explicitly marked signed.
+IFF lengths alone are big-endian 32-bit values. Names are Pascal strings:
+one unsigned length byte followed by exactly that many bytes, without an
+implicit NUL terminator or alignment byte. A Word can start at an odd offset.
+
+Apple Fixed quantities use signed 16.16 little-endian representation: decode
+a signed 32-bit integer and divide by 65536. Thus 440 Hz is stored as
+00 00 b8 01. The low-address word contains the fractional portion. This is
+distinct from the signed 8.8 relative pitch and unsigned 8.8 envelope steps.
+
+3. Container and chunk traversal
+
+FORM's size includes ASIF and the child chunks, but excludes FORM's own
+eight-byte ID/size header. Its declared endpoint is 8 + FORM.size.
+
+Each child chunk contains:
+
+  Relative offset  Length  Meaning
+                0       4  Four-byte chunk ID
+                4       4  Payload length, unsigned big-endian
+                8       n  Payload
+              8+n     n&1  Zero padding when n is odd
+
+The pad is not included in n. The next header is at 8+n+(n&1). Child pads
+are included in the parent FORM size. A top-level odd FORM likewise needs
+an external IFF pad, although a conforming ASIF's child layout makes its
+FORM payload even. No scanning for ASCII chunk names is needed or safe:
+waveform bytes can coincidentally contain those names.
+
+Published ASIF requires exactly one WAVE chunk and at least one INST chunk.
+Their order is not fixed. Multiple instruments may use the same WAVE.
+NAME, AUTH, (c)<space>, and ANNO are optional. Other chunks are permitted by
+IFF extension rules; an application may skip them using their declared
+lengths. Skipping an unknown chunk does not decode its private semantics.
+
+Bytes after the top-level FORM endpoint are not waveform data. Some writers
+add storage alignment fill. Nonzero trailing material has no meaning in the
+published format and must be reported as opaque unless independently decoded.
+
+4. WAVE payload
+
+Let N be the WaveName length byte, H = 1 + N, and K = NumSamples.
+
+  Payload offset  Length  Field
+               0       1  WaveName length N
+               1       N  WaveName bytes
+               H       2  WaveSize
+             H+2       2  NumSamples K
+             H+4    12*K  SampleTable
+        H+4+12*K     ...  WaveData
+
+WaveSize is a zero-based byte count in Apple's specification: the intended
+WaveData length is WaveSize + 1, allowing one through 65536 bytes. A value
+of $FFFF denotes 65536 bytes, not a zero-length or unspecified waveform.
+One sentence in Apple's note calls the data 'WaveSize Bytes'; its explicit
+zero-based-counter definition supplies the +1 rule. Historical byte-count
+writers instead store the exact count; see section 8.
+
+Each SampleTable entry is twelve bytes:
+
+  Entry offset  Length  Field         Meaning
+             0       2  Location      Byte offset from the WAVE chunk ID
+             2       2  Size          Length in 256-byte pages
+             4       4  OrigFreq      Original tone frequency, Fixed Hz
+             8       4  SampRate      Recording sample rate, Fixed Hz
+
+Location is relative to the chunk's ID, NOT the payload or file start.
+The normative absolute sample start is WAVE_chunk_offset + Location.
+The nominal sample extent is Size * 256 bytes. It must lie within WaveData.
+Entries may be referenced by instruments; the number of samples need not
+equal the number of instruments. Overlapping/shared data is possible and
+must not be mistaken for stereo interleaving.
+
+OrigFreq=0 means the sampled tone's original frequency is unknown.
+SampRate=0 means the original sampling rate is unknown. Neither is a default
+frequency. A nonzero OrigFreq is a pitch in Hz, not a sampling rate.
+Knowing a sample's fundamental alone is insufficient to infer its sample
+rate without additional information. Do not estimate pitch from the waveform
+to repair these fields.
+
+WaveData is uncompressed, mono, unsigned eight-bit linear amplitude. $80 is
+the centerline, $01..$7F are negative excursions, and $81..$FF positive ones.
+It can be placed directly into an eight-bit PCM WAV data chunk, EXCEPT for
+the special $00 control value. $00 is an oscillator stop marker, not a
+negative full-scale PCM value. At that byte a DOC oscillator stops; swap
+mode may start its partner. Bytes after a stop may be a different waveform,
+alignment material, or unreachable/stale wave memory. They must not simply
+be played as a continuation of the same waveform.
+
+Every WaveData byte remains part of the stored wave bank even when no
+instrument references it. Physical retention and audible reachability are
+different properties. Extraction need not turn unused or opaque storage
+into audible samples.
+
+5. INST payload
+
+Let N be InstName's byte length and H=1+N. Its complete defined size is
+H + 34 + 6*(AWaveCount+BWaveCount), excluding the chunk header and IFF pad.
+
+  Payload offset  Length  Field
+               0       1  InstName length N
+               1       N  InstName bytes
+               H       2  SampleNum: zero-based SampleTable index
+             H+2      24  Eight envelope segments, three bytes each
+            H+26       1  ReleaseSegment
+            H+27       1  PriorityIncrement
+            H+28       1  PitchBendRange
+            H+29       1  VibratoDepth
+            H+30       1  VibratoSpeed
+            H+31       1  UpdateRate: unused, should be zero
+            H+32       1  AWaveCount A
+            H+33       1  BWaveCount B
+            H+34     6*A  Oscillator A waveform list
+         H+34+6*A    6*B  Oscillator B waveform list
+
+Two oscillators form a generator. Each list can contain up to 255 entries.
+There are two independent lists, not alternating A/B records.
+
+An envelope segment consists of a one-byte breakpoint and a little-endian
+unsigned 8.8 step magnitude. Breakpoints range from 0 to 127. At the assumed
+200 Hz update rate (one tick every 5 ms), the current envelope level moves
+toward the next breakpoint by the step magnitude, clamped at the target.
+Raw step 1 means 1/256 envelope unit per tick; raw $0100 means one unit.
+The direction is determined by the target, not a sign bit in the step.
+The initial level is zero. A zero step creates a sustain. The release path
+must eventually reach a zero breakpoint. Unused segments should have zero
+breakpoints and nonzero steps.
+
+Apple's description calls the segments linear but also specifies a
+logarithmic level scale: sixteen breakpoint units correspond to about 6 dB.
+A faithful Note Synthesizer implementation must reproduce its level-to-DOC
+volume mapping, not multiply PCM directly by breakpoint/127.
+
+ReleaseSegment selects segment 1..7 for release; multiple following segments
+can be used. PriorityIncrement is subtracted from the generator's allocation
+priority upon reaching its first sustain. Release halves priority. Allocation
+of another generator decrements existing priorities to favor stealing older
+voices. These are voice allocation parameters, not PCM scaling factors.
+
+PitchBendRange is 1, 2 or 4 semitones for a pitch-wheel excursion from its
+center (64) to maximum (127). VibratoDepth is 0..127, with zero disabling
+software vibrato. VibratoSpeed controls a triangle LFO in 0.2 Hz steps.
+UpdateRate is reserved; older proposals assigned it an inadequate rate
+encoding. The published ASIF envelope clock is always 200 Hz, irrespective
+of a nonzero value left in that reserved byte.
+
+6. Six-byte oscillator waveform descriptor
+
+  Entry offset  Length  Field
+             0       1  TopKey
+             1       1  WaveAddress
+             2       1  WaveSize register
+             3       1  DOCMode register
+             4       2  RelPitch, signed little-endian 8.8 semitones
+
+For a MIDI note, independently choose the first entry in each list whose
+TopKey is greater than or equal to the note. TopKey values should increase;
+the last should be 127. Entries allow multisampling and per-range tuning.
+
+WaveAddress supplies the high byte of the wave RAM address, before adding
+the sample's RAM placement. The low eight bits are zero. The address is
+relative to a sample placed at page zero. The table's size further masks the
+address to a table-aligned boundary; an unaligned page number does not start
+an arbitrary region on real hardware.
+
+For the size register R:
+
+  bits 0..2: resolution r, 0..7
+  bits 3..5: table-size index s, 0..7
+  bit 6:     ES5503 address bit A16 (not available in the IIgs 64 KiB RAM)
+  bit 7:     unused on ES5503
+
+The table length is 256 << s, from 256 through 32768 bytes. The effective
+low-bank table address is (WaveAddress << 8) & ~(table_length-1).
+The DOC phase accumulator's address shift is 9+r-s. For a frequency register
+F and oscillator service frequency C, traversal speed is
+C*F / 2**(9+r-s) sample addresses per second. C depends on hardware clock and
+the enabled oscillator count, which are not stored in ASIF. For equal r and
+s, each 512 frequency units advances one sample address per DOC service.
+
+RelPitch is a signed semitone displacement, including fractional semitones.
+For example 00 f4 represents -12 semitones. It compensates sample tuning and
+DOC configuration; it is not an original-rate field. The Note Synthesizer's
+effective tuning precision is 1/128 semitone, constrained further by DOC
+frequency resolution.
+
+For the mode register M:
+
+  bit 0:     halt; one means initially halted
+  bits 1..2: 0=free run, 1=one shot, 2=sync/amplitude modulation, 3=swap
+  bit 3:     interrupt enable; ASIF specifies zero
+  bits 4..7: output-channel selection
+
+Free run repeats at the table boundary but a zero data byte still stops it.
+One shot ends at the table boundary or a zero. Swap starts the paired
+oscillator when it stops. Sync/AM requires the hardware's oscillator pairing
+and cannot be represented by concatenating samples. Hardware interactions
+also include the even/odd one-shot/swap retrigger case documented by emulator
+authors; a full renderer must implement these interactions explicitly.
+
+Common configurations are A=$00/B=$00 for continuous synthesis,
+A=$06/B=$03 for a swapped pair of one-shot regions, and A=$06/B=$01 for an
+initial region followed by a repeating sustain region. A halted B is not
+necessarily unused: A can start it through swap. On conventional IIgs
+stereo cards channel 0 is right and channel 1 is left. Channel assignment
+does not make the stored WaveData stereo.
+
+7. Optional text and future chunks
+
+NAME is the collection/display name, AUTH identifies authorship, (c)<space>
+is a copyright notice, and ANNO is an annotation. Published payloads are
+exactly ckSize ASCII bytes, without an embedded length byte. Apple's ANNO
+paragraph repeats the author wording, but ANNO is the standard annotation
+chunk. Chunk IDs are case-sensitive, including the trailing space in (c) .
+
+Historical writers also use Pascal strings in these optional chunks. A
+length byte of payload_length-1 permits that interpretation, but can be
+ambiguous with a literal first character in a standard text chunk. The
+converter records BOTH the exact bytes and the potential Pascal display;
+it does not discard or globally clear high bits. Name fields may contain
+NULs, high-bit Apple characters, or stale bytes inside their declared length.
+These remain name bytes, not a second hidden header. Their original intended
+text is not always recoverable.
+
+Unknown IFF chunks are length-delimited opaque extensions. A lossless copy
+would preserve them. The converter's verbose audit preserves all source bytes
+and records their boundaries; default PCM WAV output cannot carry arbitrary
+ASIF extensions or a complete instrument program.
+
+8. Historical producer layouts
+
+8.1 Exact-count WaveSize
+
+Several writers use WaveSize as a byte count, contrary to Apple's +1 rule.
+The distinction is determined from the declared WAVE payload length minus
+the complete Pascal name, four fixed header bytes and twelve bytes per table
+entry. Equality to WaveSize identifies the count layout; equality to
+WaveSize+1 identifies the published layout. Disagreement with both is an
+error, not permission to search the sample bytes for a later chunk signature.
+
+For a legacy single-sample bank the bounded WaveData extent is the sample
+extent. Its Size field can round down or up to pages and is not an exact byte
+count. Location=0 in that layout means the beginning of WaveData. A Location
+equal to the full WAVE header length uses the published chunk-relative origin.
+These deviations do not justify guessing offset origins in an arbitrary
+multi-sample file.
+
+8.2 AudioZap
+
+The AudioZap 1.2s executable contains a 15-byte Pascal-name ASIF template.
+Its writer uses byte-count WaveSize, one SampleTable entry, Location=0,
+floor(byte_count/256) pages, OrigFreq=0, and SampleNum=1 despite having only
+one sample. Its usual envelope is (breakpoint,raw step):
+(127,$4000), (0,$0200), followed by six (0,0) segments. The subsequent six
+bytes are Release=1, Priority=32, PitchBend=0, Depth=0, Speed=0, UpdateRate=0.
+These structural fields, rather than a sample filename or display name,
+identify the implemented AudioZap profile. Wave list sizes and modes vary.
+
+The writer stores its playback frequency control in the low word of SampRate,
+leaving the high word zero. It is neither a standard Fixed nor an integer Hz
+rate. The executable's bytes/second display multiplies the control by 1645
+and divides by 32. Thus the nominal rate is control*51.40625 Hz. This is the
+software's nominal rate, not a measurement of a particular machine's crystal.
+Its UI accepts values 1..799. Values outside that range cannot safely be
+distinguished from differently encoded or corrupted rate metadata by this
+profile and require an explicit override. A zero still supplies no rate.
+
+8.3 NoiseTracker GS / FTA writer
+
+The published NoiseTracker GS source, IMPORT.S/CreateSnd, establishes:
+byte-count WaveSize; a single sample; chunk-relative Location; pages rounded
+up; OrigFreq=SampRate=0; SampleNum=0; Pascal optional text; and a fixed
+instrument template with variable DOC sizes and modes.
+
+The writer rounds an odd waveform length up by one. For an even length that
+is not exactly 256,512,1024,2048,4096,8192,16384 or 32768, it appends two zero
+bytes. Exact listed powers of two are unchanged. These zeros stop playback.
+It computes FORM length from the ORIGINAL length, so the final INST can lie
+one or two bytes beyond FORM's declared endpoint. Its WAVE length correctly
+uses the adjusted length.
+
+The INST size is emitted as two zero bytes followed by a little-endian Word,
+instead of the required big-endian long. For an instrument payload of 62,
+the stored four bytes are 00 00 3e 00, which a strict IFF reader sees as
+15872. The instrument's name and wave counts independently determine 62.
+The writer also fills storage through the next 256-byte boundary with zeros.
+This outer fill has no audio meaning.
+
+8.4 Equal integer-frequency convention
+
+A further legacy single-sample layout uses Location=0 and identical nonzero
+OrigFreq and SampRate values with zero high words. These represent integer
+Hz in the implemented legacy-Hz interpretation, NOT standard Fixed or a
+sampled fundamental equal to the sample clock. With --legacy-hz, the converter applies this
+interpretation only to the exact-count, single-region-compatible layout.
+This producer convention is empirical, lacks a version tag, and has not been
+verified from its writer source. It is an explicit remaining uncertainty.
+Use --rate when independent provenance gives a different interpretation.
+
+9. Deterministic recovery and byte accounting
+
+The converter first requires FORM/ASIF at their exact offsets. It never
+recognizes an unrelated file by waveform statistics, filename or extension.
+Rejection occurs before creating outputDir. Once the signature is present,
+malformed lengths may be bounded against physical EOF to recover available
+sample bytes. Missing PCM bytes are not padded or invented.
+
+For INST, the self-described size can repair the documented swapped low word
+when the big-endian length exceeds the container and equals the typed size
+shifted left eight bits. A zero INST size is also repaired from that typed
+size. One or two bytes of a final INST beyond FORM can be recovered only
+when its field counts demand exactly those existing bytes. A truncated
+instrument retains all complete fields; the remaining partial field is
+explicitly undecoded. No fields are fabricated to complete it.
+
+An invalid chunk ID stops traversal of the remaining container. Nonzero bytes
+outside FORM are opaque. The converter does not inflate a short WAVE because
+a file happens to be 65536 bytes longer, and does not search later data for
+an INST-looking signature. Such reconstruction would require independent
+producer or corruption evidence.
+
+The verbose byte ledger is a disjoint partition of [0,physical_file_size).
+Every existing byte belongs to a header field, declared name/text, table
+field, waveform storage, IFF pad, known extension boundary, truncated
+remainder or trailing region. A runtime check verifies that there are no
+gaps or overlaps. Exact source_hex and a SHA-256 hash permit lossless source
+reconstruction, including bytes whose semantics remain unresolved.
+
+10. Converter interface and output
+
+  python3 appleIIgsSampledInstrument.py INPUT OUTPUT_DIRECTORY
+  python3 appleIIgsSampledInstrument.py INPUT OUTPUT_DIRECTORY -verbose
+  python3 appleIIgsSampledInstrument.py INPUT OUTPUT_DIRECTORY --rate 11025
+  python3 appleIIgsSampledInstrument.py INPUT OUTPUT_DIRECTORY --unknown-rate 11025
+  python3 appleIIgsSampledInstrument.py INPUT OUTPUT_DIRECTORY --legacy-hz
+
+Only WAV files are written by default. Existing output directories are
+accepted and matching output names are atomically replaced per file. The
+input cannot be its own output. New files have mode 0664; new directories
+allow user/group reading and traversal even under a restrictive umask.
+Python 3.10 or newer and its standard library are sufficient. No reference
+documents, source archives, external programs or data files are runtime
+dependencies.
+
+--rate explicitly sets every exported sample's playback rate. It can resolve
+an untagged rate encoding but does not repair missing waveform bytes.
+When the stored sample rate is zero (unknown), the converter uses 8363 Hz
+by default and writes WAV files for any recoverable waveform data.
+--unknown-rate changes this fallback playback rate only for zero-rate samples.
+The fallback is a conversion policy, not a recovered original recording rate;
+the converter reports its use in warnings and verbose metadata. Stored nonzero
+rates retain their normal decoding rules, and --rate overrides every sample.
+--legacy-hz explicitly selects integer-Hz decoding for matching untagged
+equal-frequency fields. Without it, these ambiguous fields are refused.
+Errors and warnings go to stderr, and output paths to stdout. Exit status
+0 means at least one WAV was written; status 2 means conversion failed.
+Partial recoveries are identified in warnings and verbose metadata.
+
+Each SampleTable entry produces its playable prefix, ending immediately
+before the first DOC zero marker. For legacy single-sample banks its entire
+bounded storage is examined; page rounding and the selected DOC table size
+do not truncate the stored sample. Additional distinct, nonzero effective
+addresses referenced by A/B descriptors produce separate bounded WAVs. This
+preserves separately playable sustain regions. Identical additional regions
+are deduplicated. Different instruments can reference the same PCM without
+requiring duplicate audio for each note or envelope.
+
+An empty region or one beginning with a DOC zero has no audible waveform and
+is reported as skipped. Data after the first stop is not concatenated into
+the sound; it remains in the source/audit and may be exported separately if
+another descriptor actually references it. No silence trimming, amplitude
+normalization, pitch estimation, DC correction, smoothing or dithering is
+performed. Nonzero PCM bytes are copied exactly.
+
+Outputs are RIFF/WAVE, format 1, mono unsigned 8-bit PCM. The only default
+chunks are fmt and data, with a RIFF pad for odd data lengths. Rates are
+rounded to the nearest integer Hz, with halves rounded upward; PCM bytes
+are not resampled. The exact pre-rounding rate is available in the audit.
+Waveform names use the entire input basename. One output is BASENAME.wav;
+multiple outputs add stable wave/sample/offset identifiers before .wav.
+
+The converter does not apply instrument volume envelopes, pitch bend,
+relative pitch, vibrato, channel mixing, note allocation, swap retriggering
+or note duration to the extracted waveform. It decodes them for inspection.
+It does not invent a MIDI unity note or smpl loop for a PCM extraction.
+Loop-capable regions are identified in verbose metadata. A complete
+instrument performance requires an explicitly chosen note, duration,
+velocity, controller sequence and hardware/software rendering model.
+
+-verbose additionally writes BASENAME.asif.json containing exact source
+bytes, the byte ledger, decoded tables and instruments, diagnostics, output
+rates and hashes. The converter itself never generates an HTML report or
+other sidecars by default. Output validation precedes directory creation.
+Ordinary I/O failure can still leave already completed WAVs in a multi-file
+conversion; file replacement is atomic, not a multi-file transaction.
+
+11. Known incompleteness and next work
+
+The published field layout is decoded, but full universal semantics and full
+synthesis are not implemented. In particular:
+
+* Untagged historical rate encodings can be ambiguous. The equal integer-Hz
+  convention needs verification from original writer source or controlled
+  save experiments. AudioZap's nominal display rate is source-code evidence
+  from executable analysis, not exact physical-clock calibration.
+* A missing rate cannot be recovered from ASIF alone. The converter uses
+  8363 Hz by default; --unknown-rate can select another playback rate.
+  Recovering the original rate requires provenance beyond the file.
+* All eight-bit name values can be preserved, but malformed/stale text has
+  no recoverable unique original spelling.
+* Private chunks and nonzero material outside FORM are preserved in the
+  audit but remain semantically opaque. Full interpretation needs their
+  writer or provenance. Truncated bytes need an intact original copy.
+* The parser supports arbitrary declared sample counts, Pascal-name lengths,
+  instrument counts and A/B key lists. Legacy offset repair is intentionally
+  restricted to the unambiguous single-sample count layout. Unsupported
+  offset conventions are reported, not guessed.
+* A complete renderer must implement the original Note Synthesizer envelope
+  volume table, update scheduling, MIDI tuning and allocation logic, and DOC
+  free-run, one-shot, sync/AM, swap and even/odd interactions. Nonzero A16 bank
+  requests cannot be resolved from an IIgs 64 KiB bank alone. These are
+  diagnosed while extracting any independently bounded underlying PCM.
+* Byte coverage does not certify that an unused waveform tail is meaningful
+  audio. This extractor follows the first zero stop. It does not emulate
+  high-frequency DOC address stepping that might jump across a zero byte.
+
+12. Sources and evidence
+
+Apple Computer, John Worthington and Matt Deatherage, March 1989,
+Apple II File Type Note $D8/$0002, Apple IIGS Sampled Instrument File.
+Primary specification, archived in Apple II File Type Notes:
+https://mirrors.apple2.org.za/ftp.apple.asimov.net/documentation/misc/Apple2FileTypeNotes1993.pdf
+
+Olivier Goguel / FTA, NoiseTracker GS 1.0 source distribution,
+IMPORT.S, CreateSnd and its P0/P1 templates. The writer code is primary
+evidence for the length, endian and alignment deviations:
+https://mirrors.apple2.org.za/ground.icaen.uiowa.edu/apple16/Music/Applics/Noisetrackergs.v10src/ntgs10src.shk
+
+Ian Schmidt, AudioZap 1.2s executable and included documentation:
+https://mirrors.apple2.org.za/ground.icaen.uiowa.edu/apple16/Music/Applics/Audiozap.v12s/AZ.SHK
+In the executable's main segment, the ASIF template begins at segment
+offset $7BE0; the rate store is at $44F7; the displayed-rate arithmetic starts
+at $0405 and is repeated at $206E. The latter uses multiplication by $066D
+and division by $0020. The program writes the same rate variable into the
+DOC frequency registers. These offsets identify the analyzed executable,
+not ASIF file offsets and not recognition constants in the converter.
+
+R. Belmont and MAME contributors, ES5503 implementation and hardware-test
+notes. Primary implementation evidence for register masks and interactions:
+https://github.com/mamedev/mame/blob/master/src/devices/sound/es5503.cpp
+
+The format specification above is independent of particular audio files,
+filenames, collection directories and display names.

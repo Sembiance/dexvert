@@ -57,7 +57,7 @@ export class Format
 
 		// lastly, if the format itself has a meta function, call that
 		if(this.meta)
-			Object.assign(meta, (await this.meta(inputFile, dexState)) || {});
+			Object.assign(meta, (await this.meta(inputFile, dexState, meta)) || {});
 
 		return meta;
 	}
@@ -134,7 +134,7 @@ export class Format
 			confidenceAdjust : {type : "function"},
 			fallback         : {type : "boolean"},
 			idCheck          : {type : "function", length : [0, 3]},
-			meta             : {type : "function", length : [0, 2]},
+			meta             : {type : "function", length : [0, 3]},
 			packed           : {type : "boolean"},
 			priority         : {types : ["number", "function"]},	// type : "number", enum : Object.values(format.PRIORITY)
 			simple           : {type : "boolean"},

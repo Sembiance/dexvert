@@ -2,7 +2,7 @@ import {Format} from "../../Format.js";
 
 export class steamInstallSystem extends Format
 {
-	name           = "Steam Install Ssytem";
+	name           = "Steam Install System";
 	ext            = [".sid"];
 	forbidExtMatch = true;
 	magic          = [/^geArchive: SID( |$)/];

@@ -8,28 +8,20 @@
 /--------------\
 | TOP Priority |
 \--------------/
-
+* http://fileformats.archiveteam.org/wiki/TLzrw1
+  https://discmaster.textfiles.com/search?detection=21485a4c*
+  Supported by latest deark
 
 
 /-------------\
 | Vibe Viable |
 \-------------/
 >>> wip
-* videos in unsupported.js video (already started)
-  Also those in src/format/video/ with unsupported set
 <<<
 
-* ZIP files might have hidden 'metadata' in PKAV/AVEXTRA data. So vibe code support for this.
-	First dexvert needs a new meta program to retrieve this info and append to end of comment (or create if needed)
-	Can use these projects to help vibe come up with the correct code for v1.x and v2.x and AVEXTRA data extraction:
-		https://github.com/johnsonjh/infozip-av
-		https://github.com/johnsonjh/pkstuff/blob/master/pkav_verify.py
-	Also have the vibe code create a 2nd tool that has the bare minimum fastest fewest byte reads to just "determine" if the zip has this data
-	Then create a selectiveReprocess.js for zip that only includes zips that actually have this data
+* Finish vibing the remaining unsupported.js "audio" formats
 
-* http://fileformats.archiveteam.org/wiki/TLzrw1
-
-* Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)
+* Tackle installers
   NOTE: If I come across ones that have consistent "metadata" on the exe, I can use an agent with running "exiftool -quiet -json" to find what to reprocess
   Right now installers (including Wise) are not detected as such, just treatest as an EXE where wise/defactory/nsis/etc are just "tried"
   Should probably come up with better magic/detection of each installer type and then make a separate format/unpacker for each
@@ -44,8 +36,6 @@
 	* All the other The various exe.js installer specific magics
 	* After all reprocessed, search for exe's like 10M or more, or search for "setup.exe" or "install.exe"
 	  See if you can find magic, or maybe it has a version/text file/image that is common amongst other installers of the same type
-
-* Do the unsupport.js "audio" formats
 
 * Possibly the image and poly formats listed in text.js or other things that look like probably binary data encoded into text
 

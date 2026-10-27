@@ -9,7 +9,7 @@ export class vibe2wav extends Program
 		singleFile : "Extractor just converts to a single file"
 	};
 	args       = async r => [path.join(Program.binPath("vibe2wav"), r.format.formatid, `${r.format.formatid}.py`), r.inFile(), r.flags.singleFile ? await r.outFile("out.wav") : r.outDir()];
-	renameOut  = false;
+	renameOut  = r => !!r.flags.singleFile;
 	skipVerify = true;
 	chain      = "sox[type:wav][skipVerify]";
 }

@@ -119,11 +119,12 @@ const SLOW_FORMATS = {
 	"text/tornado3DProject" : 2,
 
 	// video
-	"video/avi"          : 6,
-	"video/mov"          : 6,
-	"video/trilobyteVDX" : 5,
-	"video/vivo"         : 5,
-	"video/wmv"          : 11
+	"video/avi"            : 6,
+	"video/mov"            : 6,
+	"video/trilobyteVDX"   : 5,
+	"video/vivo"           : 5,
+	"video/webExRecording" : 3,
+	"video/wmv"            : 11
 };
 
 console.log(printUtil.minorHeader(`Processing ${formatsToProcess.size.toLocaleString()} formats...`, {prefix : "\n"}));

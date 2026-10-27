@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,016)
+# Unsupported File Formats (4,011)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -272,29 +272,24 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (59)
+## Audio (54)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/abletonSoundData](https://discmaster.textfiles.com/search?format=abletonSoundData) | Ableton Sound Data | .asd | 
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. No actual sampled audio, just parameters and register settings for the OPL2 FM chip.
 [audio/amSound](https://discmaster.textfiles.com/search?format=amSound) | AM Sound |  | [4 sample files](https://sembiance.com/fileFormatSamples/audio/amSound/)
 [audio/appleIIgsAudio](https://discmaster.textfiles.com/search?format=appleIIgsAudio) | Apple IIgs Audio |  | 
-[audio/appleIIgsSampledInstrumentFile](https://discmaster.textfiles.com/search?format=appleIIgsSampledInstrumentFile) | Apple IIgs Sampled Instrument File |  | 
 [audio/ariaSamplesBank](https://discmaster.textfiles.com/search?format=ariaSamplesBank) | ARIA Samples Bank | .bnk | 
 [audio/artOfNoiseInstrument](https://discmaster.textfiles.com/search?format=artOfNoiseInstrument) | Art of Noise Instrument | .fm | [5 sample files](https://sembiance.com/fileFormatSamples/audio/artOfNoiseInstrument/)
 [audio/audioSimAnalogueSoundfile](https://discmaster.textfiles.com/search?format=audioSimAnalogueSoundfile) | AudioSim analogue Soundfile | .snd | 
-[audio/audioWorksSoundSample](https://discmaster.textfiles.com/search?format=audioWorksSoundSample) | AudioWorks Sound Sample |  | 
 [audio/commonInstrumentFile](https://discmaster.textfiles.com/search?format=commonInstrumentFile) | [Common Instrument Sample](http://fileformats.archiveteam.org/wiki/Common_Instrument_Format) | .ci1 .ci2 | 
 [audio/commonLoudspeaker](https://discmaster.textfiles.com/search?format=commonLoudspeaker) | [Common Loudspeaker](http://fileformats.archiveteam.org/wiki/Common_Loudspeaker_Format) | .cf1 .cf2 | 
 [audio/covoxSpeechThingAudioSample](https://discmaster.textfiles.com/search?format=covoxSpeechThingAudioSample) | Covox Speech Thing audio sample | .v8 | 
 [audio/creativeLabsInstrumentBank](https://discmaster.textfiles.com/search?format=creativeLabsInstrumentBank) | [Creative Labs Instrument Bank](http://fileformats.archiveteam.org/wiki/Instrument_Bank) | .ibk | [2 sample files](https://sembiance.com/fileFormatSamples/audio/creativeLabsInstrumentBank/) - gamemus supports reading this format, but doesn't have a way to convert or extract it
 [audio/deluxeSoundSample](https://discmaster.textfiles.com/search?format=deluxeSoundSample) | Deluxe Sound Sample | .instr | 
 [audio/deskMateSound](https://discmaster.textfiles.com/search?format=deskMateSound) | DeskMate Sound | .snd | 
-[audio/digitalSymphonySoundSample](https://discmaster.textfiles.com/search?format=digitalSymphonySoundSample) | Digital Symphony Sound Sample |  | 
 [audio/dmxOP2InstrumentData](https://discmaster.textfiles.com/search?format=dmxOP2InstrumentData) | DMS OP2 Instrument Data |  | 
 [audio/dynamixSSMSoundAndMusic](https://discmaster.textfiles.com/search?format=dynamixSSMSoundAndMusic) | Dynamix SSM sound and music | .sng | 
-[audio/ensoniqWaveSetFormat](https://discmaster.textfiles.com/search?format=ensoniqWaveSetFormat) | Ensoniq WaveSet Format | .ecw | 
-[audio/fineArtistSound](https://discmaster.textfiles.com/search?format=fineArtistSound) | Fine Artist Sound |  | 
 [audio/headspaceSoundBanks](https://discmaster.textfiles.com/search?format=headspaceSoundBanks) | Headspace Sound Banks | .hsb | 
 [audio/homeBrewSound](https://discmaster.textfiles.com/search?format=homeBrewSound) | HomeBrew Sound | .hse | [1 sample file](https://sembiance.com/fileFormatSamples/audio/homeBrewSound/)
 [audio/hyperStudioSampledSound](https://discmaster.textfiles.com/search?format=hyperStudioSampledSound) | HyperStudio sampled sound |  | 

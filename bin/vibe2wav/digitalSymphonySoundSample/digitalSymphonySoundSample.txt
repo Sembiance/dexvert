@@ -1,0 +1,463 @@
+DIGITAL SYMPHONY SOUND SAMPLE (SySample)
+Binary format and deterministic WAV conversion specification
+
+1. Scope and identification
+
+SySample is Digital Symphony's standalone, single-waveform sound format for
+RISC OS. Its RISC OS filetype is hexadecimal 10A. It contains one mono waveform,
+a name, and optional forward repeat information. File extensions and filenames
+have no bearing on identification. This is not the Symphony song/module format,
+which has a different signature, nor the Symphony pattern/sequence format.
+
+All integer fields are unsigned and little-endian unless stated otherwise.
+Offsets in this document start at zero. Bit offsets increase from the least
+significant bit of each byte to its most significant bit, then to the next byte.
+There is no checksum, directory, channel-count field, rate field, timestamp,
+volume, fine-tune, root note, or collection of sub-samples in this container.
+
+The required eight-byte signature is:
+
+    02 01 13 13 13 01 0D 10
+
+These bytes encode the ASCII letters BASSSAMP with 64 subtracted from each
+letter. They are not an ASCII string in the file. Require the complete signature;
+do not identify a damaged signature using filename, entropy, or audio content.
+
+2. Header
+
+Let L be the unsigned byte at offset 9 and let H = 20 + L.
+
+Offset       Size       Meaning
+0            8          Exact signature above
+8            1          Format version
+9            1          Name length L, in bytes (0..255)
+10           L          Name bytes, without an added terminator
+10 + L       3          Half the sample-point count
+13 + L       3          Half the repeat start position
+16 + L       3          Half the repeat length
+19 + L       1          Packing/encoding method
+H            variable   Waveform payload
+following    variable   Alignment and, in malformed files, extraneous data
+
+The header is packed: do not insert alignment before any field. To read a
+three-byte field a,b,c, compute a + 256*b + 65536*c.
+
+Multiply each of the three length/position fields by TWO, including for 16-bit
+audio. The resulting values count sample points, not bytes. Consequently the
+stored waveform length N, repeat start R, and repeat length Q are even, and
+each ranges from 0 through 33,554,430. For method 3 only, a waveform of N sample
+points occupies 2*N audio bytes. For the other methods the decoded symbol
+stream has N bytes.
+
+Versions 0 and 1 use this layout. Version 1 introduced the additional methods
+3, 4 and 5 with Digital Symphony 1.30. Method 2 was added earlier, while the
+file version remained 0. The authors' compatibility rule is to reject version
+numbers 10 and above, but to recognize methods individually for versions below
+10. Thus a decoder need not reject a known method solely because the version
+is 2..9. This does not establish that such versions were actually published.
+Unknown methods must not be guessed from the payload or version number.
+
+Name length is the full byte; the module format's high-bit name flags DO NOT
+apply here. Names normally use the RISC OS character set. Retain the original
+bytes, including control bytes, spaces, and any embedded zero. The display
+mapping is ISO-8859-1 except for 80..9F, which map, in order, to Unicode:
+
+80: 20AC 0174 0175 25F0 1FBC0 0176 0177 FFFD
+88: 21E6 21E8 21E9 21E7 2026 2122 2030 2022
+90: 2018 2019 2039 203A 201C 201D 201E 2013
+98: 2014 2212 0152 0153 2020 2021 FB01 FB02
+
+Byte 87 has no assigned text character in this mapping; FFFD is a display
+replacement only. Older fonts may render some positions differently. None of
+this affects audio or the retained name bytes. Never use the embedded name as
+an unchecked filesystem path.
+
+3. Repeats and playback rate
+
+Q of zero or two means no active repeat. For Q > 2, the repeat is forward over
+sample indices R through R+Q-1 inclusive. The file represents an instrument
+waveform, so the repeat is a sustain operation in a tracker. It does not mean
+that the waveform should be duplicated a guessed number of times in an export.
+Any data after the repeat remains part of the waveform.
+
+A valid active repeat satisfies R < N and R+Q <= N. A recovering decoder can
+clip an overlong repeat to the recovered waveform or omit it if its start is
+outside the recovered audio, reporting that action.
+
+NO SAMPLING FREQUENCY IS STORED. Neither original recording speed nor a unique
+musical pitch can be recovered from this file alone. A WAV rate must come from
+the caller or an explicitly declared audition convention. The converter uses
+8363 Hz by default and accepts -rate HZ. This is not a rate inferred from bytes,
+names, waveform analysis, or file size. Changing it changes playback speed and
+pitch without resampling or altering the decoded sample points.
+
+4. Encoding methods
+
+Method  Meaning                                      Payload structure
+0       8-bit VIDC logarithmic                        N raw bytes
+1       LZW-compressed signed linear differences      LZW bitstream
+2       8-bit signed linear PCM                       N raw bytes
+3       16-bit signed little-endian PCM               2*N raw bytes
+4       Sigma-delta unsigned linear differences       threshold + bitstream
+5       Sigma-delta unsigned logarithmic differences  threshold + bitstream
+
+Methods other than 0..5 are unsupported. Methods 1, 4 and 5 do not include an
+independent compressed byte length. Their ends are determined by the decoded
+sample count, the LZW end code where applicable, and the alignment rules.
+There is no interleaving: all decoded values belong to one mono channel.
+
+For an empty waveform the converter requires the complete header, emits no
+sample points, and expects only file alignment after the packing byte. Empty
+compressed payload variants containing an otherwise unnecessary stream are not
+silently inferred; additional bytes are diagnosed as extraneous data.
+
+5. Method 0: VIDC logarithmic samples
+
+Each byte b uses bit 0 as sign (1 is negative), bits 1..4 as mantissa, and bits
+5..7 as exponent. The deterministic 16-bit PCM reconstruction is:
+
+    m = (b >> 1) & 15
+    e = b >> 5
+    magnitude = ((8*m + 132) << e) - 132
+    pcm = -magnitude if (b & 1) else magnitude
+
+Examples, stated in hexadecimal input and decimal output:
+
+    00 -> 0       01 -> 0       02 -> 8       03 -> -8
+    20 -> 132     21 -> -132    FE -> 32124   FF -> -32124
+
+This is the VIDC arrangement of a segmented mu-law magnitude. A file byte is
+NOT an ordinary G.711 mu-law byte. To use a conventional G.711 decoder, map to
+
+    u = ((1 - (b & 1)) << 7) | (127 ^ (b >> 1))
+
+before decoding. In particular, the sign must be inverted relative to that
+mu-law decoder's stored sign convention. The formula above agrees with FFmpeg's
+pcm_vidc decoder and retains more detail than old 8-bit conversion tables.
+It reconstructs digital levels; it does not emulate the analogue filtering,
+DAC tolerances, or speakers of a particular computer.
+
+6. Method 2 and method 3: signed PCM
+
+For method 2, each byte v represents v for v < 128, otherwise v-256. To export
+as signed 16-bit PCM, multiply that value by 256. This preserves the original
+8-bit values without normalization, interpolation, or dithering.
+
+For method 3, read each pair low,high as low + 256*high; subtract 65536 if the
+value is at least 32768. These are already signed 16-bit samples. Preserve the
+little-endian pairs unchanged in a PCM16 WAV. Do not swap endian order, apply
+delta integration, or double the number of frames.
+
+7. Method 1: Digital Symphony LZW and delta integration
+
+7.1 Bit packing
+
+Codes are packed least-significant bit first, continuously across bytes. The
+first code starts at the first bit of the byte at offset H. The reader consumes
+exactly the current width, even across a byte or word boundary. Width changes
+and dictionary resets do not align the stream or discard bits. Width starts
+at 9 and can increase through 10, 11, 12 to 13.
+
+7.2 Dictionary
+
+Initial entries 0..255 are the corresponding single byte. Code 256 clears the
+dictionary and code 257 terminates the stream. The first free dictionary index
+is 258. Maximum dictionary size is 8192 entries (indices 0..8191).
+
+Maintain a previous decoded phrase P, initially absent. For each code:
+
+  a. Read one code at the current width.
+  b. For 256: reset width to 9, discard entries 258 onward, and clear P.
+     Preserve output already decoded and the bit position. Continue reading.
+  c. For 257: terminate. If fewer than N bytes have been produced, the stream
+     is malformed; those already produced are still usable.
+  d. For a defined dictionary index, let S be that entry's byte string.
+  e. If the code equals the first free index and P exists, let S = P + P[0].
+     This is the normal LZW self-reference (KwKwK) case.
+  f. Any larger code, or an undefined reference without P, is invalid.
+  g. Append S to the output. It must not exceed the declared N decoded bytes.
+  h. If the output has now reached N, skip the dictionary update and read
+     the following end code 257 using THE CURRENT width, then finish.
+  i. Otherwise, if P exists and there is space, add P + S[0] at the first
+     free index. Advance that index. If it now equals 2**width, and width
+     is below 13, increase width for the next code.
+  j. Set P = S and repeat.
+
+There is no mandatory initial clear code. Once the dictionary reaches 8192,
+keep it frozen until a clear code; do not increase width to 14 or implicitly
+reset it. Clear may occur before the dictionary is full.
+
+The final-code rule in step h matters at dictionary-width boundaries. Symphony
+can emit its final EOF at the width of the last data code, even when performing
+the normal final dictionary insertion would have increased the width. Do not
+probe alternative widths heuristically.
+
+An end code is required after N output bytes; reaching N alone does not consume
+or validate the whole encoded stream. A premature end, invalid reference,
+missing end, or phrase extending beyond N is a diagnosed stream error.
+
+7.3 Delta integration
+
+The decompressed bytes are differences, not final audio. Start accumulator A
+at zero. For each decoded byte d:
+
+    A = (A + d) & 255
+    signed_sample = A if A < 128 else A - 256
+    pcm16 = signed_sample * 256
+
+Integrate continuously across dictionary resets. Unsigned modular addition
+also handles two's-complement negative differences correctly.
+
+7.4 Stream end
+
+After consuming code 257, the unused high bits of the current byte are not
+codes. Round the number of bytes consumed since H upward to a multiple of four.
+This is STREAM-RELATIVE alignment, not absolute file alignment. Then apply the
+separate final-file alignment described in section 9.
+
+8. Methods 4 and 5: adaptive sigma-delta
+
+8.1 Header and state
+
+The byte at H is the run threshold T. The bitstream begins at H+1 and uses the
+same least-significant-bit-first convention as LZW. The threshold byte does
+NOT count in the bitstream's four-byte alignment.
+
+Initialize width W = 8, consecutive-small-code count C = 0. Read eight bits
+as the initial unsigned accumulator A and output A as the first sample symbol.
+This byte is an ABSOLUTE initial value, not a difference from zero.
+
+8.2 Decode the remaining N-1 symbols
+
+Read W bits as integer V:
+
+  - If V is zero, this is a width-increase marker. Produce no output, increase
+    W by one, set C to zero, and read again. Increasing above nine bits is
+    malformed: an eight-bit modulo difference never requires a larger code.
+  - Otherwise, let D = V >> 1. If V is odd, subtract D from A; if V is even,
+    add D. Reduce A modulo 256 and output it.
+  - If bit W-1 of V is set, set C to zero.
+  - Otherwise increment C. Once C reaches T, reduce W by one, with a minimum
+    of one bit, then set C to zero.
+
+Code 1 is a zero difference. Code 0 cannot mean a zero difference because it
+is the width-increase marker. At width one, code 1 has its high bit set, so
+constant samples can remain at width one indefinitely. Width is at most nine.
+The sign applies to the difference; it is not the sign of the resulting PCM.
+
+For T = 0, the converter uses the effective threshold 1 and reports a warning,
+matching OpenMPT/libxmp recovery behavior. For T above 31, historical decoders
+disagree: TimPlayer masks to the low five bits, while OpenMPT and libxmp use
+the entire byte. The converter uses the entire byte and explicitly warns.
+No claim is made that the original encoder defined the high three bits as a
+separate field. Establishing the intended behavior for those values requires
+the original encoder or authoritative additional documentation.
+
+Stop immediately after N symbols have been output. There is NO sigma-delta
+EOF token. Do not consume another code or synthesize a terminator.
+
+8.3 Reconstruct method 4
+
+The output symbols are unsigned linear amplitudes with zero amplitude at 128:
+
+    pcm16 = (A - 128) * 256
+
+The accumulator has already integrated the differences. Do not integrate it
+again or interpret the initial symbol as signed linear PCM.
+
+8.4 Reconstruct method 5
+
+Method 5 uses an unsigned, monotonic logarithmic arrangement different from
+method 0's interleaved sign. Convert each decoded symbol A into a VIDC byte:
+
+    sign = A >> 7
+    t = (A ^ 255) if A < 128 else A
+    vidc = ((t << 1) & 255) | sign
+
+Then use section 5's VIDC reconstruction formula. Equivalently, its digital
+level is +M(127-A) for A < 128 and -M(A-128) otherwise, where
+
+    M(x) = ((8*(x & 15) + 132) << (x >> 4)) - 132.
+
+Thus 0 maps to +32124, 127 and 128 to zero, and 255 to -32124.
+
+8.5 Stream end
+
+After the last symbol, ignore unused high bits of the final byte. Let B be the
+number of bytes touched beginning at H+1, including the initial absolute value.
+The complete payload size is 1 + align4(B). The leading 1 is the threshold.
+Apply final absolute file alignment after this complete payload.
+
+9. Exact alignment and excess-data accounting
+
+Define align4(x) = (x + 3) & ~3. The documented logical payload end P is:
+
+    method 0 or 2: P = H + N
+    method 3:      P = H + 2*N
+    method 1:      P = H + align4(ceil(consumed_LZW_bits / 8))
+    method 4 or 5: P = H + 1 + align4(ceil(consumed_sigma_bits / 8))
+
+Sigma bit counts exclude the threshold byte and include the initial absolute
+sample. LZW bit counts include the end code. For an empty waveform with no
+payload, P = H. The documented whole-file length is F = align4(P).
+
+There can therefore be three distinct non-audio regions:
+
+  1. Unused high bits in a compressed stream's last byte.
+  2. Zero to three bytes of compressed-stream-relative word padding.
+  3. Zero to three bytes from P to F for absolute file-word padding.
+
+These are not interchangeable. Together the two byte-padding regions can
+occupy up to six bytes. The format notes specify zero-valued final file
+padding. Readers can accept nonzero alignment contents without changing any
+sample; the converter reports nonzero bits/bytes rather than treating them as
+audio. Their positions and lengths are determined structurally, not by looking
+for trailing zeros or by deciding whether the bytes sound like audio.
+
+Bytes beyond F are NOT documented padding, another sample, a rate, or an
+extension field. They are unexplained trailing data in an otherwise recognized
+file. Their length, exact offsets, and raw contents can be retained in verbose
+diagnostics. Excluding them from audio follows N and the validated stream
+boundary; it does not identify their original purpose. Zero-valued extra bytes
+are also extraneous, rather than justification for extending the padding rule.
+
+There is no defined meaning for arbitrary excess bytes. Fully explaining such
+bytes requires identifying the producing program and inspecting its save path,
+or obtaining independent documentation for an actual extension. Calling them
+reserved, padding, or a rate without evidence would be an unsupported guess.
+
+10. Converter behavior and WAV representation
+
+Usage:
+
+    python3 digitalSymphonySoundSample.py inputFile outputDir
+    python3 digitalSymphonySoundSample.py inputFile outputDir -rate 22050
+    python3 digitalSymphonySoundSample.py inputFile outputDir -verbose
+
+--rate and --verbose are also accepted. Only the Python standard library is
+required. No shared library, executable, source archive, data table file, or
+network access is needed at conversion time.
+
+One accepted input produces outputDir/<complete-input-basename>.wav. The
+existing output directory is reused. Existing WAVs with that exact target name
+are replaced; unrelated files are untouched. The embedded name is not used to
+choose the output path. Names with existing suffixes retain those suffixes
+before the added .wav.
+
+By default no sidecar, report, manifest, raw dump, or other persistent file is
+created. Output is a RIFF/WAVE file with:
+
+  - fmt: format tag 1, one channel, selected integer rate, byte rate twice that
+    rate, block alignment 2, and 16 bits per sample.
+  - LIST/INFO/INAM when a name is present: original RISC OS name bytes plus a
+    terminating zero. Name character interpretation in other applications may
+    vary; bytes are retained without assuming UTF-8.
+  - smpl when there is a usable repeat: one forward indefinite loop, start R,
+    inclusive end R+Q-1 (after any reported clipping), zero fractional offset.
+    The export assigns MIDI unity note 60 and sample period round(1e9/rate).
+    Unity note 60 is a WAV export convention, not source pitch information.
+    A WAV forward loop cannot express every tracker note-release behavior.
+  - data: the entire recovered waveform in signed PCM16 little-endian form.
+
+WAV chunks have standard even-byte RIFF padding. Browsers commonly ignore smpl
+and play the waveform once; the source repeat remains available to software
+that recognizes that chunk. The converter does not repeatedly render loops.
+
+-verbose additionally writes <complete-input-basename>.json in outputDir.
+It contains field values, original name bytes, input/PCM hashes, warnings,
+compression statistics, the chosen rate, and a contiguous half-open partition
+of the entire input into bit ranges. Small structural and residual regions
+include their exact hex bytes. Audio code ranges refer back to the source;
+the JSON is an audit, not a redundant complete backup of the input.
+
+The accounting deliberately distinguishes understood codes, unused alignment,
+and unexplained or damaged regions. Covering every bit with a range does NOT
+mean that arbitrary trailing bytes have been semantically explained.
+
+11. Recognition, corruption, and recovery
+
+Recognition and full decoding occur before any output directory or persistent
+output file is created. Signature mismatch, version >= 10, unknown packing
+method, or an incomplete indispensable header causes failure with no output.
+The CLI reports a reason to stderr and exits 1. It does not invoke a fallback
+converter for a different format.
+
+Once the exact format and layout are established, recover deterministically:
+
+  - Truncated raw data: retain all complete available samples up to N.
+  - Truncated or invalid compressed data: stop at the first impossible code,
+    preserving only the decoded prefix; do not scan for a new stream start.
+  - LZW phrase overrun: retain only the declared number of samples and report
+    the excess phrase. No extra waveform is invented.
+  - Missing LZW EOF after a complete waveform: retain that waveform and report
+    the invalid termination.
+  - Missing alignment: retain decoded audio and report missing bytes.
+  - Nonzero alignment or trailing data: retain decoded audio, account for the
+    residual bytes explicitly, and report the anomaly.
+  - Invalid loop: clip its end or omit the loop, as described earlier.
+
+If N is nonzero and no complete sample can be recovered, fail without output.
+A legitimately empty waveform can be exported as a zero-frame WAV. Successful
+prefix recovery exits 0 with warnings, since it produced usable audio. The
+audio_complete and stream_complete fields in verbose mode distinguish a full
+waveform from a validated, complete compressed stream.
+
+Lengths are never guessed from apparent silence or a plausible-looking end.
+There is no checksum, so structurally valid but altered bytes cannot always be
+detected. An intact signature identifies the container; it does not guarantee
+that a corrupted count, name, loop, or sample value is still original.
+
+Each output file is atomically replaced using a temporary file in the output
+directory; temporary files are removed. Final file permissions are 0644. Newly
+created directories have user/group read and search permission even under a
+restrictive umask. Directory permissions of existing user directories are not
+changed.
+
+12. Evidence, interoperability, and limits
+
+The header, version policy, six packing identifiers, half-length units, and
+final-file alignment are documented by Digital Symphony's authors. The two
+compression algorithms are independently implemented by multiple players.
+The companion converter uses explicit algorithms rather than filename rules,
+content classification, estimated compression ratios, or guessed rates.
+
+Reference sources:
+
+  Bernard Jungen and Gil Damoiseaux, DSym_Info, revisions through 23 Oct 1996;
+  original standalone sample format description in Docs/DSymPlay/DSym_Info:
+  https://www.riscos-digitalcd.net/digitalcd/player/docs.zip
+
+  Excerpt of the authors' format notes maintained by libxmp:
+  https://github.com/libxmp/libxmp/blob/master/docs/formats/digital_symphony.txt
+
+  libxmp Digital Symphony decoder and bitstream implementations:
+  https://github.com/libxmp/libxmp/blob/master/src/loaders/sym_load.c
+  https://github.com/libxmp/libxmp/blob/master/src/loaders/lzw.c
+
+  OpenMPT Digital Symphony loader, LZW termination-width behavior, and
+  sigma-delta decoding:
+  https://github.com/OpenMPT/openmpt/blob/master/soundlib/Load_dsym.cpp
+
+  FFmpeg VIDC PCM reconstruction (vidc2linear):
+  https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/pcm_tablegen.h
+
+  RISC OS Programmer's Reference Manual, sound architecture and VIDC format:
+  https://www.riscos.com/support/developers/prm/sound.html
+
+  OpenMPT RISC OS text mapping:
+  https://github.com/OpenMPT/openmpt/blob/master/src/mpt/string_transcode/transcode.hpp
+
+The VIDC reconstruction follows FFmpeg's sign convention, also consistent with
+libxmp and TimPlayer's positive-even/negative-odd VIDC tables. OpenMPT's current
+SySample-related module conversion path yields the opposite polarity for its
+logarithmic cases when passed through its conventional mu-law decoder. Older
+8-bit log-to-linear tables also quantize more coarsely than PCM16. They should
+not be used as a bit-exact PCM16 reference.
+
+The documented encoding families are implemented. Claims beyond the evidence
+are explicitly excluded: original playback rate is absent; arbitrary extra
+trailer semantics are unknown; thresholds above 31 have conflicting historical
+implementations; and unpublished incompatible versions or new packing methods
+are not decoded speculatively. Resolve those questions through original
+encoder/save-source analysis and known-output test vectors, not heuristic
+interpretation of a waveform.

@@ -1,0 +1,584 @@
+ENSONIQ WAVESET (ECW / ECLW) FILE FORMAT
+Structural specification and PCM extraction reference
+Revision 1, 2026-10-26
+
+STATUS AND SCOPE
+===============
+
+This document describes the little-endian ECLW waveset container used by the
+Ensoniq/Creative AudioPCI software MIDI synthesizer. The usual extension is
+.ecw. It is unrelated to the geospatial Enhanced Compressed Wavelet format.
+
+The container, table record boundaries, sample addressing, embedded RDNS
+directory, and signed 16-bit PCM representation are decoded. This is NOT a
+complete semantic specification of the synthesizer. Some control bytes,
+scales, flag meanings, and wavetable operations remain unresolved. They are
+explicitly identified below. Byte accounting or lossless preservation must
+not be confused with understanding those bytes' musical effects.
+
+Consequently, an extractor can produce the stored waveforms without being
+able to reproduce every instrument's MIDI performance. A standalone WAV
+also cannot directly express key-dependent layering, envelopes, controller
+routing, or a moving wavetable. No claim of 100% semantic reverse engineering
+is made by this document or the accompanying converter.
+
+All layout descriptions are independent of any particular bank, filename,
+file size, patch count, or instrument name. Read offsets and counts from the
+file; do not select layouts from names or approximate bank sizes.
+
+
+1. NOTATION
+===========
+
+Offsets marked 0x are hexadecimal; other quantities are decimal.
+u8/i8: unsigned/signed 8-bit integer.
+u16/i16: unsigned/signed 16-bit little-endian integer.
+u32: unsigned 32-bit little-endian integer.
+All signed integers use two's complement.
+
+An interval [a,b) includes a and excludes b. File offsets are byte offsets
+from the beginning of the file unless explicitly described as relative.
+Sample addresses use a different unit: 1/16 of a 16-bit PCM sample, or 1/8
+byte. They are relative to the beginning of the waveform area, INCLUDING
+any embedded RDNS directory.
+
+Text occupies fixed byte slots and ends at the first NUL. Nonzero bytes
+after that NUL can be stale text; they are not a second string. For display,
+Latin-1 preserves the byte-to-code-point mapping, including the copyright
+symbol. A universal encoding for arbitrary non-ASCII text is not established.
+Retain the original byte slot if exact reconstruction matters.
+
+
+2. FILE ORGANIZATION AND IDENTIFICATION
+======================================
+
+The basic structure is:
+
+    fixed prologue / descriptive text
+    allocation directory
+    MIDI maps, instruments, patches, linking arrays, sample descriptors
+    optional alignment bytes
+    waveform area: optional RDNS directory, then PCM storage
+
+Absolute offsets, rather than adjacency, connect these regions. Table data
+and the waveform area need not begin on a 2- or 4-byte file boundary.
+The PCM words are aligned relative to the waveform area, not necessarily
+relative to the file.
+
+File prologue:
+
+  Offset  Size  Encoding  Meaning
+  0x0000     4  bytes     Exact ASCII signature ECLW (45 43 4C 57).
+  0x0004     4  bytes     Opaque marker, normally 01 00 01 00.
+  0x0008     4  u32       Allocation-directory absolute offset A.
+  0x000C     4  u32       Normally 16. Consistent with text start T=0x10;
+                         alternate values have not been independently verified.
+
+The marker at 0x0004 must not be presented as a proven major/minor version
+number. Its interpretation is unresolved. Identical markers occur within
+the allocation directory.
+
+Text region relative to T (normally 16):
+
+  Offset  Size       Meaning
+  +0         80      Copyright text.
+  +80        80      Display name of the waveset.
+  +160      256      Internal filename text; not a path to follow.
+  +416       80      Description.
+  +496    A-T-496    Information text and unused bytes up to the directory.
+
+For the conventional A=0x700 layout, the final slot is 1280 bytes. Text after
+its first NUL is still part of the slot. Historical configurator software
+may impose stricter limits than the physical text capacity; those UI limits
+are not required to extract samples.
+
+Recognition must use the signature, followed by structural validation. An
+.ecw extension alone proves nothing. A matching signature with impossible
+offsets may be a damaged waveset; do not scan arbitrary bytes for replacement
+tables or infer boundaries from zero runs.
+
+
+3. ALLOCATION DIRECTORY
+=======================
+
+The directory at absolute offset A occupies 140 bytes (0x8C), including
+the final waveform-length field. This corrects a historical description
+that understated the conventional total header size by two bytes: with
+A=0x700, the first possible table offset is 0x78C, or 1932 bytes.
+
+A table descriptor consists of three u32 values in this order:
+
+    absolute file offset, total byte length, record count
+
+Relative offsets within the allocation directory:
+
+  Offset  Size  Meaning                                      Record size
+  +0x00      4  Opaque marker, normally 01 00 01 00
+  +0x04     12  Bank-map descriptor                           256
+  +0x10     12  Drum-kit-map descriptor                       256
+  +0x1C     12  MIDI program-map descriptor                   256
+  +0x28     12  Drum-note-map descriptor                      256
+  +0x34     12  Instrument descriptor                         23
+  +0x40     12  Internal patch descriptor                     76
+  +0x4C      4  Opaque marker, normally 01 00 01 00
+  +0x50     12  Sample-set slot array descriptor (array 1)       2
+  +0x5C     12  Sample-set tag array descriptor (array 2)        2
+  +0x68     12  Sample-set sample-index array (array 3)          2
+  +0x74     12  Sample-descriptor table                        16
+  +0x80      4  Opaque marker, normally 01 00 01 00
+  +0x84      4  Waveform-area absolute file offset W
+  +0x88      4  Waveform-area byte length L
+
+Each table's length should equal count * record_size. The waveform area is
+[W,W+L). Its declared length includes an RDNS directory when one is present.
+It does not extend automatically to EOF if the declaration is shorter.
+
+Tables should not overlap the allocation directory or waveform area.
+Unallocated bytes can occur between table ends and the waveform area;
+0xEE alignment fill is known. Such bytes are not audio and must not be
+discarded by an exact archival representation. No universal padding rule
+or checksum over the whole file has been established.
+
+
+4. MIDI MAPPING TABLES
+=====================
+
+Every map is 128 consecutive u16 entries, thus 256 bytes.
+
+Bank map: entry b selects a MIDI program map for bank b.
+Drum-kit map: entry k selects a drum-note map for kit/program k.
+MIDI program map: entry p selects an instrument for program p.
+Drum-note map: entry n selects an instrument for percussion note n.
+
+Indices are zero-based. Entries can share the same destination. A value of
+0xFFFF denotes an absent entry in linking contexts; do not dereference it.
+The directory can express multiple maps, although the common synth setup
+uses one bank map and one drum-kit map. Selection between multiple top-level
+bank/kit maps by a particular synth implementation is not established here.
+
+Following MIDI mappings is unnecessary for extracting all stored samples.
+In particular, unreferenced descriptors and alternative sample sets must
+not be silently excluded merely because no default MIDI program selects them.
+
+
+5. INSTRUMENT RECORDS
+====================
+
+An instrument is exactly 23 bytes. The byte at +0 selects the layout.
+
+Type 2: up to two patch layers
+-----------------------------
+
+  Offset  Size  Type  Meaning
+  +0         1  u8    2
+  +1         1  u8    Layer-selection mode
+  +2         1  u8    Split key, used by mode 2
+  +3        10  bytes First layer
+  +13       10  bytes Second layer
+
+Modes: 0 = first layer; 1 = both layers; 2 = first at/below split key and
+second above it; 3 = second layer. Other mode values have no confirmed
+playback interpretation. Both layers are stored even when one is inactive.
+Two layers do not inherently imply a stereo PCM sample: each source is mono
+and has its own pan, tuning, and delay controls.
+
+Each 10-byte layer:
+
+  Offset  Size  Type  Meaning
+  +0         2  u16   Internal patch index
+  +2         1  i8    Amplitude/envelope-related adjustment; exact scale unknown
+  +3         1  i8    Pan adjustment; exact transfer curve unknown
+  +4         1  i8    Coarse tuning adjustment, reported in semitones
+  +5         1  i8    Fine tuning adjustment; exact arithmetic unverified
+  +6         2  u16   Onset-delay control; exact time scale unverified
+  +8         1  u8    Unresolved control byte
+  +9         1  u8    Exclusive/choke-group control
+
+The two unresolved control bytes occur at instrument offsets +11 and +21.
+Choke controls occur at +12 and +22. Group equality can make related
+percussion sounds mutually exclusive. The complete zero-value and scope
+rules require synth-engine verification.
+
+Type 255: key-dependent instrument dispatch
+------------------------------------------
+
+  Offset  Size  Meaning
+  +0         1  Value 255
+  +1         1  Unresolved byte
+  +2        21  Seven consecutive 3-byte branches
+
+Each branch is a u16 instrument index followed by a u8 upper key limit.
+Use the first active branch whose upper limit is >= the incoming MIDI key.
+A limit of 127 terminates the active branch list. Remaining stored branches
+can contain stale, nonmonotonic data and must not be treated as active.
+Validate targets and detect cycles before recursively resolving dispatch.
+The extractor records branches but does not traverse them to render MIDI.
+
+Other type values are unsupported for synthesis. Their full 22-byte payload
+can still be retained without affecting independent PCM extraction.
+
+
+6. INTERNAL PATCH RECORDS
+========================
+
+A patch is exactly 76 bytes. The following list accounts for all offsets.
+Names for several controls are based on reported behavioral experiments;
+their numeric transfer functions remain unverified. In particular, a raw
+control value must not simply be labeled milliseconds, decibels, or hertz.
+
+  Offset(s)  Meaning
+  0x00       Signed pitch-envelope depth
+  0x01       Modulation-controller sensitivity
+  0x02       Key scaling: 0 chromatic, 1 constant pitch, 2 quarter-tone
+  0x03-0x0A  Eight unresolved bytes
+  0x0B-0x0C  u16 sample-set slot index, into array 1
+  0x0D       Tuning-related byte; precise interpretation unresolved
+  0x0E-0x0F  Two unresolved bytes (do not assume they are unused)
+  0x10       Signed sample-split/key adjustment
+  0x11-0x1A  Ten unresolved bytes
+  0x1B-0x29  Pitch-envelope control block
+  0x2A-0x38  Wavetable-envelope control block
+  0x39-0x47  Amplitude-envelope control block
+  0x48       Vibrato/pitch-LFO depth
+  0x49       Vibrato/pitch-LFO rate control
+  0x4A       Vibrato onset/delay control
+  0x4B       Unresolved byte
+
+Each 15-byte envelope block, relative to its beginning:
+
+  +0   Release destination/target candidate; not verified
+  +1   Delay before attack (amplitude interpretation less well established)
+  +2   Initial level
+  +3   Attack-time control
+  +4   Attack level
+  +5   Decay-time control
+  +6   Decay level
+  +7   Sustain-time control
+  +8   Sustain level
+  +9   Release-time control
+  +10  Velocity influence on envelope magnitude
+  +11  Unresolved; may affect attack behavior
+  +12  Key-number influence on envelope timing
+  +13  Release-phase control; 0/1 commonly respond to/ignore note-off;
+       other values exist and their meaning is unresolved
+  +14  Unresolved; nonzero values occur
+
+Wavetable-envelope level controls choose a position within the stored
+wavetable material, rather than directly modifying amplitude. Its timing,
+selection, interpolation and interaction with sample control bytes are not
+fully decoded. Treating this block as a normal amplitude ADSR loses behavior.
+
+The converter parses each block and preserves every patch byte. It does
+not apply any patch or instrument controls to the WAV data.
+
+
+7. SAMPLE-SET LINKING ARRAYS
+==========================
+
+Array 1 is a slot-indexed table of u16 values. A patch's u16 at +0x0B selects
+one slot. 0xFFFF means absent. Otherwise that entry selects a position j in
+both arrays 2 and 3.
+
+Array 2 contains 16-bit sample-set tags. Array 3 contains matching first
+sample-descriptor indices. A slot can address multiple consecutive pairs:
+
+    array2[j] != 0: tag identifies a sample-set alternative;
+                   array3[j] is its first sample descriptor.
+    advance j until array2[j] == 0, the list terminator.
+
+The RDNS set directory independently stores the slot number, tag and
+descriptor pointer. Together they verify the linking relationship. Multiple
+alternatives can share a slot. Do not assume every slot occupies exactly
+two array entries, or discard the second alternative in a longer list.
+
+The algorithm producing the tags is unresolved. They are NOT verified
+checksums of the waveform bytes, and a tag match does not prove PCM integrity.
+The driver's policy for choosing among a slot's alternatives is also not
+fully established. Unused array capacity is still stored and accounted for.
+
+
+8. SAMPLE DESCRIPTORS AND ADDRESSES
+==================================
+
+Each descriptor is 16 bytes:
+
+  Offset  Size  Type   Meaning
+  +0         1  u8     Upper MIDI key limit
+  +1         1  u8     Playback/loop/wavetable control
+  +2         2  bytes  Pitch/tuning word (raw little-endian value)
+  +4         4  u32    Start address S
+  +8         4  u32    Loop address B
+  +12        4  u32    End address E
+
+The end address begins at +12 (0x0C), not +11. A historical listing contains
+an overlapping-offset typo at this field.
+
+Each address is in sixteenths of a PCM sample relative to W:
+
+    exact PCM sample position = address / 16
+    exact relative byte position = address / 8
+    file offset of containing PCM word = W + 2 * floor(address / 16)
+
+Do not divide by 16 and then treat the result as a byte offset. Do not add
+the RDNS PCM boundary a second time. Low four address bits carry fractional
+sample position; end-address fractions are meaningful and occur in data.
+
+The two tuning bytes have been described as fine/coarse controls. Interpreting
+them together as signed i16 is a lossless representation, not proof of a
+particular root-key equation. The exact reference clock, bias and rounding
+of the synthesizer's pitch calculation have not been established here.
+
+Key zones continue through consecutive descriptors until upper key 127.
+A sample set's directory pointer identifies its first descriptor. Waveform
+ranges may overlap: the same PCM is legitimately reused with another start
+position, key limit, control byte or end point. Descriptors need not be sorted
+by start address. Duplicate ranges must not be mistaken for malformed data.
+
+Control-byte behavior:
+
+  0:   reported nonlooped playback with special percussion-tuning behavior
+  1:   nonlooped playback with different tuning behavior
+  2:   ordinary looped playback
+  3:   looped playback; distinction from 2 is not fully established
+  >=128: moving/multiple-wavetable controls; additional waveform material
+         exists beyond the base end address. Low seven bits correlate with
+         additional loop-length units, but a complete proven playback
+         algorithm is unavailable.
+  Other values: no complete semantics established.
+
+These controls do not change the demonstrated 16-bit PCM encoding. The
+extractor copies the base interval [S,E), without synthesizing looping or
+dynamic wave selection. For an integral S and fractional E, it retains the
+whole PCM word containing E, giving ceil(E/16)-S/16 output frames. This is
+a declared extraction policy, not an estimate of a new boundary.
+
+A fractional S requires a resampling/phase convention that is not implemented.
+Such a descriptor is skipped with a reason, while the PCM pool remains
+available. Fractional loop points are preserved as integers in verbose
+metadata. No rounded or invented loop is written into a WAV smpl chunk.
+
+
+9. EMBEDDED RDNS DIRECTORY
+=========================
+
+When the four bytes at W+8 are ASCII RDNS, the waveform area begins with an
+embedded directory. The common layout has a 40-byte header:
+
+  Relative  Size  Type   Meaning
+  +0           4  u32    Opaque value, normally 16
+  +4           4  u32    Declared total waveform-area length, including RDNS
+  +8           4  bytes  ASCII RDNS (52 44 4E 53)
+  +12          1  u8     Name-slot length, 14
+  +13          1  u8     Sample-set record length, 22
+  +14          2  u16    Sample-descriptor length, 16
+  +16          2  u16    Sample-set directory offset R, normally 40
+  +18          2  u16    Duplicate sample-descriptor offset D
+  +20          2  u16    PCM data offset P
+  +22          2  u16    Number of sample-set records G
+  +24          2  u16    Number of sample descriptors N
+  +26         14  bytes  ROM-label slot; first byte can be NUL
+
+All R, D and P offsets are relative to W. The relationships are:
+
+    R >= 40
+    R + 22*G <= D
+    D + 16*N <= P
+    P <= L
+
+In tightly packed directories both inequalities between tables are equalities.
+P is a cumulative offset, NOT the byte length of the duplicate table.
+D points to duplicate sample descriptors, NOT to sample-set records.
+
+Each 22-byte sample-set record:
+
+  Relative  Size  Type  Meaning
+  +0           4  u32   Relative pointer to its first duplicate descriptor
+  +4           2  u16   Sample-set slot number (index in array 1)
+  +6           2  u16   Tag matching an entry in array 2
+  +8          14  bytes Name slot, NUL-terminated, sometimes space padded
+
+Given first-descriptor pointer F, the first sample index is (F-D)/16.
+Require F >= D and (F-D) % 16 == 0. Naming then follows consecutive sample
+descriptors until upper key 127. Name strings are labels, never executable
+paths. Nonzero bytes after a terminator are retained but not displayed.
+
+The duplicate table uses the exact 16-byte descriptor layout from section 8.
+The outer copy is authoritative for this extractor. If copies disagree,
+report the conflict; do not silently choose whichever sounds better. Missing
+whole outer records can be recovered from a structurally valid RDNS copy.
+
+The known RDNS layout requires lengths 14/22/16. Different advertised sizes
+are unsupported directory variants. Independently valid outer sample ranges
+can still be extracted, but no PCM-pool boundary or names are guessed.
+
+The outer ECLW structure does not require sample names for audio playback.
+If there is no RDNS signature, use explicit outer sample ranges only. The
+converter does not search for RDNS elsewhere or assume that arbitrary bytes
+before the first sample are PCM.
+
+
+10. PCM STORAGE, GUARDS, AND PLAYBACK RATE
+========================================
+
+The PCM representation is mono signed 16-bit little-endian linear audio.
+There is no demonstrated compression, encryption, delta coding or stereo
+interleaving in this profile. All values -32768 through 32767 are valid.
+
+With a valid RDNS directory, [W+P,W+L) is the PCM storage pool. It includes
+ordinary samples, additional wavetable cycles, shared sample tails, and
+words not addressed by a base sample interval. Short guard regions occur
+between many sample ranges and a zero-filled tail can follow the last one.
+Some unreferenced spans contain nonzero audio. Do not identify them as pure
+padding just because no base descriptor points to them. Their exact use by
+interpolation and wave scanning is not completely understood.
+
+Preserving the entire pool preserves those words without guessing where
+an extra sample begins or how to label it. It does not prove that every
+unused word is played by the synthesizer. The pool may contain concatenated
+sounds and abrupt transitions; it is not a continuous musical performance.
+
+No per-sample recording-rate field has been decoded. A waveform in a sample
+synthesizer can be played at many rates depending on the requested note and
+tuning controls. The supplied converter uses a fixed, documented 22050 Hz
+WAV export rate, configurable with --sample-rate. It does not infer rates
+from note names, loop periodicity, file sizes, or filenames. The chosen rate
+must not be described as a recovered native recording rate or a guarantee
+of matching the original MIDI synthesizer's pitch.
+
+
+11. EXTRACTION, CORRUPTION, AND BYTE PRESERVATION
+===============================================
+
+Safe decoding procedure:
+
+  1. Verify ECLW before creating any output directory or file.
+  2. Read and bound the allocation directory.
+  3. Decode every complete table record within both declared length and count.
+  4. Bound the waveform area by both its declared length and available bytes.
+  5. Parse RDNS only at the specified location and with coherent boundaries.
+  6. Plan every output before creating files.
+  7. Extract each valid descriptor independently using its explicit addresses.
+  8. When P is established, also export the complete available PCM pool.
+
+If the file is truncated, export surviving complete PCM words, identify
+partial outputs, and list samples whose starts are beyond available data.
+Do not pad missing words with silence. A final incomplete two-byte word is
+not a PCM sample; retain its byte in verbose reconstruction metadata.
+
+Do not recover a bad descriptor by trimming to the next sample start:
+overlapping/shared ranges are legal. A reversed interval, fractional start,
+or start inside RDNS metadata is reported and skipped. Absent waveform bytes
+cannot be recovered from names or another file without external evidence.
+
+Unrecognized inputs, missing allocation directories, and inputs with no
+safely located audio produce an error and no new output files. A recognized
+damaged container can yield partial audio. Unknown synthesis fields do not
+prevent raw PCM extraction because the encoding and explicit ranges are
+independent of those controls.
+
+In-range PCM corruption is generally undetectable from this layout alone:
+there is no verified whole-file or waveform checksum. An unusual waveform
+is not sufficient evidence to discard, repair, or reinterpret the data.
+
+The converter's verbose byte map partitions the entire existing file into
+declared regions and unallocated spans. All span lengths sum to file size.
+This is structural coverage, not a percentage of semantic understanding.
+
+Verbose JSON also includes a lossless source-reconstruction recipe:
+
+  - Non-PCM prefix and any suffix/odd tail are base64 byte strings with offsets.
+  - The PCM pool is referenced by its WAV filename and data-chunk byte offset.
+  - If the pool boundary is unavailable, the recipe retains all input bytes
+    in base64 instead of guessing a partition.
+
+Read WAV PCM using a RIFF-aware reader, place each range at its declared
+source offset, and verify the saved source SHA-256. Hashes here are computed
+for audit purposes; they are not fields found in the ECW format.
+
+
+12. CONVERTER INTERFACE
+=======================
+
+    python3 ensoniqWaveSetFormat.py <inputFile> <outputDir>
+    python3 ensoniqWaveSetFormat.py -verbose <inputFile> <outputDir>
+    python3 ensoniqWaveSetFormat.py --sample-rate 32000 <inputFile> <outputDir>
+
+Requires Python 3.9 or newer and only the Python standard library. No network
+access, external decoder, library installation, or companion data files are
+needed. This specification and the tests are not runtime dependencies.
+
+The destination may already exist. Existing files are preserved; filename
+collisions receive a numeric suffix through exclusive creation. Source
+labels are sanitized before being used as filenames. Output files are
+readable by the creating user and group, even with a restrictive umask.
+
+Default output consists only of WAV files:
+
+  <input-name>_PCM_pool.wav
+  <input-name>_<descriptor-index>_<sample-set-name>.wav
+
+Each valid descriptor gets its own WAV even when it shares data with another
+descriptor. The pool WAV is produced only when RDNS establishes its boundary.
+All WAVs contain plain mono PCM with fmt and data chunks. The converter does
+not normalize, filter, retune, synthesize loops, or add guessed smpl metadata.
+
+Only -verbose/--verbose creates an additional JSON file with parsed fields,
+raw control bytes, source ranges, hashes, warnings, skipped samples and the
+reconstruction recipe. Diagnostics on stderr are not sidecar files.
+
+Exit status: 0 when at least one WAV was written; 2 for an identification,
+unrecoverable parsing, argument, or filesystem error. Successful salvage can
+still carry warnings or skip descriptors, so inspect stderr or verbose JSON
+when completeness matters.
+
+
+13. UNRESOLVED WORK REQUIRED FOR COMPLETE SYNTHESIS SUPPORT
+=========================================================
+
+The remaining work is substantive:
+
+  - Determine the meaning of all opaque prologue/directory marker words and
+    validate alternate text-pointer and directory-layout variants.
+  - Decode instrument bytes +1 in type 255 and +11/+21 in type 2, including
+    all choke, release, delay, and tuning corner cases.
+  - Identify patch bytes 0x03-0x0A, 0x0E-0x0F, 0x11-0x1A, the unresolved
+    envelope positions, and 0x4B; verify the functions of tentative fields.
+  - Recover exact envelope, velocity, key tracking, vibrato, pan and gain
+    arithmetic, including lookup tables and rounding rules.
+  - Determine sample-set tag generation and selection among alternatives.
+  - Recover sample-control bit semantics, especially moving wavetable
+    limits, phase changes and interpolation beyond the base end point.
+  - Establish the pitch reference clock, tuning-word arithmetic, fractional
+    start/loop/end behavior, and precise use of guard and residual words.
+
+The next reliable step is analysis of an original AudioPCI synthesizer
+binary, followed by controlled single-field bank mutations and recorded
+MIDI probes in a compatible driver environment. Capture known notes,
+velocities, controllers, note-off timing and output clock. Compare engine
+memory addresses and audio to discriminate competing interpretations.
+This is preferable to inventing meanings from statistical correlations.
+
+The included source implements the verified structural decoding and raw
+audio extraction described above. It does not implement the unresolved
+synthesis behavior or claim full understanding of every input byte.
+
+
+14. REFERENCES AND EVIDENCE
+===========================
+
+John N. Engelmann, .ECW file specification 1.5 (2009-01-29), preserved in the
+ecw2sfz source repository:
+https://svn.code.sf.net/p/ecw2sfz/code/trunk/ecw.txt
+
+ecw2sfz / MIDI::ECW parser and export program, revision 3:
+https://sourceforge.net/p/ecw2sfz/code/HEAD/tree/trunk/
+https://svn.code.sf.net/p/ecw2sfz/code/trunk/MIDI/ECW.pm
+https://svn.code.sf.net/p/ecw2sfz/code/trunk/ecw2sfz.pl
+
+These are prior reverse-engineering sources, not an official manufacturer
+specification. Their explicit unknowns are retained as unknowns here.
+Structural relationships were independently checked against binary data,
+including table lengths, duplicate descriptor equality, RDNS offsets,
+slot/tag/sample relationships, shared ranges and PCM byte preservation.
+The corrections concerning total header size, descriptor end offset, and
+RDNS cumulative offsets follow from those binary relationships.

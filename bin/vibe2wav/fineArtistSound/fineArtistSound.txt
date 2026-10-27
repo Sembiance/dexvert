@@ -1,0 +1,389 @@
+FINE ARTIST SOUND LIBRARY FORMAT
+CHNK version 4, Windows and classic Macintosh serialization
+
+Status and scope
+----------------
+This document describes the indexed sound-library profile of the CHNK container
+used by Microsoft Fine Artist and Creative Writer. It describes physical byte
+layout, sound decoding, category lists, allocation slack, and the accompanying
+converter's exact supported scope. CHNK is a general resource container; the
+magic alone does not identify a sound library. The file extension is irrelevant.
+
+The supported profile is a standalone CHNK container with version fields 4/4,
+inline SND / PCM sound representations, CSRO category representations, and FREE
+allocation records. The parser supports arbitrary numbers of representations
+per directory record. Microsoft ADPCM and uncompressed 8-bit/16-bit PCM sound
+payloads are implemented. The waveform output is signed 16-bit little-endian
+PCM WAV. Both mono and stereo Microsoft ADPCM are implemented.
+
+This is NOT a claim that every possible CHNK variation has been fully reverse
+engineered. The native platform descriptor's subfield meanings and the nonzero
+storage-control enum remain unresolved. Nested CHNK resources, negative offsets
+referring to another backing store, and other representation types are outside
+the implemented profile. These limits are specified below, rather than assigning
+guessed meanings or silently decoding unknown storage modes. All bytes in the
+supported layout have an explicit structural location, including unused bytes;
+structural byte coverage is distinct from complete semantic understanding.
+
+Notation and byte order
+-----------------------
+u8/u16/u32 denote unsigned 8/16/32-bit integers; s16 denotes signed two's
+complement 16-bit integers. Offsets and lengths count bytes, starting at zero.
+Integer arithmetic in the format is not tied to the host machine's word size.
+
+The 4/4 version pair at offsets 8..11 identifies the serialization byte order:
+    04 00 04 00 : little endian (Windows)
+    00 04 00 04 : big endian (classic Macintosh)
+All container integers, category integers, WAVE structural integers and ADPCM
+format/coefficient fields use this order unless explicitly stated otherwise.
+ADPCM block headers and PCM16 waveform samples ALWAYS use little endian.
+
+Container four-character tags are literal bytes, with case and spaces intact.
+For example, SND<space> is 53 4e 44 20 on both platforms. WAVE tags behave
+differently: the Macintosh serialization reverses their four bytes. Do not
+reverse the container's creator, resource-kind, representation or category tags.
+
+Container header (24 bytes)
+---------------------------
+Offset  Size  Meaning
+0       4     Literal ASCII CHNK.
+4       4     Creator/application identifier; opaque four-character tag.
+              Known identifiers include ICCC, KWrd and KPnt. This field is
+              application metadata, not the sound codec or byte-order selector.
+8       2     Minimum reader format version. The original reader rejects >4.
+10      2     Writer format version. The original reader rejects values <1.
+              The converter intentionally accepts only the specified 4/4 pair.
+12      2     Total directory-record count, across all linked directory blocks.
+14      1     Reserved byte, initialized to zero by the writer.
+15      1     Native platform descriptor: 03 for the Windows writer, 54 for
+              the Macintosh writer. It is a byte, not an endian-swapped u16.
+              Individual packed subfields have not been identified conclusively.
+16      4     Sum of directory-record lengths; excludes block headers/slack.
+20      4     Logical end-of-file offset, normally the physical file length.
+
+The first directory-block header immediately follows, at offset 24. No checksum,
+encryption, compression wrapper, or absolute disk-sector address is present.
+Native allocation uses 512-byte granularity. This explains file/allocation
+padding but is not a rule for locating the next resource: explicit offsets
+and lengths are authoritative. Directory order need not equal physical order.
+
+Linked directory blocks
+-----------------------
+Each block starts with this eight-byte header:
+    +0  u16 block length
+    +2  u16 number of directory records in this block
+    +4  u32 absolute offset of next directory-block header
+A next offset of FFFFFFFF ends the chain. Follow pointers; never scan for tags.
+Repeated pointers are a cycle and must terminate traversal.
+
+The first header is at file offset 24, and its block length counts from FILE
+OFFSET ZERO, including the 24-byte container header. Its records begin at 32.
+A normal first block length is 512. For later blocks, length counts from the
+block-header offset itself, and records begin eight bytes after that offset.
+Later blocks may declare exactly 8 + sum(record lengths); their disk allocation
+can still be rounded up to 512. The next-block pointer does not have to equal
+the current offset plus the declared length or rounded allocation length.
+
+Parse precisely the declared number of records, each using its own length.
+Bytes remaining inside the block are directory slack. Directory header counts,
+the global record count, and the global sum of record lengths provide independent
+consistency checks. Records' representation counts do NOT contribute extra
+records to the global record count.
+
+Variable-length directory record
+--------------------------------
+Offset  Size       Meaning
++0      2          u16 total record length, even, including name and alignment.
++2      4          Literal resource-kind tag.
++6      2          u16 resource ID, scoped by resource kind.
++8      2          u16 representation count N.
++10     2          Native compiler-layout record flags; see below.
++12     12*N       Representation descriptors, consecutively.
++12+12*N variable  Optional Pascal resource name and alignment.
+
+Each representation descriptor is:
+    +0  4 bytes  literal representation/encoding tag
+    +4  u32      resource payload offset from the container's beginning
+    +8  u32      resource payload length, excluding allocation padding
+Descriptors provide alternative representations of the same named resource.
+The converter emits each supported sound representation. It does not assume
+that the representation count is one or derive the name offset from a fixed
+24-byte record header.
+
+A payload offset with bit 31 set has special backing-store semantics in the
+original implementation: it uses the bitwise-complemented offset in a separate
+backing file. Such a descriptor is not an offset into the current file. A
+standalone converter without that store must report it as unavailable.
+
+If the record ends at 12+12*N, it has no name. Otherwise the next byte is the
+name length L, followed by exactly L name bytes. A normal record then has zero
+or one alignment byte to make its total length even. The alignment byte is NOT
+a C-string terminator and need not be zero. Names are decoded as Windows-1252
+for Windows serialization and Macintosh Roman for Macintosh serialization.
+Raw name bytes are also retained in the verbose audit. Undefined Windows-1252
+code points use Unicode replacement characters for display only. Name text
+has no effect on payload interpretation, codec selection or file recognition.
+
+Record flags at +10/+11 are not a normal endian-swapped integer:
+    Windows +10 bits 0..1 : two-bit storage-control enum
+    Macintosh +10 bits 7..6 : corresponding enum
+    Windows +10 bit 2 : nested-container flag
+    Macintosh +10 bit 5 : corresponding nested-container flag
+The original resource-creation routine maps caller flag 0x10 to enum value 2,
+0x20 to enum value 1, and caller flag 0x100 to the nested-container flag. The
+nested-container flag causes recursive directory loading during enumeration.
+The exact policy selected by the storage-control enum remains unresolved.
+Remaining bits and byte +11 have no established nonzero disk semantics.
+
+The implemented flat sound-library profile requires BOTH flag bytes to be zero.
+A zero flags value selects ordinary direct resource access. Nonzero flags are
+reported and skipped, not silently interpreted as this default. Nested resource
+containers are a general-container feature, not inferred from embedded magic.
+
+Resource kinds and allocation ownership
+---------------------------------------
+SND<space> / PCM<space>
+    A sound in the legacy WAVE serialization described below. The representation
+    name PCM does not mean the encoded data is necessarily uncompressed.
+    The WAVE format tag is authoritative.
+
+CSRO / CSRO
+    A named, ordered resource-category list. Payload:
+        +0 u16 declared member count K
+        +2 4 bytes literal member resource-kind tag (normally SND<space>)
+        +6 K consecutive u16 member IDs
+    The category's own name and ID come from its directory record. Member order
+    is meaningful. A sound can exist without category membership. Category IDs
+    are not sound offsets, sound sizes or audio codec values.
+    If the declared count differs from the number of complete u16 IDs physically
+    present in the explicit payload, the converter reports the inconsistency
+    and retains all physically stored complete IDs for the audit. It never
+    manufactures missing IDs. A final unmatched byte is retained in the audit.
+
+FREE / FREE
+    An explicitly indexed free allocation. Its ID/name do not identify an active
+    sound. Payload bytes have no live resource semantics; they may be zeros,
+    stale audio, old directory bytes or other remnants. They must not be decoded
+    by searching for apparent RIFF headers. Their byte values are not predictable
+    padding constants and cannot establish the identity of a deleted resource.
+
+Other resource-kind/representation pairs are reported as unsupported. They are
+not decoded according to file names, nearby resources or signatures in slack.
+
+Unreferenced bytes between allocations, unused directory capacity, record
+alignment, unused resource allocation capacity, and bytes after logical EOF
+are distinct from active payloads. Every physical byte can be assigned to a
+header, record, active payload, FREE allocation or unreferenced storage interval.
+There is no format-defined meaning for the previous contents of inactive
+storage. A lossless forensic audit may retain those bytes without pretending
+that they are active objects. The converter's optional audit records interval
+positions, owners and SHA-256 hashes, plus hex for metadata and inactive bytes.
+
+Legacy WAVE serialization
+-------------------------
+A sound representation starts:
+    +0  4 bytes RIFF (Windows) or FFIR (Macintosh)
+    +4  u32 number of bytes after this size field (total sound size minus 8)
+    +8  4 bytes WAVE (Windows) or EVAW (Macintosh)
+    +12 subchunks
+Each subchunk is a four-byte tag, a u32 payload length, and that many bytes.
+Unlike general RIFF practice, the legacy resource walker advances by exactly
+8 + payload length, without adding an odd-length padding byte. All boundaries
+are explicit. The converter uses this packed rule, not guessed RIFF alignment.
+The generated output WAV uses normal RIFF word padding.
+
+Canonical tags:          Windows bytes    Macintosh bytes
+Format description      fmt<space>       <space>tmf
+Private loop metadata   loop             pool
+Encoded waveform        data             atad
+Optional frame count    fact             tcaf
+
+The normal sequence is fmt, loop, data. The parser walks explicit lengths and
+also accepts a missing loop chunk or other chunk ordering. Duplicate tags are
+reported as unsupported ambiguity. Unknown chunks are accounted for and reported;
+they are not assigned invented semantics. No generic RIFF LIST or other file
+format is assumed merely because an unknown tag resembles one.
+
+Format payload: common fields
+-----------------------------
++0  u16 format tag: 1 = integer PCM, 2 = Microsoft ADPCM
++2  u16 channel count: 1 = mono, 2 = stereo
++4  u32 samples per second (use this EXACT value)
++8  u32 nominal average bytes per second
++12 u16 encoded block alignment in bytes
++14 u16 bits per encoded sample: 8/16 for PCM, 4 for ADPCM
+
+Do not infer the sample rate from average byte rate, block size, sound name,
+or a customary playback rate. The nominal byte-rate field can be rounded or
+historically inconsistent; it is not used to calculate decoded timing.
+
+PCM (format tag 1)
+------------------
+The base format payload is 16 bytes. Frames are interleaved in channel order.
+Block alignment equals channels * bits / 8. PCM8 bytes are unsigned, with 128
+representing zero; convert to PCM16 with (byte - 128) * 256. PCM16 waveform words
+are signed little-endian, including in the Macintosh structural serialization.
+There is no compression state. An incomplete final frame is discarded with a
+warning; complete frames remain usable.
+
+Microsoft ADPCM format extension (format tag 2)
+----------------------------------------------
++16 u16 cbSize, the historical extension-size field
++18 u16 samples per block, PER CHANNEL, including two seed samples
++20 u16 coefficient-pair count C
++22 C pairs of s16 coefficient1, s16 coefficient2
+Actual format payload length is 22 + 4*C. For the standard seven coefficients,
+it is 50 bytes. The original writer can store cbSize=60 despite there being only
+32 actual extension bytes. This is a writer inconsistency, not 60 bytes of hidden
+extension or a reason to shift the next chunk. The actual chunk length and the
+coefficient count establish the boundary. A conventional cbSize=32 is also valid.
+
+The standard coefficient pairs are:
+    0: (256,    0)     1: (512, -256)     2: (  0,    0)
+    3: (192,   64)     4: (240,    0)     5: (460, -208)
+    6: (392, -232)
+Use the stored table, not an assumed fixed table. Predictor indices select it.
+For a full block of B bytes and C channels, the physical frame capacity is
+    2 + floor(2 * (B - 7*C) / C).
+Samples-per-block must be at least 2 and not exceed this capacity. Common
+mono block configurations are 256 bytes / 500 frames and 512 bytes / 1012 frames.
+
+Microsoft ADPCM block decoding
+------------------------------
+Divide data into blocks using the format's block alignment. The final block
+may be shorter. Every block starts with an independent predictor history.
+All fields in these encoded blocks use LITTLE ENDIAN on both platforms:
+    C bytes       predictor indices, one per channel
+    C * s16       initial positive adaptive step sizes (delta)
+    C * s16       sample1, the newer seed samples
+    C * s16       sample2, the older seed samples
+    remaining     packed four-bit residuals
+The header size is 7*C bytes. Emit sample2 for all channels first, then sample1
+for all channels. For mono, each byte contains successive samples high nibble
+then low nibble. For stereo, high nibble is left and low nibble is right.
+
+For each nibble n (0..15), independently for the selected channel:
+    signed_nibble = n if n < 8 else n - 16
+    predicted = trunc_toward_zero((sample1*coef1 + sample2*coef2) / 256)
+    value = clamp(predicted + signed_nibble*delta, -32768, 32767)
+    sample2 = sample1
+    sample1 = value
+    delta = max(16, floor(adaptation[n]*delta / 256))
+    emit value
+The adaptation table, in index order 0..15, is:
+    230, 230, 230, 230, 307, 409, 512, 614,
+    768, 614, 512, 409, 307, 230, 230, 230
+
+Truncation toward zero in the predictor is essential for negative numerators;
+Python's // alone would round negative values down and change the waveform.
+Clip the reconstructed sample BEFORE using it as the next predictor history.
+Do not replace the initial delta with 16 before the first residual; the minimum
+is applied at the subsequent adaptation step. Negative initial deltas and
+out-of-range predictor indices invalidate that block.
+
+A short final block with a complete header still yields its two seed frames
+plus every complete available residual frame, limited by samples-per-block.
+A partial header yields no frames. Do not pad a short block with encoded zeros,
+repeat its final sample, resample, normalize, or trim quiet waveform data.
+There is no separate exact-frame-count field in the usual library payload.
+An optional fact chunk can supply a u32 decoded frame count; a count no larger
+than recovered frames trims the output, while a larger count is reported.
+
+Private loop payload (10 bytes)
+-------------------------------
++0  u32 loop start sample position
++4  u32 loop end sample position
++8  u16 MIDI base/root note, normally 60 (middle C)
+The format uses container byte order for all three fields. These semantics
+are established by the Macintosh import routine: it copies classic SoundHeader
+loopStart, loopEnd and baseFrequency into these positions. The one-byte source
+baseFrequency is widened to a u16. This is NOT a volume or sample-rate field.
+
+The default tuple is (0, 0, 60). Repeated playback is controlled separately by
+the calling application. In the Windows playback path, end=0 means the waveform
+end when looping is requested; an end-start difference of 1 selects whole-wave
+playback. A file alone therefore does not specify how many repetitions to emit.
+The converter produces one pass through the waveform and retains the original
+three fields in a normalized little-endian loop chunk in the output WAV. It does
+not manufacture repeats or invent a standard smpl loop policy. Ordinary browser
+players play the decoded waveform once and may ignore this private metadata.
+
+Recognition and damaged inputs
+------------------------------
+Recognition requires the CHNK magic, the exact supported 4/4 version pair, and
+at least one explicitly indexed SND / PCM representation with the correct
+RIFF/WAVE tag pair for that byte order. Bare WAV, AIFF, classic Mac snd resources,
+other CHNK versions and documents without an indexed sound are not accepted.
+The creator tag and filename alone are never sufficient identification.
+
+Before creating any output directory or file, the converter parses the complete
+reachable index, checks the target identity, decodes recoverable sounds, and
+constructs the output WAV bytes. An unrelated/unsupported input writes no files.
+A recognized library with no recoverable supported audio also writes no files
+and returns an error. Existing output-directory contents are left intact.
+
+For an established sound library, a corrupt record length stops traversal of
+that block; a usable next-block pointer can still lead to further records.
+Cycles stop traversal. A resource length is bounded by physical EOF and the
+next explicit allocation start. Truncated WAVE chunks are decoded only to the
+available boundary. Invalid ADPCM blocks are skipped at their known block
+boundaries so subsequent independently initialized blocks can be recovered.
+There is no byte scanning, guessed block alignment or signature-based salvage.
+Warnings describe every detected inconsistency and skipped resource.
+
+The optional byte audit partitions the ENTIRE physical file, including trailing
+bytes and nonzero slack. It exposes overlapping ownership explicitly. This is
+an accounting tool, not evidence that inactive bytes have recoverable semantics.
+Encoded audio ranges have hashes and their explicit source offsets; metadata
+and inactive ranges additionally have raw hex. Audio can be decoded from its
+source range using the rules above without a sidecar.
+
+Converter interface and output
+------------------------------
+    python3 fineArtistSound.py inputFile outputDir
+    python3 fineArtistSound.py -verbose inputFile outputDir
+The output directory may already exist. Missing directories are created only
+after successful recognition/decoding. Default file output is WAV ONLY. Warnings
+are sent to stderr and a conversion count to stdout. The -verbose/--verbose
+option additionally writes one JSON audit file. It does not change audio.
+
+Output names combine a sanitized input basename, resource ID and resource name.
+Unsafe path characters cannot escape outputDir. Name collisions receive numeric
+suffixes, including repeated conversions and multiple representations. Existing
+files and symlinks are not overwritten. Created files have mode 0664; newly
+created directories have user/group read and search permissions. Output PCM is
+16-bit, signed, little-endian, interleaved, at the stored channel count and rate.
+Each WAV contains fmt, optional normalized loop, and data chunks, with standard
+RIFF lengths and word alignment. The converter requires Python 3.10 or later
+and only its standard library; no external executable or support file is used.
+
+Remaining research needed
+-------------------------
+To extend this beyond the documented flat sound-library profile:
+1. Trace every consumer of the native platform descriptor and establish its
+   packed subfield definitions, particularly cross-platform string conversion.
+2. Trace reads of the two-bit directory storage enum, and validate each nonzero
+   mode with an independently generated original-program file.
+3. Implement recursively indexed nested CHNK containers and the backing-file
+   resolution rules, with fixtures that actually exercise those branches.
+4. Add an encoding only after its representation contract and original decoder
+   have been established; do not guess a codec from a representation name.
+
+Evidence and reproducibility
+----------------------------
+The layout was checked against both the Win16 and Motorola 68000 program code.
+Useful implementation landmarks are: Windows code segment 13 offsets 8FD4
+(directory reader), 9356 (writer), A726 (name location), 9A76 (representation
+lookup), AAA9 (nested traversal); Windows segment 14 offsets 4F1C and 55D6
+(sound reader/writer); Macintosh CODE resource 3 offset 032C (container writer)
+and CODE resource 5 offset 27A4 (SoundHeader import and loop-field mapping).
+These are program-relative code offsets, not container file offsets.
+
+The regression suite includes endian conversion, multiple representations,
+PCM, signed predictor division, stereo nibble order, short/damaged ADPCM blocks,
+cycles, truncated data, nondefault loop retention, refusal without file output,
+existing-directory handling and output permissions. Its optional corpus check
+normalizes only the encoded WAVE wrapper and compares decoded PCM byte-for-byte
+against an independent FFmpeg decoder. FFmpeg is a verification dependency only.
+The Microsoft ADPCM algorithm can also be inspected in the primary FFmpeg source:
+https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/adpcm.c

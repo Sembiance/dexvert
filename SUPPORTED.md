@@ -1,4 +1,4 @@
-# Supported File Formats (3,968)
+# Supported File Formats (3,973)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -524,7 +524,7 @@ archive | [Pixfolio Catalog](http://fileformats.archiveteam.org/wiki/PixFolio_ca
 archive | [PKLITE Packed](http://fileformats.archiveteam.org/wiki/PKLITE) |  | [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/pklitePacked/)
 archive | PKR1 Archive | .pkr | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/pkr1Archive/)
 archive | PKTINY Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/pktinyPacked/)
-archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip .exe | [sevenZip](http://p7zip.sourceforge.net/) [unzip](http://infozip.sourceforge.net/) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) | [52 sample files](https://sembiance.com/fileFormatSamples/archive/zip/)
+archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip .exe | [sevenZip](http://p7zip.sourceforge.net/) [unzip](http://infozip.sourceforge.net/) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) | [56 sample files](https://sembiance.com/fileFormatSamples/archive/zip/)
 archive | PlayStation 3 Theme | .p3t | [p3t_extract](https://github.com/hoshsadiq/ps3theme-p3t-extract) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/playstation3Theme/)
 archive | [PMA Archive](http://fileformats.archiveteam.org/wiki/PMA) | .pma | [unar](https://github.com/incbee/Unarchiver) [lha](https://github.com/jca02266/lha) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/pma/)
 archive | [PMarc SFX Archive](http://fileformats.archiveteam.org/wiki/PMsfx) | .com | [lha](https://github.com/jca02266/lha) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/pmarcSFX/)
@@ -641,7 +641,7 @@ archive | Stardock Entertainment game data archive | .emp .mtd | [gameextractor]
 archive | [Stargunner Game Archive](https://moddingwiki.shikadi.net/wiki/DLT_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/stargunnerGameArchive/)
 archive | Starsiege Game Archive | .vol | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/starsiegeGameArchive/)
 archive | [STAT Compressed](https://bellard.org/stat/) | .st | [stat_fabrice](https://bellard.org/stat/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/statCompressed/)
-archive | Steam Install Ssytem | .sid | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | 
+archive | Steam Install System | .sid | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/steamInstallSystem/)
 archive | [Stellar 7 Game Archive](https://moddingwiki.shikadi.net/wiki/RES_Format_(Stellar_7)) | .res | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/stellar7GameArchive/)
 archive | Still Life 2 DAT Archive | .dat | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/stillLife2DAT/)
 archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](https://gitlab.com/heikkiorsila/amigadepacker) | [42 sample files](https://sembiance.com/fileFormatSamples/archive/stc/)
@@ -759,7 +759,7 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (195)
+## Audio (200)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | 208 Audio (Ocean Games) | .bnk | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/twoZeroEightAudio/)
@@ -775,6 +775,7 @@ audio | Alpha Ogg Audio | .ao | [ffmpeg](https://ffmpeg.org/) [vgmstream](https:
 audio | Amiga 16VX Sound |  | [vibe2wav](https://github.com/Sembiance/dexvert) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/amiga16vx/)
 audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8-Bit_Sampled_Voice) | .8svx .iff | [ffmpeg](https://ffmpeg.org/) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [15 sample files](https://sembiance.com/fileFormatSamples/audio/amiga8svx/) - Some 8SVX files don't have a sample rate in the file (test3.iff, sample01.ek___D.8svx). In these cases I try multiple different common sample rates. SDL library I could use to create an 8svx2wav program: https://github.com/svanderburg/SDL_8SVX
 audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank#AMOS_Samples_Bank) | .abk | [amosbank](https://github.com/dschwen/amosbank) [dumpamos](https://github.com/kyz/amostools/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/amosSamples/)
+audio | Apple IIgs Sampled Instrument |  | [vibe2wav](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/appleIIgsSampledInstrument/)
 audio | [Apple QuickTime Audio](http://fileformats.archiveteam.org/wiki/QuickTime) | .mov .omv .pmv .qt | [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/quickTimeAudio/) - HUGE room for improvement here. Several files don't convert like "Demo Music File" and "BOMBER_BGM"
 audio | Arika NXMS Audio | .nxms | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/arikaNXMS/)
 audio | [AST Wii Audio](http://fileformats.archiveteam.org/wiki/Nintendo_GameCube_/_Wii_AST) | .ast | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/astWii/)
@@ -783,6 +784,7 @@ audio | [Audible Audio](https://wiki.multimedia.cx/index.php/Audible_Audio) | .a
 audio | [Audio Interchange File Format](http://fileformats.archiveteam.org/wiki/AIFF) | .aif .aiff .aff | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) [GARbro](https://github.com/shiikwi/GARbro) | [52 sample files](https://sembiance.com/fileFormatSamples/audio/aif/)
 audio | [Audio Visual Research](http://fileformats.archiveteam.org/wiki/AVR) | .avr | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/avr/)
 audio | Audiokinetic WWISE Audio | .wem | [vgmstream](https://github.com/vgmstream/vgmstream) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/audiokineticWWISE/)
+audio | AudioWorks Sound Sample |  | [vibe2wav](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/audioWorksSoundSample/)
 audio | Aureal Aspen sound bank | .arl | [vibe2wav](https://github.com/Sembiance/dexvert) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/aurealAspenSoundBank/)
 audio | [AVI Audio](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/aviAudio/)
 audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF) | .son | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/siff/) - The .son test files are technically supported by libavformat and ffmpeg/cvlc, yet it often produces very distored WAVs. My hunch is the decompression algo doesn't quite work with my particular test SIFF files. I couldn't locate ANY OTHER converters.
@@ -803,6 +805,7 @@ audio | Cyberflix DreamFactory CFDF Audio | .trk | [vgmstream](https://github.co
 audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [vibe2wav](https://github.com/Sembiance/dexvert) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/dataShowSound/)
 audio | [DiamondWare Digitized Audio](http://fileformats.archiveteam.org/wiki/DiamondWare_Digitized) | .dwd | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/diamondWareDigitized/)
 audio | [Digital Speech Standard](http://justsolve.archiveteam.org/wiki/Digital_Speech_Standard) | .dss | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/digitalSpeechStandard/)
+audio | Digital Symphony Sound Sample |  | [vibe2wav](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/digitalSymphonySoundSample/)
 audio | DirectMusic Segment | .dmsg | [vgmstream](https://github.com/vgmstream/vgmstream) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/directMusicSegment/)
 audio | [Dolby Digital AC-3 ATSC A/52](https://wiki.multimedia.cx/index.php/A52) | .ac3 | [ffmpeg](https://ffmpeg.org/) [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/ac3/)
 audio | [Dolby Lossless Predictive Audio](https://wiki.multimedia.cx/index.php/Lossless_Predictive_Audio_Coding) | .mlp | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/mlpAudio/)
@@ -816,9 +819,11 @@ audio | [Electronic Arts Sound hEADer](http://fileformats.archiveteam.org/wiki/E
 audio | EMAX-II Disk Image |  | [vibe2wav](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/emx2DiskImage/)
 audio | Emblaze Audio | .ea | [vibe2wav](https://github.com/Sembiance/dexvert) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/emblazeAudio/)
 audio | Ensoniq Disk Image | .gkh .eds .eda .ede .edt .edv | [vibe2wav](https://github.com/Sembiance/dexvert) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/ensoniqDiskImage/)
+audio | Ensoniq WaveSet Format | .ecw | [vibe2wav](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/ensoniqWaveSetFormat/)
 audio | Entis Engine Compressed Audio | .mio | [vgmstream](https://github.com/vgmstream/vgmstream) [GARbro](https://github.com/shiikwi/GARbro) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/entisEngineAudio/)
 audio | [eXtended Instrument](http://fileformats.archiveteam.org/wiki/Extended_instrument) | .xi | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/eXtendedInstrument/)
 audio | feelplus XWAV Audio | .xwv | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/feelplusXWAV/)
+audio | Fine Artist Sound | .snd | [vibe2wav](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/fineArtistSound/)
 audio | Flanker Sound Library | .sfx | [foremost](http://foremost.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/flankerSoundLibrary/)
 audio | [FM-Towns SND](https://wiki.multimedia.cx/index.php/FM_TOWNS_SND) | .snd | [ffmpeg](https://ffmpeg.org/) [vibe2wav](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/fmTownsSND/)
 audio | [FMOD Sample Bank](http://fileformats.archiveteam.org/wiki/FMOD_Sample_Bank) | .fsb .bank | [vgmstream](https://github.com/vgmstream/vgmstream) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [zxtune123](https://zxtune.bitbucket.io/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/fmodSampleBank/)
@@ -1912,7 +1917,7 @@ image | Red Storm RSB | .rsb | [nconvert](https://www.xnview.com/en/nconvert/) [
 image | ReGIS | .regis | [abydosconvert](http://snisurset.net/code/abydos/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/regis/)
 image | [REKO Cardset](http://fileformats.archiveteam.org/wiki/REKO_Cardset) | .reko .deck .rkp | [deark](https://entropymine.com/deark/) [reko2png](https://github.com/Sembiance/reko2png) | [17 sample files](https://sembiance.com/fileFormatSamples/image/rekoCardset/)
 image | [Rembrandt True Color Picture](http://fileformats.archiveteam.org/wiki/Rembrandt) | .tcp | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/rembrandt/)
-image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [vibe2svg](https://github.com/Sembiance/dexvert) [pabloDraw](http://picoe.ca/products/pablodraw/) [abydosconvert](http://snisurset.net/code/abydos/) | [22 sample files](https://sembiance.com/fileFormatSamples/image/ripScrip/)
+image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [vibe2svg](https://github.com/Sembiance/dexvert) [pabloDraw](http://picoe.ca/products/pablodraw/) [abydosconvert](http://snisurset.net/code/abydos/) | [55 sample files](https://sembiance.com/fileFormatSamples/image/ripScrip/)
 image | Renderware Texture | .txd_tex | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [29 sample files](https://sembiance.com/fileFormatSamples/image/renderwareTexture/)
 image | Reunion Graphic | .pic | [wuimg](https://codeberg.org/kaleido/wuimg) | [8 sample files](https://sembiance.com/fileFormatSamples/image/reunionGraphic/)
 image | [Ricoh JSI Image](http://justsolve.archiveteam.org/wiki/J6I) | .j6i | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/ricohJ6I/)
@@ -3521,7 +3526,7 @@ text | Renderize Project | .bin .eye |  | [17 sample files](https://sembiance.co
 text | Renderman compiled Shader object | .slo |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/rendermanCompiledShaderObject/)
 text | ResourceMaster project | .rsm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/resourceMasterProject/)
 text | Rexx-Adventure game source | .rad |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/rexxAdventureGameSource/)
-text | [Rexx-Adventure Saved game](http://fileformats.archiveteam.org/wiki/Rexx-Adventure_saved_game) | .ras |  | 
+text | [Rexx-Adventure Saved game](http://fileformats.archiveteam.org/wiki/Rexx-Adventure_saved_game) | .ras |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/rexxAdventureSavedGame/)
 text | RIO driver | .scp .stp |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/rioDriver/)
 text | RIS Citation | .txt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/risCitation/)
 text | Robocode Battle | .battle |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/robocodeBattle/)
@@ -3556,7 +3561,7 @@ text | ShowMaker Device | .smdevice |  | [6 sample files](https://sembiance.com/
 text | Siag spreadsheet | .siag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/siagSpreadsheet/)
 text | SIDPLAY Info | .sid .si |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sidPLAYInfo/)
 text | Signum 3 Printer Driver | .trb .prt |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/signum3PrinterDriver/)
-text | Signum Font List | .fli |  | 
+text | Signum Font List | .fli |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/signumFontList/)
 text | Signum Help File | .hlp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/signumHelpFile/)
 text | Signum Key-Combination-List | .ktl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/signumKeyCombinationList/)
 text | Signum Shorthands | .kue |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/signumShorthands/)

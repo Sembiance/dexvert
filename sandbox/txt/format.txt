@@ -139,8 +139,9 @@ Don't classify. Useful on specific formats where the output tends to be confused
 >>> allow2ColorSVG = true
 Set this to allow 2-color SVG output (normally it's forbidden due to being too lax and letting garbage out)
 
->>> meta = async inputFile => { return {}; }
-Format specific function that takes in an input DexFile and should return meta about the input file
+>>> meta = async (inputFile, dexState, currentMeta) => { return {}; }
+Format specific function that takes in an input DexFile and should return meta about the input file.
+This runs last, so you can modify currentMeta object deleting or massaging it as you see fit
 
 >>> ******** Conversion
 >>> metaProvider = ["image", "darkTable", "ansiArt", "cueInfo=>cue"]

@@ -67,7 +67,6 @@ const SKIP_FORMATS = [
 	"other/symlink",
 
 	// no known samples
-	"text/rexxAdventureSavedGame",
 	"text/signumFontList",
 
 	// only HUGE samples available
@@ -245,7 +244,8 @@ const SUPPORTING_FILES = {
 		pog                     : /\.pnm$/i,
 		redArchive              : /TIMETREK\.001$/,
 		setupSpecialist         : /SETUP\.\d$/,
-		softdiskForWindowsSetup : /\.w02$/i
+		softdiskForWindowsSetup : /\.w02$/i,
+		steamInstallSystem      : /\.sim$/i
 	},
 	audio :
 	{

@@ -1,0 +1,485 @@
+AudioWorks Sound Sample — reverse-engineered format specification
+================================================================
+
+Scope and certainty
+-------------------
+
+This document describes the Computer Concepts AudioWorks Sound Sample format
+for RISC OS, normally assigned filetype &BD6. A filename extension is not
+required and is not an identification mechanism. It is unrelated to other
+products also named AudioWorks, and to other formats using the name SND.
+
+The container, audio encodings, packed sample order, channel identifiers,
+stereo blocking, and the loop selection behavior described below have been
+checked against AudioWorks 1.53 and AudioManager 1.25. This is sufficient to
+decode their uncompressed mono/stereo audio without guessing a sample rate,
+endianness, precision, or layout from a waveform.
+
+This is NOT a claim that every historical extension or every loop field's
+original design intent has been recovered. In particular, SND_HEAD byte 7
+and several SND_LOOP fields are read or written but not interpreted by the
+inspected sample loader. Their complete intended semantics are not known.
+They are explicitly identified below; they must not be silently invented.
+The supplied converter retains these bytes in its WAV output and rejects
+unestablished audio-affecting variants. Missing or invalid audio parameters
+cannot always be recovered without additional evidence.
+
+Notation
+--------
+
+u8       Unsigned byte.
+u32le    Unsigned 32-bit integer, least significant byte first.
+s16be    Signed 16-bit two's-complement integer, most significant byte first.
+offset   Byte address relative to the beginning of the file, unless stated.
+sample   One amplitude value for one channel.
+frame    One simultaneous sample from each channel.
+
+Container integers are little-endian. Linear multi-byte audio is big-endian.
+These are independent rules. All ranges below are half-open: [start,end).
+
+1. Identification and outer container
+-------------------------------------
+
+The file is an Acorn chunk file with an AudioWorks SND_ chunk namespace.
+
+Offset  Size  Type     Meaning
+0       4     bytes    C5 C6 CB C3 (u32le 0xC3CBC6C5), chunk-file identifier.
+4       4     u32le    maxChunks: allocated directory entry count.
+8       4     u32le    numChunks: number of active chunks.
+12      16*M  records Directory of M=maxChunks entries.
+
+The two counts are not format versions. maxChunks can exceed numChunks.
+The directory ends at 12 + 16*maxChunks. An active entry has nonzero offset.
+An inactive entry has offset zero; its name and size have no defined value.
+They can contain nonzero stale bytes. A reader must inspect all allocated
+slots, not assume that active slots occupy the first numChunks positions.
+numChunks is redundant and may be checked against the nonzero offsets.
+
+Each directory entry has this layout, at 12 + 16*i:
+
+Relative offset  Size  Type     Meaning
+0                8     bytes    Exact chunk identifier; not NUL-terminated.
+8                4     u32le    Absolute chunk payload offset; zero=unused.
+12               4     u32le    Exact payload byte length.
+
+The header is followed by chunks referenced by these entries. No assumption
+about chunk order, adjacency, or fixed offsets is necessary. There is no
+checksum, overall duration, or overall file length field in this profile.
+
+The generic Acorn chunk specification requires word-aligned chunk offsets.
+AudioWorks itself also writes packed, unaligned chunks. Consequently the
+stored offset is authoritative and must NOT be rounded up. Both aligned and
+unaligned storage are accepted. Alignment space is outside the chunk size.
+There is no required alignment after the final chunk.
+
+Unused directory bytes and unreferenced physical gaps are not audio. They
+have no defined playback meaning. Their literal content must not be used
+as a signature, a secondary header, or a precision/layout detector. An
+unreferenced suffix is likewise not an extension of the final audio chunk.
+Nonzero gap/suffix bytes can be retained verbatim, but their historical
+origin cannot be established from the container alone.
+
+Chunk-file magic also identifies other file families, including object
+files and envelope files. Identify this format by the magic together with
+active SND_HEAD and SND_CHAN directory entries. Do not search arbitrary
+payload bytes for these names. A usable audio file needs exactly one head
+and at least one channel chunk. A matching extension alone is insufficient.
+
+2. Chunk inventory
+------------------
+
+Identifier  Multiplicity  Purpose
+SND_HEAD    One           Audio interpretation parameters; nine bytes.
+SND_INFO    Optional      NUL-terminated descriptive byte string.
+SND_CHAN    One or two    Channel identifier followed by encoded audio.
+SND_LOOP    Optional      Playback-region/loop records and terminator.
+
+Separate stereo uses two SND_CHAN entries with the same chunk identifier.
+This is a single sample with multiple channels, not an archive of unrelated
+sounds. Unknown active identifiers are not defined by this specification.
+Their presence does not justify treating their contents as raw audio.
+
+3. SND_HEAD
+-----------
+
+The payload is exactly nine bytes, with no internal alignment:
+
+Relative offset  Size  Type   Meaning
+0                4     u32le  Sample rate in frames per second (Hz).
+4                1     u8     Encoding, defined in section 6.
+5                1     u8     Stored precision: 8, 12, or 16 bits/sample.
+6                1     u8     Number of channels: 1=mono, 2=stereo.
+7                1     u8     Auxiliary/reserved byte; established value 0.
+8                1     u8     Layout flags; bit 0 selects blocked stereo.
+
+Byte 6 is an eight-bit channel count, NOT a little-endian 16-bit count
+combined with byte 7. The original reader loads these bytes separately.
+
+Byte 7 is copied into an auxiliary field by the original import routine;
+the inspected native import/PCM path does not use it to alter the samples.
+The original writer emits zero. Calling a nonzero value a compression code,
+endianness flag, or version would be speculation. Nonzero values are outside
+the converter's established profile and are rejected.
+
+Byte 8 bit 0:
+  0: channels have separate SND_CHAN chunks.
+  1: stereo channels are combined into eight-sample blocks in one SND_CHAN.
+
+For mono, bit 0 does not change audio order. Other flag bits are not defined
+here and are rejected. There is no byte-order flag for audio in this profile.
+
+The rate is an integer. Preserve it as stored; do not snap it to a familiar
+audio rate. Zero is invalid. Precision zero does not define a valid sample
+representation. It must not be interpreted as an automatic/default width
+merely because the data looks eight-bit. The original editor has a later
+invalid-width fallback to eight bits, but also divides by the header width
+before reaching it; that does not establish the intended precision of a
+malformed file. This converter refuses an undefined width.
+
+4. SND_INFO
+-----------
+
+A descriptive sequence of single-byte characters followed by a zero byte.
+The directory size includes the terminator. Its content may identify a
+sound, an importing application, or a recording operation, but it does not
+override SND_HEAD. It is not a filename to execute or an output path.
+
+Interpret the first zero as the string terminator. Any remaining bytes are
+retained as uninterpreted bytes in the declared chunk; do not continue text
+parsing into the next chunk. If no zero exists within the declared bounds,
+the metadata is malformed but independently located audio is still usable.
+The original editor displays a bounded prefix of the description, which
+does not constrain the physical chunk length.
+
+No character-set declaration is stored. ASCII is unambiguous; high bytes
+can represent RISC OS alphabet-dependent characters. The converter keeps
+the original bytes in hexadecimal rather than asserting a Unicode mapping.
+
+5. SND_CHAN and channel order
+----------------------------
+
+Relative offset  Size     Meaning
+0                1        Channel identifier.
+1                size-1   Encoded amplitude data.
+
+The leading byte is included in the directory size and is NOT an amplitude.
+The number of complete samples follows from the remaining length and the
+precision. There is no separate sample-count field.
+
+Separate channels (layout flag bit 0 clear):
+  Identifier 1: first/left channel, also the usual mono identifier.
+  Identifier 2: second/right channel.
+  Directory order does not determine left/right order; the identifier does.
+
+Blocked stereo (layout flag bit 0 set, two channels):
+  A single channel chunk normally has identifier 0.
+  After the identifier, store eight left samples, eight right samples,
+  eight left samples, eight right samples, and so on.
+
+  A block for ONE channel occupies exactly B bytes, where B is the stored
+  precision in bits/sample: 8 bytes for eight 8-bit samples, 12 bytes for
+  eight packed 12-bit samples, or 16 bytes for eight 16-bit samples.
+
+  A full stereo group occupies 2*B bytes. For frame index f, the group is
+  floor(f/8), and the sample within its channel block is f mod 8. The left
+  block starts at group*2*B and the right block at group*2*B+B, relative to
+  the first amplitude byte. Decode each block using section 6.
+
+  This is not ordinary L0,R0,L1,R1 PCM interleaving. WAV output must reorder
+  it into ordinary interleaved frames.
+
+The original reader accepts identifier 0 for mono as well as identifier 1.
+For a malformed mono identifier outside 0/1, its loader still consumes one
+byte and assigns the remaining payload to channel 1. The converter follows
+that deterministic native recovery, with an explicit warning. It cannot
+prove whether a faulty writer omitted the identifier and placed an audio
+sample in its position; it does not put the consumed byte back into audio.
+
+An invalid identifier for separate stereo is ambiguous and is rejected.
+For blocked stereo the explicit layout flag determines the channel split;
+an unexpected leading byte is consumed and reported. Duplicate channel IDs
+are ambiguous, not a license to concatenate several sounds.
+
+6. Audio encoding
+-----------------
+
+Encoding byte  Representation                    Permitted precision
+0              Acorn VIDC logarithmic             8
+1              Unsigned linear (offset binary)    8, 12, 16
+2              Signed linear (two's complement)  8, 12, 16
+3              Mu-law code bytes                  8
+
+There is no compression beyond logarithmic quantization in this profile.
+In particular, the 12-bit representation is packed linear PCM, not ADPCM.
+No predictor, nibble difference table, or run-length coding is involved.
+
+6.1 Eight-bit linear
+
+One byte is one sample. Let b be its unsigned value.
+
+Unsigned: value = b - 128, in [-128,127].
+Signed:   value = b if b < 128, otherwise b - 256.
+
+For signed 16-bit WAV PCM, multiply value by 256. Do not normalize, scale
+by the measured peak, remove DC, or trim apparently silent samples.
+
+6.2 Sixteen-bit linear
+
+Two consecutive bytes a,b form u = 256*a+b (big-endian).
+
+Unsigned: value = u - 32768.
+Signed:   value = u if u < 32768, otherwise u - 65536.
+
+Write value in little-endian signed 16-bit WAV order. A trailing single
+byte cannot form a complete sample and is not padded into an invented one.
+
+6.3 Twelve-bit linear
+
+Three consecutive bytes a,b,c hold two samples, most significant bits first:
+
+  u0 = (a << 4) | (b >> 4)
+  u1 = ((b & 15) << 8) | c
+
+For unsigned data subtract 2048 from each u. For signed data, subtract 4096
+when u >= 2048. Multiply each result by 16 for signed 16-bit WAV PCM.
+
+Bit diagram:
+  a: sample 0 bits 11..4
+  b: sample 0 bits 3..0 | sample 1 bits 11..8
+  c: sample 1 bits 7..0
+
+A malformed trailing two-byte group supplies one complete 12-bit sample
+and an unused low nibble containing an incomplete next sample. Preserve
+the nibble as residual source information. A lone trailing byte supplies
+no complete sample. Do not shift the packing or borrow bytes from outside
+the declared channel chunk.
+
+6.4 VIDC logarithmic
+
+For a code byte b:
+  sign     = b & 1              (0 positive, 1 negative)
+  mantissa = (b >> 1) & 15
+  exponent = b >> 5
+
+The exact AudioManager/AudioWorks lookup-table expansion to signed 16-bit is:
+  magnitude = (((16 + mantissa) << exponent) - 16) * 8
+  value     = -magnitude if sign is 1, otherwise magnitude
+
+There are two zero codes, 0 and 1. Positive maximum code 254 maps to 31616;
+negative maximum code 255 maps to -31616. This mapping reproduces the
+software's digital playback levels. It does not model analog variations
+in a physical VIDC DAC, amplifier, speaker, or reconstruction filter.
+
+6.5 Mu-law and the original AudioWorks playback curve
+
+The byte layout is complemented mu-law with the sign in bit 7. The original
+editor implements it by converting each byte into a VIDC code:
+
+  vidc_code = (((b << 1) | (b >> 7)) & 255) XOR 255
+  value = VIDC_decode(vidc_code)
+
+The converter uses this same reconstruction curve. Both 255 and 127 map
+to zero, 128 maps to 31616, and 0 maps to -31616.
+
+This distinction matters for exact comparisons: the usual G.711 mu-law
+expansion uses a bias of 132, whereas the AudioWorks lookup-table path
+effectively uses 128. Standard G.711 maximum magnitude is 32124, not 31616.
+Substituting a generic mu-law decoder would therefore not reproduce the
+original application's samples exactly. The encoded bytes are retained
+conceptually as mu-law codes, but conversion here targets AudioWorks
+playback behavior, not an assertion that these two expansion curves match.
+
+7. SND_LOOP
+-----------
+
+The established native representation contains three 16-byte region records
+followed by a four-byte 0xFFFFFFFF start-value terminator (52 bytes total).
+The bytes before the terminator can be parsed as records using this layout:
+
+Relative offset  Size  Type   Meaning established from the native reader
+0                4     u32le  Start position in per-channel sample units.
+4                4     u32le  Region length in per-channel sample units.
+8                4     u32le  Auxiliary word, ignored by inspected loader.
+12               1     u8     Repeat selector: zero selects a repeat region.
+13               3     bytes  Control bytes ignored by inspected loader.
+
+If a prospective record's first word is 0xFFFFFFFF, it is the terminator;
+there is no remaining 12-byte record body for that sentinel. Offsets and
+lengths are sample counts, not byte counts, and are not multiplied by the
+number of channels. Region end = start + length, exclusive.
+
+The native writer describes an initial region, a repeating middle region,
+and a final region. It writes auxiliary word zero, repeat-selector values
+1,0,1, and remaining control bytes FF 00 00. The native reader examines at
+most three records and identifies the repeat range through selector zero.
+It does not interpret the auxiliary word or remaining control bytes.
+
+Other literal encodings include nonzero auxiliary words and zero control
+words. It would be conjecture to declare the auxiliary word universally a
+repeat count, or byte 13 universally a channel mask or volume. Those roles
+have NOT been established. A schema switch between different historical
+interpretations has likewise not been established. This is a specific
+remaining limit of the reverse engineering, not undocumented audio data.
+
+The supplied parser records every complete region and every residual byte.
+For standard WAV smpl metadata it uses valid selector-zero ranges from the
+first three records. The ordinary WAV audio is the entire sample, played
+once; it is not expanded into an infinite or arbitrarily repeated waveform.
+Applications that support smpl can use the embedded loop range. Browser
+audio players generally play the full data chunk without sampler looping.
+
+Stale loop coordinates can remain after editing/resampling. For a selected
+range with a valid start but an end beyond the available audio, the converter
+clamps the end to available frames and warns. A zero-length range, a start
+beyond audio, or a length with its high bit set is not made into a playable
+loop. A negative length stored as an unsigned wrapped value is invalid;
+do not reinterpret it as billions of samples. Source fields are retained
+unchanged even when the optional WAV loop representation is repaired.
+
+8. Malformed data, unsupported data, and byte accounting
+-------------------------------------------------------
+
+No waveform statistics, filenames, descriptions, corpus-specific offsets,
+or similarity matches participate in decoding decisions.
+
+Identification and audio parameter validation happen before output creation.
+An unrelated file is rejected without a WAV, sidecar, or new output directory.
+An identifiable AudioWorks file can still be rejected when no defensible
+audio interpretation exists, such as zero/unknown precision or missing rate.
+
+The established recovery rules are:
+
+* A wrong active-chunk count is reported; actual nonzero directory offsets
+  determine the entries. A truncated directory is not scanned or guessed.
+* An active chunk beginning inside the directory is rejected. Offset/length
+  arithmetic is bounds checked. An otherwise valid chunk ending beyond EOF
+  supplies only its available bytes, with a truncation warning.
+* Audio chunks overlapping each other, or overlapping SND_HEAD, are rejected
+  because the ownership/parameters would be ambiguous.
+* SND_INFO overlapping audio is recorded as malformed metadata. The explicit
+  SND_CHAN range remains authoritative for audio; it is not shortened to
+  accommodate the conflicting text length.
+* Available complete amplitude samples are decoded. Residual bytes/nibbles
+  are reported and retained; missing bytes are never synthesized.
+* Truncated blocked stereo is separated by the same fixed eight-sample block
+  rule. If channel lengths differ, export individual mono WAVs to retain all
+  complete samples rather than silently padding or dropping one channel.
+* A recoverable single channel of separate stereo is exported as mono with a
+  warning. Empty input audio does not produce a misleading empty WAV.
+* Unreferenced gaps and suffixes stay outside audio, regardless of whether
+  their bytes resemble samples. The raw bytes remain available as metadata.
+* Invalid zero-bit precision is rejected. Neither a familiar rate nor an
+  approximately centered waveform proves what its writer intended.
+
+Byte accounting comprises the 12-byte preamble; every 16-byte allocated
+directory slot (including unused slots); every declared chunk's available
+bytes; all physical gaps and suffixes; and all overlapping ranges. Within
+channel chunks it includes the identifier, complete samples and residual
+bits. No field is silently skipped because it happens to be zero.
+
+Accounting for physical bytes is different from knowing their original
+semantics. The auxiliary loop/control fields, high-byte text alphabet, and
+historical origins of orphan bytes remain limits. The documentation does
+not relabel these unknowns as meaningful reserved constants.
+
+9. Converter interface and WAV output
+-------------------------------------
+
+Invocation:
+  python3 audioWorksSoundSample.py <inputFile> <outputDir>
+  python3 audioWorksSoundSample.py <inputFile> <outputDir> -verbose
+
+Python 3.10 or newer is supported. Only Python's standard library is needed.
+No original AudioWorks binaries, lookup-table files, executables, network
+connections, or external packages are needed at conversion time.
+
+Existing output directories are allowed. A normal sound produces one WAV
+named <complete-input-basename>.wav. Extensions in the input basename are
+preserved, which avoids conflating differently named source files. Unequal
+recovered channel lengths produce .channel-1.wav and .channel-2.wav suffixes.
+An existing file at that exact output name is atomically replaced. Other
+directory contents are left alone. A failed format validation writes nothing.
+Disk I/O failure can still occur during writing; this is distinct from format
+rejection. Each final file is written through a temporary file and replaced
+only after that file's complete contents have been written.
+
+Default output consists exclusively of WAV files. -verbose/--verbose also
+creates <input-basename>.json containing a byte/metadata audit. Warnings go
+to stderr; successful WAV paths go to stdout. Return codes are 0 for success
+(including reported deterministic recovery), 2 for format/decoding refusal,
+and 1 for I/O failure. Files are mode 0664; newly created directory paths
+include user/group read, write and search permission.
+
+WAVs are RIFF/WAVE with signed 16-bit little-endian PCM, the declared rate,
+and one or two channels. Eight- and twelve-bit inputs are exactly expanded
+without normalization or resampling. The chunks are:
+
+  fmt   Standard PCM format (format tag 1).
+  data  Converted samples, ordinarily interleaved for stereo.
+  smpl  Optional bounded forward-loop metadata as described above.
+  awss  Private UTF-8 JSON source audit, version 1.
+
+RIFF payload lengths exclude the optional single even-alignment pad byte.
+The RIFF length is the complete file size minus eight. Each chunk must be
+skipped using its declared length plus an odd-length padding byte. The
+private chunk does not change the audio format and is ignored by normal
+WAV players. It is inside the requested WAV, not a separate default file.
+
+The awss JSON preserves the source SHA-256 and size; original directory
+header and every directory slot field; raw HEAD/INFO/LOOP bytes; channel
+marker values; discarded residual bytes/nibbles; all unreferenced ranges;
+overlap descriptions; raw and interpreted loop records; warnings; output
+channel IDs, sample counts and PCM hashes. The verbose sidecar is a readable
+copy of the same audit. It is not a complete source-file backup: encoded
+amplitudes are decoded, and the two logarithmic zero codes become the same
+PCM zero. This has no audible effect but prevents a general byte-identical
+reverse conversion from WAV alone.
+
+10. Evidence and remaining work
+-------------------------------
+
+Primary material:
+
+* Acorn Programmer's Reference Manual, Appendix D, Code file formats:
+  https://www.riscos.com/support/developers/prm/objectformat.html
+  Establishes the generic chunk preamble, allocation/active counts,
+  offset-zero inactive-entry rule, and name/offset/size directory.
+
+* Computer Concepts AudioWorks user guide, distributed by the current
+  software archive:
+  https://www.riscos.com/apdl/manuals/audioworks.pdf
+  Describes the supported precisions, representations and stereo editing.
+
+* Original AudioWorks 1.53 (13 March 1995) and AudioManager 1.25
+  (5 April 1994), distributed from the AudioWorks product archive:
+  https://www.riscos.com/apdl/products/apdl/audioworks/index.htm
+  The following routine locations document the provenance of the binary
+  analysis, not constants needed by a decoder:
+    AudioWorks virtual 0x1CFA0: native chunk/header/channel/loop import.
+    AudioWorks virtual 0x1B034: native directory/header/loop writer.
+    AudioWorks virtual 0x1DAB8: eight-sample stereo deblocking.
+    AudioWorks virtual 0x1C438: native blocked-stereo writer.
+    AudioWorks virtual 0x0ACB0: sample extraction and 12-bit packing.
+    AudioWorks virtual 0x1E7D4: interpretation and loop-bound validation.
+    AudioManager relative 0x2720: chunk recognition and channel prefix.
+    AudioManager relative 0x3448: stereo block deinterleaving.
+    AudioManager relative 0x479C: all 256 logarithmic reconstruction levels.
+
+  SHA-256 of the inspected packed AudioWorks executable:
+    1717dd39b8c5fc1d071eb7bc89a8a005c109d1061ba6441997917abe5b08657f
+  SHA-256 of the inspected AudioManager module:
+    58163ffc571e943b0cbbfceefa7dbf5b0c0dd83d18316ec285a27dbd22c204b5
+
+The decoder is an independent Python implementation of the storage rules.
+It does not redistribute or require those research binaries.
+
+To remove the remaining specification limits, obtain the original technical
+definition of SND_HEAD/SND_LOOP or a writer/player that gives nonzero values
+to the ignored fields, then trace their use with controlled files. In
+particular, establish the role of the auxiliary loop word and all control
+bytes across earlier versions. To recover zero-precision files reliably,
+obtain their originating writer, a trustworthy original export, or explicit
+corrected precision/channel-prefix information. Audio appearance alone does
+not satisfy a no-heuristics requirement. New chunk types, nonzero head
+auxiliary values, additional layout flags, or additional channel counts
+require comparable evidence before support can be claimed.

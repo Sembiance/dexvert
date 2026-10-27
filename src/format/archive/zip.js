@@ -53,9 +53,9 @@ export class zip extends Format
 		return r;
 	};
 
-	metaProvider   = ["zipInfo"];
-	untouched      = dexState => dexState.hasMagics("Zip archive data (empty)");
-	processed      = dexState =>
+	metaProvider = ["zipInfo", "pkavDump"];
+	untouched    = dexState => dexState.hasMagics("Zip archive data (empty)");
+	processed    = dexState =>
 	{
 		// reverse priority order
 		for(const k of ["sevenZip", "unzip"])
@@ -69,5 +69,14 @@ export class zip extends Format
 		}
 
 		return false;
+	};
+	meta = (inputFile, dexState, meta) =>
+	{
+		if(!meta?.pkavDump?.length)
+			return {};
+
+		const r = {comment : `${meta?.comment?.length ? `${meta.comment}\n` : ""}${meta.pkavDump}`};
+		delete meta.pkavDump;
+		return r;
 	};
 }

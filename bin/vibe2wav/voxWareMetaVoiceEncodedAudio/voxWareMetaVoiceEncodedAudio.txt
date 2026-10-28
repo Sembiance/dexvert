@@ -1,0 +1,480 @@
+VOXWARE LEGACY VOX!/VOXd AUDIO
+Binary container and compressed-frame reference
+Revision 1, 2026-10-27
+
+STATUS AND SCOPE
+
+This is a verified description of the little-endian RIFF/WAVE container with
+WAVE format tag 0x0062, a 40-byte VOX! descriptor, and a VOXd compressed stream.
+It covers codec identifiers 0x0403, 0x0504, and 0x0605 and concatenations of
+independent containers. A .vox extension alone does not identify this format.
+Dialogic ADPCM, MagicaVoxel, other WAVE codecs, the later VOXh/VOX. wrappers,
+and other Voxware codec identifiers are outside this document's implemented
+scope. The term MetaVoice is sometimes used loosely for this entire family;
+these three identifiers are distinct codec profiles.
+
+THIS IS NOT A COMPLETE INDEPENDENT CODEC SPECIFICATION. Container fields,
+frame packing and frame lengths have been recovered, but the full numerical
+codebooks and synthesis algorithms have not been independently reconstructed.
+The supplied converter delegates synthesis to original Voxware binaries.
+Two bookkeeping fields and the intended interpretation of some encoder
+metadata remain unresolved. Their positions and decoder behavior are stated
+explicitly below. A byte coverage audit does not prove semantic understanding
+of those bytes. A decoder cannot be reimplemented from this document alone.
+
+1. NOTATION AND RECOGNITION
+
+u16 and u32 mean unsigned little-endian 16-bit and 32-bit integers. f32 means
+little-endian IEEE-754 binary32. Four-character identifiers are literal ASCII
+bytes, case sensitive. All sizes in chunk headers are byte counts excluding
+the eight-byte chunk header. All offsets in a table are relative to the start
+identified immediately before that table.
+
+A supported stream must satisfy all of the following structural conditions:
+  * Begin with RIFF and the WAVE form type, at the declared container boundary.
+  * Contain a fmt chunk with tag 0x0062, one channel, and a supported PCM
+    description. Its data chunk must begin with VOX!, with descriptor size 40.
+  * Have one VOXd chunk and one supported codec descriptor; the codec profile
+    and the two sample rates must agree.
+Do not search arbitrary byte strings for RIFF, VOX!, or VOXd to find streams.
+These sequences can occur in compressed audio and are not resynchronization
+markers. File extensions and guessed durations are not recognition tests.
+
+2. RIFF FORM
+
+Offset  Size  Type   Meaning
+0       4     ASCII  "RIFF"
+4       4     u32    Form length: all bytes after this field through form end
+8       4     ASCII  "WAVE"
+12      ...         Consecutive RIFF chunks
+
+The form's logical end is start + 8 + length. RIFF chunks are padded to an
+even byte boundary. A chunk of odd length has one alignment byte, excluded
+from its chunk length. This byte is not audio; its value is not interpreted.
+The converter accepts a missing final alignment byte at EOF as recoverable
+damage and warns. A form of odd length is itself aligned before a following
+form; its alignment byte is outside its own length.
+
+Chunk layout:
+  +0  four-byte chunk identifier
+  +4  u32 payload length
+  +8  payload
+  +8+length  one alignment byte when length is odd
+
+The ordinary sequence is fmt , fact, data. Container walking is length driven,
+so recognized RIFF chunks need not have fixed absolute offsets. Other chunk
+types are skipped by their lengths and reported as uninterpreted metadata.
+Their internal semantics are not claimed to be implemented. Multiple fmt or
+data chunks in one form, and extended fmt descriptors, are not implemented.
+
+3. fmt CHUNK
+
+The identifier is "fmt " including its final space; payload length is 16.
+
+Offset  Size  Type  Meaning
+0       2     u16   wFormatTag = 0x0062 (legacy Voxware)
+2       2     u16   nChannels = 1
+4       4     u32   nSamplesPerSec: 8000, 11025, or 22050
+8       4     u32   nAvgBytesPerSec: declared average compressed byte rate
+12      2     u16   nBlockAlign: original PCM sample width, 1 or 2
+14      2     u16   wBitsPerSample: original PCM precision, 8 or 16
+
+The last two fields do not describe compressed frame sizes. Compressed frames
+are bit packed and need not end at byte boundaries. The average byte rate is
+informational and may reflect encoder calculations rather than an exact
+payload-size/duration quotient. It must not be used to find frame boundaries.
+There is no cbSize field in the supported 16-byte descriptor.
+
+4. fact CHUNK
+
+The identifier is "fact"; the usual payload length is four bytes:
+  +0 u32 declared uncompressed length/count
+
+Ordinary WAVE specifies an uncompressed sample count here. Legacy Voxware
+writers are inconsistent: the value can reflect a PCM byte count, an original
+sample count, or a stale count inconsistent with the encoded frames. The exact
+writer-dependent rules have not been recovered. There is no reliable flag
+that selects one interpretation. Consequently this converter preserves and
+reports the value but does not infer its units, trim decoded audio to it, or
+pad audio to reach it. Output length comes from actual codec decoding.
+An absent or short fact chunk does not prevent recovery of complete frames.
+
+5. data CHUNK AND NESTED VOXWARE CHUNKS
+
+The RIFF "data" payload contains a nested sequence beginning:
+  "VOX!", u32(40), 40 descriptor bytes
+  "VOXd", u32(compressed length), compressed bytes, optional alignment byte
+
+The descriptor and VOXd header therefore occupy 56 bytes before the actual
+compressed audio. In the conventional fmt/fact/data sequence, descriptor
+payload starts at absolute offset 64 and compressed audio starts at 112.
+Those absolute offsets are examples of layout arithmetic, not parser rules.
+
+VOXd length is authoritative when it fits within its parent. When it exceeds
+the enclosing data payload, the converter clamps it to the parent boundary
+and reports the discrepancy. Very large lengths such as 0xffffff90 are
+malformed unsigned lengths, not a newly invented negative-length convention.
+The intact outer boundary still permits recovery. If the outer form is also
+truncated, the physical EOF supplies the last available bound.
+
+6. THE 40-BYTE VOX! DESCRIPTOR
+
+Offsets below begin AFTER the VOX! chunk's eight-byte header.
+
+Offset  Size  Type  Meaning and confidence
+0       2     u16   Codec identifier (one combined word, not two versions)
+2       2     u16   Encoder's nominal PCM samples-per-frame hint
+4       2     u16   Original PCM bytes per sample, 1 or 2
+6       2     u16   Encoder buffer bookkeeping; ignored by the decoder reader
+8       4     u32   Packing flags: 0 for file mode; 6 for supported RT24
+12      4     u32   Declared compressed frame count
+16      4     u32   Encoder-private word; ignored by the decoder reader
+20      4     u32   Nominal sample rate in Hz
+24      4     f32   Low-pitch metadata (Hz; exact measurement convention unresolved)
+28      4     f32   Mean-pitch metadata (Hz; exact measurement convention unresolved)
+32      4     f32   High-pitch metadata (Hz; exact measurement convention unresolved)
+36      4     f32   Stored amplitude scaling metadata
+
+The sample-count hint can be rounded, can differ between writer versions,
+and is not sufficient to predict exact decoded length. RT24 synthesis uses
+180 samples per frame at 8000 Hz. File-mode synthesis has a nominal 15 ms
+frame; this is 165.375 or 330.75 samples at the corresponding rates, so exact
+integer output lengths depend on the reference synthesis timing/rounding.
+
+The writer copies offset 6 from an internal output-buffer field. The writer
+copies offset 16 from a process global. Their intended persistent semantics
+have not been established; they must not be described as zero-filled padding,
+a checksum, a timestamp, or an authorization key without further evidence.
+The reference input reader does not use either value to reconstruct audio.
+
+Offset 8 is generated by ORing bit 1 and bit 2 when the encoder's corresponding
+packing-mode switch is set. Thus 6 means those two bits set, not six-byte
+frames. Other combinations are unsupported by this implementation.
+
+Pitch metadata is copied into codec state and can support voice alteration.
+The bridge requests neutral pitch and speed. Its file-mode decoder initializes
+the amplitude multiplier to 1 under its default API settings; the stored
+scaling field is retained but the converter does not independently impose
+gain normalization. Other player versions can produce different PCM.
+Nonfinite metadata floats are reported and replaced only in the in-memory
+decoder input, using zero for pitch fields and one for amplitude scaling.
+
+7. CODEC IDENTIFIERS
+
+Identifier  Descriptor bytes  Nominal rate  Profile
+0x0403      03 04             11025 Hz      File-mode narrowband
+0x0504      04 05              8000 Hz      RT24, 2400-bit/s speech
+0x0605      05 06             22050 Hz      File-mode wideband
+
+All three supported profiles are mono. Output is always 16-bit signed PCM,
+including when original PCM precision was eight bits. Codec selection uses
+the descriptor identifier, never the filename or estimated bit rate.
+
+8. BIT ORDER AND RT24 FRAMES
+
+Read each byte least significant bit first. The first bit read from a field
+is its least significant bit. Frames follow immediately, with no per-frame
+byte alignment, length word, synchronization word, or checksum.
+
+An RT24 frame is exactly 54 bits:
+  4 bits   voicing parameter
+  8 bits   pitch parameter
+  6 bits   energy parameter
+  3 bits   spectral coefficient 0
+  4 bits   spectral coefficient 1
+  4 bits   spectral coefficient 2
+  4 bits   spectral coefficient 3
+  4 bits   spectral coefficient 4
+  4 bits   spectral coefficient 5
+  3 bits   spectral coefficient 6
+  3 bits   spectral coefficient 7
+  3 bits   spectral coefficient 8
+  3 bits   spectral coefficient 9
+  1 bit    additional synthesis parameter
+
+The width vector is [4,8,6,3,4,4,4,4,4,3,3,3,3,1]. Each complete frame produces
+180 PCM samples. The numerical mappings for the spectral values, the last
+bit, and the complete RT24 synthesis have not been independently recovered.
+The labels above describe decoder roles; they are not a substitute for the
+missing codebooks and mathematical reconstruction rules.
+
+9. FILE-MODE FRAMES
+
+Each frame starts with V, a four-bit voicing index, followed by P, an eight-bit
+pitch index. These select N, the number of following four-bit harmonic
+amplitude values. N is zero for V=0. For V=1..15, use the exact table in
+Appendix A. The reference parser caps the underlying table entries at 31.
+No interpolation or guessed pitch formula is used to determine lengths.
+
+Narrowband 0x0403 fields, in order:
+  V: 4 bits
+  P: 8 bits
+  unvoiced-band energy index: 8 bits
+  six spectral codebook indices: 5 bits each
+  voiced energy index: 7 bits
+  N harmonic amplitude indices: 4 bits each
+Total: 57 + 4*N bits.
+
+Wideband 0x0605 fields, in order:
+  V: 4 bits
+  P: 8 bits
+  low-band unvoiced energy index: 8 bits
+  six low-band spectral codebook indices: 5 bits each
+  high-band energy index: 6 bits
+  four high-band spectral codebook indices: 5 bits each
+  voiced energy index: 7 bits
+  N harmonic amplitude indices: 4 bits each
+Total: 83 + 4*N bits.
+
+The voicing value is V/15. The pitch index is mapped through a period ranging
+from approximately 125 down to 16 internal samples, using a linear index
+mapping; the converter deliberately uses the original table for frame length
+instead of recomputing it from floating-point pitch. The spectral and energy
+indices select nonlinear numerical tables. Synthesis combines harmonic and
+noise components, spectral reconstruction, filtering, interpolation and,
+for wideband, a second band. The exact tables, filter state equations, phase
+generation, rounding and initialization rules remain a dependency on the
+reference decoder. Describing the bit widths does not implement these steps.
+
+10. END OF STREAM AND DAMAGE RECOVERY
+
+Read at most the declared frame count, and never past VOXd's bounded payload.
+If too few bits remain for a complete frame, do not send that partial frame
+to synthesis. Reduce the frame count in the private decoder copy to the
+number of complete frames. Do not fabricate padding frames or append silence.
+
+The last encoded frame can end partway through a byte. Remaining bits in that
+byte and any terminal fill byte are excluded from synthesis. They are distinct
+from an outer RIFF alignment byte. Terminal bit values are not required to be
+zero by this implementation; the decoder ignores them. The exact writer rule
+for emitting an entire extra fill byte is not established. Verbose diagnostics
+report the terminal bit count and raw terminal bytes, including the final
+partially consumed byte. More than eight terminal bits are flagged.
+
+The following operations are verified recovery, not searches or guesses:
+  * Clamp a chunk's impossible length to its known enclosing boundary.
+  * Clamp a truncated RIFF form to EOF.
+  * Recover only complete frames using the exact field-width rules.
+  * Tolerate a missing final alignment byte.
+  * Stop at an invalid next concatenation boundary and report trailing bytes.
+
+Unknown codec identifiers, other WAVE tags, unsupported packing flags,
+unsupported channels/rates/precision, extended fmt layouts and alternative
+Voxware wrappers are rejected. Missing structural identifiers cannot be
+recovered by assuming that arbitrary data is compressed speech. The converter
+does not attempt packet-loss concealment, bit-flip correction, or magic-byte
+resynchronization. The format has no verified integrity checksum in this
+supported layout, so complete-size frames can still contain damaged values.
+
+11. CONCATENATED STREAMS
+
+A file may consist of multiple independent RIFF/WAVE forms, with no archive
+header, count, name table, or separator. Advance to the previous form's
+declared end and optional even-alignment byte; parse the next form there.
+Reset the codec stream state for each member. Do not decode concatenated
+payloads as one continuous speech stream. Each form yields a separate WAV.
+Member names are generated from the input stem and one-based source order.
+There are no embedded pronunciation labels in this container structure.
+
+12. CONVERTER INTERFACE AND OUTPUT
+
+Usage:
+  python3 voxWareMetaVoiceEncodedAudio.py <inputFile> <outputDir>
+  python3 voxWareMetaVoiceEncodedAudio.py -verbose <inputFile> <outputDir>
+
+outputDir may already exist. A single stream produces <input-stem>.wav.
+Concatenations produce <input-stem>_000001.wav, _000002.wav, and so on. Six
+digits are a minimum width, not a maximum member count. Existing matching
+output filenames are refused rather than overwritten; unrelated files in
+outputDir are allowed. Input files are never modified.
+
+Default persistent conversion output consists only of WAV files. The command
+prints status and warnings to the terminal. -verbose additionally writes
+<input-stem>.voxware.json with offsets, descriptors, byte-range coverage,
+frame counts, terminal bytes, output lengths and warnings. The listening HTML
+is a separate one-time report, not a converter side effect. Newly created
+output directories have mode 0775 and output files mode 0664 on POSIX.
+
+Every supported RIFF member is structurally inspected before output begins.
+A non-target codec in this prescan rejects the input before outputDir is
+created. Recognized damaged streams can yield partial recovered audio. A
+member that cannot be decoded has no WAV, while independently decodable
+members can still be retained. Exit status 0 means WAV generation succeeded,
+possibly with recovery warnings; 1 means a fatal error; 2 means some members
+were skipped after others were decoded.
+
+The bridge accepts at most 64 MiB of compressed input per member and allocates
+at most 512 MiB of PCM per member. Oversized members are explicitly unsupported
+by this implementation. No claim is made that these are format limits.
+
+13. RUNTIME DEPENDENCIES AND IMPLEMENTATION BOUNDARY
+
+The Python module itself uses only the Python standard library (Python 3.10+).
+It requires the adjacent voxware_support directory containing:
+  decoder_bridge.exe  -- supplied 32-bit Windows IPC helper
+  mm32dcmp.dll        -- original file-mode decoder
+  VDK32116.DLL        -- original RT24 decoder
+decoder_bridge.c supplies the helper's source. Rebuilding it uses an x86 MinGW
+C compiler, for example:
+  i686-w64-mingw32-gcc -O2 -s -static-libgcc -o decoder_bridge.exe decoder_bridge.c
+The Python module pins binary SHA-256 hashes; a rebuild requires updating its
+expected helper hash. Binaries are loaded by explicit path, without codec
+registration or Windows system-directory installation.
+
+On POSIX, Wine with 32-bit support and wineserver are required. With no explicit
+WINEPREFIX, the converter creates an isolated temporary Wine prefix outside
+outputDir, then shuts down that prefix and deletes it. Wine's temporary runtime
+files are not conversion artifacts. An explicitly supplied WINEPREFIX is
+reused; its lifecycle belongs to the caller. The bridge runs without a display.
+Windows can run the helper directly. Linux/Wine is the validated environment;
+the native Windows path has not received equivalent testing.
+
+The helper receives bounded, reconstructed RIFF members over stdin and returns
+raw PCM over stdout. It does not write intermediate audio files. File-mode
+calls use a 90-byte ToolVox parameter block; RT24 uses a 142-byte block. The
+input selector is 0x00010201 (compressed WAVE memory), and the output selector
+is 0x00020200 (raw PCM memory). Output width is two bytes, neutral pitch is
+requested, and speed is 1.0. Returned PCM byte count determines WAV length.
+No use is made of FFmpeg's unrelated MetaSound decoder.
+
+Voxware's synthesis can vary between decoder revisions and can include
+pseudorandom noise components. The output is original-codec reconstruction,
+not recovery of the pre-compression waveform and not a claim of bit-exact
+agreement with every historical player.
+
+14. EVIDENCE AND NEXT STEPS
+
+The layout was checked against disassembly and controlled calls to the
+original codecs. Useful MM32DCMP image addresses (base 0x10000000):
+  0x100022a6: RIFF fmt/fact/data reader
+  0x10002fc0: VOX!/VOXd reader
+  0x10002d98: VOX! writer, including private/bookkeeping fields
+  0x100014d1: LSB-first variable-length frame reader
+  0x10012a58: narrowband field-width initialization
+  0x10012935: wideband field-width initialization
+  0x10011532: harmonic count lookup and cap
+  0x1000ed19, 0x1000ea6e: narrowband/wideband parameter reconstruction
+  0x100159e6: amplitude handling and synthesis dispatch
+  0x1005f710: harmonic-count table
+VDK32116 address 0x10029830 initializes the 54-bit RT24 width vector; address
+0x100201e0 reads the descriptor; 0x100134f0 sets RT24's 180-sample frame size.
+
+Original binary provenance and hashes are recorded in voxware_support/NOTICE.txt.
+The historic WAVE tag registry is RFC 2361:
+https://www.rfc-editor.org/rfc/rfc2361.html
+RIFF WAVE chunk background:
+https://learn.microsoft.com/en-us/windows/win32/xaudio2/resource-interchange-file-format--riff-
+
+To finish a self-contained implementation and specification:
+  1. Recover and publish every spectral, energy, pitch, harmonic and filter
+     table for the three profiles, with exact index-to-value mappings.
+  2. Reconstruct the synthesis, filter state, interpolation, phase/noise state,
+     initialization and final flushing, including x87 precision/rounding.
+  3. Resolve the header bookkeeping and encoder-private values, pitch-statistic
+     conventions, fact-writer inconsistencies, and terminal fill-byte rule by
+     tracing original encoder implementations and controlled encodings.
+  4. Build independent implementations and compare their PCM against reference
+     decoders for exhaustive field boundaries, varied speech and corruption.
+  5. Test other documented Voxware wrappers/profile combinations separately;
+     do not silently equate them with this supported container.
+
+APPENDIX A. EXACT FILE-MODE HARMONIC COUNTS
+
+Each row specifies inclusive pitch-index ranges as first-last:N. V is the
+four-bit voicing index. Select the range containing P; its N is the number of
+four-bit harmonic values after the fixed fields. Rows below include the
+reference parser's cap at 31. This is a format table, not a corpus heuristic.
+
+V=0
+  0-255:0
+
+V=1
+  0-12:6  13-63:5  64-114:4  115-165:3  166-216:2  217-255:1
+
+V=2
+  0-25:11  26-50:10  51-75:9  76-101:8  102-126:7  127-152:6  153-177:5
+  178-203:4  204-228:3  229-254:2  255-255:1
+
+V=3
+  0-12:17  13-29:16  30-46:15  47-63:14  64-80:13  81-97:12  98-114:11
+  115-131:10  132-148:9  149-165:8  166-182:7  183-199:6  200-216:5
+  217-233:4  234-249:3  250-255:2
+
+V=4
+  0-5:23  6-18:22  19-31:21  32-44:20  45-56:19  57-69:18  70-82:17
+  83-95:16  96-107:15  108-120:14  121-133:13  134-146:12  147-158:11
+  159-171:10  172-184:9  185-196:8  197-209:7  210-222:6  223-235:5
+  236-247:4  248-255:3
+
+V=5
+  0-2:29  3-12:28  13-22:27  23-32:26  33-42:25  43-53:24  54-63:23
+  64-73:22  74-83:21  84-93:20  94-104:19  105-114:18  115-124:17
+  125-134:16  135-144:15  145-154:14  155-165:13  166-175:12  176-185:11
+  186-195:10  196-205:9  206-216:8  217-226:7  227-236:6  237-246:5
+  247-255:4
+
+V=6
+  0-33:31  34-42:30  43-50:29  51-59:28  60-67:27  68-75:26  76-84:25
+  85-92:24  93-101:23  102-109:22  110-118:21  119-126:20  127-135:19
+  136-143:18  144-152:17  153-160:16  161-169:15  170-177:14  178-186:13
+  187-194:12  195-203:11  204-211:10  212-220:9  221-228:8  229-237:7
+  238-245:6  246-254:5  255-255:4
+
+V=7
+  0-70:31  71-77:30  78-85:29  86-92:28  93-99:27  100-106:26  107-114:25
+  115-121:24  122-128:23  129-136:22  137-143:21  144-150:20  151-157:19
+  158-165:18  166-172:17  173-179:16  180-186:15  187-194:14  195-201:13
+  202-208:12  209-216:11  217-223:10  224-230:9  231-237:8  238-245:7
+  246-252:6  253-255:5
+
+V=8
+  0-98:31  99-104:30  105-111:29  112-117:28  118-123:27  124-130:26
+  131-136:25  137-142:24  143-149:23  150-155:22  156-161:21  162-168:20
+  169-174:19  175-181:18  182-187:17  188-193:16  194-200:15  201-206:14
+  207-212:13  213-219:12  220-225:11  226-231:10  232-238:9  239-244:8
+  245-251:7  252-255:6
+
+V=9
+  0-119:31  120-125:30  126-131:29  132-136:28  137-142:27  143-148:26
+  149-153:25  154-159:24  160-165:23  166-170:22  171-176:21  177-182:20
+  183-187:19  188-193:18  194-199:17  200-204:16  205-210:15  211-216:14
+  217-221:13  222-227:12  228-233:11  234-238:10  239-244:9  245-249:8
+  250-255:7
+
+V=10
+  0-137:31  138-142:30  143-147:29  148-152:28  153-157:27  158-162:26
+  163-167:25  168-172:24  173-177:23  178-182:22  183-188:21  189-193:20
+  194-198:19  199-203:18  204-208:17  209-213:16  214-218:15  219-223:14
+  224-228:13  229-233:12  234-238:11  239-244:10  245-249:9  250-254:8
+  255-255:7
+
+V=11
+  0-151:31  152-155:30  156-160:29  161-165:28  166-169:27  170-174:26
+  175-179:25  180-183:24  184-188:23  189-192:22  193-197:21  198-202:20
+  203-206:19  207-211:18  212-216:17  217-220:16  221-225:15  226-229:14
+  230-234:13  235-239:12  240-243:11  244-248:10  249-253:9  254-255:8
+
+V=12
+  0-162:31  163-167:30  168-171:29  172-175:28  176-179:27  180-184:26
+  185-188:25  189-192:24  193-196:23  197-201:22  202-205:21  206-209:20
+  210-213:19  214-218:18  219-222:17  223-226:16  227-230:15  231-235:14
+  236-239:13  240-243:12  244-247:11  248-252:10  253-255:9
+
+V=13
+  0-172:31  173-176:30  177-180:29  181-184:28  185-188:27  189-192:26
+  193-196:25  197-200:24  201-204:23  205-208:22  209-212:21  213-216:20
+  217-219:19  220-223:18  224-227:17  228-231:16  232-235:15  236-239:14
+  240-243:13  244-247:12  248-251:11  252-255:10
+
+V=14
+  0-180:31  181-184:30  185-187:29  188-191:28  192-195:27  196-198:26
+  199-202:25  203-206:24  207-209:23  210-213:22  214-217:21  218-220:20
+  221-224:19  225-228:18  229-231:17  232-235:16  236-239:15  240-242:14
+  243-246:13  247-250:12  251-253:11  254-255:10
+
+V=15
+  0-180:31  181-184:30  185-187:29  188-191:28  192-195:27  196-198:26
+  199-202:25  203-206:24  207-209:23  210-213:22  214-217:21  218-220:20
+  221-224:19  225-228:18  229-231:17  232-235:16  236-239:15  240-242:14
+  243-246:13  247-250:12  251-253:11  254-255:10
+

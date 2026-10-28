@@ -1,0 +1,370 @@
+KOEPAC AUDIO ARCHIVE FORMAT
+==========================
+
+Scope
+-----
+This specification describes the KOEPAC voice-archive format used by AVG32
+and RealLive software: the eight-byte signature 4B 4F 45 50 41 43 00 00, a
+32-byte header, an eight-byte-per-clip directory, and independently coded
+1,024-sample audio blocks. It is sufficient to implement a reader and a
+writer without external lookup tables or codec libraries.
+
+The supported header profile has zeroes in all reserved positions. This
+format has no explicit version or codec selector. No meaning is assigned
+to nonzero reserved bytes; a possible extension using those bytes is
+outside this specification. The .koe extension alone is not identification:
+other unrelated formats can use that extension.
+
+All multi-byte integers are unsigned little-endian. All offsets are
+absolute byte offsets measured from the first byte of the archive. Index
+positions, block positions, and sample positions in this document are
+zero-based. Audio PCM values are signed integers. There is no encryption,
+checksum, embedded filename, timestamp, loop point, or text metadata in
+this profile. No alignment is required for clip or block payloads.
+
+1. Physical organization
+------------------------
+
+    32-byte archive header
+    N directory records, each 8 bytes
+    clip data, addressed by the directory
+
+Each clip's data consists of:
+
+    B unsigned 16-bit block lengths
+    block 0 payload
+    block 1 payload
+    ...
+    block B-1 payload
+
+The length table precedes ALL payloads for that clip. A length is a byte
+count, not a sample count. A zero length has no payload bytes. Every block,
+including a zero-length block, represents exactly 1,024 mono samples.
+There is no separate last-block sample count. Preserve all samples and
+silence, including any padding the producer included in the last block.
+
+A canonical packed archive places the first clip at 32 + 8*N and each
+subsequent clip immediately after the preceding clip. The final clip ends
+at EOF. There is no footer, per-clip header, mandatory padding, or
+terminator. Readers must use directory offsets, not infer offsets from
+IDs or assume IDs are sorted. Reordered directory records do not change
+the interpretation of the addressed clips.
+
+2. Header: exactly 32 bytes
+--------------------------
+
+ Offset  Length  Type         Meaning
+ ------  ------  -----------  --------------------------------------------
+ 0x00       8    bytes        Signature: 4B 4F 45 50 41 43 00 00
+                              ASCII "KOEPAC" followed by two zero bytes.
+ 0x08       8    bytes        Reserved; all eight bytes are zero.
+ 0x10       4    uint32 LE    N: number of directory records / voice clips.
+ 0x14       4    uint32 LE    Absolute start of the clip-data region.
+                              Canonically 0x20 + 8*N.
+ 0x18       4    uint32 LE    Sample rate in samples per second.
+                              Zero explicitly selects 22,050 Hz.
+                              A nonzero value is used directly.
+ 0x1C       4    bytes        Reserved; all four bytes are zero.
+
+The rate applies to every clip. The stored source has one audio channel
+and uses the fixed codec defined below; these properties are not separate
+header fields. Some players expand each decoded sample into two identical
+channels. Such dual-mono presentation adds no information. A mono WAV at
+the header rate preserves both the waveform and the original duration.
+
+The reserved bytes are defined only as zero-filled storage in this
+profile. Their historical purpose, or any nonzero extension semantics,
+cannot be recovered from zero values and is not claimed here. They are
+checked rather than silently ignored by the accompanying converter.
+
+3. Directory records
+--------------------
+Record i starts at 0x20 + 8*i, for 0 <= i < N.
+
+ Relative  Length  Type         Meaning
+ --------  ------  -----------  ------------------------------------------
+ +0           2    uint16 LE    Clip ID, in the range 0 through 65,535.
+ +2           2    uint16 LE    B: number of 1,024-sample audio blocks.
+ +4           4    uint32 LE    Absolute offset O of the block-length table.
+
+A clip ID is a lookup key, not its ordinal or a filesystem name. IDs need
+not be consecutive or sorted. IDs normally identify clips uniquely. A
+reader can preserve duplicate records by disambiguating their output
+filenames with the directory ordinal. Distinct records addressing the
+same offset can be decoded independently.
+
+B can be zero, representing an empty clip. Otherwise the decoded sample
+count is B*1024, the mono 16-bit PCM byte count is B*2048, and the duration
+in seconds is B*1024/sample_rate. Since B is uint16, one clip has at most
+67,107,840 decoded samples (134,215,680 PCM bytes).
+
+4. Block-length table and exact byte addressing
+-----------------------------------------------
+For a clip with block count B and table offset O:
+
+    L[j] = uint16_le(file[O + 2*j : O + 2*j + 2])
+    P[0] = O + 2*B
+    P[j] = O + 2*B + sum(L[k] for 0 <= k < j)
+    E    = O + 2*B + sum(L[k] for 0 <= k < B)
+
+Block j occupies [P[j], P[j] + L[j]); the entire clip occupies [O, E).
+The next payload begins immediately after the declared end of its
+predecessor, even during recovery from a damaged block. An implementation
+must not let a malformed block consume bytes belonging to another block
+or another independently addressed clip.
+
+The length value selects the block representation:
+
+    L == 0       1,024 zero-valued PCM samples; no input bytes.
+    L == 1024    1,024 direct 8-bit companded sample codes.
+    otherwise    Nibble-coded differential companded samples (DPCM).
+
+Length 1,024 always means the direct-code representation. It is never
+interpreted as compressed data, regardless of its byte contents. This
+size dispatch is part of the format, not a detection heuristic.
+
+5. Exact companding function
+---------------------------
+Let u be an unsigned 8-bit sample code, 0 <= u <= 255. Its signed 16-bit
+PCM value T(u) is:
+
+    u ==   0:  -32768
+    u == 128:       0
+    u == 255:   32767
+    1 <= u <= 127:  1 - 2*(128-u)^2
+    129 <= u <= 254: 2*(u-128)^2 - 1
+
+These equations specify all 256 table entries exactly. The special cases
+are essential, particularly u=255: substituting the quadratic expression
+there would incorrectly produce 32,257 instead of 32,767.
+
+Useful values, shown as signed PCM and hexadecimal two's-complement:
+
+    code     PCM       16-bit hexadecimal
+       0    -32768     8000
+       1    -32257     81FF
+      64     -8191     E001
+     127        -1     FFFF
+     128         0     0000
+     129         1     0001
+     192      8191     1FFF
+     254     31751     7C07
+     255     32767     7FFF
+
+This is KOEPAC's own quadratic companding, not linear unsigned PCM, A-law,
+mu-law, or an IMA ADPCM step table.
+
+6. Direct-code blocks (L == 1024)
+---------------------------------
+Read each of the 1,024 payload bytes as u and emit T(u). The direct block
+contains no predictor seed, state header, or extra samples. In particular,
+a byte value 128 emits silence and byte value 0 emits negative full scale.
+
+7. Silence blocks (L == 0)
+--------------------------
+Emit 1,024 signed PCM zeroes. This is different from decoding 1,024 sample
+codes of value zero. No byte is read and no state is inherited from, or
+passed to, the adjacent block.
+
+8. Differential blocks (all other lengths)
+------------------------------------------
+Each differential block begins with an unsigned 8-bit accumulator d = 0.
+It does NOT begin at 128. This is a predictor in companded-code space,
+not a signed linear PCM predictor. Reset it independently for every block.
+
+Read the payload as a stream of nibbles, low nibble before high nibble
+within each byte. For each of exactly 1,024 output samples:
+
+  1. Read one nibble n.
+  2. If n is 0 through 14, set c = n.
+  3. If n is 15, read two more nibbles a, then b, and set c = a + 16*b.
+     Thus 15 is an escape marker, not the short code for delta -8.
+     Escaped codes may have any value from 0 through 255, including
+     redundant encodings of values 0 through 14.
+  4. Convert c into a signed adjustment A(c):
+
+         c even: A(c) = c/2
+         c odd:  A(c) = -(c+1)/2
+
+  5. Update d = (d - A(c)) modulo 256.
+     Subtraction, 8-bit wraparound, and the order of operations matter.
+  6. Emit T(d) as a signed 16-bit PCM sample.
+
+A short code occupies one nibble and an escaped code occupies three.
+Escapes cross byte boundaries freely. An escape in the low nibble uses
+the current byte's high nibble as a and the next byte's low nibble as b.
+An escape in a high nibble consumes the following complete byte, with
+that byte's low nibble as a and high nibble as b.
+
+Every sample consumes an odd number of nibbles. Consequently every pair
+of samples ends on a byte boundary. After 1,024 samples, no unused half
+byte remains. If X samples use escapes, the exact payload size is:
+
+    L = (1024 + 2*X)/2 = 512 + X
+
+A complete differential representation therefore has between 512 and
+1,536 bytes. L=1,024 is reserved for direct-code mode, so a writer must
+not store a differential representation of exactly that size. A typical
+writer uses the direct representation when compression offers no saving;
+a decoder can still process valid differential sizes above 1,024.
+
+There is no adaptive step size, run-length coding, inter-block history,
+trailing predictor, or end marker. A valid block consumes exactly L bytes
+and produces exactly 1,024 samples. Extra or insufficient encoded bytes
+are structural corruption; there is no defined padding inside a block.
+
+Differential examples (prefixes only, not complete blocks):
+
+    Byte 00: short codes 0,0. Starting at d=0, both samples are -32768.
+    Byte 01: short codes 1,0. d becomes 1 and stays 1: -32257,-32257.
+    Bytes FF 0F: escape code 255, then short code 0. A(255)=-128,
+                 so d becomes 128 and stays 128: 0,0.
+
+The last example followed by 511 zero bytes is a complete 513-byte DPCM
+block producing 1,024 zero PCM samples. A length-zero silence block is a
+more compact representation of the same waveform.
+
+9. Writing an archive
+---------------------
+Assign IDs and choose the shared rate. Divide each clip's companded codes
+into 1,024-sample blocks, padding only when necessary; no original
+unpadded length is stored. Exact re-encoding of arbitrary 16-bit PCM is
+not always possible because the companding map is lossy.
+
+For each block, either write no payload for all-zero PCM, write the
+1,024 sample codes directly, or encode the modular differences. Starting
+at d=0, the required adjustment is (d-u) modulo 256, interpreted in the
+signed range -128 through 127. Nonnegative adjustment a maps to c=2*a;
+negative a maps to c=-2*a-1. Emit c directly as one nibble if c<15;
+otherwise emit 15, c&15, c>>4. Update d=u. Pack low nibble first. Avoid
+the reserved compressed size 1,024 by choosing direct mode in that case.
+
+Compute all block lengths, clip offsets, the directory count and the
+start-of-data field. Write zeroes to reserved header positions, write the
+directory, then each clip's length table and payloads. No fixed filename
+convention or external data is needed to encode or decode the archive.
+
+10. Validation and damage recovery
+----------------------------------
+Recognition must check the complete eight-byte signature before creating
+any output. Extension-based guessing and fallback to other formats are
+not appropriate. A signature mismatch is unsupported input. Nonzero
+reserved header bytes identify a profile this specification does not
+define and must not be guessed at.
+
+For a structurally valid archive, validate every directory record, all
+length tables, non-overlapping clip extents, the data-region field, exact
+compressed consumption, and complete byte coverage through EOF. The only
+reserved bytes in a canonical archive are the twelve zero header bytes;
+no other opaque or padding region is required by this layout.
+
+Once the full signature is established, corruption can be handled using
+explicit boundaries. The converter follows these deterministic rules:
+
+* An incomplete header cannot locate clips, so extraction fails without
+  creating an output directory. A rate that cannot fit the WAV byte-rate
+  field also fails without inventing a substitute rate.
+* Directory reading is bounded by the declared count, EOF, and an explicit
+  data-region offset that would otherwise place records inside payload.
+  Only complete directory records are considered.
+* An entry offset inside the accessible header/index, or beyond EOF, is
+  skipped. An incomplete length table is skipped: the payload's start
+  cannot safely be inferred without the entire table.
+* A clip is bounded by the next distinct usable entry offset or EOF.
+  Truncated raw blocks retain available samples; truncated DPCM blocks
+  retain fully decoded samples. Missing samples become zero PCM, with a
+  warning. Subsequent blocks still start at their declared offsets.
+* An overlong DPCM block retains its first 1,024 decoded samples and
+  reports the unused bytes. It does not reinterpret them as another codec.
+* Duplicate IDs receive ordinal suffixes. Shared offsets are decoded
+  for each record and reported. Empty clips produce valid empty WAVs.
+* Unreferenced bytes, including any trailing bytes, are reported with
+  exact half-open byte ranges. Verbose metadata preserves their hex
+  values. Such bytes are not silently labelled as meaningful padding.
+
+Recovery cannot reconstruct genuinely lost samples or discover the
+intended value of a damaged header. In the absence of a checksum,
+corruption that remains syntactically valid is not necessarily detectable.
+These are limits of the source format, not reasons to guess at missing
+audio data. Recovery warnings distinguish altered output from clean
+conversion.
+
+11. WAV output and command-line contract
+---------------------------------------
+Run with Python 3.10 or later:
+
+    python3 koepacAudioArchive.py inputFile outputDir
+    python3 koepacAudioArchive.py inputFile outputDir -verbose
+
+Only the Python standard library is used. The script is self-contained;
+it needs no external programs, lookup files, or third-party modules.
+
+One WAV is written per usable directory entry, named:
+
+    <input-stem>_<clip-ID-as-five-decimal-digits>.wav
+
+Duplicate IDs additionally use _entry<five-digit-directory-ordinal>
+before .wav. The input extension and filename do not affect decoding.
+An existing output directory is accepted. Matching output files are
+atomically replaced, unrelated files are left in place, and the input
+file is never intentionally replaced. No persistent temporary, metadata,
+or report file is produced in normal mode. Temporary output files are
+removed after success or handled exceptions.
+
+-verbose (also --verbose) adds <input-stem>.koepac.json, with the raw header,
+all index-record values, block offsets, lengths, modes, consumed bytes,
+unreferenced ranges and warnings. Normal-mode clean extraction is silent;
+warnings and failures go to standard error. Verbose mode prints per-clip
+details. The listening HTML report is a separate one-time deliverable,
+not a side effect of the converter.
+
+Exit statuses:
+
+    0  Clean conversion, including a valid archive containing zero clips.
+    1  I/O failure or essential malformed data that prevents conversion.
+    2  Signature mismatch or unsupported header profile; nothing written.
+    3  Recognized archive with warnings, recovered clips, or skipped clips.
+
+Output WAVs and verbose JSON files are readable by user and group (0644).
+New output directories grant user/group read and search permissions even
+under a restrictive umask. Existing directory permissions are respected.
+
+Each WAV has a conventional 44-byte RIFF/WAVE header:
+
+    0x00  "RIFF"
+    0x04  uint32 LE: 36 + PCM byte count
+    0x08  "WAVE"
+    0x0C  "fmt "
+    0x10  uint32 LE: 16
+    0x14  uint16 LE: 1                 (integer PCM)
+    0x16  uint16 LE: 1                 (mono)
+    0x18  uint32 LE: effective sample rate
+    0x1C  uint32 LE: 2 * sample rate    (bytes per second)
+    0x20  uint16 LE: 2                 (block alignment)
+    0x22  uint16 LE: 16                (bits per sample)
+    0x24  "data"
+    0x28  uint32 LE: B * 2048
+    0x2C  B * 2048 bytes of signed little-endian PCM
+
+No resampling, normalization, silence removal, filtering, channel
+duplication, or guessed rate is applied.
+
+12. Implementation provenance and extension limits
+--------------------------------------------------
+The structural and codec rules can be cross-checked against these public
+implementations, which are useful independent references:
+
+* GARbro, RealLive/ArcKOE.cs:
+  https://github.com/morkt/GARbro/blob/master/ArcFormats/RealLive/ArcKOE.cs
+* arc_unpacker, real_live/koepac_audio_archive_decoder.cc:
+  https://github.com/vn-tools/arc_unpacker/blob/master/src/dec/real_live/koepac_audio_archive_decoder.cc
+* RLVM, systems/base/koepac_voice_archive.cc, including its xclannad origin:
+  https://github.com/eglaysher/rlvm/blob/master/src/systems/base/koepac_voice_archive.cc
+
+The converter implements all three block representations and the entire
+zero-reserved-header profile above. It does not claim support for an
+undocumented nonzero reserved-field extension or unrelated .koe formats.
+To extend it to such a profile, obtain its producer or a matching decoder,
+determine the changed header/codec rules, and validate those rules against
+independently decoded audio before accepting the profile. No filename-
+specific exceptions or content-dependent format guesses are required.

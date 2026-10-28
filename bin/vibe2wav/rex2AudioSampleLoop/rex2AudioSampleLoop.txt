@@ -1,0 +1,665 @@
+REX2 AUDIO LOOP STORAGE FORMAT
+Revision: 2026-10-27
+
+STATUS AND SCOPE
+
+This is a standalone description of the CAT / REX2 container and the DWOP
+integer audio coding used by file-format versions 1.0.0, 2.0.0 and 3.0.0.
+It describes the physical layout of every supported chunk, including fields
+which are unrelated to the waveform. The decoding procedure below is sufficient
+to recover mono or stereo 16-bit and 24-bit source PCM without a proprietary
+library, sample-name rules, guessed offsets, or audio-content heuristics.
+
+This is NOT a claim that every REX2 semantic has been resolved. In particular,
+the meanings of the seven RCYX editor fields, some editor enumeration values,
+and the complete playback/effect algorithms remain unresolved. An identified
+field boundary and type are not the same as an understood field purpose.
+Those limits and the work needed to resolve them are listed at the end.
+
+The accompanying converter writes the complete stored source waveform. It does
+not reproduce ReCycle's preview or sequenced slice rendering. The source can
+contain audio before and after the designated loop; all of it is retained.
+Slice mute flags, pitch, gain, gating, EQ, compression, attack, decay, stretch,
+and preview tempo do not change these extracted PCM values. They are parsed
+as metadata, not rendered into the output. No normalization, resampling,
+dithering, silence removal, channel conversion or slice-boundary trimming is
+performed on a valid source.
+
+NOTATION
+
+Offsets in chunk tables are relative to the start of the chunk PAYLOAD, after
+the eight-byte chunk header. U8, U16 and U32 are unsigned integers of that many
+bits. I16 and I32 are signed two's-complement integers. Multi-byte container
+fields are big-endian. PCM in the output WAV is little-endian.
+
+A frame contains one sample per output channel. All stored frame counts,
+loop endpoints, slice starts and slice lengths refer to frames, not bytes or
+the total number of interleaved samples. A stereo frame therefore occupies
+four bytes at 16 bits or six bytes at 24 bits.
+
+1. IDENTIFICATION AND CONTAINER
+
+Absolute offset   Length   Meaning
+0                 4        ASCII "CAT " (the space is significant)
+4                 4        U32 root payload length N
+8                 4        ASCII "REX2"
+12                N-4      Nested chunks
+
+A complete root occupies N+8 bytes, plus an alignment byte if N is odd.
+The file extension is not an identifier. Older FORM / AIFF-based REX and RCY
+files are different formats and are outside this specification and converter.
+
+Every chunk uses this framing:
+
+Offset   Length    Meaning
+0        4         Four-byte chunk identifier
+4        4         U32 payload length N, excluding header and alignment
+8        N         Payload
+8+N      N modulo 2   One alignment byte if the payload length is odd
+
+The alignment byte is conventionally zero. Its value is not sound data.
+The next chunk begins at offset 8+N+(N modulo 2). Padding is required inside
+containers too. The parent payload length includes its type, child headers,
+child payloads and child alignment bytes, but not its own header/alignment.
+
+A CAT payload starts with a four-byte type, then child chunks. Known types:
+
+  REX2   Root waveform document.
+  DEVL   Device settings: TRSH, EQ followed by two spaces, and COMP.
+  SLCL   Slice list: zero or more SLCE records.
+
+Normal structure:
+
+  CAT / REX2
+    HEAD
+    CREI                   optional creator information
+    GLOB
+    RECY
+    RCYX                   optional editor extension
+    CAT / DEVL
+      TRSH
+      EQ  
+      COMP
+    CAT / SLCL
+      SLCE ...
+    SINF
+    SDAT
+
+Read declared boundaries recursively. Do not search arbitrary bytes for tag
+strings: compressed audio can contain any apparent tag. The converter permits
+different chunk ordering. HEAD, SINF and SDAT must each be unambiguous; the
+other singleton records must not be duplicated. It accepts only the listed
+chunk and container identifiers, rejecting unknown extensions before writing.
+That is a deliberate support boundary, not a statement that extensions cannot
+exist. It does not implement multiple nested REX2 documents in one input.
+
+2. SHARED SERIALIZED TYPES
+
+2.1 Version records
+
+A short version record occupies five bytes:
+
+Offset   Type   Meaning
+0        U8     0xBC version-record signature
+1        U8     Major version
+2        U8     Minor version
+3        U8     Revision
+4        U8     Reserved byte, normally zero
+
+The short form represents release stage, stage number zero and build zero.
+The exact sequence BC FF FF FF FF instead introduces the extended form:
+
+Offset   Type   Meaning
+0        5 B    BC FF FF FF FF
+5        U32    Major
+9        U32    Minor
+13       U32    Revision
+17       U32    Stage: 1 development, 2 alpha, 3 beta, 4 release
+21       U32    Stage number
+25       U32    Build number
+
+The extended record occupies 29 bytes. Never treat its sentinel bytes as a
+huge major version or as the start of the following field. Subsequent field
+offsets advance by the actual serialized version length V, either 5 or 29.
+
+2.2 Cross-platform strings
+
+Old form: U32 byte length L, followed by L bytes in Windows Latin-1
+(Windows-1252). There is no stored terminating NUL and no internal alignment.
+L=0 represents the empty string. Preserve the exact bytes; embedded NULs and
+undefined Windows-1252 byte values should not silently alter a byte audit.
+
+New form: U32 0xFFFFFFFF, a version record for string format 1.0,
+a U32 UTF-8 byte length L, then L UTF-8 bytes. L counts encoded bytes, not
+Unicode characters. The converter recognizes both forms explicitly. It records
+original bytes and uses escaped text for malformed character sequences rather
+than guessing another character encoding. New-style strings can appear in
+HEAD or CREI and can have different lengths from their old-style equivalents.
+
+2.3 Boolean bytes
+
+Boolean values are serialized as one byte, normally 0 or 1. They are not
+bitfields unless the containing table explicitly says so. Nonstandard values
+can be preserved in the metadata audit without affecting source PCM.
+
+3. HEAD -- DOCUMENT HEADER
+
+Offset   Length       Meaning
+0        4            U32 magic 0x490CF18D
+4        V            File-format version record
+4+V      16           UUID; all bytes zero in the supported format
+20+V     variable     Obsolete filename as a cross-platform string
+
+With a short version and an empty old-style filename, the payload is 29 bytes.
+The name length then starts at offset 25 and the name bytes at offset 29.
+This name is informational; it is never used as a destination path.
+
+HEAD byte 5 is the major version in the short form, NOT the bytes per sample.
+Version 1.0.0 and version 2.0.0 can both contain 16-bit audio; use SINF to
+determine the PCM representation. Version 3.0.0 supports 24-bit source audio.
+
+The official reader rejects a nonzero UUID. Its wider purpose is not known;
+it must not be assigned an invented encryption or protection meaning. This
+converter rejects such a header as an unsupported variant. It also rejects
+major/minor/revision combinations outside 1.0.0, 2.0.0 and 3.0.0, and
+non-release extended HEAD versions. Supported major/minor/revision values may
+use either serialized version form.
+
+4. CREI -- CREATOR INFORMATION
+
+Five consecutive cross-platform strings, in this order:
+
+  creator/name, copyright, URL, email, free text.
+
+There are no fixed 256-byte fields on disk. There is no padding between
+strings. Only the complete CREI chunk receives IFF alignment. The strings
+need not be present for audio decoding, and the converter does not impose a
+255-character truncation. A malformed string is reported; its original bytes
+remain available in the verbose audit.
+
+5. GLOB -- GLOBAL LOOP AND PLAYBACK SETTINGS
+
+Payload length: 22 bytes.
+
+Offset   Type   Meaning
+0        U32    Number of SLCE records, including analysis-only markers
+4        U16    Whole bars
+6        U8     Additional beats
+7        U8     Time-signature numerator
+8        U8     Time-signature denominator
+9        U8     Analysis sensitivity, 0..99
+10       U16    Gate sensitivity, 0..999
+12       U16    Processing gain control
+14       I16    Pitch control, -2400..2400 (cents)
+16       U32    Preview tempo in milli-BPM; divide by 1000 for BPM
+20       U8     Transmit-as-slices Boolean
+21       U8     Silence-selected Boolean
+
+The first word is a record count, not a PPQ position. The preview tempo need
+not equal the natural tempo of the stored waveform. It does not determine
+the sample rate. No time stretching is required to decode source PCM.
+
+The SDK validates bar counts up to 999, additional beats up to 7, sensitivity
+up to 99, gate up to 999, and preview tempo from 20000 to 450000 milli-BPM.
+The converter preserves invalid editor settings and warns about count
+disagreement; it does not discard otherwise recoverable source audio.
+
+The processing gain is a playback control, not an integer PCM scale stored
+inside SDAT. Reference slice rendering includes an approximately 5/6 factor
+at the common gain value 1000. Reproducing that renderer also requires its
+other processing stages, so this converter does not apply that factor.
+
+6. RECY -- RECYCLE APPLICATION INFORMATION
+
+Payload length with a short version: 15 bytes.
+
+Offset   Length   Meaning
+0        V        ReCycle application/export version record
+V        1        Preview-play Boolean
+V+1      1        Horizontal ruler unit selector
+V+2      4        U32 cached exported byte count
+V+6      4        U32 cached exported slice count
+
+For V=5, the byte count is at offset 7 and the slice count at offset 11.
+These are editor/export cache values, not the SDAT byte length or authoritative
+PCM frame count. The ruler selector's full user-interface enumeration is not
+resolved here. Preserve it numerically.
+
+Reading bytes 8..11 as a second tempo is incorrect: that straddles the two
+cache fields. Use GLOB for preview tempo and SINF for waveform timing.
+
+7. RCYX -- RECYCLE DOCUMENT EXTRA INFORMATION
+
+This record has a version followed by exactly 16 bytes of editor state.
+The supported extension version is 1.0. With V=5 its payload is 21 bytes.
+The official binary reader verifies the following field boundaries/types:
+
+Offset   Type   Meaning / implementation name
+0        V      Extension version record
+V        U32    Editor enumeration, editor_enum
+V+4      U8     Boolean editor_bool_1
+V+5      U8     Boolean editor_bool_2
+V+6      U8     Boolean editor_bool_3
+V+7      U32    editor_u32_1
+V+11     U32    editor_u32_2
+V+15     U8     Boolean editor_bool_4
+
+The document loader accepts enumeration values 0..3. The seven user-facing
+meanings are UNRESOLVED. In particular, assigning the two U32 values to window
+dimensions merely because their values resemble screen sizes would be a
+heuristic, not a verified interpretation. They are intentionally not named
+that way here. The converter parses and records them but does not act on them.
+
+8. DEVL DEVICE SETTINGS
+
+These three chunks are children of CAT / DEVL. They describe playback effects
+and do not change the lossless compressed source representation.
+
+8.1 TRSH -- transient shaper, seven bytes
+
+Offset   Type   Meaning
+0        U8     Enabled Boolean
+1        U16    Attack control, 0..1023
+3        U16    Decay control, 0..1023
+5        U16    Stretch control, 0..100
+
+Attack and decay values are control/table indices, not directly milliseconds.
+Version-dependent transformations and synthesized stretch tails belong to
+the playback engine. Stretch tails are not extra PCM hidden after SDAT.
+
+8.2 EQ followed by two spaces -- equalizer, 17 bytes
+
+Offset   Type   Meaning                         Stored range
+0        U8     Enabled Boolean                 0 or 1
+1        U16    Low-cut frequency, Hz           15..12000
+3        U16    Low-band frequency, Hz          20..3000
+5        I16    Low-band gain control           -18000..18000
+7        U16    Low-band Q control              500..10000
+9        U16    High-band frequency, Hz         1500..16000
+11       I16    High-band gain control          -18000..18000
+13       U16    High-band Q control             500..10000
+15       U16    High-cut frequency, Hz          100..20000
+
+Field names and ranges are verified from the binary reader and its calls into
+the named equalizer setters. This document retains the integer gain and Q
+controls; exact scaling and filter transfer functions are not specified.
+
+8.3 COMP -- compressor, nine bytes
+
+Offset   Type   Meaning                         Serialized range
+0        U8     Enabled Boolean                 0 or 1
+1        U16    Threshold control               0..127
+3        U16    Ratio control                   0..127
+5        U16    Attack control                  0..1023
+7        U16    Release control                 0..1023
+
+These are control values, not a literal ratio or time in milliseconds. The
+playback reader applies version-dependent envelope conversions and narrower
+runtime clamps. The full transfer function and time tables are not implemented.
+
+9. SLCL AND SLCE -- SLICING INFORMATION
+
+CAT / SLCL contains one SLCE chunk per stored analysis or slice record.
+Each SLCE payload is 11 bytes:
+
+Offset   Type   Meaning
+0        U32    Start frame in the complete decoded waveform
+4        U32    Stored length in frames
+8        U16    Transient-analysis strength/points, normally 0..32767
+10       U8     Flags: bit 0 muted, bit 1 locked, bit 2 selected
+
+Flag bits 3..7 are reserved and are rejected by the official reader.
+The points field is NOT a PPQ timestamp. Selected is an editing state; its
+audible effect depends on the global silence-selected mode.
+
+Length 1 is commonly an analysis marker; it is not enough simply to assume
+every record is a separately playable slice. The displayed/rendered sequence
+also depends on sensitivity, locked/muted/selected states, gate settings,
+loop endpoints and transmit-as-slices. The stored table and the public slice
+list can therefore have different counts and lengths. This converter retains
+every record but emits the complete waveform, without a heuristic visibility
+filter or a guessed division into separate files.
+
+SLCE positions do not delimit independently compressed blocks. There are no
+per-slice decoder resets or separate compressed byte offsets. Decode SDAT
+from its beginning before accessing any later slice. The first SLCE does not
+necessarily start at frame zero. Leading silence is ordinary encoded PCM;
+there is no mandated 256-frame or other fixed-length codec warm-up to remove.
+
+10. SINF -- SOURCE SOUND INFORMATION
+
+Payload length: 18 bytes.
+
+Offset   Type   Meaning
+0        U8     Channels: 1 mono, 2 stereo
+1        U8     Sample representation code
+2        U32    Source sample rate in Hz
+6        U32    Total decoded frame count F
+10       U32    Loop start frame, inclusive
+14       U32    Loop end frame, exclusive
+
+Representation codes known to the metadata reader:
+
+  1   8-bit integer       outside this converter's audio support
+  3   16-bit integer      supported
+  5   24-bit integer      supported
+  7   32-bit float        outside this converter's audio support
+
+The sample rate occupies FOUR bytes starting at offset 2. Reading only the
+low two bytes happens to work for low rates but is not the format.
+The converter does not substitute 44100 for a missing or zero rate. It
+requires a positive rate representable in the resulting PCM WAV header.
+
+Total decoded samples = F * channels. Total uncompressed bytes =
+F * channels * bytes_per_sample. Loop endpoints do not replace F as the
+decoder termination condition. Valid loop bounds satisfy
+0 <= loop_start <= loop_end <= F. Invalid loop metadata does not prevent
+extraction of the full F-frame source waveform.
+
+11. SDAT -- DWOP COMPRESSED SOURCE AUDIO
+
+The first bit of compressed audio is the high bit of the first payload byte.
+There is no additional prologue, size word, codec signature, seek table or
+per-slice header inside SDAT for this profile. The DWOP name denotes the
+codec; it is not a required four-byte prefix in the payload.
+
+11.1 Bit ordering and integer rules
+
+Read payload bytes in order and bits within a byte from bit 7 to bit 0.
+Equivalently, read big-endian 32-bit words, most significant bit first.
+Symbols can cross byte and word boundaries. There is no entropy state reset
+at such boundaries, at a slice, or at an arbitrary processing-buffer boundary.
+
+Predictor states are signed 32-bit values. Energy states are unsigned 32-bit
+values. Reduce their arithmetic modulo 2^32; reinterpret predictor results
+as signed. Right shifts of signed values are arithmetic. Energy shifts are
+logical. A notation U32(x) below means x modulo 2^32, and I32(x) means the
+signed interpretation of those same low 32 bits.
+
+11.2 Channel states
+
+Each coded channel independently starts with:
+
+  D[0..4] = 0              doubled-sample finite differences
+  E[0..4] = 2560           estimated residual magnitudes
+
+Mono has one such state. Stereo has two, sharing just the bit reader.
+The first stereo state codes the left channel and the second codes right
+minus left. Decode in order: left frame 0, difference frame 0, left frame 1,
+difference frame 1, and so on.
+
+11.3 Select predictor order
+
+Choose p in 0..4 with the lowest unsigned E[p]. A tie chooses the lowest
+index. No predictor identifier is transmitted: encoder and decoder make
+the same decision from their prior state.
+
+  step = U32(3 * E[p] + 36) >> 7
+
+This is an entropy-code step, not an audio quantization step. The source is
+lossless. A zero step is not a supported valid coding state; report a damaged
+stream rather than attempting an unbounded unary loop.
+
+11.4 Expanding unary prefix
+
+Set accumulator A=0 and zero count Z=0. Read bits until a one is read.
+For each zero:
+
+  A = A + step
+  Z = Z + 1
+  if Z is a multiple of 7:
+      step = step * 4
+
+The terminating one consumes a bit but adds nothing to A. The step used for
+the remainder is the FINAL step, after any multiplications. The first seven
+zeros use the initial step, the next seven use four times that step, etc.
+Arithmetic overflow or physical end-of-input is corruption, not implicit
+zero input. The converter stops and retains previously completed frames.
+
+11.5 Truncated-binary remainder
+
+For positive final step T, compute:
+
+  n = floor(log2(T))
+  J = 2^(n+1)
+  cutoff = J - T
+  r = read n bits as an unsigned integer (zero when n=0)
+  if r >= cutoff:
+      r = 2*r - cutoff + read one more bit
+  code = A + r
+
+This produces a remainder in 0..T-1. T=1 consumes no remainder bits.
+Using integer bit_length(T)-1 computes n exactly; no floating-point log or
+content-based decision is necessary.
+
+Descriptions using adaptive J and remainder-bit variables are equivalent:
+initialize J=2 and n=0, then shift J and adjust n until J/2 <= T < J.
+The exact result depends only on T, so an explicit history variable is not
+required. The converter uses this direct integer formulation.
+
+11.6 Sign folding and doubled residual
+
+  d = I32(code XOR -(code AND 1))
+
+The initial mappings are 0 -> 0, 1 -> -2, 2 -> 2, 3 -> -4, 4 -> 4.
+Residuals are even because the predictor operates at twice the integer PCM
+amplitude. This is not the conventional undoubled zigzag formula.
+
+11.7 Reconstruct finite differences
+
+Let old[0..4] be the previous D values and new[0..4] the replacement values.
+
+  new[p] = d
+  for i from p-1 down to 0:
+      new[i] = I32(old[i] + new[i+1])
+  for i from p+1 through 4:
+      new[i] = I32(new[i-1] - old[i-1])
+  D = new
+
+The index p is the actual prediction order: 0 is direct amplitude, 1 is
+first difference, 2 second difference, 3 third difference, 4 fourth
+difference. Some implementations number their switch cases differently;
+the order definition and equations above avoid that implementation artifact.
+
+11.8 Update energies
+
+For i=0..4, using the NEW D and the OLD energy:
+
+  magnitude = D[i] XOR (D[i] >> 31)
+  E[i] = U32(E[i] + magnitude - (E[i] >> 5))
+
+This magnitude is one's-complement magnitude: a nonnegative value contributes
+itself, while a negative value contributes abs(value)-1. Replacing it with
+abs(value) changes later decisions and corrupts the decode.
+
+11.9 Output PCM
+
+For mono:
+
+  sample = D_mono[0] >> 1
+
+For stereo, after decoding both coded values for the frame:
+
+  left  = D_left[0] >> 1
+  right = (D_left[0] + D_difference[0]) >> 1
+
+Use a sufficiently wide intermediate for the stereo addition. Both states
+are in the doubled domain, so this is equivalent to adding their separately
+halved even values. Stereo is left/difference, not independent L/R and not
+mid/side. Interleave output as L0,R0,L1,R1,...
+
+Use signed 16-bit values for SINF code 3 and signed 24-bit values for code 5.
+Do not shift 24-bit samples down to 16 bits. A valid decoded value must fit
+the declared width. Recovery clamps out-of-range values and reports the
+count; it never silently wraps such values or calls the result verified.
+
+11.10 Termination and trailing bits
+
+Stop after exactly F complete frames from SINF. There is no end-of-stream
+symbol and no audio checksum. The remaining bits first zero-fill the current
+32-bit word. Original ReCycle streams then contain one additional all-zero
+32-bit word. A writer emitting just the flushed final word is also accepted.
+
+If B bits were consumed for audio, word padding has (-B) modulo 32 bits.
+The standard original-stream SDAT length is:
+
+  4 * ceil(B / 32) + 4 bytes.
+
+These final padding and flush bits are not additional silence samples.
+Check them separately from the IFF chunk alignment byte. The verbose audit
+records the exact consumed-bit count, padding, extra zero words and raw tail.
+Unexpected nonzero tail data, extra words, or a non-word-aligned SDAT are
+reported rather than assigned a guessed meaning.
+
+For stereo corruption, retain only frames for which both coded channels were
+completed. Never invent a missing right channel or append zeros to satisfy a
+declared frame count. A physical truncation can be detected, but arbitrary
+bit corruption can produce apparently valid wrong PCM: without a checksum
+the format does not allow universal corruption detection or repair.
+
+12. CONVERTER BEHAVIOR
+
+  python3 rex2AudioSampleLoop.py <inputFile> <outputDir>
+  python3 rex2AudioSampleLoop.py <inputFile> <outputDir> -verbose
+
+Requirements: Python 3.9 or newer and its standard library only. No SDK,
+external decoder, compiler, package installation, network access or supporting
+data file is required at runtime. The text specification and listening report
+are not runtime dependencies.
+
+The normal output is one WAV containing the entire source. The output directory
+may already exist. The converter preserves its unrelated contents and existing
+files. It starts with the input stem plus .wav; on a name collision it uses
+.1.wav, .2.wav, etc. Existing WAVs are never overwritten. It does not create
+slice files, JSON, text, logs, thumbnails or HTML by default. It prints the
+resulting path to stdout and diagnostics, when needed, to stderr.
+
+-verbose additionally writes <actual-output-name>.wav.json containing the
+chunk tree, absolute offsets, metadata fields, raw non-audio payload bytes,
+alignment bytes, SHA-256 hashes, codec bit counts and recovery warnings.
+The input itself is never modified. The destination is not created until the
+file has been identified, parsed and decoded to at least one complete frame.
+Foreign formats and unsupported audio/version/extension variants fail with
+exit status 1 and no output. Successful complete or partial recovery returns
+0; partial recovery always emits a warning. An unrecoverable target file
+also returns 1 without a WAV.
+
+Safe recovery follows declared boundaries only. A truncated chunk may use its
+available prefix; a truncated SDAT may yield complete earlier frames. Invalid
+nonessential metadata does not discard decodable audio. A damaged HEAD magic
+can be reported and recovered when the exact REX2 root, supported version
+record and required sound information remain. Missing rate, ambiguous duplicate
+sound chunks, absent version or undecodable audio cannot be safely guessed.
+
+The output is a RIFF/WAVE PCM file with a 16-byte fmt payload and one data
+payload. Its sample rate, channel count and bit depth are taken from SINF.
+WAV data contains signed little-endian two's-complement PCM. There are no
+embedded slice/effect/loop metadata chunks. An odd data size receives one zero
+alignment byte, excluded from the data size but included in the RIFF size.
+The converter rejects decoded waveforms exceeding the 32-bit RIFF size limit
+before creating output; RF64 and splitting very large waveforms are not
+implemented. Decoding is memory-resident, so adequate RAM is also required.
+New files have user and group read
+bits set; newly created destination directories have user and group search
+and read bits set. No external files are loaded to perform decoding.
+
+13. REMAINING GAPS AND HOW TO RESOLVE THEM
+
+The byte layout is explicit, but these semantics are not completely understood:
+
+* RCYX: the 16 bytes after its version record have verified field types but
+  unresolved user-facing meanings. Resolve them by making one controlled
+  ReCycle editor change at a time, saving, and comparing exact chunk fields;
+  correlate those changes with the document-extra loading code.
+
+* RECY ruler-unit selector: the full mapping to display units is unresolved.
+  Resolve it by controlled changes of each ruler mode in ReCycle.
+
+* Playback processing: the exact EQ gain/Q scaling, filter coefficients,
+  compressor control curves/envelope tables, transient-shaper envelope tables,
+  synthesized stretch tail, gate/visibility rules, gain/headroom, pitch and
+  preview scheduling are not implemented as a renderer. The physical fields
+  are parsed. Reproducing playback requires reference renders of controlled
+  impulses, steps, tones and slice edits across format versions, followed by
+  matching the documented binary reader and effect-engine behavior.
+
+* Audio sample-format codes 1 and 7 are recognized as unsupported; their
+  complete SDAT-to-PCM semantics are not asserted here. Obtain independently
+  verified source/render pairs before extending support. Nonzero HEAD UUIDs,
+  new file versions and new chunk types also require separate evidence.
+
+Consequently this deliverable is a complete source-waveform extractor for
+the stated integer profile, not a complete ReCycle application emulator or
+a 100-percent semantic specification for every possible REX2 variant.
+
+14. EVIDENCE AND ATTRIBUTION
+
+The container and codec were checked through direct binary analysis, full
+compressed-stream consumption, comparison with a separate C++ decoder, and
+decode/re-encode comparisons. Re-encoding validates coded symbols, predictor
+decisions, padding and the extra zero word; it does not prove editor-field
+semantics or that source PCM equals an effects-processed preview.
+
+Useful primary implementation references:
+
+  VelociLoops, public-domain/Unlicense C++ decoder and encoder:
+  https://github.com/kunitoki/VelociLoops
+  https://github.com/kunitoki/VelociLoops/blob/main/src/velociloops.cpp
+  Reference checkout: f77609ec70b7bb6db362ba97030bd9703539fa01
+
+  Independently published DWOP investigation:
+  https://github.com/charlesvestal/schwung-rex/blob/main/REX2_FORMAT.md
+  Reference checkout: c46ed640bcbd9d9c31a9b2b1e73590ab113abdb6
+
+  Additional container and zero-word investigation:
+  https://github.com/esaruoho/paketti/blob/master/rex2-format.txt
+
+  Reason Studios REX SDK 1.9.2, official reader and serialized media types:
+  https://developer.reasonstudios.com/downloads/other-products
+  https://cdn.reasonstudios.com/developers/RexSDK/1/192/REXSDK_Mac_1.9.2.zip
+
+Public descriptions have disagreed about HEAD byte 5, SINF rate width, RECY
+tempo, and SLCE points/flags. The tables above use the actual typed field
+reads and named reader/setter behavior instead of those conflicting guesses.
+The converter contains its own Python implementation and does not load or
+redistribute the SDK. REX2 and ReCycle are products of Reason Studios /
+Propellerhead Software; this work is independent of those companies.
+
+The following notice accompanies use of the official SDK as a research
+reference. It is reproduced here, not as a required runtime component:
+
+General License Agreement
+
+This product, is provided by Reason Studios Aktiebolag, reg. no. 556546-2206, 
+Hornsbruksgatan 23, SE-117 34 Stockholm, Sweden, ("Reason Studios") and your use thereof 
+is subject to your continued compliance with the terms and conditions included herein. 
+
+Reason Studios hereby grants to you a royalty-free license to study, amend and use this 
+product.
+Notwithstanding anything to the contrary in this license agreement, you may not use this 
+product (or parts thereof) in conjunction with any open source software, free software or 
+other software that risk creating an obligation to distribute or publish this product 
+(including any part thereof) or any software used together with this product to any 
+third party. 
+
+YOU ACKNOWLEDGE AND AGREE THAT THIS PRODUCT IS PROVIDED ON AN "AS-IS" AND "AS-AVAILABLE" 
+BASIS, WITHOUT ANY REPRESENTATION OR WARRANTY (WHETHER EXPRESS OR IMPLIED), INCLUDING, 
+BUT NOT LIMITED, ANY REPRESENTATIONS OR WARRANTIES CONCERNING AVAILABILITY, 
+NON-INFRINGEMENT, FITNESS FOR A PARTICULAR PURPOSE OR MERCHANTABILITY. IN NO EVENT SHALL 
+REASON STUDIOS (INCLUDING ITS EMPLOYEES, AGENTS, CONSULTANTS OR REPRESENTATIVES) BE LIABLE
+FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY WHATSOEVER. 
+
+FOR THE AVOIDANCE OF DOUBT, YOU ARE USING THIS PRODUCT AT YOUR OWN RISK AND LIABILITY.
+
+With the exception of products distributed via Reason Studios' marketplace, this license 
+agreement and the copyright notice included herein must be distributed together with all 
+copies of any results from your use of this product .
+
+Reason Studios reserves the right to amend this agreement at any time by providing written
+notice on www.reasonstudios.com. 
+
+This agreement is governed by and construed in accordance with Swedish law. Any dispute, 
+controversy or claim in relation to this agreement shall be finally settled by Swedish 
+courts, with the district court of Stockholm as the court of first instance.
+
+© Reason Studios AB, Version 1, Updated 18 November 2019

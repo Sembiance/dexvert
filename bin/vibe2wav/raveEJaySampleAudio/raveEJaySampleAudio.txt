@@ -1,0 +1,350 @@
+RAVE eJAY SAMPLE AUDIO: tPxD / T FORMAT
+=====================================
+
+Scope and certainty
+-------------------
+This document specifies the byte-oriented tPxD/T compressed mono sample stream
+used by the classic eJay family. A file contains one record, or consecutive
+records forming a sample bank. The extension is not part of identification.
+This is not the RIFF/WAVE format, a song/arrangement format, an INF descriptor,
+or an arbitrary format sharing the .pxd extension.
+
+The audio decoding rules below are independently implemented from the original
+32-bit PXD32D5 decoder's instructions. They include its exact amplitude table,
+16-bit arithmetic, dictionary replacement and long-entry aliasing. They do not
+require the original DLL at runtime. Record headers and the terminal-command
+forms described below have also been checked against binary streams.
+
+There is one semantic limitation: the text metadata is extensible application
+information. Its optional penultimate numeric field has no established meaning,
+and no character-encoding identifier is stored. The conventional interpretation
+of a final six-digit field as a date is not established by the audio decoder.
+Those bytes are preserved exactly, rather than assigned invented meanings.
+Consequently this is a complete executable description of the supported audio
+stream grammar, but not a claim that every application's metadata vocabulary,
+or every historical eJay format variant, has been reverse engineered.
+
+Numbers and terminology
+-----------------------
+Offsets are relative to the start of a record unless stated otherwise. All
+multibyte numbers are little-endian. Hexadecimal bytes are written with a 0x
+prefix. A sample/frame means one signed mono amplitude, not a byte. The decoded
+rate is fixed at 44,100 frames/second and the output is signed 16-bit PCM.
+No sample-rate or channel-count field occurs in this record header.
+
+A record begins at offset R. Let L be its metadata-length byte, and let
+H = R + 5 + L be the absolute offset of its fixed T marker.
+
+Record layout
+-------------
+Relative offset    Length        Meaning
+0                  4             Exact ASCII signature "tPxD"
+4                  1             L: number of bytes in the metadata area
+5                  L             Metadata bytes, ending in 0x00 0x00
+5 + L              1             Exact marker 0x54 (ASCII "T")
+6 + L              4             N: unsigned decoded frame count
+10 + L             2             S: signed initial predictor, reduced scale
+12 + L             variable      Compressed command stream
+variable           0, 1 or 3      Optional terminal commands, described below
+
+The compressed command stream begins at R + 12 + L. Metadata is byte-counted:
+L includes both trailing zero bytes. No alignment rounding is applied. There
+is no compressed-byte-count field, checksum, separate dictionary block, footer
+index, encryption layer or RIFF wrapper in this profile. The fixed signature,
+length and marker are structural; do not locate audio by searching for "T" or
+for a NUL byte in the input.
+
+A normal audio-bearing record has N >= 1. S is the initial amplitude at half
+output scale. The first output sample is wrap16(2*S). It is emitted before any
+compressed command. This sample counts toward N.
+
+Metadata
+--------
+The L bytes are a length-delimited text area with a double-NUL ending. The
+core decoder skips this area by L; it never uses text to choose a codec, sample
+rate, frame count, stereo pairing or record boundary. Decode audio using the
+binary header regardless of the content or number of text lines.
+
+Common metadata conventions use CR LF (0x0d 0x0a) separators:
+
+  One to three lines: display label, optional second line, optional blank line.
+  Six lines: label line 1, label line 2, product/collection, kit/subcollection,
+             category, nominal frames per four-beat bar.
+  Eight lines: those six fields, an application-specific numeric code,
+               an application-specific six-digit field resembling DDMMYY.
+
+Empty lines are significant. A category may itself be numeric. Some applications
+put a product label and an original filename in only two lines. Treat such
+text as descriptive content; an embedded filename is not an external dependency
+and must not be opened. These conventions are not additional binary variants.
+
+Where the sixth field contains the nominal bar-frame count B, its conventional
+relationship to tempo is BPM = 4 * 60 * 44100 / B. This is musical metadata,
+not a playback sample rate. Its presence does not authorize resampling or
+stretching the audio. Some metadata writers leave it empty.
+
+The format does not declare a character encoding. ASCII and Western single-byte
+text are compatible with the established usage. The supplied converter renders
+bytes through Latin-1 for a reversible display and includes raw metadata hex in
+verbose output. The exact original text encoding and semantics of the two
+optional extra fields remain unresolved; audio extraction does not depend on
+them. Do not use a title suffix such as L or R to merge records: stereo grouping
+can require an external descriptor and is not encoded as a channel relationship
+in this stream. Each record is independently exported as mono.
+
+Decoder state
+-------------
+Start each record with a fresh dictionary and accumulator:
+
+  accumulator = (2 * S) modulo 65536
+  emit accumulator as a signed 16-bit sample
+  emitted = 1
+  dictionary slot 0 = five zero deltas
+  all other dictionary slots = undefined
+
+For every decoded delta code c:
+
+  accumulator = (accumulator + DELTA[c]) modulo 65536
+  emit accumulator as a signed 16-bit sample
+  emitted += 1
+
+wrap16(x) is ((x + 32768) modulo 65536) - 32768. Wrap, rather than saturate,
+on overflow. Do not normalize, remove DC, fade, filter or apply a second gain
+factor. At unity gain the original playback decoder doubles the stored seed
+and uses the doubled lookup table specified here. This scaling is distinct
+from a separate older conversion routine that multiplies by four.
+
+Command grammar
+---------------
+Command bytes are read only at command boundaries. Operand bytes have no
+special meaning as commands, even if they equal a signature byte or opcode.
+
+0x00 .. 0xf3:
+    Read the corresponding dictionary slot and emit its sequence of deltas.
+    Initially 0x00 repeats the current amplitude five times. This is not an
+    absolute silence/reset command: a nonzero accumulator remains nonzero.
+    Slot 0 may subsequently be redefined. An undefined slot is malformed;
+    it is not valid to guess its contents from nearby audio.
+
+0xf4 .. 0xfe:
+    Let K = opcode - 0xf3 (one through eleven).
+    Read one unsigned slot-index byte I, then K delta-code bytes.
+    Replace the dictionary entry at I with those K codes and emit the newly
+    defined sequence immediately. There is no additional reference byte after
+    the definition. Replacing an entry does not reset the accumulator.
+    The index operand may address all 256 slots; indices 0xf4..0xff cannot be
+    directly referenced by a one-byte reference command but definitions still
+    emit their values. The usual encoder uses indices 1..243 and lengths 1..5.
+    Arbitrary replacement order is permitted; do not require sequential IDs.
+
+0xff:
+    Read one delta-code byte and emit that single delta. This does not add or
+    change a dictionary entry. In particular 0xff 0x80 repeats one amplitude.
+
+Examples, using the table below and an initial accumulator of zero:
+
+  ff 81              emits 2
+  f5 01 81 82        defines slot 1 as [+2,+4] and emits 2,6
+  01                 replays slot 1, adding +2,+4 to the current accumulator
+  00                 initially emits five copies of the current accumulator
+
+Dictionary storage and long-entry compatibility
+------------------------------------------------
+The legacy decoder represents each slot at an eight-word stride (16 bytes),
+storing signed delta words followed by a -1 word terminator. All actual deltas
+are even, so -1 is unambiguously the terminator. A reference traverses words
+until that terminator, not until a separately stored length.
+
+Definitions of lengths 1..7 fit inside a slot. A length of 8..11 writes across
+the next slot's start, including its terminator. Later definitions can replace
+a previous terminator and extend a previous entry's effective length. This is
+an implementation quirk, not an additional nesting/compression scheme. To
+reproduce it without unsafe memory access, use a bounded arena of 256*8+12
+word cells, initially undefined, with slot 0's first five cells zero and its
+sixth cell -1. A definition writes K deltas and -1 beginning at cell 8*I.
+A reference starts at 8*opcode and stops at -1. Reaching an undefined cell or
+the end of the arena is malformed. A definition emits its K newly written
+values immediately. This rule also specifies unusual overlapping definitions
+without relying on memory corruption in the original implementation.
+
+Delta table
+-----------
+The following P[0..127] values are exact integers in output PCM units, in index
+order (eight rows of sixteen values):
+
+  0, 2, 4, 6, 8, 10, 14, 18, 22, 26, 32, 38, 44, 50, 56, 64
+  72, 80, 88, 98, 108, 118, 130, 142, 154, 168, 182, 198, 214, 230, 248, 266
+  286, 306, 328, 352, 376, 402, 430, 458, 488, 520, 554, 588, 624, 662, 702, 744
+  788, 834, 882, 934, 988, 1044, 1102, 1164, 1228, 1296, 1366, 1440, 1516, 1596, 1680, 1768
+  1860, 1956, 2056, 2160, 2268, 2380, 2498, 2620, 2748, 2880, 3018, 3162, 3312, 3468, 3630, 3798
+  3974, 4156, 4346, 4542, 4746, 4958, 5178, 5408, 5646, 5892, 6148, 6414, 6690, 6976, 7272, 7578
+  7896, 8224, 8564, 8916, 9282, 9660, 10050, 10454, 10872, 11304, 11752, 12214, 12692, 13186, 13696, 14222
+  14766, 15326, 15904, 16500, 17116, 17752, 18406, 19082, 19778, 20494, 21232, 21992, 22776, 23582, 24412, 25266
+
+Define all 256 entries as:
+
+  DELTA[0] = 0
+  DELTA[c] = -P[128-c]        for 1 <= c <= 127
+  DELTA[c] =  P[c-128]        for 128 <= c <= 255
+
+Thus both 0x00 and 0x80 are zero delta codes when used as operands. A command
+0x00 has the separate dictionary-reference meaning. Code 0xff as an operand
+means +25266, although 0xff as a command introduces a literal.
+
+The original table generator starts A=2.2, F=1.0565 and Q[0]=0, then for
+I=1..127 performs these operations in this order:
+
+  Q[I] = Q[I-1] + (1 if I < 6 else trunc(A - 0.52))
+  A = A * F
+  F = F - 0.00022
+
+The stored A and F values are binary64 between iterations; intermediate
+arithmetic uses the original x87 conversion rules. Finally P[I]=2*Q[I].
+Use the integer table for portable, reproducible decoding rather than relying
+on floating-point rounding. The negative entries are reflected around code
+128. Code zero is zero because the original table allocation is zero-filled;
+the generator reads its zero-filled extra endpoint when constructing code 0.
+
+This is quantized differential coding. The original uncompressed recording
+cannot generally be reconstructed bit-for-bit before lossy encoding. The WAV
+contains the exact PCM represented by the compressed stream, not a restoration
+of information the compressor discarded.
+
+Ending a record and reading a bank
+----------------------------------
+Decode complete commands until the initial sample plus expanded deltas reaches
+or exceeds N. A final dictionary command can extend past N. Consume its entire
+encoded command, but retain only the first N PCM frames. Extra values from
+that command are outside the declared duration, not another audio channel.
+
+At this point the supported terminal grammar is:
+
+  * No terminal command, followed immediately by EOF or the next tPxD record.
+  * One 0x00 command, followed immediately by EOF or the next tPxD record.
+  * If the expanded frame count was exactly N: 0xff C 0x00, where C is any
+    delta-code byte, followed immediately by EOF or the next tPxD record.
+
+The additional commands are ordinary literal/repeat commands beyond the
+header's duration. The literal adds DELTA[C]; the final 0x00 replays slot 0.
+They are accounted for as terminal commands and do not contribute PCM to the
+WAV. They are not checksums or metadata. No particular value of C is required.
+The provenance/reason that a writer emits redundant commands is not needed to
+interpret their bytes, and is not inferred from the sample's name or content.
+
+Bank records have no inter-record alignment, separator, global record count
+or global header. After consuming the explicit terminal form, the next record
+must start at that exact byte. Reset all predictor and dictionary state there.
+Never search for the signature inside the compressed stream. Signature-looking
+bytes can be legitimate operands or dictionary references before N is reached.
+This terminal grammar is the supported profile; other trailing constructions
+are reported as unrecognized data, not silently accepted or skipped.
+
+Malformed input and recognition policy
+--------------------------------------
+An input whose first four bytes are not exactly "tPxD" is unsupported, regardless
+of its extension. Reject it before creating the output directory or any file.
+A non-T marker is an unsupported profile. Preflight every reachable record
+before writing output so an unsupported marker in a later record also produces
+no output. No alternate audio/container formats are tried.
+
+Once the exact signature identifies the target family, damage is reported and
+recovery is conservative:
+
+  * An incomplete header yields no audio for that record.
+  * A missing double-NUL metadata ending is reported; the stored length still
+    locates the following binary fields.
+  * EOF before N yields only the known decoded prefix, with a shorter WAV.
+  * A trailing 0xff lacking its operand yields no amplitude for that command.
+  * An incomplete dictionary definition contributes the deltas actually present,
+    but a missing index or missing delta is never fabricated.
+  * Undefined references stop decoding before that command. No guessed silence,
+    dictionary repair, extrapolation or signature resynchronization is used.
+  * Unrecognized trailing bytes are reported with their exact offset/length.
+    Already decoded records remain recoverable; unknown bytes are retained in
+    the optional verbose manifest as hex.
+  * N=0 is reported as malformed and exports no audio for that record.
+
+A damaged count can make later boundaries unknowable. There is no checksum or
+compressed length with which to uniquely repair it. Stopping with an explicit
+unparsed range is preferable to inventing a boundary. This is a recovery policy,
+not an assertion that all possible corruption is reversible.
+
+WAV representation
+------------------
+Each record produces a separate RIFF/WAVE file containing these fields:
+
+  RIFF, uint32(36 + 2*M), WAVE
+  fmt , uint32(16)
+  uint16(1)             PCM format
+  uint16(1)             mono
+  uint32(44100)         frames/second
+  uint32(88200)         bytes/second
+  uint16(2)             block alignment
+  uint16(16)            bits/sample
+  data, uint32(2*M)
+  M little-endian signed 16-bit samples
+
+M=N for a complete record; M is the available frame count after partial recovery.
+No metadata chunks, sidecar files or extra audio are added by default. The
+ordinary RIFF size limit applies to a single WAV; the implementation reports
+an error if a record exceeds what a RIFF size field can represent.
+
+Converter interface
+-------------------
+  python3 raveEJaySampleAudio.py inputFile outputDir
+  python3 raveEJaySampleAudio.py -verbose inputFile outputDir
+
+Requires Python 3.9 or later and only the Python standard library. No DLL,
+codec executable, network service, separate table file or external module is
+required. The output directory may already exist. Otherwise it is created only
+when there is something to write. Existing unrelated files are retained;
+matching output filenames are replaced atomically. Temporary files used for
+atomic replacement are removed, including after a write failure.
+
+For a single record the filename is <input-stem>.wav. For multiple records the
+filenames are <input-stem>_0001.wav, <input-stem>_0002.wav, and so on, in physical
+record order. No metadata field is interpreted as a path. Output files have
+mode 0644; newly created directories have user/group read and traverse access.
+
+-verbose (or --verbose) additionally writes <input-stem>.json with header
+values, raw metadata bytes, token counts, record byte ranges, terminal bytes,
+partial commands, warnings and output paths. A foreign signature or unsupported
+marker never creates even a verbose manifest. Normal console diagnostics do
+not imply a sidecar file.
+
+Exit status:
+  0  Complete conversion, no structural warnings.
+  2  Unsupported format/profile or an I/O/conversion failure.
+  3  Recognized input with damage or unparsed bytes; recovered WAVs may exist.
+
+An I/O failure during a multi-record export can leave earlier successfully
+written WAVs. Format identification and preflight failures precede all writes.
+
+Research provenance and limits
+------------------------------
+The primary behavioral reference is PXD32D5.DLL, distributed with the historical
+PXD2WAV utility, archived at:
+https://ilovepaws.nyc3.digitaloceanspaces.com/rarities/pxd2wav.zip
+
+Relevant instruction addresses in that DLL's preferred 0x10000000 image:
+  0x10011ce2..0x10011d07: allocate and zero the delta table buffer.
+  0x10012242..0x10012398: construct and double the delta table.
+  0x100123db..0x10012415: initialize the five-zero dictionary entry.
+  0x1001533f..0x10015383: skip metadata and double the initial predictor.
+  0x10016509..0x1001670a: compressed playback decoder, unity-gain PCM reference.
+  0x10021289..0x100212e4: select mono samples from the playback buffer.
+
+The independent open-source wrapper at
+https://github.com/paator/eJayDecompressor
+also documents the eJay DLL workflow. It is not a runtime dependency of this
+converter, and its filename-based stereo inference is deliberately not used.
+
+Audio arithmetic and command dispatch have been checked by emulating the
+original machine instructions, including all command opcodes, delta codes,
+signed overflow and overlapping long dictionary entries. Terminal grammar
+comes from structural analysis of streams; it is not an official vendor
+specification. Full semantic documentation of the optional extra text fields
+would require a writer/metadata-editor implementation, original authoring
+software with controlled exports, or vendor documentation. Establishing the
+intended extended-text charset would likewise require such an authoritative
+source or controlled exports containing distinguishable non-ASCII characters.

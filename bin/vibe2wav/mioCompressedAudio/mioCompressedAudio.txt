@@ -1,0 +1,635 @@
+ENTIS MIO COMPRESSED AUDIO
+Binary format specification and decoder notes
+Revision: 2026-10-27
+
+1. SCOPE AND CONVENTIONS
+
+MIO means Music Interleaved and Orthogonal transformed. It is the audio member
+of the Entis EMC record-container family. A filename extension is not a format
+identifier. MIO is unrelated to Nintendo MIO0 compression and neural MioCodec.
+
+This document fully specifies the audio-only MIO 0x00020300 profile using
+ERINA adaptive Huffman coding, including LOT, LOT with middle/side stereo
+rotation (MSS), and lossless PCM transforms. It specifies the byte layout,
+bitstream, entropy-model state, coefficient layout, inverse transforms, and
+PCM reconstruction. No filenames, expected file sizes, guessed sample rates,
+signature scanning, or audio-content heuristics are part of decoding.
+
+The wider Entis family also has earlier MIO revisions, ERISA arithmetic-coded
+audio (architecture 0xFFFFFFF0), image/movie records, and sequence tables.
+Those extensions are outside this implemented profile. This document is not
+a claim that every historical Entis format has been implemented. Section 15
+lists the exact limits and the work needed to extend them.
+
+All byte offsets are relative to the object being described unless explicitly
+called file offsets. Integers in container and fixed audio headers are unsigned
+little-endian, including the 64-bit record lengths. Signed audio integers use
+two's complement. Packed audio bits are read in increasing byte-address order,
+most-significant bit first within each byte. A field of k bits is accumulated
+as an unsigned big-endian bit value even though container integers are little-
+endian. There is no alignment between packed fields.
+
+One PCM frame contains one sample value per channel. Every sample-count field
+in a MIO header counts frames, not the number of interleaved scalar values.
+There is one audio stream per supported container; SoundStm records are
+successive packets of that stream, not separate tracks.
+
+2. EMC FILE HEADER: 64 BYTES
+
+Offset  Size  Meaning
+0x00       8  Literal bytes 45 6E 74 69 73 1A 00 00 ("Entis\x1A\0\0").
+0x08       4  EMC multimedia file ID, 0x03000100.
+0x0C       4  Reserved extension word, zero.
+0x10      48  Format description, NUL-padded to the entire field:
+              "Music Interleaved and Orthogonal transformed".
+
+The description is 44 ASCII bytes followed by four zero bytes. Neither the
+EMC signature nor file ID alone distinguishes MIO from other Entis media.
+The decoder requires all three identification components: signature, ID, and
+MIO description. Nonzero reserved/trailing description bytes are damage once
+the MIO description itself has been established.
+
+3. RECORD CONTAINER
+
+Every record consists of:
+
+Offset  Size  Meaning
+0x00       8  Record identifier, exact bytes, including trailing spaces.
+0x08       8  Payload size, excluding this 16-byte record header.
+0x10    size  Payload.
+
+The next sibling starts at record_start + 16 + payload_size. No implicit
+RIFF-style even-byte padding or other alignment is applied. A container
+record's payload consists of consecutive child records and its length bounds
+all those children. Length arithmetic must use at least 64-bit integers and
+must be checked against both the parent boundary and the physical file size.
+There is no checksum, footer, or independent end-of-file record.
+
+The supported tree, in order, is:
+
+  64-byte EMC header
+  "Header  "
+      "FileHdr "   exactly once, first
+      "SoundInf"   exactly once
+      "cpyright"   optional textual copyright
+      "descript"   optional textual description
+  "Stream  "
+      "SoundStm"   zero or more successive audio packets
+
+Optional text records may be interspersed after FileHdr. Header and Stream
+each occur exactly once. An unknown record cannot be assumed to be ignorable
+metadata: the converter rejects it before writing output. In particular,
+image/movie/sequence records are not handled as extra audio tracks.
+
+4. FileHdr PAYLOAD: 20 BYTES
+
+Offset  Size  Field                  Meaning
+0x00       4  version                0x00020100.
+0x04       4  contained_flags        0x00000100: contains audio.
+0x08       4  keyframe_interval      Shared image/movie keyframe interval.
+0x0C       4  image_frame_count      Zero for audio-only MIO.
+0x10       4  duration_ms            Overall presentation time in milliseconds.
+
+The keyframe field belongs to the common media header and does not specify
+audio packet count or audio entropy reset spacing. Audio resets are indicated
+individually by SoundStm flags. A keyframe value of one denotes independent
+image frames in the image variant; it has no audio reconstruction effect.
+
+duration_ms may be zero or populated by the writer. It is descriptive timing,
+not an authoritative PCM length, and may have integer-millisecond rounding.
+PCM duration is decoded_frames / sample_rate. Do not trim or pad audio to
+duration_ms. Generic contained_flags also reserves 0x1 for images, 0x2 for
+alpha, 0x10 for palettes, and 0x200 for sequences; combinations containing
+those features are outside this audio-only profile.
+
+5. SoundInf PAYLOAD: 40 BYTES
+
+Offset  Size  Field                  Meaning
+0x00       4  version                0x00020300.
+0x04       4  transformation         See below.
+0x08       4  architecture           See below.
+0x0C       4  channels               1 or 2.
+0x10       4  sample_rate            PCM frames per second, a positive integer.
+0x14       4  blockset_count         Unused/reserved; zero.
+0x18       4  subband_degree D       Base transform length is 2^D.
+0x1C       4  sample_count           Total PCM frames in the stream.
+0x20       4  lapped_degree          LOT overlap degree; one.
+0x24       4  bits_per_sample        PCM scalar sample width.
+
+Transformations:
+  0x00000005  LOT: independently transformed channels, lossy, 16-bit PCM.
+  0x00000105  LOT-MSS: joint stereo rotation, lossy, 16-bit PCM.
+              With one channel, this uses the ordinary LOT bit layout.
+  0x03020000  Lossless predictive PCM, 8 or 16 bits per sample.
+
+For LOT, D is 8..12 inclusive and lapped_degree is exactly one. No sample-rate
+table is implied: read sample_rate directly. For lossless PCM, subband_degree
+and lapped_degree do not participate in sample reconstruction.
+
+Architectures:
+  0xFFFFFFFF  Historical ERI_RUNLENGTH_GAMMA identifier. For MIO LOT this
+              actually selects the same order-1 adaptive Huffman byte coder
+              as 0xFFFFFFFC, not the ERI image gamma-only byte coder.
+  0xFFFFFFFC  ERI_RUNLENGTH_HUFFMAN: order-1 adaptive Huffman bytes with
+              adaptive zero-run lengths. Required for lossless PCM.
+  0xFFFFFFF0  ERISA_NEMESIS_CODE: an arithmetic-coded word path in the MIO
+              codec. Not implemented by this converter.
+
+sample_count should equal the sum of the SoundStm frame counts. If corruption
+makes these disagree, packet frame counts determine the output; the mismatch
+is reported. Neither the filename nor FileHdr timing is used to resolve it.
+
+6. TEXT RECORDS
+
+cpyright and descript payloads are text, without an extra length field.
+UTF-16 text has a leading BOM (FF FE for little-endian; FE FF for big-endian).
+Without a BOM the historical encoding is ASCII or Windows Shift-JIS/CP932.
+ASCII is a subset of CP932. Trailing NULs may terminate the string. Text has
+no effect on audio decoding. Malformed text bytes are retained in the source
+file; verbose JSON displays Unicode replacement characters where needed.
+
+7. SoundStm FIXED HEADER: 8 BYTES
+
+Offset  Size  Field                  Meaning
+0x00       1  version                1.
+0x01       1  flags                  Bit 0: lead/reset packet; other bits zero.
+0x02       2  reserved               Zero.
+0x04       4  frames S               PCM frame count produced by this packet.
+0x08       -  compressed payload     Packed bits described below.
+
+The record payload length includes these eight bytes. A lead packet resets
+all entropy trees, the previous-symbol context, and pending zero-run state.
+A continuation packet inherits those states from the previous packet. The
+first decodable packet must be a lead packet. Packet-local packed bit position
+always restarts at zero; final word padding is never part of the next packet.
+
+Crucially, the lead flag controls entropy state. Transform overlap does not
+carry from one SoundStm packet to another: each packet has its own leading and
+trailing half-blocks, even when its Huffman state continues.
+
+8. LOT SIDE INFORMATION AND COEFFICIENT COUNTS
+
+Let N = 2^D, B = ceil(S/N), C = channels, and Q = B*N*C.
+A packet reconstructs exactly S frames but codes Q quantized coefficients.
+The unused PCM positions in the final rounded transform block are discarded.
+Do not discard their coded coefficients: they still affect entropy state.
+
+The bitstream begins with one reserved zero bit. Next come transform side
+information fields in block-set order, followed by one reserved zero bit,
+then the adaptive Huffman-coded coefficient bytes, and finally zero padding
+to the next 32-bit boundary. There is no byte alignment before entropy data.
+
+For ordinary LOT (including one-channel LOT-MSS):
+  Set last_division[ch] = -1 for each channel.
+  For block set b = 0..B-1:
+    For channel ch = 0..C-1:
+      Read division v as 2 bits.
+      If v differs from last_division[ch]:
+        If b > 0, append a TRAILING half-block at degree D-last_division[ch].
+        The first new subblock is a LEADING half-block.
+      Otherwise the first new subblock is INTERNAL.
+      Set last_division[ch] = v.
+      Append 2^v subblocks at degree D-v; all after the first are INTERNAL.
+  If B > 0, append one TRAILING half-block per channel, in channel order,
+  each using that channel's final degree.
+
+Division values 0, 1, 2 mean one, two, or four subblocks of lengths N, N/2,
+or N/4. Value 3 is reserved in this profile and is treated as malformed.
+Each appended block immediately consumes a 32-bit weight word W and a
+16-bit unsigned overall quantization coefficient A from the side stream.
+A division-change trailing block's W,A precede those of the new subblocks.
+
+For two-channel LOT-MSS, there is one division sequence shared by both
+channels, so the channel loop above has one iteration. Every appended block
+represents both channels and consumes a stereo rotation code before W,A:
+  LEADING or TRAILING: 2 bits, one angle for all coefficient positions.
+  INTERNAL:           4 bits, upper two bits for even coefficient positions,
+                      lower two bits for odd positions.
+There is one final joint TRAILING block, not two separate metadata entries.
+
+Block kinds consume coefficients as follows, where M = 2^(block degree):
+  LEADING:   M/2 coefficients per channel, placed at odd matrix indices;
+             even indices are initially zero. Produces no PCM frames yet.
+  INTERNAL:  M coefficients per channel. Produces up to M PCM frames.
+  TRAILING:  M/2 coefficients per channel, placed at odd matrix indices;
+             even indices are initially zero. Produces up to M PCM frames.
+
+These counts add to exactly Q. In MSS blocks, take all coefficients for the
+first channel, then all for the second channel. In ordinary LOT, the side
+information's append order also gives the coefficient-consumption order.
+Each channel's PCM output is capped at S frames, independently of how many
+complete transform positions the operations reconstruct.
+
+9. ADAPTIVE HUFFMAN AND ZERO-RUN CODING (ERINA ORDER 1)
+
+This coder is shared by lossless PCM and the LOT coefficient-byte plane.
+There are 257 adaptive trees. Trees 0..255 code byte symbols in the context
+of the previous decoded symbol byte; tree 256 codes positive zero-run lengths.
+Initialize all trees empty and previous_symbol = 0 on a lead packet.
+
+To produce L bytes:
+  First output any pending zeros from a preceding decode request.
+  While fewer than L bytes have been produced:
+    Decode a byte with tree[previous_symbol]; output the byte.
+    If the byte is zero:
+      Decode positive length R with tree[256].
+      Output R-1 additional zeros. The first zero was already output.
+      Carry any zeros beyond this request as pending zero-run state.
+    Set previous_symbol to the decoded byte (zero after a zero run).
+
+Expanded run zeros do not individually update a symbol tree. The zero symbol
+and its run-length symbol each update their respective trees once. No end
+marker is required: L is determined from the fixed headers and transform
+rounding. For LOT, L = 2*Q. For lossless PCM, L = S*C*(bits_per_sample/8).
+
+9.1 Tree representation
+
+Use 513 node slots indexed 0..512; root = 512; null = 32768. Each node has:
+  weight: nonnegative integer
+  parent: parent slot or null
+  child:  an even index of two consecutive child slots for an internal node,
+          or (0x80000000 | symbol) for a leaf.
+The escape symbol is 0x7FFFFFFF, so its leaf child value is 0xFFFFFFFF.
+The active nodes occupy a suffix beginning at first. Initially first = 512,
+root.weight = 0, root.parent = null, root.child = null.
+The symbol lookup table used by encoders is unnecessary for a decoder.
+
+To decode with a nonempty tree, start at root and repeatedly consume one bit
+and select node.child + bit until reaching a leaf. Save the leaf's symbol,
+increment its weight, normalize from that node, and, if root.weight >= 16384,
+halve and rebuild the tree as below. These updates also apply when the leaf
+is the escape leaf. If the saved symbol is not escape, return it.
+
+For an empty tree or an escape leaf, read a new literal:
+  Byte tree:       read eight raw bits.
+  Zero-run tree:   read the positive interleaved gamma code below.
+Insert the new symbol into the tree and return it.
+
+9.2 Positive interleaved gamma code
+
+Set value = 1. Read one continuation bit. While it is one, read one data bit,
+set value = 2*value + data_bit, and read the next continuation bit. Return
+value when the continuation bit is zero. Examples: 1 -> 0, 2 -> 100,
+3 -> 110, 4 -> 10100, 5 -> 10110. A zero length cannot be represented.
+
+9.3 Normalization
+
+The following exact tie behavior matters. Starting at node i:
+  While i < root:
+    Find the largest slot j >= i, j < root, such that every slot scanned
+    after i through j has weight strictly smaller than node[i].weight.
+    Stop the scan at the first weight >= node[i].weight.
+    If j != i:
+      Exchange node contents at i and j, but retain the parent value
+      originally belonging to each slot.
+      For every exchanged internal node, set both children's parent to its
+      new slot. An encoder must also repair symbol/escape lookup entries.
+      Continue from j.
+    Move to the current node's parent.
+    Recompute that parent's weight as the sum of its two children's weights.
+
+Do not swap equal weights. Normalization recomputes weights on the path;
+it is not an independent increment of every ancestor.
+
+9.4 Insertion
+
+If first > 0, subtract two from first and let i = first. Put a new leaf
+of weight one and the literal symbol at i.
+
+If the tree was empty:
+  New leaf i and escape leaf i+1 both have weight one and parent root.
+  root.child = i, root.weight = 2, root.parent = null.
+Otherwise:
+  Copy the former node i+2 into slot i+1.
+  Turn i+2 into an internal node with child i, weight 1+node[i+1].weight,
+  and its former parent unchanged.
+  Set parents of i and i+1 to i+2; normalize from i+2.
+
+If all slots are occupied (first == 0), replace the symbol in leaf slot zero,
+or slot one if slot zero is escape. Preserve its existing weight and parent.
+This bounded-alphabet behavior is relevant to the run-length tree, where
+more than 256 distinct positive lengths can occur. There is no generic
+unbounded canonical Huffman table hidden in the stream.
+
+9.5 Weight halving and rebuilding
+
+Scan old nodes from slot 511 down to first. For each leaf, replace its weight
+by (weight+1)//2 and copy the leaf into the next slot descending from 512.
+Let next be the lowest occupied slot of this compacted leaf list.
+For i = first, first+2, ...:
+  Copy nodes[next], nodes[next+1] into nodes[i], nodes[i+1]; advance next by 2.
+  Repair the child parent links of either copied node if it is internal.
+  Let w be the sum of these two node weights.
+  If next > 512:
+    Set root to weight w, parent null, child i.
+    Set both copied nodes' parent to root and finish.
+  Otherwise insert an internal node of weight w and child i immediately
+  before the first node at or after next whose weight is >= w. Shift the
+  preceding smaller-weight nodes down by one slot to make room. If no such
+  node exists, use slot 512. Then decrement next by one and continue.
+
+No entropy reset is implied by a weight rebuild. Tree state, previous symbol,
+and pending runs continue between packets unless the lead flag is set.
+
+10. COEFFICIENT BYTE PLANES AND INTERLEAVING
+
+For LOT, decode 2*Q bytes. The first Q are encoded high bytes H; the next Q
+are low bytes L. For each position p, recover the 16-bit signed coefficient:
+
+  low = L[p]
+  high = H[p] XOR (0xFF if low >= 128 else 0)
+  coefficient = signed16((high << 8) | low)
+
+The XOR predicts the high byte from the sign of the low byte, not from the
+sign of the final coefficient. Plain concatenation of the two planes is wrong.
+
+The resulting values are transposed before block consumption:
+  Ordinary LOT: width = N,     rows = B*C.
+  Stereo MSS:   width = 2*N,   rows = B.
+  For x = 0..width-1 and y = 0..rows-1:
+    coefficients[y*width+x] = recovered_value[x*rows+y].
+
+Now consume the flat coefficient array using the block list from section 8.
+Exactly Q coefficients must be consumed. Both the high and low byte planes
+are one continuous entropy decode; do not reset the context between them.
+
+11. INVERSE QUANTIZATION
+
+For a block of length M = 2^d, extract six unsigned five-bit codes:
+  code[j] = (W >> (5*j)) & 31, j = 0..5.
+  r[j] = 2^(-(code[j]-15)/2), j = 0..5; r[6] = 1.
+The top two bits b = W >> 30 encode a block-noise weight (b+2)/2.
+Values 0..2 are defined by the original specification; value 3 is reserved.
+The inverse formula still gives 2.5 for a damaged/reserved value of 3.
+
+Define seven band widths M/64, M/64, M/32, M/16, M/8, M/4, M/2.
+Each point p[j] is the band's starting index plus half its width.
+Build a floating weight vector f[k]:
+  Before p[0]: f[k] = r[0].
+  Between consecutive p[j-1], p[j]: linearly interpolate r[j-1], r[j].
+  From p[6] onward: f[k] = 1.
+For k = 15,31,47,... multiply f[k] by (b+2)/2.
+Then replace f[M-1] with A, the block's unsigned 16-bit overall coefficient.
+For every matrix position k:
+
+  X[k] = sqrt(2/M) * A * (1/f[k]) * quantized[k].
+
+Half-blocks have zero quantized values at even indices. The special last
+coefficient cancels A and becomes sqrt(2/M)*quantized[M-1]. The converter
+uses this continuous limit when A == 0 to avoid an otherwise undefined 0/0;
+all other reconstructed coefficients then become zero. It reports A == 0
+as damage. No gain normalization or post-decode volume adjustment is applied.
+
+For numerical compatibility with the Entis implementation, compute r, linear
+interpolation, and sqrt scale in binary64; store f in binary32; multiply its
+special odd weight in binary32; round 1/f to binary32; and round each final
+X to binary32. Subsequent matrix buffers and rotation parameters are binary32.
+Avoid contraction of multiply/add pairs into fused operations if matching
+the historical implementation's PCM rounding is important.
+
+12. STEREO ROTATION, ODD GIVENS MATRIX, LOT, AND IDCT
+
+12.1 Inverse stereo rotation
+
+For two-channel MSS, inverse-quantize both channel matrices first. For the
+selected rotation code t, set s = float32(sin(t*pi/8)) and
+c = float32(cos(t*pi/8)). For the same coefficient position in channels 0,1:
+  new0 = old0*c - old1*s
+  new1 = old0*s + old1*c
+Use one code for an entire half-block. For internal blocks use separate even
+and odd position codes, as specified in section 8. This operation precedes
+the odd Givens transform. Channels then undergo the same inverse operations
+independently. Ordinary LOT has no stereo rotation.
+
+12.2 Odd Givens rotation parameters
+
+For each transform length M, k = pi/(2*M). Starting with step = 2, generate
+groups of seven parameter pairs until step >= M, multiplying step by 8 after
+each group. For pair i = 0..6 in a group:
+  ws = 1; a = 0
+  For j = 0..i-1:
+    a += step
+    ws = ws*group[j].sin + group[j].cos*cos(a*k)
+  angle = atan2(ws, cos((a+step)*k))
+  group[i] = (float32(sin(angle)), float32(cos(angle))).
+The ws/a calculations use binary64; previously generated parameters use their
+stored binary32 values. Flatten groups in their creation order into R.
+
+Apply the inverse odd Givens matrix with this index-exact procedure:
+  index = 1; step = 2; lc = (M/2)//8; base = 0
+  Repeat:
+    base += 7; index += 7*step; step *= 8
+    If lc <= 8: stop this loop
+    lc //= 8
+  For j descending from lc-2 to 0:
+    Rotate positions index+j*step and index+(j+1)*step using R[base+j].
+  While lc <= (M/2)//8:
+    base -= 7; step //= 8; index -= 7*step
+    For group = 0..lc-1:
+      For j descending from 6 to 0:
+        u = group*(8*step) + index + j*step
+        Rotate positions u and u+step using R[base+j].
+    lc *= 8
+
+Here "Rotate" has the inverse-matrix sign convention:
+  new_a = old_a*cos + old_b*sin
+  new_b = old_b*cos - old_a*sin.
+Read both old values before writing either new value.
+
+12.3 Half-block boundary conditions and inverse pre-LOT
+
+After the odd Givens matrix:
+  LEADING:  set X[2*i] =  X[2*i+1].
+  TRAILING: set X[2*i] = -X[2*i+1].
+  INTERNAL: no boundary substitution.
+
+For every adjacent pair (a,b), apply inverse pre-LOT:
+  X[2*i]   = 0.5*(a+b)
+  X[2*i+1] = 0.5*(a-b).
+
+A LEADING block becomes the saved overlap matrix P and emits no PCM.
+For INTERNAL and TRAILING blocks, combine the previous overlap and current X:
+  Y[2*i]   = P[2*i] + X[2*i+1]
+  Y[2*i+1] = P[2*i] - X[2*i+1].
+For INTERNAL, save the current X as the next P. A TRAILING block ends that
+degree's overlap chain. On a division change, the old trailing block is
+completed before the new degree's leading block initializes a new P.
+
+12.4 Inverse DCT and PCM
+
+The inverse DCT has the following unnormalized mathematical definition:
+  pcm[t] = Y[0] + sum(Y[k]*cos(pi*k*(2*t+1)/(2*M)), k=1..M-1).
+The sqrt(2/M) scaling was already included in inverse quantization.
+Do not apply another orthonormal-DCT normalization factor or a sine window.
+
+The converter uses the Entis recursive binary32 butterfly calculation to
+match its rounding. A portable implementation may evaluate the mathematical
+formula above, but different floating-point operation ordering can change
+occasional final samples by a least significant bit. The exact butterfly is:
+
+Define C[d][i] = float32(cos((2*i+1)*pi/(4*2^d))). Generate each table by
+starting angle = pi/(4*2^d) and repeatedly adding twice that angle in binary64.
+Let h = float32(cos(pi/4)) and h2 = float32(2*h).
+Define FDCT(x) of length M with X[0] half the ordinary DC sum:
+  Base M=4:
+    a=x0+x3; b=x1+x2; c=C[1][0]*(x0-x3); e=C[1][1]*(x1-x2)
+    X0=0.5*(a+b); X2=h*(a-b); X1=c+e; X3=h2*(c-e)-X1.
+  Otherwise:
+    a[i]=x[i]+x[M-1-i]; b[i]=x[i]-x[M-1-i], i=0..M/2-1
+    even=FDCT(a)
+    odd=2*FDCT(b[i]*C[log2(M)-1][i])
+    For i=1..M/2-1, odd[i] -= odd[i-1], using the updated previous value.
+    Interleave even and odd.
+
+Define IDCT(Y):
+  Base M=4:
+    a=Y0; b=h*Y2; c=C[1][0]*Y1; e=C[1][1]*Y3
+    f=c+e; g=h2*(c-e)-f
+    x0=(a+b)+f; x3=(a+b)-f; x1=(a-b)+g; x2=(a-b)-g.
+  Otherwise:
+    E=IDCT(even-indexed Y)
+    O=2*FDCT(Y[2*i+1]*C[log2(M)-1][i])
+    For i=1..M/2-1, O[i] -= O[i-1], using the updated previous value.
+    x[i]=E[i]+O[i]; x[M-1-i]=E[i]-O[i], i=0..M/2-1.
+
+Each displayed elementary floating-point operation stores a binary32 result,
+except the explicitly binary64 table generation and quantization calculations.
+Finally round PCM to nearest integer with ties away from zero, then saturate
+to [-32768,32767]. Store signed 16-bit little-endian samples, interleaving
+channel 0 then channel 1 for stereo. Emit only the remaining declared S frames.
+
+13. LOSSLESS PREDICTIVE PCM
+
+Lossless packets omit all LOT side information and reserved packed bits.
+Their compressed payload starts immediately with the ERINA byte stream.
+Each packet resets its numeric predictors, regardless of whether it resets
+the entropy trees.
+
+For 8-bit PCM, decoded byte order is channel-planar: S deltas for channel 0,
+then S deltas for channel 1 when present. Starting with value = 0 separately
+for each channel, add each delta modulo 256. Interleave the resulting unsigned
+PCM bytes for WAV output; do not add or subtract 128.
+
+For 16-bit PCM, each channel occupies 2*S decoded bytes. Within a channel,
+the first S are predicted high bytes and the next S low bytes. Undo the same
+sign-dependent XOR from section 10 to reconstruct a 16-bit delta-of-delta.
+Start value = delta = 0 separately for each channel and each packet:
+  delta = (delta + reconstructed_word) modulo 65536
+  value = (value + delta) modulo 65536.
+Store value as a signed 16-bit two's-complement PCM sample. Interleave channels
+for WAV. Predictors reset per packet; entropy models reset only at a lead flag.
+
+14. PACKET TERMINATION AND COMPLETE BYTE ACCOUNTING
+
+After the exact requested number of entropy symbols has expanded, let T be
+the total consumed bit count, including LOT side information when present.
+The writer completes the current 32-bit word with zero bits:
+  padding_bits = (-T) modulo 32, a number in 0..31.
+The compressed payload must contain exactly (T+padding_bits)/8 bytes.
+If T is already divisible by 32, no extra word is required. Padding is relative
+to the compressed payload, not the absolute file offset.
+
+Thus every valid file byte belongs to one of:
+  the 64-byte EMC header;
+  a 16-byte record header;
+  a fixed FileHdr or SoundInf field;
+  an optional text byte;
+  an 8-byte SoundStm header;
+  LOT side information, an entropy code/literal, or final zero word padding.
+There are no unexplained alignment gaps or arbitrary trailing blobs.
+The converter verifies disjoint container intervals cover the whole file and
+records exact side-information, entropy, and padding bit counts per packet.
+
+15. CONVERTER BEHAVIOR, LIMITS, AND EXTENSION WORK
+
+Usage:
+  python3 mioCompressedAudio.py inputFile outputDir
+  python3 mioCompressedAudio.py inputFile outputDir -verbose
+
+The converter creates outputDir if necessary and accepts an existing directory.
+It writes one input-stem.wav for a supported single-stream input. Existing WAVs
+with that exact name are replaced. It never modifies the input. The default
+creates only the WAV in the output directory. -verbose additionally creates
+input-stem.mio.json with all header values, packet details, byte intervals,
+bit counts, and any recovery diagnostics. Diagnostics also go to stderr.
+The one-time listening HTML report is separate from the converter and is never
+generated as a conversion side effect.
+
+Recognition and all container/profile validation happen before output-directory
+creation or codec compilation. Decode also completes before any WAV is written.
+An unrelated file, unsupported record, unsupported revision, mixed-media file,
+or unsupported architecture produces no output. No extension-based fallback is
+attempted, and no arbitrary bytes are searched for plausible packet signatures.
+
+For a positively identified MIO file that is damaged:
+  * Bound overlong records by their known parent/file boundary and report it.
+  * Prefer packet frame counts to a disagreeing total sample count.
+  * Report reserved-word corruption while retaining otherwise decodable audio.
+  * Missing final padding, nonzero padding, and extra bytes after known padding
+    are reported; correctly reconstructed audio is retained.
+  * Drop a packet whose compressed audio cannot be reconstructed. Its partial
+    output is never exposed. Skip dependent continuation packets until the next
+    explicit lead/reset packet, then resume using that reset.
+  * Concatenate successfully recovered packets, without inventing missing
+    samples or silence. The shortened timeline is reported as a recovery issue.
+  * If no nonempty audio is recoverable, write nothing and return failure.
+
+Exit codes: 0 = complete clean conversion; 1 = rejected input or conversion
+failure with no new audio output; 2 = WAV written with reported damage/recovery.
+An empty valid stream produces an empty PCM WAV. These statuses do not promise
+atomic behavior on unrelated operating-system failures such as a disk filling
+during the final output write.
+
+Dependencies: Python 3.9+ standard library and an installed C++17 compiler
+named c++, g++, or clang++. Linux and macOS native library loading are supported.
+The Python script embeds all codec source; no companion source file, binary
+codec, FFmpeg, NumPy, or downloaded runtime resource is needed. The native core
+is compiled with -O2 -fPIC -ffp-contract=off in a temporary directory. Source
+and shared-library build files are removed on normal exit and are not conversion
+outputs. Abrupt power loss can leave the operating system's temporary directory.
+All created output files are readable by owner and group; new output directories
+also have owner/group traversal permission.
+
+Explicit resource limits: at most 256 MiB of reconstructed PCM in one packet,
+and at most 0xFFFFFFFF-36 PCM bytes in an ordinary RIFF WAV. These are declared
+implementation limits, not tests used to infer the format. Larger legal streams
+would require streaming/RF64 or WAV splitting. The input and output are buffered
+in memory during conversion.
+
+Not implemented:
+  * SoundInf revisions other than 0x00020300.
+  * Architecture 0xFFFFFFF0: MIO's ERISA arithmetic word decoder, including its
+    adaptive probability tables, escape-word path, arithmetic register reset,
+    renormalization, and termination. Next step: port that documented SDK path
+    and test lead and continuation packets against an independent decoder and
+    genuine arithmetic-coded fixtures before accepting the architecture.
+  * Extra container records, sequence playback, multiple/mixed media streams,
+    and unknown flags. Next step: obtain their authoritative layouts and fixture
+    files, define their audio timeline semantics, and add explicit parsing.
+  * Native Windows compiler/library loading. The audio algorithms themselves
+    are portable C++17; the build/load wrapper needs a Windows implementation.
+
+Unobserved codec configurations cannot be certified merely from header names.
+Unsupported features are rejected explicitly rather than silently treated as
+the closest implemented variant. The supplied implementation does not claim
+support for the entire historical MIO/ERI/MEI family.
+
+16. PRIMARY REFERENCES AND ATTRIBUTION
+
+Entis ERI/MIO format specification (Japanese), including EMC records and the
+audio compression sections:
+  https://www.entis.jp/eridev/download/bin/erinaf.lzh
+
+ERISA-Library 1.07e source, notably Include/xerisa.h, Source/ERISA/erisasound.cpp,
+erisacontext.cpp, decerisa.cpp, encerisa.cpp, and cpp/erisamatrixc.cpp:
+  https://www.entis.jp/eridev/download/bin/erisa107e.lzh
+
+GARbro's independently executable C# port used for PCM cross-checking:
+  https://github.com/morkt/GARbro/tree/master/ArcFormats/Entis
+
+ERISA-Library version 1.07e
+Copyright (C) 2000-2004 Leshade Entis, Entis-soft.
+GARbro C# port by morkt.
+The converter's adaptation uses the GNU GPL option offered by ERISA-Library's
+license and is distributed under GPL-2.0-or-later, without warranty.
+License: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html

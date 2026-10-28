@@ -420,7 +420,7 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat, image:Entis.EriFormat, image:Paprika.NpFormat
 	//		image:RSystem.RsgFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat, image:Ikura.TanFormat
-	//		image:Elf.MskFormat
+	//		image:Elf.MskFormat, image:Abogado.KgFormat
 	// SEEN TWICE:
 	//		image:Herb.GrpFormat, image:Silky.IgfFormat, image:Pan.TblFormat, image:BGI.BgiFormat
 	/^image:Adobe\.PsdFormat /,
@@ -445,28 +445,27 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DSK_SPIS, DAT_CMP, 000_2, 000_7, 000_8
+	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DAT_CMP, 000_2, 000_7, 000_8
 	//		DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
-	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, GB_UBA
+	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, WLD_WRLD, SCW_COTS, GB_UBA
 	//		LUG_LIONHEAD, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4, LZ, GLB
 	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, DAT_ARCV, BF_BIG, WAR_WARC, PACKED_BFPK, ZSM_ZSNDXBOX, IMG_AFS_2, PFS_PFS, DBS_WAVFILE
-	//		BMC_BM, AUDIOPKG_V18, XWB_WBND_5, SPD_HEAD, IBT_DXT_DXT, TLB_HLIB, SFX_5, DAT_WWWW, ANI_ANI, DAT_CHELALIC, ARC_16, 000_12, 000_13
-	//		001_5, BIN_7L_2, ZXC_90, GRP_3, PRE_OPEN_2
+	//		XWB_WBND_5, SPD_HEAD, IBT_DXT_DXT, TLB_HLIB, DAT_WWWW, ANI_ANI, STF, BIN_7L_2, GRP_3, ARC_ARCV410, IMG_9
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XXX_RU
-	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PRS
-	/^geArchive: 0000?_(5|10|PCW|package)( |$)/,
-	/^geArchive: ARC_(4|6|8|10|11|13|A20|ARC)( |$)/,
+	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PRS, BIO_BRGR
+	/^geArchive: 0000?_(5|10|12|13|PCW|package)( |$)/,
+	/^geArchive: 001_[25]( |$)/,
+	/^geArchive: ARC_(4|6|8|10|11|13|16|A20|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
 	/^geArchive: BAG_(5|GABA_2)( |$)/,
-	/^geArchive: DAT_(11|42|48|53|57|DG|RES|PAK)( |$)/,
+	/^geArchive: DAT_(11|42|48|53|57|CHELALIC|DG|RES|PAK)( |$)/,
 	/^geArchive: IMG(_(4|LINK|DAVILEX_2))?( |$)/,
 	/^geArchive: PAK_(7|11|30|41|42|49|50|DATA|FORM|PAK_2|PACK_[26])( |$)/,
 	/^geArchive: PCK_([256]|PACK)( |$)/,
 	/^geArchive: PCK5( |$)/,
 	/^geArchive: WAD_([48]|WAD)( |$)/,
 	
-	/^geArchive: 001_2( |$)/,
 	/^geArchive: A00( |$)/,
 	/^geArchive: AMM_FORM( |$)/,
 	/^geArchive: AR_DAVE( |$)/,
@@ -474,6 +473,7 @@ export const WEAK_VALUES =
 	/^geArchive: AQA( |$)/,
 	/^geArchive: ASF_SCHI( |$)/,
 	/^geArchive: ASNCDAT( |$)/,
+	/^geArchive: AUDIOPKG_V18( |$)/,
 	/^geArchive: BANK_QL( |$)/,
 	/^geArchive: BBA_BAF( |$)/,
 	/^geArchive: BDF( |$)/,
@@ -482,6 +482,7 @@ export const WEAK_VALUES =
 	/^geArchive: BIN_P00P( |$)/,
 	/^geArchive: BKF_2( |$)/,
 	/^geArchive: BKS( |$)/,
+	/^geArchive: BMC_BM( |$)/,
 	/^geArchive: BNK( |$)/,
 	/^geArchive: BOX_BOX( |$)/,
 	/^geArchive: BUNDLE_BNDL( |$)/,
@@ -501,6 +502,7 @@ export const WEAK_VALUES =
 	/^geArchive: DBS( |$)/,
 	/^geArchive: DLL_MZ( |$)/,
 	/^geArchive: DNI_DIRT( |$)/,
+	/^geArchive: DSK_SPIS( |$)/,
 	/^geArchive: DTA(_DTA)?( |$)/,
 	/^geArchive: DSRES_DSIGTANK( |$)/,
 	/^geArchive: FBZ_PK( |$)/,
@@ -538,7 +540,7 @@ export const WEAK_VALUES =
 	/^geArchive: PCG( |$)/,
 	/^geArchive: PKF( |$)/,
 	/^geArchive: PKG_ZPKG( |$)/,
-	/^geArchive: PRE_OPEN( |$)/,
+	/^geArchive: PRE_OPEN(_2)?( |$)/,
 	/^geArchive: PRJ_PROJ( |$)/,
 	/^geArchive: PSF_PSF( |$)/,
 	/^geArchive: RAW_MHWANH( |$)/,
@@ -549,6 +551,7 @@ export const WEAK_VALUES =
 	/^geArchive: SCH_SND( |$)/,
 	/^geArchive: SHD( |$)/,
 	/^geArchive: SFS_AAMVHFSS( |$)/,
+	/^geArchive: SFX_5( |$)/,
 	/^geArchive: SFX_DSFX( |$)/,
 	/^geArchive: SLV_DATA( |$)/,
 	/^geArchive: SMA_SMA( |$)/,
@@ -566,7 +569,8 @@ export const WEAK_VALUES =
 	/^geArchive: WBK_WAVEBK11( |$)/,
 	/^geArchive: WD_WD( |$)/,
 	/^geArchive: XFS( |$)/,
-
+	/^geArchive: ZXC_90( |$)/,
+	
 	// SEEN ONCE:
 	//		DIR_DIR_IMG
 	// SEEN TWICE:
@@ -578,6 +582,7 @@ export const WEAK_VALUES =
 	/^geViewer: MP3( |$)/,
 	/^geViewer: OGG_OGG( |$)/,
 	/^geViewer: PKBARC_BMT( |$)/,
+	/^geViewer: RAW_MHWANH( |$)/,
 	/^geViewer: TXT( |$)/,
 	/^geViewer: TGA( |$)/,
 	/^geViewer: WAV_RIFF( |$)/,
@@ -729,9 +734,9 @@ export const WEAK_VALUES =
 
 	// vgmstream
 	// SEEN  ONCE:
-	//		seb
-	// SEEN TWICE:
 	//		???
+	// SEEN TWICE:
+	//		seb
 	/^vgmstream: exakt_sc/,
 	/^vgmstream: mp4_aac_ffmpeg/,
 	/^vgmstream: mpeg - MPEG header/,

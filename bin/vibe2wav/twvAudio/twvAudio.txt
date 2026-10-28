@@ -286,6 +286,14 @@ A strict decoder should reject a file if:
 WAV conversion
 --------------
 
+Usage: python3 twvAudio.py <inputFile> <existingOutputDirectory>
+
+The output directory must already exist. The supported TWV structure has no
+known title field, so the output filename is audio.wav. Successful conversion
+replaces an existing audio.wav in that directory. Validation and writing to a
+temporary file finish before replacement; a failed conversion preserves any
+existing output.
+
 The converter writes a RIFF/WAVE file with:
 
 * PCM format code 1

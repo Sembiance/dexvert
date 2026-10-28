@@ -1,0 +1,409 @@
+HYPERSTUDIO SAMPLED SOUND -- RWP REVISION
+=======================================
+
+Scope and completeness
+----------------------
+This is a self-contained description of the Apple IIgs HyperStudio sampled
+sound data fork whose signature is SSHS and whose version identifier is the
+four bytes "RWP ". It specifies the entire 64-byte header, monophonic PCM,
+and both Apple ACE encodings, including an implementable decoder.
+
+The accompanying converter extracts the decoded waveform. It does not render
+HyperStudio's hardware playback effects. The volume, echo and repeat fields
+are parsed and preserved in the WAV, but do not change its waveform. Stereo
+layout, other version identifiers, and the reserved compression method are
+outside its implemented scope. These are explicit limitations: this is not
+a claim of complete support for every HyperStudio revision or bit-exact
+emulation of the application. See "Unresolved behavior and next steps".
+
+Identity and integer conventions
+--------------------------------
+The ProDOS/GS/OS file type is $D8 and the auxiliary type is $8001. Those
+attributes are external filesystem metadata, not additional bytes in this
+data fork. A filename extension is neither required nor sufficient to
+identify a file. Do not confuse this data with a HyperStudio stack, a Mac
+sound resource, an AIFF file, or a raw Apple IIgs sound.
+
+Offsets below are absolute byte offsets from the beginning of the data fork.
+All numeric fields are unsigned little-endian integers. A Word has two bytes
+and a Long has four. Identifiers are literal byte strings; do not reverse
+their character order. Values prefixed with $ are hexadecimal. The on-disk
+header is exactly 64 bytes. There is one monophonic waveform after it, not
+a directory of named sounds. There are no chunk headers, checksums, sample
+timestamps, instrument envelopes, or independently framed ACE blocks.
+
+Header: every byte from offset 0 through 63
+-----------------------------------------
+Offset  Size  Name          Meaning
+dec/hex bytes
+
+ 0/$00   4   HFileID        $53 $53 $48 $53, ASCII "SSHS".
+ 4/$04   4   HDataOffset    $00000038 (56). The data starts at 8 + this
+                           value = 64. The displacement is from the end
+                           of this four-byte field, not from file byte 0.
+ 8/$08   4   HVersID        $52 $57 $50 $20, ASCII "RWP ". The final space
+                           is significant. This is a version identifier,
+                           not a numeric version or a NUL-ended string.
+12/$0C   4   HDataID        Creator identifier. "SSDK" ($53 $53 $44 $4B)
+                           identifies the original Sound Shop creator.
+                           Different creators may have assigned IDs; this
+                           field does not select the compression method.
+16/$10   2   HLength2       Channel one's length in 256-byte pages. Inactive
+                           and normally zero for a monophonic sound.
+18/$12   2   HPbRate2       Channel one's playback-rate parameter. Inactive
+                           in mono. Uses the same formula as HPbRate.
+20/$14   2   HVolume2       Channel one's playback volume, 0..15. Inactive
+                           in mono.
+22/$16   2   HEcho2         Channel one's echo setting, 0..127. Inactive
+                           in mono.
+24/$18   2   HLength        Length in whole 256-byte pages. For compressed
+                           storage, do not use this as a decoded sample
+                           count: HAce supplies the expanded block count.
+                           The low byte of an exact byte count is absent.
+26/$1A   2   HAce           Bits 15..14 select compression; bits 13..0
+                           are the ACE nBlks parameter. Details below.
+28/$1C   2   HPbRate        Channel zero's playback-rate parameter P.
+                           FFStartSound's freqOffset is P + 40.
+                           Rate = (P + 40) * 51.40625 samples/second
+                                = (P + 40) * 1645 / 32 Hz.
+30/$1E   2   HVolume        Channel zero's playback volume, 0..15.
+                           This controls playback gain, not PCM encoding.
+32/$20   2   HStereo        0 = monophonic; 1 = two channels. Other values
+                           have no defined interpretation in this revision.
+34/$22   2   HEcho          Channel zero's echo setting, 0..127; zero
+                           disables the effect. See playback notes below.
+36/$24   2   HReserved      Reserved word, required to be zero. No defined
+                           audio meaning in this revision.
+38/$26   2   HRepeat        Shared playback repeat setting, 0..20; zero is
+                           off, and 20 requests continuous repetition.
+40/$28   4   HOffset1       Offset intended for an additional channel's
+                           data. The published formula is
+                           64 + HLength * 256. Inactive/zero in mono.
+                           The original description incorrectly calls its
+                           destination "channel zero", although offset 64
+                           already holds that channel. See stereo limits.
+44/$2C   4   HExtra         Reserved long, required to be zero. No defined
+                           audio meaning in this revision.
+48/$30   1   HFileName.len  Optional Pascal-string length, 0..15.
+49/$31  15   HFileName.data Name characters followed by unused storage.
+                           Unused bytes should be zero. Length zero with
+                           all 15 bytes zero means no stored name.
+                           This is a fixed 16-byte Pascal-string field;
+                           it cannot hold 16 characters plus a length byte.
+
+Bytes 16..23, 40..43, and the reserved fields still exist in mono; they are
+not audio. Reserved zero bytes have a defined role as reserved storage, not
+undiscovered sample values. Nonzero inactive or reserved values are retained
+and reported, without assigning invented semantics to them.
+
+Names contain bytes, not a declared Unicode encoding. ASCII characters have
+their usual interpretation. No field chooses a code page for bytes >= $80.
+The converter preserves those bytes and uses a reversible Latin-1 display
+in diagnostic metadata; this does not assert a historical character set.
+The embedded name is descriptive only, never an output path.
+
+Two errors in the historical header note deserve particular attention:
+"offset from this field" is ambiguous unless the end of HDataOffset is used;
+56 + 8 gives the explicitly specified data offset 64. The name is called a
+16-character string in prose but given only 16 bytes including the length.
+Maximum actual capacity is consequently 15 characters.
+
+Payload and length accounting
+-----------------------------
+For supported monophonic files, bytes [64, EOF) are the sound payload.
+There is no documented footer, metadata trailer, EOF opcode or automatic
+silence-trimming rule. A final run of identical amplitudes or compressed
+codes is still payload. Physical file length supplies the number of bytes
+actually available. It must never be inferred from how a waveform sounds.
+
+Let A be the unsigned HAce word, M = A >> 14, and B = A & $3FFF.
+
+ M  Meaning         Encoded bytes for B blocks   Decoded samples
+ 0  Uncompressed    HLength * 256, nominally     One per physical byte
+ 1  ACE method 1    B * 256                      B * 512
+ 2  ACE method 2    B * 192                      B * 512
+ 3  Reserved        Undefined                    Undefined
+
+ACE's "512-byte blocks" refer to decoded data, not compressed input.
+The number of compressed bytes is B * 64 * (5 - M). In compressed files,
+HLength describes whole pages of stored data and may omit a fractional page;
+use the ACE block count, not HLength * 256, to size the encoded payload.
+For example, an odd B in method 2 can produce a 64-, 128-, or 192-byte
+remainder relative to a 256-byte boundary. Such bytes are compressed audio.
+
+An uncompressed stored page count can disagree with physical payload size.
+The count has only page resolution and cannot establish a byte-accurate
+editor selection or distinguish extra recorded silence from meaningful
+audio. The recovery policy below retains the complete physical payload and
+reports the discrepancy. It does not declare all surplus bytes to be
+padding, nor silently discard a final page. A short payload cannot reveal
+whether an editor left a stale count or the file was truncated.
+
+Uncompressed samples
+--------------------
+Each payload byte is one unsigned linear 8-bit amplitude. $80 is the center
+value; the signed amplitude is byte - 128. The sample rate comes exclusively
+from HPbRate. There is no endian conversion, sign-bit toggle, mu-law decode,
+channel interleaving, or decompression in mono PCM mode.
+
+Apple IIgs sound hardware uses zero-valued waveform data specially. The
+sample extractor preserves raw $00 bytes as PCM values; it does not stop
+there or guess that they mark file EOF. ACE expansion, by contrast, clips
+its output to 1..255, avoiding that hardware value.
+
+Exact Apple ACE decoding
+------------------------
+ACE is lossy adaptive differential pulse-code modulation. It is not IMA
+ADPCM, Microsoft ADPCM, Macintosh MACE, or a fixed signed-nibble delta
+codec. Replacing it with any of those algorithms gives incorrect audio.
+
+The following algorithm reproduces the decoding core of Apple IIgs
+Tool029 version $0103, including its unusual order of predictor updates.
+It needs no toolset binary, external tables, emulator, or initial state
+stored in the file.
+
+1. Width and code ordering
+
+   Method 1 uses 4-bit codes. Each byte contains two samples: low nibble
+   first, high nibble second. Method 2 uses consecutive 3-bit codes in a
+   little-endian bit stream. Each group of three bytes emits eight samples:
+
+     word24 = b0 | (b1 << 8) | (b2 << 16)
+     code[k] = (word24 >> (3*k)) & 7, for k = 0..7.
+
+   Bit 3 of a 4-bit code, or bit 2 of a 3-bit code, is the sign bit;
+   1 means negative. Lower bits are an unsigned magnitude code.
+   There is no initial literal sample and no per-block predictor header.
+
+2. Initial state
+
+   At the beginning of the sound, set predictor = 128 and index = 0.
+   Preserve both across every code and every 512-sample block. An ACE
+   block is a tool-call accounting unit, not a state-reset boundary.
+
+3. Step sizes
+
+   The complete zero-based step table is:
+
+     3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 18, 20, 22, 24, 26,
+     29, 32, 35, 39, 43, 47, 52, 57, 63, 69, 76, 84, 92, 102, 112,
+     123, 135, 149, 164, 180, 198, 218, 240, 264.
+
+   There are 42 entries, indexed 0..41. These are exact integers.
+   Reconstructing the table by a floating-point growth formula is incorrect.
+
+4. Per-code operation
+
+   width = 4 for method 1, or 3 for method 2
+   sign_bit = 1 << (width - 1)
+   sign = -1 if (code & sign_bit) != 0 else +1
+   magnitude = code & (sign_bit - 1)
+   step = steps[index]
+
+   For method 1:
+     delta = ((step >> 2) if magnitude & 1 else 0)
+           + ((step >> 1) if magnitude & 2 else 0)
+           + ( step       if magnitude & 4 else 0)
+
+   For method 2:
+     delta = ((step >> 1) if magnitude & 1 else 0)
+           + ( step       if magnitude & 2 else 0)
+
+   predictor = signed16(predictor + sign * delta)
+   emit clamp(predictor, 1, 255)
+   predictor = signed16(predictor + sign * (step >> (width - 1)))
+
+   If method 1, adjustment = [-1,-1,-1,-1,2,4,6,8][magnitude].
+   If method 2, adjustment = [-1,-1,2,5][magnitude].
+   index = clamp(index + adjustment, 0, 41).
+
+   Here >> is integer right shift on the nonnegative step value.
+   clamp(v,a,b) = max(a,min(b,v)).
+   signed16(v) = ((v + 32768) mod 65536) - 32768.
+
+   Three details are essential:
+     * The small bias is added AFTER emitting the current sample.
+     * Output clipping does not clip the internal predictor.
+     * Predictor arithmetic wraps at 16 bits, as on the 65816 processor.
+
+   A commonly used ADPCM implementation that adds the bias before output
+   or clamps the predictor will not match ACE, even with the right table.
+
+5. End of data
+
+   A well-formed stream has the encoded size given above. For malformed
+   short or long streams, complete available codes can still be decoded
+   with continuous state. Method 1 has no fractional code at a byte
+   boundary. A method-2 payload not divisible by three leaves 1 or 2 bits
+   after decoding all complete codes. Those bits cannot specify another
+   sample and must not be padded to create one.
+
+Decoder conformance vectors (independent of any sound file)
+---------------------------------------------------------
+Starting with fresh state:
+
+ Method  Encoded hexadecimal  Decoded unsigned-PCM hexadecimal
+   1     77                   84 96
+   2     FF                   7C 70; two incomplete final bits, value 3
+
+For a larger state-continuity and clipping check, concatenate the byte
+sequence $00,$01,...,$FF four times for method 1 (1024 encoded bytes), and
+three times for method 2 (768 encoded bytes). Each expands to 2048 bytes.
+SHA-256 hashes of the decoded PCM are:
+
+ method 1: 9c5d5c93f79af4279e218d207fcc4d3d0bb96f5f34071a46c2346291685cf85a
+ method 2: e5827435fb8455cd3a40e6fd46efd46a40552ca30fc5710dd7aa10e137884dfa
+
+These results were obtained by instruction-level execution of the original
+Apple decoding routines, independently of the formula implementation.
+
+Playback settings versus sample storage
+--------------------------------------
+HVolume is a player setting. It does not mean that low-volume stored bytes
+use a different amplitude scale or bit depth. In the original playback
+code the 4-bit value is expanded to an 8-bit sound-tool volume by 17 * V.
+
+HEcho controls an application effect involving overlapping playback of
+the waveform. It is not a delay in milliseconds encoded directly in the
+header. The Sound Browser and later Sound Shop implementations configure
+their sound-tool chains differently; an exact portable echo formula has
+not been established for the RWP revision. Do not invent one by treating
+HEcho as milliseconds, samples, or a simple feedback gain.
+
+HRepeat controls playback sequencing. Zero disables repeating and twenty
+means continuous playback. Application implementations and their polling
+of the sound tools determine finite-play counts and final stop behavior.
+The extractor emits one waveform pass and retains the original setting.
+An infinite repetition cannot be materialized as a finite PCM data chunk.
+
+File recognition and malformed-input policy
+------------------------------------------
+The converter requires all of these before decoding:
+  * Literal SSHS signature at byte zero.
+  * A complete 64-byte header.
+  * Exact RWP-space version identifier.
+  * HDataOffset = 56.
+  * HStereo = 0.
+  * Compression method 0, 1 or 2.
+  * At least one complete recoverable sample.
+
+It does not scan for an embedded signature, infer a sample rate, guess
+endianness, try several codecs, or select a codec by audio statistics.
+Unsupported identities, revisions, channel layouts and methods fail
+without creating an output directory or writing output files. Failure to
+establish the header boundary also produces no output, even for a damaged
+file with the SSHS signature.
+
+Once this layout is established, the converter tolerates stale page counts,
+zero or inconsistent ACE block counts, short/long payloads, bad name lengths,
+nonzero unused fields, and out-of-range playback settings. It reports each
+condition. It decodes every complete payload code without filling missing
+audio, discarding an extra page, or trimming silence. A malformed name is
+bounded to its physical 15-byte storage; its original length is retained.
+Undecodable trailing bits are recorded numerically in the WAV metadata.
+No attempted recovery changes the source file.
+
+WAV mapping and command-line behavior
+------------------------------------
+Run with Python 3.10 or later:
+
+  python3 hyperStudioSampledSound.py inputFile outputDir
+  python3 hyperStudioSampledSound.py -verbose inputFile outputDir
+
+outputDir may already exist. Missing directories are created only after
+successful decoding. The output name is the complete input basename plus
+".wav", preserving dots in historical names. A previous output at that
+same destination is atomically replaced. The source file cannot be replaced
+by an output. Unrelated files in the output directory are left alone.
+
+By default there is exactly one output file: the WAV. It contains:
+  RIFF/WAVE: normal RIFF framing with correct even-byte chunk padding.
+  fmt :      PCM format 1, mono, 8 bits per sample, block alignment 1.
+  hshd:      Custom ancillary chunk holding the exact 64 source header bytes.
+  LIST/INFO/ICMT:
+             NUL-terminated ASCII JSON with parsed header values, exact
+             rational rate, original identifiers/name bytes, diagnostics,
+             source and PCM SHA-256 hashes, and waveform extraction policy.
+  data:      The unscaled PCM waveform, once, including any stored silence.
+
+Readers may ignore hshd and LIST and play the standard fmt/data audio.
+The data chunk length excludes its optional alignment pad. No compressed
+payload is hidden in another WAV chunk and no new audio is invented.
+Original PCM is byte-for-byte preserved. ACE is expanded to the exact
+8-bit values produced by Apple's decoder, not upsampled to 16 bits.
+
+WAV stores a whole-number sample rate. The converter rounds the exact
+(P+40)*1645/32 rate to the nearest integer, with half values rounded up.
+It does not resample the PCM. The exact source rate is retained in ICMT.
+The resulting rate error is at most 0.5 Hz.
+
+-verbose additionally writes input-basename.json with a contiguous byte map
+covering the entire source, all field values and raw header bytes, codec
+parameters, and recovery notes. Neither mode creates a listening report
+or auxiliary audio files automatically. Errors and warnings go to stderr;
+successful output paths go to stdout. Exit status is 0 on successful
+extraction (including reported recovery), 1 on conversion/I/O failure,
+and 2 for an invalid command line. Output files are mode 0644 so both
+owner and group can read them. No third-party libraries or support files
+are needed at runtime.
+
+Unresolved behavior and next steps
+---------------------------------
+The 64-byte monophonic header and both audio codecs have no unmapped byte
+ranges. This does not make all original playback behavior recoverable:
+
+1. Stereo. The header documents two channels but contains an inconsistent
+   HOffset1 description, and does not settle compressed stereo storage or
+   state ordering. The converter rejects HStereo != 0. To implement this
+   without guessing, obtain files created by software actually supporting
+   stereo, inspect that writer/reader, establish channel order and offset
+   bases, and verify whether ACE state resets per channel. Independent
+   rates should be retained by separate channel WAVs unless a documented
+   stereo rendering policy is chosen.
+
+2. Effects. Volume, echo and repeats survive in the WAV metadata, but the
+   data chunk is an extracted waveform, not an emulated performance. To
+   render exactly, trace the RWP-era sound-tool chains and interrupt/stop
+   behavior, including echo oscillator rate, gain, timing and termination,
+   and compare against captured output from the original application.
+
+3. Conflicting lengths. All available audio is recoverable, but missing
+   bytes and the author's intended edit endpoint cannot be derived from
+   an inconsistent page count. A pristine original or the application's
+   saved editor state is needed to resolve that provenance. This program
+   preserves evidence and reports the conflict rather than claiming it
+   can reconstruct information the file no longer contains.
+
+4. Other revisions/extensions. An identifier such as RWP4 is distinct.
+   Reserved bytes do not license guessing an extension. Additional
+   revisions require their own validated layout and decoding rules.
+
+Sources and reproducibility
+---------------------------
+Header definitions and published frequency formula:
+  Apple Computer, Matt Deatherage, File Type Note $D8/$8001, May 1990;
+  Developer CD March 1993 collection, printed pages 179-181.
+  https://mirrors.apple2.org.za/ftp.apple.asimov.net/documentation/misc/DTCA2DOC-016-1%20file%20type%20notes.pdf
+
+ACE API, block sizes and state continuity:
+  Apple IIgs Toolbox Reference, Volume 3, chapter 27;
+  Apple IIgs Toolbox Reference Update, ACE Tool Set.
+  https://goldstarsoftware.com/applesite/Documentation/AppleIIgsToolboxReferenceUpdate.PDF
+
+Exact decoding behavior:
+  Apple IIgs System 6.0.1, SystemTools1/System/Tools/Tool029, version $0103.
+  Its main load segment contains the 2:1 core at $215C, the 8:3 core at
+  $1E2F, and initialization at $24D2. The formula above was checked against
+  all 1,032 code/step combinations in its six lookup tables, and against
+  execution of the original machine instructions. Addresses are relative
+  to the loaded main segment, not raw offsets into the OMF tool file.
+  https://mirrors.apple2.org.za/ftp.apple.asimov.net/images/gs/os/gsos/System_6.0.1.zip
+
+Playback-setting descriptions and original application implementations:
+  Roger Wagner Publishing, HyperStudio manual, Sound Shop chapter,
+  especially printed page 60; HyperStudio Sound Browser and Sound Shop.
+  https://whatisthe2gs.apple2.org.za/files/Hyperstudio31/Manual/HyperStudio.pdf
+  https://whatisthe2gs.apple2.org.za/files/Hyperstudio31/2Image/HyperStudio_v3_1.zip
+
+No sample filenames, per-file offsets, per-file rate overrides, or
+audio-dependent codec guesses are part of the format or converter.

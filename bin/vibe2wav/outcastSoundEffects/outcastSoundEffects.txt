@@ -1,0 +1,386 @@
+OUTCAST SOUND EFFECTS (SFX): MONO GSM FULL RATE PROFILE
+=====================================================
+
+1. Scope and confidence
+-----------------------
+
+This document specifies the Outcast SFX profile identified by the twelve-byte
+prefix 32 54 76 98 01 00 00 00 00 00 80 3F. It describes the complete container,
+every encoded audio bit, the fixed-point decoding procedure, and explicit
+policies for damaged input. An SFX of this profile contains one mono stream.
+The filename and extension are not part of identification.
+
+There is one unresolved historical detail: the original engine-level meanings
+of the constant words at offsets 4 and 8 are not established. They are often
+described as a channel count and a floating-point compression factor, but those
+names must not be treated as verified semantics. Their exact encodings and
+required values are known and checked. Neither word needs interpretation to
+decode this profile. Other values could indicate another profile, or damage;
+there is no evidence-based rule for distinguishing those cases.
+
+Consequently this is a complete byte layout and decoding specification for
+the stated profile, not a claim to have proved the original purpose of every
+header field or discovered all possible Outcast audio variants. Resolving that
+remaining semantic uncertainty requires the original SFX loader/writer source
+or its executable, followed by examination of the uses of offsets 4 and 8 and
+controlled tests with changed values. Unknown variants must not be guessed.
+
+2. Container layout
+-------------------
+
+All header integers are unsigned 32-bit little-endian. Offsets are absolute
+byte offsets from the beginning of the file. There is no alignment padding.
+
+ Offset  Bytes  Name used here       Encoding and meaning
+ ------  -----  ------------------  -----------------------------------------
+ 0x00       4   signature           0x98765432; bytes 32 54 76 98.
+ 0x04       4   profile_word        Exactly 0x00000001 in this profile.
+ 0x08       4   factor_bits         Exactly 0x3F800000; these bits also encode
+                                    IEEE-754 binary32 +1.0, little-endian.
+ 0x0C       4   data_bytes          Number D of compressed payload bytes.
+ 0x10       4   sample_rate         Playback samples per second, R.
+ 0x14       D   audio               Consecutive 33-byte GSM Full Rate frames.
+
+The header is exactly 20 bytes. The total well-formed file length is 20 + D;
+D must be divisible by 33. There is no checksum, footer, timestamp, index,
+substream directory, loop marker, name, original uncompressed length, or
+additional metadata chunk. Any bytes beyond 20 + D are extraneous data, not
+another implicitly concatenated sound. No header integer is an offset.
+
+For F = D / 33:
+
+  frame i begins at 20 + 33*i, for 0 <= i < F;
+  decoded sample count = 160*F;
+  decoded 16-bit PCM byte count = 320*F;
+  duration in seconds = 160*F/R;
+  compressed byte rate = 33*R/160.
+
+The playback rate is taken from the header. In particular, R = 22050 means
+22050 Hz playback, not 8000 Hz. GSM's telephony convention of 8000 Hz does not
+override the container's rate. Decoding produces sample values directly;
+there is no resampling, rate estimation, volume normalization, or trimming.
+The last frame is retained in full because no exact pre-encoding sample count
+is stored. D = 0 can be represented as an empty stream.
+
+3. Frame packing: every bit
+--------------------------
+
+Each frame occupies 33 bytes = 264 bits. It is the ordinary libgsm/toast
+packing, NOT the Microsoft WAV49 packing of two frames into 65 bytes, and NOT
+the reordered, error-protected GSM radio-channel representation.
+
+Number the bits in a frame from 0 through 263. Bit 0 is the most significant
+bit of byte 0; bit 7 is its least significant bit; bit 8 is the most significant
+bit of byte 1, and so on. All fields below are unsigned binary integers, most
+significant bit first. Byte boundaries do not interrupt a field.
+
+ Frame bits  Width  Field       Meaning
+ ----------  -----  ----------  --------------------------------------------
+   0..3         4   magic       Exactly binary 1101 (hexadecimal D).
+   4..9         6   LARc[0]     Coded log-area ratio 0, range 0..63.
+  10..15        6   LARc[1]     Coded log-area ratio 1, range 0..63.
+  16..20        5   LARc[2]     Coded log-area ratio 2, range 0..31.
+  21..25        5   LARc[3]     Coded log-area ratio 3, range 0..31.
+  26..29        4   LARc[4]     Coded log-area ratio 4, range 0..15.
+  30..33        4   LARc[5]     Coded log-area ratio 5, range 0..15.
+  34..36        3   LARc[6]     Coded log-area ratio 6, range 0..7.
+  37..39        3   LARc[7]     Coded log-area ratio 7, range 0..7.
+  40..95       56   subframe 0  First 40 reconstructed residual samples.
+  96..151      56   subframe 1  Next 40 reconstructed residual samples.
+ 152..207      56   subframe 2  Next 40 reconstructed residual samples.
+ 208..263      56   subframe 3  Last 40 reconstructed residual samples.
+
+For subframe j in 0..3 let B = 40 + 56*j. Its fields are:
+
+ Frame bits       Width  Field       Meaning
+ ---------------  -----  ----------  ---------------------------------------
+ B+0 .. B+6          7   Nc          Long-term prediction lag, in samples.
+ B+7 .. B+8          2   bc          Long-term prediction gain table index.
+ B+9 .. B+10         2   Mc          Excitation grid offset, 0..3.
+ B+11.. B+16         6   xmaxc       Quantized excitation amplitude, 0..63.
+ B+17.. B+55        39   xmc[0..12]  Thirteen unsigned three-bit pulse codes.
+
+More precisely, pulse xmc[k], for k in 0..12, occupies bits
+B+17+3*k through B+19+3*k. Its range is 0..7. The last pulse ends at B+55.
+
+There are 76 codec parameters: 8 LAR codes plus 4*(4 + 13) subframe values.
+The bit total is 4 + 36 + 4*(7 + 2 + 2 + 6 + 13*3) = 264. There are no unused
+bits, implicit pad bits, or opaque audio bytes. The signature nibble is a
+checked constant, not a pulse parameter. All 260 remaining bits affect codec
+parameters. Repacking these values in the listed order reproduces the frame.
+
+Valid encoded pitch lags are 40..120. The seven-bit field can also represent
+0..39 or 121..127; GSM's decoder rule in that case is to reuse the previous
+valid lag, initially 40. Every representable value of the other fields is
+defined by the decoder. There is no frame checksum with which to detect a
+changed but still valid parameter.
+
+4. Exact fixed-point synthesis
+-----------------------------
+
+The following defines the decoding operations without requiring another
+implementation. All array indices are zero-based. Intermediate expressions
+use unbounded signed integers except at the explicit saturation points.
+Right shifts are arithmetic: negative results round toward negative infinity.
+
+  S(x)   = max(-32768, min(32767, x))
+  M(a,b) = S((a*b + 16384) >> 15)
+
+M is rounded Q15 multiplication, including saturation of (-32768)*(-32768).
+Do not replace integer shifts with floating-point arithmetic or truncation
+toward zero. Ordering of saturation and rounding operations matters.
+
+Initialize these persistent decoder values once at the start of the stream:
+
+  history[0..119] = 0  (the last 120 reconstructed residual samples)
+  previous_lar[0..7] = 0
+  v[0..8] = 0         (short-term synthesis filter memory)
+  previous_lag = 40
+  deemphasis = 0
+
+Do not reset this state at each frame. Parameters can be unpacked independently,
+but bit-exact sound synthesis depends on earlier frames.
+
+4.1. Excitation reconstruction, for each of four subframes
+
+Let a = xmaxc. Compute exponent e and mantissa m:
+
+  e = (a >> 3) - 1 if a > 15, otherwise 0
+  m = a - (e << 3)
+  if m == 0:
+      e = -4
+      m = 7
+  otherwise:
+      while m <= 7:
+          m = (m << 1) | 1
+          e = e - 1
+      m = m - 8
+
+Now e is in -4..6 and m is in 0..7. Use this direct mantissa table:
+
+  FAC = [18431, 20479, 22527, 24575, 26623, 28671, 30719, 32767]
+
+Let t = 6 - e. Set rounding = 2^(t-1) when t > 0, otherwise zero.
+Start excitation[0..39] at zero. For k = 0..12:
+
+  q = M(FAC[m], (2*xmc[k] - 7) << 12)
+  excitation[Mc + 3*k] = S(q + rounding) >> t
+
+Only those thirteen grid positions receive excitation pulses. In particular,
+Mc = 3 is meaningful and places the last pulse at index 39.
+
+4.2. Long-term synthesis, for each subframe in sequence
+
+Set N = Nc if 40 <= Nc <= 120, otherwise N = previous_lag.
+Set previous_lag = N. The Q15 gain table is:
+
+  gain = [3277, 11469, 21299, 32767][bc]
+
+For k = 0..39, using the history at the start of this subframe:
+
+  d[k] = S(excitation[k] + M(gain, history[120 + k - N]))
+
+Replace history with history[40..119] followed by d[0..39]. Append d to the
+frame's residual array w. After four subframes, w contains 160 values.
+
+4.3. Decoding the log-area ratios
+
+The following tables are indexed by i = 0..7:
+
+  MIC  = [-32, -32, -16, -16, -8, -8, -4, -4]
+  B2   = [0, 0, 4096, -5120, 188, -3584, -682, -2288]
+  INVA = [13107, 13107, 13107, 13107, 19223, 17476, 31454, 29708]
+
+For each i:
+
+  q = S(((LARc[i] + MIC[i]) << 10) - B2[i])
+  q = M(INVA[i], q)
+  current_lar[i] = S(q + q)
+
+4.4. Interpolating coefficients and converting to reflection coefficients
+
+There are four short-term interpolation regions within a frame. Their sizes
+are 13, 14, 13, and 120; these are distinct from the 40-sample excitation
+subframes. For each coefficient let p = previous_lar[i], c = current_lar[i].
+
+ Residual sample indices  Interpolated log-area ratio L
+ -----------------------  -------------------------------------------------
+   0..12                  S(S((p >> 2) + (c >> 2)) + (p >> 1))
+  13..26                  S((p >> 1) + (c >> 1))
+  27..39                  S(S((p >> 2) + (c >> 2)) + (c >> 1))
+  40..159                 c
+
+For each L, let z = min(abs(L), 32767). Convert to a reflection magnitude:
+
+  if z < 11059:       r = z << 1
+  else if z < 20070:  r = z + 11059
+  else:              r = S((z >> 2) + 26112)
+
+The signed coefficient is -r if L < 0, otherwise r. This gives rrp[0..7]
+for the region. After deriving the regions, retain current_lar as the next
+frame's previous_lar.
+
+4.5. Short-term synthesis and postprocessing
+
+For each residual sample in order, select its region's rrp and set s = w[k].
+For i descending from 7 to 0:
+
+  s = S(s - M(rrp[i], v[i]))
+  v[i+1] = S(v[i] + M(rrp[i], s))
+
+Then:
+
+  v[0] = s
+  deemphasis = S(s + M(deemphasis, 28180))
+  output_sample = S(deemphasis + deemphasis) & ~7
+
+The last expression clears the three least significant bits in the signed
+16-bit sample, leaving a value in -32768..32760. Write the sample as a signed
+16-bit little-endian PCM integer. Retain v, history, previous_lar,
+previous_lag, and deemphasis for the next frame. Exactly 160 samples result
+from every complete frame.
+
+5. Recognition and damage handling
+---------------------------------
+
+These rules distinguish the format definition from the converter's explicit
+recovery policy. Damaged bytes cannot in general be restored exactly. There
+is no checksum, redundancy, or original length field to make that possible.
+
+Recognition:
+  Read and validate the 20-byte header before reading the payload. Require
+  the exact signature and the supported words at offsets 4 and 8. Do not
+  identify by extension, search for signatures at arbitrary positions, guess
+  an alternate codec, or attempt another format. Unsupported prefixes create
+  no output file or directory, including when -verbose is supplied.
+
+Unavailable header fields:
+  A short header cannot establish both payload size and playback rate. A zero
+  playback rate is unusable. These cases produce a diagnostic and no output.
+  No substitute rate is guessed. RIFF PCM also requires R <= 0x7FFFFFFF so its
+  unsigned 32-bit byte-rate field can hold 2*R.
+
+Truncated payload:
+  Use the smaller of D and the number of physically available payload bytes.
+  Decode its complete 33-byte frame slots. Report missing bytes. A partial
+  final frame cannot produce correct audio, so report and discard it. Never
+  pad a compressed frame with invented values or synthesize frames for an
+  absent tail.
+
+Incorrect alignment of D:
+  Report D modulo 33 != 0. Complete frames before that boundary remain usable;
+  the incomplete remainder is accounted for but not decoded.
+
+Extra physical bytes:
+  Bytes beyond the declared payload boundary are reported and excluded. Do
+  not reinterpret them as additional audio or concatenate a second stream.
+  This honors the explicit length instead of guessing that the length is
+  wrong. A -verbose audit records the exact extra bytes in hexadecimal.
+
+Damaged frame signature after format recognition:
+  A complete slot whose high nibble is not D is reported. Substitute 160 zero
+  PCM samples to retain its time position and reset decoder state before
+  continuing at the next fixed 33-byte slot. Do not scan for a new boundary.
+  This is a documented loss-concealment policy, not recovered original sound
+  and not a claim that silent samples were encoded in the damaged frame.
+
+Out-of-range pitch lag:
+  Apply the codec-defined previous-lag rule and report the occurrence. Do
+  not reset the stream or discard the other parameters of that subframe.
+
+No recoverable frames:
+  A nonempty/damaged stream with no complete frame bearing a valid signature
+  produces no output. A well-formed empty stream produces an empty PCM WAV.
+
+Limits of detection:
+  Altered parameter bits or a positive but incorrect playback rate cannot be
+  detected without external evidence. Deleted or inserted bytes can destroy
+  framing; boundary scanning is intentionally not used. Following a reset,
+  later audio can differ from the undamaged original until predictive state
+  recovers. Recovery messages go to standard error even without -verbose.
+
+6. WAV representation and converter interface
+---------------------------------------------
+
+Command:
+
+  python3 outcastSoundEffects.py <inputFile> <outputDir>
+
+The converter creates outputDir if needed and accepts an existing directory.
+It writes one file, <input filename without final extension>.wav. An existing
+file with that output name is replaced only after decoding finishes. Paths
+that alias the input itself are rejected. Other files in outputDir are left
+alone. No metadata, extracted compressed stream, report, or sidecar is retained
+by default. A transient staging file is used for atomic publication and is
+removed on ordinary write failure. Files have mode 0644; newly created
+directories permit both user and group to read and traverse them.
+
+With -verbose (or --verbose), the converter additionally writes a .json file
+with header values, a complete byte-region accounting, all frame parameters,
+damaged/trailing bytes, and warnings, and prints a conversion summary.
+
+--decoder auto    Use installed libgsm when available; otherwise use Python.
+--decoder python  Use the embedded fixed-point decoder only.
+--decoder libgsm  Require the external libgsm shared library explicitly.
+
+Python 3.9 or newer and its standard library are sufficient. No supporting
+data files, compiler, package installation, FFmpeg, or network access are
+required. The optional libgsm accelerator must export gsm_create, gsm_decode,
+and gsm_destroy with their normal C API. It uses ordinary 33-byte packing and
+maintains one codec state per continuous stream. Both backends implement the
+same synthesis procedure. The source contains libgsm's permission notice.
+
+Exit status is zero when a WAV is written, including documented recoveries.
+An unsupported/unrecoverable input, dependency error for explicitly requested
+libgsm, or I/O error gives a nonzero exit status and a standard-error message.
+Input validation and decoding precede creation of any output directory.
+An I/O failure during optional JSON writing can leave the completed WAV.
+
+Output WAV has the following canonical layout, all integers little-endian.
+Let P = number of PCM samples * 2.
+
+ Offset  Bytes  Value
+ ------  -----  -----------------------------------------------------------
+  0         4   ASCII RIFF
+  4         4   36 + P
+  8         4   ASCII WAVE
+ 12         4   ASCII fmt followed by one space
+ 16         4   16 (format chunk size)
+ 20         2   1 (integer PCM)
+ 22         2   1 (one channel)
+ 24         4   R (sample rate)
+ 28         4   2*R (byte rate)
+ 32         2   2 (block alignment)
+ 34         2   16 (bits per sample)
+ 36         4   ASCII data
+ 40         4   P
+ 44         P   Signed 16-bit little-endian PCM
+
+P is even, so no data-chunk padding is needed. There are no ancillary chunks.
+The total size is 44 + P. Inputs expanding beyond the RIFF 32-bit size limit
+(36 + P > 0xFFFFFFFF) are rejected before output rather than silently wrapped.
+The implementation holds compressed input and decoded PCM in memory; available
+memory can impose a lower practical limit. This profile has only one stream,
+so splitting a valid input into multiple WAVs is unnecessary.
+
+7. Sources and verification basis
+---------------------------------
+
+The container prefix, byte counts, frame boundaries, and rate interpretation
+are independently described in James McNeill's SFX converter:
+  https://github.com/mcneja/sfx2wav/blob/master/sfx2wav.cpp
+  https://playtechs.blogspot.com/2010/05/reading-outcast-sfx-files.html
+
+The codec is GSM 06.10 RPE-LTP full-rate speech transcoding. Its normative
+fixed-point procedures and tables are specified by ETSI:
+  https://www.etsi.org/deliver/etsi_ts/100900_100999/100961/05.03.00_60/ts_100961v050300p.pdf
+
+The conventional 33-byte packing, state initialization, and reference integer
+implementation are available from the libgsm authors:
+  https://www.quut.com/gsm/
+  https://www.quut.com/gsm/gsm-1.0.23.tar.gz
+
+The header's two constant words are specified here conservatively as profile
+requirements. The converter does not turn unverified field names into codec,
+channel-layout, resampling, or gain decisions. The next step for broader
+historical format coverage is the loader/writer investigation in section 1.

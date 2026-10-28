@@ -12,7 +12,8 @@ export class iffCAT extends Format
 		// specific
 		"Kindwords document (v2.x)", "TrapFAX FAX"
 	];
-	idMeta     = ({macFileType, macFileCreator}) => macFileType==="REX2" && macFileCreator==="ReCy";
-	trustMagic = true;
-	converters = ["iffCATExtract"];
+	forbiddenMagic = ["REX2 audio sample loop"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="REX2" && macFileCreator==="ReCy";
+	trustMagic     = true;
+	converters     = ["iffCATExtract"];
 }

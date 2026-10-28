@@ -2,9 +2,12 @@
 # Vibe coded by Codex
 """Convert GEO/Emblaze audio-only files to 8 kHz mono, 16-bit PCM WAV.
 
-Usage: emblazeAudio.py <inputFile> <outputFile>
+Usage: emblazeAudio.py <inputFile> <outputDirectory>
 Requires Python 3.9+ and ffmpeg on PATH; no third-party Python modules or
 supporting files are needed.
+
+The output directory must already exist. This format has no title metadata,
+so the output filename is always audio.wav.
 
 The format is the exact 28-byte vendor signature below followed immediately
 by GSM 06.10 full-rate frames. Each frame has 33 bytes, a 0xD high nibble,
@@ -82,10 +85,13 @@ def extract_gsm(data):
     return bytes(frames), warnings
 
 
-def convert(input_file, output_file):
+def convert(input_file, output_directory):
     """Write a validated WAV; return (PCM sample count, recovery warnings)."""
     source = Path(input_file)
-    destination = Path(output_file)
+    directory = Path(output_directory)
+    if not directory.is_dir():
+        raise AudioError(f"output directory must already exist and be a directory: {directory}")
+    destination = directory / "audio.wav"
     if source.resolve() == destination.resolve() or (
         destination.exists() and os.path.samefile(source, destination)
     ):
@@ -99,9 +105,6 @@ def convert(input_file, output_file):
     ffmpeg = shutil.which("ffmpeg")
     if ffmpeg is None:
         raise AudioError("ffmpeg is required but was not found on PATH")
-    if not destination.parent.is_dir():
-        raise AudioError(f"output directory does not exist: {destination.parent}")
-
     with tempfile.TemporaryDirectory(prefix=".emblazeAudio-", dir=destination.parent) as work:
         raw = Path(work) / "audio.gsm"
         wav = Path(work) / "audio.wav"
@@ -141,16 +144,17 @@ def main(argv=None):
                     "Requires ffmpeg on PATH."
     )
     parser.add_argument("inputFile", help="Emblaze audio-only input file")
-    parser.add_argument("outputFile", help="destination WAV file")
+    parser.add_argument("outputDirectory", help="existing output directory; writes audio.wav (no title metadata)")
     args = parser.parse_args(argv)
     try:
-        samples, warnings = convert(args.inputFile, args.outputFile)
+        samples, warnings = convert(args.inputFile, args.outputDirectory)
     except (AudioError, OSError) as exc:
         print(f"emblazeAudio: {exc}", file=sys.stderr)
         return 1
     for message in warnings:
         print(f"emblazeAudio: warning: {message}", file=sys.stderr)
-    print(f"Wrote {args.outputFile}: {samples} samples, {samples / SAMPLE_RATE:.3f} s, "
+    destination = Path(args.outputDirectory) / "audio.wav"
+    print(f"Wrote {destination}: {samples} samples, {samples / SAMPLE_RATE:.3f} s, "
           "8000 Hz mono PCM16")
     return 0
 

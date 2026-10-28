@@ -1,0 +1,38 @@
+Voxware reference decoder dependencies
+
+These proprietary legacy binaries retain their original Voxware copyright.
+They are not code written by Codex and are not represented as an independent
+implementation of the codecs. This notice does not grant a redistribution
+license. The bridge source and executable are newly created interoperability
+code. Keep this provenance notice with the decoder files.
+
+mm32dcmp.dll -- 448000 bytes
+ToolVox Decompressor DLL for Windows, 1.0.9.30 Beta 3.
+Copyright Voxware, Inc. 1995, 1996.
+SHA-256: 583a2a7e705a2c1a93bf26a8055677ff417d90025e078495077a9d48daeebf9c
+Recovered from the original Timetables of Technology software distribution:
+https://discmaster.textfiles.com/file/17188/TheTimetablesOfTechnology.iso/timetbl/mm32dcmp.dll
+Used for codec 0x0403 and 0x0605.
+
+VDK32116.DLL -- 563712 bytes
+Voxware RealTime Codec for Windows, version 1.1.6.
+Copyright Voxware, Inc.
+SHA-256: e3c412bcc3d0cd6beaa1e988772b5cfab43ef49fc18bc9d64a3ca0cb151fea2f
+Extracted unchanged from the original ToolVox Gold installer archived at:
+https://www.rarewares.org/rrw/files/vocodecs/ToolVGld.exe
+Product archive page: https://www.rarewares.org/rrw/voxware.php
+Used for codec 0x0504 (RT24).
+
+The support binaries do not need installation or codec registration.
+The converter loads only these pinned copies from its own support directory.
+On Linux/other POSIX hosts they require Wine with 32-bit support; on Windows
+run the supplied bridge directly. The Python converter requires no pip modules.
+
+The exact 4096-byte harmonic-count lookup recovered from MM32DCMP is compressed
+inside the Python converter. The standalone format document includes the
+complete effective lookup as ranges. The synthesis tables remain in the DLLs.
+
+Rebuild the helper from the project root:
+  i686-w64-mingw32-gcc -O2 -Wall -Wextra -s -static-libgcc \
+    -o voxware_support/decoder_bridge.exe voxware_support/decoder_bridge.c
+Update SUPPORT_HASHES in the Python module after a deliberate rebuild.

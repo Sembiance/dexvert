@@ -1,0 +1,537 @@
+KURZWEIL K2 PRAM SAMPLE BANKS
+Binary layout, PCM extraction, implementation limits
+Revision: 2026-10-26
+
+STATUS AND SCOPE
+
+This is a standalone description of the PRAM object-bank container and the
+sample structures needed to extract its explicitly addressed audio. It is
+NOT a complete semantic specification of every Kurzweil object or every
+byte. In particular, several historical header fields, synthesis-object
+bodies, natural-envelope timing, and unreferenced storage remain unresolved.
+Those limits are identified below rather than assigned invented meanings.
+
+The accompanying converter extracts original sample recordings. A bank is
+not a recording of the synthesizer's output: programs, keymaps, modulation,
+envelopes, effects, MIDI setups and songs describe how the instrument uses
+samples. Exporting PCM does not emulate that instrument. Some valid banks
+contain only these objects, or sample headers referring to the instrument's
+ROM, and consequently cannot produce a WAV without an external sound source.
+
+The supported signature is PRAM. SROM system-object images, MIDI SysEx,
+disk/filesystem images, and unrelated formats are outside this specification
+and are rejected. An extension alone never identifies the format. KRZ and
+numbered KR1/KR2/... names are common, but numbered names can also contain
+ordinary independent banks. Related instruments use the same basic PRAM
+container; machine-configuration bytes are not a reliable format discriminator.
+
+CONVENTIONS
+
+All offsets in the field tables are hexadecimal. All integer quantities,
+including PCM, are big-endian unless the WAV output section says otherwise.
+u8/u16/u32 are unsigned 8/16/32-bit integers. i8/i16/i32 are signed two's
+complement integers. A byte interval [a,b) includes a and excludes b.
+Sample addresses count 16-bit words, not bytes. The sound-header end address
+is inclusive. Relative pointers are relative to the address of the pointer
+field itself, not the start of the surrounding object.
+
+FILE STRUCTURE
+
+    32-byte file header
+    zero or more negatively length-prefixed object blocks
+    four-byte zero object-section terminator
+    optional packed PCM pool
+
+The object-section boundary is explicitly stored in the file header. There
+is no RIFF-style audio chunk tag, compression tag, or per-waveform byte count.
+Sample objects contain pointers into the pool; PCM data do not appear inside
+their object bodies. Multiple headers may refer to overlapping or identical
+audio. Unreferenced PCM may also remain in the pool.
+
+File header, 32 bytes:
+
+ Offset  Size  Encoding  Meaning
+ 00      4     bytes     ASCII PRAM (50 52 41 4D)
+ 04      4     u32       Object-section end / PCM byte offset in a normal bank
+ 08      4     u32       Split total/remaining count, or legacy memory field
+ 0C      4     u32       Split part number, or legacy memory field
+ 10      4     u32       Saving operating-system version, decimal hundredths
+ 14      4     u32       Machine/configuration identifier; detailed bits unresolved
+ 18      8     bytes     Reserved; normally zero; preserve all bytes
+
+For a nonsplit bank with no PCM, offset 04 equals file length. Otherwise,
+file length minus offset 04 is the number of stored PCM bytes. The two
+fields at 08 and 0C are NOT universally an audio length and a part number.
+Older nonsplit banks contain large values in both, often consistent with
+allocator bookkeeping. Their complete semantics have not been established.
+The converter preserves their numerical values and does not use them as
+PCM lengths in an ordinary bank.
+
+The version is a decimal value, not packed BCD: 310 denotes 3.10. It describes
+the saving OS and does not by itself specify every object-body version.
+
+OBJECT BLOCKS
+
+Starting at byte 20, read an i32. Zero ends the object section. A negative
+value -L declares a block of L bytes including its own four-byte length.
+Read the next block at the current block position plus L. Positive values
+are invalid as normal block lengths. A damaged block is not a license to
+scan for a plausible header elsewhere in its bytes.
+
+A block may contain one object or several. Objects are aligned to two-byte
+boundaries. Common individually saved blocks also end on four-byte boundaries,
+but bulk-object blocks need only be word-aligned. A parser that assumes one
+object per block or requires every block to be a multiple of four loses valid
+objects. Alignment bytes have no playback meaning and need not be zero.
+
+Object header, relative to its own first byte O:
+
+ Offset  Size       Encoding  Meaning
+ 00      2          u16       Packed object type and ID
+ 02      2          u16       Object size N, including this header and name
+ 04      2          u16       Relative body pointer D
+ 06      variable   bytes     Object name, terminator, alignment/storage bytes
+ 04+D    N-(04+D)   bytes     Type-specific body
+
+The next object starts at O+N, rounded up to a two-byte boundary. The object
+length is independent of the enclosing block length and excludes any following
+object-alignment or block-alignment bytes.
+
+The display name is at most 16 bytes, normally NUL-terminated. A fully occupied
+16-byte name need not have a terminator within those 16 bytes. The body pointer
+is authoritative. Bytes between the display name and body must not be consumed
+as name characters merely because they are nonzero. ASCII is the ordinary
+name repertoire; Latin-1 is used as a reversible display mapping for other
+byte values, without claiming that it is the instrument's full character set.
+
+Type/ID decoding:
+
+    If packed & 8000h:
+        type = (packed >> 8) & FCh
+        ID   = packed & 03FFh
+    Otherwise:
+        type = packed >> 8
+        ID   = packed & 00FFh
+
+Types relevant to the container:
+
+ Type   Meaning                    ID encoding
+ 64     System/data table          8-bit table selector
+ 67     Intonation table           8-bit packed ID
+ 68     Velocity map               8-bit packed ID
+ 69     Pressure map               8-bit packed ID
+ 6F     Quick-access bank          8-bit packed ID
+ 70     Song                       8-bit packed ID
+ 71     Effect                     8-bit packed ID
+ 90     Program                    10-bit ID
+ 94     Keymap                     10-bit ID
+ 98     Sample / sound block       10-bit ID
+ 9C     K2000 setup                10-bit ID
+ A4     Later setup                10-bit ID
+ B0     KDFX studio                10-bit ID
+ B4     KDFX preset                10-bit ID
+ BC     KDFX algorithm             10-bit ID
+
+The 10-bit ID is the displayed object number. Packed 8-bit IDs are not
+universally displayed numbers. For intonation/velocity/pressure/QA/song IDs,
+codes 1..75 map directly; for code v >= 76:
+
+    displayed = 100 * (1 + (v-76)//20) + (v-76)%20
+
+For effect IDs, codes 1..37 map directly; for code v >= 38:
+
+    displayed = 100 * (1 + (v-38)//10) + (v-38)%10
+
+The converter reports the stored ID. Table selectors include 10h for master
+settings, 23h for macro, 24h for names, and 25h for faders. Recognition of a
+type does not imply that its complete body is decoded.
+
+SAMPLE OBJECT: SOUND BLOCK
+
+At the sample object's body pointer, a 12-byte sound block describes one or
+more 32-byte sound headers. It contains no PCM.
+
+ Offset  Size  Encoding  Meaning
+ 00      2     u16       Base subsample ID
+ 02      2     u16       Number of sound headers minus one
+ 04      2     u16       Relative pointer to first sound header, normally 8
+ 06      1     bits      Bit 0: stereo; bit 1: temporary protection
+ 07      1     u8        Reserved
+ 08      2     u16       Copy ID; lifecycle semantics unresolved
+ 0A      2     u16       Reserved
+
+For header index i, starting with zero:
+
+    header_position = body_position + 4 + headers_offset + 32*i
+    subsample_ID    = base_ID + i
+
+The remaining sound-block flag bits are reserved/undefined here. The
+converter retains all bits but uses only bit 0 to establish stereo.
+An object with two headers is NOT necessarily stereo. With bit 0 clear,
+each header defines a separate mono subsample, commonly at a different root
+key. With bit 0 set and exactly two headers, they are left and right channels.
+The ordering of stereo multi-root objects with more than two headers is not
+established by this implementation; their channels are exported individually.
+
+SAMPLE OBJECT: SOUND HEADER
+
+Each sound header H is 32 bytes:
+
+ Offset  Size  Encoding  Meaning
+ 00      1     u8        MIDI root key, 0..127; MIDI 60 is middle C
+ 01      1     bits      Playback/storage flags, detailed below
+ 02      1     i8        Normal volume adjustment in half-decibels
+ 03      1     i8        Alternate volume adjustment in half-decibels
+ 04      2     u16       Highest-playback pitch in cents
+ 06      2     u16       Relative subsample-name pointer; zero means absent
+ 08      4     u32       Normal start word address
+ 0C      4     u32       Alternate start word address
+ 10      4     u32       Loop start word address
+ 14      4     u32       Inclusive end word address (loop end when looping)
+ 18      2     u16       Relative normal natural-envelope pointer
+ 1A      2     u16       Relative alternate natural-envelope pointer
+ 1C      4     u32       Sample period in nanoseconds
+
+Sound-header flags:
+
+ Mask   Meaning
+ 03     Playback direction: 0 forward, 1 reverse, 2 bidirectional, 3 undefined
+ 04     Ignore release
+ 08     Alternate-start sense reversed
+ 10     RAM-based sample
+ 20     Share/copy permission flag
+ 40     Needs load: this header addresses sample bytes stored with the bank
+ 80     Loop disabled when set; loop enabled when clear
+
+The flags describe instrument playback. They do not change the PCM encoding.
+In particular, reverse playback is not reverse byte order. The converter
+exports storage-order PCM and maps a supported loop direction to WAV sampler
+metadata. A conventional browser player plays the recording once, forward;
+it does not implement the Kurzweil voice lifecycle or MIDI release behavior.
+
+Bit 40h is necessary before interpreting addresses as positions in the bank's
+PCM pool. With it clear, the addresses may refer to ROM or another externally
+available sample. They must not be used to carve bytes out of the current file.
+
+The name pointer, when nonzero, addresses a NUL-terminated string at H+6+value.
+The envelope pointers address H+18h+value and H+1Ah+value respectively. Both
+envelope pointers can refer to the same envelope; an alternate envelope can
+also begin at a later stage of the normal envelope. Pointers must be checked
+against the owning object. An out-of-bounds pointer is reported, not followed
+into unrelated objects or sample data.
+
+Sample frequency is:
+
+    exact_rate_Hz = 1,000,000,000 / period_ns
+
+The period is NOT a frequency in Hz or millihertz. Integer quantization means
+that converting a period back to a frequency may not produce a familiar
+rounded audio rate. The converter rounds the quotient to the nearest positive
+integer for the WAV fmt field, with exact halves rounded upward. It does not
+snap rates to a list of common frequencies. The original integer period is
+preserved in the WAV smpl chunk.
+
+Periods zero and FFFFFFFFh are not treated as usable rates. A root key and
+highest-pitch field cannot reconstruct an original period exactly: those
+parameters contain tuning and quantization. No audio is exported for a header
+with an unspecified rate, and no guessed 44.1/48 kHz fallback is used.
+
+The highest-pitch field is associated with the instrument's playback ceiling
+and pitch adjustment. A useful explanatory relation is root_key*100 plus
+1200*log2(48000/rate), but this does NOT establish an invertible file-format
+rule for recovering missing periods. The converter retains the field verbatim
+and does not use that approximation to manufacture a sample rate.
+
+NATURAL ENVELOPES
+
+An envelope is a sequence of four-byte pairs:
+
+    i16 decay_rate
+    u16 time_parameter
+
+Read through the first pair whose time is zero (sustain boundary), then through
+the following release sequence to its zero-time pair. A common user-sample
+envelope is three pairs: a decay pair with time 1, a zero/zero sustain pair,
+and a release-rate pair with time 0. Multiple sound headers can share stages.
+
+For ordinary editable decay/release rates, the signed stored rate is associated
+with -4 times the decay in dB/second. The general time-parameter unit and the
+complete envelope engine have NOT been established. Consequently the
+converter records the stage pairs but does not impose an envelope on the PCM.
+Unreferenced envelope-like data or trailing object bytes are retained as raw
+bytes and explicitly marked uninterpreted; a plausible pattern is not enough
+to give it a semantic name.
+
+PCM ADDRESSING AND EXPORT BOUNDARIES
+
+An addressed PCM word at w is stored at:
+
+    normal_file_byte_offset = file_header.object_end + 2*w
+
+Each word is a signed 16-bit linear PCM value, most-significant byte first.
+Stereo is planar: each channel has its own complete address range. For WAV,
+the converter swaps the two bytes in every word and interleaves left/right
+frames. No normalization, gain, dithering, resampling, filtering or smoothing
+is performed. The original numeric PCM values are preserved.
+
+An edited normal start can lie after an alternate start or loop start. The
+converter's explicit extraction policy is to preserve all data addressed by
+that header:
+
+    A = minimum(normal_start, alternate_start, loop_start)
+        using only pointers not greater than end
+    Z = end + 1
+    exported words = [A, Z), limited to complete words actually available
+
+Normal start must not follow end. Other start pointers following end are
+reported and excluded. The WAV contains cue markers for valid normal and
+alternate starts relative to A. Thus the stored recording can include audio
+before the ordinary playback start; the cue identifies the edited start.
+This is an explicit preservation policy, not a claim that A is necessarily
+the beginning of the instrument's memory allocation.
+
+Loop endpoints become loop_start-A and end-A, both inclusive in WAV smpl.
+A loop outside the available recovered audio is omitted and reported. Loops
+of one frame or other short lengths are not arbitrarily discarded.
+
+The end pointer describes a playback/loop boundary. It does NOT universally
+identify the end of a backing allocation. Some pools retain PCM beyond it.
+The next sample's start is also NOT an unambiguous allocation boundary when
+headers alias audio or have edited starts. The converter deliberately does
+not assign intervening PCM to a waveform by neighbour-distance inference.
+Those byte ranges are listed as unexported PCM, and are preserved as base64
+in verbose output. They are one reason this specification is not a complete
+reverse engineering of every byte's semantic purpose.
+
+A stereo pair is interleaved when both channels have equal period and equal
+available frame counts. Different channel root keys do not prevent raw stereo
+export; the standard WAV smpl root uses the left key, and both original values
+remain in the embedded sample object. Incompatible loop definitions omit the
+common WAV loop. Unequal channel lengths or rates produce separate channel
+WAVs with an explanation; no samples are discarded to equalize them and no
+silence is invented to pad them.
+
+KEYMAP OBJECTS
+
+A keymap connects keys and velocity levels to sample/subsample IDs and tuning.
+It does not contain audio. The converter parses the following layout for
+diagnostics; it does not synthesize keys or create a sampled instrument.
+
+ Offset  Size  Encoding  Meaning
+ 00      2     u16       Default sample ID
+ 02      2     bits      Per-entry field-selection method
+ 04      2     i16       Base pitch
+ 06      2     i16       Pitch spacing per entry, cents
+ 08      2     u16       Number of entries per velocity table minus one
+ 0A      2     u16       Entry size, bytes
+ 0C      16    8*u16     Eight self-relative velocity-table pointers
+
+Each pointer is relative to its own word; multiple pointers may resolve to
+one shared table. Entries are fixed-size within that table. The recognized
+method fields occur in the following order:
+
+ Mask   Width   Field
+ 10     2       Signed tuning in cents
+ 08     1       Signed coarse tuning code (scale not established here)
+ 04     1       Signed volume adjustment, half-decibels
+ 02     2       Sample ID; otherwise use the header default
+ 01     1       Subsample ID
+
+The stored entry size must agree with the selected field widths. The
+simultaneous use of method bits 10h and 08h is unresolved in this implementation
+and is retained without decoding entries. Unknown method bits are likewise
+reported. Table counts and pointers are bounded by the object, never allowed
+to read into another object just to satisfy a declared entry count.
+
+NON-AUDIO OBJECT BODIES
+
+Programs contain tagged synthesis segments, with format-dependent data for
+layers, modulation sources, envelopes, DSP algorithms, and effects references.
+Setups, songs, effect definitions, quick-access banks and system tables have
+their own body schemas. Their framing, type, ID, name and complete body bytes
+are preserved, but their internal schemas are not implemented here.
+
+No claim is made that framing an object or retaining its bytes amounts to
+understanding those bytes. These bodies are a material remaining gap relative
+to a full specification of the PRAM format. Their presence does not prevent
+extraction of independently described PCM sample objects.
+
+SPLIT BANKS
+
+A first split part has header field 0Ch equal to 1. Its field 08h declares
+the total PCM byte count across all parts. The complete object section occurs
+in this first part, followed by an initial portion of the shared PCM pool.
+
+A continuation has a 32-byte PRAM header and a four-byte continuation-control
+word at byte 20h. Its PCM begins at byte 24h (36 decimal). Field 0Ch is the
+sequential part number. Field 08h is the number of PCM bytes still required
+AFTER that continuation; the last part has zero. Field 04h may be 36 or a
+copy of the first part's object-section boundary. It must not be used to skip
+that many bytes in a continuation.
+
+The continuation-control word can be zero or nonzero. Its full interpretation
+has not been established. It is not a sample word and is retained verbatim.
+
+Given a validated sequence, remove each continuation's 36-byte prefix and
+append its PCM to the preceding pool. Sample addresses remain relative to
+that logical combined pool. For every accepted continuation, verify:
+
+    total - bytes_accumulated_before - continuation_payload_length
+        == continuation_remaining_count
+
+If this equation fails, some part or count is inconsistent. The bytes alone
+do not identify whether the missing data belong at the end of the preceding
+part, the beginning/end of the continuation, or elsewhere. Blind concatenation
+would relocate later sample addresses. The converter therefore keeps only
+the validated prefix for extraction and retains the ambiguous continuation
+verbatim in verbose output. A missing later part similarly leaves a known
+prefix; complete and partial samples within that prefix can be recovered.
+
+Sibling discovery is a naming convention, not a magic test: same directory,
+same stem, case-insensitive KR1/KR2/... or KR1.KRZ/KR2.KRZ/... names; a KRZ
+name may also designate part 1. Header part numbers, OS versions, configuration
+IDs and permitted object-offset variants must agree. Ambiguous candidate sets
+are not chosen arbitrarily. No search across unrelated directories is used.
+
+Invoking a continuation searches for its validated part 1. Without it, raw
+PCM has no available channel, address or period metadata, so no WAV is made.
+A normal object block takes precedence over a numbered filename or a large
+legacy field value, preventing an ordinary bank from being misclassified as
+a continuation.
+
+IDENTIFICATION AND DAMAGE RECOVERY
+
+Before writing anything, require the PRAM signature, a complete plausible
+header, and either a valid first object-block structure, an empty object
+section, or an identifiable continuation. A nonmatching file produces an error
+and no files or directories, even with verbose requested. This implementation
+does not try other audio formats as a fallback.
+
+After a bank is identified:
+
+* Follow only explicit lengths and offsets. Do not scan for replacement magic,
+  object IDs, text names, plausible waveforms, or spectral pitch estimates.
+* Keep earlier valid objects if a later block is broken. A block's independent
+  length permits continuing after an invalid body when its boundary is known.
+* Bound sample headers, strings, envelopes and key tables by their owning object.
+* Read only complete 16-bit PCM words. An odd final byte is reported/preserved
+  in verbose diagnostics, never combined with a made-up zero byte.
+* A sample intersecting the end of available PCM produces its available prefix
+  and is explicitly marked partial. A sample entirely absent is skipped.
+* An invalid or unspecified period is not replaced by a guessed frequency.
+* Unknown non-audio bodies are retained as opaque records; they cannot be heard
+  by inventing or rendering a waveform from those bytes.
+
+The sound and structure checks establish supported cases; they cannot prove
+that arbitrary corrupted bytes still represent the author's intended sound.
+There is no checksum field used by this PRAM layout to provide that assurance.
+
+WAV OUTPUT
+
+Outputs are RIFF/WAVE files, with little-endian RIFF fields and PCM. Chunks:
+
+    fmt   : PCM format 1, 16 bits, one or two channels, integer sample rate
+    smpl  : original nanosecond period, root key, and valid loop if applicable
+    cue   : valid normal/alternate start markers
+    LIST  : adtl labels naming the cue markers
+    krz   : private chunk with exact original sample-object bytes
+    data  : byte-swapped and, for stereo, interleaved original PCM
+
+Chunk tags are four bytes: fmt and krz have a trailing space. Each chunk has
+a u32 payload length; an odd payload is followed by one alignment byte not
+included in that length. RIFF length is total file length minus eight.
+
+The private "krz " payload begins with the original packed type/ID, size,
+relative body offset and name, followed by the complete sample-object body.
+It excludes the enclosing negative block length. It preserves alternative
+channel tuning, volume, flags, natural envelopes and other sample-object bytes
+which have no equivalent standard WAV field. It does not imply those bytes
+have all been interpreted. Standard WAV readers skip this unfamiliar chunk.
+The metadata is inside the actual WAV; no sidecar is required or written by
+default. A multi-root object is retained in full in each of its exported WAVs.
+
+There is no pitch-shifting or gain adjustment. A sample's root key is metadata,
+not an instruction to transpose its PCM to middle C. The WAV smpl tuning
+fraction is zero; exact instrument tuning behavior is not rendered.
+
+USE OF THE CONVERTER
+
+    python3 kurzweilK2Sample.py <inputFile> <outputDir>
+    python3 kurzweilK2Sample.py <inputFile> <outputDir> -verbose
+
+The output directory may exist. Unrelated files in it are retained. Generated
+names include the input bank stem, object ID, subsample ID and sanitized sample
+name. Duplicate names/IDs receive a numeric suffix. Repeating a conversion
+replaces the same generated filenames atomically. Obsolete outputs from a
+previous, different conversion are not removed automatically.
+
+No directory is created when there are no WAVs and verbose is absent. With
+verbose, one <bank>.metadata.json is also written. It includes:
+
+* Header values, source hashes and lossless raw header/object-section bytes.
+* Parsed sample/keymap fields and raw bytes of every parsed object.
+* A primary-file structural byte-region map, warnings and skipped-item reasons.
+* Export spans, frame counts, rates and filenames.
+* Unexported PCM ranges and unlocated continuation bytes as base64.
+
+The byte-region map is structural accounting, not 100% semantic decoding.
+Opaque bytes are explicitly labeled. The JSON does not hide the incompleteness
+behind a successful extraction status.
+
+Exit status is 0 when one or more WAVs were produced (including partial
+recovery), 1 for identification/I/O/output errors, and 2 for an identified
+bank with no exportable audio. Warnings go to stderr. Use verbose metadata
+to distinguish recovered samples from a wholly complete bank. All generated
+files are readable by user and group. The converter requires Python 3.10 or
+newer and only its standard library; it requires no external executable,
+library, network service, ROM image or supporting data file.
+
+REMAINING WORK FOR A COMPLETE FORMAT SPECIFICATION
+
+1. Establish historical fields 08h/0Ch and all machine/configuration bits from
+   firmware or controlled saves across OS/hardware revisions. Explain the
+   continuation-control word rather than merely preserving it.
+2. Decode every non-audio object body and all version-dependent program/setup,
+   song, effect, table and KDFX fields. Rendering them requires a separate
+   synthesis implementation, not just a file parser.
+3. Determine natural-envelope timing and release behavior, copy-ID lifecycle,
+   reserved flag semantics, and the remaining unreferenced sample-body bytes.
+   Controlled single-parameter edits and firmware analysis are needed to
+   distinguish padding, stale memory and meaningful data.
+4. Establish allocation rules for PCM outside all explicit playback spans and
+   for aliased/edited headers. Do not call neighbour-based extents exact without
+   independently verifying those rules.
+5. Establish stereo multi-root ordering and combined keymap tuning-method bits.
+6. Resolve missing-period headers from an authoritative source or controlled
+   device resave. A cent-rounded pitch parameter alone is insufficient.
+7. Obtain missing/corrected split media and replacement damaged bytes. Missing
+   audio cannot be recovered by understanding a header more thoroughly.
+
+These are concrete limits of the delivered implementation. A complete claim
+that every byte of every PRAM bank is semantically understood is not supported.
+
+REFERENCE MATERIAL
+
+The layout was checked against direct binary parsing and the following
+independent descriptions/implementations. They are research references, not
+runtime dependencies. Some disagree or use heuristics that this converter
+deliberately does not adopt, notably rate snapping and neighbour-based extents.
+
+Geoffrey Mayer, KurzFile, 2000: original reverse-engineering notes reproduced at
+https://pdfcoffee.com/kurzfile-4-pdf-free.html
+Its sample-period unit is incorrect; its unresolved fields remain unresolved.
+
+Marc Halbruegge and Sven Thoennissen, KurzFiler source:
+https://github.com/SpotlightKid/kurzfiler/tree/master/kurzobjects/samples
+The inclusive end convention is implemented in Soundfilehead.java; compare
+the period and object parsing against the data rather than inheriting its
+fallback frequencies or repairs.
+
+mpc2emu, PRAM/sample research and hardware observations:
+https://github.com/lentferj/mpc2emu/blob/master/docs/KRZ_FORMAT.md
+
+k2kremote, firmware/sample-import research:
+https://github.com/lentferj/k2kremote/blob/main/docs/IMPORT_CONVERSION.md
+
+Kurzweil official product documentation and manuals:
+https://kurzweil.com/k2000/

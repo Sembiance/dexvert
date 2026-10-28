@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,011)
+# Unsupported File Formats (4,002)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (261)
+## Archive (262)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -86,6 +86,7 @@ Family/Format | Name | Extensions | Notes
 [archive/dreamloadFileArchiveImage](https://discmaster.textfiles.com/search?format=dreamloadFileArchiveImage) | Dreamload File Archive image | .dfi | 
 [archive/dryArchiveData](https://discmaster.textfiles.com/search?format=dryArchiveData) | DRY archive data | .dry | 
 [archive/dshieldProtected](https://discmaster.textfiles.com/search?format=dshieldProtected) | DSHIELD Protected | .exe | 
+[archive/dynamixGameEngineArchive](https://discmaster.textfiles.com/search?format=dynamixGameEngineArchive) | Dynamix game engine archive | .sol .000 .001 .002 | 
 [archive/emu3Filesystem](https://discmaster.textfiles.com/search?format=emu3Filesystem) | E-Mu III Filesystem |  | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?format=ediSplitFileArchive) | EDI Split File Archive |  | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?format=emmaCompress) | EmmaCompress |  | 
@@ -272,7 +273,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (54)
+## Audio (43)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/abletonSoundData](https://discmaster.textfiles.com/search?format=abletonSoundData) | Ableton Sound Data | .asd | 
@@ -292,30 +293,20 @@ Family/Format | Name | Extensions | Notes
 [audio/dynamixSSMSoundAndMusic](https://discmaster.textfiles.com/search?format=dynamixSSMSoundAndMusic) | Dynamix SSM sound and music | .sng | 
 [audio/headspaceSoundBanks](https://discmaster.textfiles.com/search?format=headspaceSoundBanks) | Headspace Sound Banks | .hsb | 
 [audio/homeBrewSound](https://discmaster.textfiles.com/search?format=homeBrewSound) | HomeBrew Sound | .hse | [1 sample file](https://sembiance.com/fileFormatSamples/audio/homeBrewSound/)
-[audio/hyperStudioSampledSound](https://discmaster.textfiles.com/search?format=hyperStudioSampledSound) | HyperStudio sampled sound |  | 
 [audio/iffSampledAudio](https://discmaster.textfiles.com/search?format=iffSampledAudio) | [IFF Sampled audio](https://wiki.amigaos.net/wiki/SAMP_IFF_Sampled_Sound) |  | 
 [audio/inrsTelecomAudio](https://discmaster.textfiles.com/search?format=inrsTelecomAudio) | INRS-Telecom audio | .aud | 
 [audio/inverseFrequency](https://discmaster.textfiles.com/search?format=inverseFrequency) | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://sembiance.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
 [audio/jetPilotAudio](https://discmaster.textfiles.com/search?format=jetPilotAudio) | JETPilot audio |  | 
 [audio/kixtartSPK](https://discmaster.textfiles.com/search?format=kixtartSPK) | KixTart SPK Notation | .spk | 
-[audio/koepacAudioArchive](https://discmaster.textfiles.com/search?format=koepacAudioArchive) | Koepac audio archive | .koe | 
-[audio/kurzweilK2Sample](https://discmaster.textfiles.com/search?format=kurzweilK2Sample) | Kurzweil K2 Sample | .kr1 .kr2 .krz | 
-[audio/madeSoundFile](https://discmaster.textfiles.com/search?format=madeSoundFile) | MADE Sound File | .sfl | 
 [audio/maestroAudio](https://discmaster.textfiles.com/search?format=maestroAudio) | Maestro Audio |  | 
-[audio/magicOfEndoriaSoundSample](https://discmaster.textfiles.com/search?format=magicOfEndoriaSoundSample) | Magic of Endoria Sound Sample | .snd .smp | 
 [audio/microsoftSpeechData](https://discmaster.textfiles.com/search?format=microsoftSpeechData) | Microsoft Speech Data |  | 
-[audio/mioCompressedAudio](https://discmaster.textfiles.com/search?format=mioCompressedAudio) | MIO compressed audio | .mio | 
 [audio/musiclineInstrument](https://discmaster.textfiles.com/search?format=musiclineInstrument) | [Musicline Instrument](https://www.musicline.org/) |  | [7 sample files](https://sembiance.com/fileFormatSamples/audio/musiclineInstrument/)
-[audio/outcastSoundEffects](https://discmaster.textfiles.com/search?format=outcastSoundEffects) | [Outcast Sound effects](https://playtechs.blogspot.com/2010/05/reading-outcast-sfx-files.html) | .sfx | 
 [audio/parisAudioFormat](https://discmaster.textfiles.com/search?format=parisAudioFormat) | PARIS Audio Format | .paf | 
 [audio/parrotDigitalSample](https://discmaster.textfiles.com/search?format=parrotDigitalSample) | Parrot Digital sample | .dig | 
 [audio/performanceMusicBank](https://discmaster.textfiles.com/search?format=performanceMusicBank) | Performance Music Bank |  | 
 [audio/prolineVoice](https://discmaster.textfiles.com/search?format=prolineVoice) | Proline Voice | .pvd | [8 sample files](https://sembiance.com/fileFormatSamples/audio/prolineVoice/)
 [audio/psionAIKAudio](https://discmaster.textfiles.com/search?format=psionAIKAudio) | Psion AICA Audio | .aik | [3 sample files](https://sembiance.com/fileFormatSamples/audio/psionAIKAudio/)
 [audio/psm2CompressedSound](https://discmaster.textfiles.com/search?format=psm2CompressedSound) | PSM 2 compressed sound | .dat | 
-[audio/raveEJaySampleAudio](https://discmaster.textfiles.com/search?format=raveEJaySampleAudio) | Rave eJay sample audio |  | 
-[audio/rex2AudioSampleLoop](https://discmaster.textfiles.com/search?format=rex2AudioSampleLoop) | REX2 audio sample loop | .rx2 .rex | 
-[audio/richMusicFormat](https://discmaster.textfiles.com/search?format=richMusicFormat) | Rich Music Format | .rmf | [4 sample files](https://sembiance.com/fileFormatSamples/audio/richMusicFormat/)
 [audio/rpgMakerEncryptedOggVorbisAudio](https://discmaster.textfiles.com/search?format=rpgMakerEncryptedOggVorbisAudio) | RPG Maker encrypted Ogg Vorbis audio | .rpgmvo | 
 [audio/sonicArrangerInstrument](https://discmaster.textfiles.com/search?format=sonicArrangerInstrument) | Sonic Arranger instrument |  | No known converter
 [audio/sonixSoundSample](https://discmaster.textfiles.com/search?format=sonixSoundSample) | Sonix Sound Sample | .ss | [18 sample files](https://sembiance.com/fileFormatSamples/audio/sonixSoundSample/) - These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's
@@ -324,7 +315,6 @@ Family/Format | Name | Extensions | Notes
 [audio/soundImagesSoundSample](https://discmaster.textfiles.com/search?format=soundImagesSoundSample) | Sound Images sound sample | .bin | 
 [audio/soundPlayDigitizedAudio](https://discmaster.textfiles.com/search?format=soundPlayDigitizedAudio) | Sound Play digitized audio | .snd | 
 [audio/turtleBeachWaveFrontSoundBank](https://discmaster.textfiles.com/search?format=turtleBeachWaveFrontSoundBank) | Turtle Beach WaveFront sound Bank | .wfb | 
-[audio/voxWareMetaVoiceEncodedAudio](https://discmaster.textfiles.com/search?format=voxWareMetaVoiceEncodedAudio) | VoxWare MetaVoice encoded audio | .vox | 
 [audio/vSampler3Soundbank](https://discmaster.textfiles.com/search?format=vSampler3Soundbank) | VSampler 3 soundbank | .vs3 .vc3 | 
 [audio/winGrooveSoundbank](https://discmaster.textfiles.com/search?format=winGrooveSoundbank) | WinGroove soundbank | .tpd | 
 [audio/wipeoutSoundEffects](https://discmaster.textfiles.com/search?format=wipeoutSoundEffects) | Wipeout sound effects | .fx0 .fx1 .fx2 .fx3 .fx4 .fx5 .fx6 .fx7 | 
@@ -1095,7 +1085,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,848)
+## Other (2,850)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2851,6 +2841,7 @@ Family/Format | Name | Extensions | Notes
 [other/notationInterchangeFileFormat](https://discmaster.textfiles.com/search?format=notationInterchangeFileFormat) | [Notation Interchange File Format](http://fileformats.archiveteam.org/wiki/Notation_Interchange_File_Format) | .nif | 
 [other/notatorLogicProject](https://discmaster.textfiles.com/search?format=notatorLogicProject) | Notator Logic project | .log .lso | 
 [other/novalogicResourceGameData](https://discmaster.textfiles.com/search?format=novalogicResourceGameData) | Novalogic Resource / game data | .res | 
+[other/novellNetWareConnectModemDefinition](https://discmaster.textfiles.com/search?format=novellNetWareConnectModemDefinition) | Novell NetWare Connect Modem Definition | .mdc | 
 [other/novellNetwareVirtualLoadableModule](https://discmaster.textfiles.com/search?format=novellNetwareVirtualLoadableModule) | Novell Netware Virtual Loadable Module | .vlm .exe | 
 [other/novellSystemPrintDef](https://discmaster.textfiles.com/search?format=novellSystemPrintDef) | Novell System PrintDef Device Definition | .pdf | 
 [other/noxMap](https://discmaster.textfiles.com/search?format=noxMap) | NoX Map | .map .nxz | 
@@ -3741,6 +3732,7 @@ Family/Format | Name | Extensions | Notes
 [other/visualBasicProjectWorkspace](https://discmaster.textfiles.com/search?format=visualBasicProjectWorkspace) | Visual Basic Project Workspace | .frm | 
 [other/visualBasicTokenizedSource](https://discmaster.textfiles.com/search?format=visualBasicTokenizedSource) | Visual Basic Tokenized Source | .bas | 
 [other/visualCPPExportLibrary](https://discmaster.textfiles.com/search?format=visualCPPExportLibrary) | Visual C++ Export Library | .exp | 
+[other/visualCPPProjectWorkspace](https://discmaster.textfiles.com/search?format=visualCPPProjectWorkspace) | Visual C++ Project Workspace | .vcp | 
 [other/visualFoxProCompoundIndex](https://discmaster.textfiles.com/search?format=visualFoxProCompoundIndex) | Visual FoxPro Compound Index | .cdx | 
 [other/visualHomeObject](https://discmaster.textfiles.com/search?format=visualHomeObject) | Visual Home object | .bte | 
 [other/visualLISPApplication](https://discmaster.textfiles.com/search?format=visualLISPApplication) | Visual LISP Application | .vlx | 
@@ -4050,7 +4042,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (20)
+## Video (19)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -4065,7 +4057,6 @@ Family/Format | Name | Extensions | Notes
 [video/movieSetterSet](https://discmaster.textfiles.com/search?format=movieSetterSet) | MovieSetter Set | .set | 
 [video/ntitler](https://discmaster.textfiles.com/search?format=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 [video/pageFlipperPlusFXAnimation](https://discmaster.textfiles.com/search?format=pageFlipperPlusFXAnimation) | PageFlipper Plus F/X animation |  | 
-[video/pcAnimatePlusAnimation](https://discmaster.textfiles.com/search?format=pcAnimatePlusAnimation) | PC Animate Plus Animation | .ani | 
 [video/riffANIM](https://discmaster.textfiles.com/search?format=riffANIM) | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/)
 [video/roxanneAnimation](https://discmaster.textfiles.com/search?format=roxanneAnimation) | Roxanne animation | .rox | 
 [video/theDirector](https://discmaster.textfiles.com/search?format=theDirector) | [The Director Animation/Slideshow](https://www.computinghistory.org.uk/det/63951/The-Director/) | .film | [1 sample file](https://sembiance.com/fileFormatSamples/video/theDirector/)

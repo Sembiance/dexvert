@@ -3,6 +3,7 @@
 import os
 import struct
 import sys
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -369,36 +370,33 @@ def make_wav(twv):
     return b"RIFF" + pack_u32(len(body)) + body
 
 
-def convert(input_path, output_path):
+def convert(input_path, output_dir):
+    directory = Path(output_dir)
+    if not directory.is_dir():
+        raise TwvError(f"output directory must already exist: {directory}")
     twv = parse_twv(input_path)
     wav = make_wav(twv)
-    out = Path(output_path)
-    tmp = out.with_name(out.name + ".tmp")
+    # The supported TWV structure has no known title field.
+    out = directory / "audio.wav"
+    tmp = None
     try:
-        tmp.write_bytes(wav)
+        with tempfile.NamedTemporaryFile(dir=directory, prefix=".twvAudio-", suffix=".tmp", delete=False) as handle:
+            tmp = Path(handle.name)
+            handle.write(wav)
         os.chmod(tmp, 0o664)
         tmp.replace(out)
-        os.chmod(out, 0o664)
-    except Exception:
-        try:
-            tmp.unlink()
-        except FileNotFoundError:
-            pass
-        raise
+    finally:
+        if tmp is not None:
+            tmp.unlink(missing_ok=True)
 
 
 def main(argv):
     if len(argv) != 3:
-        print("usage: twvAudio.py <inputFile> <outputFile.wav>", file=sys.stderr)
+        print("usage: twvAudio.py <inputFile> <existingOutputDirectory>", file=sys.stderr)
         return 2
-    output_path = Path(argv[2])
     try:
-        convert(argv[1], output_path)
+        convert(argv[1], argv[2])
     except Exception as exc:
-        try:
-            output_path.unlink()
-        except FileNotFoundError:
-            pass
         print(f"twvAudio: {exc}", file=sys.stderr)
         return 1
     return 0

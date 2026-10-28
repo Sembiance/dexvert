@@ -1,0 +1,1052 @@
+BEATNIK RICH MUSIC FORMAT (RMF)
+Binary format reference and richMusicFormat.py converter documentation
+Investigation date: 2026-10-27
+
+1. SCOPE AND SOURCES
+===================
+
+RMF is a resource container for sequenced music, custom sampled instruments,
+recorded sounds, and song metadata. Its musical sequence is a Standard MIDI
+File, often compressed and encrypted. It does not use MOD/XM/IT pattern data.
+Many RMFs contain no sample data: their instruments come from a separate
+Beatnik soundbank. Other RMFs contain a mixture of bank instruments and custom
+samples. A sound-effect RMF can contain just one MIDI note triggering one sample.
+
+This document gives the byte layouts, decoding algorithms, resource relationships,
+and playback semantics needed to interpret the files in the accompanying corpus.
+It also describes legacy SMS and later linear-RMF structures found in the
+released engine. It is a source-derived reference, not an official published
+Beatnik specification. Distinguish the format's capabilities from the converter's
+support and fidelity limits in section 14. Undefined/reserved fields are identified
+as such, rather than assigned invented meanings.
+
+Primary reference: the original Beatnik/miniBAE source published by Steve Hales:
+https://github.com/heyigor/miniBAE
+
+Relevant files under minibae/BAE_Source/Common/:
+
+  X_API.h, X_API.c       IREZ files, resource traversal, caches, compression wrapper
+  X_Formats.h           SONG, INST, sound, audio-object, and metadata layouts
+  X_Decompress.c        Block and string encryption
+  NewNewLZSS.c          LZSS and delta transforms
+  DriverTools.c         Resource selection and SONG/string handling
+  SampleTools.c         Sound-header interpretation and sample decoding
+  X_IMA.c               IMA ADPCM implementation
+  GenSong.c             Song performance settings and tempo factor
+  GenSeq.c              MIDI interpretation and Beatnik bank-selection rules
+  GenPatch.c            Instrument splits and extension records
+  GenSynth.c, GenSnd.h  Voice pitch, envelopes, modulation, and mixing
+
+Direct format reference:
+https://github.com/heyigor/miniBAE/blob/main/minibae/BAE_Source/Common/X_Formats.h
+Direct resource reader:
+https://github.com/heyigor/miniBAE/blob/main/minibae/BAE_Source/Common/X_API.c
+Direct compression implementation:
+https://github.com/heyigor/miniBAE/blob/main/minibae/BAE_Source/Common/NewNewLZSS.c
+Direct cipher implementation:
+https://github.com/heyigor/miniBAE/blob/main/minibae/BAE_Source/Common/X_Decompress.c
+
+The source mixes historical revisions and contains some comments superseded by
+the actual reader. The layouts here use the on-disk 16/32-bit sizes, not the
+sizes of C pointers or long on a modern 64-bit host. Historical endian bugs in
+old host-side code should not be mistaken for an alternative disk layout.
+
+
+2. NOTATION AND ENCODING
+========================
+
+Unless explicitly stated otherwise:
+
+  u8, s8     unsigned/signed 8-bit integer
+  u16, s16   unsigned/signed 16-bit BIG-ENDIAN integer
+  u32, s32   unsigned/signed 32-bit BIG-ENDIAN integer
+  FourCC     four literal bytes, case-sensitive
+  fixed16.16 unsigned 32-bit fixed point; divide by 65536 for its numeric value
+  offset     zero-based byte offset
+
+Structures are packed. There is no general requirement to align resources,
+metadata strings, or extension records to two or four bytes. Sound sample
+byte order has its own rules. MIDI and embedded MPEG data use their native
+formats. Temporary SoundFonts and output WAVs use little-endian RIFF encoding.
+
+Resource names are Pascal strings: an unsigned one-byte byte count followed by
+that many text bytes, without an obligatory NUL. SONG type-1 metadata strings
+are NUL-terminated instead. Mac Roman is a suitable decoding for this historical
+corpus; RMF does not provide a universal UTF-8 encoding declaration. The cipher
+must be removed before interpreting text bytes.
+
+Resource record IDs are signed 32-bit values. Many references in SONG and INST
+are signed 16-bit values. Sign extension matters: a reference of 0xFFFF means
+-1, not necessarily 65535. Some writers zero-extended 16-bit IDs into the record
+ID field; the converter accepts that representation if exact lookup fails.
+
+
+3. IREZ FILE HEADER AND RESOURCE RECORDS
+======================================
+
+File header, 12 bytes:
+
+  Offset Size Type   Meaning
+       0    4 FourCC "IREZ", hexadecimal 49 52 45 5A
+       4    4 u32    Resource-map version; 1 in the examined files
+       8    4 u32    Number of resource records
+
+The first resource record begins at absolute file offset 12. Each record is:
+
+  Relative offset  Size       Type    Meaning
+                0     4       u32     Absolute offset of NEXT record
+                4     4       FourCC  Resource type
+                8     4       s32     Resource ID
+               12     1       u8      Name byte count N
+               13     N       bytes   Pascal-string name bytes
+             13+N     4       u32     Payload byte count L
+             17+N     L       bytes   Resource payload
+
+The next-record offset is not a relative size, nor an offset to the payload.
+In this corpus it equals the end of the payload; the last record points to EOF.
+Follow the linked offsets for the declared number of records. Do not search
+for FourCC strings within arbitrary sample bytes. Check both payload length
+and next offset against the physical file size. Reject backward links, links
+into the current payload, and truncated names/lengths/data.
+
+There is no RIFF header around these RMFs. The file is not one continuous PCM
+or MP3 stream. There is no mandatory whole-file checksum or file-level cipher.
+
+The same IREZ container occurs with .hsb and .gm soundbank extensions and with
+no extension. An IREZ signature alone does not mean a file is a song: one local
+file contains classic Macintosh application resources instead. Version-0 IREZ
+compatibility paths exist in the historical code; this converter requires version 1.
+
+
+4. RESOURCE TYPES AND RELATIONSHIPS
+===================================
+
+  Type   Payload meaning
+  ----   ---------------
+  SONG   Song settings, referenced music/audio ID, and descriptive metadata
+  Midi   Standard MIDI File
+  MIDI   Legacy spelling of the same MIDI resource type
+  cmid   LZSS-compressed Standard MIDI File
+  emid   Encrypted Standard MIDI File
+  ecmi   Encrypted, LZSS-compressed Standard MIDI File
+  INST   Instrument definition; maps note ranges to sample IDs
+  snd    Sound Manager / Beatnik sound resource (FourCC is "snd " with a space)
+  csnd   Outer compressed sound resource
+  esnd   Outer encrypted sound resource
+  CACH   Resource-directory acceleration cache
+  VERS   Three u16 values: major, minor, subminor version (6 bytes)
+  BANK   Bank identity/status metadata; layout below
+  ALIS   Instrument aliases for a bank
+  EACS   Encryption access-control string
+  RMF!   Registered RMF-object type, not the IREZ file signature
+  TRSH   Resource slot marked as discarded; skip by the record link
+  TEXT   Generic text resource type defined by the engine
+
+Other types may be present in an IREZ file. Unknown resource payloads can be
+skipped safely because the outer record carries their size. Unknown SONG or
+INST subrecords generally cannot be skipped without a known layout.
+
+A structured SONG references a MIDI resource by ID. The engine's lookup priority
+for the same ID is ecmi, emid, cmid, Midi, then MIDI. An INST resource references
+one or more samples. Sound lookup priority is csnd, esnd, then "snd ". Different
+resource types may legitimately have the same numerical ID.
+
+Do not assume every resource name is a song title. Sample names often retain
+source filenames such as "sandbeach01-wet44.aif". Read SONG/TITL for the title.
+
+CACH payload:
+
+  u32 totalResources
+  repeated totalResources times, 20 bytes per entry:
+    FourCC resourceType
+    s32    resourceID
+    u32    resourceLength
+    u32    fileOffsetName  (absolute offset of Pascal-string length byte)
+    u32    fileOffsetData  (absolute payload offset)
+
+The cache is an optimization, not the authority for decoding a song. A reader
+can reconstruct resource locations from the record chain and ignore CACH.
+
+BANK payload (normally resource ID 0): u32 version followed by two unencrypted
+NUL-terminated strings, bank URL then bank name. The in-memory BankStatus
+structure has two fixed 4096-byte arrays, but those arrays are NOT the on-disk
+layout; XCreateBankStatus writes only the actual strings.
+
+ALIS payload (normally resource ID 0): u32 version (defined version 0), u32
+alias count, then that many pairs of s32 source ID and s32 replacement ID.
+These aliases are separate from a SONG's RMAP metadata. The converter does
+not load external banks or apply ALIS; none occurs in the 260-file RMF set.
+
+EACS payload (normally resource ID 0): u32 version followed by an encrypted
+NUL-terminated access-control string, decoded with the string cipher in section 5.
+This is a bank/editor metadata facility, not a replacement cipher for ecmi/esnd.
+
+
+5. ENCRYPTION
+==============
+
+The emid and esnd cipher applies to the complete resource PAYLOAD, not the
+record header or resource name. For ecmi, decrypt the payload FIRST and then
+decompress it. Each independently encrypted resource starts with a fresh state.
+
+For each encrypted byte c:
+
+  Initial state r = 56549 (0xDCE5)
+  Plaintext p = (c XOR (r >> 8)) AND 255
+  Next state r = ((c + r) * 52845 + 22719) modulo 2^32
+
+Encryption uses the same recurrence with:
+
+  c = (p XOR (r >> 8)) AND 255
+
+The state update uses the CIPHERTEXT byte, including during decryption. The
+bottom 16 bits suffice for the next keystream byte; the 32-bit form follows
+the original engine's unsigned-long implementation.
+
+For locked SONG metadata, each string starts with the same initial state.
+The FourCC tag is not encrypted. Decrypt one byte at a time until the decoded
+byte is zero, consuming that encrypted terminator. An encrypted terminator
+need not be a literal zero in the input; a literal zero may also occur inside
+an encrypted string. Never use a raw NUL search to find its end. Restart the
+cipher for the next string, rather than continuing the previous string's state.
+
+This is a historical lightweight reversible encoding, not modern cryptography.
+There is no password or user-supplied key needed to decode it.
+
+
+6. LZSS AND DELTA COMPRESSION
+============================
+
+Compressed resource payload header:
+
+  Offset Size Meaning
+       0    1 Compression transform selector
+       1    3 Decompressed byte count, unsigned big endian (maximum 0xFFFFFF)
+       4    * LZSS token stream
+
+For cmid/ecmi, the engine ignores the selector and uses raw LZSS. The output
+must begin with a valid Standard MIDI File header, "MThd".
+
+LZSS token stream:
+
+  Read one flag byte. Process its bits from bit 0 to bit 7.
+  Flag bit 1: copy the next input byte literally to the output.
+  Flag bit 0: read a BIG-ENDIAN 16-bit token T.
+
+    length   = (T >> 12) + 3                (3 through 18 bytes)
+    distance = 4096 - (T AND 0x0FFF)         (1 through 4096 bytes)
+
+  Copy length bytes from output[currentPosition - distance]. Copy in forward
+  byte order so overlapping references can repeat a short pattern. Stop when
+  the declared output count is reached. The original decoder truncates the
+  last copy at that output count. There is no initialized dictionary allowing
+  a back-reference before the beginning of output.
+
+Example: output "ABC" followed by token 0x3FFD copies 6 bytes from 3 bytes
+back, producing "ABCABCABC". Bits are literal/copy flags, not Huffman codes.
+
+For csnd and other general compressed data, the selector means:
+
+  255   Raw LZSS output
+    0   LZSS, then undo mono 8-bit deltas
+    1   LZSS, then undo interleaved stereo 8-bit deltas
+    2   LZSS, then undo mono 16-bit deltas
+    3   LZSS, then undo interleaved stereo 16-bit deltas
+
+Delta decoding is modular accumulation, independently for each channel. The
+first value of each channel is absolute; each later value is added to that
+channel's previous value, modulo 256 or 65536. For stereo the channels alternate.
+The transform acts on the compressed buffer as a whole, including any header
+bytes that were passed to the compressor, not just a guessed sample-data suffix.
+
+Important compatibility qualification: the historical 16-bit delta functions
+operate on native short values and do not record an endian flag in this wrapper.
+The converter uses the big-endian Macintosh interpretation for selectors 2/3.
+Little-endian producer variants cannot be distinguished by this wrapper alone.
+There are no csnd resources in the 260-file RMF corpus used for this investigation.
+
+
+7. SONG RESOURCE: STRUCTURED RMF (TYPE 1)
+========================================
+
+Offsets relative to the SONG payload. Fixed header is 50 bytes.
+
+  Offset Size Type   Meaning
+       0    2 s16    MIDI resource ID
+       2    1 u8     Reserved
+       3    1 u8     Reverb preset/type
+       4    2 u16    Master tempo parameter; zero means default
+       6    1 u8     Song type: 1 = structured RMF
+       7    1 u8     Locked; nonzero means encrypted text metadata
+       8    2 s16    Song pitch shift, in semitones
+      10    2 s16    Maximum effect voices
+      12    2 s16    Maximum MIDI voices
+      14    2 s16    Mix level
+      16    2 s16    Song volume: 127 = unity, 254 = approximately twice unity
+      18    1 u8     Song is embedded in a soundbank
+      19    1 u8     Reserved
+      20   28 bytes  Seven reserved 32-bit fields
+      48    2 u16    Number of metadata subrecords
+      50    * bytes  Metadata subrecords
+
+The source treats a stored song volume of zero as the default 127. It does not
+mean muted. Master tempo is a multiplier on MIDI tempo, not beats per minute:
+
+  t = storedTempo if nonzero, otherwise 16667
+  percent = clamp(floor(100 * t / 16667), 25, 300)
+  tempoMultiplier = percent / 100
+
+For example, a multiplier of 2 halves the wall-clock duration of MIDI ticks.
+MIDI tempo meta-events still apply. Pitch shift normally excludes MIDI channel
+10 (channel index 9). Voice limits, mix-level behavior, reverb algorithms, and
+velocity curves belong to the renderer and affect exact sound reproduction.
+
+Each metadata subrecord begins with a four-byte tag. There is NO generic
+subrecord length field. The following tags contain one NUL-terminated string:
+
+  TITL Title                  PERF Performed by
+  COMP Composer               COPD Copyright date/text
+  COPL Obsolete copyright line LICC Publisher/licensor contact
+  LUSE License use            LDOM Licensed-to URL/domain
+  LTRM License term           EXPD Expiration date
+  NOTE Composer notes         INDX Index/catalog number
+  GENR Genre                  SUBG Subgenre
+  TMPO Descriptive tempo text  OSRC Original source
+  MANU Manufacturer           MSC1 through MSC8 miscellaneous text
+
+If locked is nonzero, decrypt EACH string independently, including its NUL.
+Metadata can begin at an odd byte offset. TMPO is descriptive text; the actual
+master-tempo control remains the header field at offset 4.
+
+Two additional subrecord types:
+
+  VELC: 128 big-endian 16-bit values, 256 bytes total. A custom velocity curve.
+
+  RMAP: u16 wordCount, then wordCount 16-bit words interpreted as successive
+        (source instrument number, replacement INST resource ID) pairs.
+        wordCount is a WORD COUNT, not a byte count or pair count. Thus a
+        well-formed mapping has an even wordCount and occupies 2 + 2*wordCount
+        bytes after the RMAP tag.
+
+An unknown metadata tag cannot safely be skipped by guessing its contents.
+
+
+8. LEGACY SMS SONG (TYPE 0) AND LINEAR RMF (TYPE 2)
+=================================================
+
+SMS fixed portion, 18 bytes before remaps:
+
+  Offset Size Meaning
+       0    2 s16 MIDI resource ID
+       2    1 Reserved
+       3    1 Reverb type
+       4    2 u16 Master tempo parameter
+       6    1 Song type = 0
+       7    1 s8 Song pitch shift
+       8    1 Maximum effect voices
+       9    1 Maximum MIDI notes
+      10    2 s16 Mix level
+      12    1 flags1
+      13    1 Note decay
+      14    1 s8 Default percussion program; -1 selects GM percussion behavior
+      15    1 flags2
+      16    2 u16 Remap PAIR count
+      18    * Remap pairs: s16 source instrument, s16 replacement INST ID
+    varies  * Four consecutive Pascal strings: copyright, author, title, contact
+
+SMS flags1:
+  0x80 locked, 0x40 terminate decay, 0x08 file-track flag,
+  0x04 enable MIDI program changes, 0x01 use lead for all voices.
+  0x20, 0x10, 0x02 are reserved/obsolete.
+SMS flags2: 0x80 ignore bad patches; other bits reserved/obsolete.
+
+The SMS text reader uses Pascal strings directly, rather than the type-1
+encrypted C-string rules. SMS has no structured SONG volume field.
+
+Later linear-RMF header, 50 bytes:
+
+  Offset Size Meaning
+       0    2 s16 Audio resource ID
+       2    1 Reserved
+       3    1 Reverb type
+       4    2 u16 Tempo parameter
+       6    1 Song type = 2
+       7    1 Locked metadata flag
+       8    2 s16 Maximum effects
+      10    2 s16 Maximum notes
+      12    2 s16 Mix level
+      14    2 s16 Volume; source comment specifies 100 = unity for this type
+      16    4 FourCC Audio format type
+      20    4 fixed16.16 Sample rate
+      24    4 u32 Uncompressed byte length
+      28    4 u32 Uncompressed frame length
+      32    1 Channels
+      33    1 Bits per sample
+      34    1 Flags: 0x80 disables loops, 0x40 embedded; other bits reserved
+      35    1 Reserved
+      36   12 Reserved
+      48    2 u16 Metadata subrecord count
+      50    * Metadata subrecords as above
+
+There is a historical ambiguity: earlier source revisions assigned SONG type
+2 to MOD; later revisions removed that structure and reused 2 for linear RMF.
+Do not identify a legacy type-2 payload from that byte alone. This converter
+rejects type 2, rather than interpreting an unverified variant as a MIDI song.
+No type-0 or type-2 SONG was found among these 260 .rmf files.
+
+
+9. INSTRUMENT DEFINITIONS (INST)
+================================
+
+Offsets relative to INST payload:
+
+  Offset Size Type Meaning
+       0    2 s16  Default sample resource ID
+       2    2 s16  Master MIDI root key; zero means no master-root adjustment
+       4    1 s8   Pan placement (approximately -63 left through +63 right)
+       5    1 u8   flags1
+       6    1 u8   flags2
+       7    1 s8   Legacy sound-modifier resource ID
+       8    2 s16  miscParameter1
+      10    2 s16  miscParameter2
+      12    2 u16  Key-split count K
+      14   8*K     Key-split records
+    14+8*K  2      Tremolo count, followed by legacy variable tremolo data
+    varies  2      Tremolo terminator 0x8000
+    varies  2      Reserved word
+    varies  *      Two Pascal descriptor strings
+    varies  *      Optional extended-instrument data (flags1 bit 0x02)
+
+The familiar minimal instrument occupies 24 bytes when the split/tremolo
+counts and descriptor strings are empty. Do not impose that size on an extended
+instrument. The released extended reader locates the 0x8000 sentinel after the
+split array, skips the reserved word and two Pascal strings, then reads extensions.
+
+Each 8-byte key split:
+
+  Offset Size Meaning
+       0    1 Low MIDI key (inclusive)
+       1    1 High MIDI key (inclusive)
+       2    2 s16 Sample resource ID
+       4    2 s16 miscParameter1 (replacement root or sound-modifier parameter)
+       6    2 s16 miscParameter2 (volume or sound-modifier parameter)
+
+Compatibility detail: the released engine treats K < 2 as a SINGLE sample
+instrument using the header's default sample and parameters. A stored K of 1
+does not activate range selection. For K >= 2, choose the first matching range
+after applying the master-root adjustment. No matching split means no voice.
+
+flags1:
+  0x80 Old interpolation enable; unused in the referenced reader
+  0x40 Old amplitude-scale enable; unused
+  0x20 Disable sample looping
+  0x10 Reserved
+  0x08 Honor sample's stored sample rate
+  0x04 Sample-and-hold behavior during envelope/release processing
+  0x02 Extended instrument format
+  0x01 Avoid reverb send by default
+
+flags2:
+  0x80 Reserved
+  0x40 Play at sampled frequency, independent of played note
+  0x20 Old fit-key-splits behavior; unused
+  0x10 Enable legacy sound modifier
+  0x08 Use misc fields as sample-root and volume replacements
+  0x04 Old non-polyphonic flag; unused in current synthesis
+  0x02 Old pitch randomness; unused
+  0x01 Old play-from-split behavior; unused
+
+When flags2 bit 0x08 is set, miscParameter1 is the replacement sample root
+and miscParameter2 is a percentage volume. For compatibility, volume zero
+means 100, not silence. For split instruments use each split's parameters.
+When the bit is clear, the sample header's base key supplies the root.
+
+Pitch calculation expressed as playback ratio:
+
+  shiftedNote = note - masterRoot + 60, if masterRoot != 0; otherwise note
+  selectedRoot = replacementRoot if flags2 & 0x08 else sampleBaseKey
+  pitchRatio = 2^((shiftedNote - selectedRoot) / 12)
+  if flags2 & 0x40: pitchRatio = 1
+  effectiveSampleRate = storedSampleRate if flags1 & 0x08 else 22050
+
+The original engine also bounds its lookup-table pitch range by octave wrapping
+and applies MIDI pitch bend/LFOs. The converter maps the normal root/range/rate
+behavior to SoundFont parameters, without emulating that pitch-table limitation.
+
+Loop start/end belong to the sample. Ignore loops when disabled by the instrument,
+empty, reversed, beyond the sample, or shorter than the engine's minimum loop
+size. The original engine has a renderer-specific minimum; the converter accepts
+valid loops of at least two frames and uses SoundFont sustain-loop mode.
+
+
+10. EXTENDED INSTRUMENT RECORDS
+===============================
+
+Following the descriptor strings:
+
+  12 reserved bytes
+  u8 unitCount
+  unitCount extension records, each starting with a FourCC
+
+The engine masks tag bytes with 0x5F (case-folding letters). Records have
+type-specific layouts, without generic lengths.
+
+ADSR:
+  u8 stageCount (maximum 8)
+  stageCount records, each 12 bytes:
+    s32 target level
+    u32 stage time in microseconds
+    FourCC stage operation
+
+Stage operations:
+  LINE  Linear ramp
+  SUST  Sustain stage
+  LAST  Terminate envelope
+  GOTO  Unconditional stage control transfer
+  GOST  Conditional stage control transfer
+  RELS  Release-stage control
+  zero  Off/unused
+
+For ordinary amplitude envelopes, 4096 represents nominal unity. A level of
+8192 therefore carries gain as well as an envelope shape. Do not simply
+normalize every envelope to its own peak and lose that gain. GOTO/GOST/RELS
+are interpreted by the native synthesizer's state machine, not as ordinary
+linear ramp tags; exact emulation requires the GenSynth.c state machine.
+
+LFO records have tags VOLU (amplitude), PITC (pitch), SPAN or "PAN " (pan),
+LPFR (filter frequency), LPRE (filter depth), and LPAM (filter amount):
+
+  u8 stageCount
+  stageCount envelope stages, each laid out as for ADSR
+  u32 period in the engine's time units
+  FourCC wave shape
+  s32 DC offset/feed
+  s32 level/depth
+
+Wave shapes defined by the engine: SINE, TRIA, SQUA, SQU2, SAWT, SAW2.
+Scaling of LFO output depends on its destination; it is not uniformly Hertz
+or semitones for every destination.
+
+CURV:
+  FourCC source control
+  FourCC destination control
+  u8 pointCount
+  pointCount records: u8 input value, s16 output scalar
+
+The engine supports up to four such curves, maps MIDI controls through them,
+and adds an implicit endpoint at input 127 with the final scalar. A scalar
+of 256 represents unity for ordinary control-scaling curves. Destinations
+include envelope attack time/level, sustain level/release, LFO parameters,
+note volume, and filter controls.
+
+LPGF:
+  s32 low-pass frequency parameter
+  s32 resonance parameter
+  s32 low-pass amount parameter
+
+DMOD: no payload. Disables the engine's automatically added default mod-wheel
+to pitch-LFO connection.
+
+Observed editor defect: some FreshPotato, RottenTomato, and Loop instrument
+records declare six units, contain one complete ADSR record, then end with
+four bytes F1 F1 F1 F1. The converter accepts precisely this terminal filler
+instead of reading past EOF. It does not treat arbitrary unknown units as padding.
+
+Simple ADSRs are translated to SoundFont attack/hold/decay/sustain/release.
+The full Beatnik modulation/filter graph and arbitrary envelope control flow
+are not reproduced by the converter; see section 14.
+
+
+11. SOUND RESOURCES: OUTER ENVELOPE AND HEADERS
+=============================================
+
+After removing esnd encryption or csnd compression, a sound payload begins
+with a big-endian u16 format number. The resource type describes OUTER storage;
+the decoded sound header describes INNER sample compression. For example,
+esnd can decrypt to a sound containing IMA ADPCM or MPEG.
+
+Format 1 (Sound Manager):
+  u16 format = 1
+  u16 modifier/synthesizer count S
+  S records of (u16 modifier number, u32 initialization value)
+  u16 command count C
+  C commands of (u16 command, s16 parameter1, s32 parameter2)
+  Sound header at relative offset 6 + 6*S + 8*C
+
+Format 2 (Sound Manager/HyperCard):
+  u16 format = 2
+  u16 reference count
+  u16 command count C
+  C commands of the same 8-byte layout
+  Sound header at relative offset 6 + 8*C
+
+Common sound commands include 80 = soundCmd and 81 = bufferCmd; the high
+bit of a command can indicate a data-offset form. The miniBAE reader computes
+the contiguous header location as above rather than dereferencing host pointers.
+
+Formats 1/2 select a header using the byte at soundHeader+20:
+  0x00 standard, 0xFF extended PCM, 0xFE compressed.
+
+Standard header, 22 bytes:
+
+  Offset Size Meaning
+       0    4 Sample pointer field (normally zero for serialized data)
+       4    4 u32 Byte length = frame count for mono 8-bit audio
+       8    4 fixed16.16 Sample rate
+      12    4 u32 Loop-start frame
+      16    4 u32 Loop-end frame
+      20    1 Encoding = 0x00
+      21    1 Base MIDI key
+      22    * Unsigned 8-bit mono PCM; 128 is the center value
+
+Extended PCM header, 64 bytes:
+
+  Offset Size Meaning
+       0    4 Sample pointer field
+       4    4 u32 Channel count
+       8    4 fixed16.16 Sample rate
+      12    4 u32 Loop-start frame
+      16    4 u32 Loop-end frame
+      20    1 Encoding = 0xFF
+      21    1 Base MIDI key
+      22    4 u32 Frame count
+      26   10 AIFF 80-bit extended sample-rate field
+      36    4 Marker-chunk pointer field
+      40    4 Instrument-chunk pointer field
+      44    4 AES-recording pointer field
+      48    2 u16 Bits per sample
+      50    1 Beatnik embedded-sound flag
+      51    1 PCM Intel-order flag (nonzero = little endian)
+      52   12 Reserved
+      64    * Interleaved PCM data
+
+8-bit PCM is unsigned. 16-bit PCM is signed, normally big endian unless the
+Intel-order flag is set. Pointer fields are historical serialized placeholders,
+not addresses that a file reader may follow in its own process.
+
+Compressed Sound Manager header, 64 bytes:
+
+  Offset Size Meaning
+       0    4 Sample pointer field
+       4    4 u32 Channels
+       8    4 fixed16.16 Sample rate
+      12    4 u32 Loop-start frame, in decoded audio
+      16    4 u32 Loop-end frame, in decoded audio
+      20    1 Encoding = 0xFE
+      21    1 Base MIDI key
+      22    4 u32 Frame/block count (codec dependent)
+      26   10 AIFF 80-bit sample rate
+      36    4 Marker-chunk pointer field
+      40    4 FourCC Compression format
+      44    1 Bit 0x80 requests 8-bit IMA decode in the original engine
+      45    1 Embedded-sound flag
+      46    2 Reserved
+      48    4 Decoder-state pointer field
+      52    4 Leftover-samples pointer field
+      56    2 s16 Compression ID
+      58    2 u16 Packet size in bits
+      60    2 u16 Synthesizer resource ID
+      62    2 u16 Decoded sample-size field
+      64    * Compressed sample packets
+
+Compression ID -1 means fixed compression specified by the format FourCC.
+ID 3 is MACE 3:1 and ID 4 is MACE 6:1 in the historical Macintosh path.
+The original source notes inconsistent byte/bit units in sampleSize for some
+codecs; codec-specific decoding takes precedence over blindly trusting it.
+
+
+12. BEATNIK TYPE-3 SOUND HEADER AND CODECS
+========================================
+
+Sound format 3 is u16 value 3 followed immediately by a 124-byte header.
+The following offsets are relative to that header, i.e. add 2 to obtain
+offsets relative to the decoded snd payload:
+
+  Offset Size Meaning
+       0    4 FourCC Codec subtype
+       4    4 fixed16.16 Playback sample rate
+       8    4 u32 Decoded byte count, excluding skipped prefix
+      12    4 u32 Frame count (legacy MPEG block count for MPEG)
+      16    4 u32 Encoded byte count
+      20    4 u32 Historical block-byte count; no longer authoritative
+      24    4 u32 Start frame/prefix to skip (special MPEG units below)
+      28   24 Six u32 loop-start values, one per possible channel
+      52   24 Six u32 loop-end values
+      76    4 FourCC Optional name-resource type
+      80    4 s32 Optional name-resource ID
+      84    1 Base MIDI key
+      85    1 Channels (format allows up to six)
+      86    1 Bits per sample
+      87    1 Embedded flag
+      88    1 Encrypted flag
+      89    1 PCM Intel-order flag
+      90    2 Reserved
+      92   32 Reserved
+     124    * Encoded sample data
+
+Encoded samples therefore start at decoded-resource offset 126. Serialized
+writers sometimes include unused trailing bytes; encodedBytes selects the data.
+The playback reader uses the first channel's loop points for ordinary voices.
+The separate outer esnd encryption does not imply this inner encrypted flag.
+The converter rejects a nonzero inner encrypted flag because the released
+sample reader supplies no independent decoding contract for that flag.
+
+Codec FourCC values defined in X_Formats.h:
+
+  none  Raw PCM (lowercase FourCC)
+  ima4  Apple AIFF/QuickTime IMA ADPCM
+  imaW  Microsoft/WAV-style IMA ADPCM
+  ulaw  G.711 mu-law
+  alaw  G.711 A-law
+  mac3  MACE 3:1 (typically selected by compression ID)
+  mac6  MACE 6:1
+
+The corresponding AIFF-C interchange codec tags for MACE are uppercase MAC3
+and MAC6. The converter's FFmpeg wrapper uses those uppercase AIFF-C tags.
+
+  mpgn  MPEG nominal 32 kbit/s    mpga 40     mpgb 48     mpgc 56
+  mpgd  MPEG nominal 64 kbit/s    mpge 80     mpgf 96     mpgg 112
+  mpgh  MPEG nominal 128 kbit/s   mpgi 160    mpgj 192    mpgk 224
+  mpgl  MPEG nominal 256 kbit/s   mpgm 320
+
+The FourCC identifies a codec/encoding preset; use the actual MPEG frames to
+decode the bitstream. Do not infer byte lengths from the nominal bitrate.
+
+IMA4 in a compressed Sound Manager header:
+  The stored frame count is a packet-group count.
+  Each channel contributes one 34-byte packet per group.
+  Each packet has a big-endian 2-byte predictor/index preamble and 32 bytes
+  containing 64 four-bit codes, low nibble first within each byte.
+  Preamble predictor is the signed high nine bits (mask 0xFF80); the low seven
+  bits give the step-table index. Decode with the standard IMA predictor and
+  step-index updates. Clamp predictor to signed 16-bit and index to 0..88.
+  Packets for stereo are channel-major within each group: left 34, right 34.
+  DecodedFrames = storedPacketGroups * 64.
+  EncodedBytes = storedPacketGroups * channels * 34.
+
+The converter places these packets in an AIFF-C envelope for FFmpeg. This is
+the Apple packet layout; feeding it directly to a WAV IMA decoder is wrong.
+The converter retains 16-bit decode precision rather than deliberately reducing
+IMA output to 8 bits when an old resource requests that optimization.
+
+For A-law/mu-law, each stored byte produces one signed 16-bit sample. MACE
+has its own codec framing; FFmpeg's AIFF-C decoder is used by the converter.
+
+MPEG special rules:
+  frameCount may be a historical MPEG block count, not PCM frames.
+  DecodedFrames = decodedBytes / (channels * 2).
+  The startFrame field counts 16-bit SAMPLES across all channels for MPEG.
+  SkipFrames = startFrame / channels, not startFrame for each channel.
+  Decode MPEG, discard that prefix, retain decodedBytes of interleaved PCM.
+
+  Crucially, the MPEG stream's advertised sample rate can differ from the
+  type-3 playback sample rate. Decode the original frame samples without
+  resampling to the RMF rate, then label/play them at the RMF rate. Resampling
+  during decompression changes both pitch and duration incorrectly. This is
+  observable in evillaugh.rmf and DoctorQ.rmf, not just a theoretical possibility.
+
+For type-3 uncompressed PCM, startFrame is expected to be zero. For other
+type-3 codecs it normally counts frames. The published source explicitly has
+unfinished branches for some less-common type-3 codecs; an enum constant alone
+does not establish complete support across all released players.
+
+
+13. MIDI PLAYBACK AND BANK SELECTION
+===================================
+
+Decoded MIDI is an ordinary Standard MIDI File:
+
+  "MThd", u32 headerLength (normally 6), u16 format, u16 tracks, u16 division
+  Each track: "MTrk", u32 payloadLength, track event bytes
+
+Formats 0 and 1 are used in this corpus. Delta times and variable-size lengths
+use MIDI's big-endian 7-bit variable-length integers, up to four bytes. Channel
+messages support running status. Note On with velocity zero means Note Off.
+Meta events are FF, type, variable-length payload length, payload. Important
+types include 03 sequence/track name, 2F end of track, 51 tempo, 58 time signature,
+and 06 marker. Tempo is a three-byte count of microseconds per quarter note.
+Division is either ticks per quarter note or SMPTE frames/ticks when bit 15 is
+set. Default tempo is 500000 microseconds per quarter note.
+
+Sequencing stays MIDI even when a filename includes "_MOD". For example,
+kraftytechy_MOD.rmf contains a MIDI sequence and an embedded drum-loop sample.
+
+Beatnik's normal bank mapping uses 256 resource IDs per MIDI bank:
+
+  MIDI bank 0: INST 0..127 melodic, INST 128..255 percussion
+  MIDI bank 1: INST 256..383 special melodic, INST 384..511 special percussion
+  MIDI bank 2: INST 512..639 user melodic, INST 640..767 user percussion
+
+In default mode, channels 1..9 and 11..16 choose a melodic instrument by Program
+Change; channel 10 chooses a percussion instrument by MIDI note number.
+
+  melodic ID    = bank * 256 + program
+  percussion ID = bank * 256 + 128 + note
+
+CC 0 selects the bank. CC 32 is ignored by the referenced Beatnik engine.
+The engine resets CC 0 values greater than 3 to zero; bank 3 is a historical
+edge case which falls back to the raw patch number because only six internal
+128-entry banks exist. Do not multiply by 128 without distinguishing the two
+melodic/percussion halves of each Beatnik bank.
+
+Beatnik NRPN bank-mode control:
+  CC 99 = 5, CC 98 = 0, then CC 6 = mode
+
+  mode 0: Default channel-dependent melodic/GM-percussion behavior
+  mode 1: Force percussion half, select instrument by Program Change
+  mode 2: Force percussion half, select instrument by note number
+  mode 3: Force melodic half, select instrument by Program Change
+
+Modes 1..3 apply regardless of the channel number. The NRPN parameter selector
+is reset after Data Entry in the original engine. NRPN 4/0 selects a velocity
+curve; the native engine includes several non-linear curves. Standard MIDI
+volume, pan, expression, sustain, pitch bend, modulation, and ordinary RPN
+pitch-bend range also affect playback.
+
+The engine preloads first-channel bank/program state while scanning the song.
+That matters when a note precedes initial bank/program messages at tick zero.
+Some sample-trigger files omit Note Off and rely on sample completion or the
+end-of-song timeline. End Of Track is not permission to discard its delta time.
+Markers and externally controlled playback can implement interactive loops;
+a file-to-WAV conversion normally renders one pass through the stored sequence.
+
+External bank dependence is part of the format. Embedded samples do not
+necessarily replace every instrument used in the sequence. A GM soundfont
+cannot reproduce Beatnik's proprietary special-bank timbres automatically.
+
+
+14. richMusicFormat.py USAGE AND IMPLEMENTATION
+==============================================
+
+Usage:
+
+  python3 richMusicFormat.py <inputFile> <outputDir>
+
+Example:
+
+  mkdir -p /tmp/rmf-audio
+  python3 richMusicFormat.py 11120/CARMEN.RMF /tmp/rmf-audio
+
+The output directory must already exist. The converter does not modify input
+files or install/download software. It prints the resulting WAV path to stdout,
+diagnostics to stderr, and exits with status 0 on success or 1 on conversion
+failure. Argument errors use argparse's exit status 2.
+
+Dependencies:
+
+  Python 3.10 or later; standard library only
+  TiMidity++ executable named timidity on PATH
+  eaw/gravis.cfg and its GUS .pat files for non-embedded instruments
+  FFmpeg executable named ffmpeg on PATH for compressed embedded samples
+
+The supplied eaw directory is a GUS patch collection, not a single .sf2 file.
+It is searched in the current working directory, then beside the script.
+The script reads its GM and standard percussion definitions from gravis.cfg
+and resolves patch paths directly. The hardcoded system directory in the
+supplied timidity.cfg is therefore not required to exist.
+
+Output is 44,100 Hz, stereo, signed 16-bit PCM in a .wav file. Naming priority:
+
+  1. Nonempty SONG/TITL, or the SMS title string.
+  2. First-track MIDI sequence-name metadata, if SONG has no title.
+  3. out.wav if neither is present.
+
+Unsafe filename characters, path separators, and control characters are
+replaced; blank/dot-only names become out. Names are capped at 200 UTF-8 bytes
+before the extension, leaving filesystem space for suffixes. Windows device
+names are prefixed with an underscore. Existing files/symlinks are never
+overwritten: title-2.wav, title-3.wav, etc. are used on collision.
+
+Temporary MIDI, soundfont, configuration, and rendering files live in a private
+temporary subdirectory under outputDir and are removed on success or failure.
+Only a validated final WAV is atomically linked into the requested directory.
+
+Conversion steps:
+
+  1. Validate and traverse IREZ resources independently of CACH.
+  2. Read the single SONG and its title/settings.
+  3. Select, decrypt, and decompress its MIDI resource.
+  4. Parse and merge MIDI tracks, including running status and tempo changes.
+  5. Resolve Beatnik bank modes/remaps into explicit instrument IDs per note.
+  6. Decode referenced custom samples, preserving root keys, splits, rate,
+     stereo channels, loop points, and instrument gain.
+  7. Build a temporary SoundFont 2.1 containing those embedded instruments.
+  8. Bind each used instrument to an explicit TiMidity bank/program slot.
+     General instruments use EAW; embedded instruments use the temporary font.
+  9. Render a single MIDI track with 1 ms time resolution. Explicitly disable
+     TiMidity drum treatment on all 16 channels because percussion IDs have
+     already been resolved. Preserve initial silence and timed final releases.
+ 10. Check for 16-bit saturation. If needed, reduce master gain and rerender
+     until unclipped or the minimum gain is reached. This changes overall
+     loudness, not note timing or relative channel balance.
+ 11. Validate the WAV header/format and publish the final output.
+
+If TiMidity trims a silent tail after its last sounding voice, silence is
+appended to retain at least the full stored MIDI timeline. Synthesizer release
+or reverb tails may make the WAV longer than that timeline.
+
+Fully silent MIDI sequences produce a silent WAV of the stored duration,
+with at least one sample frame. This includes intentionally silent stub RMFs;
+some stubs have unusually long timelines. No-note input is not a rendering error.
+
+Supported and tested on the supplied RMF corpus:
+
+  IREZ version 1, structured SONG type 1, encrypted metadata, emid/ecmi;
+  format-0/1 MIDI, tempo/controller/program events and Beatnik NRPN bank modes;
+  mono/stereo PCM, Apple IMA ADPCM, and type-3 MPEG samples;
+  default and split instruments, loop/root/rate flags, simple envelope mapping.
+
+Additional implemented paths include unencrypted/compressed MIDI, raw snd,
+csnd transforms, SMS SONG metadata, and G.711/MACE decoding via FFmpeg. These
+paths do not all have real examples in the supplied .rmf corpus; synthetic
+tests and source analysis do not substitute for broad historical compatibility.
+
+Fidelity and support limits:
+
+  * This is a practical TiMidity/EAW renderer, not a bit-exact Beatnik emulator.
+    EAW's GM instruments differ from Beatnik's original bank. Missing special
+    or user bank instruments use the corresponding EAW GM instrument with a
+    warning. Undefined GM percussion notes with no EAW counterpart are silent,
+    explicitly reported, rather than replaced with an unrelated sound.
+
+  * Original sample bytes and sample pitch/rate are retained, but arbitrary
+    multistage envelopes are approximated with SoundFont ADSR. Instrument
+    LFOs, control curves, and filter extension parameters are parsed but are
+    not reproduced by this implementation. Beatnik velocity curves, exact
+    reverb/chorus, sample-and-hold edge cases, and voice-stealing behavior are
+    not emulated exactly. The engine's special sample-processing SMOD facility
+    is not implemented. Warning messages identify encountered DSP/curve limits.
+
+  * The output is one pass, not interactive playback or infinite marker loops.
+    Timing is quantized to 1 millisecond. TiMidity may append a release/reverb
+    tail. Export loudness can be reduced to prevent integer clipping.
+
+  * More than one SONG is rejected as a bank/multi-song input. There is no
+    implicit choice among several songs. Files without SONG are also rejected.
+    The .hsb soundbanks here contain many SONG entries and are not individual
+    song inputs for this two-argument interface.
+
+  * Linear/legacy MOD SONG type 2, MIDI format 2, MIDI SysEx, unknown metadata
+    subrecords, more than two sample channels, inner type-3 encryption, and
+    type-3 imaW are not supported. They produce clear errors, not mislabeled
+    output or a silently substituted piano rendering.
+
+  * Bounds: 256 MiB input, 256 MiB decoded per sample, two million MIDI events,
+    four-hour song duration, 120 seconds per sample-decoder subprocess, and
+    600 seconds per TiMidity invocation. These are implementation limits,
+    not restrictions of the historical format.
+
+
+15. OBSERVED CORPUS AND CHECKS
+=============================
+
+The initial recursive inspection found 260 .rmf files:
+
+  185 contain MIDI without embedded samples.
+   75 contain MIDI plus embedded instruments/samples.
+    0 contain audio without a MIDI resource.
+
+Aggregate RMF resource counts (counting duplicate content in different files):
+
+  SONG 260, CACH 260, ecmi 195, emid 65, INST 232,
+  esnd 419, "snd " 6, VERS 66.
+
+There are 425 sample resources, representing 378 distinct stored sample
+payloads. Their decoded-header categories are:
+
+  152 Apple IMA ADPCM resources in formats 1/2
+   37 Extended PCM resources
+   33 Standard 8-bit PCM resources
+  203 Type-3 MPEG resources
+
+All 260 sequences and title metadata were parsed; all 232 instruments were
+parsed, including the terminal-filler quirk; all 378 distinct sample payloads
+were decoded. All 260 .rmf files were successfully converted end to end to
+validated WAVs. Regression checks
+exercise metadata naming, bounds failures, custom-sample audio, and percussion
+mapping. Eight regression tests passed, including stereo separation, 440 Hz
+sample pitch, filename collisions, encryption boundaries, LZSS back-references,
+MPEG playback rate, omitted Note Off, and preservation of trailing silence.
+Exact acoustic equivalence to the proprietary Beatnik player has not
+been established and is not claimed.
+
+Concrete examples:
+
+  34688/kraftytechy-full.rmf        Sequence only; bank instruments required
+  11120/CARMEN.RMF                 Title "Toreador"; four custom vocal samples
+  39611/popster-full-samples.rmf    MIDI plus two custom vocal samples
+  17754/science1999.rmf            Eight instruments and 49 samples
+  18046/evillaugh.rmf              One note triggers one MPEG sound effect
+  18046/CREAK.rmf                  One note triggers one MPEG sound effect
+  41258/kraftytechy_MOD.rmf         MIDI plus one custom drum-loop sample
+
+
+16. RELATED AUDIO-OBJECT STRUCTURE
+==================================
+
+The engine also defines AudioResource, separate from the snd envelopes above.
+Do not confuse this with the IREZ outer record or with SONG type 2. It is
+included here to distinguish another resource-level structure in the source:
+
+  Offset Size Meaning
+       0    4 Version (1)
+       4    4 Data length
+       8    4 Data offset from start of this structure
+      12    4 Audio type FourCC
+      16    4 Usage type
+      20    4 fixed16.16 Sample rate
+      24    4 Sample frame count
+      28    4 Loop-start frame
+      32    4 Loop-end frame
+      36    2 s16 Base MIDI key
+      38    2 s16 Bit size
+      40    2 s16 Channels
+      42    4 Name-resource type
+      46    4 s32 Name-resource ID
+      50    1 Used-in-bank flag
+      51    3 Unused flags
+      54   64 Reserved filler
+     118    4 firstSampleFiller / following data marker
+
+Respect dataOffset when interpreting this structure rather than assuming
+that every audio object is a standalone WAV. The AudioResource enum defines
+"snd ", csnd, esnd, MPEG, IMA2, IMA4, and RPCM; their payloads
+use their respective formats. This generic audio-object API is not needed to
+decode any of the 260 RMFs examined here.
+
+
+17. SOURCE ATTRIBUTION
+======================
+
+The decoding logic and field interpretation were developed with reference to
+the released miniBAE source. Its original license is reproduced below for
+the source-derived algorithm portions; this notice does not impose additional
+restrictions on the user's own music files.
+
+Copyright (c) 2009 Beatnik, Inc All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimer.
+
+Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.
+
+Neither the name of the Beatnik, Inc nor the names of its contributors may be
+used to endorse or promote products derived from this software without
+specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.

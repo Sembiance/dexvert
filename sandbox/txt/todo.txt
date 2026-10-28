@@ -19,8 +19,6 @@
 >>> wip
 <<<
 
-* Finish vibing the remaining unsupported.js "audio" formats
-
 * Tackle installers
   NOTE: If I come across ones that have consistent "metadata" on the exe, I can use an agent with running "exiftool -quiet -json" to find what to reprocess
   Right now installers (including Wise) are not detected as such, just treatest as an EXE where wise/defactory/nsis/etc are just "tried"
@@ -56,7 +54,7 @@ Otherwise the ttf.js lib we vibe code will need to have a renderer and render to
   Of course then re-process ALL FONTS on discmaster
   vibe code this? first ask about different formats I may want to convert "into" and settle on 1 bitmap, 1 vector
   Can give it code to existing converters to 'learn' about particular formats
-  Then handle the "unsupported" fonts. Search dexvert for "unsupported" in src/format/font/
+  Then handle the "unsupported" fonts. Search dexvert for "unsupported" in src/format/font/ and go through the font category in unsupported.js
   Then vibe support for any KNOWN unsupported formats. If it's gonna stay unsupported, add a comment on the unsupported line // explaining why
   Add support for NFNT and FOND mac resources: https://discmaster.textfiles.com/browse/46647/GA2%2033%20-%202ad31mtj.img/%E2%80%A2Fonts/Rubino%20Sans%20ICG/Rubino%20Sans%20ICG.rsrc
 	FOND: https://discmaster.textfiles.com/browse/46896/howard-the-duck-tremors-2-hi-res-art-logos.iso/trem2bd01_typefaces.hqx/TREM2BD01_TYPEFACES/gathered%20fonts/Futura%20Medium%2024.rsrc
@@ -114,6 +112,8 @@ Otherwise the ttf.js lib we vibe code will need to have a renderer and render to
 * Several macromediaDirector images still come out all messed up, I bet a vibe coded one (especially if it leans on scummvm code to learn) could do MUCh better
   Examples:
 	https://discmaster.textfiles.com/browse/46939/1996-091/RELHST.zip/HISTORY.ARJ/HISTORY/GUNS.DXR
+
+* Other formats listed in unsupported.js (alreeady did audio & video)
 
 /---------------\
 | High Priority |

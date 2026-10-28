@@ -1,0 +1,312 @@
+MADE SOUND FILE (SFLX)
+Binary format and decoder specification
+======================================
+
+1. Scope and certainty
+----------------------
+
+SFLX is a single-stream, block-coded sound resource used by MADE-family game
+software and by MechWarrior II. The usual extension is .SFL, but identification
+depends on the four signature bytes, not the filename. Decoding produces
+unsigned 8-bit mono PCM. This document describes the SFLX wrapper and its six
+established block coding types. Headerless sounds, resource archives, movies,
+and unrelated formats also using the .SFL extension are outside its scope.
+
+The header, block boundaries, codebooks, index packing, predictor, repetition,
+and interpolation below are implemented. All supported fields have explicit
+interpretations; there is no signature scanning, guessed resynchronization,
+statistical codec detection, or filename-dependent behavior.
+
+There are limits to a claim of complete historical knowledge:
+
+* No sample rate is stored. Correct playback timing requires external context.
+* Stored blocks can remain after the declared playback block count. Their
+  contents decode normally, but the original encoder's reason for writing
+  them, and whether they represent a padded partial source block, are not
+  established. Known count-driven players omit them. No field records a
+  partial block's original valid-sample count.
+* Control types 6..15 and reduction value 3 have no established decoding
+  semantics. They are not silently mapped onto known modes.
+* The original purpose of ignored control bits 4 and 5 is not established;
+  their observable decoder behavior is to have no effect.
+* Packed-code blocks whose sample count is not a whole number of index bytes,
+  and reduction factors that do not divide the block size, are outside the
+  supported profile. Legacy implementations have unsafe/ambiguous behavior
+  for these cases, rather than a reliable definition of padding.
+
+Thus this is a complete operational specification of the supported SFLX
+profile, with explicit boundaries, not a claim that every possible historical
+variant or encoder intention has been proved. Resolving the remaining issues
+requires the original encoder/player code or executable disassembly, with
+test resources exercising those cases. Playback rates require the originating
+game's configuration, scripts, or audio playback call sites.
+
+2. Scalar representation and header
+------------------------------------
+
+All multi-byte integers are unsigned and little-endian. Offsets below are
+absolute from the start of the resource, measured in bytes. There is no
+alignment padding between fields or between blocks.
+
+Offset  Width  Name                 Meaning
+------  -----  -------------------  -----------------------------------------
+0x00      4    signature            Exactly 53 46 4C 58, ASCII "SFLX".
+0x04      4    resource_size        Resource byte length minus four.
+0x08      4    block_count          Number of blocks in declared playback.
+0x0C      2    block_size           Output PCM samples per complete block.
+0x0E      .    encoded_blocks       Consecutive variable-length blocks.
+
+The first byte beyond the declared resource is at resource_size + 4, not at
+resource_size + 8. The length includes the length field itself and everything
+after it, including any stored blocks beyond block_count. A header requires
+resource_size >= 10 and block_size > 0. A block count of zero is representable;
+it declares no playback blocks, even if extra encoded blocks are stored.
+
+block_count occupies four bytes. Some MADE readers historically read only its
+low 16 bits. The converter reads all 32 bits; it does not reinterpret the upper
+two bytes as padding. The count never causes an allocation for absent blocks.
+
+The wrapper contains no version number, channel count, sample rate, bit depth,
+checksum, compression-size table, loop points, text metadata, or stream index.
+All audio in one wrapper belongs to one continuous mono stream.
+
+3. Block grammar and length
+---------------------------
+
+Each block begins with an unsigned control byte C:
+
+    bits 0..3: T = C & 0x0F, coding type
+    bits 4..5: ignored by the established decoder
+    bits 6..7: R = C >> 6, sample reduction mode
+
+The reduction factor F and the stored sample count W are:
+
+    R = 0: F = 1, W = block_size
+    R = 1: F = 2, W = block_size / 2
+    R = 2: F = 4, W = block_size / 4
+    R = 3: undefined; reject
+
+The divisions must be exact and W must be positive. A reduced block still
+produces block_size PCM samples after interpolation. The file's playback
+sample rate is not changed by a block's reduction mode.
+
+ T  Coding                   Body bytes                 Total block bytes
+ -  -----------------------  -------------------------  -----------------
+ 0  Silence                  none                       1
+ 1  Repeat                   none                       1
+ 2  One-bit indexed deltas   2-entry table + W/8 codes   3 + W/8
+ 3  Two-bit indexed deltas   4-entry table + W/4 codes   5 + W/4
+ 4  Four-bit indexed deltas  16-entry table + W/2 codes  17 + W/2
+ 5  Literal unsigned PCM     W samples                  1 + W
+
+Each table entry and each code-stream byte occupies one byte. W must be a
+multiple of 8, 4, or 2 for types 2, 3, or 4 respectively. These exact equations
+locate every subsequent block. Payload bytes may have any value, including
+values that would be control bytes at a block boundary.
+
+There is no separate end marker, fixed footer, byte-stuffing, or alignment
+byte in this grammar. In particular, a zero at a block boundary is a complete
+silence block, not an EOF marker. Bytes cannot be discarded merely because
+they are zero. Parse using the block grammar and the wrapper length.
+
+4. Persistent decoder state
+----------------------------
+
+At the start of a resource initialize:
+
+    P = 0                       signed DPCM accumulator
+    B = block_size copies of 128   previous expanded unsigned PCM block
+
+State persists across blocks and across changes in coding type or reduction
+factor. It is reset only at the start of a new SFLX resource. Each block first
+constructs a base sequence A of W unsigned PCM samples, then interpolates A
+when necessary. The expanded block becomes B for subsequent repetition.
+
+Type 0, silence:
+    A consists of W copies of 128.
+    Set P = 0.
+
+Type 1, repeat:
+    A is the first W samples of B.
+    Leave P unchanged.
+
+Repeating a reduced block means taking the first W samples of the previous
+EXPANDED block and expanding them again. It is not a repeat of the previous
+encoded bytes or the previous block's pre-interpolation samples. Repetition
+at the beginning of a resource produces silence because B was initialized.
+
+Type 5, literal:
+    Read W bytes into A without signed conversion.
+    Set P = A[W - 1] - 128.
+
+Literal PCM may contain 0, and can therefore set P to -128. This differs from
+the minimum value produced by the saturating DPCM step.
+
+5. Types 2, 3, and 4: codebook differential PCM
+-----------------------------------------------
+
+Let b be 1, 2, or 4 for coding types 2, 3, or 4. Read 2**b codebook bytes U.
+Convert each to a signed delta:
+
+    D[j] = 2 * U[j] - 128
+
+U is an unsigned byte; D can range from -128 through +382 in steps of two.
+Do not sign-extend U, treat the table as absolute amplitudes, or divide its
+values by two. The table is local to the current block and must be read anew.
+
+Read W*b/8 packed bytes. For each byte V, extract indices from LEAST to MOST
+significant bits, at shifts 0, b, 2*b, ... less than 8:
+
+    j = (V >> shift) & ((1 << b) - 1)
+    P = max(-127, min(127, P + D[j]))
+    append P + 128 to A
+
+Apply saturation after EVERY index. Saturation is not wrapping, and its lower
+limit is -127 rather than -128. DPCM output consequently lies in 1..255.
+The last accumulator carries into the next block. It is not reset when a new
+table is read. After reduced-rate interpolation, P still refers to the last
+base sample; interpolation does not update the accumulator.
+
+Example: starting at P=0, a one-bit table [64,65] represents deltas [0,+2].
+An index byte AA hex gives indices 0,1,0,1,0,1,0,1 and unsigned output
+[128,130,130,132,132,134,134,136].
+
+6. Interpolation
+----------------
+
+Interpolation operates on unsigned sample values, with integer floor division
+at every average. For a COMPLETE block define a virtual endpoint A[W]=A[W-1].
+For each base sample a=A[i], let z=A[i+1] and m=(a+z)//2.
+
+    F = 1: emit a
+    F = 2: emit a, m
+    F = 4: emit a, (a+m)//2, m, (m+z)//2
+
+The resulting length is exactly block_size. Store this entire expanded result
+in B. The virtual endpoint makes the last sample constant for the remaining
+positions in its interpolation group; no lookahead into the next block occurs.
+
+This endpoint convention matches the safe ScummVM implementation. Historical
+code has been reported to read beyond the newly filled base sequence at that
+endpoint. Such stale-memory behavior is not a portable signal specification
+and is not reproduced. No filtering, normalization, gain adjustment, or
+additional resampling is applied by the converter.
+
+7. Declared count, stored tail, and corruption
+---------------------------------------------
+
+The declared playback length is block_count * block_size samples. A count-driven
+player stops after block_count blocks. Physical resources may contain further
+ordinary blocks within resource_size + 4. Those bytes are fully parseable:
+they use the same control and payload grammar and continue the same state.
+
+For preservation, the converter includes every decodable block inside the
+declared resource in one WAV by default, including those stored tail blocks.
+It reports their presence. --declared-only instead limits WAV output to the
+declared count while still parsing and accounting for the tail. Tail content
+is not classified by amplitude, filename, or an assumed terminator value.
+Neither export policy proves how many original, unpadded samples a tail block
+contained. No hidden original-sample count can be recovered from this wrapper.
+
+A genuine SFLX signature permits deterministic recovery of truncated input:
+
+* The complete 14-byte header and a nonzero block size are needed to decode.
+* Read only up to min(physical file length, declared resource length).
+* Keep every complete, understood block before EOF.
+* If a literal block is truncated, retain its actual stored sample bytes.
+* If a DPCM codebook is incomplete, account for its bytes, but produce no
+  samples from that block. Indices cannot be decoded with a guessed table.
+* If the codebook is complete and indices are truncated, decode all present
+  index bytes. The resulting base samples are an exact prefix of the block.
+* For a truncated reduced-rate block, emit only samples whose endpoints are
+  available. The last available base sample itself is valid, but interpolation
+  toward its missing successor is not. Do not clamp that missing successor.
+* Do not synthesize the absent blocks or fill them with guessed silence.
+* Extra physical bytes after the declared resource end are reported as outside
+  the resource and omitted from audio. They are not searched for another file.
+
+When an unknown control type, undefined reduction, or unsupported alignment is
+encountered, the converter rejects the whole conversion before writing output.
+There is no reliable way to distinguish an undocumented variant from a damaged
+control byte or to determine its payload length. It does not decode an
+apparently plausible prefix and quietly call the rest supported.
+
+The length field can itself be corrupt. The converter follows its boundary
+and reports mismatches; it does not guess a replacement length. A length ending
+inside the header, a zero block size, an incomplete header, or no recoverable
+samples causes a diagnostic and no output. Rejected inputs never create their
+output directory or alter existing output files.
+
+8. Playback rate and WAV representation
+---------------------------------------
+
+The decoded stream is mono, unsigned 8-bit PCM, centered on 128. Playback rate
+is supplied by the game or caller. 11025 Hz is the converter's explicit default
+and the rate used by the MechWarrior II reference converter. Other MADE games
+can use other rates, including 8000 Hz or rates set by game scripts.
+
+--rate HZ sets the WAV playback rate without changing sample bytes. It is a
+caller-supplied value, not a rate inferred from the file. Choosing the wrong
+rate changes speed and pitch even when the decoded samples are correct.
+
+The exported WAV uses RIFF/WAVE, format tag 1, one channel, eight bits/sample,
+block alignment 1, and byte rate equal to sample rate. The data chunk contains
+the decoded PCM with no amplitude transformation. Odd-length data receives one
+zero RIFF alignment byte, excluded from the data chunk size and sample count.
+There are no metadata chunks. One SFLX resource produces one WAV.
+
+9. Converter interface and artifacts
+-------------------------------------
+
+    python3 madeSoundFile.py inputFile outputDir
+    python3 madeSoundFile.py inputFile outputDir --rate 8000
+    python3 madeSoundFile.py inputFile outputDir --declared-only
+    python3 madeSoundFile.py inputFile outputDir -verbose
+
+Requires Python 3.8 or later and only its standard library. No external program,
+package, network connection, lookup table, or companion file is needed at run
+time. The specification and HTML report are not runtime dependencies.
+
+outputDir may exist. The default output is input-stem.wav. An existing file
+with that output name is replaced atomically after successful decoding. Other
+files in the directory are left alone. New output files have mode 0644; newly
+created directories allow user and group traversal/read access. An output path
+that would overwrite the input is refused.
+
+Only -verbose (also --verbose) adds input-stem.json. It records the parsed
+header, warnings, playback policy, per-block offsets and controls, decoded
+delta tables, sample ranges, and a disjoint byte-range map. Ranges use inclusive
+start and exclusive end offsets. The map covers every physical input byte;
+outside-resource bytes are explicitly marked as uninterpreted. It is not a
+claim that external junk has a meaning within SFLX. No raw dumps or extra audio
+files are generated. Diagnostics go to stderr and a success line to stdout.
+
+Exit status is 0 when a WAV is written, including deterministic partial recovery,
+and 1 for rejection or an I/O failure. Argument syntax errors use status 2.
+Parsing and unsupported-feature checks finish before any destination writes.
+An operating-system write failure is separate from a format rejection; in
+verbose mode a WAV can already exist if writing its JSON subsequently fails.
+
+10. Reference implementations and evidence
+-------------------------------------------
+
+The binary equations and state transitions were checked against these public
+implementations, and against direct structural parsing and independent vectors:
+
+ScummVM, engines/made/sound.cpp, decompressSound:
+https://github.com/scummvm/scummvm/blob/master/engines/made/sound.cpp
+
+ScummVM, engines/made/resource.cpp, SoundResource::load:
+https://github.com/scummvm/scummvm/blob/master/engines/made/resource.cpp
+
+ScummVM, engines/made/made.cpp and scriptfuncs.cpp, external sound-rate setup:
+https://github.com/scummvm/scummvm/blob/master/engines/made/made.cpp
+https://github.com/scummvm/scummvm/blob/master/engines/made/scriptfuncs.cpp
+
+MechVM, src/MechWarriorIIPRJ.cpp, SFLX_HEADER, sflx, and SFL2Wav:
+https://github.com/DrItanium/MechVM-original/blob/master/src/MechWarriorIIPRJ.cpp
+
+The implementations agree on the basic wrapper, coding types, delta arithmetic,
+and bit ordering, but legacy code has platform and bounds issues. The explicit
+safe rules above, particularly endpoint treatment and malformed-input recovery,
+describe this converter rather than reproducing undefined memory accesses.

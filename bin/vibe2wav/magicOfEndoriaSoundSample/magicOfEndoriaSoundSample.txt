@@ -1,0 +1,291 @@
+MAGIC OF ENDORIA SOUND SAMPLE / PALLADIX SM8
+Standalone binary file format and conversion specification
+Revision 1, 2026-10-26
+
+1. SCOPE
+
+This specification describes the standalone, inline-PCM SM8 sound sample
+format used by the Palladix / PSM sound system, including Magic of Endoria.
+The usual extension is .smp; an extension is not part of the format and is
+not needed to recognize it. One file contains exactly one mono waveform.
+
+All offsets are absolute byte offsets from the beginning of the file.
+All multibyte integers are little-endian. Fields are packed, without
+alignment gaps. The complete header occupies ten bytes. The sample body
+is uncompressed unsigned 8-bit PCM. There is no sample bank, channel table,
+codec selection, bit-depth selection, text encoding, checksum, loop table,
+terminator, optional chunk, trailer, or file-level alignment padding.
+
+This is a file format specification, not an emulation of the whole PSM
+sound system. Runtime mixing, repetition counts, sound-card gain, speaker
+filtering and hardware-specific rate quantization are external to the file.
+PMM/P2L containers and other Palladix formats are outside its scope.
+
+2. COMPLETE BYTE LAYOUT
+
+Offset  Length  Type       Meaning
+------  ------  ---------  ------------------------------------------------
+0x0000       4  bytes      Signature: 53 4D 38 00, ASCII "SM8" followed by NUL.
+0x0004       2  uint16 LE  PCM scaling-state marker V; normal range 0..256.
+0x0006       2  uint16 LE  Number N of PCM bytes, also the mono sample count.
+0x0008       2  uint16 LE  PC programmable interval timer reload divisor D.
+0x000A       N  uint8[N]   The waveform, one unsigned amplitude per byte.
+
+The exact size of a well-formed nonempty file is:
+
+    file_size = 10 + N
+    1 <= N <= 65535
+
+The PCM occupies the half-open byte range [10, 10 + N). There are no
+unclassified header bytes. In particular, offset 9 is the HIGH BYTE of
+the divisor, not a reserved byte; offset 7 is the high byte of N. Neither
+field is restricted to the low-byte values commonly used in games.
+
+3. SIGNATURE AND SCALING-STATE MARKER
+
+The four-byte identifier includes the NUL at offset 3. The normal pristine
+header begins with the six bytes 53 4D 38 00 00 01. The last two of those
+six bytes are the little-endian value 256, not a channel count, byte-order
+mark, compression flag, or independent one-byte version number.
+
+V = 256 (0x0100): the original unscaled state. The original driver can
+apply its external software playback gain to this state. For standalone
+extraction at unity gain, copy the stored PCM unchanged.
+
+V = 0..255: a state produced by the driver's in-place volume preprocessing
+routine. The stored waveform ALREADY includes this scaling. The word records
+the applied scale; it is not an instruction to scale the waveform again.
+The original playback code bypasses its normal per-sample software gain
+for these prescaled states. Standalone extraction again copies PCM unchanged.
+
+The driver's preprocessing operation, when starting with V = 256, is:
+
+    signed_amplitude = input_byte - 128
+    output_byte = 128 + floor(signed_amplitude * V_new / 256)
+    header_word_at_4 = V_new
+
+For the normal 0..256 scale range, the result is already in 0..255 and
+requires no clipping. This operation is documented to explain the marker;
+the converter does NOT perform it, undo it, normalize, or remove DC offset.
+V = 0 is therefore not, by itself, a command to mute nonzero stored data.
+
+The original driver also makes an IN-MEMORY descriptor by replacing this
+word with 0xFF00. Its DMA routine treats markers with high byte 0xFF as
+descriptors with an external sample-memory address at offset 10 instead
+of inline PCM. Such an address is meaningful only in the original process;
+a descriptor dump is not a self-contained sound sample file. The converter
+rejects it instead of interpreting pointer bytes as sound. Marker values
+above 256 are outside the supported standalone profile and are rejected.
+There is no evidence justifying interpreting other such values as a new
+codec or as a gain to apply. This specification makes no such assumption.
+
+4. WAVEFORM ENCODING
+
+Each PCM byte is one amplitude in the range 0..255:
+
+    0   = maximum negative amplitude
+    128 = zero amplitude / nominal silence
+    255 = maximum positive amplitude
+
+There is exactly one channel. The conceptual signed value is byte - 128.
+An equivalent lossless 16-bit representation would be (byte - 128) * 256,
+but this converter retains the original 8-bit representation.
+
+Every byte of the body is audio. A run of 00, 80, FF, text-like bytes, or
+even "SM8" inside the declared body has no structural significance. Leading
+and trailing silence are retained. Samples are neither delta-coded nor
+compressed. No byte swapping, sign-bit inversion, nibble unpacking,
+decompression, deinterleaving, gain multiplication, or silence trimming is
+necessary to write the payload to an 8-bit PCM WAV data chunk.
+
+5. SAMPLE RATE AND DURATION
+
+D is a count of PC timer input ticks per PCM sample, not a frequency in Hz
+and not the Sound Blaster DSP's 256-minus-time-constant representation.
+The effective divisor is:
+
+    effective_D = D, if D != 0
+    effective_D = 65536, if D == 0
+
+Zero has the 16-bit PIT reload meaning; it must not be replaced by an
+arbitrarily chosen audio rate. All sixteen bits are significant. Increasing
+the divisor slows playback. The nominal playback frequency and duration are:
+
+    nominal_rate = 1193182 / effective_D samples per second
+    nominal_duration = N * effective_D / 1193182 seconds
+
+1193182 Hz is the integer nominal PC PIT clock used by the independent
+reference player. The physical IBM-PC clock is approximately 1193181.818 Hz;
+its tiny difference and analog clock tolerances are not additional file
+fields. Reproducing a particular historical sound card's mixer, DAC, or DSP
+rate table is a separate hardware-emulation problem.
+
+Standard PCM WAV stores the rate as an INTEGER. To preserve each original
+sample byte without resampling, the converter uses nearest-integer Hz:
+
+    wav_rate = floor((1193182 + floor(effective_D / 2)) / effective_D)
+    wav_duration = recovered_sample_count / wav_rate
+
+For example, D = 100 yields nominal 11931.82 Hz and a WAV rate of 11932 Hz.
+D = 512 yields nominal 2330.43359375 Hz and a WAV rate of 2330 Hz. D = 0
+yields nominal approximately 18.2065 Hz and a WAV rate of 18 Hz. The latter
+illustrates why relative timing error can be appreciable for very slow
+rates. The absolute rounding error is at most 0.5 Hz. No rate is snapped
+to a conventional value such as 8000, 11025, 22050 or 44100 Hz.
+
+The output is sample-exact, not an assertion of exact fractional timing
+or cycle-exact historical playback. The verbose audit records both rates,
+the exact nominal rational rate, and the rounding difference.
+
+6. RECOGNITION AND MALFORMED INPUTS
+
+Recognition is independent of the filename and extension. Start at byte 0;
+never search within an unrelated file for an embedded signature. Require
+the exact four-byte identifier, a complete ten-byte header, and a supported
+inline PCM scaling marker. A valid nonempty file has exactly 10 + N bytes.
+
+The converter uses these deterministic recovery rules:
+
+* Wrong or incomplete four-byte signature: reject as not the target format.
+  Only four bytes are read before rejecting an unrelated file. Do not
+  create the destination directory or any output file.
+
+* Exact four-byte signature but fewer than ten header bytes: recognizable
+  truncated SM8; reject without output because the complete sample count,
+  divisor, or payload boundary cannot be recovered.
+
+* Scaling marker outside 0..256: reject as an unsupported representation.
+  Do not invent a gain, interpret runtime pointers as audio, or guess that
+  the marker was corrupted from 256.
+
+* N = 0: reject without output. The original file recognizer requires a
+  nonzero count. Even if bytes follow, their intended audio extent cannot
+  be established without replacing the declared count by a guess.
+
+* Nonzero N but no bytes after the header: reject; no PCM can be recovered.
+
+* Between 1 and N-1 bytes after a valid header: recover every available PCM
+  byte at the declared rate and warn that the audio is truncated. Do not
+  synthesize the missing samples or pad them with silence.
+
+* More than N bytes after a valid header: recover exactly the declared N
+  samples and warn about the excluded trailing byte count. Those bytes
+  cannot be classified as audio, padding, another sample, or an extension.
+  Their extent and SHA-256 are recorded when -verbose is used. Their
+  meaning remains unknown because the input violates the file grammar.
+
+* D = 0: valid timer representation, handled as 65536; not a recovery case.
+
+There are no amplitude tests, plausibility-based rate choices, special
+filenames, payload hashes used for recognition, or corpus-specific rules.
+No checksum is available to distinguish syntactically valid damaged audio
+or a syntactically valid incorrect divisor from intentional data.
+
+7. WAV SERIALIZATION AND COMMAND-LINE INTERFACE
+
+    python3 magicOfEndoriaSoundSample.py <inputFile> <outputDir>
+    python3 magicOfEndoriaSoundSample.py <inputFile> <outputDir> -verbose
+
+The program requires Python 3.10 or newer and only its standard library.
+It does not require ffmpeg, a reference player, a sound driver, this text
+file, an Internet connection, or any other supporting file to run.
+
+The result is <outputDir>/<inputFile stem>.wav. There is one WAV per input
+because standalone SM8 contains one waveform. An already-existing output
+directory is accepted. Missing parent directories are created after the
+input has been validated. Existing matching output filenames are replaced
+atomically; unrelated destination files are untouched. Attempts to overwrite
+the input itself, including an alias to it, are rejected. New output files
+are mode 0644, explicitly readable by owner and group regardless of umask;
+new directories have at least owner/group read and traversal access.
+
+The WAV contains only a standard 16-byte PCM fmt chunk and a data chunk:
+
+    WAVE format tag       = 1 (integer PCM)
+    channel count         = 1
+    sample rate           = wav_rate, from section 5
+    byte rate             = wav_rate
+    block alignment       = 1
+    bits per sample       = 8
+    data chunk size       = number of recovered PCM bytes
+
+The PCM data chunk contains the exact stored sample bytes. For an odd data
+length, append one zero RIFF alignment byte AFTER the data chunk. It is
+included in the RIFF size but excluded from the data size and sample count.
+This WAV-only alignment byte is not an extra audio sample or a source byte.
+Total WAV file size is 44 + sample_count + (sample_count mod 2).
+
+Without -verbose, only the WAV is written. Successful normal conversion
+prints nothing. Recovery warnings go to stderr. -verbose (also --verbose
+or -v) additionally creates <stem>.json containing header values, byte
+ranges, input and PCM hashes, rate derivation, warnings, and output details,
+and prints a brief conversion description. This option does not alter the
+WAV bytes. There are no default metadata sidecars or automatic HTML reports.
+
+Exit codes: 0 = WAV written (possibly with stated recovery warnings),
+1 = input/conversion/I/O error, 2 = command-line usage error. Format rejection
+occurs before any output creation, even with -verbose. Each output file is
+written through an adjacent temporary file that is removed or atomically
+renamed; no temporary file remains after normal success or a handled write
+failure. General I/O failures after a successful WAV write, such as failure
+to write an explicitly requested JSON audit, can leave that valid WAV.
+
+8. EVIDENCE, CONFIDENCE, AND LIMITS
+
+The structure and decoding rules were checked against independent playback
+source code and the original PSM sound drivers. This document is a reverse
+engineered specification, not a claim to be an original publisher manual.
+
+Primary implementation evidence:
+
+* Sebastian Sprenger, XMPlay PLX plugin rev.1 (2018), source distribution:
+  https://www.vgmpf.com/Wiki/images/a/a3/PLX_v1.zip
+  src/plx_smp.c defines a packed signature, signed volume-state word,
+  uint16 size, uint16 latch and byte payload. smp_hz establishes the rate
+  calculation and zero-divisor convention. smp_start and dma_run establish
+  one channel, unsigned 8-bit amplitudes, unity standalone gain and the
+  payload extent. src/plx.h defines the nominal PIT clock as 1193182.
+  This converter is an independent implementation and does not incorporate
+  or depend on the plugin's code or binary.
+
+* Original Magic of Endoria PSM drivers, preserved in the DOS distribution:
+  https://www.myabandonware.com/game/magic-of-endoria-ig2
+  Driver binaries were inspected as x86 real-mode machine code, not executed.
+  Their hashes and byte offsets below make the observations reproducible
+  without relying on particular filenames for input sample recognition.
+
+  DMABLAST.DRV SHA-256:
+  5911ba1c33af2ef58d7468a04198431bbb81e6919b416752b319c10056fc0f54
+    0x14F0: pristine SM8 signature and scaling marker constant.
+    0x0EF5..0x0F34: verifies that pristine header, reads N at +6, records
+    the scaling argument at +4, then transforms N unsigned PCM bytes.
+    0x1FCF..0x1FDC: only marker 256 selects the external software gain;
+    otherwise playback uses unity gain for the already-scaled samples.
+    0x2008..0x2014: reads the count at +6 and starts sample data at +10.
+    0x18CF..0x18E3: accesses the two-byte divisor at +8.
+    0x20A3..0x20CD: constructs a runtime descriptor with marker 0xFF00.
+    0x0634..0x0640: checks high byte 0xFF and consumes an external address
+    instead of using inline PCM in that runtime-only representation.
+
+  SMPCVX.DRV SHA-256:
+  7c9a497b841410ae09d8519b24edd9a058f9d64a95b7283203ba95a8f3de7169
+    0x03FA: normal six-byte header constant.
+    0x0426..0x0438: verifies the four-byte identifier, accepts scaling
+    markers <=256, and distinguishes pristine from already-scaled data.
+    0x04BC..0x04D5: consumes size and divisor followed directly by PCM.
+
+The ten-byte standalone header, PCM encoding, body extent, scaling-state
+semantics and PIT divisor are accounted for. No unknown field is labeled
+as padding or silently discarded. The converter supports the full 16-bit
+length/divisor domains subject to the nonempty constraint and the defined
+0..256 inline scaling states, rather than a table of previously seen values.
+
+Limits are explicit: unknown marker values and external-memory descriptors
+are not decoded; missing essential header bytes cannot be reconstructed;
+malformed trailers have no defined interpretation; WAV uses an integer rate;
+and hardware-specific playback processing is not reproduced. To extend the
+scope to an unknown marker, obtain the original producer or a driver path
+that defines it, establish whether it still stores inline PCM, and verify
+its semantics before accepting it. An external-memory descriptor additionally
+requires the referenced memory contents. Neither is needed for ordinary
+standalone SM8 files, including the prescaled inline representation.

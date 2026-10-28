@@ -8,5 +8,5 @@ export class twvAudio extends Format
 	forbidExtMatch = true;
 	magic          = _MOV_MAGIC;
 	weakMagic      = true;
-	converters     = ["vibe2wav[singleFile][renameOut]"];
+	converters     = ["vibe2wav[renameOut]"];
 }

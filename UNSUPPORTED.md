@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,002)
+# Unsupported File Formats (4,010)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (262)
+## Archive (260)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -111,8 +111,6 @@ Family/Format | Name | Extensions | Notes
 [archive/haptekCompressedFile](https://discmaster.textfiles.com/search?format=haptekCompressedFile) | Haptek Compressed file | .htr .haptar | [1 sample file](https://sembiance.com/fileFormatSamples/archive/haptekCompressedFile/)
 [archive/hDiskDiskImage](https://discmaster.textfiles.com/search?format=hDiskDiskImage) | HDisk disk image |  | 
 [archive/hToolCompressedArchive](https://discmaster.textfiles.com/search?format=hToolCompressedArchive) | HTool compressed archive |  | 
-[archive/humongousEntertainmentGameDataArchive](https://discmaster.textfiles.com/search?format=humongousEntertainmentGameDataArchive) | Humongous Entertainment game data archive | .he2 | 
-[archive/humongousEntertainmentMusicAudioDataArchive](https://discmaster.textfiles.com/search?format=humongousEntertainmentMusicAudioDataArchive) | Humongous Entertainment music/audio data archive | .he4 | 
 [archive/hxCFloppyEmulatorDiskImage](https://discmaster.textfiles.com/search?format=hxCFloppyEmulatorDiskImage) | HxC Floppy Emulator disk image | .hfe | 
 [archive/iceCompressedArchive](https://discmaster.textfiles.com/search?format=iceCompressedArchive) | ICE compressed archive | .ice | 
 [archive/iffCompressedDataArchiveFile](https://discmaster.textfiles.com/search?format=iffCompressedDataArchiveFile) | IFF Compressed Data Archive File | .xar | 
@@ -322,7 +320,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (191)
+## Document (192)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -346,6 +344,7 @@ Family/Format | Name | Extensions | Notes
 [document/appleWorksDatabase](https://discmaster.textfiles.com/search?format=appleWorksDatabase) | AppleWorks Database |  | 
 [document/appleWorksSpreadsheet](https://discmaster.textfiles.com/search?format=appleWorksSpreadsheet) | AppleWorks Spreadsheet |  | 
 [document/appleWorksWordProcessing](https://discmaster.textfiles.com/search?format=appleWorksWordProcessing) | AppleWorks Word Processing |  | 
+[document/applicationDataServerBaseFile](https://discmaster.textfiles.com/search?format=applicationDataServerBaseFile) | Application Data Server Base File | .mbf | 
 [document/astoundPresentation](https://discmaster.textfiles.com/search?format=astoundPresentation) | [Astound Presentation](http://fileformats.archiveteam.org/wiki/Astound_Presentation) | .asd .smp .asv | [1 sample file](https://sembiance.com/fileFormatSamples/document/astoundPresentation/)
 [document/asymetrixCompelPresentation](https://discmaster.textfiles.com/search?format=asymetrixCompelPresentation) | Asymetrix Compel Presentation | .cpl | [1 sample file](https://sembiance.com/fileFormatSamples/document/asymetrixCompelPresentation/)
 [document/bdcHelpSystem](https://discmaster.textfiles.com/search?format=bdcHelpSystem) | BDC HelpSystem | .hlp | 
@@ -585,7 +584,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (124)
+## Font (126)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -680,6 +679,7 @@ Family/Format | Name | Extensions | Notes
 [font/proVideoFont](https://discmaster.textfiles.com/search?format=proVideoFont) | Pro Video font |  | 
 [font/processingFont](https://discmaster.textfiles.com/search?format=processingFont) | Processing Font | .vlw | 
 [font/professionalDrawFont](https://discmaster.textfiles.com/search?format=professionalDrawFont) | Professional Draw Font | .pdfont | 
+[font/psiLOGICFontFile](https://discmaster.textfiles.com/search?format=psiLOGICFontFile) | PSI-LOGIC FontFile | .drv | 
 [font/psionFont](https://discmaster.textfiles.com/search?format=psionFont) | Psion Font | .fon | 
 [font/psmEngineFont](https://discmaster.textfiles.com/search?format=psmEngineFont) | PSM Engine Font | .fnt | 
 [font/publisherSTypeFoundryBitmapFont](https://discmaster.textfiles.com/search?format=publisherSTypeFoundryBitmapFont) | Publisher's Type Foundry bitmap Font | .xfr | 
@@ -690,6 +690,7 @@ Family/Format | Name | Extensions | Notes
 [font/saxonPublisherFont](https://discmaster.textfiles.com/search?format=saxonPublisherFont) | Saxon Publisher Font | .sxf .sx | 
 [font/signum3CompressedFont](https://discmaster.textfiles.com/search?format=signum3CompressedFont) | Signum! 3 Compressed Font | .s01 .24n .9p .30l | 
 [font/signumPrinterFont](https://discmaster.textfiles.com/search?format=signumPrinterFont) | Signum! Printer Font | .p24 .p9 .l30 | 
+[font/sithEngineFont](https://discmaster.textfiles.com/search?format=sithEngineFont) | Sith Engine Font | .sft | 
 [font/softLogikBitmapFont](https://discmaster.textfiles.com/search?format=softLogikBitmapFont) | Soft-Logik bitmap Font | .fm .14h .12h .18h .24h .36h .10h .14i .dmf .psf | 
 [font/speedo](https://discmaster.textfiles.com/search?format=speedo) | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://sembiance.com/fileFormatSamples/font/speedo/)
 [font/takeTwoInteractiveSoftwareFont](https://discmaster.textfiles.com/search?format=takeTwoInteractiveSoftwareFont) | Take-Two Interactive Software Font | .fnt | 
@@ -715,7 +716,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (191)
+## Image (192)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -837,6 +838,7 @@ Family/Format | Name | Extensions | Notes
 [image/mvpPaintAnimation](https://discmaster.textfiles.com/search?format=mvpPaintAnimation) | MVP Paint Animation | .af | 
 [image/needForSpeedTextures](https://discmaster.textfiles.com/search?format=needForSpeedTextures) | Need For Speed textures | .fam | 
 [image/neoPaintPattern](https://discmaster.textfiles.com/search?format=neoPaintPattern) | NeoPaint Pattern | .pat | [2 sample files](https://sembiance.com/fileFormatSamples/image/neoPaintPattern/) - While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
+[image/novastormSpriteSheets](https://discmaster.textfiles.com/search?format=novastormSpriteSheets) | Novastorm Sprite sheets | .spr | 
 [image/omniGraffleDrawing](https://discmaster.textfiles.com/search?format=omniGraffleDrawing) | OmniGraffle Drawing | .graffle | 
 [image/openTTDGraphicsResource](https://discmaster.textfiles.com/search?format=openTTDGraphicsResource) | OpenTTD Graphics Resource | .grf | 
 [image/pOSWorkbenchIcon](https://discmaster.textfiles.com/search?format=pOSWorkbenchIcon) | p.OS Workbench Icon | .info | 
@@ -1085,7 +1087,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,850)
+## Other (2,855)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1109,6 +1111,7 @@ Family/Format | Name | Extensions | Notes
 [other/threeDCKShapeData](https://discmaster.textfiles.com/search?format=threeDCKShapeData) | 3D Construction Kit Shape Data | .3sd | 
 [other/threeDConstructionKitVideoDriver](https://discmaster.textfiles.com/search?format=threeDConstructionKitVideoDriver) | 3D Construction Kit video driver | .drv | 
 [other/threeDCKWorldData](https://discmaster.textfiles.com/search?format=threeDCKWorldData) | 3D Construction Kit World Data | .kwd .kit | 
+[other/threeDHomeArchitectFloorPlan](https://discmaster.textfiles.com/search?format=threeDHomeArchitectFloorPlan) | 3D Home Architect floor plan | .pl0 .pl1 .pl2 | 
 [other/threeDLandscapeProject](https://discmaster.textfiles.com/search?format=threeDLandscapeProject) | 3D Landscape project | .lnd | 
 [other/threeDMovieMaker](https://discmaster.textfiles.com/search?format=threeDMovieMaker) | 3D Movie Maker | .3mm .3th .chk .3cn | 
 [other/threeDStudioProject](https://discmaster.textfiles.com/search?format=threeDStudioProject) | 3D Studio Project | .prj | 
@@ -1403,6 +1406,7 @@ Family/Format | Name | Extensions | Notes
 [other/axisGameEnhancementModules](https://discmaster.textfiles.com/search?format=axisGameEnhancementModules) | Axis Game Enhancement Modules | .fil | 
 [other/b17FlyingFortressSavedGameMission](https://discmaster.textfiles.com/search?format=b17FlyingFortressSavedGameMission) | B-17 Flying Fortress Saved Game/mission | .bsg | 
 [other/babbleData](https://discmaster.textfiles.com/search?format=babbleData) | Babble! Data | .bab | 
+[other/babyDriverPrinterDefinitionTable](https://discmaster.textfiles.com/search?format=babyDriverPrinterDefinitionTable) | Baby Driver Printer Definition Table | .pdt | 
 [other/babylonDictionary](https://discmaster.textfiles.com/search?format=babylonDictionary) | Babylon Dictionary | .bdc | 
 [other/babylonGlossary](https://discmaster.textfiles.com/search?format=babylonGlossary) | Babylon Glossary | .bgl | 
 [other/backItDeviceDefinition](https://discmaster.textfiles.com/search?format=backItDeviceDefinition) | Back-It device definition | .cfg | 
@@ -1918,6 +1922,7 @@ Family/Format | Name | Extensions | Notes
 [other/electronicArtsAPTGameData](https://discmaster.textfiles.com/search?format=electronicArtsAPTGameData) | Electronic Arts APT game data | .apt | 
 [other/electronicArtsAudioContainerSystem](https://discmaster.textfiles.com/search?format=electronicArtsAudioContainerSystem) | Electronic Arts audio Container System | .sph .dty .mon .asf | 
 [other/electronicArtsBundleGameDataArchive](https://discmaster.textfiles.com/search?format=electronicArtsBundleGameDataArchive) | Electronic Arts Bundle game data archive | .bundle | 
+[other/electronicArtsGameData](https://discmaster.textfiles.com/search?format=electronicArtsGameData) | Electronic Arts game data | .rsc .crs .car | 
 [other/electronicArtsInteractiveSequence](https://discmaster.textfiles.com/search?format=electronicArtsInteractiveSequence) | Electronic Arts interactive sequence | .map .lin | 
 [other/eliteGameSavePC](https://discmaster.textfiles.com/search?format=eliteGameSavePC) | Elite game save (PC) | .cdr | 
 [other/elitePlusCommanderFileSavedGame](https://discmaster.textfiles.com/search?format=elitePlusCommanderFileSavedGame) | Elite Plus Commander file / saved game | .cdr | 
@@ -3313,6 +3318,7 @@ Family/Format | Name | Extensions | Notes
 [other/simutransObjectPackage](https://discmaster.textfiles.com/search?format=simutransObjectPackage) | Simutrans object package | .pak | 
 [other/siscadpData](https://discmaster.textfiles.com/search?format=siscadpData) | SISCAD-P data | .zra .sfd .red | 
 [other/sisthemaPersonalSystem](https://discmaster.textfiles.com/search?format=sisthemaPersonalSystem) | Sisthema Personal System | .sth | 
+[other/sithEngineColormap](https://discmaster.textfiles.com/search?format=sithEngineColormap) | Sith Engine Colormap | .cmp | 
 [other/sKickRelocationTable](https://discmaster.textfiles.com/search?format=sKickRelocationTable) | SKick Relocation/patch Table | .rtb | 
 [other/skincrafterSkin](https://discmaster.textfiles.com/search?format=skincrafterSkin) | skincrafter skin | .skf | 
 [other/skinMagicSkin](https://discmaster.textfiles.com/search?format=skinMagicSkin) | SkinMagic Skin |  | 
@@ -3651,6 +3657,7 @@ Family/Format | Name | Extensions | Notes
 [other/ulticapLibrary](https://discmaster.textfiles.com/search?format=ulticapLibrary) | ULTIcap Library | .lib | 
 [other/ultimaVIIInitialGameData](https://discmaster.textfiles.com/search?format=ultimaVIIInitialGameData) | Ultima VII initial game data | .dat | 
 [other/ultimaVIIPalette](https://discmaster.textfiles.com/search?format=ultimaVIIPalette) | Ultima VII palette | .flx | 
+[other/ultimaVIIShapeTransformTables](https://discmaster.textfiles.com/search?format=ultimaVIIShapeTransformTables) | Ultima VII shape transform Tables | .tbl | 
 [other/ultimateFootball95Playbook](https://discmaster.textfiles.com/search?format=ultimateFootball95Playbook) | Ultimate Football '95 Playbook | .pbk | 
 [other/ultimateRaceProDCR](https://discmaster.textfiles.com/search?format=ultimateRaceProDCR) | Ultimate Race Pro DCR | .dcr | 
 [other/ultimateStuntsReplay](https://discmaster.textfiles.com/search?format=ultimateStuntsReplay) | Ultimate Stunts Replay | .repl | 
@@ -4042,13 +4049,14 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (19)
+## Video (20)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?format=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
 [video/accentShowSequence](https://discmaster.textfiles.com/search?format=accentShowSequence) | Accent Software Show Sequence | .seq | [11 sample files](https://sembiance.com/fileFormatSamples/video/accentShowSequence/) - Old MS-DOS software. Couldn't find a standalone player/converter, and also probably wasn't very popular.
 [video/amigaGL](https://discmaster.textfiles.com/search?format=amigaGL) | Amiga GL | .gl | 
+[video/cda2Cutscene](https://discmaster.textfiles.com/search?format=cda2Cutscene) | CDA2 cutscene | .cda | 
 [video/deluxeVideo](https://discmaster.textfiles.com/search?format=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 [video/eaMADVideo](https://discmaster.textfiles.com/search?format=eaMADVideo) | [EA MAD Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
 [video/golemInto](https://discmaster.textfiles.com/search?format=golemInto) | Golem Into Video | .xfl | 

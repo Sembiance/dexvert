@@ -7,7 +7,7 @@ export class radiance extends Format
 	ext            = [".hdr", ".rgbe", ".xyze", ".pic", ".rad"];
 	weakExt        = [".pic"];
 	mimeType       = "image/vnd.radiance";
-	magic          = ["Radiance RGBE Image Format", "Radiance HDR image data", "Radiance High Dynamic Range bitmap", "piped hdr sequence (hdr_pipe)", "HDRI :hdri:", /^fmt\/591( |$)/];
+	magic          = ["Radiance RGBE Image Format", "Radiance HDR image data", "Radiance High Dynamic Range bitmap", "piped hdr sequence (hdr_pipe)", "HDRI :hdri:", "image/vnd.radiance", /^fmt\/591( |$)/];
 	metaProvider   = ["image"];
 	converters     = ["pfsconvert", "convert[strongMatch]", "iconvert[strongMatch]", "nconvert[format:hdri][strongMatch]", "noesis[type:image]", `abydosconvert[format:${this.mimeType}]`, "gimp[strongMatch]"];
 	verify         = ({meta}) => meta.colorCount>1;

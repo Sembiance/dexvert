@@ -386,13 +386,14 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
-	//      archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener, archive:Peach.NijiDatOpener, archive:Youkai.DatOpener
+	//      archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
-	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:AirNovel.AirOpener
+	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:AirNovel.AirOpener, archive:Valkyria.DatOpener
 	// SEEN TWICE:
-	//		archive:Will.ArcOpener, archive:StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener, archive:Nekopunch.PakOpener, archive:Key.PakOpener
+	//		archive:Will.ArcOpener, archive:StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener, archive:Nekopunch.PakOpener, archive:Key.PakOpener, archive:Youkai.DatOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
+	/^archive:Artifact\.MooOpener /,
 	/^archive:AviOpener \(GENERIC AVI\)/,
 	/^archive:BlackRainbow\.DatOpener /,
 	/^archive:Broccoli\.MpegVideoOpener /,
@@ -408,6 +409,8 @@ export const WEAK_VALUES =
 	/^archive:Mokopro\.NNNNOpener /,
 	/^archive:MpgOpener \(GENERIC MPG\)/,
 	/^archive:Parsley\.CgV1Opener /,
+	/^archive:Peach\.NijiDatOpener /,
+	/^archive:PenguinWorks\.DatOpener /,
 	/^archive:Xuse\.BinOpener /,
 	/^archive:Youkai\.VoiceDatOpener /,
 
@@ -419,10 +422,10 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat, image:Entis.EriFormat, image:Paprika.NpFormat
-	//		image:RSystem.RsgFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat, image:Ikura.TanFormat
-	//		image:Elf.MskFormat, image:Abogado.KgFormat
+	//		image:RSystem.RsgFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat
+	//		image:Elf.MskFormat, image:Abogado.KgFormat, image:AyPio.Pdt5Format
 	// SEEN TWICE:
-	//		image:Herb.GrpFormat, image:Silky.IgfFormat, image:Pan.TblFormat, image:BGI.BgiFormat
+	//		image:Silky.IgfFormat, image:BGI.BgiFormat
 	/^image:Adobe\.PsdFormat /,
 	/^image:CrossNet\.GrbFormat /,
 	/^image:CsWare\.BpcFormat /,
@@ -431,11 +434,14 @@ export const WEAK_VALUES =
 	/^image:Ego\.AntFormat /,
 	/^image:Ffa\.Pt1Format /,
 	/^image:Gs\.PicFormat /,
+	/^image:Herb\.GrpFormat /,
+	/^image:Ikura\.TanFormat /,
 	/^image:JpegFormat /,
 	/^image:KAAS\.PicFormat /,
 	/^image:Leaf\.PxFormat /,
 	/^image:MayBeSoft\.HhpFormat /,
 	/^image:Mapl\.Mi2Format /,
+	/^image:Pan\.TblFormat /,
 	/^image:Softpal\.PicFormat /,
 	/^image:System98\.GFormat /,
 	/^image:TifFormat /,
@@ -445,22 +451,23 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DAT_CMP, 000_2, 000_7, 000_8
-	//		DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
+	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, 000_2, 000_7, 000_8
+	//		DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP, MAP_2, ARC_9, DAV_SLIB, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
 	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, WLD_WRLD, SCW_COTS, GB_UBA
 	//		LUG_LIONHEAD, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4, LZ, GLB
-	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, DAT_ARCV, BF_BIG, WAR_WARC, PACKED_BFPK, ZSM_ZSNDXBOX, IMG_AFS_2, PFS_PFS, DBS_WAVFILE
-	//		XWB_WBND_5, SPD_HEAD, IBT_DXT_DXT, TLB_HLIB, DAT_WWWW, ANI_ANI, STF, BIN_7L_2, GRP_3, ARC_ARCV410, IMG_9
+	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, BF_BIG, WAR_WARC, PACKED_BFPK, ZSM_ZSNDXBOX, IMG_AFS_2, PFS_PFS, DBS_WAVFILE
+	//		XWB_WBND_5, SPD_HEAD, IBT_DXT_DXT, TLB_HLIB, STF, BIN_7L_2, GRP_3, PAK_60, DFS_SFDX
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XXX_RU
-	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PRS, BIO_BRGR
-	/^geArchive: 0000?_(5|10|12|13|PCW|package)( |$)/,
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XPR_XPR2, DAT_CMP
+	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PRS, BIO_BRGR, ANI_ANI, BIN_LF
+	//		DAT_WWWW
+	/^geArchive: 0000?_(5|10|12|13|PCW|package|SFDX)( |$)/,
 	/^geArchive: 001_[25]( |$)/,
-	/^geArchive: ARC_(4|6|8|10|11|13|16|A20|ARC)( |$)/,
+	/^geArchive: ARC_(4|6|8|10|11|13|16|A20|ARC|ARCV410)( |$)/,
 	/^geArchive: ARK_2( |$)/,
 	/^geArchive: BAG_(5|GABA_2)( |$)/,
-	/^geArchive: DAT_(11|42|48|53|57|CHELALIC|DG|RES|PAK)( |$)/,
-	/^geArchive: IMG(_(4|LINK|DAVILEX_2))?( |$)/,
+	/^geArchive: DAT_(11|42|48|53|57|ARCV|CHELALIC|DG|RES|PAK)( |$)/,
+	/^geArchive: IMG(_(4|9|LINK|DAVILEX_2))?( |$)/,
 	/^geArchive: PAK_(7|11|30|41|42|49|50|DATA|FORM|PAK_2|PACK_[26])( |$)/,
 	/^geArchive: PCK_([256]|PACK)( |$)/,
 	/^geArchive: PCK5( |$)/,
@@ -468,6 +475,7 @@ export const WEAK_VALUES =
 	
 	/^geArchive: A00( |$)/,
 	/^geArchive: AMM_FORM( |$)/,
+	/^geArchive: ANI( |$)/,
 	/^geArchive: AR_DAVE( |$)/,
 	/^geArchive: ARF_AR( |$)/,
 	/^geArchive: AQA( |$)/,
@@ -569,6 +577,7 @@ export const WEAK_VALUES =
 	/^geArchive: WBK_WAVEBK11( |$)/,
 	/^geArchive: WD_WD( |$)/,
 	/^geArchive: XFS( |$)/,
+	/^geArchive: XXX_RU( |$)/,
 	/^geArchive: ZXC_90( |$)/,
 	
 	// SEEN ONCE:
@@ -655,15 +664,16 @@ export const WEAK_VALUES =
 
 	// idarc
 	// SEEN  ONCE:
-	// 		Terse, ZPack, ZZip (Damien Debin), PSA, HPA, Gather
+	// 		Terse, ZPack, ZZip (Damien Debin), HPA, Gather
 	// SEEN TWICE:
-	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug), BMF, CMP, SBC
+	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug), BMF, SBC
 	/^idarc: 777( |$)/,
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
 	/^idarc: Arhangel( |$)/,
 	/^idarc: Blink \(D\.T\.S\.\)( |$)/,
 	/^idarc: BOA( |$)/,
+	/^idarc: CMP( |$)/,
 	/^idarc: DitPack( |$)/,
 	/^idarc: Disintegrator( |$)/,
 	/^idarc: Flash( |$)/,
@@ -675,6 +685,7 @@ export const WEAK_VALUES =
 	/^idarc: PC\/3270( |$)/,
 	/^idarc: PKLite( |$)/,
 	/^idarc: PPMN( |$)/,
+	/^idarc: PSA( |$)/,
 	/^idarc: QuArk( |$)/,
 	/^idarc: RKive( |$)/,
 	/^idarc: SKY( |$)/,
@@ -736,12 +747,14 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	//		???
 	// SEEN TWICE:
-	//		seb
+	//		???
 	/^vgmstream: exakt_sc/,
 	/^vgmstream: mp4_aac_ffmpeg/,
 	/^vgmstream: mpeg - MPEG header/,
+	/^vgmstream: ogg_vorbis /,
 	/^vgmstream: raw_pcm/,
 	/^vgmstream: raw_wavm/,
+	/^vgmstream: seb /,
 
 	// xdgMime
 	// SEEN  ONCE:
@@ -1672,6 +1685,7 @@ export const WEAK_VALUES =
 	/^Genecyst save state$/,
 	/^Generator GNM output log \/ music$/,
 	/^Genital Save state \(v1\.2\+\)$/,
+	/^Geometer's Sketchpad document \(generic\)$/,
 	/^GEOS Revision$/,
 	/^GFX9000 Movie Format$/,
 	/^GIF bitmap \(generic\)$/,
@@ -1685,7 +1699,7 @@ export const WEAK_VALUES =
 	/^Graham Systems Disk Sqeezer disk image$/,
 	/^Grapher for DOS Symbol$/,
 	/^GraphiCode Programmable Device Format$/,
-	/^GUIX binary standalone resource \(LE\)$/,
+	/^GUIX binary (standalone )?resource \([GL]E\)$/,
 	/^HA compressed archive$/,
 	/^Hi-MD Minidisc ATRAC3\+? audio data container$/,
 	/^HP Xine compressed$/,
@@ -2222,6 +2236,7 @@ export const WEAK_VALUES =
 	/^BMW TIS grayscale bitmap$/,
 	/^Bochs configuration \(with rem\)$/,
 	/^Borland Reflex Screen driver$/,
+	/^BRAINAC - DosHelfer Icon$/,
 	/^BrainStorm document$/,
 	/^Brigade Commander specifications$/,
 	/^BRender Material script/,
@@ -2941,7 +2956,6 @@ export const WEAK_VALUES =
 	/^Xara color palette$/,
 	/^XBaze data base$/,
 	/^Xbox 360 (CON|LIVE) container data file$/,
-	/^Xbox archive \(generic\)$/,
 	/^Xbox Game Profile Data$/,
 	/^Xbox Packed Resource$/,
 	/^Xerox EDMICS-RLC bitmap/,

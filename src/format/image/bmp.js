@@ -10,6 +10,7 @@ export class bmp extends Format
 	magic          = [
 		"Windows Bitmap", /^PC bitmap, (Windows 3\.x|OS\/2 \d\.x) format/, /^PC bitmap, Windows (98\/2000|95\/NT4)/, "Device independent bitmap graphic", "Run Length Encoded bitmap", "Mac BMP bitmap (MacBinary)",
 		"image/x-dib", "piped bmp sequence (bmp_pipe)", "PC bitmap", /Bitmap Bild \(Typ \d/, "image/bmp", "deark: bmp", "deark: dib", /^OS\/2 Bitmap :(bmp|dib|os2|pmsk):$/, /^geViewer: BMP_BMP( |$)/, "image:BmpFormat",
+		/^geViewer: BMP_BMP_RGBA( |$)/,	// Alpha isn't handled at the moment, gameextractor isn't used to convert as this format right now
 		/^fmt\/(114|115|116|117|118|119)( |$)/, /^x-fmt\/270( |$)/
 	];
 	weakMagic    = ["image/bmp", /^geViewer: BMP_BMP( |$)/];

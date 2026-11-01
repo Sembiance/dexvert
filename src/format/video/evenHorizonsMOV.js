@@ -6,5 +6,6 @@ export class evenHorizonsMOV extends Format
 	ext            = [".mov"];
 	forbidExtMatch = true;
 	magic          = ["Even Horizons MOV"];
+	weakMagic      = true;
 	converters     = ["na_eofdec[format:eh-mov]"];
 }

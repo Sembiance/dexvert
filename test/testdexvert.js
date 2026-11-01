@@ -261,7 +261,8 @@ const SUPPORTING_FILES = {
 		fractalImageFormat : /\.ftt$/i,
 		printMasterShape   : /\.sdr$/i,
 		quakeGFXLMP        : /palette\.lmp$/,
-		ripScrip           : /\.ic[n1456]$/i
+		ripScrip           : /\.ic[n1456]$/i,
+		sithEngineTexture  : /\.cmp$/i
 	},
 	music :
 	{

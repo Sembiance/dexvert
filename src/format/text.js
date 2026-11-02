@@ -239,6 +239,7 @@ export default
 		jCreatorProject                          : {name : "JCreator Project", ext : [".jcp"], magic : ["JCreator Project"]},
 		jCreatorWorkspace                        : {name : "JCreator Workspace", ext : [".jcw"], magic : ["JCreator Workspace"]},
 		js                                       : {name : "JavaScript", ext : [".js"], magic : ["JavaScript Source Code", "JavaScript source", "Node.js script executable", "text/javascript"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/JavaScript"},
+		keditLanguageDefinition                  : {name : "KEDIT Language Definition", ext : [".kld"], magic : ["KEDIT Language Definition"], weakMagic : true},
 		kornShellScript                          : {name : "Korn shell script", magic : [/^Korn shell script/, /^a .*\/ksh script executable/, /^Shell Skript: '.*\/ksh'/, /Executable script, shebang: ".*\/ksh"/]},
 		kdeKXMLGUIRC                             : {name : "KDE KXML GUI RC", ext : [".rc"], magic : ["KDE KXML GUI RC", "application/vnd.kde.kxmlguirc"], weakMagic : true},
 		lcovCoverageTracefile                    : {name : "LCOV coverage tracefile", ext : [".info"], magic : [/^LCOV coverage tracefile/]},

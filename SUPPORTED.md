@@ -1,11 +1,11 @@
-# Supported File Formats (4,002)
+# Supported File Formats (4,004)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (757)
+## Archive (758)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | "The Sims" object | .flr .wll .iff | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/theSimsObject/)
@@ -76,10 +76,11 @@ archive | ARC 0AK | .gka | [gameextractor](https://sourceforge.net/projects/game
 archive | [ArcadeLab/Retro64 Graphics](https://web.archive.org/web/20220705090053/https://wiki.xentax.com/index.php/Retro64_GFX) | .gfx | [gameViewerLinux](https://game-viewer.org/plugins.php) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/arcadeLabGraphics/)
 archive | [ArcFS Archive](http://fileformats.archiveteam.org/wiki/ArcFS) | .arc | [nspark](https://github.com/mjwoodcock/nspark) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/arcFS/)
 archive | [ARJ Archive](http://fileformats.archiveteam.org/wiki/ARJ) | .arj .001 .exe | [arj](https://arj.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) | [29 sample files](https://sembiance.com/fileFormatSamples/archive/arj/)
+archive | Armobiles BMB archive | .bmb | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/armobilesBMB/)
 archive | Armobiles DMD archive | .dmd | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/armobilesDMD/)
 archive | Armobiles WMW archive | .wmw | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/armobilesWMW/)
 archive | [ARQ Archive](http://fileformats.archiveteam.org/wiki/ARQ) | .arq | [arq](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/arq/)
-archive | [Artisoft installation Package](http://fileformats.archiveteam.org/wiki/ARTIPACK) | .pak | [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/artisoftInstallationPackage/)
+archive | [Artisoft installation Package](http://fileformats.archiveteam.org/wiki/ARTIPACK) | .pak | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/artisoftInstallationPackage/)
 archive | [ARX Archive](http://fileformats.archiveteam.org/wiki/ARX) | .arx | [deark](https://entropymine.com/deark/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/arx/)
 archive | ASCARON Entertainment game archive | .cpr | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/ascaronEntertainmentGameArchive/)
 archive | [ASD Archive](http://fileformats.archiveteam.org/wiki/ASD_Archiver) | .asd | [unasd](https://www.sac.sk/download/pack/asd020.exe) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/asdArchive/)
@@ -220,7 +221,7 @@ archive | DWFB WAD | .wad | [gameextractor](https://sourceforge.net/projects/gam
 archive | [DWS Self-Extracting Archive](http://fileformats.archiveteam.org/wiki/DWC) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/dwcSelfExtracting/)
 archive | Dynamix Game Archive | .dyn | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dynamixGameArchive/)
 archive | [EA Archive](http://fileformats.archiveteam.org/wiki/EA_archive) | .ea .pea | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/eaArchive/)
-archive | EA SCHI AST game archive | .ast | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/eaSCHIAST/)
+archive | EA SCHI AST game archive | .ast | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/eaSCHIAST/)
 archive | Earth and Beyond Game Archive | .mix .pkg | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/earthAndBeyondGameArchive/)
 archive | Earthsiege Archive | .vol | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/earthsiegeArchive/)
 archive | Eclipse Voice Archive | .fvt | [na_game_tool_extract](https://nihav.org/game_tool.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/eclipseVoiceArchive/)
@@ -684,13 +685,13 @@ archive | Tony Hawk Archive | .pkr | [gameextractor](https://sourceforge.net/pro
 archive | Total Annihilation HPI Archive | .hpi .ufo .ccx .kmp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/totalAnnihilationHPI/)
 archive | [TPK Archive](http://fileformats.archiveteam.org/wiki/TPK_(compressed_archive)) |  | [deark](https://entropymine.com/deark/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/tpk/)
 archive | [Transport Neutral Encapsulation Format](http://fileformats.archiveteam.org/wiki/Transport_Neutral_Encapsulation_Format) | .tnef .dat | [ytnef](https://github.com/Yeraze/ytnef) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/tnef/)
-archive | Triangle DAT | .dat | [GARbro](https://github.com/shiikwi/GARbro) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/triangleDAT/)
+archive | Triangle DAT | .dat | [GARbro](https://github.com/shiikwi/GARbro) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/triangleDAT/)
 archive | Trilobyte GJD Archive | .gjd | [na_game_tool_extract](https://nihav.org/game_tool.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/trilobyteGJD/)
 archive | Triplex Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/triplexPacked/)
 archive | [TRS-80 Disk Image](http://fileformats.archiveteam.org/wiki/DMK) | .dmk .dsk | [trsread](http://www.trs-80emulators.com/trsread-trswrite.html) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/dmk/)
 archive | TRS/80 JVC Disk Image | .jvc | [jvcextract](https://github.com/mseminatore/dsktools) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/trs80JVCDiskImage/)
 archive | TSCRUNCH Packed | .exe .com | cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/tscrunchPacked/)
-archive | TSL Magic Archive | .wmw | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/tslMagicArchive/)
+archive | TSL Magic Archive | .wmw | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/tslMagicArchive/)
 archive | Tsunami Media game data archive | .rlb | [na_game_tool_extract](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/tsunamiMediaGameDataArchive/)
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTCOMP) |  | [ttdecomp](http://www.exelana.com/techie/c/ttdecomp.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/ttcomp/)
 archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .cr | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/ttw/)
@@ -2685,7 +2686,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,183)
+## Text (1,184)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -3104,7 +3105,7 @@ text | GraphEdit Filter Graph Markup Language | .xgr |  | [10 sample files](http
 text | Graphlet File Format | .gml |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/graphletFileFormat/)
 text | Graphmatica Graph | .gr |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/graphmaticaGraph/)
 text | Gravis Firebird 2 configuration | .fbd |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/gravisFirebird2Configuration/)
-text | Gravis Firebird configuration | .fbd |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/gravisFirebirdConfiguration/)
+text | Gravis Firebird configuration | .fbd |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/gravisFirebirdConfiguration/)
 text | GROMACS Residue Topology | .rtp |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/gromacsResidueTopology/)
 text | GSMSEND configuration | .par |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/gsmsendConfiguration/)
 text | Gui4CLI script | .g .gc |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/gui4CLIScript/)
@@ -3185,6 +3186,7 @@ text | Karateka animation script |  |  | [10 sample files](https://sembiance.com
 text | Kasparov's Gambit saved Game | .gam |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/kasparovsGambitSavedGame/)
 text | KDE config file | .kdelnk .desktop |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/kdeConfigFile/)
 text | KDE KXML GUI RC | .rc |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/kdeKXMLGUIRC/)
+text | KEDIT Language Definition | .kld |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/keditLanguageDefinition/)
 text | KEGS configuration | .kegs |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/kegsConfiguration/)
 text | KeyNote notes | .knt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/keyNoteNotes/)
 text | KeyTronic Trakball profile | .pro .fil |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/keyTronicTrakballProfile/)

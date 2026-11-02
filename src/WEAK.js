@@ -460,13 +460,12 @@ export const WEAK_VALUES =
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XPR_XPR2, DAT_CMP
 	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PRS, BIO_BRGR, ANI_ANI, BIN_LF
-	//		DAT_WWWW
 	/^geArchive: 0000?_(5|10|12|13|PCW|package|SFDX)( |$)/,
 	/^geArchive: 001_[25]( |$)/,
 	/^geArchive: ARC_(4|6|8|10|11|13|16|A20|ARC|ARCV410)( |$)/,
 	/^geArchive: ARK_2( |$)/,
 	/^geArchive: BAG_(5|GABA_2)( |$)/,
-	/^geArchive: DAT_(11|42|48|53|57|ARCV|CHELALIC|DG|RES|PAK)( |$)/,
+	/^geArchive: DAT_(11|42|48|53|57|ARCV|CHELALIC|DG|RES|PAK|WWWW)( |$)/,
 	/^geArchive: IMG(_(4|9|LINK|DAVILEX_2))?( |$)/,
 	/^geArchive: PAK_(7|11|30|41|42|49|50|DATA|FORM|PAK_2|PACK_[26])( |$)/,
 	/^geArchive: PCK_([256]|PACK)( |$)/,
@@ -2450,6 +2449,7 @@ export const WEAK_VALUES =
 	/^Hugin Project$/,
 	/^HydraVision Texture$/,
 	/^ICE ECC data \(v2\.x\)$/,
+	/^Icestudio project$/,
 	/^IceTracker module/,
 	/^IFF Color Map$/,	// Just because it has a CMAP as the first entry, doesn't mean that's what this file is, it's often a Movie Setter file with FACE and BODY elements. If it is a CMAP, IFF ILBM ends up handling it and creates a png
 	/^IFF document storage$/,

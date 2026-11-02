@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,010)
+# Unsupported File Formats (4,012)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1087,7 +1087,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,855)
+## Other (2,857)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1976,6 +1976,7 @@ Family/Format | Name | Extensions | Notes
 [other/extraForWindowsBinaryCompiledMacro](https://discmaster.textfiles.com/search?format=extraForWindowsBinaryCompiledMacro) | Extra! for Windows Binary/compiled Macro | .ebm | 
 [other/extraForWindowsSmartpadDefinition](https://discmaster.textfiles.com/search?format=extraForWindowsSmartpadDefinition) | Extra! for Windows smartpad definition | .ewp | 
 [other/extraForWindowsSnapShot](https://discmaster.textfiles.com/search?format=extraForWindowsSnapShot) | Extra! for Windows SnapShot | .pss | 
+[other/f22Lightning2RES](https://discmaster.textfiles.com/search?format=f22Lightning2RES) | F-22 Lightning 2 RES | .res | 
 [other/f1ChallengeMAS](https://discmaster.textfiles.com/search?format=f1ChallengeMAS) | F1 Challenge MAS | .mas | 
 [other/f1gpEdData](https://discmaster.textfiles.com/search?format=f1gpEdData) | F1GP-Ed Data | .events .settings | 
 [other/fableSaveGame](https://discmaster.textfiles.com/search?format=fableSaveGame) | Fable save game | .sav | 
@@ -3336,6 +3337,7 @@ Family/Format | Name | Extensions | Notes
 [other/smartBootManagerBackupFile](https://discmaster.textfiles.com/search?format=smartBootManagerBackupFile) | Smart Boot Manager Backup File |  | 
 [other/smartCatDiskCatalog](https://discmaster.textfiles.com/search?format=smartCatDiskCatalog) | SmartCat disk Catalog | .cat | 
 [other/smartListToGoDatabase](https://discmaster.textfiles.com/search?format=smartListToGoDatabase) | SmartList To Go database | .pdb | 
+[other/smartPadPad](https://discmaster.textfiles.com/search?format=smartPadPad) | SmartPad Pad | .kpp .kps | 
 [other/smdicDictionary](https://discmaster.textfiles.com/search?format=smdicDictionary) | SMDIC Dictionary | .dic | 
 [other/snagItCapture](https://discmaster.textfiles.com/search?format=snagItCapture) | SnagIt capture | .snag | 
 [other/snarkBustersGameDataArchive](https://discmaster.textfiles.com/search?format=snarkBustersGameDataArchive) | Snark Busters game data archive | .pack | 

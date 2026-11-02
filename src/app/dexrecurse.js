@@ -88,6 +88,8 @@ const EXCLUDED_SAMPLE_FORMATS = [
 
 	// not interesting, or very application specific or have only come across a tiny repeated few over and over
 	"archive/activeMime",
+	"archive/armobilesDMD",
+	"archive/armobilesWMW",
 	"archive/corelMOSAIC",
 	"archive/impactILB",
 	"archive/softdiskLibrary",

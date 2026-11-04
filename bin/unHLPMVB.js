@@ -160,14 +160,16 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 					cachedPNGData[availableFilename] = (await Deno.readFile(tmpPNGFilePath)).asHex();
 					return rtfPNG(cachedPNGData[availableFilename]);
 				}
-				else if(importOutputFile.endsWith(".png"))
+				
+				if(importOutputFile.endsWith(".png"))
 				{
 					// PNG files can be directly embedded into the file
 					availableFilenames.delete(availableFilename);
 					cachedPNGData[availableFilename] = (await Deno.readFile(importOutputFileAbsolute)).asHex();
 					return rtfPNG(cachedPNGData[availableFilename]);
 				}
-				else if(importOutputFile.endsWith(".mp4"))
+				
+				if(importOutputFile.endsWith(".mp4"))
 				{
 					// MP4 files usually result from embedded .AVI movies in multimedia view book files. let's grab a thumbnail and embed that and NOT remove the file from the available names so it will get copied over if --extractExtra is set
 					const vidWidth = r?.phase?.meta?.width || 100;

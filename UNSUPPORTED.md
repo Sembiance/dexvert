@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,012)
+# Unsupported File Formats (4,018)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -584,10 +584,11 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (126)
+## Font (127)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
+[font/threeDFontCreatorFont](https://discmaster.textfiles.com/search?format=threeDFontCreatorFont) | 3D Font Creator Font | .xft | 
 [font/threeDStudioDOSVectorFont](https://discmaster.textfiles.com/search?format=threeDStudioDOSVectorFont) | 3DStudio DOS vector Font | .fnt | 
 [font/abletonFont](https://discmaster.textfiles.com/search?format=abletonFont) | Ableton Font | .fnt | 
 [font/aladdin4DFont](https://discmaster.textfiles.com/search?format=aladdin4DFont) | Aladdin 4D Font | .4df .4dff | 
@@ -1087,7 +1088,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,857)
+## Other (2,860)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1150,6 +1151,7 @@ Family/Format | Name | Extensions | Notes
 [other/abuseLevel](https://discmaster.textfiles.com/search?format=abuseLevel) | Abuse Level | .lvl .spe | 
 [other/accelProtelPrintedCircuitBoard](https://discmaster.textfiles.com/search?format=accelProtelPrintedCircuitBoard) | ACCEL/Protel Printed Circuit Board | .pcb | 
 [other/aceNotesPIMData](https://discmaster.textfiles.com/search?format=aceNotesPIMData) | AceNotes PIM data | .an2 | 
+[other/acgResourceData](https://discmaster.textfiles.com/search?format=acgResourceData) | ACG Resource data | .rs .res | 
 [other/actContactLayoutV30](https://discmaster.textfiles.com/search?format=actContactLayoutV30) | ACT! Contact Layout | .cly | 
 [other/actContactMapV30](https://discmaster.textfiles.com/search?format=actContactMapV30) | ACT! contact Map | .map | 
 [other/actDataBaseBlobV30](https://discmaster.textfiles.com/search?format=actDataBaseBlobV30) | ACT! data base Blob | .blb | 
@@ -1951,6 +1953,7 @@ Family/Format | Name | Extensions | Notes
 [other/esriArcInfoBinaryGrid](https://discmaster.textfiles.com/search?format=esriArcInfoBinaryGrid) | ESRI Arc/Info Binary Grid | .adf | 
 [other/esriCoverageAnnotation](https://discmaster.textfiles.com/search?format=esriCoverageAnnotation) | ESRI ArcInfo Coverage Annotation |  | 
 [other/esriGridNIT](https://discmaster.textfiles.com/search?format=esriGridNIT) | ESRI ArcInfo Grid NIT | .nit | 
+[other/esriArcViewNDResourceDatabase](https://discmaster.textfiles.com/search?format=esriArcViewNDResourceDatabase) | ESRI ArcView ND Resource Database | .dat | 
 [other/esriAttributeIndexFiles](https://discmaster.textfiles.com/search?format=esriAttributeIndexFiles) | ESRI Attribute Index Files | .ain | 
 [other/esriShapefileHeaderIndex](https://discmaster.textfiles.com/search?format=esriShapefileHeaderIndex) | ESRI Shapefile Header Index | .aih | 
 [other/esriSpatialIndex](https://discmaster.textfiles.com/search?format=esriSpatialIndex) | ESRI Spatial Index |  | 
@@ -2756,6 +2759,7 @@ Family/Format | Name | Extensions | Notes
 [other/mythTheFallenLordsGameArchive](https://discmaster.textfiles.com/search?format=mythTheFallenLordsGameArchive) | Myth: The Fallen Lords game archive | .gor .bin | 
 [other/nTrackStudioConfiguration](https://discmaster.textfiles.com/search?format=nTrackStudioConfiguration) | n-Track Studio Configuration |  | 
 [other/nacDrawDocument](https://discmaster.textfiles.com/search?format=nacDrawDocument) | NacDraw document | .nac | 
+[other/nadconDatumShiftGridData](https://discmaster.textfiles.com/search?format=nadconDatumShiftGridData) | NADCON datum-shift grid data | .los .las .laa .loa | 
 [other/nascarRacingCarData](https://discmaster.textfiles.com/search?format=nascarRacingCarData) | NASCAR Racing Car/Track data | .trk .car | 
 [other/nascarRacingReplay](https://discmaster.textfiles.com/search?format=nascarRacingReplay) | NASCAR Racing Replay | .rpy | 
 [other/nascarRacingSeasonCarData](https://discmaster.textfiles.com/search?format=nascarRacingSeasonCarData) | NASCAR Racing Season Car data | .car | 
@@ -3950,7 +3954,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (95)
+## Poly (97)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3987,6 +3991,7 @@ Family/Format | Name | Extensions | Notes
 [poly/elasticRealityShape](https://discmaster.textfiles.com/search?format=elasticRealityShape) | Elastic Reality Shape | .er | 
 [poly/eMachineShopModel](https://discmaster.textfiles.com/search?format=eMachineShopModel) | eMachineShop model | .ems | 
 [poly/expert4DModel](https://discmaster.textfiles.com/search?format=expert4DModel) | Expert 4D model | .maq | 
+[poly/f1ManagerModel](https://discmaster.textfiles.com/search?format=f1ManagerModel) | F1 Manager Model | .mod | 
 [poly/fastRayObject](https://discmaster.textfiles.com/search?format=fastRayObject) | FastRay object |  | 
 [poly/fastRayScene](https://discmaster.textfiles.com/search?format=fastRayScene) | FastRay scene |  | 
 [poly/floorPlanPlus3DDrawing](https://discmaster.textfiles.com/search?format=floorPlanPlus3DDrawing) | FloorPlan Plus/3D Drawing | .fp3 | 
@@ -4012,6 +4017,7 @@ Family/Format | Name | Extensions | Notes
 [poly/openCascade3DModel](https://discmaster.textfiles.com/search?format=openCascade3DModel) | Open Cascade Technology 3D model | .brp | 
 [poly/painter3DModel](https://discmaster.textfiles.com/search?format=painter3DModel) | Painter 3D model | .d | 
 [poly/parasolidModel](https://discmaster.textfiles.com/search?format=parasolidModel) | Parasolid model | .x_t | 
+[poly/plantWALKModel](https://discmaster.textfiles.com/search?format=plantWALKModel) | PlantWALK model | .m .model | 
 [poly/playStationRSDPolygons](https://discmaster.textfiles.com/search?format=playStationRSDPolygons) | PlayStation RSD Polygons | .ply | 
 [poly/polyfilm](https://discmaster.textfiles.com/search?format=polyfilm) | Polyfilm 3D Model | .3d | [8 sample files](https://sembiance.com/fileFormatSamples/poly/polyfilm/)
 [poly/povRay](https://discmaster.textfiles.com/search?format=povRay) | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [4 sample files](https://sembiance.com/fileFormatSamples/poly/povRay/) - POV-RAY files: https://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV https://discmaster.textfiles.com/search?q=POV-Ray&qfields=name&qfields=t&extension=pov I need a better way to DETECT them though, I'm sure there are some that don't have the .pov extension, so figuring out some sort of magic for them would be POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest I have compiled povray1 as dexvert/bin/povray/povray1 Also, povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory which may be tricky Because these external files include 'includes' and pointers to images/textures and MORE. All in different parent directories, or who knows where. So there would need to be some sort of pre-parser that recursively walks and travels the file and all dependencies and pulls them all in, from the original file path. Challenging for sure. Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case POVRAY1 also generates broken TGA output that only seems to convert with nconvert (may not longer be the case now since I have improved TGA support) Lastly, I'm not sure how to get it as a poly. My hunch is Pov Ray 1.0 (and maybe later versions too) really are just a 'renderer' and don't have any way to export to another 3D model format, which is ok assimp claims support for PovRAY Raw (.raw) and AccuTrans3D says it supports .pov but a few gentle tests on my part yielded no results

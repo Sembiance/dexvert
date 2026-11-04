@@ -14,8 +14,14 @@ export class pcx extends Format
 		"image/vnd.zbrush.pcx", "deark: pcx (PCX)"
 	];
 	metaProvider = ["image"];
-	converters   = [
-		"nconvert[format:pcx]", "convert", "deark[module:pcx]", "iio2png", "gimp[strongMatch]", "imconv[format:pcx]", "wuimg[format:pcx]", "tkimgConvert[strongMatch]", "gameextractor[strongMatch][renameOut][codes:PCX]",
-		...["paintDotNet", "imageAlchemy", "noesis[type:image]", "graphicWorkshopProfessional", "photoDraw", "hiJaakExpress", "picturePublisher", "konvertor", "canvas5", "canvas", "tomsViewer", "corelDRAW", "keyViewPro"].map(v => `${v}[strongMatch]`)
-	];
+	converters   = dexState =>
+	{
+		const r = ["nconvert[format:pcx]", "convert", "deark[module:pcx]", "iio2png", "gimp[strongMatch]", "imconv[format:pcx]", "wuimg[format:pcx]"];
+		if(dexState.meta?.width && dexState.meta?.height)
+			r.push("tkimgConvert[strongMatch]", "gameextractor[strongMatch][renameOut][codes:PCX]");
+
+		// all these windows programs can handle PCX, but honestly it should have already been handled by the above, so running all these would probably be a massive waste of time
+		//r.push(...["paintDotNet", "imageAlchemy", "noesis[type:image]", "graphicWorkshopProfessional", "photoDraw", "hiJaakExpress", "picturePublisher", "konvertor", "canvas5", "canvas", "tomsViewer", "corelDRAW", "keyViewPro"].map(v => `${v}[strongMatch]`));
+		return r;
+	};
 }

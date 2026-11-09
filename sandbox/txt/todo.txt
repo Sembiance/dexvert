@@ -19,6 +19,11 @@
 >>> wip
 <<<
 
+* Better wpg (WordPerfect Graphic) support:
+  https://discmaster.textfiles.com/browse/46951/1996-134/XFCOP7.zip/OFFPRONT.ARJ/OFF7/COREL/OFFICE7/GRAPHICS/BACKGNDS/MEDICAL
+  For example see sandbox/wip/wpg/*
+  Find more (based on magic and detections) for vibe code to tackle
+
 * Tackle installers
   NOTE: If I come across ones that have consistent "metadata" on the exe, I can use an agent with running "exiftool -quiet -json" to find what to reprocess
   Right now installers (including Wise) are not detected as such, just treatest as an EXE where wise/defactory/nsis/etc are just "tried"

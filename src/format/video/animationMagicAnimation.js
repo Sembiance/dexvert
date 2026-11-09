@@ -5,6 +5,6 @@ export class animationMagicAnimation extends Format
 	name           = "Animation Magic video/Animation";
 	ext            = [".ani"];
 	forbidExtMatch = true;
-	magic          = ["Animation Magic video/Animation"];
+	magic          = ["Animation Magic video/Animation", /^geArchive: ANI_ANI( |$)/];
 	converters     = ["vibe2avi"];
 }

@@ -7,5 +7,6 @@ export class folioInfobase extends Format
 	ext            = [".nfo", ".sdw", ".fff", ".def"];
 	forbidExtMatch = true;
 	magic          = ["Infobase (Folio)", "Folio Infobase", /^fmt\/(1157|1158|1159|1160|1161|1162|1163)( |$)/];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="INFB" && macFileCreator==="FOLI";
 	converters     = ["vibeExtract"];
 }

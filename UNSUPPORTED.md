@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,018)
+# Unsupported File Formats (4,020)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -421,7 +421,7 @@ Family/Format | Name | Extensions | Notes
 [document/klasikTextDocument](https://discmaster.textfiles.com/search?format=klasikTextDocument) | Klasik Text document | .txk | 
 [document/legatoSpreadSheet](https://discmaster.textfiles.com/search?format=legatoSpreadSheet) | Legato SpreadSheet | .lss | 
 [document/logistixSpreadsheet](https://discmaster.textfiles.com/search?format=logistixSpreadsheet) | Logistix spreadsheet | .lgx | 
-[document/lucid3DSpreadsheet](https://discmaster.textfiles.com/search?format=lucid3DSpreadsheet) | Lucid 3-D spreadsheet | .lcd | 
+[document/lucid3DSpreadsheet](https://discmaster.textfiles.com/search?format=lucid3DSpreadsheet) | Lucid 3-D spreadsheet | .lcd .lcw | 
 [document/masterCook](https://discmaster.textfiles.com/search?format=masterCook) | MasterCook Cookbook | .mcf | [2 sample files](https://sembiance.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
 [document/matrixSpreadsheet](https://discmaster.textfiles.com/search?format=matrixSpreadsheet) | Matrix spreadsheet | .mtx | 
 [document/maxiPlanSpreadsheet](https://discmaster.textfiles.com/search?format=maxiPlanSpreadsheet) | MaxiPlan spreadsheet | .plan | 
@@ -1088,7 +1088,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,860)
+## Other (2,862)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1618,6 +1618,7 @@ Family/Format | Name | Extensions | Notes
 [other/civilizationIIISaveGame](https://discmaster.textfiles.com/search?format=civilizationIIISaveGame) | Civilization III save game | .bic .bix | 
 [other/clamAntivirusByteCodeSignatures](https://discmaster.textfiles.com/search?format=clamAntivirusByteCodeSignatures) | Clam Antivirus ByteCode signatures | .cbc | 
 [other/clarionRunTimeLibrary](https://discmaster.textfiles.com/search?format=clarionRunTimeLibrary) | Clarion RunTime Library | .rtl | 
+[other/clarisHomePageLibrary](https://discmaster.textfiles.com/search?format=clarisHomePageLibrary) | Claris Home Page Library | .hlb | 
 [other/clarisWorksPaletteFiles](https://discmaster.textfiles.com/search?format=clarisWorksPaletteFiles) | Claris Works palette files | .pl .plt | 
 [other/clarisDrawClipartLibrary](https://discmaster.textfiles.com/search?format=clarisDrawClipartLibrary) | ClarisDraw Clipart Library | .clb | 
 [other/clariSSAPreferences](https://discmaster.textfiles.com/search?format=clariSSAPreferences) | ClariSSA preferences |  | 
@@ -3778,6 +3779,7 @@ Family/Format | Name | Extensions | Notes
 [other/virtualVolumeViewDatabase](https://discmaster.textfiles.com/search?format=virtualVolumeViewDatabase) | [VVV Virtual Volume View database](http://vvvapp.sourceforge.net/) | .vvv | 
 [other/vwCommsDataBase](https://discmaster.textfiles.com/search?format=vwCommsDataBase) | VW Comms Data Base | .db .vct .vcc | 
 [other/warBirdsAirplaneArt](https://discmaster.textfiles.com/search?format=warBirdsAirplaneArt) | WarBirds airplane art | .vew | 
+[other/warCraft2SaveGame](https://discmaster.textfiles.com/search?format=warCraft2SaveGame) | WarCraft II save game | .sav | 
 [other/warCraft3Map](https://discmaster.textfiles.com/search?format=warCraft3Map) | WarCraft III Map | .w3m | 
 [other/warCraft3RecordedGame](https://discmaster.textfiles.com/search?format=warCraft3RecordedGame) | WarCraft III Recorded Game | .w3g | 
 [other/warlordsXCG](https://discmaster.textfiles.com/search?format=warlordsXCG) | Warlords XCG | .xcg | 

@@ -1055,6 +1055,7 @@ export default
 		sunClocksVectorMapFormat                   : {name : "SunClock's Vector Map Format", ext : [".vmf"], magic : [/^SunClock's Vector Map Format data/]},
 		superDOSAdapterFile                        : {name : "SuperDOS Adapter File", ext : [".adf"], magic : ["SuperDOS Adapter File"], weakMagic : true},
 		superKeyKeyboardLayout                     : {name : "SuperKey keyboard Layout", ext : [".lay"], magic : ["SuperKey keyboard Layout"], weakMagic : true},
+		superSonicWiring                           : {name : "SuperSonic Wiring", ext : [".wir"], magic : ["SuperSonic Wiring"], weakMagic : true},
 		superTuxLevel                              : {name : "SuperTux Level", ext : [".stl"], magic : ["SuperTux Level"]},
 		superTuxWorldMap                           : {name : "SuperTux World Map", ext : [".stwm"], magic : ["SuperTux World Map"]},
 		surfcamPostProcessor                       : {name : "SURFCAM post processor", ext : [".m3", ".e4", ".m4", ".e2", ".e", ".l2", ".m", ".l", ".m5"], magic : ["SURFCAM post processor"], weakMagic : true},

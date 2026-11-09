@@ -424,7 +424,7 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat, image:Entis.EriFormat, image:Paprika.NpFormat
 	//		image:RSystem.RsgFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat, image:Amaterasu.GrpFormat
-	//		image:Elf.MskFormat, image:Abogado.KgFormat, image:AyPio.Pdt5Format, image:Ikura.DoFormat, image:Tanuki.AmapFormat
+	//		image:Abogado.KgFormat, image:AyPio.Pdt5Format, image:Ikura.DoFormat, image:Tanuki.AmapFormat
 	// SEEN TWICE:
 	//		image:BGI.BgiFormat, image:Prime.ThpFormat
 	/^image:Adobe\.PsdFormat /,
@@ -433,6 +433,7 @@ export const WEAK_VALUES =
 	/^image:Desire\.DesFormat /,
 	/^image:Discovery\.Pr1Format /,
 	/^image:Ego\.AntFormat /,
+	/^image:Elf\.MskFormat /,
 	/^image:Ffa\.Pt1Format /,
 	/^image:Gs\.PicFormat /,
 	/^image:Herb\.GrpFormat /,
@@ -453,16 +454,16 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, 000_7, 000_8
+	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, 000_7, RES_23
 	//		TOD_TOD2, LEV, RWS_2, MAP, MAP_2, ARC_9, DAV_SLIB, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
-	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, VRAM_PIFF, GRA, 001_TCLF, WLD_WRLD, SCW_COTS, GB_UBA, PAK_PACK_7
+	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, VRAM_PIFF, GRA, 001_TCLF, WLD_WRLD, SCW_COTS, GB_UBA, PRS, PRS_2
 	//		LUG_LIONHEAD, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4, LZ, GLB
-	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, BF_BIG, WAR_WARC, PACKED_BFPK, ZSM_ZSNDXBOX, IMG_AFS_2, PFS_PFS, DBS_WAVFILE
-	//		XWB_WBND_5, SPD_HEAD, IBT_DXT_DXT, TLB_HLIB, STF, PAK_60, DFS_SFDX, S16, SB_SBIN, TPK_ZZZ0
+	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, BF_BIG, PACKED_BFPK, ZSM_ZSNDXBOX, IMG_AFS_2, PFS_PFS, DBS_WAVFILE
+	//		XWB_WBND_5, SPD_HEAD, IBT_DXT_DXT, TLB_HLIB, STF, PAK_60, DFS_SFDX, S16, SB_SBIN, TPK_ZZZ0, ARCHIVE_ARCH
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XPR_XPR2, DAT_CMP, BIN_7L_2
-	//		DAM_RZ, ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, HNK, VPPPC, DWX_DELPHIXWAVE, WIN_FORM, PR, ANI_ANI, RBH_PIFF, RBH_PIFF_2
-	//		GRP_3
+	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, HNK, DWX_DELPHIXWAVE, WIN_FORM, PR, ANI_ANI, RBH_PIFF, RBH_PIFF_2
+	//		WAR_WARC, PAK_PACK_7, GRP_3, 000_8
 	/^geArchive: 0000?_(5|10|12|13|PCW|package|SFDX)( |$)/,
 	/^geArchive: 001_[25]( |$)/,
 	/^geArchive: ARC_(4|6|8|10|11|13|16|A20|ARC|ARCV410)( |$)/,
@@ -510,6 +511,7 @@ export const WEAK_VALUES =
 	/^geArchive: CPN( |$)/,
 	/^geArchive: CRH_MDMD( |$)/,
 	/^geArchive: CWG_VW( |$)/,
+	/^geArchive: DAM_RZ( |$)/,
 	/^geArchive: DATA_KAPL( |$)/,
 	/^geArchive: DBS( |$)/,
 	/^geArchive: DLL_MZ( |$)/,
@@ -577,6 +579,7 @@ export const WEAK_VALUES =
 	/^geArchive: UE\d_(Generic|\d)( |$)/,
 	/^geArchive: UOP_MYP( |$)/,
 	/^geArchive: VOL_VOL_3( |$)/,
+	/^geArchive: VPPPC( |$)/,
 	/^geArchive: W32_ESPX( |$)/,
 	/^geArchive: WBK_WAVEBK11( |$)/,
 	/^geArchive: WD_WD( |$)/,
@@ -749,7 +752,7 @@ export const WEAK_VALUES =
 
 	// vgmstream
 	// SEEN  ONCE:
-	//		nds_rrds
+	//		nds_rrds, vsv
 	// SEEN TWICE:
 	//		???
 	/^vgmstream: exakt_sc/,
@@ -762,9 +765,9 @@ export const WEAK_VALUES =
 
 	// xdgMime
 	// SEEN  ONCE:
-	//		application/x-spectrum-d80, application/vnd.apache.parquet
+	//		application/vnd.apache.parquet
 	// SEEN TWICE:
-	//		???
+	//		application/x-spectrum-d80
 	/^application\/buildstream\+yaml$/,
 	/^application\/its\+xml$/,
 	/^application\/mathematica$/,
@@ -1703,7 +1706,7 @@ export const WEAK_VALUES =
 	/^Graham Systems Disk Sqeezer disk image$/,
 	/^Grapher for DOS Symbol$/,
 	/^GraphiCode Programmable Device Format$/,
-	/^GUIX binary (standalone )?resource \([GL]E\)$/,
+	/^GUIX binary (standalone )?resource \([BL]E\)$/,
 	/^HA compressed archive$/,
 	/^Hi-MD Minidisc ATRAC3\+? audio data container$/,
 	/^HP Xine compressed$/,
@@ -2233,6 +2236,7 @@ export const WEAK_VALUES =
 	/^BIS Binarized Rtm animation$/,
 	/^BitCom Emulation settings$/,
 	/^Bitstream Compressed Outline font$/,
+	/^BKFL CCTV video$/,
 	/^BlackBarry encrypted REM format$/,
 	/^Bleach game data archive$/,
 	/^Blur game data Package \(PC\)$/,
@@ -2799,6 +2803,7 @@ export const WEAK_VALUES =
 	/^SMS Coastline data$/,
 	/^SMS Super File$/,
 	/^SMS XYZ data$/,
+	/^Snippit Synth Patch$/,
 	/^Snowdrop game data archive$/,
 	/^SoftMaker TextMaker text Document$/,
 	/^Sony SELF - SPRX format$/,

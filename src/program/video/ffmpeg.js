@@ -7,9 +7,9 @@ export const _FFMPEG_CONVERTERS_BUILDER = ({dexState, format, outType, libre}) =
 	const prefix = `ffmpeg${libre ? "[libre]" : ""}[format:${format}][outType:${outType}]`;
 
 	if(outType==="pngFrame")
-		return [].pushSequence(0, (dexState.meta.frameCount || 0)).map(i => `${prefix}[numFrames:${dexState.meta.frameCount}][frameNum:${i}]`).join(" & ");
+		return [].pushSequence(0, (dexState.meta.frameCount ? dexState.meta.frameCount-1 : 0)).map(i => `${prefix}[numFrames:${dexState.meta.frameCount}][frameNum:${i}]`).join(" & ");
 
-	return [].pushSequence(0, (dexState.meta.streamCount || 0)).map(i => `${prefix}[numStreams:${dexState.meta.streamCount}][streamNum:${i}]`).join(" & ");
+	return [].pushSequence(0, (dexState.meta.streamCount ? dexState.meta.streamCount-1 : 0)).map(i => `${prefix}[numStreams:${dexState.meta.streamCount}][streamNum:${i}]`).join(" & ");
 };
 
 export class ffmpeg extends Program
@@ -75,7 +75,7 @@ export class ffmpeg extends Program
 
 			case "wav":
 				a.push(...inFileArgs);
-				if(r.flags.streamNum)
+				if(Object.hasOwn(r.flags, "streamNum"))
 					a.push("-map", `0:a:${r.flags.streamNum}`);
 				if(r.flags.rate)
 					a.push("-af", `asetrate=${r.flags.rate}`);

@@ -16,7 +16,7 @@ export class fig2dev extends Program
 	post  = async r =>
 	{
 		// inline into the SVG any referenced images
-		const svgOutFile = (r.f.files.output || []).find(file => file.ext.toLowerCase()===".svg");
+		const svgOutFile = (r.f.files.new || []).find(file => file.ext.toLowerCase()===".svg");
 		if(!svgOutFile)
 			return;
 

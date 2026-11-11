@@ -9,7 +9,8 @@ export class petsciiEditor extends Format
 	auxFiles = (input, otherFiles) => otherFiles.filter(file => file.base.toLowerCase()===(input.name.toLowerCase() + this.ext.find(ext => ext!==input.ext.toLowerCase())));
 
 	// Don't do anything with .col files
-	untouched = ({f}) => f.input.ext.toLowerCase()===".col";
+	untouched       = ({f}) => f.input.ext.toLowerCase()===".col";
+	verifyUntouched = false;
 
 	converters = ["recoil2png[format:SCR]"];
 }

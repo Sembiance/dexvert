@@ -52,7 +52,7 @@ export class iso extends Format
 
 	idMeta = ({macFileType, macFileCreator}) => (["GImg", "HImg", "hImg", "iImg"].includes(macFileType) && macFileCreator==="CDr3") || (macFileType==="DOCI" && macFileCreator==="CDWr");
 	confidenceAdjust = (inputfile, matchType, curConfidence, {idMetaData, xlog}) => ((idMetaData.macFileType==="rohd" && idMetaData.macFileCreator==="ddsk") ? -2 : 0);	// allow appleDiskCopyNDIF to handle these
-	idCheck = async (inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, xlog}) =>
+	idCheck = async (inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, xlog}) =>	// eslint-disable-line unicorn/prefer-default-parameters
 	{
 		// this whole function is just to handle when we have an ext match to '.bin' or '.img' because they are so generic we need to check for other files. easier to do this than with a combination of 'auxFiles'
 		const ext = inputFile.ext.toLowerCase();
@@ -154,7 +154,7 @@ export class iso extends Format
 
 					// 1 or fewer non-audio tracks, just let it fall through and use the default converters
 				}
-				else if(cueFileMeta.files.filter(file => file.name).find(file => file.name.toLowerCase().endsWith(dexState.f.input.base.toLowerCase())).tracks.some(track => track.type.toLowerCase()==="audio"))
+				else if(cueFileMeta.files.filter(file => file.name).find(file => file.name.toLowerCase().endsWith(dexState.f.input.base.toLowerCase()))?.tracks?.some(track => track.type.toLowerCase()==="audio"))
 				{
 					// Audio track, let it be handled normally
 					dexState.xlog.debug`Audio track, let it be handled normally`;

@@ -12,13 +12,14 @@ export class quartetST extends Format
 	// Both .qts and .smp are required and are often prefix extensions
 	auxFiles = (input, otherFiles) =>
 	{
-		const preExtMatch = this.ext.some(ext => ext.toLowerCase()===input.preExt.toLowerCase());
-		const otherExt = this.ext.find(ext => ext!==(preExtMatch ? input.preExt : input.ext));
-		return otherFiles.filter(file => (preExtMatch ? file.preName.toLowerCase()===input.preName.toLowerCase() : file.name.toLowerCase()===input.name.toLowerCase()) && otherExt===(preExtMatch ? file.preExt : file.ext));
+		const pre = this.ext.includes(input.preExt.toLowerCase());
+		const exts = (pre ? input.preExt : input.ext).toLowerCase()===".smp" ? this.ext.filter(ext => ext!==".smp") : [".smp"];
+		return otherFiles.filter(file => (pre ? file.preName : file.name).toLowerCase()===(pre ? input.preName : input.name).toLowerCase() && exts.includes((pre ? file.preExt : file.ext).toLowerCase()));
 	};
 
 	// Don't do anything with .smp files
-	untouched = ({f}) => (f.input.ext.toLowerCase() || f.input.preExt.toLowerCase())===".smp";
+	untouched       = ({f}) => (this.ext.includes(f.input.preExt.toLowerCase()) ? f.input.preExt : f.input.ext).toLowerCase()===".smp";
+	verifyUntouched = false;
 
 	converters = ["uade123[player:Quartet_ST]"];
 	notes      = "Are there 2 seperate formats I'm dealing with here?";

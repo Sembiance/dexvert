@@ -215,6 +215,7 @@ export default
 		diceCProject                             : {name : "Dice C project", ext : [".dice"], magic : ["Dice C project"], weakMagic : true},
 		dotNetAssemblyInstallLog                 : {name : ".NET assembly Installation Log", ext : [".installlog"], magic : [".NET assembly Installation Log"], weakMagic : true},
 		eclipseProductMarker                     : {name : "Eclipse product marker", magic : ["Eclipse product marker"]},
+		editPadProCustomSyntaxColoringScheme     : {name : "EditPad Pro Custom Syntax Coloring Scheme", ext : [".jgcscs"], magic : ["EditPad Pro Custom Syntax Coloring Scheme"]},
 		editPlusAutoCompletion                   : {name : "EditPlus Auto Completion", ext : [".acp"], magic : ["EditPlus Auto Completion"], weakMagic : true},
 		editPlusSyntax                           : {name : "EditPlus Syntax", ext : [".stx"], magic : ["EditPlus Syntax file"], weakMagic : true},
 		eMbeddedVisualBasicProject               : {name : "eMbedded Visual Basic Project", ext : [".ebp"], magic : ["eMbedded Visual Basic Project"]},

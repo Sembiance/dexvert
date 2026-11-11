@@ -7,7 +7,8 @@ export class wmv extends Format
 	ext          = [".wmv", ".asf", ".xesc"];
 	magic        = [
 		// generic
-		"Windows Media (generic)", "Microsoft ASF", "Advanced Streaming Format (generic)", "Windows Media-Audio/Video Datei (WMA/WMV)", "application/vnd.ms-asf", "ASF (Advanced / Active Streaming Format) (asf)", "deark: asf", /^fmt\/(131|132|133|441)( |$)/,
+		"Windows Media (generic)", "Microsoft ASF", "Advanced Streaming Format (generic)", "Windows Media-Audio/Video Datei (WMA/WMV)", "application/vnd.ms-asf", "ASF (Advanced / Active Streaming Format) (asf)", "deark: asf", "archive:WmvOpener",
+		/^fmt\/(131|132|133|441)( |$)/,
 		
 		// specific
 		"Microsoft Digital Video Recording"

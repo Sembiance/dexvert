@@ -28,7 +28,7 @@ export class hpgl extends Format
 			// commands must be terminated by semi-colon or line feed
 			// so we check the first non-empty line and pass if we find a semi-colon or if the first 2 chars are a valid command and the third letter is a space
 			const VALID_COMMANDS = ["aa", "ar", "ca", "ci", "cp", "cs", "dc", "dp", "df", "dr", "di", "dt", "ea", "er", "ft", "im", "ip", "in", "iw", "lb", "oa", "oc", "od", "oe", "of", "ph", "oi", "oo", "op", "os", "pa", "pd", "pr", "ps", "pt", "pu", "ra", "ro", "rr", "sa", "sc", "si", "sl", "sm", "sp", "sr", "ss", "tl", "uc", "vs"];
-			return line?.trim().includes(";") || (VALID_COMMANDS.includes(line?.substring(0, 2).toLowerCase() && line.charAt(2)===" "));
+			return line?.trim().includes(";") || (VALID_COMMANDS.includes(line?.substring(0, 2).toLowerCase()) && line.charAt(2)===" ");
 		}
 
 		return false;

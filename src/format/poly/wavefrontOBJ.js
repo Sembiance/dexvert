@@ -15,7 +15,7 @@ export class wavefrontOBJ extends Format
 	idMeta   = ({macFileType, macFileCreator}) => macFileType==="PCFL" && macFileCreator==="SWIN";
 	auxFiles = (input, otherFiles) =>
 	{
-		const supportFiles = otherFiles.filter(o => [".mtl", ".tiff", ".tif"].includes(o.ext.toLowerCase()));
+		const supportFiles = otherFiles.filter(o => [".mtl", ".tiff", ".tif", ".jpg", "jpeg", ".png"].includes(o.ext.toLowerCase()));
 		const exactSupports = supportFiles.filter(o => o.name.toLowerCase()===input.name.toLowerCase());
 		if(exactSupports.length)
 			return exactSupports;

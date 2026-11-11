@@ -105,7 +105,7 @@ export class resource_dasm extends Program
 			for(const filePath of fileOutputPaths)
 			{
 				const filename = path.basename(filePath);
-				if(!filename.includes("_composite.") && filename.startsWith(iconPrefix))
+				if(!filename.includes("_composite.") && (filename.startsWith(`${iconPrefix}_`) || filename.startsWith(`${iconPrefix}.`)))
 					filePathsToRemove.add(filePath);
 			}
 
@@ -115,7 +115,7 @@ export class resource_dasm extends Program
 			filePathsToAdd.push(newFilePath);
 		});
 		fileOutputPaths.push(...filePathsToAdd);
-		await Array.from(filePathsToRemove.values()).parallelMap(async filePath =>
+		await Array.from(filePathsToRemove).parallelMap(async filePath =>
 		{
 			await fileUtil.unlink(filePath);
 			fileOutputPaths.removeOnce(filePath);

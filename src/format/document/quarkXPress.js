@@ -10,7 +10,7 @@ export class quarkXPress extends Format
 		"Quark XPress document", "QuarkXpress project", "QuarkXPress Tags", "XPress Tags", "Intel Quark Express Document", "QuarkXPress Document", /Quark Express Document/, "application/vnd.quark.quarkxpress",
 		/^fmt\/(650|652|1317|1318|1319|1321|1322|1323|1325|1442|1443|1444)( |$)/, /^x-fmt\/182( |$)/
 	];
-	idMeta     = ({macFileType, macFileCreator}) => ["XDOC", "XTMP"].includes(macFileType) && macFileCreator.startsWith("XPR");
+	idMeta     = ({macFileType, macFileCreator}) => ["XDOC", "XTMP"].includes(macFileType) && macFileCreator?.startsWith("XPR");
 	converters = [
 		"quarkXPress6",
 		"quarkXPress6[outType:eps]",	// quarkxpress6 is finicky and won't "print" some files, such as covers.qxd so we just try both printing (pdf) and eps

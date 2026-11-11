@@ -12,15 +12,13 @@ export class euphony extends Format
 	auxFiles = (input, otherFiles) =>
 	{
 		if([".fmb", ".pmb"].includes(input.ext.toLowerCase()))
-			return [];
+			return [];	// we intentionally don't identify as fmb/pmb because we don't have any magic for it, just an extension match
 		
 		const f = otherFiles.filter(otherFile => [".fmb", ".pmb"].includes(otherFile.ext.toLowerCase()));
 		return f.length>0 ? f : false;
 	};
 
 	// Don't do anything with .fmb/.pmb files
-	untouched       = ({f}) => [".fmb", ".pmb"].includes(f.input.ext.toLowerCase());
-	verifyUntouched = false;
-	metaProvider    = ["musicInfo"];
-	converters      = ["eupplay"];
+	metaProvider = ["musicInfo"];
+	converters   = ["eupplay"];
 }

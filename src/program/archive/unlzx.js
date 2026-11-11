@@ -10,6 +10,7 @@ export class unlzx extends Program
 	};
 	bin        = "unlzx";
 	args       = r => [r.flags.listOnly ? "-v" : "-x", r.inFile()];
+	cwd        = r => r.outDir();
 	runOptions = ({stdoutEncoding : "latin1"});
 	post       = r =>
 	{

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Vibe coded by Claude
+# Vibe coded by Codex
 #
 # stosSample.py - Convert STOS BASIC sample files to WAV
 #
@@ -17,11 +17,27 @@ import sys
 import os
 import struct
 
-MAX_RATE_BYTE = 40  # rate bytes above this are coincidental audio data
+MAX_RATE_BYTE = 40  # conservative recognition limit, not a format guarantee
+
+
+def looks_like_text(data):
+    """Recognize mostly printable ASCII with frequent word/line separators.
+
+    This is a heuristic: raw PCM has no checksum or structure to prove that
+    bytes are audio. Requiring whitespace avoids rejecting quiet PCM whose
+    values happen to be printable characters near the unsigned center.
+    """
+    if not data:
+        return False
+
+    printable_count = sum(32 <= b <= 126 or b in b"\t\n\r" for b in data)
+    whitespace_count = sum(b in b" \t\n\r" for b in data)
+    return (printable_count / len(data) >= 0.98
+            and whitespace_count / len(data) >= 0.01)
 
 
 def validate_stos_file(data):
-    """Check that data starts with JON and has a valid rate byte. Raises ValueError if not."""
+    """Check the header and payload plausibility; raise ValueError if rejected."""
     if len(data) < 5:
         raise ValueError(f"File too small ({len(data)} bytes, need at least 5)")
 
@@ -32,13 +48,19 @@ def validate_stos_file(data):
     if freq_byte == 0:
         raise ValueError("Rate byte is 0 (invalid sample rate)")
 
-    if freq_byte >= 0x41:
+    if freq_byte > MAX_RATE_BYTE:
         raise ValueError(
-            f"Byte 3 is 0x{freq_byte:02X} ('{chr(freq_byte)}'), looks like ASCII text, "
-            f"not a STOS sample rate"
+            f"Rate byte {freq_byte} is outside the supported range "
+            f"1-{MAX_RATE_BYTE} kHz"
         )
 
     audio_data = data[4:]
+    if looks_like_text(audio_data):
+        raise ValueError(
+            "Payload looks like ASCII text, not STOS audio "
+            "(at least 98% printable text and 1% whitespace)"
+        )
+
     avg = sum(audio_data) / len(audio_data)
     if avg < 80 or avg > 170:
         raise ValueError(
@@ -81,6 +103,10 @@ def find_sub_samples(data):
 
         # Skip empty or tiny segments (< 100 bytes)
         if audio_len < 100:
+            continue
+
+        # Text can also follow an embedded JON header in a mixed-content file.
+        if looks_like_text(data[audio_start:audio_end]):
             continue
 
         # Skip segments that don't look like audio
@@ -141,8 +167,6 @@ def main():
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
 
-    os.makedirs(output_dir, exist_ok=True)
-
     basename = os.path.splitext(os.path.basename(input_file))[0]
     if not basename:
         basename = os.path.basename(input_file)
@@ -152,6 +176,8 @@ def main():
     if not samples:
         print(f"Error: No valid audio segments found in {input_file}", file=sys.stderr)
         sys.exit(1)
+
+    os.makedirs(output_dir, exist_ok=True)
 
     for i, (rate_byte, audio_start, audio_end) in enumerate(samples):
         audio_data = data[audio_start:audio_end]

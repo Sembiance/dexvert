@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,020)
+# Unsupported File Formats (4,024)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -320,7 +320,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (192)
+## Document (193)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -472,6 +472,7 @@ Family/Format | Name | Extensions | Notes
 [document/saxonPublisherDocument](https://discmaster.textfiles.com/search?format=saxonPublisherDocument) | Saxon Publisher document | .sp | 
 [document/pagePlus](https://discmaster.textfiles.com/search?format=pagePlus) | [Serif PagePlus Publication](http://fileformats.archiveteam.org/wiki/Serif_PagePlus) | .ppp .ppx .ppb .ppt | [9 sample files](https://sembiance.com/fileFormatSamples/document/pagePlus/) - Could probably very easily install PagePlus 9 or 10 (NOT X9) and use it to convert to RTF/PDF, but have only encountered a single CD with these files on it so far.
 [document/signumDocument3](https://discmaster.textfiles.com/search?format=signumDocument3) | Signum Document v3 | .sdk | 
+[document/simpleWareHelp](https://discmaster.textfiles.com/search?format=simpleWareHelp) | SimpleWare Help | .hlp | 
 [document/softbookPublisherEBook](https://discmaster.textfiles.com/search?format=softbookPublisherEBook) | Softbook Publisher eBook | .imp | 
 [document/softdeskSpreadsheet](https://discmaster.textfiles.com/search?format=softdeskSpreadsheet) | Softdesk Spreadsheet | .sst | 
 [document/starAmPlanSpreadsheet](https://discmaster.textfiles.com/search?format=starAmPlanSpreadsheet) | StarAm Plan Spreadsheet | .sab | 
@@ -717,7 +718,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (192)
+## Image (193)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -755,6 +756,7 @@ Family/Format | Name | Extensions | Notes
 [image/cadStdDrawing](https://discmaster.textfiles.com/search?format=cadStdDrawing) | CadStd drawing | .cad | 
 [image/cadvanceDrawing](https://discmaster.textfiles.com/search?format=cadvanceDrawing) | CADVANCE drawing | .vwf .bin | 
 [image/calamusVectorDocument](https://discmaster.textfiles.com/search?format=calamusVectorDocument) | Calamus Vector Document | .cvd | 
+[image/caleraToshibaTaggedDocument](https://discmaster.textfiles.com/search?format=caleraToshibaTaggedDocument) | Calera/Toshiba Tagged Document | .fax .001 | 
 [image/canvasDrawing](https://discmaster.textfiles.com/search?format=canvasDrawing) | Canvas drawing) | .cnv | [12 sample files](https://sembiance.com/fileFormatSamples/image/canvasDrawing/)
 [image/chasysDrawIESDrawing](https://discmaster.textfiles.com/search?format=chasysDrawIESDrawing) | Chasys Draw IES drawing | .cd5 | 
 [image/clarisDraw](https://discmaster.textfiles.com/search?format=clarisDraw) | Claris Draw | .cdd | [1 sample file](https://sembiance.com/fileFormatSamples/image/clarisDraw/)
@@ -1088,7 +1090,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,862)
+## Other (2,864)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2241,6 +2243,7 @@ Family/Format | Name | Extensions | Notes
 [other/hitmanCodename47SaveGame](https://discmaster.textfiles.com/search?format=hitmanCodename47SaveGame) | Hitman: Codename 47 save game | .sav | 
 [other/hmp3DGameStudioTerrain](https://discmaster.textfiles.com/search?format=hmp3DGameStudioTerrain) | HMP 3D GameStudio terrain | .hmp | 
 [other/hmvsAntivirusDOSPlugIn](https://discmaster.textfiles.com/search?format=hmvsAntivirusDOSPlugIn) | HMVS antivirus DOS PlugIn | .pnp .lng | 
+[other/hollyCristmasTaleVFN](https://discmaster.textfiles.com/search?format=hollyCristmasTaleVFN) | Holly: A Christmas Tale VFN Archive | .vfn | 
 [other/homePlanPro5Clip](https://discmaster.textfiles.com/search?format=homePlanPro5Clip) | Home Plan Pro 5 Clip | .clp | 
 [other/homePlanPro5Plan](https://discmaster.textfiles.com/search?format=homePlanPro5Plan) | Home Plan Pro 5 Plan | .pln | 
 [other/homeBrewLevel](https://discmaster.textfiles.com/search?format=homeBrewLevel) | HomeBrew Level | .hle | 
@@ -2304,6 +2307,7 @@ Family/Format | Name | Extensions | Notes
 [other/indexApolloDatabaseEngine](https://discmaster.textfiles.com/search?format=indexApolloDatabaseEngine) | Index Apollo Database Engine | .nsx | 
 [other/indexerVolumeGUID](https://discmaster.textfiles.com/search?format=indexerVolumeGUID) | Index Volume GUID |  | 
 [other/inertiaPlayerConfiguration](https://discmaster.textfiles.com/search?format=inertiaPlayerConfiguration) | Inertia Player Configuration | .cfg | 
+[other/infinityEnginePaperdoll](https://discmaster.textfiles.com/search?format=infinityEnginePaperdoll) | Infinity Engine paperdoll | .plt | 
 [other/infinity2Project](https://discmaster.textfiles.com/search?format=infinity2Project) | Infinity2 Project | .ipr | 
 [other/infobaseNextPage](https://discmaster.textfiles.com/search?format=infobaseNextPage) | Infobase (NextPage) | .nfo | 
 [other/infoComicsGameData](https://discmaster.textfiles.com/search?format=infoComicsGameData) | InfoComics game data | .img .dat | 
@@ -2483,6 +2487,7 @@ Family/Format | Name | Extensions | Notes
 [other/lotus123FormattingData](https://discmaster.textfiles.com/search?format=lotus123FormattingData) | Lotus 1-2-3 Formatting Data | .fm3 | 
 [other/lotus123Graph](https://discmaster.textfiles.com/search?format=lotus123Graph) | Lotus 1-2-3 Graph | .gph | 
 [other/lotus123SQZCompressed](https://discmaster.textfiles.com/search?format=lotus123SQZCompressed) | Lotus 1-2-3 SQZ! Compressed | .wq! | 
+[other/lotus123TextDisplayDriver](https://discmaster.textfiles.com/search?format=lotus123TextDisplayDriver) | Lotus 1-2-3 text Display Driver | .drv | 
 [other/lotusAccessory](https://discmaster.textfiles.com/search?format=lotusAccessory) | Lotus Accessory | .acc | 
 [other/lotusAgendaDataObjects](https://discmaster.textfiles.com/search?format=lotusAgendaDataObjects) | Lotus Agenda data objects | .aga .bka | 
 [other/lotusAgendaScreenDriver](https://discmaster.textfiles.com/search?format=lotusAgendaScreenDriver) | Lotus Agenda Screen Driver | .sdr | 
@@ -3174,7 +3179,6 @@ Family/Format | Name | Extensions | Notes
 [other/ravenloftAnimation](https://discmaster.textfiles.com/search?format=ravenloftAnimation) | Ravenloft Animation | .anm | 
 [other/raysMediaData](https://discmaster.textfiles.com/search?format=raysMediaData) | Rays Media data | .mda | 
 [other/rcSimulatorGameData](https://discmaster.textfiles.com/search?format=rcSimulatorGameData) | RC Simulator game data | .par | 
-[other/rdfzGameDataContainer](https://discmaster.textfiles.com/search?format=rdfzGameDataContainer) | RDFZ game data container |  | 
 [other/realDRAWProject](https://discmaster.textfiles.com/search?format=realDRAWProject) | Real-DRAW Project | .rdw | 
 [other/realBasicProject](https://discmaster.textfiles.com/search?format=realBasicProject) | RealBasic Project | .rbp | 
 [other/realmsOfTheHauntingSoundEffects](https://discmaster.textfiles.com/search?format=realmsOfTheHauntingSoundEffects) | Realms of the Haunting Sound Effects | .sfx | 

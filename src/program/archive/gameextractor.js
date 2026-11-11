@@ -13,7 +13,7 @@ export class gameextractor extends Program
 	exec         = async r =>
 	{
 		const msg = {inputFilePath : r.inFile({absolute : true}), outputDirPath : r.outDir({absolute : true})};
-		if(r.flags.codes?.length)
+		if(Object.hasOwn(r.flags, "codes"))
 			msg.codes = r.flags.codes.toString().split(",");
 
 		const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : msg, asJSON : true});

@@ -15,7 +15,7 @@ export class ani extends Format
 		
 		// Look for the 'anih' subchunk and then grab the displayRate: https://web.archive.org/web/20130530192915/http://oreilly.com/www/centers/gff/formats/micriff
 		const anihLoc = inputData.indexOfX("anih");
-		if(anihLoc===null)
+		if(anihLoc===-1 || inputData.length<anihLoc+40)
 			return {};
 		
 		let displayRate = inputData.getUInt32LE(anihLoc + 36);

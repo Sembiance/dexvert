@@ -115,18 +115,53 @@ may also use this format.
 
 Identification
 --------------
-A file is a valid STOS sample if:
+The converter uses these conservative recognition checks:
 1. It is at least 5 bytes long (4-byte header + at least 1 audio byte)
 2. Bytes 0-2 are 0x4A 0x4F 0x4E ("JON")
-3. Byte 3 is in the range 0x01-0x3F (valid frequency values for audio)
-4. The average value of the audio data bytes is approximately 128 (±48),
-   consistent with unsigned 8-bit PCM centered at 0x80
+3. Byte 3 is in the supported range 1-40 (0x01-0x28), using the same limit
+   for the initial header and embedded sub-sample headers. This is a
+   recognition policy, not a guarantee about all possible STOS files.
+4. The payload does not look like ASCII text: reject it if at least 98%
+   of its bytes are printable ASCII (0x20-0x7E), tab, LF, or CR, and at
+   least 1% are spaces, tabs, LF, or CR. Both conditions must hold.
+5. The average payload byte value is between 80 and 170 inclusive,
+   as a plausibility check for unsigned 8-bit PCM centered at 0x80.
+6. No more than half of the first 1000 payload bytes (or the entire
+   payload if shorter) are zero.
+
+For conversion, embedded JON headers with supported rate bytes delimit
+candidate sub-samples. Each exported segment must contain at least 100
+audio bytes, pass the same text check over its entire payload, and have
+an average between 80 and 170 over its first 1000 bytes (or all of it if
+shorter). Empty, tiny, text-like, or implausibly centered segments are
+skipped. At least one segment must qualify before an output directory
+is created or a WAV is written.
 
 Note: Many non-audio files from Atari ST games coincidentally begin with
 "JON" as part of text strings (e.g., "JONATHAN", "JONES", "JON THE
-PROGRAMMER"). These can be distinguished because:
-  - Byte 3 is typically an ASCII letter (0x41-0x7A) rather than a small number
-  - The data average is far from 128 (typically < 80)
+PROGRAMMER"). An ASCII letter in byte 3 exceeds the supported rate range,
+but whitespace can masquerade as a valid rate. In particular, "JON " is
+also the header for 32 kHz audio; tabs and newlines also overlap supported
+rates. The payload average alone cannot distinguish prose from audio.
+
+The regression file sample1/00481_Knole.bio.txt begins with "JON KNOLES".
+Its payload average is 89.19, within the existing accepted range, but
+100% of the payload is printable text/line breaks and 15.2% is whitespace.
+The text check rejects it without rejecting genuine 32 kHz samples.
+Checking whitespace as well as printability avoids rejecting quiet PCM
+whose bytes all happen to be printable characters near the center value.
+Recognition depends on file contents, not the filename extension.
+
+These checks are heuristics, not proof of validity. This raw PCM format
+has no payload length field or checksum, and every byte value can occur
+in audio. Some binary garbage can still pass; unusual valid audio can
+also resemble text. Embedded JON sequences can occur in PCM by chance,
+so sub-sample splitting is likewise heuristic.
+
+Run the regression tests with:
+  python3 -m unittest -v
+They cover the biography, malformed input, quiet/silent audio, 32 kHz
+audio, multi-sample boundaries, and the supplied sample0 inputs.
 
 
 Conversion to WAV

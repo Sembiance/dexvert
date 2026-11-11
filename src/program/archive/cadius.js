@@ -56,7 +56,7 @@ export class cadius extends Program
 			const {day, month, year} = line.match(/^\s*File Modification Date\s+:\s*(?<day>\d{2})-(?<month>\w{3})-(?<year>\d{4})\s*$/)?.groups || {};
 			if(day && month && year)
 			{
-				r.meta.fileMeta[currentFilePath].when = dateParse(`${day}-${["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].indexOf(month).toString().padStart(2, "0")}-${year} 12:12:12`, "dd-MM-yyyy HH:mm:ss");
+				r.meta.fileMeta[currentFilePath].when = dateParse(`${day}-${[null, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].indexOf(month).toString().padStart(2, "0")}-${year} 12:12:12`, "dd-MM-yyyy HH:mm:ss");
 				continue;
 			}
 
@@ -78,18 +78,21 @@ export class cadius extends Program
 			}
 		}
 
-		if(Object.keys(_PRO_DOS_TYPE_PRETTY_SUB).includes(r.meta.fileMeta[currentFilePath]?.proDOSType) && Object.keys(_PRO_DOS_TYPE_PRETTY_SUB[r.meta.fileMeta[currentFilePath].proDOSType]).includes(r.meta.fileMeta[currentFilePath].proDOSTypeAux))
-			r.meta.fileMeta[currentFilePath].proDOSTypePretty += ` (${_PRO_DOS_TYPE_PRETTY_SUB[r.meta.fileMeta[currentFilePath].proDOSType][r.meta.fileMeta[currentFilePath].proDOSTypeAux]})`;
-
-		if(["06", "FC"].includes(r.meta.fileMeta[currentFilePath]?.proDOSType))
-			r.meta.fileMeta[currentFilePath].proDOSLoadingAddress = r.meta.fileMeta[currentFilePath].proDOSTypeAux;
-		
-		if(r.meta.fileMeta[currentFilePath]?.proDOSType==="04")
+		for(const meta of Object.values(r.meta.fileMeta))
 		{
-			if(r.meta.fileMeta[currentFilePath]?.proDOSTypeAux==="0000")
-				r.meta.fileMeta[currentFilePath].proDOSSequential = true;
-			else
-				r.meta.fileMeta[currentFilePath].prodDOSRecordLength = r.meta.fileMeta[currentFilePath].proDOSTypeAux;
+			if(_PRO_DOS_TYPE_PRETTY_SUB[meta.proDOSType]?.[meta.proDOSTypeAux])
+				meta.proDOSTypePretty += ` (${_PRO_DOS_TYPE_PRETTY_SUB[meta.proDOSType][meta.proDOSTypeAux]})`;
+
+			if(["06", "FC"].includes(meta.proDOSType))
+				meta.proDOSLoadingAddress = meta.proDOSTypeAux;
+
+			if(meta.proDOSType==="04")
+			{
+				if(meta.proDOSTypeAux==="0000")
+					meta.proDOSSequential = true;
+				else
+					meta.proDOSRecordLength = meta.proDOSTypeAux;
+			}
 		}
 
 		for(const outputFile of r.f.files.new || [])
@@ -99,8 +102,8 @@ export class cadius extends Program
 			outputFile.setTS(relMeta?.when?.getTime() || (r.originalInput || r.f.input).ts);
 		}
 
-		for(const key of Object.keys(r.meta.fileMeta))
-			delete r.meta.fileMeta[key].when;
+		for(const o of Object.values(r.meta.fileMeta))
+			delete o.when;
 	};
 	renameOut = false;
 }

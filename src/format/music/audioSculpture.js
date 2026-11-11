@@ -10,13 +10,14 @@ export class audioSculpture extends Format
 
 	auxFiles = (input, otherFiles) =>
 	{
-		// Needs both file.adsc and file.adsc.as however only the .adsc file is converter
-		const otherFile = otherFiles.find(file => (input.ext.toLowerCase()===".adsc" ? file.base.toLowerCase()===`${input.base.toLowerCase()}.as` : file.base.toLowerCase()===`${input.name.toLowerCase()}.adsc`));
-		return otherFile ? [otherFile] : false;
+		// Needs both file.adsc and file.adsc.as however only the .adsc file is converted
+		const otherFile = otherFiles.find(file => (input.ext.toLowerCase()===".adsc" ? file.base.toLowerCase()===`${input.base.toLowerCase()}.as` : file.ext.toLowerCase()===".adsc" && file.base.toLowerCase()===input.name.toLowerCase()));
+		return otherFile ? [otherFile] : [];
 	};
 
 	// Don't do anything with .as files
-	untouched = ({f}) => f.input.ext.toLowerCase()===".as";
+	untouched       = ({f}) => f.input.ext.toLowerCase()===".as";
+	verifyUntouched = false;
 
 	metaProvider  = ["musicInfo"];
 	converters    = ["uade123[player:AudioSculpture]"];

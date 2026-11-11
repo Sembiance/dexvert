@@ -386,11 +386,12 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
-	//      archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener, archive:Advs.DatOpener
+	//      archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
-	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:AirNovel.AirOpener, archive:Valkyria.DatOpener
+	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:AirNovel.AirOpener
 	// SEEN TWICE:
 	//		archive:Will.ArcOpener, archive:StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener, archive:Nekopunch.PakOpener, archive:Key.PakOpener
+	//		archive:Advs.DatOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:Artifact\.MooOpener /,
@@ -411,6 +412,7 @@ export const WEAK_VALUES =
 	/^archive:Parsley\.CgV1Opener /,
 	/^archive:Peach\.NijiDatOpener /,
 	/^archive:PenguinWorks\.DatOpener /,
+	/^archive:Valkyria\.DatOpener /,
 	/^archive:Xuse\.BinOpener /,
 	/^archive:Youkai\.DatOpener /,
 	/^archive:Youkai\.VoiceDatOpener /,
@@ -423,10 +425,10 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat, image:Entis.EriFormat, image:Paprika.NpFormat
-	//		image:RSystem.RsgFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat, image:Amaterasu.GrpFormat
+	//		image:RSystem.RsgFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat
 	//		image:Abogado.KgFormat, image:AyPio.Pdt5Format, image:Ikura.DoFormat, image:Tanuki.AmapFormat
 	// SEEN TWICE:
-	//		image:BGI.BgiFormat, image:Prime.ThpFormat
+	//		image:BGI.BgiFormat, image:Prime.ThpFormat, image:Amaterasu.GrpFormat
 	/^image:Adobe\.PsdFormat /,
 	/^image:CrossNet\.GrbFormat /,
 	/^image:CsWare\.BpcFormat /,
@@ -463,7 +465,7 @@ export const WEAK_VALUES =
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XPR_XPR2, DAT_CMP, BIN_7L_2
 	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, HNK, DWX_DELPHIXWAVE, WIN_FORM, PR, ANI_ANI, RBH_PIFF, RBH_PIFF_2
-	//		WAR_WARC, PAK_PACK_7, GRP_3, 000_8
+	//		PAK_PACK_7, 000_8
 	/^geArchive: 0000?_(5|10|12|13|PCW|package|SFDX)( |$)/,
 	/^geArchive: 001_[25]( |$)/,
 	/^geArchive: ARC_(4|6|8|10|11|13|16|A20|ARC|ARCV410)( |$)/,
@@ -531,6 +533,7 @@ export const WEAK_VALUES =
 	/^geArchive: G00S000( |$)/,
 	/^geArchive: GJD( |$)/,
 	/^geArchive: GME( |$)/,
+	/^geArchive: GRP_3( |$)/,
 	/^geArchive: GSC_NU20_2( |$)/,
 	/^geArchive: GUT( |$)/,
 	/^geArchive: HDD( |$)/,
@@ -581,6 +584,7 @@ export const WEAK_VALUES =
 	/^geArchive: VOL_VOL_3( |$)/,
 	/^geArchive: VPPPC( |$)/,
 	/^geArchive: W32_ESPX( |$)/,
+	/^geArchive: WAR_WARC( |$)/,
 	/^geArchive: WBK_WAVEBK11( |$)/,
 	/^geArchive: WD_WD( |$)/,
 	/^geArchive: XFS( |$)/,
@@ -673,7 +677,7 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		Terse, ZPack, ZZip (Damien Debin), HPA, Gather
 	// SEEN TWICE:
-	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug), BMF, SBC
+	// 		QuArk, Blink (D.T.S.), ELI 5750, DZip (Nolan Pflug), BMF, SBC
 	/^idarc: 777( |$)/,
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
@@ -681,6 +685,7 @@ export const WEAK_VALUES =
 	/^idarc: Blink \(D\.T\.S\.\)( |$)/,
 	/^idarc: BOA( |$)/,
 	/^idarc: CMP( |$)/,
+	/^idarc: Codec( |$)/,
 	/^idarc: DitPack( |$)/,
 	/^idarc: Disintegrator( |$)/,
 	/^idarc: Flash( |$)/,
@@ -752,9 +757,9 @@ export const WEAK_VALUES =
 
 	// vgmstream
 	// SEEN  ONCE:
-	//		nds_rrds, vsv
+	//		vsv
 	// SEEN TWICE:
-	//		???
+	//		nds_rrds
 	/^vgmstream: exakt_sc/,
 	/^vgmstream: mp4_aac_ffmpeg/,
 	/^vgmstream: mpeg - MPEG header/,

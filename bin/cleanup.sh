@@ -61,6 +61,7 @@ rm -rf grasp*
 rm -rf pymp*
 rm -rf clickteam*
 rm -rf .org.chromium*
+rm -rf screencam-render*
 fd magick -x rm {} \;
 rm -rf ge-server* Ay_Emul* cxf-tmp* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp* folio* .folio*
 rm -f ./*.crash.txt

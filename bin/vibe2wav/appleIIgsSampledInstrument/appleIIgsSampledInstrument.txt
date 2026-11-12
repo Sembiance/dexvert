@@ -22,9 +22,10 @@ There is no version field identifying the historical rate encodings. The
 integer-Hz convention described below is an observed structural convention;
 its generality is not established by the published Apple specification.
 Recognition of that convention cannot prove the intent of every possible
-writer. Therefore its rate interpretation requires an explicit --legacy-hz
-option or playback-rate override; it is not guessed by default. Complete
-format support remains unfinished in the areas listed in section 11.
+writer. The converter automatically applies the narrowly defined integer-Hz
+interpretation in section 8.4 and warns that it is inferred. This is an
+empirical decoding policy, not a guarantee about an untagged writer's intent.
+Complete format support remains unfinished in the areas listed in section 11.
 A byte ledger accounts for storage boundaries;
 it must not be confused with complete semantic understanding.
 
@@ -337,13 +338,23 @@ This outer fill has no audio meaning.
 8.4 Equal integer-frequency convention
 
 A further legacy single-sample layout uses Location=0 and identical nonzero
-OrigFreq and SampRate values with zero high words. These represent integer
-Hz in the implemented legacy-Hz interpretation, NOT standard Fixed or a
-sampled fundamental equal to the sample clock. With --legacy-hz, the converter applies this
-interpretation only to the exact-count, single-region-compatible layout.
+OrigFreq and SampRate values with zero high words. The converter automatically
+interprets SampRate as integer Hz when all of these conditions hold:
+
+* The WAVE payload uses exact-count WaveSize (section 8.1).
+* There is exactly one SampleTable entry, with Location=0.
+* OrigFreq equals SampRate, and their raw value is in 1..65535.
+
+For example, raw SampRate=8363 is interpreted as 8363 Hz. A warning and output
+metadata identify this as an inferred legacy encoding. This interpretation
+does not assign OrigFreq as the sampled tone's pitch. Other nonzero untagged
+legacy encodings remain unresolved and require --rate.
+
 This producer convention is empirical, lacks a version tag, and has not been
-verified from its writer source. It is an explicit remaining uncertainty.
-Use --rate when independent provenance gives a different interpretation.
+verified from its writer source. Its automatic use is a conversion policy,
+not proof of the original recording rate. Use --rate when independent
+provenance gives a different interpretation. The --legacy-hz option remains
+accepted for compatibility; it is no longer necessary to enable detection.
 
 9. Deterministic recovery and byte accounting
 
@@ -380,7 +391,6 @@ reconstruction, including bytes whose semantics remain unresolved.
   python3 appleIIgsSampledInstrument.py INPUT OUTPUT_DIRECTORY -verbose
   python3 appleIIgsSampledInstrument.py INPUT OUTPUT_DIRECTORY --rate 11025
   python3 appleIIgsSampledInstrument.py INPUT OUTPUT_DIRECTORY --unknown-rate 11025
-  python3 appleIIgsSampledInstrument.py INPUT OUTPUT_DIRECTORY --legacy-hz
 
 Only WAV files are written by default. Existing output directories are
 accepted and matching output names are atomically replaced per file. The
@@ -398,8 +408,10 @@ by default and writes WAV files for any recoverable waveform data.
 The fallback is a conversion policy, not a recovered original recording rate;
 the converter reports its use in warnings and verbose metadata. Stored nonzero
 rates retain their normal decoding rules, and --rate overrides every sample.
---legacy-hz explicitly selects integer-Hz decoding for matching untagged
-equal-frequency fields. Without it, these ambiguous fields are refused.
+Matching untagged equal-frequency fields are automatically decoded as integer
+Hz under the exact conditions in section 8.4, with a warning. --legacy-hz is
+accepted for compatibility with older commands and has no additional effect.
+--rate takes precedence over automatic detection and the missing-rate fallback.
 Errors and warnings go to stderr, and output paths to stdout. Exit status
 0 means at least one WAV was written; status 2 means conversion failed.
 Partial recoveries are identified in warnings and verbose metadata.

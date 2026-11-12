@@ -2444,6 +2444,7 @@ export default
 		compiledXKeyMap                          : {name : "Compiled X KeyMap", ext : [".xkm"], magic : ["Compiled X KeyMap", "Compiled XKB Keymap"], weakMagic : true},
 		componentConfigurationFile               : {name : "Component Configuration File", ext : [".ccf"], magic : ["Component Configuration File", /^Philips Pronto IR remote control CCF/], weakMagic : true},
 		compressedElectronicsWorkbenchProject    : {name : "Compressed Electronics Workbench project", magic : ["Compressed Electronics Workbench project"]},
+		compuGraphicIntellifontTypefaceLibrary   : {name : "CompuGraphic Intellifont Typeface Library", ext : [".typ"], magic : ["CompuGraphic Intellifont Typeface Library"]},
 		concurrentDOSSerialTerminalConfiguration : {name : "Concurrent DOS Serial Terminal Configuration", ext : [".dat"], magic : ["Concurrent DOS Serial Terminal Configuration"]},
 		coolEditAuditionSession                  : {name : "Cool Edit / Audition Session", ext : [".ses"], magic : ["Cool Edit / Audition Session", /^fmt\/1498( |$)/]},
 		coreFile                                 : {name : "Core File", filename : [/^core$/], weakFilename : true, ext : [".core"], magic : [/^(AIX|Alpha|ELF|IRIX|Linux\/i386|NetBSD|SunOS).* core (file|dump)/, /^core file \(Xenix\)/, /^core file from/, "application/x-core", "Unix/Linux 32-Bit Core Datei"], weakMagic : true},

@@ -339,7 +339,7 @@ archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-ima
 archive | [IMP](http://fileformats.archiveteam.org/wiki/IMP) | .imp | [imp](https://www.sac.sk/download/pack/imp110d.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/imp/)
 archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/impactILB/)
 archive | Imperium Galactica 2 Game Archive | .dat | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/imperiumGalactica2GameArchive/)
-archive | Infinity Engine BIFF Archive | .bif | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | 
+archive | Infinity Engine BIFF Archive | .bif | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/infinityEngineBIFFArchive/)
 archive | [Inno Setup installer](http://fileformats.archiveteam.org/wiki/Inno_Setup_self-extracting_archive) | .exe | [innoextract](https://github.com/dscharrer/innoextract) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/)
 archive | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [vibeExtract](https://github.com/Sembiance/dexvert) | [38 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
 archive | [InstallIt! Compressed File](http://justsolve.archiveteam.org/wiki/InstallIt!) | _ | [installIt](http://cd.textfiles.com/simtel/simtel0101/simtel/install/ii204.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/installIt/)
@@ -691,7 +691,7 @@ archive | Tony Hawk Archive | .pkr | [gameextractor](https://sourceforge.net/pro
 archive | Total Annihilation HPI Archive | .hpi .ufo .ccx .kmp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/totalAnnihilationHPI/)
 archive | [TPK Archive](http://fileformats.archiveteam.org/wiki/TPK_(compressed_archive)) |  | [deark](https://entropymine.com/deark/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/tpk/)
 archive | [Transport Neutral Encapsulation Format](http://fileformats.archiveteam.org/wiki/Transport_Neutral_Encapsulation_Format) | .tnef .dat | [ytnef](https://github.com/Yeraze/ytnef) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/tnef/)
-archive | Triangle DAT | .dat .ff | [GARbro](https://github.com/shiikwi/GARbro) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/triangleDAT/)
+archive | Triangle DAT | .dat .ff .art | [GARbro](https://github.com/shiikwi/GARbro) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/triangleDAT/)
 archive | Trilobyte GJD Archive | .gjd | [na_game_tool_extract](https://nihav.org/game_tool.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/trilobyteGJD/)
 archive | Triplex Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/triplexPacked/)
 archive | [TRS-80 Disk Image](http://fileformats.archiveteam.org/wiki/DMK) | .dmk .dsk | [trsread](http://www.trs-80emulators.com/trsread-trswrite.html) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/dmk/)
@@ -776,7 +776,7 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (212)
+## Audio (211)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | 208 Audio (Ocean Games) | .bnk | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/twoZeroEightAudio/)
@@ -839,7 +839,7 @@ audio | EMAX-II Disk Image |  | [vibe2wav](https://github.com/Sembiance/dexvert)
 audio | Emblaze Audio | .ea | [vibe2wav](https://github.com/Sembiance/dexvert) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/emblazeAudio/)
 audio | Ensoniq Disk Image | .gkh .eds .eda .ede .edt .edv | [vibe2wav](https://github.com/Sembiance/dexvert) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/ensoniqDiskImage/)
 audio | Ensoniq WaveSet Format | .ecw | [vibe2wav](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/ensoniqWaveSetFormat/)
-audio | Entis Engine Compressed Audio | .mio | [vgmstream](https://github.com/vgmstream/vgmstream) [GARbro](https://github.com/shiikwi/GARbro) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/entisEngineAudio/)
+audio | Entis Engine Compressed Audio | .mio | [vgmstream](https://github.com/vgmstream/vgmstream) [vibe2wav](https://github.com/Sembiance/dexvert) [GARbro](https://github.com/shiikwi/GARbro) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/entisEngineAudio/)
 audio | [eXtended Instrument](http://fileformats.archiveteam.org/wiki/Extended_instrument) | .xi | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/eXtendedInstrument/)
 audio | feelplus XWAV Audio | .xwv | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/feelplusXWAV/)
 audio | Fine Artist Sound | .snd | [vibe2wav](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/fineArtistSound/)
@@ -886,7 +886,6 @@ audio | MaxonMAGIC Sound Sample | .hsn | [vibe2wav](https://github.com/Sembiance
 audio | MED Synth Sound |  | [vibe2wav](https://github.com/Sembiance/dexvert) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/medSynthSound/)
 audio | Microsoft XWMA Audio | .xwma .xwm | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/xwmaAudio/)
 audio | MIDI Sample Dump | .sds | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/midiSampleDump/)
-audio | MIO compressed audio | .mio | [vibe2wav](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/mioCompressedAudio/)
 audio | Mohawk WAVE File | .sndl .seq .pal .shpl .cnt .bmp ._scr .scrb .mfo .puzz .shap .shp# .unit .fscn .cur .snd .mid view | [vibe2wav](https://github.com/Sembiance/dexvert) [ffmpeg](https://ffmpeg.org/) | [15 sample files](https://sembiance.com/fileFormatSamples/audio/mohawkWAVE/)
 audio | [Monkey's Audio](http://fileformats.archiveteam.org/wiki/Monkey's_Audio) | .ape | [ffmpeg](https://ffmpeg.org/) [nihav](https://git.nihav.org/) [zxtune123](https://zxtune.bitbucket.io/) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/monkeysAudio/)
 audio | Monster GameCube NST Audio | .dsp | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/monsterGameCubeNST/)
@@ -923,7 +922,7 @@ audio | Rave eJay sample audio | .pxd | [vibe2wav](https://github.com/Sembiance/
 audio | [RCA-VOC](http://fileformats.archiveteam.org/wiki/RCA-VOC) | .voc | [devoc](https://github.com/Sembiance/devoc) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/rcaVOC/)
 audio | [RealAudio](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .ra .rma .rmf | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/realAudio/)
 audio | RedSpark | .rsd | [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/redSpark/)
-audio | RenderWare Stream | .rws | [vgmstream](https://github.com/vgmstream/vgmstream) [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/renderWareStream/)
+audio | RenderWare Stream | .rws | [vgmstream](https://github.com/vgmstream/vgmstream) [ffmpeg](https://ffmpeg.org/) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/renderWareStream/)
 audio | REX2 audio sample loop | .rx2 .rex | [vibe2wav](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/rex2AudioSampleLoop/)
 audio | [RK Audio](http://fileformats.archiveteam.org/wiki/RK_Audio) | .rka | [ffmpeg](https://ffmpeg.org/) [rkau](https://www.sac.sk/download/pack/rkau107.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/rkAudio/)
 audio | Rockstar Games RSTM | .rstm | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/rockstarGamesRSTM/)
@@ -980,7 +979,7 @@ audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV
 audio | [WavPack](http://fileformats.archiveteam.org/wiki/WavPack) | .wv .wvc | [sox](http://sox.sourceforge.net) [nihav](https://git.nihav.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/wavPack/)
 audio | WBNK Audio Archive | .wbnk | [vibe2wav](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/wbnkAudioArchive/)
 audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwood_Studios_AUD) | .aud | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/westwoodStudiosAudio/) - Sample file 991.AUD converts to just silence, not sure why.
-audio | [Windows Media Audio](http://fileformats.archiveteam.org/wiki/WMA) | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/wma/)
+audio | [Windows Media Audio](http://fileformats.archiveteam.org/wiki/WMA) | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/wma/)
 audio | [WinRec DVSM](https://temlib.org/AtariForumWiki/index.php/DVSM) | .dvs | [vibe2wav](https://github.com/Sembiance/dexvert) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/dvsm/)
 audio | Wwise sound Bank | .bnk | [vgmstream](https://github.com/vgmstream/vgmstream) [ffmpeg](https://ffmpeg.org/) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/wwiseSoundBank/)
 audio | [XA Audio](https://wiki.multimedia.cx/index.php/Maxis_XA) | .xa | [sox](http://sox.sourceforge.net) [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [17 sample files](https://sembiance.com/fileFormatSamples/audio/xaAudio/)
@@ -1320,7 +1319,7 @@ font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TrueType) | .ttf 
 font | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [vibe2png](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/font/universalBitMapFormat/)
 font | [Web Open Font Format](http://fileformats.archiveteam.org/wiki/WOFF) | .woff .woff2 | [fontforge](https://fontforge.org) | [10 sample files](https://sembiance.com/fileFormatSamples/font/woff/) - Some fail to convert because their printable characters are icons and are in very high level charcodes and don't convert with imagemagick convert and thus fail verification.
 font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt and MODERN.fnt
-font | XCar Font | .fnt | [wuimg](https://codeberg.org/kaleido/wuimg) | [9 sample files](https://sembiance.com/fileFormatSamples/font/xCarFont/)
+font | XCar Font | .fnt | [wuimg](https://codeberg.org/kaleido/wuimg) | [11 sample files](https://sembiance.com/fileFormatSamples/font/xCarFont/)
 font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/font/zxFont/)
 
 
@@ -2237,7 +2236,7 @@ music | eXotic AdLib | .xad | [adplay](https://github.com/adplug/adplay-unix) | 
 music | [Extended MIDI](http://fileformats.archiveteam.org/wiki/XMI_(Extended_MIDI)) | .xmi | [midistar2mp3](https://github.com/Sembiance/midistar2mid) | [12 sample files](https://sembiance.com/fileFormatSamples/music/xmi/)
 music | [Extended Module](http://fileformats.archiveteam.org/wiki/Extended_Module) | .xm .oxm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [17 sample files](https://sembiance.com/fileFormatSamples/music/xm/)
 music | eXtra Simple Music | .xsm | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://sembiance.com/fileFormatSamples/music/extraSimpleMusic/)
-music | Extreme Tracker | .et1 .m | [zxtune123](https://zxtune.bitbucket.io/) | [14 sample files](https://sembiance.com/fileFormatSamples/music/extremeTracker/)
+music | Extreme Tracker | .et1 .m | [zxtune123](https://zxtune.bitbucket.io/) | [9 sample files](https://sembiance.com/fileFormatSamples/music/extremeTracker/)
 music | [Extreme's Tracker Module](http://fileformats.archiveteam.org/wiki/Extreme's_Tracker_module) | .ams | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [6 sample files](https://sembiance.com/fileFormatSamples/music/extremesTracker/)
 music | [Face The Music Module](http://eab.abime.net/showthread.php?t=62254) | .ftm | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [5 sample files](https://sembiance.com/fileFormatSamples/music/faceTheMusic/)
 music | [Farandole Composer Module](http://fileformats.archiveteam.org/wiki/Farandole_Composer_module) | .far | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [15 sample files](https://sembiance.com/fileFormatSamples/music/farandoleComposer/)
@@ -2697,7 +2696,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,186)
+## Text (1,187)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2854,7 +2853,7 @@ text | Cabri 3D Figure | .fig |  | [10 sample files](https://sembiance.com/fileF
 text | Cabri 3D Language | .cgl |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/cabri3DLanguage/)
 text | Cabri 3D Macro | .mac |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/cabri3DMacro/)
 text | Cache Directory Tagging Standard | .tag |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/cacheDirectoryTaggingStandard/)
-text | Cadence OrCAD/Allegro CAM status | .cam .pcb |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/cadenceOrCADAllegroCAMStatus/)
+text | Cadence OrCAD/Allegro CAM status | .cam .pcb |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/cadenceOrCADAllegroCAMStatus/)
 text | CADSTAR data (generic) | .rgf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cadstarData/)
 text | Calamus ASCII Translation Table | .att |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/calamusASCIITranslationTable/)
 text | Call Of Duty weapons data |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/callOfDutyWeaponsData/)
@@ -3136,6 +3135,7 @@ text | HSQLDB configuration | .properties |  | [10 sample files](https://sembian
 text | HTML Component | .htc |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/htmlComponent/)
 text | HTML Help Collection | .col |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/htmlHelpCollection/)
 text | HTTrack Website Copier cookies | .txt |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/htTrackWebsiteCopierCookies/)
+text | HyperACCESS hosts password List | .lst |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/hyperACCESSHostsPasswordList/)
 text | HyperChem molecule format | .hin |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/hyperChemMoleculeFormat/)
 text | HyperReader! Videodisc player Driver | .vdr |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/hyperReaderVideodiscPlayerDriver/)
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht .hhk .hhc .hts .htx .shtml .phtml .hta .asp .aspx |  | [34 sample files](https://sembiance.com/fileFormatSamples/text/html/) - I tried some ways I could relax this in order to properly detect HTML files that have no extension, but DOM parsers are really lenient and will parse almost anything as HTML. It is also CPU intensive.

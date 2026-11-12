@@ -717,7 +717,7 @@ export const WEAK_VALUES =
 
 	// nconvertID
 	// SEEN  ONCE:
-	//		byusir, aurora
+	//		byusir, aurora, st4
 	// SEEN TWICE:
 	//		???
 	/^ADEX :adex:$/,

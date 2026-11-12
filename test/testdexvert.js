@@ -736,6 +736,7 @@ const UNPROCESSED_ALLOW_NO_IDS = [
 	"image/printfox",
 	"image/teletext",
 	"image/sprEd",
+	"music/audioSculpture",	// turtle-ready.adsc specifically doesn't have it's corresponding .as file
 	"music/euphony",
 	"music/moduleProtector",
 	"music/noisePacker",

@@ -331,10 +331,11 @@ def sample_rate(doc, wave, sample, override, unknown_rate, legacy_hz):
             if value > 799:
                 return None, "rate exceeds AudioZap's 1..799 UI range; integer-Hz versus DOC-register intent is ambiguous; supply --rate"
             return value * 1645 / 32, "AudioZap DOC frequency units × 1645/32 Hz (nominal software rate)"
-        if original == value and value <= 65535:
+        if len(wave["samples"]) == 1 and original == value and value <= 65535:
             if not legacy_hz:
-                return None, "untagged equal-frequency legacy fields; integer-Hz interpretation requires --legacy-hz or --rate"
-            return float(value), "explicit --legacy-hz interpretation of untagged equal-frequency fields"
+                return None, "automatic legacy-Hz detection is disabled; supply --rate"
+            doc.warn(f"inferred legacy integer-Hz sample rate {value} Hz from equal frequency fields; encoding is untagged")
+            return float(value), "automatically inferred integer-Hz interpretation of untagged equal-frequency fields"
         return None, "untagged legacy rate encoding is ambiguous; supply --rate"
     # Apple's Fixed: signed 16.16, little-endian, fraction in the low word.
     signed = value if value < 0x80000000 else value - 0x100000000
@@ -361,13 +362,14 @@ class Output:
                 "pcm_sha256": hashlib.sha256(self.pcm).hexdigest()}
 
 
-def extract(doc, rate=None, unknown_rate=DEFAULT_UNKNOWN_RATE, legacy_hz=False):
+def extract(doc, rate=None, unknown_rate=DEFAULT_UNKNOWN_RATE, legacy_hz=True):
     """Extract bounded sample records and additional referenced oscillator regions.
 
     This is sample extraction, not a performance of the Note Synthesizer.
     Stops are DOC zero bytes; envelopes and oscillator interactions are decoded
     but deliberately do not alter the sample data. Missing rates use 8363 Hz;
-    passing unknown_rate=None explicitly disables this fallback.
+    passing unknown_rate=None explicitly disables this fallback. Matching legacy
+    integer-Hz rates are inferred with a warning; legacy_hz=False disables this.
     """
     outputs, failures = [], []
     for wi, wave in enumerate(doc.waves):
@@ -527,8 +529,8 @@ def main(argv=None):
     p.add_argument("--rate", type=positive_rate, help="explicit playback rate in Hz for all extracted samples")
     p.add_argument("--unknown-rate", type=positive_rate, default=DEFAULT_UNKNOWN_RATE,
                    help="fallback playback rate when SampRate is zero (default: 8363 Hz)")
-    p.add_argument("--legacy-hz", action="store_true",
-                   help="explicitly interpret equal nonzero legacy frequency fields as integer Hz")
+    p.add_argument("--legacy-hz", action="store_true", default=True,
+                   help="compatibility option; matching legacy integer-Hz rates are already detected automatically")
     args = p.parse_args(argv)
     try:
         doc = parse_asif(args.inputFile.read_bytes())

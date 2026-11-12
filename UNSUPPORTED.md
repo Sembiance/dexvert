@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,024)
+# Unsupported File Formats (4,025)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1090,7 +1090,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,864)
+## Other (2,865)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1665,6 +1665,7 @@ Family/Format | Name | Extensions | Notes
 [other/compiledXKeyMap](https://discmaster.textfiles.com/search?format=compiledXKeyMap) | Compiled X KeyMap | .xkm | 
 [other/componentConfigurationFile](https://discmaster.textfiles.com/search?format=componentConfigurationFile) | Component Configuration File | .ccf | 
 [other/compressedElectronicsWorkbenchProject](https://discmaster.textfiles.com/search?format=compressedElectronicsWorkbenchProject) | Compressed Electronics Workbench project |  | 
+[other/compuGraphicIntellifontTypefaceLibrary](https://discmaster.textfiles.com/search?format=compuGraphicIntellifontTypefaceLibrary) | CompuGraphic Intellifont Typeface Library | .typ | 
 [other/concurrentDOSSerialTerminalConfiguration](https://discmaster.textfiles.com/search?format=concurrentDOSSerialTerminalConfiguration) | Concurrent DOS Serial Terminal Configuration | .dat | 
 [other/calCompressedData](https://discmaster.textfiles.com/search?format=calCompressedData) | Confusion and Light Compressed Data | .cal | 
 [other/coolEditAuditionSession](https://discmaster.textfiles.com/search?format=coolEditAuditionSession) | Cool Edit / Audition Session | .ses | 

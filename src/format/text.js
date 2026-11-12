@@ -658,6 +658,7 @@ export default
 		htmlComponent                              : {name : "HTML Component", ext : [".htc"], magic : ["HTML Component"], weakMagic : true},
 		htmlHelpCollection                         : {name : "HTML Help Collection", ext : [".col"], magic : ["HTML Help Collection"]},
 		htTrackWebsiteCopierCookies                : {name : "HTTrack Website Copier cookies", ext : [".txt"], magic : ["HTTrack Website Copier cookies"]},
+		hyperACCESSHostsPasswordList               : {name : "HyperACCESS hosts password List", ext : [".lst"], magic : ["HyperACCESS hosts password List"]},
 		hyperChemMoleculeFormat                    : {name : "HyperChem molecule format", ext : [".hin"], magic : ["HyperChem molecule format"], weakMagic : true},
 		hyperReaderVideodiscPlayerDriver           : {name : "HyperReader! Videodisc player Driver", ext : [".vdr"], magic : ["HyperReader! Videodisc player Driver"], weakMagic : true},
 		iafaPackageInfo                            : {name : "IAFA Package info", ext : [".pkg", ".age"], magic : ["IAFA Package info"]},

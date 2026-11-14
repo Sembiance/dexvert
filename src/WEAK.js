@@ -457,20 +457,21 @@ export const WEAK_VALUES =
 	// gameextractor
 	// SEEN  ONCE:
 	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, 000_7, RES_23
-	//		TOD_TOD2, LEV, RWS_2, MAP, MAP_2, ARC_9, DAV_SLIB, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
+	//		TOD_TOD2, LEV, RWS_2, MAP, MAP_2, DAV_SLIB, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
 	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, VRAM_PIFF, GRA, 001_TCLF, WLD_WRLD, SCW_COTS, GB_UBA, PRS, PRS_2
 	//		LUG_LIONHEAD, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4, LZ, GLB
 	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, BF_BIG, PACKED_BFPK, ZSM_ZSNDXBOX, IMG_AFS_2, PFS_PFS, DBS_WAVFILE
-	//		XWB_WBND_5, SPD_HEAD, IBT_DXT_DXT, TLB_HLIB, STF, PAK_60, DFS_SFDX, S16, SB_SBIN, TPK_ZZZ0, ARCHIVE_ARCH
+	//		XWB_WBND_5, SPD_HEAD, IBT_DXT_DXT, TLB_HLIB, STF, PAK_60, DFS_SFDX, S16, SB_SBIN, TPK_ZZZ0, ARCHIVE_ARCH, GRP_GRP1
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XPR_XPR2, DAT_CMP, BIN_7L_2
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XPR_XPR2, DAT_CMP
 	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, HNK, DWX_DELPHIXWAVE, WIN_FORM, PR, ANI_ANI, RBH_PIFF, RBH_PIFF_2
-	//		PAK_PACK_7, 000_8
-	/^geArchive: 0000?_(5|10|12|13|PCW|package|SFDX)( |$)/,
+	//		PAK_PACK_7, ARC_9
+	/^geArchive: 0000?_(5|8|10|12|13|PCW|package|SFDX)( |$)/,
 	/^geArchive: 001_[25]( |$)/,
 	/^geArchive: ARC_(4|6|8|10|11|13|16|A20|ARC|ARCV410)( |$)/,
 	/^geArchive: ARK_2( |$)/,
 	/^geArchive: BAG_(5|GABA_2)( |$)/,
+	/^geArchive: BIN_(LF|P00P|7L_2)( |$)/,
 	/^geArchive: DAT_(11|42|48|53|57|ARCV|CHELALIC|DG|RES|PAK|WWWW)( |$)/,
 	/^geArchive: IMG(_(4|9|LINK|DAVILEX_2))?( |$)/,
 	/^geArchive: PAK_(7|11|30|41|42|49|50|DATA|FORM|PAK_2|PACK_[26])( |$)/,
@@ -492,8 +493,6 @@ export const WEAK_VALUES =
 	/^geArchive: BDF( |$)/,
 	/^geArchive: BIG( |$)/,
 	/^geArchive: BIG_SCHL( |$)/,
-	/^geArchive: BIN_LF( |$)/,
-	/^geArchive: BIN_P00P( |$)/,
 	/^geArchive: BIO_BRGR( |$)/,
 	/^geArchive: BKF_2( |$)/,
 	/^geArchive: BKS( |$)/,
@@ -675,13 +674,14 @@ export const WEAK_VALUES =
 
 	// idarc
 	// SEEN  ONCE:
-	// 		Terse, ZPack, ZZip (Damien Debin), HPA, Gather
+	// 		Terse, ZPack, ZZip (Damien Debin), HPA, Gather, ABComp
 	// SEEN TWICE:
-	// 		QuArk, Blink (D.T.S.), ELI 5750, DZip (Nolan Pflug), BMF, SBC
+	// 		QuArk, Blink (D.T.S.), ELI 5750, DZip (Nolan Pflug), SBC
 	/^idarc: 777( |$)/,
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
 	/^idarc: Arhangel( |$)/,
+	/^idarc: BMF( |$)/,
 	/^idarc: Blink \(D\.T\.S\.\)( |$)/,
 	/^idarc: BOA( |$)/,
 	/^idarc: CMP( |$)/,
@@ -770,9 +770,9 @@ export const WEAK_VALUES =
 
 	// xdgMime
 	// SEEN  ONCE:
-	//		application/vnd.apache.parquet
+	//		???
 	// SEEN TWICE:
-	//		application/x-spectrum-d80
+	//		application/x-spectrum-d80, application/vnd.apache.parquet
 	/^application\/buildstream\+yaml$/,
 	/^application\/its\+xml$/,
 	/^application\/mathematica$/,
@@ -2142,6 +2142,7 @@ export const WEAK_VALUES =
 	/^A-10 Tank Killer game data archive$/,
 	/^Aard Dictionary$/,
 	/^Abacus spreadsheet$/,
+	/^ABasiC BSAVE binary data$/,
 	/^Ability document$/,
 	/^Absolute Terror game data archive$/,
 	/^AceMoney data$/,

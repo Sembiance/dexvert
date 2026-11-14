@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,025)
+# Unsupported File Formats (4,049)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1090,7 +1090,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,865)
+## Other (2,888)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1331,6 +1331,7 @@ Family/Format | Name | Extensions | Notes
 [other/arcsoloTapeSupport](https://discmaster.textfiles.com/search?format=arcsoloTapeSupport) | ARCsolo Tape Support | .tds | 
 [other/area51GameDataArchive](https://discmaster.textfiles.com/search?format=area51GameDataArchive) | Area 51 game data archive | .dfs | 
 [other/arenaOpeningBook](https://discmaster.textfiles.com/search?format=arenaOpeningBook) | Arena opening Book | .abk | 
+[other/armProjectManagerProject](https://discmaster.textfiles.com/search?format=armProjectManagerProject) | ARM Project Manager Project | .apj | 
 [other/armorCommandMission](https://discmaster.textfiles.com/search?format=armorCommandMission) | Armor Command mission | .hpj | 
 [other/armorCommandPicture](https://discmaster.textfiles.com/search?format=armorCommandPicture) | Armor Command Picture | .pic | 
 [other/armSISpeedIndexTimingsData](https://discmaster.textfiles.com/search?format=armSISpeedIndexTimingsData) | ArmSI Speed Index timings data |  | 
@@ -2308,7 +2309,28 @@ Family/Format | Name | Extensions | Notes
 [other/indexApolloDatabaseEngine](https://discmaster.textfiles.com/search?format=indexApolloDatabaseEngine) | Index Apollo Database Engine | .nsx | 
 [other/indexerVolumeGUID](https://discmaster.textfiles.com/search?format=indexerVolumeGUID) | Index Volume GUID |  | 
 [other/inertiaPlayerConfiguration](https://discmaster.textfiles.com/search?format=inertiaPlayerConfiguration) | Inertia Player Configuration | .cfg | 
-[other/infinityEnginePaperdoll](https://discmaster.textfiles.com/search?format=infinityEnginePaperdoll) | Infinity Engine paperdoll | .plt | 
+[other/infinityEngineAnimation](https://discmaster.textfiles.com/search?format=infinityEngineAnimation) | Infinity Engine Animation | .bam .dat | 
+[other/infinityEngineArea](https://discmaster.textfiles.com/search?format=infinityEngineArea) | Infinity Engine Area | .are | 
+[other/infinityEngineAreaDescription](https://discmaster.textfiles.com/search?format=infinityEngineAreaDescription) | Infinity Engine Area Description | .are | 
+[other/infinityEngineCreature](https://discmaster.textfiles.com/search?format=infinityEngineCreature) | Infinity Engine Creature | .cre .bak | 
+[other/infinityEngineDialogue](https://discmaster.textfiles.com/search?format=infinityEngineDialogue) | Infinity Engine Dialogue | .dlg | 
+[other/infinityEngineEffect](https://discmaster.textfiles.com/search?format=infinityEngineEffect) | Infinity Engine Effect | .eff | 
+[other/infinityEngineExportedPlayerCharacter](https://discmaster.textfiles.com/search?format=infinityEngineExportedPlayerCharacter) | Infinity Engine Exported Player Character | .chr | 
+[other/infinityEngineItem](https://discmaster.textfiles.com/search?format=infinityEngineItem) | Infinity Engine Item | .itm | 
+[other/infinityEnginePaperdoll](https://discmaster.textfiles.com/search?format=infinityEnginePaperdoll) | Infinity Engine Paperdoll | .plt | 
+[other/infinityEngineProjectile](https://discmaster.textfiles.com/search?format=infinityEngineProjectile) | Infinity Engine Projectile | .pro | 
+[other/infinityEngineRegion](https://discmaster.textfiles.com/search?format=infinityEngineRegion) | Infinity Engine Region/Map | .wed | 
+[other/infinityEngineResourceDirectory](https://discmaster.textfiles.com/search?format=infinityEngineResourceDirectory) | Infinity Engine Resource Directory | .key | 
+[other/infinityEngineSaveGame](https://discmaster.textfiles.com/search?format=infinityEngineSaveGame) | Infinity Engine Save Game | .gam | 
+[other/infinityEngineSpell](https://discmaster.textfiles.com/search?format=infinityEngineSpell) | Infinity Engine Spell | .spl | 
+[other/infinityEngineSpellCastingFx](https://discmaster.textfiles.com/search?format=infinityEngineSpellCastingFx) | Infinity Engine Spell Casting FX | .vvc | 
+[other/infinityEngineStore](https://discmaster.textfiles.com/search?format=infinityEngineStore) | Infinity Engine Store | .sto | 
+[other/infinityEngineTalkTable](https://discmaster.textfiles.com/search?format=infinityEngineTalkTable) | Infinity Engine Talk Table | .tlk | 
+[other/infinityEngineTileset](https://discmaster.textfiles.com/search?format=infinityEngineTileset) | Infinity Engine tileset | .tis .tiz | 
+[other/infinityEngineTranslation](https://discmaster.textfiles.com/search?format=infinityEngineTranslation) | Infinity Engine Translation | .h | 
+[other/infinityEngineUserInterfaceDescription](https://discmaster.textfiles.com/search?format=infinityEngineUserInterfaceDescription) | Infinity Engine User Interface Description | .chu | 
+[other/infinityEngineVariables](https://discmaster.textfiles.com/search?format=infinityEngineVariables) | Infinity Engine Variables | .var | 
+[other/infinityEngineWorldMap](https://discmaster.textfiles.com/search?format=infinityEngineWorldMap) | Infinity Engine World Map | .wmp | 
 [other/infinity2Project](https://discmaster.textfiles.com/search?format=infinity2Project) | Infinity2 Project | .ipr | 
 [other/infobaseNextPage](https://discmaster.textfiles.com/search?format=infobaseNextPage) | Infobase (NextPage) | .nfo | 
 [other/infoComicsGameData](https://discmaster.textfiles.com/search?format=infoComicsGameData) | InfoComics game data | .img .dat | 
@@ -2580,6 +2602,7 @@ Family/Format | Name | Extensions | Notes
 [other/mathCadDocument](https://discmaster.textfiles.com/search?format=mathCadDocument) | MathCad Document | .mcd | 
 [other/mathVISIONFormula](https://discmaster.textfiles.com/search?format=mathVISIONFormula) | MathVISION Formula | .f | 
 [other/matlabPCode](https://discmaster.textfiles.com/search?format=matlabPCode) | MATLAB p-code | .p | 
+[other/maxRES](https://discmaster.textfiles.com/search?format=maxRES) | MAX RES Archive | .res | 
 [other/maxonCinema4DCOFFEEBinary](https://discmaster.textfiles.com/search?format=maxonCinema4DCOFFEEBinary) | Maxon Cinema 4D COFFEE Binary | .cob | 
 [other/maxonCinema4DCoffeeShader](https://discmaster.textfiles.com/search?format=maxonCinema4DCoffeeShader) | Maxon Cinema 4D Coffee shader | .cof | 
 [other/maxonCinema4DLayout](https://discmaster.textfiles.com/search?format=maxonCinema4DLayout) | Maxon Cinema 4D Layout | .l4d | 
@@ -4064,13 +4087,14 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (20)
+## Video (21)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?format=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
 [video/accentShowSequence](https://discmaster.textfiles.com/search?format=accentShowSequence) | Accent Software Show Sequence | .seq | [11 sample files](https://sembiance.com/fileFormatSamples/video/accentShowSequence/) - Old MS-DOS software. Couldn't find a standalone player/converter, and also probably wasn't very popular.
 [video/amigaGL](https://discmaster.textfiles.com/search?format=amigaGL) | Amiga GL | .gl | 
+[video/baldiesAnimation](https://discmaster.textfiles.com/search?format=baldiesAnimation) | Baldies animation | .bal | 
 [video/cda2Cutscene](https://discmaster.textfiles.com/search?format=cda2Cutscene) | CDA2 cutscene | .cda | 
 [video/deluxeVideo](https://discmaster.textfiles.com/search?format=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 [video/eaMADVideo](https://discmaster.textfiles.com/search?format=eaMADVideo) | [EA MAD Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)

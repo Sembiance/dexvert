@@ -1,0 +1,267 @@
+INFINITY ENGINE GRAPHICS: MOS V1 AND MOSC V1
+===========================================
+
+Scope
+-----
+MOS V1 stores one static indexed-color image as a rectangular array of tiles.
+Each tile has its own 256-color palette. Typical uses include interface art
+and miniature maps. This specification describes every field of the MOS V1
+image representation and its MOSC V1 compression wrapper. MOS V2 is a separate,
+external-texture representation and is outside this specification.
+
+The image is self-contained: no game installation, external palette, texture,
+filename convention, or extension is needed to decode it. There are no frames,
+animation controls, mipmaps, per-pixel alpha values, or embedded text fields.
+
+Notation and identification
+---------------------------
+All MOS integers are unsigned and little-endian. Byte offsets are zero-based.
+Intervals [a,b) include a and exclude b. ASCII spaces are literal 0x20 bytes,
+not NUL terminators. The complete eight-byte identifying prefix is required:
+
+    Uncompressed: 4D 4F 53 20 56 31 20 20    "MOS V1  "
+    Compressed:   4D 4F 53 43 56 31 20 20    "MOSCV1  "
+
+Extensions, partial signatures, and approximate matches are not sufficient.
+The compressed form expands to a complete uncompressed MOS V1 resource,
+including its own 24-byte header. Offsets in that expanded resource refer to
+its start, not the start of the compressed wrapper.
+
+MOS V1 header: exactly 24 bytes
+------------------------------
+Offset  Length  Type       Meaning
+0x00       4   ASCII      Signature: "MOS " (including its final space).
+0x04       4   ASCII      Version: "V1  " (including two final spaces).
+0x08       2   uint16     W: image width in pixels, greater than zero.
+0x0A       2   uint16     H: image height in pixels, greater than zero.
+0x0C       2   uint16     C: number of tile columns, greater than zero.
+0x0E       2   uint16     R: number of tile rows, greater than zero.
+0x10       4   uint32     Tile side length, 64 in MOS V1.
+0x14       4   uint32     P: absolute byte offset to the palette array.
+
+The side-length field is a pixel dimension, not a byte count or tile area.
+The defined MOS V1 tiling is 64 by 64; this field is not a version selector
+for alternate tile sizes. An intact header satisfies:
+
+    C = (W + 63) // 64
+    R = (H + 63) // 64
+    N = C * R
+    P >= 24
+
+P is normally 24, but readers must use its stored value. Bytes in [24,P),
+when present, are outside the defined image structures and have no specified
+rendering meaning. No alignment or additional header is implied by a gap.
+The dimensions are at most 65535 each because of their uint16 representation.
+
+Section addresses
+-----------------
+The palette array and offset array are consecutive; they have no separate
+length fields or delimiters:
+
+    Palette array:   [P, P + 1024*N)
+    Offset array:    [L, L + 4*N), where L = P + 1024*N
+    Pixel-data base: D = L + 4*N = P + 1028*N
+
+There is one palette and one offset for every tile. Their tile numbering is
+row-major, left to right and then top to bottom:
+
+    tile index i = tile_row * C + tile_column
+    tile_column = i % C
+    tile_row    = i // C
+
+Palettes: all entries, including unused ones
+------------------------------------------
+Palette i occupies 1024 bytes starting at P + 1024*i. It contains 256 entries
+of four bytes each. Entry j begins at P + 1024*i + 4*j:
+
+    byte +0: blue intensity,  0..255
+    byte +1: green intensity, 0..255
+    byte +2: red intensity,   0..255
+    byte +3: reserved/unused byte, conventionally zero
+
+This is B,G,R,reserved storage, not R,G,B,A. The fourth byte does not supply
+opacity and must not be copied into PNG alpha. A nonzero reserved byte does
+not change the entry's color. The converter counts these bytes for auditing
+and ignores their values for rendering. Entries never selected by a pixel
+still occupy their full four-byte slots and have the same interpretation.
+
+The engine's color key is pure green, RGB (0,255,0). Any entry with those
+three component values is transparent. Transparency is selected by color,
+not by a fixed palette index: index zero is not unconditionally transparent.
+All other colors are opaque, including RGB (0,0,0). When converting to RGBA,
+preserve the RGB channels and set alpha to 0 for the key, 255 otherwise.
+There are no partial-alpha colors. Viewing tools that disable color-key
+transparency may display these pixels as green instead.
+
+Tile-offset array
+-----------------
+Entry i is the uint32 at L + 4*i. Call its value O[i]. It is a byte offset
+relative to D, the beginning of pixel storage. Thus the first index byte of
+tile i is at D + O[i]. It is not an absolute file offset, palette offset,
+pixel coordinate, or length. Each offset is authoritative: readers must not
+assume that tiles are physically consecutive or that O[0] is zero.
+
+Different tiles can reference the same stored bytes, including partially
+overlapping spans. Each reference is decoded using that tile's own palette
+and dimensions. The lookup mechanism also permits physical reordering.
+There is no requirement to infer lengths by subtracting adjacent offsets.
+
+Tile dimensions and pixel storage
+--------------------------------
+For tile (c,r), compute its origin and stored size as follows:
+
+    x0 = 64*c                 y0 = 64*r
+    tw = min(64, W - x0)      th = min(64, H - y0)
+    stored byte count = tw * th
+
+For a consistent grid, tw and th are both in 1..64. Tiles on the right and
+bottom edges store only their actual pixels. An edge dimension divisible
+by 64 produces a full 64-pixel tile, never a zero-width or zero-height tile.
+
+Each pixel is one unsigned 8-bit palette index. Within a tile, indices run
+left to right through a row and then top to bottom through successive rows.
+The local row stride is tw bytes. There is no row padding, bit packing,
+run-length encoding, per-tile header, or per-tile compression.
+
+For local coordinates 0 <= u < tw and 0 <= v < th:
+
+    index_address = D + O[i] + v*tw + u
+    palette_index = unsigned_byte_at(index_address)
+    palette_address = P + 1024*i + 4*palette_index
+    destination_pixel = (x0 + u, y0 + v)
+
+Use the palette rule above to write that destination pixel. Image coordinate
+(0,0) is the upper left. There is no vertical flip or bottom-up BMP ordering.
+
+In compact, consecutively stored files, O[0]=0 and each following offset is
+the previous offset plus the previous tile's byte count. In that case:
+
+    total pixel-index bytes = W*H
+    file length = P + 1028*C*R + W*H
+
+This length formula is a consequence of compact storage, not a replacement
+for following the offset array. For arbitrary physical placement, the file
+must extend to at least max(D + O[i] + tw[i]*th[i]). Unreferenced storage and
+bytes after the last referenced tile have no defined MOS V1 image meaning;
+they are not hidden image channels or undocumented mandatory fields.
+
+MOSC V1 wrapper
+---------------
+Offset  Length  Type       Meaning
+0x00       4   ASCII      Signature: "MOSC".
+0x04       4   ASCII      Version: "V1  ".
+0x08       4   uint32     Length of the complete expanded MOS V1 resource.
+0x0C     rest  bytes      One zlib stream containing that resource.
+
+The payload uses the RFC 1950 zlib container around RFC 1951 DEFLATE, not
+gzip and not raw DEFLATE. The zlib container includes its compression header
+and terminal Adler-32 checksum. The expanded length should equal the stored
+uint32. The expanded bytes must begin with the exact MOS V1 signature. The
+MOSC header is not part of that expanded length. No external compression
+dictionary or additional member is defined. Trailing wrapper bytes have no
+specified meaning. A decoder must validate the zlib stream and length;
+those checks can be reported as damage while retaining recoverable pixels.
+
+All valid DEFLATE compression modes are accepted: stored/uncompressed blocks,
+fixed-Huffman blocks, and dynamic-Huffman blocks, at any compression level.
+Neither the filename nor a particular pair of zlib header bytes selects the
+decoder. Compression is recognized by the exact outer MOSC V1 signature.
+The same converter command handles compressed and uncompressed inputs; no
+pre-decompression step, temporary expanded resource, or extra flag is needed.
+
+Byte accounting has two distinct address spaces for a compressed resource.
+Physical source coverage is the 12-byte MOSC header plus the consumed zlib
+member, with any trailing bytes reported separately. Expanded image coverage
+is the full inner MOS header, palettes, offset array, and indexed pixels.
+Do not add expanded image bytes to the physical compressed file size. In
+verbose output, wrapper.file_bytes and wrapper.zlib_consumed_bytes describe
+the physical source, while byte_audit describes the expanded MOS resource.
+
+Validation, byte accounting, and recovery policy
+------------------------------------------------
+A conforming reader checks the exact signature, complete header, dimensions,
+grid consistency, palette location, complete arrays, and each independently
+referenced tile span. It accounts for the whole 24-byte header, all N*1024
+palette bytes, all N*4 lookup bytes, and all physically referenced pixel bytes.
+Repeated pixel references count once toward physical byte coverage. Reserved
+palette bytes are understood unused fields; they are not omitted from the
+accounting. Unreferenced ranges should be identified explicitly.
+
+The supplied converter uses these deterministic rules for damaged inputs:
+
+* An unknown signature/version is rejected before output is opened. It does
+  not scan for embedded signatures or fall back to unrelated image formats.
+* A confirmed resource without a complete MOS header, usable dimensions,
+  nonempty grid, or a palette offset outside the header cannot be rendered.
+  No guessed dimensions or replacement offsets are used.
+* A corrupt block-size field is reported; rendering uses V1's defined 64.
+* Inconsistent grid counts retain the stored counts for table addressing.
+  Tiles are placed at their prescribed 64-pixel coordinates and clipped to
+  the declared canvas. Missing coverage remains transparent. Tiles wholly
+  outside the canvas have no recoverable pixel dimensions and are reported.
+* Complete stored offsets are honored even if other offsets are damaged.
+  Missing offsets are never reconstructed from preceding tiles.
+* Available pixel bytes with known palette RGB values are rendered. Missing
+  or out-of-range data remains transparent black. Valid color-key pixels
+  retain green RGB and zero alpha, distinguishable from missing pixels.
+* Reserved palette values never become alpha. Unreferenced bytes are reported
+  and have no effect on the rendered image.
+* For damaged MOSC streams, the decompressor retains the decodable prefix.
+  Bad checksums, premature termination, length mismatches, and trailing bytes
+  are reported. Invalid compression data is never bypassed or guessed. A
+  recovered payload still needs the exact inner MOS V1 header.
+* If not even one pixel with a known color is recoverable, conversion fails
+  without creating or changing the destination. An entirely color-key image
+  is nevertheless valid and produces an entirely transparent PNG.
+
+These are explicit recovery decisions, not claims that absent bytes can be
+reconstructed. A partially recovered PNG is accompanied by stderr warnings.
+No image information can be recovered from destroyed dimensions or tables
+without independent evidence; the converter does not invent that evidence.
+
+Converter interface and output
+------------------------------
+    python3 infinityEngineGraphic.py inputFile outputFile
+    python3 infinityEngineGraphic.py -verbose inputFile outputFile
+
+Python 3.9 or later and its standard library are sufficient. There are no
+third-party packages or supporting files. The input may have any filename.
+The output parent directory must already exist. The destination must differ
+from the source, including hard-link and symbolic-link aliases.
+
+The PNG is 8-bit RGBA, noninterlaced, top-down, with lossless zlib-compressed
+image data and standard PNG CRCs. No source palette bytes, source metadata,
+text chunks, thumbnails, or sidecar files are embedded or written separately.
+One temporary PNG stages the completed output in the destination directory;
+it is atomically renamed and removed on failure. Only the requested final
+PNG remains. Its permissions are 0644, readable by its owner and group.
+
+A successful normal conversion is silent and exits with status 0. Successful
+partial recovery also exits 0 and prints warnings to stderr. Unsupported or
+unrecoverable input and I/O failures exit 1 with an explanatory stderr message;
+command-line syntax errors exit 2. Stdout is unused. Existing output remains
+unchanged when input decoding fails. -verbose / --verbose prints structured
+diagnostics to stderr, including offsets, dimensions, byte coverage, reserved
+byte counts, color-key pixel count, missing pixels, and wrapper information.
+Verbose mode does not create additional files either.
+
+The decoder uses the input's stored tables rather than filename-specific
+rules. All defined MOS V1 image fields and the MOSC V1 wrapper are implemented.
+MOS V2 and other Infinity Engine resource formats are explicitly unsupported;
+adding MOS V2 would require its separate block table and external PVRZ texture
+resources. There is no arbitrary image-size cutoff, though available memory,
+disk space, and runtime naturally constrain conversion of very large images.
+
+References and corroboration
+----------------------------
+The field layout can also be checked against the IESDP MOS documentation:
+https://gibberlings3.github.io/iesdp/file_formats/ie_formats/mos_v1.htm
+
+Palette component order, unused palette byte, fixed 64-pixel tiles, and green
+color-key behavior are corroborated by the independent engine/tool decoders:
+https://github.com/gemrb/gemrb/blob/master/gemrb/plugins/MOSImporter/MOSImporter.cpp
+https://github.com/Argent77/NearInfinity/blob/master/src/org/infinity/resource/graphics/MosV1Decoder.java
+
+Compression containers and PNG output are specified by RFC 1950, RFC 1951,
+and the PNG specification. The MOS offset and pixel formulas above suffice
+to implement the image reader without consulting external documentation.

@@ -19,6 +19,10 @@
 >>> wip
 <<<
 
+* In unsupported.js: infinityEngineTileset (both uncompressed and compressed versions) (use trid bytes to find samples, tell AI about both .tis and .tiz)
+
+* In unsupported.js: baldiesAnimation (vibe2avi)
+
 * Better wpg (WordPerfect Graphic) support:
   https://discmaster.textfiles.com/browse/46951/1996-134/XFCOP7.zip/OFFPRONT.ARJ/OFF7/COREL/OFFICE7/GRAPHICS/BACKGNDS/MEDICAL
   For example see sandbox/wip/wpg/*

@@ -1,0 +1,362 @@
+INFINITY ENGINE SOUND: WAVC V1.0 AND INTERPLAY ACM VERSION 1
+=========================================================
+
+1. Scope and conventions
+------------------------
+
+WAVC is a wrapper around one Interplay ACM compressed audio stream. It is
+not RIFF/WAVE, even when its filename ends in .wav. The underlying ACM
+stream can also exist without the wrapper. This document specifies both
+representations, including the complete compressed-sample decoding process.
+There is one sound per stream, with one or two interleaved channels, and
+signed 16-bit PCM output. There are no tracks, embedded filenames, seek
+tables, timestamps, loops, checksums, or encryption fields.
+
+All multibyte header integers are unsigned little-endian. Offsets below
+are hexadecimal byte offsets unless stated otherwise. The compressed
+stream is read least significant bit first: bit 0 of a byte precedes bit 1,
+and so on. An n-bit integer is the sum of bit[i] * 2**i, in read order.
+Compressed fields, columns, and blocks are NOT aligned to byte boundaries.
+Arithmetic in the inverse transform uses signed two's-complement 32-bit
+values with modulo-2**32 wrapping, not saturation. Right shifts of signed
+values are arithmetic (round toward negative infinity).
+
+2. WAVC container header (28 bytes)
+-----------------------------------
+
+Offset  Bytes  Meaning
+0000    4      ASCII signature: WAVC (57 41 56 43).
+0004    4      ASCII version: V1.0 (56 31 2e 30).
+0008    4      Uncompressed PCM byte count, excluding any RIFF/WAVE header.
+000c    4      Compressed byte count, INCLUDING the 14-byte ACM header,
+               EXCLUDING the WAVC header and any gap before the payload.
+0010    4      Absolute byte offset of the ACM header; ordinarily 001c.
+0014    2      Playback channels: 1 = mono, 2 = interleaved stereo.
+0016    2      Decoded bits per sample: 16.
+0018    2      Playback sample rate in Hz, per channel; not fixed at 22050.
+001a    2      Unused word. Its value has no playback meaning. Accept any
+               bit pattern, including nonzero values. It is NOT the high
+               half of a 32-bit sample rate, a flag, or a checksum.
+
+The payload is the byte interval [ACM_offset, ACM_offset + compressed_size).
+Its first four bytes must be 97 28 03 01. The uncompressed size is twice the
+ACM count of scalar samples. Header sizes count stored bytes, so the
+compressed size excludes the implicit zero suffix described in section 6.
+
+The offset field locates the stream; never search the file for an ACM
+signature. An offset greater than 28 can leave a gap. The format assigns
+no audio meaning to bytes in that gap or after the declared payload. A
+reader may decode the declared stream while reporting such extra bytes;
+it must not silently interpret them as additional sounds or new fields.
+
+For consistent files, the channel count and sample rate in the WAVC and
+ACM headers agree. Their disagreement is malformed metadata, not a new
+codec. A recovery policy is given in section 9.
+
+3. Embedded or standalone ACM header (14 bytes)
+------------------------------------------------
+
+These offsets are relative to the ACM stream, not the outer file.
+
+Offset  Bytes  Meaning
+0000    3      Codec signature bytes 97 28 03 (LE integer 0x032897).
+0003    1      Version, exactly 01.
+0004    4      N: total number of decoded scalar 16-bit sample values,
+               counting ALL channels together. This is not a frame count.
+0008    2      Channel count, 1 or 2.
+000a    2      Sample rate in Hz, per channel (nonzero).
+000c    2      Packed geometry: low 4 bits = L, high 12 bits = R.
+000e    ...    Compressed blocks begin immediately, LSB first.
+
+L is the inverse-transform level, 0 through 15. R is the number of
+coefficient rows, 1 through 4095. Define C = 2**L columns and B = R*C
+scalar values per decoded block. R=0 is invalid. L=0 is well-defined:
+there is one column and no inverse transform or output shift.
+
+Decode ceil(N/B) complete coefficient blocks, retaining only the first N
+scalar results. N=0 describes empty audio and requires no blocks. Some
+older decoders reject empty streams or L=0 as implementation restrictions;
+neither restriction is necessary for the decoding algorithm here.
+
+For stereo the output order is L0,R0,L1,R1,... . The transform does not
+run independently on each channel; it operates on the interleaved scalar
+sequence. Duration is N/(channels*sample_rate). N must be a multiple of the
+channel count for complete frames. Do not infer channels from filenames,
+waveform correlation, game identity, or the file extension.
+
+4. Compressed block grammar and all column modes
+------------------------------------------------
+
+Each block contains:
+
+    P : 4 bits      Amplitude-table exponent, 0..15.
+    S : 16 bits     Unsigned amplitude step, 0..65535.
+    for column c = 0 through C-1:
+        M : 5 bits Column coding mode, 0..31.
+        values     Enough mode-specific codewords to produce R indices.
+
+There is no block-size field or marker. The codewords and R determine the
+next column position; C determines the next block position.
+
+Let K = 2**P. The amplitude table is A[q] = q*S for -K <= q < K. This range
+includes -K and excludes +K. All decoded indices, including those produced
+by fixed-width modes, must fit this range. A zero S is permitted and makes
+all valid coefficients zero. Do not use uninitialized or previous-block
+table values to make an out-of-range index appear valid.
+
+Build a row-major array X of B signed 32-bit coefficients. Columns are
+stored on disk in column order, but index q at row r, column c becomes
+X[r*C+c] = A[q]. A new amplitude table applies to each block.
+
+The following code strings show bits IN READ ORDER, from left to right.
+Thus code "10" means read a 1 then a 0, not the integer binary value 2.
+u1/u2/u3 denote a following LSB-first integer of 1/2/3 bits.
+
+Mapping tables:
+    sign[u1] = [-1, +1]
+    near[u2] = [-2, -1, +1, +2]
+    far[u2]  = [-3, -2, +2, +3]
+    wide[u3] = [-4, -3, -2, -1, +1, +2, +3, +4]
+
+Mode(s)       Complete codebook
+0             Fill all R indices with zero; no value bits follow.
+1,2           Reserved/invalid; no defined codebook.
+3 through 16  Read M bits per row, u; q = u - 2**(M-1).
+17            0 -> [0,0]; 10 -> [0]; 11 u1 -> [sign[u1]].
+18            0 -> [0]; 1 u1 -> [sign[u1]].
+19            Read 5 bits, u in 0..26. Output three base-3 digits,
+              least significant first, with 1 subtracted from each:
+              [u%3-1, (u//3)%3-1, u//9-1]. Values 27..31 are invalid.
+20            0 -> [0,0]; 10 -> [0]; 11 u2 -> [near[u2]].
+21            0 -> [0]; 1 u2 -> [near[u2]].
+22            Read 7 bits, u in 0..124. Output three base-5 digits,
+              least significant first, with 2 subtracted from each:
+              [u%5-2, (u//5)%5-2, u//25-2]. Values 125..127 invalid.
+23            0 -> [0,0]; 10 -> [0]; 110 u1 -> [sign[u1]];
+              111 u2 -> [far[u2]].
+24            0 -> [0]; 10 u1 -> [sign[u1]]; 11 u2 -> [far[u2]].
+25            Reserved/invalid.
+26            0 -> [0,0]; 10 -> [0]; 11 u3 -> [wide[u3]].
+27            0 -> [0]; 1 u3 -> [wide[u3]].
+28            Reserved/invalid.
+29            Read 7 bits, u in 0..120. Output two base-11 digits,
+              least significant first, with 5 subtracted from each:
+              [u%11-5, u//11-5]. Values 121..127 are invalid.
+30,31         Reserved/invalid.
+
+For a codeword producing two or three indices, retain only as many as fit
+in the current column's R rows. Consume the entire codeword nevertheless.
+For example, a two-zero code at the last row produces one retained zero;
+the extra zero is discarded. Grouped digits never spill into another
+column. No additional padding bits occur at the end of a column.
+
+5. Complete inverse transform
+------------------------------
+
+Initialize a history array H of 2*C-2 signed 32-bit zeros ONCE per stream.
+Keep H between successive blocks and between row chunks within a block.
+Do not reset it at block or channel boundaries. L=0 skips this section.
+
+Define wrap32(v) = ((v + 2**31) modulo 2**32) - 2**31.
+
+The primitive pass(X, base, stride, count, H, hbase) is:
+
+    for lane = 0 .. stride-1:
+        h = hbase + 2*lane
+        a = H[h]
+        b = H[h+1]
+        pos = base + lane
+        repeat count/2 times:
+            c = X[pos]                 # save ORIGINAL pair
+            d = X[pos+stride]
+            X[pos]        = wrap32(a + 2*b + c)
+            X[pos+stride] = wrap32(2*c - b - d)
+            a = c
+            b = d
+            pos += 2*stride
+        H[h]   = a
+        H[h+1] = b
+
+For each block, transform row chunks using:
+
+    chunk_rows = 1, if L > 9
+                 (2048 >> L) - 2, otherwise
+
+    for row_start = 0, chunk_rows, 2*chunk_rows, ... less than R:
+        base = row_start*C
+        stride = C/2
+        count = 2*min(chunk_rows, R-row_start)
+        hbase = 0
+
+        pass(X, base, stride, count, H, hbase)
+        hbase += 2*stride
+
+        # Required bias correction, after the FIRST pass only:
+        for j = 0 .. count-1:
+            X[base + j*stride] = wrap32(X[base + j*stride] + 1)
+
+        while stride > 1:
+            stride /= 2
+            count *= 2
+            pass(X, base, stride, count, H, hbase)
+            hbase += 2*stride
+
+All divisions shown here are exact integer divisions except min(). This
+algorithm covers odd R, the L=9/L=10 chunk-rule boundary, and all levels
+through 15. Chunking and the bias correction are part of the codec, not
+optional performance choices. The history partitions have lengths C,
+C/2, ..., 2 and sum to 2*C-2.
+
+For each transformed X entry, in row-major order, compute:
+
+    raw16 = (X[i] >> L) & 0xffff
+    pcm16 = raw16 if raw16 < 32768 else raw16 - 65536
+
+Store raw16 as two little-endian bytes. This operation wraps rather than
+clipping if the shifted value exceeds the signed 16-bit range. For L=0
+it directly converts the scaled coefficients. Keep at most the remaining
+N values from each block. The last block must still be fully decoded; its
+unused transform results are discarded, not written as extra audio.
+
+6. Logical termination, zero suffix, and physical byte accounting
+----------------------------------------------------------------
+
+The decoded scalar count N terminates the stream. There is no EOF code.
+The legacy encoder's bit writer postpones runs of zero bytes and only
+flushes them if a later nonzero byte requires them. At final flush it also
+omits an all-zero partial byte. Consequently trailing zero bytes/bits of
+the last block may be absent from the stored payload. Reads beyond the
+physical payload return zero until the required blocks are decoded. This
+is the writer's defined zero-suffix convention, not an inferred waveform
+repair or a search for an alternative bit alignment. It can omit more
+than a single byte; do not impose a one-byte semantic limit.
+
+When zero extension is not needed, unused high bits of the final byte
+have no audio meaning. Writers should set them to zero. A decoder can
+report their actual value without interpreting it as another block.
+
+Every byte of an ordinary WAVC file belongs to one of these ranges:
+the 28-byte wrapper, the 14-byte ACM header, and the densely packed
+compressed fields (including any unused high bits of the last byte).
+The unused wrapper word is fully located and deliberately ignored, not
+an unknown field with guessed semantics. There is no alignment padding
+between blocks. A final tuple's unused digits are part of its codeword.
+
+Whole bytes after the last required codeword have no defined additional
+audio interpretation, even when zero. Extra data, wrapper gaps, or bytes
+outside the compressed extent must be explicitly reported. They are not
+automatically another ACM stream, metadata, or a checksum. Such extras
+are outside this specification's defined sound payload.
+
+Zero suffixes and the lack of a checksum impose a real integrity limit:
+accidental truncation that removes nonzero bits can be indistinguishable
+from intentionally omitted zeros. No decoder can prove the original
+missing bits in that case. A reader should report the implicit-zero count
+when auditing, and report a truncated outer extent when its size field
+exceeds the physical file. It must not claim that zero extension certifies
+an arbitrary damaged file as the original recording.
+
+7. Writing decoded WAV
+-----------------------
+
+Write one PCM WAVE stream, normally a 44-byte RIFF/WAVE header followed by
+the decoded scalar values. The fmt chunk has format tag 1, channels from
+the playback metadata, sample rate in Hz, byte rate = rate*channels*2,
+block alignment = channels*2, and bits per sample = 16. The data chunk
+length is exactly the number of output scalar values times two. RIFF
+chunk size is 36 + data length. There is no extra data pad because 16-bit
+PCM always has even byte length. No normalization, resampling, channel
+guessing, filtering, or gain changes are needed.
+
+For output exceeding RIFF's 32-bit size fields, the converter writes the
+standard RF64 WAVE extension: RF64 signature; 0xffffffff RIFF/data sizes;
+a 28-byte ds64 payload containing 64-bit RIFF size, data size, frame
+count, and a zero table length; then ordinary fmt and data chunks. Its
+RIFF size is PCM bytes + 72. Output retains the .wav extension.
+
+8. Recognition and unsupported formats
+---------------------------------------
+
+Recognize the exact eight bytes WAVCV1.0 at offset zero, or the exact four
+bytes 97 28 03 01 for standalone ACM. Check the declared ACM location and
+header before decoding. An ordinary RIFF/WAVE file, Ogg, MP3, another
+WAVC version, or another ACM version is not this supported format. File
+extensions are not recognition evidence. Do not scan for signatures or
+invoke a general audio converter as a fallback.
+
+Modes 1,2,25,28,30,31 and out-of-range grouped codes are invalid bitstream
+values, not unimplemented codecs. All 26 defined modes are specified here.
+
+9. Converter behavior and deterministic recovery
+-------------------------------------------------
+
+Invocation:
+    python3 infinityEngineSound.py <inputFile> <outputDir>
+    python3 infinityEngineSound.py <inputFile> <outputDir> -verbose
+
+The output directory may already exist. The normal persistent output is
+only <input-stem>.wav. An existing output of that name is atomically
+replaced after decoding; the compressed input itself is never overwritten.
+All new files are user/group readable. Newly created directories allow
+user/group traversal. Conversion uses only the Python standard library;
+it needs no FFmpeg executable, shared library, data tables, or companion
+file. Temporary PCM storage is closed automatically; no temporary files
+remain in the output directory on completion.
+
+-verbose (also --verbose) additionally writes
+<input-stem>.infinityEngineSound.json. It contains decoded header fields,
+the unused word's exact value, hashes, physical half-open bit ranges,
+every block's P/S values, every column's mode and bit range, implicit-zero
+count, discarded transform-value counts, and recovery warnings. Bit
+positions are absolute within the original file; logical block spans can
+extend beyond physical EOF because of the zero-suffix rule. Physical
+regions always cover the actual file. No sidecar is written by default.
+
+Recognition or unrecoverable-header failure creates no output directory
+and no output file. For a positively recognized but damaged stream:
+
+* A missing/incomplete ACM header, an invalid ACM pointer/signature, R=0,
+  or no usable channel/rate metadata cannot be decoded; fail with no WAV.
+* A compressed size below the ACM header length, or an extent past EOF,
+  is reported and the available payload through physical EOF is used.
+* Valid WAVC channel/rate fields take precedence over disagreeing ACM
+  playback fields. Invalid WAVC playback fields fall back to valid ACM
+  values. Non-16-bit wrapper depth is reported and ACM's fixed 16-bit
+  output is used. The ACM sample count determines termination when the
+  uncompressed size disagrees. No replacement value is guessed.
+* On a reserved mode, invalid grouped code, or out-of-table coefficient,
+  keep already completed audio blocks. Discard the damaged block; later
+  blocks have no resynchronization marker and share synthesis history,
+  so decoding cannot safely resume at a guessed position.
+* Omit a final incomplete channel frame. If no complete block can be
+  recovered from nonempty audio, create no WAV. Known empty audio gets
+  a valid empty WAV. EOF zero extension follows section 6.
+* Extra gap/trailer bytes are described and warned about; their contents
+  are not claimed to have defined format semantics.
+
+Exit status 0 means the declared audio count was decoded (metadata warnings
+can still exist); 2 means a partial WAV was recovered before a bad block;
+1 means no usable conversion or an I/O/resource failure. Diagnostics go
+to stderr. Verbose mode also prints a short success summary to stdout.
+
+10. Technical provenance
+-------------------------
+
+The layout, codebooks, and arithmetic can be independently checked against
+the following publicly available format/implementation references. The
+definitions above are sufficient to implement decoding without them.
+
+WAVC container reference (IESDP):
+https://gibberlings3.github.io/iesdp/file_formats/ie_formats/wavc_v1.htm
+Note: its displayed compressed-size offset 0x000a is a typographical
+error; the contiguous 32-bit size fields are at 0x0008 and 0x000c.
+
+Marko Kreen's libacm decoder (ISC license; based on ABel/TeamX's work):
+https://github.com/markokr/libacm/blob/master/src/decode.c
+
+DLTCEP/TeamX bit writer (zero-run suppression and final partial-byte rule):
+https://github.com/TeoTwawki/dltcep/blob/master/bitstream.cpp
+
+Independent decoder implementations for comparison:
+https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/interplayacm.c
+https://github.com/gemrb/gemrb/tree/master/gemrb/plugins/ACMReader

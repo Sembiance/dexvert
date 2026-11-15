@@ -1,0 +1,387 @@
+INFINITY ENGINE PALETTED TILESETS: TIS V1 AND TISPACK TIZ0
+=======================================================
+
+Scope and conventions
+---------------------
+This specification describes standalone, palette-based TIS version 1 files
+and all three tile encodings of the TISpack version 0 compressed container.
+A tileset is an ordered sequence of independent 64-by-64 images. Tile numbers
+are zero-based. Tiles have no names, durations, coordinates, or inter-tile
+dependencies. Tile placement, overlays, doors and area dimensions belong to
+the separate WED resource; a TIS/TIZ alone does not specify a rectangular map.
+An arbitrary contact sheet must not be described as the original area layout.
+
+All offsets and lengths below are bytes, unless explicitly described as bits
+or pixels. Numbers are decimal unless prefixed with 0x. Strings are literal
+ASCII, without a terminating NUL. "u16" and "u32" are unsigned integers.
+TIS integers are LITTLE-ENDIAN. TIZ integers are BIG-ENDIAN. Embedded zlib
+and JPEG data follow their own standardized byte and bit ordering.
+
+Identification is by contents, never the extension or basename. A TIS file
+must begin with the exact eight bytes 54 49 53 20 56 31 20 20, "TIS V1  ".
+A TIZ0 file must begin with 54 49 5A 30, "TIZ0". Partial signatures do not
+establish identity. Headerless tile streams embedded in BIFF archives have
+no independent signature and are outside this standalone-file specification.
+
+The Enhanced Edition PVRZ-reference variant shares the TIS V1 signature but
+has 12-byte tile records rather than 5120-byte palette records. Its records
+reference separate texture resources. It is a different variant, is not
+decoded here, and must not be mistaken for paletted data. Other TIS/TIZ
+versions and other TIL encoding identifiers are also outside this scope.
+
+
+1. TIS V1 header
+----------------
+Offset  Length  Type          Meaning
+0       4       ASCII         Signature: "TIS " (including trailing space).
+4       4       ASCII         Version: "V1  " (two trailing spaces).
+8       4       u32 LE        Declared number of tiles, N.
+12      4       u32 LE        Tile record size, S = 5120 (0x1400).
+16      4       u32 LE        Absolute offset to tile data, H; normally 24.
+20      4       u32 LE        Tile side length, D = 64 (0x40).
+
+The defined header occupies 24 bytes. For canonical files, H = 24 and file
+length = 24 + N * 5120. There is no footer, checksum, directory, alignment
+padding between records, or ancillary data section.
+
+The explicit H field locates the tile array; a reader can honor H >= 24 even
+when it is noncanonical. Bytes between byte 24 and H have no defined image
+meaning and must be reported as a header gap, not invented extra fields.
+H < 24 is invalid. H beyond EOF means the tile data is unavailable.
+
+Tile i begins at H + i * 5120. Increasing the tile index does not imply any
+particular world coordinate. S and D identify the supported layout; a reader
+must not guess replacement values for unrecognized geometry.
+
+
+2. TIS palette tile / decoded TIL0 tile
+--------------------------------------
+Offset  Length  Meaning
+0       1024    256 palette entries, four bytes each.
+1024    4096    Unsigned eight-bit palette indices, one per pixel.
+
+Palette entry k occupies bytes 4*k through 4*k+3:
+    +0: blue, 0..255
+    +1: green, 0..255
+    +2: red, 0..255
+    +3: unused/reserved; NOT a usable alpha channel for original paletted TIS.
+
+The reserved byte is normally zero; nonzero values do not turn colors
+transparent. All 256 entries are stored, including entries unused by pixels.
+Duplicate colors are legal. Palette indices are not shared between tiles.
+The exact conversion to an RGB palette is (entry[2], entry[1], entry[0]).
+
+Pixel (x,y), with 0 <= x,y < 64, is the index at offset 1024 + 64*y + x.
+Rows run top to bottom; within a row pixels run left to right. There is no
+vertical flip, row padding, bit packing, or mipmap data.
+
+Transparency needs a distinction between tile storage and overlay rendering.
+Index zero is the overlay/key index; the usual transparent overlay color at
+that index is pure green, BGR = 00 FF 00. For standalone PNG export, index
+zero is transparent when that entry is pure green. Other entries stay opaque,
+including another entry with the same green color. An ordinary non-green
+entry zero is retained as an opaque color. This follows the color-key behavior
+used by modern tile readers and avoids deleting real pixels from base tiles.
+The unused fourth palette byte does not override this rule. Context-specific
+engine composition and WED overlay flags are separate from image extraction.
+
+
+3. TIZ0 file header and record framing
+--------------------------------------
+Offset  Length  Type          Meaning
+0       4       ASCII         Signature/version: "TIZ0".
+4       2       u16 BE        Declared number of tiles, N (0..65535).
+6       2       bytes         Reserved, must be 00 00.
+
+The first tile record starts at byte 8. Reserved bytes are not additional
+count bits. A reader can flag nonzero reserved bytes and still decode the
+version-0 layout; they do not change the framing.
+
+Every tile has this common prefix at record-relative offset 0:
+Offset  Length  Type          Meaning
+0       4       ASCII         Encoding identifier: "TIL0", "TIL1", or "TIL2".
+4       2       u16 BE        Payload length, L.
+6       L       bytes         Encoding-specific payload.
+
+L excludes the six-byte common prefix. The next record starts exactly at
+current_record_offset + 6 + L. L is not an absolute offset or a total record
+size. The length limit is 65535 payload bytes. Records of different encodings
+may be freely mixed. No padding, terminator record, index, footer, or whole-file
+compression stream is present. With correct counts and lengths, EOF follows
+the Nth payload immediately:
+    file_length = 8 + sum(6 + L_i), for i = 0 .. N-1.
+
+
+4. TIL0: lossless palette and pixels
+-----------------------------------
+The entire L-byte payload is ONE zlib-wrapped DEFLATE stream, not raw DEFLATE
+and not gzip. It expands to exactly 5120 bytes with the layout in section 2.
+It includes all 1024 palette bytes, even unused colors/reserved bytes, and
+all 4096 pixel indices. There are no preceding uncompressed-size fields.
+
+The original producer commonly uses compression level 9, but that level is
+not a format requirement. Any valid compatible zlib/DEFLATE encoding is legal.
+The stream must reach its end, validate its Adler-32, produce the exact size,
+and consume the entire payload. Extra compressed members or trailing bytes
+inside the payload are not part of the format and should be reported.
+
+
+5. TIL1: preserved palette, exact opacity, lossy JPEG color
+--------------------------------------------------------
+Record-relative layout:
+Offset  Length       Meaning
+0       4            "TIL1".
+4       2            u16 BE: total payload length L.
+6       2            u16 BE: compressed palette/mask length C.
+8       C            One zlib stream, decoded length exactly 1280.
+8+C     L-2-C        One complete 64x64 three-component JPEG image.
+
+Thus L must be at least 2+C plus the JPEG stream's length. The two bytes at
+offset 6 are included in L, but not in C. The JPEG has no independent TIZ
+length field: its length is computed as L-C-2. The next tile is still at 6+L.
+
+The 1280 decoded zlib bytes have this EXACT layout:
+Decoded offset  Length  Meaning
+0               256     Blue plane: blue[k] for palette entries 0..255.
+256             256     Green plane: green[k] for entries 0..255.
+512             256     Red plane: red[k] for entries 0..255.
+768             512     One-bit opacity mask: 64 rows of eight bytes.
+
+These are three separate planes, NOT interleaved three-byte RGB entries.
+There is no fourth/reserved byte per palette entry in this encoding.
+Palette entry k is RGB = (decoded[512+k], decoded[256+k], decoded[k]).
+
+For pixel (x,y), the mask byte is decoded[768 + 8*y + floor(x/8)].
+The pixel's bit is 7 - (x mod 8), most-significant bit first.
+Bit 1 means opaque. Bit 0 means transparent and selects palette entry zero.
+The mask is exact/lossless and takes precedence over JPEG color artifacts.
+
+The JPEG encodes the color image, not indices. It must be decoded as a normal
+JPEG first, then interpreted with the channel convention in section 7. For
+opaque pixels, the original unpacker remaps decoded colors into the preserved
+palette entries 1..255. Entry zero is excluded from opaque quantization, so
+color approximation cannot create unwanted transparent pixels. Transparent
+pixels use entry zero regardless of the JPEG's decoded color at that position.
+
+The container does not specify a unique palette quantizer, dithering policy,
+or JPEG inverse-DCT rounding algorithm. TISpack's unpacker uses libjpeg external
+palette quantization and offers a dithering control. Exact original palette
+indices before lossy compression cannot generally be recovered. The included
+PNG extractor uses exact nearest-palette-color selection, squared Euclidean
+distance in the three decoded channels, no dithering, with the lowest original
+palette index winning equal-distance ties. A kd-tree computes this exact
+minimum; it is not an approximate lookup. The palette and opacity mask are
+both applied. Different legitimate quantizers can produce different indices.
+
+
+6. TIL2: lossy JPEG color without a mask
+--------------------------------------
+The L-byte payload is one complete 64x64, eight-bit, three-component JPEG
+image. It contains no palette, mask, zlib wrapper, uncompressed-length prefix,
+or separate image count. Every output pixel is opaque, including pure green.
+The original unpacker builds a new 256-color palette when converting back to
+TIS. A PNG extractor can retain the full decoded color precision and avoid
+this additional palette quantization. It must apply section 7's channel order.
+
+
+7. The TIZ JPEG channel convention
+----------------------------------
+TISpack passes the TIS palette bytes in B,G,R order into a JPEG compressor
+configured to accept R,G,B. This historical convention is part of the encoded
+data; merely saving the result of a generic JPEG decoder produces exchanged
+red and blue colors. It applies to both TIL1 and TIL2.
+
+The correct sequence is:
+  1. Decode the embedded JPEG normally, including its ordinary JPEG/JFIF
+     component-to-RGB conversion. Call those output channels c0,c1,c2.
+  2. Treat c0 as the tileset's BLUE, c1 as GREEN, and c2 as RED.
+  3. For TIL2, write PNG RGB = (c2,c1,c0).
+  4. For TIL1, compare (c0,c1,c2) with the stored (blue,green,red) palette
+     triples, assign an allowed palette index, and write the RGB palette
+     in (red,green,blue) order. Apply the separate opacity mask.
+
+Do not exchange raw YCbCr components or alter JPEG coefficient tables.
+The correction occurs after normal JPEG color decoding. A standalone JPEG
+extracted verbatim from TIZ can therefore look color-swapped in an image viewer.
+
+
+8. Embedded compression formats and complete byte accounting
+------------------------------------------------------------
+The embedded streams are standard formats, not unknown TIZ-specific data.
+Their complete normative definitions are RFC 1950 (zlib), RFC 1951 (DEFLATE),
+ITU-T T.81 / ISO/IEC 10918-1 (JPEG), and the JFIF specification. There is no
+TIZ-specific compressed opcode, encryption, dictionary, or checksum algorithm.
+
+zlib:
+  The initial CMF byte contains compression method CM in bits 0..3 and window
+  information CINFO in bits 4..7. CM=8 means DEFLATE; CINFO <= 7 specifies a
+  window of 2^(CINFO+8) bytes. FLG contains FCHECK in bits 0..4, FDICT in bit 5,
+  and FLEVEL in bits 6..7. (256*CMF+FLG) mod 31 must equal zero. TIZ streams
+  are self-contained and do not supply an external preset dictionary; a stream
+  requiring one cannot be decoded from the tileset alone. FLEVEL is a hint.
+  After DEFLATE, the last four bytes are a BIG-ENDIAN Adler-32 of the decoded
+  bytes: s1 starts at 1, s2 at 0; for each decoded byte b, s1=(s1+b) mod 65521,
+  s2=(s2+s1) mod 65521; checksum=(s2<<16)|s1.
+
+DEFLATE:
+  Each block has a final-block bit and a two-bit block type. Stored blocks
+  align to a byte boundary and carry LEN/NLEN plus literal bytes; fixed and
+  dynamic Huffman blocks encode literals, end-of-block, and length/distance
+  backreferences into already-decoded data. Type 3 is invalid. Dynamic blocks
+  include the literal/length and distance code descriptions. Block headers,
+  code descriptions, matches, end-of-block, and required padding bits all
+  belong to the compressed stream. Their bit-order and code construction are
+  precisely those in RFC 1951. They are decoded and validated by Python zlib.
+
+JPEG:
+  The stream begins with FF D8 (SOI) and ends with FF D9 (EOI). Most other
+  markers have a two-byte BIG-ENDIAN length INCLUDING the length field but
+  EXCLUDING the FF/marker bytes. Marker fill FF bytes are permitted.
+  APPn and COM carry application data and comments; they do not add tiles.
+  A usual APP0 JFIF payload has "JFIF\0", a two-byte major/minor version,
+  density units, two u16 BE densities, byte thumbnail width/height, and
+  3*width*height thumbnail RGB bytes. These are stream metadata, not TIS tiles.
+  DQT (FF DB) supplies quantization table precision/identifier and 64 zigzag
+  coefficients per table. DHT (FF C4) supplies table class/identifier, sixteen
+  code-length counts, and the corresponding symbols for canonical Huffman
+  coding. SOF0 (FF C0) describes baseline DCT precision, height, width, and
+  component identifiers/sampling factors/table selectors. Other standard JPEG
+  frame types have their standard meanings, subject to decoder support.
+  SOS (FF DA) gives scan components, entropy-table selectors, and spectral/
+  successive-approximation parameters. Following it, entropy-coded data uses
+  FF 00 to represent a literal FF byte. FF D0..D7 are restart markers, with
+  intervals established by DRI (FF DD), if used. A non-stuffed, non-restart
+  marker ends the scan. Progressive streams can contain multiple scans.
+  The JPEG codec performs Huffman/arithmetic entropy decoding as supported,
+  dequantization, inverse DCT, chroma reconstruction, and color conversion.
+  JPEG coefficient data is intrinsically lossy; decoder rounding can vary.
+
+The extractor validates marker/segment framing, the 64x64 three-component
+eight-bit frame description, EOI, and payload consumption, and delegates
+standard JPEG pixel decoding to Pillow's JPEG codec. Baseline JPEG generated
+by TISpack is supported. A codec-level failure is reported for its individual
+tile, while later correctly framed tiles remain recoverable. No unknown bytes
+are treated as unexplained padding. Extra bytes after JPEG EOI or zlib's end
+are explicitly diagnosed. A valid file's structural and codec spans account
+for its complete length, and its decoded palettes, masks and pixels account
+for every byte of the decoded tile data.
+
+
+9. Extractor interface, output, and recovery policy
+--------------------------------------------------
+Run with Python 3.10 or later and Pillow with JPEG support:
+    python -m pip install Pillow
+    python infinityEngineTileset.py inputFile outputDir
+    python infinityEngineTileset.py --all inputFile outputDir
+
+The extractor is a single Python file. Pillow is its only non-standard Python
+dependency; zlib, hashing, JSON, argument parsing and file operations use the
+standard library. No original TISpack binary, helper executable, texture file,
+WED file, downloaded source, or other supporting data is needed at runtime.
+
+PNG names are tile_NNNNNN.png, with zero-based source tile numbers and a
+minimum of six decimal digits, starting at tile_000000.png. The formats contain
+no tile names, so output filenames use only the tile index, independently of
+the input filename. A skipped tile leaves a numbering gap.
+Lossless complete tiles and TIL1 use indexed PNGs with RGB palettes. TIL2 uses
+RGB PNGs. Partially recovered paletted tiles use RGBA PNGs; unknown pixels
+have zero alpha, rather than invented color data. Images are always 64x64.
+
+An existing output directory is accepted. Only matching output names are
+replaced, atomically; unrelated files are retained. Old matching output files
+for tiles not produced by a later damaged/shorter run are not deleted, so use
+a separate output directory to retain each input's extraction. Output files are
+mode 0644 and newly created directories permit user/group reading and traversal.
+
+Without --all, the extractor writes only PNGs. Console diagnostics do not
+create metadata files, and PNGs contain no generated comments or audit text.
+With --all, metadata.json additionally records source size/hash,
+header values, record offsets/lengths, codec inventory, every tile's status,
+palettes/reserved bytes, masks, codec validation details, output names/sizes,
+and warnings. Palette/mask bytes are retained in hex, including unused entries.
+For failed tiles, available source spans and the failure reason are recorded.
+This JSON is an audit, not a replacement copy of the compressed input.
+
+Exit codes:
+  0: supported input, extraction completed without detected damage.
+  1: recognized input with discrepancies/damage; available images were saved.
+  2: unsupported input/variant or an I/O/dependency failure.
+An I/O failure can occur after earlier images were successfully written.
+
+Before output-directory creation, the entire accessible outer record framing
+is inspected. Unsupported magic/version, PVRZ-reference records, unsupported
+geometry, or a new TIL encoding cause rejection with no newly written output,
+even if earlier records could otherwise have been decoded. The program does
+not try other image formats, unpack archives, or infer identity from a suffix.
+
+For positively identified supported containers, recovery is the default:
+  * A truncated fixed header is reported. No tile offset is guessed.
+  * A bad TIS count does not hide physical fixed-size tile records. Complete
+    records beyond the count are extracted and explicitly flagged. A final
+    partial record is located by the same fixed stride, never by searching.
+  * For TIS/TIL0, a complete palette and any available pixel prefix can be
+    exported. Missing pixels are transparent. An incomplete palette, or no
+    available pixels, prevents extraction of that tile.
+  * zlib output is bounded to the specified decoded size plus one overflow
+    detection byte. On a decompression/checksum error, already decoded bytes
+    are recovered by replaying the stream. Their integrity is flagged as
+    unverified. No checksum is repaired or silently ignored.
+  * TIL1 requires the complete three-plane palette. If only a prefix of the
+    opacity mask decodes, missing mask bits are represented by transparent
+    output pixels and the damage is reported. The declared C determines the
+    JPEG start; no guessed replacement length is used.
+  * In TIZ, later records are reached only through their explicit lengths.
+    A failed tile payload does not stop later correctly framed tiles.
+    Framed records beyond the count are recovered with a warning.
+  * A damaged record identifier that is not a TIL encoding stops framing at
+    that position. The remaining tail is reported; embedded magic is never
+    searched for as a resynchronization heuristic.
+  * JPEGs lacking a valid complete marker stream are skipped. No synthetic
+    EOI, missing scan, guessed image row, or fabricated image is supplied.
+    Other intact tiles remain extractable. Corruption not detected by JPEG's
+    syntax or codec cannot be guaranteed detectable: JPEG has no mandatory
+    payload checksum. Uncompressed TIS likewise has no checksum.
+
+Recovery is necessarily limited by which information remains. A destroyed
+palette, ambiguous record boundary, damaged signature, or missing external
+texture cannot be unambiguously reconstructed. Restoring an intact original
+or obtaining missing external resources is the next step in those cases.
+Supporting PVRZ-reference TIS would require a separate PVRZ/texture decoder
+and resource resolver; supporting headerless BIFF data would require archive
+resource metadata. Neither is guessed or silently claimed as supported.
+
+
+10. Implementation evidence and references
+------------------------------------------
+The layouts above can be verified from decoded bytes and from the original
+TISpack producer/consumer implementation by Per Olofsson, particularly
+til0compress, til1compress, til2compress, til1uncompress and jpeguncompress.
+The implementation is essential for two corrections to the historical
+tizformat.html prose: TIS palette bytes are BGR plus an unused byte, and TIL1
+stores three separate palette planes, not interleaved RGB triples. Its JPEG
+input follows those BGR bytes even though the JPEG API calls them RGB.
+The extractor is an independent Python implementation, not the original tool.
+
+Primary references:
+  Infinity Engine Structures Description Project (IESDP), TIS V1:
+  https://gibberlings3.github.io/iesdp/file_formats/ie_formats/tis_v1.htm
+
+  Per Olofsson, TISpack 0.91 source and bundled format description:
+  https://mods.pocketplane.net/tispack-0.91.zip
+  Project distribution page: https://www.pocketplane.net/modding-tools/
+
+  GemRB's TIS palette/key-color reader:
+  https://github.com/gemrb/gemrb/blob/master/gemrb/plugins/TISImporter/TISImporter.cpp
+
+  Near Infinity's TIS V1 palette/key-color reader:
+  https://github.com/Argent77/NearInfinity/blob/master/src/org/infinity/resource/graphics/TisV1Decoder.java
+
+  zlib and DEFLATE normative specifications:
+  https://www.rfc-editor.org/rfc/rfc1950
+  https://www.rfc-editor.org/rfc/rfc1951
+
+  JPEG normative specification, ITU-T T.81:
+  https://www.itu.int/rec/T-REC-T.81
+
+  JFIF normative specification, ITU-T T.871:
+  https://www.itu.int/rec/T-REC-T.871

@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,049)
+# Unsupported File Formats (4,052)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1090,7 +1090,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,888)
+## Other (2,891)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2309,9 +2309,11 @@ Family/Format | Name | Extensions | Notes
 [other/indexApolloDatabaseEngine](https://discmaster.textfiles.com/search?format=indexApolloDatabaseEngine) | Index Apollo Database Engine | .nsx | 
 [other/indexerVolumeGUID](https://discmaster.textfiles.com/search?format=indexerVolumeGUID) | Index Volume GUID |  | 
 [other/inertiaPlayerConfiguration](https://discmaster.textfiles.com/search?format=inertiaPlayerConfiguration) | Inertia Player Configuration | .cfg | 
+[other/infinityEngine2DimensionalArray](https://discmaster.textfiles.com/search?format=infinityEngine2DimensionalArray) | Infinity Engine 2-Dimensional Array | .2da | 
 [other/infinityEngineAnimation](https://discmaster.textfiles.com/search?format=infinityEngineAnimation) | Infinity Engine Animation | .bam .dat | 
 [other/infinityEngineArea](https://discmaster.textfiles.com/search?format=infinityEngineArea) | Infinity Engine Area | .are | 
 [other/infinityEngineAreaDescription](https://discmaster.textfiles.com/search?format=infinityEngineAreaDescription) | Infinity Engine Area Description | .are | 
+[other/infinityEngineCharacterScript](https://discmaster.textfiles.com/search?format=infinityEngineCharacterScript) | Infinity Engine Character Script | .bs | 
 [other/infinityEngineCreature](https://discmaster.textfiles.com/search?format=infinityEngineCreature) | Infinity Engine Creature | .cre .bak | 
 [other/infinityEngineDialogue](https://discmaster.textfiles.com/search?format=infinityEngineDialogue) | Infinity Engine Dialogue | .dlg | 
 [other/infinityEngineEffect](https://discmaster.textfiles.com/search?format=infinityEngineEffect) | Infinity Engine Effect | .eff | 
@@ -2322,14 +2324,15 @@ Family/Format | Name | Extensions | Notes
 [other/infinityEngineRegion](https://discmaster.textfiles.com/search?format=infinityEngineRegion) | Infinity Engine Region/Map | .wed | 
 [other/infinityEngineResourceDirectory](https://discmaster.textfiles.com/search?format=infinityEngineResourceDirectory) | Infinity Engine Resource Directory | .key | 
 [other/infinityEngineSaveGame](https://discmaster.textfiles.com/search?format=infinityEngineSaveGame) | Infinity Engine Save Game | .gam | 
+[other/infinityEngineScript](https://discmaster.textfiles.com/search?format=infinityEngineScript) | Infinity Engine Script | .bcs | 
 [other/infinityEngineSpell](https://discmaster.textfiles.com/search?format=infinityEngineSpell) | Infinity Engine Spell | .spl | 
 [other/infinityEngineSpellCastingFx](https://discmaster.textfiles.com/search?format=infinityEngineSpellCastingFx) | Infinity Engine Spell Casting FX | .vvc | 
 [other/infinityEngineStore](https://discmaster.textfiles.com/search?format=infinityEngineStore) | Infinity Engine Store | .sto | 
 [other/infinityEngineTalkTable](https://discmaster.textfiles.com/search?format=infinityEngineTalkTable) | Infinity Engine Talk Table | .tlk | 
-[other/infinityEngineTileset](https://discmaster.textfiles.com/search?format=infinityEngineTileset) | Infinity Engine tileset | .tis .tiz | 
 [other/infinityEngineTranslation](https://discmaster.textfiles.com/search?format=infinityEngineTranslation) | Infinity Engine Translation | .h | 
 [other/infinityEngineUserInterfaceDescription](https://discmaster.textfiles.com/search?format=infinityEngineUserInterfaceDescription) | Infinity Engine User Interface Description | .chu | 
 [other/infinityEngineVariables](https://discmaster.textfiles.com/search?format=infinityEngineVariables) | Infinity Engine Variables | .var | 
+[other/infinityEngineWaveSpecialEffect](https://discmaster.textfiles.com/search?format=infinityEngineWaveSpecialEffect) | Infinity Engine Wave Special Effect  | .wfx | 
 [other/infinityEngineWorldMap](https://discmaster.textfiles.com/search?format=infinityEngineWorldMap) | Infinity Engine World Map | .wmp | 
 [other/infinity2Project](https://discmaster.textfiles.com/search?format=infinity2Project) | Infinity2 Project | .ipr | 
 [other/infobaseNextPage](https://discmaster.textfiles.com/search?format=infobaseNextPage) | Infobase (NextPage) | .nfo | 

@@ -11,6 +11,7 @@ from PIL import Image
 
 MAGIC = b'Edsun CEG'
 HEADER_SIZE = 1000
+PALETTE_OFFSET = 0xC9
 
 EGA_PALETTE = [
     (0, 0, 0), (0, 0, 170), (0, 170, 0), (0, 170, 170),
@@ -212,6 +213,51 @@ def decode_line_art_mode(stream, w, h):
     return img
 
 
+def decode_advanced8(stream, w, h, palette_bytes):
+    """Decode Advanced-8 with a fixed header palette (CEG mode 13)."""
+    palette = list(struct.iter_unpack('BBB', palette_bytes))
+    blank = len(palette)
+    palette.append((0, 0, 0))
+    pixels = bytearray()
+
+    for row in range(h):
+        start = row * w
+        # Blanking supplies black for lookahead and register history at the edges.
+        line = [blank, *stream[start:start + w], blank, blank]
+        old = new = palette[blank]
+        for prev, code, nxt, after in zip(line, line[1:], line[2:], line[3:]):
+            prev_mix = 0xC0 <= prev <= 0xDF
+            next_mix = 0xC0 <= nxt <= 0xDF
+            after_mix = 0xC0 <= after <= 0xDF
+
+            if 0xC0 <= code <= 0xDF:
+                weight = code - 0xC0
+                if not prev_mix and not next_mix:
+                    # A single mix supplies the trailing edge of a thin line.
+                    if after_mix:
+                        weight = 31 - weight
+                    else:
+                        old, new = new, palette[nxt]
+            else:
+                # A color between two mixes replaces only the new register.
+                if not (prev_mix and next_mix):
+                    old = new
+                new = palette[code]
+                if not next_mix:
+                    weight = 0
+                elif after_mix and not prev_mix:
+                    weight = 31  # Hold the old color before a run of mixes.
+                else:
+                    weight = nxt - 0xC0
+
+            pixels.extend((a * (31 - weight) + b * weight + 16) // 31
+                          for a, b in zip(new, old))
+
+    # The CEG/DAC applies gamma 2.3 after mixing the linear palette colors.
+    gamma = bytes(round(255 * (n / 255) ** (1 / 2.3)) for n in range(256))
+    return Image.frombytes('RGB', (w, h), bytes(pixels.translate(gamma)))
+
+
 def decode_ceg_no_edge_mode(stream, w, h):
     palette = {}
     i = 0
@@ -277,6 +323,9 @@ def decode_grayscale_mode(stream, w, h):
 
 
 def detect_mode(stream, flags):
+    if flags == 0x0D:
+        return 'advanced8'
+
     has_edge_support = bool(flags & 0x02)
     has_bf_support = bool(flags & 0x08)
 
@@ -310,7 +359,10 @@ def convert_ceg(filepath, output_path):
 
     mode = detect_mode(stream, flags)
 
-    if mode == 'ceg':
+    if mode == 'advanced8':
+        palette_bytes = data[PALETTE_OFFSET:PALETTE_OFFSET + 256 * 3]
+        img = decode_advanced8(stream, w, h, palette_bytes)
+    elif mode == 'ceg':
         img = decode_ceg_mode(stream, w, h)
     elif mode == 'ceg_no_edge':
         img = decode_ceg_no_edge_mode(stream, w, h)

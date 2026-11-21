@@ -41,14 +41,10 @@ through inline palette redefinition and anti-aliased edge interpolation.
   0x0069  2     uint16   Image height in pixels (little-endian)
   0x006B  5     bytes    Extended metadata (varies; may contain additional
                          parameters or residual data)
-  0x0070  920   bytes    Remainder of header. Contains a mix of:
-                         - Embedded program strings (e.g., "Parse Error %1")
-                         - Software lookup tables
-                         - Color calibration data
-                         - Padding (zero bytes)
-                         The contents of this region are software-dependent
-                         and not required for image decoding. The pixel data
-                         always begins at fixed offset 0x03E8 (1000).
+  0x0070  89    bytes    Additional header data
+  0x00C9  768   bytes    256 RGB triples, one byte per component. Mode 0x0D
+                         uses these entries as its fixed palette.
+  0x03C9  31    bytes    Remaining header data
 
 
 3. MODE FLAGS (byte at offset 0x0066)
@@ -57,28 +53,12 @@ through inline palette redefinition and anti-aliased edge interpolation.
   The mode flags byte controls how pixel data is interpreted.
   Observed values: 0x01, 0x05, 0x0D, 0x0F.
 
-  Bit layout:
-    Bit 0 (0x01): Always set. Indicates a valid CEG file.
-    Bit 1 (0x02): Edge interpolation codes enabled.
-                  When set, byte values 0xC0-0xDF in the pixel stream that
-                  do NOT have an inline palette definition are treated as
-                  edge interpolation pixels (see section 5).
-    Bit 2 (0x04): Color mode.
-                  When set, the image uses color (EGA base palette or
-                  multi-color line art encoding).
-                  When clear, the image is monochrome/grayscale.
-    Bit 3 (0x08): Inline palette (BF entries) enabled.
-                  When set, the pixel stream may contain 0xBF palette
-                  definition commands (see section 4).
-
-  Common mode combinations:
+  Observed modes:
     0x0F (1111): Full CEG mode. Inline BF palette + edge interpolation.
                  Used for photographic and complex color images.
                  Supports thousands of simultaneous colors.
-    0x0D (1101): Palette + color, no dedicated edge codes.
-                 Used for EGA-compatible 16-color images with anti-aliased
-                 edges (e.g., AutoCAD wireframe captures) or images where
-                 the full byte range is used for palette indices.
+    0x0D (1101): Advanced-8 with a fixed header palette and 32 mix codes.
+                 Both acadceg.ceg and ladiesf.ceg use this mode.
     0x05 (0101): Color line art mode, no inline palette.
                  Used for anti-aliased colored vector graphics (arcs,
                  ellipses, text). Uses 3-bit color + 5-bit weight encoding.
@@ -158,33 +138,19 @@ through inline palette redefinition and anti-aliased edge interpolation.
      index value.
 
 
-  4.2 EGA + Edge Mode (flags == 0x0D, values 0x00-0x0F present)
-  ---------------------------------------------------------------
+  4.2 Advanced-8 with a fixed palette (mode 0x0D)
+  -----------------------------------------------
 
-  Pixel values 0x00-0x0F map to the standard 16-color EGA palette:
+  Values 0x00-0xBF and 0xE0-0xFF select colors from the header palette.
+  Index 0xBF consumes one pixel. Values 0xC0-0xDF specify one of 32 mixes
+  between two color registers. The decoder processes each scanline in order.
+  The sequence of palette indices and mix codes determines when the registers
+  change. An isolated mix can shade both pixels of a thin line.
 
-    Index  Color            RGB
-    -----  -----            ---
-      0    Black            (0, 0, 0)
-      1    Blue             (0, 0, 170)
-      2    Green            (0, 170, 0)
-      3    Cyan             (0, 170, 170)
-      4    Red              (170, 0, 0)
-      5    Magenta          (170, 0, 170)
-      6    Brown            (170, 85, 0)
-      7    Light Gray       (170, 170, 170)
-      8    Dark Gray        (85, 85, 85)
-      9    Light Blue       (85, 85, 255)
-     10    Light Green      (85, 255, 85)
-     11    Light Cyan       (85, 255, 255)
-     12    Light Red        (255, 85, 85)
-     13    Light Magenta    (255, 85, 255)
-     14    Yellow           (255, 255, 85)
-     15    White            (255, 255, 255)
-
-  Values 0xC0-0xDF are edge interpolation codes (same formula as 4.1c).
-  This mode is used for EGA-compatible images (e.g., AutoCAD screen
-  captures) with anti-aliased edges.
+  For a run of mix codes, the old color's weight is (code - 0xC0) / 31
+  and the new color supplies the remainder. The DAC applies gamma 2.3 after
+  mixing. See the ADV7141/ADV7146/ADV7148 data sheet, tables XI and XV,
+  and Edsun patent EP0452796A2, rules 1-7.
 
 
   4.3 Color Line Art Mode (flags == 0x05)
@@ -216,21 +182,8 @@ through inline palette redefinition and anti-aliased edge interpolation.
   This mode is used for anti-aliased text and monochrome line art.
 
 
-  4.5 Direct Palette Mode (flags == 0x0D, wide value range)
-  ----------------------------------------------------------
-
-  When flags == 0x0D and pixel values span beyond 0x0F, the file
-  uses direct palette-indexed encoding with BF palette commands
-  (if present), similar to Full CEG mode but without the 0xC0-0xDF
-  edge interpolation code range. All byte values except 0xBF are
-  treated as palette indices.
-
-  Files with few or no BF definitions in this mode may render as
-  grayscale using the raw byte value as luminance.
-
-
-5. EDGE INTERPOLATION ALGORITHM
---------------------------------
+5. EDGE INTERPOLATION IN THE MODE 0x0F DECODER
+----------------------------------------------
 
   The "Continuous Edge" technology is the defining feature of the CEG
   format. It produces smooth, anti-aliased transitions between color

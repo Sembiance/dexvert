@@ -319,9 +319,9 @@ export const WEAK_VALUES =
 
 	// ffmpeg/ffprobeID librempeg
 	// SEEN ONCE:
-	//		Sega Dreamcast KAT (kat)
-	// SEEN TWICE:
 	//		???
+	// SEEN TWICE:
+	//		Sega Dreamcast KAT (kat)
 	/^3DO PONA \(pona\)$/,
 	/^ADP \(adp\)$/,
 	/^AGSC Bank \(Metroid Prime 1\/2 GC\) \(agsc\)$/,

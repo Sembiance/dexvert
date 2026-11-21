@@ -8,5 +8,5 @@ export class fontasyPreview extends Format
 	forbidExtMatch = true;
 	magic          = ["FONTASY Preview"];
 	weakMagic      = true;
-	converters     = ["vibe2png"];	// also iconvertDOS[format:fontasyPV] see iconvertDOS.js
+	converters     = ["vibeExtract"];	// also iconvertDOS[format:fontasyPV] see iconvertDOS.js
 }

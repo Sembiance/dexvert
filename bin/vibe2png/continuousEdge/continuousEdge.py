@@ -1,7 +1,9 @@
 # Vibe coded by Claude
+# Vibe coded by Codex
 # Continuous Edge Graphics (CEG) to PNG converter
 # Decodes Edsun Laboratories CEG bitmap files
 
+import argparse
 import sys
 import os
 import struct
@@ -302,43 +304,11 @@ def detect_mode(stream, flags):
     return 'grayscale'
 
 
-def apply_crt_simulate(img):
-    import numpy as np
-    if img.mode == 'L':
-        img = img.convert('RGB')
-
-    arr = np.array(img, dtype=np.float32)
-
-    # Vertical gaussian blur (sigma ~1.4) to simulate CRT beam overlap.
-    # This is the main effect that smooths the horizontal banding from
-    # per-scanline palette redefinition.
-    vk = np.array([1, 6, 15, 20, 15, 6, 1], dtype=np.float32)
-    vk /= vk.sum()
-    pad = len(vk) // 2
-    h, w, c = arr.shape
-    padded = np.pad(arr, ((pad, pad), (0, 0), (0, 0)), mode='edge')
-    out = np.zeros_like(arr)
-    for ki, kw in enumerate(vk):
-        out += padded[ki:ki + h, :, :] * kw
-
-    # Light horizontal softness to simulate phosphor dot pitch
-    hk = np.array([1, 2, 1], dtype=np.float32)
-    hk /= hk.sum()
-    hpad = len(hk) // 2
-    padded = np.pad(out, ((0, 0), (hpad, hpad), (0, 0)), mode='edge')
-    out2 = np.zeros_like(out)
-    for ki, kw in enumerate(hk):
-        out2 += padded[:, ki:ki + w, :] * kw
-
-    return Image.fromarray(np.clip(out2, 0, 255).astype(np.uint8))
-
-
-def convert_ceg(filepath, output_dir, crt_simulate=False):
+def convert_ceg(filepath, output_path):
     data, w, h, flags = read_ceg(filepath)
     stream = data[HEADER_SIZE:]
 
     mode = detect_mode(stream, flags)
-    basename = os.path.splitext(os.path.basename(filepath))[0]
 
     if mode == 'ceg':
         img = decode_ceg_mode(stream, w, h)
@@ -351,43 +321,21 @@ def convert_ceg(filepath, output_dir, crt_simulate=False):
     else:
         img = decode_grayscale_mode(stream, w, h)
 
-    out_path = os.path.join(output_dir, f"{basename}.png")
-    img.save(out_path)
-    outputs = [out_path]
-
-    if crt_simulate:
-        crt_img = apply_crt_simulate(img)
-        crt_path = os.path.join(output_dir, f"{basename}_crt.png")
-        crt_img.save(crt_path)
-        outputs.append(crt_path)
-
-    return outputs
+    os.makedirs(os.path.dirname(output_path) or '.', exist_ok=True)
+    img.save(output_path, format='PNG')
+    return [output_path]
 
 
 def main():
-    args = [a for a in sys.argv[1:] if not a.startswith('--')]
-    flags = [a for a in sys.argv[1:] if a.startswith('--')]
-    crt_simulate = '--crtSimulate' in flags
-
-    if len(args) != 2:
-        print(f"Usage: {sys.argv[0]} [--crtSimulate] <inputFile> <outputDir>",
-              file=sys.stderr)
-        sys.exit(1)
-
-    input_file, output_dir = args
-
-    if not os.path.isfile(input_file):
-        print(f"Error: input file '{input_file}' not found", file=sys.stderr)
-        sys.exit(1)
-
-    os.makedirs(output_dir, exist_ok=True)
+    parser = argparse.ArgumentParser(description='Convert a CEG image to PNG.')
+    parser.add_argument('input_file', help='path to the source CEG file')
+    parser.add_argument('output_path', help='exact path for the output PNG')
+    args = parser.parse_args()
 
     try:
-        outputs = convert_ceg(input_file, output_dir,
-                              crt_simulate=crt_simulate)
-        for p in outputs:
-            print(p)
-    except ValueError as e:
+        convert_ceg(args.input_file, args.output_path)
+        print(args.output_path)
+    except (ValueError, OSError) as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
 

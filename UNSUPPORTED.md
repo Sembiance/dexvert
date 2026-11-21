@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,052)
+# Unsupported File Formats (4,054)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1090,7 +1090,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,891)
+## Other (2,893)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2171,6 +2171,7 @@ Family/Format | Name | Extensions | Notes
 [other/godotCompiledScript](https://discmaster.textfiles.com/search?format=godotCompiledScript) | Godot Compiled script | .gdc | 
 [other/godotResourceData](https://discmaster.textfiles.com/search?format=godotResourceData) | Godot Resource data | .res | 
 [other/goldParserTables](https://discmaster.textfiles.com/search?format=goldParserTables) | GOLD Parser Tables | .cgt | 
+[other/goldEDSyntax](https://discmaster.textfiles.com/search?format=goldEDSyntax) | GoldED Syntax | .syn | 
 [other/goldenSoftwareBinaryBoundaryData](https://discmaster.textfiles.com/search?format=goldenSoftwareBinaryBoundaryData) | Golden Software Binary Boundary data | .gsb | 
 [other/goldenSectionOrganizerDatabase](https://discmaster.textfiles.com/search?format=goldenSectionOrganizerDatabase) | GoldenSection Organizer database | .gso | 
 [other/goldMineReport](https://discmaster.textfiles.com/search?format=goldMineReport) | GoldMine report | .fp | 
@@ -3918,6 +3919,7 @@ Family/Format | Name | Extensions | Notes
 [other/worldConstructionSetElevationData](https://discmaster.textfiles.com/search?format=worldConstructionSetElevationData) | World Construction Set Elevation data | .elev | 
 [other/worldConstructionSetObject](https://discmaster.textfiles.com/search?format=worldConstructionSetObject) | World Construction Set Object | .obj | 
 [other/worldConstructionSetParameters](https://discmaster.textfiles.com/search?format=worldConstructionSetParameters) | World Construction Set Parameters | .par | 
+[other/worldRacingSYN](https://discmaster.textfiles.com/search?format=worldRacingSYN) | World Racing SYNG Archive | .syn | 
 [other/worldMachineDocument](https://discmaster.textfiles.com/search?format=worldMachineDocument) | WorldMachine document | .tmd | 
 [other/wormsDIR](https://discmaster.textfiles.com/search?format=wormsDIR) | Worms DIR | .dir | 
 [other/wpSpellDictionary](https://discmaster.textfiles.com/search?format=wpSpellDictionary) | WPSpell Dictionary |  | 

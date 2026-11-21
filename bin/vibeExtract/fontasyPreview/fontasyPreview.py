@@ -1,4 +1,5 @@
 # Vibe coded by Claude
+# Vibe coded by Codex
 """
 Fontasy Preview (.PV) file converter.
 Converts PV clip art preview files to PNG images.
@@ -185,11 +186,10 @@ def main():
 
     os.makedirs(output_dir, exist_ok=True)
 
-    base = os.path.splitext(os.path.basename(input_file))[0]
     saved = 0
     for idx, img in enumerate(images):
         if img is not None:
-            out_path = os.path.join(output_dir, f"{base}_{idx:03d}.png")
+            out_path = os.path.join(output_dir, f"{idx:03d}.png")
             img.save(out_path)
             saved += 1
 

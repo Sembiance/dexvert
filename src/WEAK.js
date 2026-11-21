@@ -388,7 +388,7 @@ export const WEAK_VALUES =
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
-	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:AirNovel.AirOpener
+	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:AirNovel.AirOpener, archive:Parsley.CgOpener
 	// SEEN TWICE:
 	//		archive:Will.ArcOpener, archive:StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener, archive:Nekopunch.PakOpener, archive:Key.PakOpener
 	//		archive:Advs.DatOpener
@@ -460,12 +460,12 @@ export const WEAK_VALUES =
 	//		TOD_TOD2, LEV, RWS_2, MAP, MAP_2, DAV_SLIB, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
 	//		BOB_FILE, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, VRAM_PIFF, GRA, 001_TCLF, WLD_WRLD, SCW_COTS, GB_UBA, PRS, PRS_2
 	//		LUG_LIONHEAD, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4, LZ, GLB
-	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, BF_BIG, PACKED_BFPK, ZSM_ZSNDXBOX, IMG_AFS_2, PFS_PFS, DBS_WAVFILE
+	//		RES_ILFF, IFF_SPR, RNC_RNCA, ASR_ASURA_FNFO, BF_BIG, PACKED_BFPK, ZSM_ZSNDXBOX, IMG_AFS_2, DBS_WAVFILE
 	//		XWB_WBND_5, SPD_HEAD, IBT_DXT_DXT, TLB_HLIB, STF, PAK_60, DFS_SFDX, S16, SB_SBIN, TPK_ZZZ0, ARCHIVE_ARCH, GRP_GRP1
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, WAD_WAD, SAD_SAUD, WSAD_WLD3, XXX, XPR_XPR2, DAT_CMP
-	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, HNK, DWX_DELPHIXWAVE, WIN_FORM, PR, ANI_ANI, RBH_PIFF, RBH_PIFF_2
-	//		PAK_PACK_7, ARC_9
+	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, HNK, DWX_DELPHIXWAVE, PR, ANI_ANI, RBH_PIFF, RBH_PIFF_2
+	//		PAK_PACK_7, ARC_9, PFS_PFS
 	/^geArchive: 0000?_(5|8|10|12|13|PCW|package|SFDX)( |$)/,
 	/^geArchive: 001_[25]( |$)/,
 	/^geArchive: ARC_(4|6|8|10|11|13|16|A20|ARC|ARCV410)( |$)/,
@@ -586,6 +586,7 @@ export const WEAK_VALUES =
 	/^geArchive: WAR_WARC( |$)/,
 	/^geArchive: WBK_WAVEBK11( |$)/,
 	/^geArchive: WD_WD( |$)/,
+	/^geArchive: WIN_FORM( |$)/,
 	/^geArchive: XFS( |$)/,
 	/^geArchive: XXX_RU( |$)/,
 	/^geArchive: ZXC_90( |$)/,

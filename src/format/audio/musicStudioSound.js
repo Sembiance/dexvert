@@ -6,6 +6,6 @@ export class musicStudioSound extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/The_Music_Studio";
 	ext            = [".snd", ".sound"];
 	forbidExtMatch = true;
-	magic          = ["The Music Studio Song"];	// shared with music/musicStudioSong, so we rely on extension to pick the correct one (and the successful conversion of course)
-	converters     = ["vibe2wav"];
+	magic          = ["The Music Studio Song", "The Music Studio Sound"];	// shared with music/musicStudioSong, so we rely on extension to pick the correct one (and the successful conversion of course)
+	converters     = ["vibe2wav[renameOut]"];
 }

@@ -386,12 +386,12 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
-	//      archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener
+	//      archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
 	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:AirNovel.AirOpener, archive:Parsley.CgOpener
 	// SEEN TWICE:
 	//		archive:Will.ArcOpener, archive:StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener, archive:Nekopunch.PakOpener, archive:Key.PakOpener
-	//		archive:Advs.DatOpener
+	//		archive:Advs.DatOpener, archive:UMeSoft.BinOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:Artifact\.MooOpener /,
